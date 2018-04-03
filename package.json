@@ -8,7 +8,7 @@
     "babel-plugin-transform-async-generator-functions": "^6.24.1",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "cross-env": "^5.1.4",
-    "flow-bin": "0.56.0",
+    "flow-bin": "0.65.0",
     "jest": "^22.4.3",
     "jest-react-native": "^18.0.0",
     "prettier": "git+https://github.com/Automattic/calypso-prettier.git#calypso-1.9",
