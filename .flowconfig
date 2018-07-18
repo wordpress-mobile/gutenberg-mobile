@@ -88,6 +88,7 @@ module.name_mapper='@gutenberg' -> '<PROJECT_ROOT>/gutenberg'
 module.name_mapper='@wordpress/data' -> '<PROJECT_ROOT>/gutenberg/packages/data'
 module.name_mapper='@wordpress/element' -> '<PROJECT_ROOT>/gutenberg/packages/element'
 module.name_mapper='@wordpress/deprecated' -> '<PROJECT_ROOT>/gutenberg/packages/deprecated'
+module.name_mapper='@wordpress/components' -> '<PROJECT_ROOT>/gutenberg/components'
 
 ; mock/ignore style files
 module.name_mapper='.*\(.scss\)' -> 'empty/object'
