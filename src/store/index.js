@@ -43,7 +43,8 @@ const initialMoreBlockHtml = `
 
 const initialParagraphBlockHtml = '<!-- wp:paragraph --><p><b>Hello</b> World!</p><!-- /wp:paragraph -->';
 
-const initialParagraphBlockHtml2 = '<!-- wp:paragraph --><p>World!</p><!-- /wp:paragraph -->';
+const initialParagraphBlockHtml2 = '<!-- wp:paragraph {"dropCap":true,"backgroundColor":"vivid-red","fontSize":"large","className":"classe-aggiuntiva-1 classe-aggiuntiva-2"} --><p class="has-background has-drop-cap is-large-text has-vivid-red-background-color">This is the content of para blog</p><!-- /wp:paragraph -->'
+//const initialParagraphBlockHtml2 = '<!-- wp:paragraph {"dropCap":true,"backgroundColor":"vivid-red","fontSize":"large","className":"classe-aggiuntiva-1 classe-aggiuntiva-2"} --><p class="has-background has-drop-cap is-large-text has-vivid-red-background-color classe-aggiuntiva-1 classe-aggiuntiva-2">This is the content of para blog</p><!-- /wp:paragraph -->'
 
 const codeBlockInstance = parse( initialCodeBlockHtml )[ 0 ];
 const moreBlockInstance = parse( initialMoreBlockHtml )[ 0 ];
