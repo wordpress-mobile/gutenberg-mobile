@@ -12,6 +12,7 @@
           "react-native-aztec": "./react-native-aztec",
           "@wordpress/blocks": "./blocks",
           "@wordpress/editor": "./editor",
+          "@wordpress/components": "./components",          
           "@gutenberg": "./gutenberg"
         },
         "extensions": [

@@ -55,7 +55,7 @@ export default class BlockHolder extends React.Component<PropsType, StateType> {
 			const Block = blockType.edit;
 
 			let style;
-			if ( blockType.name === 'core/code' ) {
+			if ( blockType.name === 'core/code' || blockType.name === 'core/paragraph') {
 				style = styles.block_code;
 			}
 

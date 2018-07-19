@@ -41,8 +41,15 @@ const initialMoreBlockHtml = `
 <!-- /wp:more -->
 `;
 
+const initialParagraphBlockHtml = `
+<!-- wp:paragraph -->
+<p>Here we have an example of a beatiful paragraph</p>
+<!-- /wp:paragraph -->
+`;
+
 const codeBlockInstance = parse( initialCodeBlockHtml )[ 0 ];
 const moreBlockInstance = parse( initialMoreBlockHtml )[ 0 ];
+const paragraphBlockInstance = parse( initialParagraphBlockHtml )[ 0 ];
 
 const initialState: StateType = {
 	// TODO: get blocks list block state should be externalized (shared with Gutenberg at some point?).
@@ -91,7 +98,8 @@ const initialState: StateType = {
 			focused: false,
 		},
 		{ ...codeBlockInstance, focused: false },
-		{ ...moreBlockInstance, focused: false },
+		{ ...moreBlockInstance, focused: false },		
+		{ ...paragraphBlockInstance, focused: false },
 		{
 			uid: '5',
 			name: 'paragraph',
