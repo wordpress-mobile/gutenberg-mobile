@@ -28,7 +28,7 @@ registerCoreBlocks();
 
 const initialCodeBlockHtml = `
 <!-- wp:code -->
-<pre><code>if name == "World":
+<pre class="wp-block-code"><code>if name == "World":
     return "Hello World"
 else:
     return "Hello Pony"</code></pre>
@@ -44,7 +44,7 @@ const initialMoreBlockHtml = `
 const initialParagraphBlockHtml = '<!-- wp:paragraph --><p><b>Hello</b> World!</p><!-- /wp:paragraph -->';
 const initialParagraphBlockHtml2 = '<!-- wp:paragraph {"dropCap":true,"backgroundColor":"vivid-red","fontSize":"large","className":"classe-aggiuntiva-1 classe-aggiuntiva-2"} --><p class="has-background has-drop-cap is-large-text has-vivid-red-background-color classe-aggiuntiva-1 classe-aggiuntiva-2">This is the content of para blog</p><!-- /wp:paragraph -->'
 
-//const codeBlockInstance = parse( initialCodeBlockHtml )[ 0 ];
+const codeBlockInstance = parse( initialCodeBlockHtml )[ 0 ];
 const moreBlockInstance = parse( initialMoreBlockHtml )[ 0 ];
 const paragraphBlockInstance = parse( initialParagraphBlockHtml )[ 0 ];
 const paragraphBlockInstance2 = parse( initialParagraphBlockHtml2 )[ 0 ];
@@ -65,7 +65,7 @@ const initialState: StateType = {
 		},
 		{ ...paragraphBlockInstance, focused: false },
 		{ ...paragraphBlockInstance2, focused: false },
-//		{ ...codeBlockInstance, focused: false },
+		{ ...codeBlockInstance, focused: false },
 		{ ...moreBlockInstance, focused: false },
 	],
 	refresh: false,
