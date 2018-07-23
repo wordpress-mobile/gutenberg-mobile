@@ -14,7 +14,7 @@ describe( 'Parser', () => {
 		else:
 			return "Hello Pony"`;
 
-	const originalCodeBlockHtml = `<pre><code>${ codeContent }</code></pre>`;
+	const originalCodeBlockHtml = `<pre class="wp-block-code"><code>${ codeContent }</code></pre>`;
 
 	const gbCodeBlockHtml = `
 		<!-- wp:code -->
