@@ -98,7 +98,7 @@ const initialState: StateType = {
 			focused: false,
 		},
 		{ ...codeBlockInstance, focused: false },
-		{ ...moreBlockInstance, focused: false },		
+		{ ...moreBlockInstance, focused: false },
 		{ ...paragraphBlockInstance, focused: false },
 		{
 			uid: '5',
