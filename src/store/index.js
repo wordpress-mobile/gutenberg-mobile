@@ -43,7 +43,7 @@ const initialMoreBlockHtml = `
 
 const initialParagraphBlockHtml = `
 <!-- wp:paragraph -->
-<p>Here we have an example of a beatiful paragraph</p>
+<p>Here we have an <em>example</em> of a <strong><em>beatiful</em></strong> paragraph<br></p>
 <!-- /wp:paragraph -->
 `;
 
