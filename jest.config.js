@@ -30,7 +30,7 @@ module.exports = {
 		'node',
 	],
 	moduleNameMapper: {
-		'@wordpress\\/(blocks|editor)$': '<rootDir>/gutenberg/$1',
+		'@wordpress\\/(blocks|editor|components)$': '<rootDir>/gutenberg/$1',
 		'@wordpress\\/(data|element|deprecated)$': '<rootDir>/gutenberg/packages/$1/src/index',
 		'@gutenberg': '<rootDir>/gutenberg',
 
