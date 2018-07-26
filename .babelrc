@@ -10,9 +10,9 @@
         "cwd": "babelrc",
         "alias": {
           "react-native-aztec": "./react-native-aztec",
-          "@wordpress/blocks": "./blocks",
+          "@wordpress/blocks": "./packages/blocks",
           "@wordpress/editor": "./editor",
-          "@wordpress/components": "./components",          
+          "@gutenberg/blocks": "./gutenberg/packages/blocks/src",
           "@gutenberg": "./gutenberg"
         },
         "extensions": [
