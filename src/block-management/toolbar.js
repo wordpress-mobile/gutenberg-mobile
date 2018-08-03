@@ -1,7 +1,7 @@
 /** @flow
  * @format */
 
-import React from 'react';
+import React, { Component } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { ToolbarButton } from './constants';
 
@@ -12,7 +12,7 @@ type PropsType = {
 	onButtonPressed: ( button: number, uid: string ) => void,
 };
 
-export default class Toolbar extends React.Component<PropsType> {
+export default class Toolbar extends Component<PropsType> {
 	render() {
 		return (
 			<View style={ styles.toolbar }>

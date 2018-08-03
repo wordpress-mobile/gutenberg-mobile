@@ -3,7 +3,7 @@
  * @flow
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import { Platform, Switch, Text, View, FlatList } from 'react-native';
 import RecyclerViewList, { DataSource } from 'react-native-recyclerview-list';
 import BlockHolder from './block-holder';
@@ -33,7 +33,7 @@ type StateType = {
 	showHtml: boolean,
 };
 
-export default class BlockManager extends React.Component<PropsType, StateType> {
+export default class BlockManager extends Component<PropsType, StateType> {
 	_recycler = null;
 
 	constructor( props: PropsType ) {

@@ -3,7 +3,7 @@
  * @flow
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import Toolbar from './toolbar';
 
@@ -24,7 +24,7 @@ type StateType = {
 	focused: boolean,
 };
 
-export default class BlockHolder extends React.Component<PropsType, StateType> {
+export default class BlockHolder extends Component<PropsType, StateType> {
 	constructor( props: PropsType ) {
 		super( props );
 		this.state = {
