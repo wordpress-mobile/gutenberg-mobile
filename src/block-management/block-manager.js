@@ -56,18 +56,18 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		return -1;
 	}
 
-	isAdditionOrDeletion( newProps ) {
+	static isAdditionOrDeletion( newProps, currState ) {
 		// there's been an addition / deletion
-		if (this.state.dataSource.size() != newProps.blocks.length) {
+		if (currState.dataSource.size() != newProps.blocks.length) {
 			return true;
 		}
 	}
 
-	// returns true if focus, content, or position changes
-	isFocusContentPositionChange( newProps ) {
+	// returns true if focus, content, or position change
+	static isFocusContentPositionChange( newProps, currState ) {
 		// checks whether there's been a `focused` flag change in the props
-		for ( let i = 0; i < this.state.dataSource.size(); ++i ) {
-			const block = this.state.dataSource.get( i );
+		for ( let i = 0; i < currState.dataSource.size(); ++i ) {
+			const block = currState.dataSource.get( i );
 			const blockUpdate = newProps.blocks[ i ];
 			if ( block.uid === blockUpdate.uid ) {
 				if ( block.focused != blockUpdate.focused ) {
@@ -84,13 +84,17 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		return false;
 	}
 
-	componentWillReceiveProps( newProps ) {
-		if ((this.isAdditionOrDeletion(newProps) === true) || (this.isFocusContentPositionChange(newProps) === true)) {
-			this.setState( {
-				...this.state,
-				dataSource: new DataSource( newProps.blocks, ( item: BlockType ) => item.uid ),
-			})
+	static getDerivedStateFromProps(props, state) {
+		debugger;
+		if ((BlockManager.isAdditionOrDeletion(props, state) === true) 
+				|| (BlockManager.isFocusContentPositionChange(props, state) === true)) {
+			return {
+				...state,
+				dataSource: new DataSource( props.blocks, ( item: BlockType ) => item.uid ),
+			};
 		}
+		// no state change necessary
+		return null;
 	}
 
 	onToolbarButtonPressed( button: number, uid: string ) {
