@@ -57,10 +57,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 	}
 
 	static isAdditionOrDeletion( newProps: PropsType, currState: StateType ) {
-		// there's been an addition / deletion
-		if ( currState.dataSource.size() !== newProps.blocks.length ) {
-			return true;
-		}
+		return currState.dataSource.size() !== newProps.blocks.length;
 	}
 
 	// returns true if focus, content, or position change
