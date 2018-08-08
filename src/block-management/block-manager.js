@@ -58,7 +58,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 
 	static isAdditionOrDeletion( newProps: PropsType, currState: StateType ) {
 		// there's been an addition / deletion
-		if (currState.dataSource.size() != newProps.blocks.length) {
+		if ( currState.dataSource.size() !== newProps.blocks.length ) {
 			return true;
 		}
 	}
@@ -70,10 +70,10 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 			const block = currState.dataSource.get( i );
 			const blockUpdate = newProps.blocks[ i ];
 			if ( block.uid === blockUpdate.uid ) {
-				if ( block.focused != blockUpdate.focused ) {
+				if ( block.focused !== blockUpdate.focused ) {
 					return true;
 				}
-				if ( block.attributes.content != blockUpdate.attributes.content ) {
+				if ( block.attributes.content !== blockUpdate.attributes.content ) {
 					return true;
 				}
 			} else {
@@ -85,9 +85,8 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 	}
 
 	static getDerivedStateFromProps( props: PropsType, state: StateType ) {
-		debugger;
-		if ((BlockManager.isAdditionOrDeletion(props, state) === true) 
-				|| (BlockManager.isFocusContentPositionChange(props, state) === true)) {
+		if ( ( BlockManager.isAdditionOrDeletion( props, state ) === true ) ||
+					( BlockManager.isFocusContentPositionChange( props, state ) === true ) ) {
 			return {
 				...state,
 				dataSource: new DataSource( props.blocks, ( item: BlockType ) => item.uid ),
