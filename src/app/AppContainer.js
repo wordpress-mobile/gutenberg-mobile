@@ -32,8 +32,8 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 		deleteBlockAction: ( uid ) => {
 			dispatch( deleteBlockAction( uid ) );
 		},
-		createBlockAction: ( uid, block ) => {
-			dispatch( createBlockAction( uid, block ) );
+		createBlockAction: ( uid, block, uidAbove ) => {
+			dispatch( createBlockAction( uid, block, uidAbove ) );
 		},
 	};
 };

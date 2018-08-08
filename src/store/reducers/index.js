@@ -21,6 +21,21 @@ function findBlockIndex( blocks, uid: string ) {
 	} );
 }
 
+/*
+ * insert block into blocks[], below / after block having uidAbove
+*/
+function insertBlock( blocks, block, uidAbove ) {
+	// TODO we need to set focused: true and search for the currently focused block and
+	// set that one to `focused: false`.
+	const insertionIndex = findBlockIndex( blocks, uidAbove );
+	if (insertionIndex === blocks.length - 1) {
+		// append new block to blocks list
+		blocks.push(block);
+	} else {
+		blocks.splice(insertionIndex + 1, 0, block);
+	}
+}
+
 export const reducer = (
 	state: StateType = { blocks: [], refresh: false },
 	action: BlockActionType
@@ -109,9 +124,7 @@ export const reducer = (
 			return { blocks: blocks, refresh: ! state.refresh };
 		}
 		case ActionTypes.BLOCK.CREATE: {
-			// TODO we need to set focused: true and search for the currently focused block and
-			// set that one to `focused: false`.
-			blocks.push(action.block);
+			insertBlock(blocks, action.block, action.uidAbove);
 			return { blocks: blocks, refresh: ! state.refresh };
 		}
 		default:
