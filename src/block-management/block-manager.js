@@ -56,11 +56,41 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		return -1;
 	}
 
-	componentWillReceiveProps(newProps) {
-		this.setState( {
-			...this.state,
-			dataSource: new DataSource( newProps.blocks, ( item: BlockType ) => item.uid ),
-		})
+	isAdditionOrDeletion( newProps ) {
+		// there's been an addition / deletion
+		if (this.state.dataSource.size() != newProps.blocks.length) {
+			return true;
+		}
+	}
+
+	// returns true if focus, content, or position changes
+	isFocusContentPositionChange( newProps ) {
+		// checks whether there's been a `focused` flag change in the props
+		for ( let i = 0; i < this.state.dataSource.size(); ++i ) {
+			const block = this.state.dataSource.get( i );
+			const blockUpdate = newProps.blocks[ i ];
+			if ( block.uid === blockUpdate.uid ) {
+				if ( block.focused != blockUpdate.focused ) {
+					return true;
+				}
+				if ( block.attributes.content != blockUpdate.attributes.content ) {
+					return true;
+				}
+			} else {
+				// same array position and different uid, this means a move up/down of a block happened
+				return true;
+			}
+		}
+		return false;
+	}
+
+	componentWillReceiveProps( newProps ) {
+		if ((this.isAdditionOrDeletion(newProps) === true) || (this.isFocusContentPositionChange(newProps) === true)) {
+			this.setState( {
+				...this.state,
+				dataSource: new DataSource( newProps.blocks, ( item: BlockType ) => item.uid ),
+			})
+		}
 	}
 
 	onToolbarButtonPressed( button: number, uid: string ) {
