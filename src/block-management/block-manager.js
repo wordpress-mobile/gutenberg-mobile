@@ -56,19 +56,23 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		return -1;
 	}
 
+	componentWillReceiveProps(newProps) {
+		this.setState( {
+			...this.state,
+			dataSource: new DataSource( newProps.blocks, ( item: BlockType ) => item.uid ),
+		})
+	}
+
 	onToolbarButtonPressed( button: number, uid: string ) {
 		const dataSourceBlockIndex = this.getDataSourceIndexFromUid( uid );
 		switch ( button ) {
 			case ToolbarButton.UP:
-				this.state.dataSource.moveUp( dataSourceBlockIndex );
 				this.props.moveBlockUpAction( uid );
 				break;
 			case ToolbarButton.DOWN:
-				this.state.dataSource.moveDown( dataSourceBlockIndex );
 				this.props.moveBlockDownAction( uid );
 				break;
 			case ToolbarButton.DELETE:
-				this.state.dataSource.splice( dataSourceBlockIndex, 1 );
 				this.props.deleteBlockAction( uid );
 				break;
 			case ToolbarButton.PLUS:
@@ -80,7 +84,6 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 				// TODO: block type picker here instead of hardcoding a core/code block
 				const newBlock = createBlock( 'core/paragraph', { content: 'new test text for a core/paragraph block' } );
 				const newBlockWithFocusedState = { ...newBlock, focused: false };
-				this.state.dataSource.push( newBlockWithFocusedState );
 				this.props.createBlockAction( newBlockWithFocusedState.uid, newBlockWithFocusedState );
 				break;
 			case ToolbarButton.SETTINGS:
