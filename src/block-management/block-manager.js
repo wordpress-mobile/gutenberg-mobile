@@ -97,7 +97,8 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 	}
 
 	onToolbarButtonPressed( button: number, uid: string ) {
-		const dataSourceBlockIndex = this.getDataSourceIndexFromUid( uid );
+		// TODO: don't remove - to be used when working on direct insertion
+		// const dataSourceBlockIndex = this.getDataSourceIndexFromUid( uid );
 		switch ( button ) {
 			case ToolbarButton.UP:
 				this.props.moveBlockUpAction( uid );
