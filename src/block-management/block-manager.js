@@ -56,7 +56,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		return -1;
 	}
 
-	static isAdditionOrDeletion( newProps, currState ) {
+	static isAdditionOrDeletion( newProps: PropsType, currState: StateType ) {
 		// there's been an addition / deletion
 		if (currState.dataSource.size() != newProps.blocks.length) {
 			return true;
@@ -64,7 +64,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 	}
 
 	// returns true if focus, content, or position change
-	static isFocusContentPositionChange( newProps, currState ) {
+	static isFocusContentPositionChange( newProps: PropsType, currState: StateType ) {
 		// checks whether there's been a `focused` flag change in the props
 		for ( let i = 0; i < currState.dataSource.size(); ++i ) {
 			const block = currState.dataSource.get( i );
@@ -84,7 +84,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		return false;
 	}
 
-	static getDerivedStateFromProps(props, state) {
+	static getDerivedStateFromProps( props: PropsType, state: StateType ) {
 		debugger;
 		if ((BlockManager.isAdditionOrDeletion(props, state) === true) 
 				|| (BlockManager.isFocusContentPositionChange(props, state) === true)) {
