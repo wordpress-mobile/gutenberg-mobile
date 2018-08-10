@@ -19,7 +19,7 @@ export type BlockListType = {
 	moveBlockUpAction: string => mixed,
 	moveBlockDownAction: string => mixed,
 	deleteBlockAction: string => mixed,
-	createBlockAction: ( string, BlockType ) => mixed,
+	createBlockAction: ( string, BlockType, string ) => mixed,
 	blocks: Array<BlockType>,
 	aztechtml: string,
 	refresh: boolean,
@@ -94,8 +94,6 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 	}
 
 	onToolbarButtonPressed( button: number, clientId: string ) {
-		// TODO: don't remove - to be used when working on direct insertion
-		// const dataSourceBlockIndex = this.getDataSourceIndexFromClientId( clientId );
 		switch ( button ) {
 			case ToolbarButton.UP:
 				this.props.moveBlockUpAction( clientId );
@@ -107,15 +105,10 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 				this.props.deleteBlockAction( clientId );
 				break;
 			case ToolbarButton.PLUS:
-				// TODO: direct access insertion: it would be nice to pass the dataSourceBlockIndex here,
-				// so in this way we know the new block should be inserted right after this one
-				// instead of being appended to the end.
-				// this.props.createBlockAction( clientId, dataSourceBlockIndex );
-
 				// TODO: block type picker here instead of hardcoding a core/code block
 				const newBlock = createBlock( 'core/paragraph', { content: 'new test text for a core/paragraph block' } );
 				const newBlockWithFocusedState = { ...newBlock, focused: false };
-				this.props.createBlockAction( newBlockWithFocusedState.clientId, newBlockWithFocusedState );
+				this.props.createBlockAction( newBlockWithFocusedState.clientId, newBlockWithFocusedState, clientId );
 				break;
 			case ToolbarButton.SETTINGS:
 				// TODO: implement settings
