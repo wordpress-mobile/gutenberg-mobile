@@ -46,7 +46,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		this.props.focusBlockAction( clientId );
 	}
 
-	getDataSourceIndexFromUid( clientId: string ) {
+	getDataSourceIndexFromClientId( clientId: string ) {
 		for ( let i = 0; i < this.state.dataSource.size(); ++i ) {
 			const block = this.state.dataSource.get( i );
 			if ( block.clientId === clientId ) {
@@ -95,7 +95,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 
 	onToolbarButtonPressed( button: number, clientId: string ) {
 		// TODO: don't remove - to be used when working on direct insertion
-		// const dataSourceBlockIndex = this.getDataSourceIndexFromUid( uid );
+		// const dataSourceBlockIndex = this.getDataSourceIndexFromClientId( clientId );
 		switch ( button ) {
 			case ToolbarButton.UP:
 				this.props.moveBlockUpAction( clientId );
@@ -110,7 +110,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 				// TODO: direct access insertion: it would be nice to pass the dataSourceBlockIndex here,
 				// so in this way we know the new block should be inserted right after this one
 				// instead of being appended to the end.
-				// this.props.createBlockAction( uid, dataSourceBlockIndex );
+				// this.props.createBlockAction( clientId, dataSourceBlockIndex );
 
 				// TODO: block type picker here instead of hardcoding a core/code block
 				const newBlock = createBlock( 'core/paragraph', { content: 'new test text for a core/paragraph block' } );
@@ -147,9 +147,9 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 
 	onChange( clientId: string, attributes: mixed ) {
 		// Update datasource UI
-		const index = this.getDataSourceIndexFromUid( clientId );
+		const index = this.getDataSourceIndexFromClientId( clientId );
 		const dataSource = this.state.dataSource;
-		const block = dataSource.get( this.getDataSourceIndexFromUid( clientId ) );
+		const block = dataSource.get( this.getDataSourceIndexFromClientId( clientId ) );
 		dataSource.set( index, { ...block, attributes: attributes } );
 		// Update Redux store
 		this.props.onChange( clientId, attributes );
