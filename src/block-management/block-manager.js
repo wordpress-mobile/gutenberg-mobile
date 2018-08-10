@@ -14,7 +14,7 @@ import styles from './block-manager.scss';
 import { getBlockType, serialize, createBlock } from '@wordpress/blocks';
 
 export type BlockListType = {
-	onChange: ( uid: string, attributes: mixed ) => void,
+	onChange: ( clientId: string, attributes: mixed ) => void,
 	focusBlockAction: string => mixed,
 	moveBlockUpAction: string => mixed,
 	moveBlockDownAction: string => mixed,
@@ -37,19 +37,19 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 	constructor( props: PropsType ) {
 		super( props );
 		this.state = {
-			dataSource: new DataSource( this.props.blocks, ( item: BlockType ) => item.uid ),
+			dataSource: new DataSource( this.props.blocks, ( item: BlockType ) => item.clientId ),
 			showHtml: false,
 		};
 	}
 
-	onBlockHolderPressed( uid: string ) {
-		this.props.focusBlockAction( uid );
+	onBlockHolderPressed( clientId: string ) {
+		this.props.focusBlockAction( clientId );
 	}
 
-	getDataSourceIndexFromUid( uid: string ) {
+	getDataSourceIndexFromUid( clientId: string ) {
 		for ( let i = 0; i < this.state.dataSource.size(); ++i ) {
 			const block = this.state.dataSource.get( i );
-			if ( block.uid === uid ) {
+			if ( block.clientId === clientId ) {
 				return i;
 			}
 		}
@@ -66,7 +66,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		for ( let i = 0; i < currState.dataSource.size(); ++i ) {
 			const block = currState.dataSource.get( i );
 			const blockUpdate = newProps.blocks[ i ];
-			if ( block.uid === blockUpdate.uid ) {
+			if ( block.clientId === blockUpdate.clientId ) {
 				if ( block.focused !== blockUpdate.focused ) {
 					return true;
 				}
@@ -74,7 +74,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 					return true;
 				}
 			} else {
-				// same array position and different uid, this means a move up/down of a block happened
+				// same array position and different clientId, this means a move up/down of a block happened
 				return true;
 			}
 		}
@@ -86,25 +86,25 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 					( BlockManager.isFocusContentPositionChange( props, state ) === true ) ) {
 			return {
 				...state,
-				dataSource: new DataSource( props.blocks, ( item: BlockType ) => item.uid ),
+				dataSource: new DataSource( props.blocks, ( item: BlockType ) => item.clientId ),
 			};
 		}
 		// no state change necessary
 		return null;
 	}
 
-	onToolbarButtonPressed( button: number, uid: string ) {
+	onToolbarButtonPressed( button: number, clientId: string ) {
 		// TODO: don't remove - to be used when working on direct insertion
 		// const dataSourceBlockIndex = this.getDataSourceIndexFromUid( uid );
 		switch ( button ) {
 			case ToolbarButton.UP:
-				this.props.moveBlockUpAction( uid );
+				this.props.moveBlockUpAction( clientId );
 				break;
 			case ToolbarButton.DOWN:
-				this.props.moveBlockDownAction( uid );
+				this.props.moveBlockDownAction( clientId );
 				break;
 			case ToolbarButton.DELETE:
-				this.props.deleteBlockAction( uid );
+				this.props.deleteBlockAction( clientId );
 				break;
 			case ToolbarButton.PLUS:
 				// TODO: direct access insertion: it would be nice to pass the dataSourceBlockIndex here,
@@ -115,7 +115,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 				// TODO: block type picker here instead of hardcoding a core/code block
 				const newBlock = createBlock( 'core/paragraph', { content: 'new test text for a core/paragraph block' } );
 				const newBlockWithFocusedState = { ...newBlock, focused: false };
-				this.props.createBlockAction( newBlockWithFocusedState.uid, newBlockWithFocusedState );
+				this.props.createBlockAction( newBlockWithFocusedState.clientId, newBlockWithFocusedState );
 				break;
 			case ToolbarButton.SETTINGS:
 				// TODO: implement settings
@@ -145,14 +145,14 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		this.state.dataSource.setDirty();
 	}
 
-	onChange( uid: string, attributes: mixed ) {
+	onChange( clientId: string, attributes: mixed ) {
 		// Update datasource UI
-		const index = this.getDataSourceIndexFromUid( uid );
+		const index = this.getDataSourceIndexFromUid( clientId );
 		const dataSource = this.state.dataSource;
-		const block = dataSource.get( this.getDataSourceIndexFromUid( uid ) );
+		const block = dataSource.get( this.getDataSourceIndexFromUid( clientId ) );
 		dataSource.set( index, { ...block, attributes: attributes } );
 		// Update Redux store
-		this.props.onChange( uid, attributes );
+		this.props.onChange( clientId, attributes );
 	}
 
 	render() {
@@ -178,7 +178,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 					style={ styles.list }
 					data={ this.props.blocks }
 					extraData={ this.props.refresh }
-					keyExtractor={ ( item ) => item.uid }
+					keyExtractor={ ( item ) => item.clientId }
 					renderItem={ this.renderItem.bind( this ) }
 				/>
 			);
@@ -202,14 +202,15 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		);
 	}
 
-	renderItem( value: { item: BlockType, uid: string } ) {
+	renderItem( value: { item: BlockType, clientId: string } ) {
 		return (
 			<BlockHolder
+				key={ value.clientId }
 				onToolbarButtonPressed={ this.onToolbarButtonPressed.bind( this ) }
 				onBlockHolderPressed={ this.onBlockHolderPressed.bind( this ) }
 				onChange={ this.onChange.bind( this ) }
 				focused={ value.item.focused }
-				uid={ value.item.uid }
+				clientId={ value.clientId }
 				{ ...value.item }
 			/>
 		);
