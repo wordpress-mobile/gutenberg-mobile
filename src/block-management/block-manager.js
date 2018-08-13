@@ -43,7 +43,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 			dataSource: new DataSource( this.props.blocks, ( item: BlockType ) => item.clientId ),
 			showHtml: false,
 			blockTypePickerVisible: false,
-			selectedBlockType: 'core/paragraph'
+			selectedBlockType: 'core/paragraph',
 		};
 	}
 
@@ -114,11 +114,11 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		this.setState( { ...this.state, blockTypePickerVisible: true } );
 	}
 
-	onBlockTypeSelected( itemValue: string, itemIndex: number ) {
-		this.setState( {...this.state, selectedBlockType: itemValue, blockTypePickerVisible: false} );
+	onBlockTypeSelected( itemValue: string ) {
+		this.setState( { ...this.state, selectedBlockType: itemValue, blockTypePickerVisible: false } );
 
 		// find currently focused block
-		const clientIdFocused = this.state.dataSource.get(this.findDataSourceIndexForFocusedItem()).clientId;
+		const clientIdFocused = this.state.dataSource.get( this.findDataSourceIndexForFocusedItem() ).clientId;
 
 		// create an empty block of the selected type
 		const newBlock = createBlock( itemValue, { content: 'new test text for a ' + itemValue + ' block' } );
@@ -209,14 +209,16 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 			);
 		}
 
-		let blockTypePicker = (
+		const blockTypePicker = (
 			<View>
 				<Picker
-					selectedValue={this.state.selectedBlockType}
-					onValueChange= { (itemValue, itemIndex) => { this.onBlockTypeSelected(itemValue, itemIndex); } } >
-					{ this.availableBlockTypes.map((item, index) => {
-							return (<Picker.Item label={item.title} value={item.name} key={index+1}/>)
-						} ) }
+					selectedValue={ this.state.selectedBlockType }
+					onValueChange={ ( itemValue ) => {
+						this.onBlockTypeSelected( itemValue );
+					} } >
+					{ this.availableBlockTypes.map( ( item, index ) => {
+						return ( <Picker.Item label={ item.title } value={ item.name } key={ index + 1 } /> );
+					} ) }
 				</Picker>
 			</View>
 		);
@@ -236,7 +238,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 				{ this.state.showHtml && <Text style={ styles.htmlView }>{ this.serializeToHtml() }</Text> }
 				{ ! this.state.showHtml && list }
 				{ this.state.blockTypePickerVisible && blockTypePicker }
-				</View>
+			</View>
 		);
 	}
 
