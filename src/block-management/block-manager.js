@@ -4,14 +4,14 @@
  */
 
 import React from 'react';
-import { Platform, Switch, Text, View, FlatList } from 'react-native';
+import { Platform, Switch, Text, View, FlatList, Picker } from 'react-native';
 import RecyclerViewList, { DataSource } from 'react-native-recyclerview-list';
 import BlockHolder from './block-holder';
 import { ToolbarButton } from './constants';
 import type { BlockType } from '../store/';
 import styles from './block-manager.scss';
 // Gutenberg imports
-import { getBlockType, serialize, createBlock } from '@wordpress/blocks';
+import { getBlockType, getBlockTypes, serialize, createBlock } from '@wordpress/blocks';
 
 export type BlockListType = {
 	onChange: ( clientId: string, attributes: mixed ) => void,
@@ -29,16 +29,21 @@ type PropsType = BlockListType;
 type StateType = {
 	dataSource: DataSource,
 	showHtml: boolean,
+	blockTypePickerVisible: boolean,
+	selectedBlockType: string,
 };
 
 export default class BlockManager extends React.Component<PropsType, StateType> {
 	_recycler = null;
+	availableBlockTypes = getBlockTypes();
 
 	constructor( props: PropsType ) {
 		super( props );
 		this.state = {
 			dataSource: new DataSource( this.props.blocks, ( item: BlockType ) => item.clientId ),
 			showHtml: false,
+			blockTypePickerVisible: false,
+			selectedBlockType: 'core/paragraph',
 		};
 	}
 
@@ -50,6 +55,16 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		for ( let i = 0; i < this.state.dataSource.size(); ++i ) {
 			const block = this.state.dataSource.get( i );
 			if ( block.clientId === clientId ) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	findDataSourceIndexForFocusedItem() {
+		for ( let i = 0; i < this.state.dataSource.size(); ++i ) {
+			const block = this.state.dataSource.get( i );
+			if ( block.focused === true ) {
 				return i;
 			}
 		}
@@ -93,6 +108,26 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		return null;
 	}
 
+	// TODO: in the near future this will likely be changed to onShowBlockTypePicker and bound to this.props
+	// once we move the action to the toolbar
+	showBlockTypePicker() {
+		this.setState( { ...this.state, blockTypePickerVisible: true } );
+	}
+
+	onBlockTypeSelected( itemValue: string ) {
+		this.setState( { ...this.state, selectedBlockType: itemValue, blockTypePickerVisible: false } );
+
+		// find currently focused block
+		const clientIdFocused = this.state.dataSource.get( this.findDataSourceIndexForFocusedItem() ).clientId;
+
+		// create an empty block of the selected type
+		const newBlock = createBlock( itemValue, { content: 'new test text for a ' + itemValue + ' block' } );
+		this.props.createBlockAction( newBlock.clientId, { ...newBlock, focused: false }, clientIdFocused );
+
+		// now set the focus
+		this.props.focusBlockAction( newBlock.clientId );
+	}
+
 	onToolbarButtonPressed( button: number, clientId: string ) {
 		switch ( button ) {
 			case ToolbarButton.UP:
@@ -105,10 +140,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 				this.props.deleteBlockAction( clientId );
 				break;
 			case ToolbarButton.PLUS:
-				// TODO: block type picker here instead of hardcoding a core/code block
-				const newBlock = createBlock( 'core/paragraph', { content: 'new test text for a core/paragraph block' } );
-				const newBlockWithFocusedState = { ...newBlock, focused: false };
-				this.props.createBlockAction( newBlockWithFocusedState.clientId, newBlockWithFocusedState, clientId );
+				this.showBlockTypePicker();
 				break;
 			case ToolbarButton.SETTINGS:
 				// TODO: implement settings
@@ -177,6 +209,20 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 			);
 		}
 
+		const blockTypePicker = (
+			<View>
+				<Picker
+					selectedValue={ this.state.selectedBlockType }
+					onValueChange={ ( itemValue ) => {
+						this.onBlockTypeSelected( itemValue );
+					} } >
+					{ this.availableBlockTypes.map( ( item, index ) => {
+						return ( <Picker.Item label={ item.title } value={ item.name } key={ index + 1 } /> );
+					} ) }
+				</Picker>
+			</View>
+		);
+
 		return (
 			<View style={ styles.container }>
 				<View style={ { height: 30 } } />
@@ -191,6 +237,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 				</View>
 				{ this.state.showHtml && <Text style={ styles.htmlView }>{ this.serializeToHtml() }</Text> }
 				{ ! this.state.showHtml && list }
+				{ this.state.blockTypePickerVisible && blockTypePicker }
 			</View>
 		);
 	}
