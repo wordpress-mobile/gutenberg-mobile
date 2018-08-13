@@ -46,7 +46,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		this.props.focusBlockAction( clientId );
 	}
 
-	getDataSourceIndexFromUid( clientId: string ) {
+	getDataSourceIndexFromClientId( clientId: string ) {
 		for ( let i = 0; i < this.state.dataSource.size(); ++i ) {
 			const block = this.state.dataSource.get( i );
 			if ( block.clientId === clientId ) {
@@ -56,31 +56,65 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		return -1;
 	}
 
+	static isAdditionOrDeletion( newProps: PropsType, currState: StateType ) {
+		return currState.dataSource.size() !== newProps.blocks.length;
+	}
+
+	// returns true if focus, content, or position change
+	static isFocusContentPositionChange( newProps: PropsType, currState: StateType ) {
+		// checks whether there's been a `focused` flag change in the props
+		for ( let i = 0; i < currState.dataSource.size(); ++i ) {
+			const block = currState.dataSource.get( i );
+			const blockUpdate = newProps.blocks[ i ];
+			if ( block.clientId === blockUpdate.clientId ) {
+				if ( block.focused !== blockUpdate.focused ) {
+					return true;
+				}
+				if ( block.attributes.content !== blockUpdate.attributes.content ) {
+					return true;
+				}
+			} else {
+				// same array position and different clientId, this means a move up/down of a block happened
+				return true;
+			}
+		}
+		return false;
+	}
+
+	static getDerivedStateFromProps( props: PropsType, state: StateType ) {
+		if ( ( BlockManager.isAdditionOrDeletion( props, state ) === true ) ||
+					( BlockManager.isFocusContentPositionChange( props, state ) === true ) ) {
+			return {
+				...state,
+				dataSource: new DataSource( props.blocks, ( item: BlockType ) => item.clientId ),
+			};
+		}
+		// no state change necessary
+		return null;
+	}
+
 	onToolbarButtonPressed( button: number, clientId: string ) {
-		const dataSourceBlockIndex = this.getDataSourceIndexFromUid( clientId );
+		// TODO: don't remove - to be used when working on direct insertion
+		// const dataSourceBlockIndex = this.getDataSourceIndexFromClientId( clientId );
 		switch ( button ) {
 			case ToolbarButton.UP:
-				this.state.dataSource.moveUp( dataSourceBlockIndex );
 				this.props.moveBlockUpAction( clientId );
 				break;
 			case ToolbarButton.DOWN:
-				this.state.dataSource.moveDown( dataSourceBlockIndex );
 				this.props.moveBlockDownAction( clientId );
 				break;
 			case ToolbarButton.DELETE:
-				this.state.dataSource.splice( dataSourceBlockIndex, 1 );
 				this.props.deleteBlockAction( clientId );
 				break;
 			case ToolbarButton.PLUS:
 				// TODO: direct access insertion: it would be nice to pass the dataSourceBlockIndex here,
 				// so in this way we know the new block should be inserted right after this one
 				// instead of being appended to the end.
-				// this.props.createBlockAction( uid, dataSourceBlockIndex );
+				// this.props.createBlockAction( clientId, dataSourceBlockIndex );
 
 				// TODO: block type picker here instead of hardcoding a core/code block
 				const newBlock = createBlock( 'core/paragraph', { content: 'new test text for a core/paragraph block' } );
 				const newBlockWithFocusedState = { ...newBlock, focused: false };
-				this.state.dataSource.push( newBlockWithFocusedState );
 				this.props.createBlockAction( newBlockWithFocusedState.clientId, newBlockWithFocusedState );
 				break;
 			case ToolbarButton.SETTINGS:
@@ -113,9 +147,9 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 
 	onChange( clientId: string, attributes: mixed ) {
 		// Update datasource UI
-		const index = this.getDataSourceIndexFromUid( clientId );
+		const index = this.getDataSourceIndexFromClientId( clientId );
 		const dataSource = this.state.dataSource;
-		const block = dataSource.get( this.getDataSourceIndexFromUid( clientId ) );
+		const block = dataSource.get( this.getDataSourceIndexFromClientId( clientId ) );
 		dataSource.set( index, { ...block, attributes: attributes } );
 		// Update Redux store
 		this.props.onChange( clientId, attributes );
