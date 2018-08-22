@@ -39,12 +39,8 @@ export const settings = {
 	},
 
 	edit( { attributes }) {
-
-		let blockName = attributes.title.charAt(0).toUpperCase() + attributes.title.slice(1);
-
 		return (
 			<View style={ styles.unsupportedBlock }>
-				<Text style={ styles.unsupportedBlockName }>{ blockName }</Text>
 				<Text style={ styles.unsupportedBlockMessage }>Unsupported</Text>
 			</View>
 		);
