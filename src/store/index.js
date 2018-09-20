@@ -36,7 +36,7 @@ setUnknownTypeHandlerName( UnsupportedBlock.name );
 
 const initialHtml = `
 <!-- wp:image -->
-<figure class="wp-block-image"><img src="https://cldup.com/cXyG__fTLN.jpg" alt=""/></figure>
+<figure class="wp-block-image"><img src="https://cldup.com/cXyG__fTLN.jpg" alt=""/><figcaption>This is a caption.</figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:title -->
