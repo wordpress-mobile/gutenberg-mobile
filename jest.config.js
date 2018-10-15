@@ -13,34 +13,31 @@ if ( process.env.TEST_RN_PLATFORM ) {
 
 module.exports = {
 	verbose: true,
-	preset: 'jest-react-native',
+	preset: 'react-native',
 	testEnvironment: 'jsdom',
-	testPathIgnorePatterns: [ '/node_modules/', '/gutenberg/test/', '/gutenberg/packages/' ],
-	moduleFileExtensions: [
-		'native.js',
-		'android.js',
-		'ios.js',
-		'js',
-		'native.json',
-		'android.json',
-		'ios.json',
-		'json',
-		'native.jsx',
-		'android.jsx',
-		'ios.jsx',
-		'jsx',
-		'node',
+	testPathIgnorePatterns: [
+		'/node_modules/',
+		'<rootDir>/gutenberg/gutenberg-mobile/',
+		'/gutenberg/test/',
+		'/gutenberg/packages/',
 	],
+	modulePathIgnorePatterns: [ '<rootDir>/gutenberg/gutenberg-mobile' ],
+	moduleDirectories: [ 'node_modules', 'symlinked-packages' ],
 	moduleNameMapper: {
-		'@wordpress\\/(block-serialization-default-parser|blocks|data|element|deprecated|editor|block-library|components|keycodes|url|a11y|viewport|core-data|api-fetch|nux)$':
-			'<rootDir>/gutenberg/packages/$1/src/index',
-
 		// Mock the CSS modules. See https://facebook.github.io/jest/docs/en/webpack.html#handling-static-assets
 		'\\.(scss)$': '<rootDir>/__mocks__/styleMock.js',
 	},
 	haste: {
 		defaultPlatform: rnPlatform,
-		platforms: [ 'android', 'ios', 'native' ],
-		providesModuleNodeModules: [ 'react-native', 'react-native-svg' ],
+		platforms: [
+			'android',
+			'ios',
+			'native',
+		],
+		hasteImplModulePath: '<rootDir>/node_modules/react-native/jest/hasteImpl.js',
+		providesModuleNodeModules: [
+			'react-native',
+			'react-native-svg',
+		],
 	},
 };

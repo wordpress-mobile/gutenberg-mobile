@@ -43,7 +43,9 @@ let upstreamTransformer = null;
 const reactNativeVersionString = require( 'react-native/package.json' ).version;
 const reactNativeMinorVersion = semver( reactNativeVersionString ).minor;
 
-if ( reactNativeMinorVersion >= 52 ) {
+if ( reactNativeMinorVersion >= 56 ) {
+	upstreamTransformer = require( 'metro/src/reactNativeTransformer' );
+} else if ( reactNativeMinorVersion >= 52 ) {
 	upstreamTransformer = require( 'metro/src/transformer' );
 } else if ( reactNativeMinorVersion >= 47 ) {
 	upstreamTransformer = require( 'metro-bundler/src/transformer' );
@@ -61,7 +63,7 @@ if ( reactNativeMinorVersion >= 52 ) {
 
 // TODO: need to find a way to pass the include paths and the default asset files via some config
 const autoImportIncludePaths = [
-	path.join( path.dirname( __filename ), '../edit-post/assets/stylesheets' ),
+	path.join( path.dirname( __filename ), '../assets/stylesheets' ),
 ];
 const autoImportAssets = [
 	'_colors.scss',
