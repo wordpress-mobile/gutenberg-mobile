@@ -51,7 +51,22 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 	}
 
 	onBlockHolderPressed( clientId: string ) {
+		this.focusDataSoruceItem(clientId);
 		this.props.focusBlockAction( clientId );
+	}
+
+	focusDataSoruceItem(clientId: string) {
+		for ( let i = 0; i < this.state.dataSource.size(); ++i ) {
+			const block = this.state.dataSource.get( i );
+			if (block.clientId === clientId) {
+				block.focused = true;
+			}
+			else {
+				if (block.focused) {
+					block.focused = false;
+				}
+			}
+		}
 	}
 
 	getDataSourceIndexFromClientId( clientId: string ) {
