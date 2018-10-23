@@ -3,7 +3,7 @@
  * @flow
  */
 
-import React from 'react';
+import { createElement, Component } from '@wordpress/element';
 import { isEqual } from 'lodash';
 
 import { Switch, Text, View, FlatList, Keyboard } from 'react-native';
@@ -48,7 +48,7 @@ type StateType = {
 	isKeyboardVisible: boolean,
 };
 
-export default class BlockManager extends React.Component<PropsType, StateType> {
+export default class BlockManager extends Component<PropsType, StateType> {
 	keyboardDidShowListener: EventEmitter;
 	keyboardDidHideListener: EventEmitter;
 

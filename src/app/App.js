@@ -3,8 +3,6 @@
 
 import '../globals';
 
-import React from 'react';
-
 // Gutenberg imports
 import { registerCoreBlocks } from '@wordpress/block-library';
 import { registerBlockType, setUnregisteredTypeHandlerName } from '@wordpress/blocks';

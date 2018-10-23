@@ -1,7 +1,7 @@
 /** @flow
  * @format */
 
-import React from 'react';
+import { createElement, Component } from '@wordpress/element';
 import { subscribeParentGetHtml } from 'react-native-gutenberg-bridge';
 
 import BlockManager, { type BlockListType } from '../block-management/block-manager';
@@ -12,7 +12,7 @@ import type { EmitterSubscription } from 'react-native';
 type PropsType = BlockListType;
 type StateType = {};
 
-export default class MainScreen extends React.Component<PropsType, StateType> {
+export default class MainScreen extends Component<PropsType, StateType> {
 	subscriptionParentGetHtml: ?EmitterSubscription;
 
 	componentDidMount() {

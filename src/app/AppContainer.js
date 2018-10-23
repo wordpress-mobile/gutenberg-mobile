@@ -1,7 +1,7 @@
 /** @flow
  * @format */
 
-import React from 'react';
+import { createElement, Component } from '@wordpress/element';
 import { parse, serialize } from '@wordpress/blocks';
 import { withDispatch, withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
@@ -27,7 +27,7 @@ type PropsType = {
 	setupEditor: ( mixed, ?mixed ) => mixed,
 };
 
-class AppContainer extends React.Component<PropsType> {
+class AppContainer extends Component<PropsType> {
 	lastHtml: ?string;
 
 	constructor( props: PropsType ) {

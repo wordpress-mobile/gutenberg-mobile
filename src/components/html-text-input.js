@@ -3,7 +3,7 @@
  * @flow
  */
 
-import React from 'react';
+import { Component } from '@wordpress/element';
 import { Platform, TextInput, KeyboardAvoidingView } from 'react-native';
 import styles from './html-text-input.scss';
 
@@ -19,7 +19,7 @@ type StateType = {
 	html: string,
 };
 
-export default class HTMLInputView extends React.Component<PropsType, StateType> {
+export default class HTMLInputView extends Component<PropsType, StateType> {
 	state = {
 		html: '',
 	}

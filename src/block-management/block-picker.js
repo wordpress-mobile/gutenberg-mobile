@@ -2,7 +2,7 @@
  * @format
  * @flow
  */
-import React, { Component } from 'react';
+import { Component } from '@wordpress/element';
 import { FlatList, Text, TouchableHighlight, View } from 'react-native';
 import Modal from 'react-native-modal';
 import styles from './block-picker.scss';

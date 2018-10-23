@@ -1,7 +1,7 @@
 /** @flow
  * @format */
 
-import React from 'react';
+import { Component } from '@wordpress/element';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { InlineToolbarButton } from './constants';
 
@@ -12,7 +12,7 @@ type PropsType = {
 	onButtonPressed: ( button: number, clientId: string ) => void,
 };
 
-export default class InlineToolbar extends React.Component<PropsType> {
+export default class InlineToolbar extends Component<PropsType> {
 	render() {
 		return (
 			<View style={ styles.inlineToolbar }>

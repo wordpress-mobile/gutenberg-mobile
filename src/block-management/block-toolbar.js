@@ -3,7 +3,7 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import { createElement, Component } from '@wordpress/element';
 import { View } from 'react-native';
 import { withSelect, withDispatch } from '@wordpress/data';
 import { compose } from '@wordpress/compose';

@@ -3,7 +3,7 @@
  * @flow
  */
 
-import React from 'react';
+import { Component } from '@wordpress/element';
 import { View, Text } from 'react-native';
 import type { BlockType } from '../../store/types';
 
@@ -21,7 +21,7 @@ type StateType = {
 // Styles
 import styles from '../../block-management/block-holder.scss';
 
-export default class UnsupportedBlockEdit extends React.Component<PropsType, StateType> {
+export default class UnsupportedBlockEdit extends Component<PropsType, StateType> {
 	render() {
 		return (
 			<View style={ styles.unsupportedBlock }>

@@ -3,7 +3,7 @@
 * @flow
 */
 
-import React from 'react';
+import { Component } from '@wordpress/element';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import InlineToolbar from './inline-toolbar';
 
@@ -24,7 +24,7 @@ type PropsType = BlockType & {
 	mergeBlocks: ( forward: boolean ) => void,
 };
 
-export default class BlockHolder extends React.Component<PropsType> {
+export default class BlockHolder extends Component<PropsType> {
 	renderToolbarIfBlockFocused() {
 		if ( this.props.focused ) {
 			return (

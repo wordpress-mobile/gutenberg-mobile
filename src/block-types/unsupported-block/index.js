@@ -2,9 +2,6 @@
  * @format
  * @flow
  */
-
-import React from 'react';
-
 // Gutenberg imports
 import { __ } from '@wordpress/i18n';
 import { RawHTML } from '@wordpress/element';
