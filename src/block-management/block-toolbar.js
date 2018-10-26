@@ -5,7 +5,7 @@ import { BlockFormatControls, BlockControls } from '@wordpress/editor';
 export default class BlockToolbar extends Component {
   render() {
     return (
-        <View style={ {backgroundColor: '#DCDCDC', flexDirection: 'row'} }>
+        <View style={ {height: 50, backgroundColor: '#DCDCDC', flexDirection: 'row'} }>
             <BlockControls.Slot/>
             <BlockFormatControls.Slot/>
         </View>

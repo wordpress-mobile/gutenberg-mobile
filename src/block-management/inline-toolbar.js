@@ -15,7 +15,7 @@ type PropsType = {
 export default class InlineToolbar extends React.Component<PropsType> {
 	render() {
 		return (
-			<View style={ styles.toolbar }>
+			<View style={ styles.inlineToolbar }>
 				<TouchableOpacity
 					onPress={ this.props.onButtonPressed.bind(
 						this,
@@ -23,7 +23,7 @@ export default class InlineToolbar extends React.Component<PropsType> {
 						this.props.clientId
 					) }
 				>
-					<View style={ styles.toolbarButton }>
+					<View style={ styles.inlineToolbarButton }>
 						<Text>+</Text>
 					</View>
 				</TouchableOpacity>
@@ -31,7 +31,7 @@ export default class InlineToolbar extends React.Component<PropsType> {
 				<TouchableOpacity
 					onPress={ this.props.onButtonPressed.bind( this, InlineToolbarButton.UP, this.props.clientId ) }
 				>
-					<View style={ styles.toolbarButton }>
+					<View style={ styles.inlineToolbarButton }>
 						<Text>▲</Text>
 					</View>
 				</TouchableOpacity>
@@ -43,7 +43,7 @@ export default class InlineToolbar extends React.Component<PropsType> {
 						this.props.clientId
 					) }
 				>
-					<View style={ styles.toolbarButton }>
+					<View style={ styles.inlineToolbarButton }>
 						<Text>▼</Text>
 					</View>
 				</TouchableOpacity>
@@ -55,7 +55,7 @@ export default class InlineToolbar extends React.Component<PropsType> {
 						this.props.clientId
 					) }
 				>
-					<View style={ styles.toolbarButton }>
+					<View style={ styles.inlineToolbarButton }>
 						{ /* eslint-disable-next-line jsx-a11y/accessible-emoji */ }
 						<Text>⚙️</Text>
 					</View>
@@ -68,7 +68,7 @@ export default class InlineToolbar extends React.Component<PropsType> {
 						this.props.clientId
 					) }
 				>
-					<View style={ styles.toolbarButton }>
+					<View style={ styles.inlineToolbarButton }>
 						<Text>🗑</Text>
 					</View>
 				</TouchableOpacity>
