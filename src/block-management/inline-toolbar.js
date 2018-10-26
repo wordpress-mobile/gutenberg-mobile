@@ -3,23 +3,23 @@
 
 import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
-import { ToolbarButton } from './constants';
+import { InlineToolbarButton } from './constants';
 
-import styles from './toolbar.scss';
+import styles from './inline-toolbar.scss';
 
 type PropsType = {
 	clientId: string,
 	onButtonPressed: ( button: number, clientId: string ) => void,
 };
 
-export default class Toolbar extends React.Component<PropsType> {
+export default class InlineToolbar extends React.Component<PropsType> {
 	render() {
 		return (
 			<View style={ styles.toolbar }>
 				<TouchableOpacity
 					onPress={ this.props.onButtonPressed.bind(
 						this,
-						ToolbarButton.PLUS,
+						InlineToolbarButton.PLUS,
 						this.props.clientId
 					) }
 				>
@@ -29,7 +29,7 @@ export default class Toolbar extends React.Component<PropsType> {
 				</TouchableOpacity>
 				<View style={ styles.buttonSeparator } />
 				<TouchableOpacity
-					onPress={ this.props.onButtonPressed.bind( this, ToolbarButton.UP, this.props.clientId ) }
+					onPress={ this.props.onButtonPressed.bind( this, InlineToolbarButton.UP, this.props.clientId ) }
 				>
 					<View style={ styles.toolbarButton }>
 						<Text>▲</Text>
@@ -39,7 +39,7 @@ export default class Toolbar extends React.Component<PropsType> {
 				<TouchableOpacity
 					onPress={ this.props.onButtonPressed.bind(
 						this,
-						ToolbarButton.DOWN,
+						InlineToolbarButton.DOWN,
 						this.props.clientId
 					) }
 				>
@@ -51,7 +51,7 @@ export default class Toolbar extends React.Component<PropsType> {
 				<TouchableOpacity
 					onPress={ this.props.onButtonPressed.bind(
 						this,
-						ToolbarButton.SETTINGS,
+						InlineToolbarButton.SETTINGS,
 						this.props.clientId
 					) }
 				>
@@ -64,7 +64,7 @@ export default class Toolbar extends React.Component<PropsType> {
 				<TouchableOpacity
 					onPress={ this.props.onButtonPressed.bind(
 						this,
-						ToolbarButton.DELETE,
+						InlineToolbarButton.DELETE,
 						this.props.clientId
 					) }
 				>

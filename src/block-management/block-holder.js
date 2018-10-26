@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
-import Toolbar from './toolbar';
+import InlineToolbar from './inline-toolbar';
 
 import type { BlockType } from '../store/';
 
@@ -17,7 +17,7 @@ import { getBlockType, getUnregisteredTypeHandlerName } from '@wordpress/blocks'
 type PropsType = BlockType & {
 	showTitle: boolean,
 	onChange: ( clientId: string, attributes: mixed ) => void,
-	onToolbarButtonPressed: ( button: number, clientId: string ) => void,
+	onInlineToolbarButtonPressed: ( button: number, clientId: string ) => void,
 	onBlockHolderPressed: ( clientId: string ) => void,
 	insertBlocksAfter: ( blocks: Array<Object> ) => void,
 };
@@ -39,9 +39,9 @@ export default class BlockHolder extends React.Component<PropsType, StateType> {
 	renderToolbarIfBlockFocused() {
 		if ( this.props.focused ) {
 			return (
-				<Toolbar
+				<InlineToolbar
 					clientId={ this.props.clientId }
-					onButtonPressed={ this.props.onToolbarButtonPressed }
+					onButtonPressed={ this.props.onInlineToolbarButtonPressed }
 				/>
 			);
 		}
