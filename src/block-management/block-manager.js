@@ -12,6 +12,7 @@ import type { BlockType } from '../store/';
 import styles from './block-manager.scss';
 import BlockPicker from './block-picker';
 import HTMLTextInput from '../components/html-text-input';
+import BlockToolbar from './block-toolbar'
 
 // Gutenberg imports
 import { createBlock } from '@wordpress/blocks';
@@ -232,6 +233,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 
 		return (
 			<View style={ styles.container }>
+				<BlockToolbar/>
 				<View style={ styles.switch }>
 					<Switch
 						activeText={ 'On' }
