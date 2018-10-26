@@ -12,7 +12,7 @@ import type { BlockType } from '../store/';
 import styles from './block-manager.scss';
 import BlockPicker from './block-picker';
 import HTMLTextInput from '../components/html-text-input';
-import BlockToolbar from './block-toolbar'
+import BlockToolbar from './block-toolbar';
 
 // Gutenberg imports
 import { createBlock } from '@wordpress/blocks';
@@ -52,20 +52,17 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 	}
 
 	onBlockHolderPressed( clientId: string ) {
-		this.focusDataSoruceItem(clientId);
+		this.focusDataSoruceItem( clientId );
 		this.props.focusBlockAction( clientId );
 	}
 
-	focusDataSoruceItem(clientId: string) {
+	focusDataSoruceItem( clientId: string ) {
 		for ( let i = 0; i < this.state.dataSource.size(); ++i ) {
 			const block = this.state.dataSource.get( i );
-			if (block.clientId === clientId) {
+			if ( block.clientId === clientId ) {
 				block.focused = true;
-			}
-			else {
-				if (block.focused) {
-					block.focused = false;
-				}
+			} else {
+				block.focused = false;
 			}
 		}
 	}
@@ -233,7 +230,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 
 		return (
 			<View style={ styles.container }>
-				<BlockToolbar/>
+				<BlockToolbar />
 				<View style={ styles.switch }>
 					<Switch
 						activeText={ 'On' }

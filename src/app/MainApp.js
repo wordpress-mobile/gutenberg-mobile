@@ -11,6 +11,10 @@ type StateType = {};
 
 export default class MainScreen extends React.Component<PropsType, StateType> {
 	render() {
-		return (<SlotFillProvider><BlockManager { ...this.props } /></SlotFillProvider>);
+		return (
+			<SlotFillProvider>
+				<BlockManager { ...this.props } />
+			</SlotFillProvider>
+		);
 	}
 }

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { BlockFormatControls, BlockControls } from '@wordpress/editor';
 
 export default class BlockToolbar extends Component {
-  render() {
-    return (
-        <View style={ {height: 50, backgroundColor: '#DCDCDC', flexDirection: 'row'} }>
-            <BlockControls.Slot/>
-            <BlockFormatControls.Slot/>
-        </View>
-    );
-  }
+	render() {
+		return (
+			<View style={ { height: 50, backgroundColor: '#DCDCDC', flexDirection: 'row' } }>
+				<BlockControls.Slot />
+				<BlockFormatControls.Slot />
+			</View>
+		);
+	}
 }
