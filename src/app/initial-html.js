@@ -24,6 +24,10 @@ Hello World
 <p><b>Hello</b> World!</p>
 <!-- /wp:paragraph -->
 
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>This is the quote part.</p><cite>This is the cite part.</cite></blockquote>
+<!-- /wp:quote -->
+
 <!-- wp:nextpage -->
 <!--nextpage-->
 <!-- /wp:nextpage -->
