@@ -56,7 +56,6 @@ export default class BlockHolder extends React.Component<PropsType, StateType> {
 		// Since unsupported blocks are handled in block-manager.js, at this point the block should definitely
 		// be supported.
 		const blockType = getBlockType( this.props.name );
-		
 		let style;
 		if ( blockType.name === 'core/code' ) {
 			style = styles.blockCode;
