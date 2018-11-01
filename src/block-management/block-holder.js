@@ -12,7 +12,6 @@ import type { BlockType } from '../store/';
 import styles from './block-holder.scss';
 
 // Gutenberg imports
-import { getBlockType, getUnregisteredTypeHandlerName } from '@wordpress/blocks';
 import { BlockEdit } from '@wordpress/editor';
 
 type PropsType = BlockType & {
@@ -66,17 +65,6 @@ export default class BlockHolder extends React.Component<PropsType, StateType> {
 				isSelected={ this.props.focused }
 			/>
 		);
-	}
-
-	getBlockType( blockName: String ) {
-		let blockType = getBlockType( blockName );
-
-		if ( ! blockType ) {
-			const fallbackBlockName = getUnregisteredTypeHandlerName();
-			blockType = getBlockType( fallbackBlockName );
-		}
-
-		return blockType;
 	}
 
 	renderBlockTitle() {
