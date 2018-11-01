@@ -22,7 +22,7 @@ type StateType = {
 export default class HTMLInputView extends React.Component<PropsType, StateType> {
 	state = {
 		html: '',
-	}
+	};
 	isIOS: boolean = Platform.OS === 'ios';
 	textInput: TextInput;
 

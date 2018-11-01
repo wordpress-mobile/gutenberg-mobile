@@ -5,9 +5,8 @@
 
 import React from 'react';
 import { View, Text } from 'react-native';
-import type { BlockType } from '../../store/';
 
-type PropsType = BlockType & {
+type PropsType = {
 	onChange: ( clientId: string, attributes: mixed ) => void,
 	onToolbarButtonPressed: ( button: number, clientId: string ) => void,
 	onBlockHolderPressed: ( clientId: string ) => void,
@@ -19,7 +18,7 @@ type StateType = {
 };
 
 // Styles
-import styles from '../../block-management/block-holder.scss';
+import styles from './style.scss';
 
 export default class UnsupportedBlockEdit extends React.Component<PropsType, StateType> {
 	render() {

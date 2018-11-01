@@ -3,13 +3,20 @@
 
 import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
-import { ToolbarButton } from './constants';
 
 import styles from './toolbar.scss';
 
 type PropsType = {
 	clientId: string,
 	onButtonPressed: ( button: number, clientId: string ) => void,
+};
+
+export const ToolbarButton = {
+	UP: 1,
+	DOWN: 2,
+	SETTINGS: 3,
+	DELETE: 4,
+	PLUS: 5,
 };
 
 export default class Toolbar extends React.Component<PropsType> {

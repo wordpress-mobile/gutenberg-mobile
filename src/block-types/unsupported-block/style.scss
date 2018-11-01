@@ -1,23 +1,5 @@
 /** @format */
 
-@import 'block-styles.scss';
-
-.blockHolder {
-	flex: 1 1 auto;
-}
-
-.blockContainer {
-	background-color: white;
-	padding: 8px;
-}
-
-.blockTitle {
-	background-color: grey;
-	padding-left: 8;
-	padding-top: 4;
-	padding-bottom: 4;
-}
-
 .unsupportedBlock {
 	background-color: #e9eff3; // grey lighten 30 
 	padding-top: 8;
@@ -42,8 +24,4 @@
 	padding-top: 24;
 	padding-bottom: 24;
 	font-size: 16px;
-}
-
-.aztec_container {
-	flex: 1;
 }

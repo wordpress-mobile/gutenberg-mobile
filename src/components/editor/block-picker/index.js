@@ -5,8 +5,8 @@
 import React, { Component } from 'react';
 import { FlatList, Text, TouchableHighlight, View } from 'react-native';
 import Modal from 'react-native-modal';
-import styles from './block-picker.scss';
-import { name as unsupportedBlockName } from '../block-types/unsupported-block';
+import styles from './style.scss';
+import { name as unsupportedBlockName } from '../../../block-types/unsupported-block';
 // Gutenberg imports
 import { getBlockTypes } from '@wordpress/blocks';
 
