@@ -53,16 +53,6 @@ export default class BlockHolder extends React.Component<PropsType, StateType> {
 	}
 
 	getBlockForType() {
-		// Since unsupported blocks are handled in block-manager.js, at this point the block should definitely
-		// be supported.
-		const blockType = getBlockType( this.props.name );
-		let style;
-		if ( blockType.name === 'core/code' ) {
-			style = styles.blockCode;
-		} else if ( blockType.name === 'core/paragraph' ) {
-			style = styles.blockText;
-		}
-
 		return (
 			<BlockEdit
 				name={ this.props.name }
@@ -74,7 +64,6 @@ export default class BlockHolder extends React.Component<PropsType, StateType> {
 				insertBlocksAfter={ this.props.insertBlocksAfter }
 				mergeBlocks={ this.props.mergeBlocks }
 				isSelected={ this.props.focused }
-				style={ style }
 			/>
 		);
 	}
