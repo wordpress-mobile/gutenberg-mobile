@@ -273,6 +273,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		return (
 			<KeyboardAvoidingView style={ { flex: 1 } } behavior={ behavior }>
 				{ list }
+				<BlockToolbar />
 			</KeyboardAvoidingView>
 		);
 	}
@@ -293,7 +294,6 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 
 		return (
 			<View style={ styles.container }>
-				<BlockToolbar />
 				<View style={ styles.switch }>
 					<Switch
 						activeText={ 'On' }
