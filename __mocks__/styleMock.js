@@ -5,6 +5,6 @@ module.exports = {
 
 	//Mock block paragraph style with minimum height
 	blockText: {
-		minHeight: 50
-	}
+		minHeight: 50,
+	},
 };
