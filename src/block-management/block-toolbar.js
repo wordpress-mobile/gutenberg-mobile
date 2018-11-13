@@ -9,6 +9,8 @@ import { Toolbar, ToolbarButton } from '@wordpress/components';
 import { BlockFormatControls, BlockControls } from '@wordpress/editor';
 import { __ } from '@wordpress/i18n';
 
+import styles from './block-toolbar.scss';
+
 type PropsType = {
 	onInsertClick: void => void,
 };
@@ -16,7 +18,7 @@ type PropsType = {
 export default class BlockToolbar extends Component<PropsType> {
 	render() {
 		return (
-			<View style={ { height: 44, backgroundColor: 'white', flexDirection: 'row' , borderTopColor: '#a8bece', borderTopWidth: 1} }>
+			<View style={ styles.container }>
 				<Toolbar>
 					<ToolbarButton
 						label={ __( 'Add block' ) }
