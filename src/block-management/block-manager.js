@@ -208,7 +208,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 	  }
 	
 	  componentWillUnmount () {
-		Keyboard.removeListener(keyboadDidShow, this.keyboardDidShow);  
+		Keyboard.removeListener(keyboardDidShow, this.keyboardDidShow);  
 		Keyboard.removeListener(keyboardDidHide, this.keyboardDidHide); 
 	  }
 	
