@@ -13,6 +13,8 @@ import styles from './block-toolbar.scss';
 
 type PropsType = {
 	onInsertClick: void => void,
+	onKeyboardHide: void => void,
+	showKeyboardHideButton: boolean,
 };
 
 export default class BlockToolbar extends Component<PropsType> {
@@ -26,6 +28,13 @@ export default class BlockToolbar extends Component<PropsType> {
 						onClick={ this.props.onInsertClick }
 					/>
 				</Toolbar>
+				{this.props.showKeyboardHideButton && (<Toolbar>
+					<ToolbarButton
+						label={ __( 'Keyboard hide' ) }
+						icon="arrow-down"
+						onClick={ this.props.onKeyboardHide }
+					/>
+				</Toolbar>)}
 				<BlockControls.Slot />
 				<BlockFormatControls.Slot />
 			</View>
