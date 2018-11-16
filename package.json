@@ -1,6 +1,6 @@
 {
   "name": "gutenberg-mobile",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "config": {
     "jsfiles": "./*.js src/*.js src/**/*.js src/**/**/*.js",
@@ -114,8 +114,8 @@
     "rememo": "^3.0.0",
     "shallowequal": "^1.0.2",
     "simple-html-tokenizer": "^0.5.1",
+    "tannin": "^1.0.1",
     "tinycolor2": "^1.4.1",
-    "turbo-combine-reducers": "^1.0.2",
-    "tannin": "^1.0.1"
+    "turbo-combine-reducers": "^1.0.2"
   }
 }
