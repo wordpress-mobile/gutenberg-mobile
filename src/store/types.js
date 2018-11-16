@@ -18,3 +18,11 @@ export type StateType = {
 	refresh: boolean,
 	fullparse: boolean,
 };
+
+export type PostType = {
+	id: number,
+	content: {
+		raw: string,
+	},
+	type: string,
+};

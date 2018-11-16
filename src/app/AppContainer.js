@@ -8,10 +8,11 @@ import { compose } from '@wordpress/compose';
 import RNReactNativeGutenbergBridge from 'react-native-gutenberg-bridge';
 
 import MainApp from './MainApp';
-import type { BlockType } from '../store/types';
+import type { PostType, BlockType } from '../store/types';
 
 type PropsType = {
 	rootClientId: ?string,
+	post: PostType,
 	isBlockSelected: string => boolean,
 	showHtml: boolean,
 	editedPostContent: string,
@@ -29,7 +30,6 @@ type PropsType = {
 	onAttributesUpdate: ( string, mixed ) => mixed,
 	initialHtml: string,
 	setupEditor: ( mixed, ?mixed ) => mixed,
-	clientId: string,
 };
 
 class AppContainer extends React.Component<PropsType> {
@@ -92,6 +92,9 @@ class AppContainer extends React.Component<PropsType> {
 
 	toggleHtmlModeAction = () => {
 		this.props.onToggleBlockMode( this.props.rootClientId );
+		// eslint-disable-next-line no-console
+		console.log( 'isEditedPostDirty', this.props.isEditedPostDirty );
+		RNReactNativeGutenbergBridge.provideToNative_Html( html, this.props.isEditedPostDirty );
 	};
 
 	mergeBlocksAction = ( blockOneClientId, blockTwoClientId ) => {
@@ -128,6 +131,7 @@ export default compose( [
 			isBlockSelected,
 			getBlockMode,
 			getEditedPostContent,
+			isEditedPostDirty,
 		} = select( 'core/editor' );
 		const selectedBlockClientId = getSelectedBlockClientId();
 
@@ -137,6 +141,7 @@ export default compose( [
 			blocks: getBlocks( rootClientId ),
 			showHtml: getBlockMode( rootClientId ) === 'html',
 			editedPostContent: getEditedPostContent(),
+			isEditedPostDirty: isEditedPostDirty(),
 		};
 	} ),
 	withDispatch( ( dispatch ) => {
