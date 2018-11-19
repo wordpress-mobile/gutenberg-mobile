@@ -1,12 +1,13 @@
 /** @flow
  * @format */
 
-import MainApp from './MainApp';
 import React from 'react';
 import { parse, serialize } from '@wordpress/blocks';
 import { withDispatch, withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import RNReactNativeGutenbergBridge from 'react-native-gutenberg-bridge';
+
+import MainApp from './MainApp';
 import type { BlockType } from '../store/types';
 
 type PropsType = {
@@ -26,10 +27,14 @@ type PropsType = {
 };
 
 class AppContainer extends React.Component<PropsType> {
+	lastHtmlSent: ?string
+
 	constructor( props: PropsType ) {
 		super( props );
 
 		this.parseBlocksAction( props.initialHtml );
+
+		this.lastHtmlSent = null;
 	}
 
 	onChange = ( clientId, attributes ) => {
@@ -53,7 +58,9 @@ class AppContainer extends React.Component<PropsType> {
 	};
 
 	createBlockAction = ( clientId, block ) => {
-		this.props.onInsertBlock( block, this.props.selectedBlockIndex + 1, this.props.rootClientId );
+		const indexAfterSelected = this.props.selectedBlockIndex + 1;
+		const insertionIndex = indexAfterSelected || this.props.blocks.length;
+		this.props.onInsertBlock( block, insertionIndex, this.props.rootClientId );
 	};
 
 	parseBlocksAction = ( html = '' ) => {
@@ -63,7 +70,8 @@ class AppContainer extends React.Component<PropsType> {
 
 	serializeToNativeAction = () => {
 		const html = serialize( this.props.blocks );
-		RNReactNativeGutenbergBridge.provideToNative_Html( html );
+		RNReactNativeGutenbergBridge.provideToNative_Html( html, this.lastHtmlSent !== html );
+		this.lastHtmlSent = html;
 	};
 
 	mergeBlocksAction = ( blockOneClientId, blockTwoClientId ) => {
