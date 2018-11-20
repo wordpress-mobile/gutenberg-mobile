@@ -20,7 +20,6 @@ import BlockToolbar from './block-toolbar';
 import { createBlock } from '@wordpress/blocks';
 import EventEmitter from 'events';
 
-
 const keyboardDidShow = 'keyboardDidShow';
 const keyboardDidHide = 'keyboardDidHide';
 
@@ -202,27 +201,27 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		}
 	}
 
-	componentDidMount () {
-		this.keyboardDidShowListener = Keyboard.addListener(keyboardDidShow, this.keyboardDidShow);
-		this.keyboardDidHideListener = Keyboard.addListener(keyboardDidHide, this.keyboardDidHide);
-	  }
-	
-	  componentWillUnmount () {
-		Keyboard.removeListener(keyboardDidShow, this.keyboardDidShow);  
-		Keyboard.removeListener(keyboardDidHide, this.keyboardDidHide); 
-	  }
-	
-	  keyboardDidShow = () => {
-		this.setState( { isKeyboardVisible: true } );
-	  }
-	
-	  keyboardDidHide = () => {
-		this.setState( { isKeyboardVisible: false } );
-	  }
+	componentDidMount() {
+		this.keyboardDidShowListener = Keyboard.addListener( keyboardDidShow, this.keyboardDidShow );
+		this.keyboardDidHideListener = Keyboard.addListener( keyboardDidHide, this.keyboardDidHide );
+	}
+
+	componentWillUnmount() {
+		Keyboard.removeListener( keyboardDidShow, this.keyboardDidShow );
+		Keyboard.removeListener( keyboardDidHide, this.keyboardDidHide );
+	}
 
 	componentDidUpdate() {
 		// List has been updated, tell the recycler view to update the view
 		this.state.dataSource.setDirty();
+	}
+
+	keyboardDidShow = () => {
+		this.setState( { isKeyboardVisible: true } );
+	}
+
+	keyboardDidHide = () => {
+		this.setState( { isKeyboardVisible: false } );
 	}
 
 	insertBlocksAfter( clientId: string, blocks: Array<Object> ) {

@@ -28,13 +28,13 @@ export default class BlockToolbar extends Component<PropsType> {
 						onClick={ this.props.onInsertClick }
 					/>
 				</Toolbar>
-				{this.props.showKeyboardHideButton && (<Toolbar>
+				{ this.props.showKeyboardHideButton && ( <Toolbar>
 					<ToolbarButton
 						label={ __( 'Keyboard hide' ) }
 						icon="arrow-down"
 						onClick={ this.props.onKeyboardHide }
 					/>
-				</Toolbar>)}
+				</Toolbar> ) }
 				<BlockControls.Slot />
 				<BlockFormatControls.Slot />
 			</View>
