@@ -26,9 +26,12 @@ export default class KeyboardAvoidingView extends React.Component <PropsType, St
 	}
 
 	componentDidMount() {
-		StatusBarManager.getHeight( ( statusBarFrameData ) => {
-			this.setState( { statusBarHeight: statusBarFrameData.height } );
-		} );
+		if ( typeof StatusBarManager.getHeight === 'function' ) {
+			console.log('ivasavic', 'missing method ');
+			StatusBarManager.getHeight( ( statusBarFrameData ) => {
+				this.setState( { statusBarHeight: statusBarFrameData.height } );
+			} );
+		}
 	}
 
 	render() {
