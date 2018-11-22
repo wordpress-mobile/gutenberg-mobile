@@ -6,7 +6,7 @@
 import React from 'react';
 import { xorBy, isEqual } from 'lodash';
 
-import { Platform, Switch, Text, View, FlatList, KeyboardAvoidingView, Keyboard } from 'react-native';
+import { Platform, Switch, Text, View, FlatList, Keyboard } from 'react-native';
 import RecyclerViewList, { DataSource } from 'react-native-recyclerview-list';
 import BlockHolder from './block-holder';
 import { InlineToolbarButton } from './constants';
@@ -15,6 +15,7 @@ import styles from './block-manager.scss';
 import BlockPicker from './block-picker';
 import HTMLTextInput from '../components/html-text-input';
 import BlockToolbar from './block-toolbar';
+import KeyboardAvoidingView from '../components/keyboard-avoiding-view';
 
 // Gutenberg imports
 import { createBlock } from '@wordpress/blocks';
@@ -285,7 +286,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 
 	renderList() {
 		let list;
-		const behavior = Platform.OS === 'ios' ? 'padding' : null;
+
 		if ( Platform.OS === 'android' ) {
 			list = (
 				<RecyclerViewList
@@ -315,7 +316,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 			);
 		}
 		return (
-			<KeyboardAvoidingView style={ { flex: 1 } } behavior={ behavior }>
+			<KeyboardAvoidingView style={ { flex: 1 } }>
 				{ list }
 				<BlockToolbar
 					onInsertClick={ () => {
