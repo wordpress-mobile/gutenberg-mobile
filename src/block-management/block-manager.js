@@ -6,7 +6,7 @@
 import React from 'react';
 import { isEqual } from 'lodash';
 
-import { Platform, Switch, Text, View, FlatList } from 'react-native';
+import { Switch, Text, View, FlatList } from 'react-native';
 import BlockHolder from './block-holder';
 import { InlineToolbarButton } from './constants';
 import type { BlockType } from '../store/types';
