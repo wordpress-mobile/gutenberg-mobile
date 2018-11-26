@@ -86,7 +86,7 @@ class AppContainer extends React.Component<PropsType> {
 	};
 
 	toggleHtmlModeAction = () => {
-		this.props.onToggleBlockMode(MAIN_APP_CLIENT_ID);
+		this.props.onToggleBlockMode( MAIN_APP_CLIENT_ID );
 	};
 
 	mergeBlocksAction = ( blockOneClientId, blockTwoClientId ) => {

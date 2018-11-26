@@ -6,7 +6,7 @@
 import React from 'react';
 import { isEqual } from 'lodash';
 
-import { Switch, Text, View, FlatList, Keyboard } from 'react-native';
+import { Text, View, FlatList, Keyboard } from 'react-native';
 import BlockHolder from './block-holder';
 import { InlineToolbarButton } from './constants';
 import type { BlockType } from '../store/types';
@@ -15,7 +15,6 @@ import BlockPicker from './block-picker';
 import HTMLTextInput from '../components/html-text-input';
 import BlockToolbar from './block-toolbar';
 import KeyboardAvoidingView from '../components/keyboard-avoiding-view';
-import { compose } from '@wordpress/compose';
 import { withSelect } from '@wordpress/data';
 
 // Gutenberg imports
