@@ -10,6 +10,8 @@ import RNReactNativeGutenbergBridge from 'react-native-gutenberg-bridge';
 import MainApp from './MainApp';
 import type { BlockType } from '../store/types';
 
+export const MAIN_APP_CLIENT_ID = 'main_app_client_id';
+
 type PropsType = {
 	rootClientId: string,
 	isBlockSelected: string => boolean,
@@ -84,8 +86,7 @@ class AppContainer extends React.Component<PropsType> {
 	};
 
 	toggleHtmlModeAction = () => {
-		console.log("toggleHtmlMode");
-		this.props.onToggleBlockMode('testId');
+		this.props.onToggleBlockMode(MAIN_APP_CLIENT_ID);
 	};
 
 	mergeBlocksAction = ( blockOneClientId, blockTwoClientId ) => {
@@ -96,6 +97,8 @@ class AppContainer extends React.Component<PropsType> {
 		return (
 			<MainApp
 				blocks={ this.props.blocks }
+				clientId={ MAIN_APP_CLIENT_ID }
+				showHtml={ false }
 				onChange={ this.onChange }
 				focusBlockAction={ this.focusBlockAction }
 				moveBlockUpAction={ this.moveBlockUpAction }

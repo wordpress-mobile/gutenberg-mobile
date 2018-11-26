@@ -15,6 +15,8 @@ import BlockPicker from './block-picker';
 import HTMLTextInput from '../components/html-text-input';
 import BlockToolbar from './block-toolbar';
 import KeyboardAvoidingView from '../components/keyboard-avoiding-view';
+import { compose } from '@wordpress/compose';
+import { withSelect } from '@wordpress/data';
 
 // Gutenberg imports
 import { createBlock } from '@wordpress/blocks';
@@ -36,11 +38,12 @@ export type BlockListType = {
 	mergeBlocksAction: ( string, string ) => mixed,
 	blocks: Array<BlockType>,
 	isBlockSelected: string => boolean,
+	clientId: string,
+	showHtml: boolean,
 };
 
 type PropsType = BlockListType;
 type StateType = {
-	showHtml: boolean,
 	inspectBlocks: boolean,
 	blockTypePickerVisible: boolean,
 	blocks: Array<BlockType>,
@@ -49,7 +52,7 @@ type StateType = {
 	isKeyboardVisible: boolean,
 };
 
-export default class BlockManager extends React.Component<PropsType, StateType> {
+export class BlockManager extends React.Component<PropsType, StateType> {
 	keyboardDidShowListener: EventEmitter;
 	keyboardDidHideListener: EventEmitter;
 
@@ -64,7 +67,6 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 
 		this.state = {
 			blocks: blocks,
-			showHtml: false,
 			inspectBlocks: false,
 			blockTypePickerVisible: false,
 			selectedBlockType: 'core/paragraph', // just any valid type to start from
@@ -239,32 +241,12 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 
 		return (
 			<View style={ styles.container }>
-				<View style={ styles.switch }>
-					<Switch
-						activeText={ 'On' }
-						inActiveText={ 'Off' }
-						value={ this.state.showHtml }
-						onValueChange={ this.handleSwitchEditor }
-					/>
-					<Text style={ styles.switchLabel }>View html output</Text>
-					<Switch
-						activeText={ 'On' }
-						inActiveText={ 'Off' }
-						value={ this.state.inspectBlocks }
-						onValueChange={ this.handleInspectBlocksChanged }
-					/>
-					<Text style={ styles.switchLabel }>Inspect blocks</Text>
-				</View>
-				{ this.state.showHtml && this.renderHTML() }
-				{ ! this.state.showHtml && list }
+				{ this.props.showHtml && this.renderHTML() }
+				{ ! this.props.showHtml && list }
 				{ this.state.blockTypePickerVisible && blockTypePicker }
 			</View>
 		);
 	}
-
-	handleSwitchEditor = ( showHtml: boolean ) => {
-		this.setState( { showHtml } );
-	};
 
 	handleInspectBlocksChanged = ( inspectBlocks: boolean ) => {
 		this.setState( { inspectBlocks } );
@@ -305,3 +287,11 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		);
 	}
 }
+
+export default withSelect( ( select, { clientId } ) => {
+	const { getBlockMode } = select( 'core/editor' );
+
+	return {
+		showHtml: getBlockMode( clientId ) === 'html',
+	};
+} )( BlockManager );
