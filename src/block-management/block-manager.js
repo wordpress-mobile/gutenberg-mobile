@@ -43,7 +43,6 @@ export type BlockListType = {
 
 type PropsType = BlockListType;
 type StateType = {
-	inspectBlocks: boolean,
 	blockTypePickerVisible: boolean,
 	blocks: Array<BlockType>,
 	selectedBlockType: string,
@@ -66,7 +65,6 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 
 		this.state = {
 			blocks: blocks,
-			inspectBlocks: false,
 			blockTypePickerVisible: false,
 			selectedBlockType: 'core/paragraph', // just any valid type to start from
 			refresh: false,
@@ -204,7 +202,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 			<FlatList
 				style={ styles.list }
 				data={ this.state.blocks }
-				extraData={ { refresh: this.state.refresh, inspectBlocks: this.state.inspectBlocks } }
+				extraData={ { refresh: this.state.refresh } }
 				keyExtractor={ ( item ) => item.clientId }
 				renderItem={ this.renderItem.bind( this ) }
 			/>
@@ -247,10 +245,6 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		);
 	}
 
-	handleInspectBlocksChanged = ( inspectBlocks: boolean ) => {
-		this.setState( { inspectBlocks } );
-	};
-
 	renderItem( value: { item: BlockType } ) {
 		const insertHere = (
 			<View style={ styles.containerStyleAddHere } >
@@ -267,7 +261,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 					onInlineToolbarButtonPressed={ this.onInlineToolbarButtonPressed }
 					onBlockHolderPressed={ this.props.focusBlockAction }
 					onChange={ this.props.onChange }
-					showTitle={ this.state.inspectBlocks }
+					showTitle={ false }
 					focused={ value.item.focused }
 					clientId={ value.item.clientId }
 					insertBlocksAfter={ ( blocks ) => this.insertBlocksAfter( value.item.clientId, blocks ) }
