@@ -22,7 +22,7 @@ export default class MainScreen extends React.Component<PropsType, StateType> {
 		} );
 
 		this.subscriptionParentToggleHTMLMode = subscribeParentToggleHTMLMode( () => {
-			this.props.toggleHtmlMode();
+			this.props.toggleHtmlModeAction();
 		} );
 	}
 

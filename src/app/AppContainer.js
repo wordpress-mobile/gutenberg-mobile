@@ -20,6 +20,7 @@ type PropsType = {
 	onMoveDown: string => mixed,
 	onMoveUp: string => mixed,
 	onRemove: string => mixed,
+	onToggleBlockMode: string => mixed,
 	onResetBlocks: Array<BlockType> => mixed,
 	onSelect: string => mixed,
 	onAttributesUpdate: ( string, mixed ) => mixed,
@@ -82,8 +83,9 @@ class AppContainer extends React.Component<PropsType> {
 		this.lastHtml = html;
 	};
 
-	toggleHtmlMode = () => {
+	toggleHtmlModeAction = () => {
 		console.log("toggleHtmlMode");
+		this.props.onToggleBlockMode('testId');
 	};
 
 	mergeBlocksAction = ( blockOneClientId, blockTwoClientId ) => {
@@ -102,7 +104,7 @@ class AppContainer extends React.Component<PropsType> {
 				createBlockAction={ this.createBlockAction }
 				parseBlocksAction={ this.parseBlocksAction }
 				serializeToNativeAction={ this.serializeToNativeAction }
-				toggleHtmlMode={ this.toggleHtmlMode }
+				toggleHtmlModeAction={ this.toggleHtmlModeAction }
 				mergeBlocksAction={ this.mergeBlocksAction }
 				isBlockSelected={ this.props.isBlockSelected }
 			/>
@@ -138,6 +140,7 @@ export default compose( [
 			selectBlock,
 			setupEditor,
 			updateBlockAttributes,
+			toggleBlockMode,
 		} = dispatch( 'core/editor' );
 
 		return {
@@ -148,6 +151,7 @@ export default compose( [
 			onMoveUp: moveBlocksUp,
 			onRemove: removeBlock,
 			onResetBlocks: resetBlocks,
+			onToggleBlockMode: toggleBlockMode,
 			onSelect: ( clientId ) => {
 				clearSelectedBlock();
 				selectBlock( clientId );

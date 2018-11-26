@@ -32,7 +32,7 @@ export type BlockListType = {
 	createBlockAction: ( string, BlockType ) => mixed,
 	parseBlocksAction: string => mixed,
 	serializeToNativeAction: void => void,
-	toggleHtmlMode: void => void,
+	toggleHtmlModeAction: void => void,
 	mergeBlocksAction: ( string, string ) => mixed,
 	blocks: Array<BlockType>,
 	isBlockSelected: string => boolean,
