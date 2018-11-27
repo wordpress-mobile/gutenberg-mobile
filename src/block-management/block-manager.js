@@ -22,8 +22,6 @@ import EventEmitter from 'events';
 const keyboardDidShow = 'keyboardDidShow';
 const keyboardDidHide = 'keyboardDidHide';
 
-const { height: fullHeight } = Dimensions.get( 'window' );
-
 export type BlockListType = {
 	onChange: ( clientId: string, attributes: mixed ) => void,
 	focusBlockAction: string => void,
@@ -134,6 +132,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 	}
 
 	onLayout = ( event: LayoutChangeEvent ) => {
+		const { height: fullHeight } = Dimensions.get( 'window' );
 		const { height } = event.nativeEvent.layout;
 		this.setState( { heightOffset: fullHeight - height } );
 	}
