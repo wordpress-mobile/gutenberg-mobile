@@ -6,7 +6,7 @@
 import React from 'react';
 import { isEqual } from 'lodash';
 
-import { Switch, Text, View, FlatList, Keyboard, Dimensions, LayoutChangeEvent, Platform, KeyboardAvoidingView } from 'react-native';
+import { Switch, Text, View, FlatList, Keyboard, LayoutChangeEvent } from 'react-native';
 import BlockHolder from './block-holder';
 import { InlineToolbarButton } from './constants';
 import type { BlockType } from '../store/types';
@@ -14,6 +14,9 @@ import styles from './block-manager.scss';
 import BlockPicker from './block-picker';
 import HTMLTextInput from '../components/html-text-input';
 import BlockToolbar from './block-toolbar';
+import KeyboardAvoidingView from '../components/keyboard-avoiding-view';
+
+console.log('ivasavic', ' Kebyaord ' + KeyboardAvoidingView);
 
 // Gutenberg imports
 import { createBlock } from '@wordpress/blocks';
@@ -45,7 +48,7 @@ type StateType = {
 	selectedBlockType: string,
 	refresh: boolean,
 	isKeyboardVisible: boolean,
-	heightOffset: number;
+	rootViewHeight: number;
 };
 
 export default class BlockManager extends React.Component<PropsType, StateType> {
@@ -69,7 +72,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 			selectedBlockType: 'core/paragraph', // just any valid type to start from
 			refresh: false,
 			isKeyboardVisible: false,
-			heightOffset: 0,
+			rootViewHeight: 0,
 		};
 	}
 
@@ -131,10 +134,9 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		}
 	}
 
-	onLayout = ( event: LayoutChangeEvent ) => {
-		const { height: fullHeight } = Dimensions.get( 'window' );
+	onRootViewLayout = ( event: LayoutChangeEvent ) => {
 		const { height } = event.nativeEvent.layout;
-		this.setState( { heightOffset: fullHeight - height } );
+		this.setState( { rootViewHeight: height } );
 	}
 
 	componentDidMount() {
@@ -203,8 +205,6 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 	}
 
 	renderList() {
-		const behavior = Platform.OS === 'ios' ? 'padding' : null;
-		const keyboardVerticalOffset = Platform.OS === 'ios' ? this.state.heightOffset : 0;
 		// TODO: we won't need this. This just a temporary solution until we implement the RecyclerViewList native code for iOS
 		// And fix problems with RecyclerViewList on Android
 		const list = (
@@ -217,7 +217,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 			/>
 		);
 		return (
-			<KeyboardAvoidingView style={ { flex: 1 } } behavior={ behavior } keyboardVerticalOffset={ keyboardVerticalOffset }>
+			<KeyboardAvoidingView style={ { flex: 1 } } parentHeight={ this.state.rootViewHeight }>
 				{ list }
 				<BlockToolbar
 					onInsertClick={ () => {
@@ -246,7 +246,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		);
 
 		return (
-			<View style={ styles.container } onLayout={ this.onLayout }>
+			<View style={ styles.container } onLayout={ this.onRootViewLayout }>
 				<View style={ styles.switch }>
 					<Switch
 						activeText={ 'On' }
