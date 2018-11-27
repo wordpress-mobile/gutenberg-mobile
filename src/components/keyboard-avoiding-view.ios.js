@@ -4,10 +4,15 @@
 */
 
 import React from 'react';
-import { KeyboardAvoidingView as IOSKeyboardAvoidingView, Dimensions } from 'react-native';
+import { View, KeyboardAvoidingView as IOSKeyboardAvoidingView, Dimensions } from 'react-native';
 
-const KeyboardAvoidingView = ( props ) => {
-	const { parentHeight } = props;
+type PropsType = {
+	...View.propTypes,
+	parentHeight: number;
+}
+
+const KeyboardAvoidingView = ( propsType: PropsType ) => {
+	const { parentHeight, ...props } = propsType;
 	const { height: fullHeight } = Dimensions.get( 'window' );
 	const keyboardVerticalOffset = fullHeight - parentHeight;
 
