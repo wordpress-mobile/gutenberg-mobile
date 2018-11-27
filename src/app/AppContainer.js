@@ -15,6 +15,8 @@ export const MAIN_APP_CLIENT_ID = 'main_app_client_id';
 type PropsType = {
 	rootClientId: string,
 	isBlockSelected: string => boolean,
+	showHtml: boolean,
+	editedPostContent: string,
 	selectedBlockIndex: number,
 	blocks: Array<BlockType>,
 	onInsertBlock: ( BlockType, number, string ) => mixed,
@@ -28,6 +30,7 @@ type PropsType = {
 	onAttributesUpdate: ( string, mixed ) => mixed,
 	initialHtml: string,
 	setupEditor: ( mixed, ?mixed ) => mixed,
+	clientId: string,
 };
 
 class AppContainer extends React.Component<PropsType> {
@@ -80,6 +83,9 @@ class AppContainer extends React.Component<PropsType> {
 	};
 
 	serializeToNativeAction = () => {
+		if ( this.props.showHtml ) {
+			this.parseBlocksAction(this.props.editedPostContent)
+		}
 		const html = serialize( this.props.blocks );
 		RNReactNativeGutenbergBridge.provideToNative_Html( html, this.lastHtml !== html );
 		this.lastHtml = html;
@@ -93,19 +99,23 @@ class AppContainer extends React.Component<PropsType> {
 		this.props.onMerge( blockOneClientId, blockTwoClientId );
 	};
 
+	static get defaultProps() {
+		return {
+			clientId: MAIN_APP_CLIENT_ID,
+		};
+	}
+
 	render() {
 		return (
 			<MainApp
 				blocks={ this.props.blocks }
-				clientId={ MAIN_APP_CLIENT_ID }
-				showHtml={ false }
+				showHtml={ this.props.showHtml }
 				onChange={ this.onChange }
 				focusBlockAction={ this.focusBlockAction }
 				moveBlockUpAction={ this.moveBlockUpAction }
 				moveBlockDownAction={ this.moveBlockDownAction }
 				deleteBlockAction={ this.deleteBlockAction }
 				createBlockAction={ this.createBlockAction }
-				parseBlocksAction={ this.parseBlocksAction }
 				serializeToNativeAction={ this.serializeToNativeAction }
 				toggleHtmlModeAction={ this.toggleHtmlModeAction }
 				mergeBlocksAction={ this.mergeBlocksAction }
@@ -116,12 +126,14 @@ class AppContainer extends React.Component<PropsType> {
 }
 
 export default compose( [
-	withSelect( ( select ) => {
+	withSelect( ( select, { clientId, content } ) => {
 		const {
 			getBlockIndex,
 			getBlocks,
 			getSelectedBlockClientId,
 			isBlockSelected,
+			getBlockMode,
+			getEditedPostContent
 		} = select( 'core/editor' );
 		const selectedBlockClientId = getSelectedBlockClientId();
 
@@ -129,6 +141,8 @@ export default compose( [
 			isBlockSelected,
 			selectedBlockIndex: getBlockIndex( selectedBlockClientId ),
 			blocks: getBlocks(),
+			showHtml: getBlockMode( clientId ) === 'html',
+			editedPostContent: getEditedPostContent()
 		};
 	} ),
 	withDispatch( ( dispatch ) => {

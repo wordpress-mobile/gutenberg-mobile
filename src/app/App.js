@@ -27,7 +27,7 @@ const AppProvider = ( { initialData }: PropsType ) => {
 		initialData = initialHtml;
 	}
 	return (
-		<AppContainer initialHtml={ initialData } />
+		<AppContainer initialHtml={ initialData } clientId={ 'main_app_client_id' } />
 	);
 };
 

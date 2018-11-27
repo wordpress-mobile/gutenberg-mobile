@@ -31,13 +31,11 @@ export type BlockListType = {
 	moveBlockDownAction: string => mixed,
 	deleteBlockAction: string => mixed,
 	createBlockAction: ( string, BlockType ) => mixed,
-	parseBlocksAction: string => mixed,
 	serializeToNativeAction: void => void,
 	toggleHtmlModeAction: void => void,
 	mergeBlocksAction: ( string, string ) => mixed,
 	blocks: Array<BlockType>,
 	isBlockSelected: string => boolean,
-	clientId: string,
 	showHtml: boolean,
 };
 
@@ -50,7 +48,7 @@ type StateType = {
 	isKeyboardVisible: boolean,
 };
 
-export class BlockManager extends React.Component<PropsType, StateType> {
+export default class BlockManager extends React.Component<PropsType, StateType> {
 	keyboardDidShowListener: EventEmitter;
 	keyboardDidHideListener: EventEmitter;
 
@@ -280,11 +278,3 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		);
 	}
 }
-
-export default withSelect( ( select, { clientId } ) => {
-	const { getBlockMode } = select( 'core/editor' );
-
-	return {
-		showHtml: getBlockMode( clientId ) === 'html',
-	};
-} )( BlockManager );
