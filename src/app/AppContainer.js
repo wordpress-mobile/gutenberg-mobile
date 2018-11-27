@@ -84,7 +84,7 @@ class AppContainer extends React.Component<PropsType> {
 
 	serializeToNativeAction = () => {
 		if ( this.props.showHtml ) {
-			this.parseBlocksAction(this.props.editedPostContent)
+			this.parseBlocksAction( this.props.editedPostContent );
 		}
 		const html = serialize( this.props.blocks );
 		RNReactNativeGutenbergBridge.provideToNative_Html( html, this.lastHtml !== html );
@@ -133,7 +133,7 @@ export default compose( [
 			getSelectedBlockClientId,
 			isBlockSelected,
 			getBlockMode,
-			getEditedPostContent
+			getEditedPostContent,
 		} = select( 'core/editor' );
 		const selectedBlockClientId = getSelectedBlockClientId();
 
@@ -142,7 +142,7 @@ export default compose( [
 			selectedBlockIndex: getBlockIndex( selectedBlockClientId ),
 			blocks: getBlocks(),
 			showHtml: getBlockMode( clientId ) === 'html',
-			editedPostContent: getEditedPostContent()
+			editedPostContent: getEditedPostContent(),
 		};
 	} ),
 	withDispatch( ( dispatch ) => {

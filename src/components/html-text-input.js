@@ -25,7 +25,6 @@ type StateType = {
 };
 
 export class HTMLInputView extends React.Component<PropsType, StateType> {
-
 	isIOS: boolean = Platform.OS === 'ios';
 	textInput: TextInput;
 	edit: string => mixed;
@@ -64,7 +63,7 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 
 	componentWillUnmount() {
 		//TODO: Blocking main thread
-		this.stopEditing()
+		this.stopEditing();
 	}
 
 	shouldComponentUpdate() {
@@ -84,7 +83,7 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 
 		return serialize( [ block ] ) + '\n\n';
 	}
-	
+
 	edit( html: string ) {
 		this.props.onChange( html );
 		this.setState( { html, isDirty: true } );
