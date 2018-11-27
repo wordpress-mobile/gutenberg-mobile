@@ -16,8 +16,6 @@ import HTMLTextInput from '../components/html-text-input';
 import BlockToolbar from './block-toolbar';
 import KeyboardAvoidingView from '../components/keyboard-avoiding-view';
 
-console.log('ivasavic', ' Kebyaord ' + KeyboardAvoidingView);
-
 // Gutenberg imports
 import { createBlock } from '@wordpress/blocks';
 import EventEmitter from 'events';
