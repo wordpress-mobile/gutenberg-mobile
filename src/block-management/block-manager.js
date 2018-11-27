@@ -15,7 +15,6 @@ import BlockPicker from './block-picker';
 import HTMLTextInput from '../components/html-text-input';
 import BlockToolbar from './block-toolbar';
 import KeyboardAvoidingView from '../components/keyboard-avoiding-view';
-import { withSelect } from '@wordpress/data';
 
 // Gutenberg imports
 import { createBlock } from '@wordpress/blocks';

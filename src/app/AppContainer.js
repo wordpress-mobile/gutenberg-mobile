@@ -126,7 +126,7 @@ class AppContainer extends React.Component<PropsType> {
 }
 
 export default compose( [
-	withSelect( ( select, { clientId, content } ) => {
+	withSelect( ( select, { clientId } ) => {
 		const {
 			getBlockIndex,
 			getBlocks,
