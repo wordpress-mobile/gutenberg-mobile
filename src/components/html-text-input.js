@@ -42,17 +42,6 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 		};
 	}
 
-	static getDerivedStateFromProps( props: PropsType, state: StateType ) {
-		if ( state.isDirty ) {
-			return null;
-		}
-
-		return {
-			value: props.html,
-			isDirty: false,
-		};
-	}
-
 	componentDidMount() {
 		const html = this.serializeBlocksToHtml();
 		this.setState( { html } );
