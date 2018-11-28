@@ -23,6 +23,8 @@ type PropsType = BlockType & {
 	onBlockHolderPressed: ( clientId: string ) => void,
 	insertBlocksAfter: ( blocks: Array<Object> ) => void,
 	mergeBlocks: ( forward: boolean ) => void,
+	canMoveUp: boolean,
+	canMoveDown: boolean,
 };
 
 export default class BlockHolder extends React.Component<PropsType> {
@@ -32,6 +34,8 @@ export default class BlockHolder extends React.Component<PropsType> {
 				<InlineToolbar
 					clientId={ this.props.clientId }
 					onButtonPressed={ this.props.onInlineToolbarButtonPressed }
+					canMoveUp={ this.props.canMoveUp }
+					canMoveDown={ this.props.canMoveDown }
 				/>
 			);
 		}

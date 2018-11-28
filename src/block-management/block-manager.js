@@ -274,7 +274,15 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		this.setState( { inspectBlocks } );
 	};
 
-	renderItem( value: { item: BlockType } ) {
+	isFirstBlock( index: number ) {
+		return index === 0;
+	}
+
+	isLastBlock( index: number ) {
+		return index === this.state.blocks.length - 1;
+	}
+
+	renderItem( value: { item: BlockType, index: number } ) {
 		const insertHere = (
 			<View style={ styles.containerStyleAddHere } >
 				<View style={ styles.lineStyleAddHere }></View>
@@ -282,6 +290,9 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 				<View style={ styles.lineStyleAddHere }></View>
 			</View>
 		);
+
+		const canMoveUp = ! this.isFirstBlock( value.index );
+		const canMoveDown = ! this.isLastBlock( value.index );
 
 		return (
 			<View>
@@ -294,6 +305,8 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 					showTitle={ this.state.inspectBlocks }
 					focused={ value.item.focused }
 					clientId={ value.item.clientId }
+					canMoveUp={ canMoveUp }
+					canMoveDown={ canMoveDown }
 					insertBlocksAfter={ ( blocks ) => this.insertBlocksAfter( value.item.clientId, blocks ) }
 					mergeBlocks={ this.mergeBlocks }
 					onReplace={ ( blocks ) => this.onReplace( value.item.clientId, blocks ) }

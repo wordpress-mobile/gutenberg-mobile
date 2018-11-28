@@ -2,28 +2,35 @@
  * @format */
 
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Dashicon } from '@wordpress/components';
 
 type PropsType = {
-    icon: string,
-    onPress: () => void,
+	disabled: boolean,
+	icon: string,
+	onPress: () => void,
 };
 
-const style = {
-	width: 44,
-	height: 44,
-	justifyContent: 'center',
-	alignItems: 'center',
-};
+const styles = StyleSheet.create( {
+	container: {
+		width: 44,
+		height: 44,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+} );
 
 export default class InlineToolbarButton extends React.Component<PropsType> {
+	static defaultProps = {
+		disabled: false,
+	};
+
 	render() {
-		const { icon, onPress } = this.props;
+		const { disabled, icon, onPress } = this.props;
 
 		return (
-			<TouchableOpacity onPress={ onPress }>
-				<View style={ style }>
+			<TouchableOpacity onPress={ onPress } disabled={ disabled } >
+				<View style={ [ styles.container, disabled && { opacity: 0.3 } ] }>
 					<Dashicon icon={ icon } />
 				</View>
 			</TouchableOpacity>

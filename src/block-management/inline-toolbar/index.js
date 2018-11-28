@@ -8,6 +8,8 @@ import InlineToolbarButton from './button';
 
 type PropsType = {
 	clientId: string,
+	canMoveUp: boolean,
+	canMoveDown: boolean,
 	onButtonPressed: ( button: number, clientId: string ) => void,
 };
 
@@ -50,11 +52,13 @@ export default class InlineToolbar extends React.Component<PropsType> {
 		return (
 			<View style={ styles.toolbar }>
 				<InlineToolbarButton
+					disabled={ ! this.props.canMoveUp }
 					onPress={ this.onUpPressed }
 					icon="arrow-up-alt"
 				/>
 
 				<InlineToolbarButton
+					disabled={ ! this.props.canMoveDown }
 					onPress={ this.onDownPressed }
 					icon="arrow-down-alt"
 				/>
