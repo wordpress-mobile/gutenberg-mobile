@@ -59,15 +59,15 @@ class AppContainer extends React.Component<PropsType> {
 	};
 
 	moveBlockUpAction = ( clientId ) => {
-		this.props.onMoveUp( clientId );
+		this.props.onMoveUp( clientId, this.props.rootClientId );
 	};
 
 	moveBlockDownAction = ( clientId ) => {
-		this.props.onMoveDown( clientId );
+		this.props.onMoveDown( clientId, this.props.rootClientId );
 	};
 
 	deleteBlockAction = ( clientId ) => {
-		this.props.onRemove( clientId );
+		this.props.onRemove( clientId, this.props.rootClientId );
 	};
 
 	createBlockAction = ( clientId, block ) => {
