@@ -6,6 +6,12 @@
 	flex: 1 1 auto;
 }
 
+.blockHolderFocused {
+	border-color: $light-gray-500;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+}
+
 .blockContainer {
 	background-color: white;
 	padding: 8px;

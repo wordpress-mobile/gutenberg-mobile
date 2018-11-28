@@ -72,11 +72,13 @@ export default class BlockHolder extends React.Component<PropsType> {
 	}
 
 	render() {
+		const { focused } = this.props;
+
 		return (
 			<TouchableWithoutFeedback
 				onPress={ this.props.onBlockHolderPressed.bind( this, this.props.clientId ) }
 			>
-				<View style={ styles.blockHolder }>
+				<View style={ [ styles.blockHolder, focused && styles.blockHolderFocused ] }>
 					{ this.props.showTitle && this.renderBlockTitle() }
 					<View style={ styles.blockContainer }>{ this.getBlockForType.bind( this )() }</View>
 					{ this.renderToolbarIfBlockFocused.bind( this )() }
