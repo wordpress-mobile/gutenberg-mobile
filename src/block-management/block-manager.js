@@ -8,7 +8,7 @@ import { isEqual } from 'lodash';
 
 import { Switch, Text, View, FlatList, Keyboard, LayoutChangeEvent } from 'react-native';
 import BlockHolder from './block-holder';
-import { InlineToolbarButton } from './constants';
+import { InlineToolbarActions } from './inline-toolbar';
 import type { BlockType } from '../store/types';
 import styles from './block-manager.scss';
 import BlockPicker from './block-picker';
@@ -118,17 +118,14 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 
 	onInlineToolbarButtonPressed = ( button: number, clientId: string ) => {
 		switch ( button ) {
-			case InlineToolbarButton.UP:
+			case InlineToolbarActions.UP:
 				this.props.moveBlockUpAction( clientId );
 				break;
-			case InlineToolbarButton.DOWN:
+			case InlineToolbarActions.DOWN:
 				this.props.moveBlockDownAction( clientId );
 				break;
-			case InlineToolbarButton.DELETE:
+			case InlineToolbarActions.DELETE:
 				this.props.deleteBlockAction( clientId );
-				break;
-			case InlineToolbarButton.SETTINGS:
-				// TODO: implement settings
 				break;
 		}
 	}
