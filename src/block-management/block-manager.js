@@ -6,7 +6,7 @@
 import React from 'react';
 import { isEqual } from 'lodash';
 
-import { Text, View, FlatList, Keyboard } from 'react-native';
+import { Text, View, FlatList, Keyboard, LayoutChangeEvent } from 'react-native';
 import BlockHolder from './block-holder';
 import { InlineToolbarButton } from './constants';
 import type { BlockType } from '../store/types';
@@ -45,6 +45,7 @@ type StateType = {
 	selectedBlockType: string,
 	refresh: boolean,
 	isKeyboardVisible: boolean,
+	rootViewHeight: number;
 };
 
 export default class BlockManager extends React.Component<PropsType, StateType> {
@@ -66,6 +67,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 			selectedBlockType: 'core/paragraph', // just any valid type to start from
 			refresh: false,
 			isKeyboardVisible: false,
+			rootViewHeight: 0,
 		};
 	}
 
@@ -125,6 +127,11 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 				// TODO: implement settings
 				break;
 		}
+	}
+
+	onRootViewLayout = ( event: LayoutChangeEvent ) => {
+		const { height } = event.nativeEvent.layout;
+		this.setState( { rootViewHeight: height } );
 	}
 
 	componentDidMount() {
@@ -205,7 +212,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 			/>
 		);
 		return (
-			<KeyboardAvoidingView style={ { flex: 1 } }>
+			<KeyboardAvoidingView style={ { flex: 1 } } parentHeight={ this.state.rootViewHeight }>
 				{ list }
 				<BlockToolbar
 					onInsertClick={ () => {
@@ -234,7 +241,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 		);
 
 		return (
-			<View style={ styles.container }>
+			<View style={ styles.container } onLayout={ this.onRootViewLayout }>
 				{ this.props.showHtml && this.renderHTML() }
 				{ ! this.props.showHtml && list }
 				{ this.state.blockTypePickerVisible && blockTypePicker }
