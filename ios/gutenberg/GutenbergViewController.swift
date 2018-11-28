@@ -83,7 +83,7 @@ extension GutenbergViewController {
     }
     
     func toggleHTMLMode(_ action: UIAlertAction) {
-        self.htmlMode = !self.htmlMode
-        self.gutenberg.toggleHTMLMode()
+        htmlMode = !htmlMode
+        gutenberg.toggleHTMLMode()
     }
 }
