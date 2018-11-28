@@ -131,8 +131,8 @@ export default compose( [
 
 		return {
 			isBlockSelected,
-			selectedBlockIndex: getBlockIndex( selectedBlockClientId ),
-			blocks: getBlocks(),
+			selectedBlockIndex: getBlockIndex( selectedBlockClientId, rootClientId ),
+			blocks: getBlocks( rootClientId ),
 			showHtml: getBlockMode( rootClientId ) === 'html',
 			editedPostContent: getEditedPostContent(),
 		};
