@@ -15,16 +15,7 @@ type PropsType = {
 
 export { InlineToolbarActions };
 
-const styles = StyleSheet.create( {
-	toolbar: {
-		flexDirection: 'row',
-		height: 44,
-		alignItems: 'flex-start',
-	},
-	spacer: {
-		flexGrow: 1,
-	},
-} );
+import styles from './style.scss';
 
 export default class InlineToolbar extends React.Component<PropsType> {
 	constructor() {

@@ -1,5 +1,6 @@
 /** @format */
 
+@import 'colors.scss';
 @import 'block-styles.scss';
 
 .blockHolder {
@@ -7,7 +8,7 @@
 }
 
 .blockHolderFocused {
-	border-color: $light-gray-500;
+	border-color: $gray-lighten-30;
 	border-top-width: 1px;
 	border-bottom-width: 1px;
 }
