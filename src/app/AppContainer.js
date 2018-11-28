@@ -11,18 +11,18 @@ import MainApp from './MainApp';
 import type { BlockType } from '../store/types';
 
 type PropsType = {
-	rootClientId: string,
+	rootClientId: ?string,
 	isBlockSelected: string => boolean,
 	showHtml: boolean,
 	editedPostContent: string,
 	selectedBlockIndex: number,
 	blocks: Array<BlockType>,
-	onInsertBlock: ( BlockType, number, string ) => mixed,
+	onInsertBlock: ( BlockType, number, ?string ) => mixed,
 	onMerge: ( string, string ) => mixed,
 	onMoveDown: string => mixed,
 	onMoveUp: string => mixed,
 	onRemove: string => mixed,
-	onToggleBlockMode: string => mixed,
+	onToggleBlockMode: ?string => mixed,
 	onResetBlocks: Array<BlockType> => mixed,
 	onSelect: string => mixed,
 	clearSelectedBlock: void => void,
