@@ -112,5 +112,8 @@ task downloadJSBundle << {
     url.withInputStream{ i -> targetFile.withOutputStream{ it << i }}
 }
 
-preBuild.dependsOn(downloadJSBundle)
-
+if (!rootProject.ext.buildGutenbergFromSource) {
+    // Download the JS bundle if we're not building from source.
+    // Usually happens when compiling this project as standalone or via jitpack
+    preBuild.dependsOn(downloadJSBundle)
+}
