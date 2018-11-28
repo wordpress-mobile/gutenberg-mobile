@@ -19,9 +19,9 @@ type PropsType = {
 	blocks: Array<BlockType>,
 	onInsertBlock: ( BlockType, number, ?string ) => mixed,
 	onMerge: ( string, string ) => mixed,
-	onMoveDown: string => mixed,
-	onMoveUp: string => mixed,
-	onRemove: string => mixed,
+	onMoveDown: ( string, ?string ) => mixed,
+	onMoveUp: ( string, ?string ) => mixed,
+	onRemove: ( string, ?string ) => mixed,
 	onToggleBlockMode: ?string => mixed,
 	onResetBlocks: Array<BlockType> => mixed,
 	onSelect: string => mixed,
@@ -59,15 +59,15 @@ class AppContainer extends React.Component<PropsType> {
 	};
 
 	moveBlockUpAction = ( clientId ) => {
-		this.props.onMoveUp( clientId );
+		this.props.onMoveUp( clientId, this.props.rootClientId );
 	};
 
 	moveBlockDownAction = ( clientId ) => {
-		this.props.onMoveDown( clientId );
+		this.props.onMoveDown( clientId, this.props.rootClientId );
 	};
 
 	deleteBlockAction = ( clientId ) => {
-		this.props.onRemove( clientId );
+		this.props.onRemove( clientId, this.props.rootClientId );
 	};
 
 	createBlockAction = ( clientId, block ) => {
