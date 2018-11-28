@@ -20,6 +20,7 @@ import com.github.godness84.RNRecyclerViewList.RNRecyclerviewListPackage;
 import com.horcrux.svg.SvgPackage;
 
 import org.wordpress.mobile.ReactNativeAztec.ReactAztecPackage;
+import org.wordpress.mobile.ReactNativeGutenbergBridge.BuildConfig;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaSelectedCallback;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.RNReactNativeGutenbergBridgePackage;
@@ -96,7 +97,7 @@ public class WPAndroidGlueCode {
                                     .setUseDeveloperSupport(isDebug)
                                     .setInitialLifecycleState(LifecycleState.RESUMED);
         if (!buildGutenbergFromSource) {
-            builder.setBundleAssetName("gutenberg-mobile-bundle.js");
+            builder.setBundleAssetName(BuildConfig.GUTENBERG_MOBILE_JS_BUNDLE_FILENAME);
         }
         mReactInstanceManager = builder.build();
         mReactInstanceManager.addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener() {

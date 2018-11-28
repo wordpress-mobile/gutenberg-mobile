@@ -25,6 +25,9 @@ group='com.github.wordpress-mobile.gutenberg-mobile'
 // fallback flag value for when lib is compiled individually (e.g. via jitpack)
 project.ext.buildGutenbergFromSource = false
 
+// define the filename to use for the JS bundle. This will "bubble" up to the Java code via a BuildConfig constant
+def gutenbergMobileJsBundleFilename = 'gutenberg-mobile-bundle.js'
+
 android {
     compileSdkVersion 27
     buildToolsVersion "27.0.3"
@@ -34,6 +37,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "GUTENBERG_MOBILE_JS_BUNDLE_FILENAME", "\"gutenbergMobileJsBundleFilename\""
     }
     lintOptions {
         abortOnError false
@@ -100,8 +104,7 @@ task downloadJSBundle << {
         assetsFolder.mkdirs();
     }
 
-    def filename = 'gutenberg-mobile-bundle.js'
-    def targetFile = new File("${assetsFolderName}/${filename}")
+    def targetFile = new File("${assetsFolderName}/${gutenbergMobileJsBundleFilename}")
     def hash = getGitHeadHash()
     def url = new URL("https://s3-us-west-1.amazonaws.com/gutenberg-mobile-js-bundle/wordpress-mobile/gutenberg-mobile/${hash}/android/App.js")
 
