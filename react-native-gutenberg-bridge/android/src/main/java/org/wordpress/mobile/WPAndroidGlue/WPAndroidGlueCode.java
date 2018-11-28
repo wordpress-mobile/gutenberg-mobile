@@ -96,7 +96,7 @@ public class WPAndroidGlueCode {
                                     .setUseDeveloperSupport(isDebug)
                                     .setInitialLifecycleState(LifecycleState.RESUMED);
         if (!buildGutenbergFromSource) {
-            builder.setBundleAssetName("index.android.bundle");
+            builder.setBundleAssetName("gutenberg-mobile-bundle.js");
         }
         mReactInstanceManager = builder.build();
         mReactInstanceManager.addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener() {

@@ -82,3 +82,32 @@ dependencies {
     }
     implementation 'com.facebook.react:react-native:+'
 }
+
+def getGitHeadHash() {
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        workingDir project.projectDir
+        commandLine 'git', 'rev-parse', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
+task downloadJSBundle << {
+    def assetsFolderName = "${project.projectDir}/src/main/assets"
+    File assetsFolder = new File(assetsFolderName)
+    if (! assetsFolder.exists()){
+        assetsFolder.mkdirs();
+    }
+
+    def filename = 'gutenberg-mobile-bundle.js'
+    def targetFile = new File("${assetsFolderName}/${filename}")
+    def hash = getGitHeadHash()
+    def url = new URL("https://s3-us-west-1.amazonaws.com/gutenberg-mobile-js-bundle/wordpress-mobile/gutenberg-mobile/${hash}/android/App.js")
+
+    println "Downloading JS bundle from ${url}"
+    url.withInputStream{ i -> targetFile.withOutputStream{ it << i }}
+}
+
+preBuild.dependsOn(downloadJSBundle)
+
