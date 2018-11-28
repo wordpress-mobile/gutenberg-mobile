@@ -25,6 +25,7 @@ type PropsType = {
 	onToggleBlockMode: string => mixed,
 	onResetBlocks: Array<BlockType> => mixed,
 	onSelect: string => mixed,
+	clearSelectedBlock: void => void,
 	onAttributesUpdate: ( string, mixed ) => mixed,
 	initialHtml: string,
 	setupEditor: ( mixed, ?mixed ) => mixed,
@@ -103,6 +104,7 @@ class AppContainer extends React.Component<PropsType> {
 				blocks={ this.props.blocks }
 				showHtml={ this.props.showHtml }
 				onChange={ this.onChange }
+				onBlur={ this.props.clearSelectedBlock }
 				focusBlockAction={ this.focusBlockAction }
 				moveBlockUpAction={ this.moveBlockUpAction }
 				moveBlockDownAction={ this.moveBlockDownAction }
