@@ -36,7 +36,6 @@ type PropsType = {
 class AppContainer extends React.Component<PropsType> {
 	lastHtml: ?string;
 
-
 	static defaultProps = {
 		clientId: MAIN_APP_CLIENT_ID,
 	};
