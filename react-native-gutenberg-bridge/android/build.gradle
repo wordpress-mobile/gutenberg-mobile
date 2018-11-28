@@ -97,19 +97,21 @@ def getGitHeadHash() {
     return stdout.toString().trim()
 }
 
-task downloadJSBundle << {
-    def assetsFolderName = "${project.projectDir}/src/main/assets"
-    File assetsFolder = new File(assetsFolderName)
-    if (! assetsFolder.exists()){
-        assetsFolder.mkdirs();
+task downloadJSBundle {
+    doLast {
+        def assetsFolderName = "${project.projectDir}/src/main/assets"
+        File assetsFolder = new File(assetsFolderName)
+        if (! assetsFolder.exists()){
+            assetsFolder.mkdirs();
+        }
+
+        def targetFile = new File("${assetsFolderName}/${gutenbergMobileJsBundleFilename}")
+        def hash = getGitHeadHash()
+        def url = new URL("https://s3-us-west-1.amazonaws.com/gutenberg-mobile-js-bundle/wordpress-mobile/gutenberg-mobile/${hash}/android/App.js")
+
+        println "Downloading JS bundle from ${url}"
+        url.withInputStream{ i -> targetFile.withOutputStream{ it << i }}
     }
-
-    def targetFile = new File("${assetsFolderName}/${gutenbergMobileJsBundleFilename}")
-    def hash = getGitHeadHash()
-    def url = new URL("https://s3-us-west-1.amazonaws.com/gutenberg-mobile-js-bundle/wordpress-mobile/gutenberg-mobile/${hash}/android/App.js")
-
-    println "Downloading JS bundle from ${url}"
-    url.withInputStream{ i -> targetFile.withOutputStream{ it << i }}
 }
 
 if (!rootProject.ext.buildGutenbergFromSource) {
