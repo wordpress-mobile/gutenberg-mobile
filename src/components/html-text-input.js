@@ -9,14 +9,13 @@ import styles from './html-text-input.scss';
 
 // Gutenberg imports
 import { serialize, parse } from '@wordpress/blocks';
-import { withSelect, withDispatch } from '@wordpress/data';
+import { withDispatch } from '@wordpress/data';
 import { withInstanceId, compose } from '@wordpress/compose';
 
 type PropsType = {
 	blocks: Array<Object>,
 	onChange: string => mixed,
 	onPersist: string => mixed,
-	html: string,
 };
 
 type StateType = {
@@ -106,12 +105,6 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 }
 
 export default compose( [
-	withSelect( ( select ) => {
-		const { getEditedPostContent } = select( 'core/editor' );
-		return {
-			html: getEditedPostContent(),
-		};
-	} ),
 	withDispatch( ( dispatch ) => {
 		const { editPost, resetBlocks } = dispatch( 'core/editor' );
 		return {
