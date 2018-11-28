@@ -36,6 +36,11 @@ type PropsType = {
 class AppContainer extends React.Component<PropsType> {
 	lastHtml: ?string;
 
+
+	static defaultProps = {
+		clientId: MAIN_APP_CLIENT_ID,
+	};
+
 	constructor( props: PropsType ) {
 		super( props );
 
@@ -98,12 +103,6 @@ class AppContainer extends React.Component<PropsType> {
 	mergeBlocksAction = ( blockOneClientId, blockTwoClientId ) => {
 		this.props.onMerge( blockOneClientId, blockTwoClientId );
 	};
-
-	static get defaultProps() {
-		return {
-			clientId: MAIN_APP_CLIENT_ID,
-		};
-	}
 
 	render() {
 		return (
