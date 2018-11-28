@@ -6,7 +6,7 @@
 import React from 'react';
 import { isEqual } from 'lodash';
 
-import { Switch, Text, View, FlatList, Keyboard, LayoutChangeEvent } from 'react-native';
+import { Text, View, FlatList, Keyboard, LayoutChangeEvent } from 'react-native';
 import BlockHolder from './block-holder';
 import { InlineToolbarActions } from './inline-toolbar';
 import type { BlockType } from '../store/types';
@@ -25,23 +25,21 @@ const keyboardDidHide = 'keyboardDidHide';
 
 export type BlockListType = {
 	onChange: ( clientId: string, attributes: mixed ) => void,
-	onBlur: void => void,
 	focusBlockAction: string => void,
 	moveBlockUpAction: string => mixed,
 	moveBlockDownAction: string => mixed,
 	deleteBlockAction: string => mixed,
 	createBlockAction: ( string, BlockType ) => mixed,
-	parseBlocksAction: string => mixed,
 	serializeToNativeAction: void => void,
+	toggleHtmlModeAction: void => void,
 	mergeBlocksAction: ( string, string ) => mixed,
 	blocks: Array<BlockType>,
 	isBlockSelected: string => boolean,
+	showHtml: boolean,
 };
 
 type PropsType = BlockListType;
 type StateType = {
-	showHtml: boolean,
-	inspectBlocks: boolean,
 	blockTypePickerVisible: boolean,
 	blocks: Array<BlockType>,
 	selectedBlockType: string,
@@ -65,8 +63,6 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 
 		this.state = {
 			blocks: blocks,
-			showHtml: false,
-			inspectBlocks: false,
 			blockTypePickerVisible: false,
 			selectedBlockType: 'core/paragraph', // just any valid type to start from
 			refresh: false,
@@ -207,7 +203,7 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 			<FlatList
 				style={ styles.list }
 				data={ this.state.blocks }
-				extraData={ { refresh: this.state.refresh, inspectBlocks: this.state.inspectBlocks } }
+				extraData={ { refresh: this.state.refresh } }
 				keyExtractor={ ( item ) => item.clientId }
 				renderItem={ this.renderItem.bind( this ) }
 			/>
@@ -243,36 +239,12 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 
 		return (
 			<View style={ styles.container } onLayout={ this.onRootViewLayout }>
-				<View style={ styles.switch }>
-					<Switch
-						activeText={ 'On' }
-						inActiveText={ 'Off' }
-						value={ this.state.showHtml }
-						onValueChange={ this.handleSwitchEditor }
-					/>
-					<Text style={ styles.switchLabel }>View html output</Text>
-					<Switch
-						activeText={ 'On' }
-						inActiveText={ 'Off' }
-						value={ this.state.inspectBlocks }
-						onValueChange={ this.handleInspectBlocksChanged }
-					/>
-					<Text style={ styles.switchLabel }>Inspect blocks</Text>
-				</View>
-				{ this.state.showHtml && this.renderHTML() }
-				{ ! this.state.showHtml && list }
+				{ this.props.showHtml && this.renderHTML() }
+				{ ! this.props.showHtml && list }
 				{ this.state.blockTypePickerVisible && blockTypePicker }
 			</View>
 		);
 	}
-
-	handleSwitchEditor = ( showHtml: boolean ) => {
-		this.setState( { showHtml } );
-	};
-
-	handleInspectBlocksChanged = ( inspectBlocks: boolean ) => {
-		this.setState( { inspectBlocks } );
-	};
 
 	isFirstBlock( index: number ) {
 		return index === 0;
@@ -300,9 +272,8 @@ export default class BlockManager extends React.Component<PropsType, StateType> 
 					key={ value.item.clientId }
 					onInlineToolbarButtonPressed={ this.onInlineToolbarButtonPressed }
 					onBlockHolderPressed={ this.props.focusBlockAction }
-					onBlur={ this.props.onBlur }
 					onChange={ this.props.onChange }
-					showTitle={ this.state.inspectBlocks }
+					showTitle={ false }
 					focused={ value.item.focused }
 					clientId={ value.item.clientId }
 					canMoveUp={ canMoveUp }
