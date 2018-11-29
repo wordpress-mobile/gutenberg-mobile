@@ -37,7 +37,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-        buildConfigField "String", "GUTENBERG_MOBILE_JS_BUNDLE_FILENAME", "\"gutenbergMobileJsBundleFilename\""
+        buildConfigField "String", "GUTENBERG_MOBILE_JS_BUNDLE_FILENAME", "\"${gutenbergMobileJsBundleFilename}\""
     }
     lintOptions {
         abortOnError false
