@@ -41,8 +41,6 @@ export default class InlineToolbar extends React.Component<PropsType> {
 	}
 
 	render() {
-
-
 		return (
 			<View style={ styles.toolbar }>
 				<ToolbarButton
