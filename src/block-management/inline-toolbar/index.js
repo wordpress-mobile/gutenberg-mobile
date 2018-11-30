@@ -4,7 +4,8 @@
 import React from 'react';
 import { View } from 'react-native';
 import InlineToolbarActions from './actions';
-import ToolbarButton from './button';
+import { ToolbarButton } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 
 type PropsType = {
 	clientId: string,
@@ -40,24 +41,29 @@ export default class InlineToolbar extends React.Component<PropsType> {
 	}
 
 	render() {
+
+
 		return (
 			<View style={ styles.toolbar }>
 				<ToolbarButton
-					disabled={ ! this.props.canMoveUp }
-					onPress={ this.onUpPressed }
+					label={ __( 'Move block up' ) }
+					isDisabled={ ! this.props.canMoveUp }
+					onClick={ this.onUpPressed }
 					icon="arrow-up-alt"
 				/>
 
 				<ToolbarButton
-					disabled={ ! this.props.canMoveDown }
-					onPress={ this.onDownPressed }
+					label={ __( 'Move block down' ) }
+					isDisabled={ ! this.props.canMoveDown }
+					onClick={ this.onDownPressed }
 					icon="arrow-down-alt"
 				/>
 
 				<View style={ styles.spacer } />
 
 				<ToolbarButton
-					onPress={ this.onDeletePressed }
+					label={ __( 'Remove content' ) }
+					onClick={ this.onDeletePressed }
 					icon="trash"
 				/>
 			</View>
