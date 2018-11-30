@@ -4,7 +4,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import InlineToolbarActions from './actions';
-import InlineToolbarButton from './button';
+import ToolbarButton from './button';
 
 type PropsType = {
 	clientId: string,
@@ -42,13 +42,13 @@ export default class InlineToolbar extends React.Component<PropsType> {
 	render() {
 		return (
 			<View style={ styles.toolbar }>
-				<InlineToolbarButton
+				<ToolbarButton
 					disabled={ ! this.props.canMoveUp }
 					onPress={ this.onUpPressed }
 					icon="arrow-up-alt"
 				/>
 
-				<InlineToolbarButton
+				<ToolbarButton
 					disabled={ ! this.props.canMoveDown }
 					onPress={ this.onDownPressed }
 					icon="arrow-down-alt"
@@ -56,7 +56,7 @@ export default class InlineToolbar extends React.Component<PropsType> {
 
 				<View style={ styles.spacer } />
 
-				<InlineToolbarButton
+				<ToolbarButton
 					onPress={ this.onDeletePressed }
 					icon="trash"
 				/>
