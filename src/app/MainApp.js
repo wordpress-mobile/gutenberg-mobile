@@ -42,6 +42,9 @@ export default class MainScreen extends React.Component<PropsType, StateType> {
 		if ( this.subscriptionParentToggleHTMLMode ) {
 			this.subscriptionParentToggleHTMLMode.remove();
 		}
+		if ( this.subscriptionParentUpdateHtml ) {
+			this.subscriptionParentUpdateHtml.remove();
+		}
 	}
 
 	render() {
