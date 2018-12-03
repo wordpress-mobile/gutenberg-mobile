@@ -71,4 +71,9 @@
     [self.gutenbergBridgeModule sendEventWithName:ToggleHTMLModeMessageName body:nil];
 }
 
+- (void)updateHtml:(NSString *)html
+{
+    [self.gutenbergBridgeModule sendEventWithName:UpdateHTMLMessageName body:@{@"html": html}];
+}
+
 @end

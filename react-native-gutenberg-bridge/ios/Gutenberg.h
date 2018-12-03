@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)toggleHTMLMode;
 
+- (void)updateHtml:(NSString *)html;
+
 @end
 
 NS_ASSUME_NONNULL_END
