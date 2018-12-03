@@ -8,18 +8,17 @@ import { Platform, TextInput, KeyboardAvoidingView } from 'react-native';
 import styles from './html-text-input.scss';
 
 // Gutenberg imports
-import { serialize, parse } from '@wordpress/blocks';
-import { withDispatch } from '@wordpress/data';
+import { parse } from '@wordpress/blocks';
+import { withDispatch, withSelect } from '@wordpress/data';
 import { withInstanceId, compose } from '@wordpress/compose';
 
 type PropsType = {
-	blocks: Array<Object>,
 	onChange: string => mixed,
 	onPersist: string => mixed,
+	editedPostContent: string,
 };
 
 type StateType = {
-	html: string,
 	isDirty: boolean,
 };
 
@@ -36,16 +35,13 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 		this.stopEditing = this.stopEditing.bind( this );
 
 		this.state = {
-			html: '',
 			isDirty: false,
 		};
 	}
 
 	componentDidMount() {
-		const html = this.serializeBlocksToHtml();
-		this.setState( { html } );
 		if ( this.isIOS ) {
-			this.textInput.setNativeProps( { text: html } );
+			this.textInput.setNativeProps( { text: this.props.editedPostContent } );
 		}
 	}
 
@@ -54,32 +50,14 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 		this.stopEditing();
 	}
 
-	shouldComponentUpdate() {
-		return ! this.isIOS;
-	}
-
-	serializeBlocksToHtml() {
-		return this.props.blocks
-			.map( this.serializeBlock )
-			.join( '' );
-	}
-
-	serializeBlock( block: Object ) {
-		if ( block.name === 'aztec' ) {
-			return '<aztec>' + block.attributes.content + '</aztec>\n\n';
-		}
-
-		return serialize( [ block ] ) + '\n\n';
-	}
-
 	edit( html: string ) {
 		this.props.onChange( html );
-		this.setState( { html, isDirty: true } );
+		this.setState( { isDirty: true } );
 	}
 
 	stopEditing() {
 		if ( this.state.isDirty ) {
-			this.props.onPersist( this.state.html );
+			this.props.onPersist( this.props.editedPostContent );
 			this.setState( { isDirty: false } );
 		}
 	}
@@ -95,7 +73,7 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 					multiline
 					numberOfLines={ 0 }
 					style={ styles.htmlView }
-					value={ this.isIOS ? null : this.state.html }
+					value={ this.props.editedPostContent }
 					onChangeText={ this.edit }
 					onBlur={ this.stopEditing }
 				/>
@@ -105,6 +83,15 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 }
 
 export default compose( [
+	withSelect( ( select ) => {
+		const {
+			getEditedPostContent,
+		} = select( 'core/editor' );
+
+		return {
+			editedPostContent: getEditedPostContent(),
+		};
+	} ),
 	withDispatch( ( dispatch ) => {
 		const { editPost, resetBlocks } = dispatch( 'core/editor' );
 		return {
