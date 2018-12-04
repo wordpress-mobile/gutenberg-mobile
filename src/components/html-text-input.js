@@ -73,7 +73,7 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 					multiline
 					numberOfLines={ 0 }
 					style={ styles.htmlView }
-					value={ this.props.editedPostContent }
+					value={ this.isIOS ? null : this.props.editedPostContent }
 					onChangeText={ this.edit }
 					onBlur={ this.stopEditing }
 				/>
