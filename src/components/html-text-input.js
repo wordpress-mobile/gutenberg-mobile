@@ -75,6 +75,7 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 		return (
 			<KeyboardAvoidingView style={ styles.container } behavior={ behavior }>
 				<TextInput
+					autoCorrect={ false }
 					ref={ ( textInput ) => this.textInput = textInput }
 					textAlignVertical="top"
 					multiline
