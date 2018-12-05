@@ -20,6 +20,7 @@ type PropsType = {
 
 type StateType = {
 	isDirty: boolean,
+	value: string,
 };
 
 export class HTMLInputView extends React.Component<PropsType, StateType> {
@@ -36,13 +37,19 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 
 		this.state = {
 			isDirty: false,
+			value: '',
 		};
 	}
 
-	componentDidMount() {
-		if ( this.isIOS ) {
-			this.textInput.setNativeProps( { text: this.props.editedPostContent } );
+	static getDerivedStateFromProps( props, state ) {
+		if ( state.isDirty ) {
+			return null;
 		}
+
+		return {
+			value: props.value,
+			isDirty: false,
+		};
 	}
 
 	componentWillUnmount() {
@@ -52,12 +59,12 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 
 	edit( html: string ) {
 		this.props.onChange( html );
-		this.setState( { isDirty: true } );
+		this.setState( { value: html, isDirty: true } );
 	}
 
 	stopEditing() {
 		if ( this.state.isDirty ) {
-			this.props.onPersist( this.props.editedPostContent );
+			this.props.onPersist( this.state.value );
 			this.setState( { isDirty: false } );
 		}
 	}
@@ -73,7 +80,7 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 					multiline
 					numberOfLines={ 0 }
 					style={ styles.htmlView }
-					value={ this.isIOS ? null : this.props.editedPostContent }
+					value={ this.state.value }
 					onChangeText={ this.edit }
 					onBlur={ this.stopEditing }
 				/>
@@ -89,7 +96,7 @@ export default compose( [
 		} = select( 'core/editor' );
 
 		return {
-			editedPostContent: getEditedPostContent(),
+			value: getEditedPostContent(),
 		};
 	} ),
 	withDispatch( ( dispatch ) => {
