@@ -37,7 +37,12 @@ export class BlockToolbar extends Component<PropsType> {
 
 		return (
 			<View style={ styles.container }>
-				<ScrollView horizontal={ true } showsHorizontalScrollIndicator={ false } keyboardShouldPersistTaps={ 'always' } alwaysBounceHorizontal={ false } >
+				<ScrollView
+					horizontal={ true }
+					showsHorizontalScrollIndicator={ false }
+					keyboardShouldPersistTaps={ 'always' }
+					alwaysBounceHorizontal={ false }
+				>
 					<Toolbar>
 						<ToolbarButton
 							label={ __( 'Add block' ) }
