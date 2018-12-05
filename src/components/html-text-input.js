@@ -15,7 +15,7 @@ import { withInstanceId, compose } from '@wordpress/compose';
 type PropsType = {
 	onChange: string => mixed,
 	onPersist: string => mixed,
-	editedPostContent: string,
+	value: string,
 };
 
 type StateType = {
