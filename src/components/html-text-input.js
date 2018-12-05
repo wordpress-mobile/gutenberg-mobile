@@ -41,7 +41,7 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 		};
 	}
 
-	static getDerivedStateFromProps( props, state ) {
+	static getDerivedStateFromProps( props: PropsType, state: StateType ) {
 		if ( state.isDirty ) {
 			return null;
 		}
