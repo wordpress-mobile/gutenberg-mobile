@@ -38,6 +38,7 @@ public class WPAndroidGlueCode {
 
     private String mContentHtml = "";
     private boolean mContentChanged;
+    private boolean mShouldUpdateContent;
     private CountDownLatch mGetContentCountDownLatch;
 
     private static final String PROP_NAME_INITIAL_DATA = "initialData";
@@ -160,12 +161,27 @@ public class WPAndroidGlueCode {
             return;
         }
 
+        if (mShouldUpdateContent) {
+            updateContent(postContent);
+        } else {
+            mShouldUpdateContent = true;
+            initContent(postContent);
+        }
+    }
+
+    private void initContent(String content) {
         Bundle appProps = mReactRootView.getAppProperties();
         if (appProps == null) {
             appProps = new Bundle();
         }
-        appProps.putString(PROP_NAME_INITIAL_DATA, postContent);
+        appProps.putString(PROP_NAME_INITIAL_DATA, content);
         mReactRootView.setAppProperties(appProps);
+    }
+
+    private void updateContent(String content) {
+        if (mReactContext != null) {
+            mRnReactNativeGutenbergBridgePackage.getRNReactNativeGutenbergBridgeModule().updateHtml(content);
+        }
     }
 
     public interface OnGetContentTimeout {
