@@ -7,6 +7,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaSelectedCallback;
@@ -33,6 +34,12 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
 
     public void getHtmlFromJS() {
         emitToJS("requestGetHtml", null);
+    }
+
+    public void updateHtml(String html) {
+        WritableMap writableMap = new WritableNativeMap();
+        writableMap.putString("html", html);
+        emitToJS("updateHtml", writableMap);
     }
 
     @ReactMethod
