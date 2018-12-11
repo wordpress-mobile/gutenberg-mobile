@@ -16,6 +16,11 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     private final ReactApplicationContext mReactContext;
     private final GutenbergBridgeJS2Parent mGutenbergBridgeJS2Parent;
 
+    private static final String EVENT_NAME_REQUEST_GET_HTML = "requestGetHtml";
+    private static final String EVENT_NAME_UPDATE_HTML = "updateHtml";
+
+    private static final String MAP_KEY_UPDATE_HTML = "html";
+
     public RNReactNativeGutenbergBridgeModule(ReactApplicationContext reactContext,
             GutenbergBridgeJS2Parent gutenbergBridgeJS2Parent) {
         super(reactContext);
@@ -33,13 +38,13 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     }
 
     public void getHtmlFromJS() {
-        emitToJS("requestGetHtml", null);
+        emitToJS(EVENT_NAME_REQUEST_GET_HTML, null);
     }
 
     public void updateHtml(String html) {
         WritableMap writableMap = new WritableNativeMap();
-        writableMap.putString("html", html);
-        emitToJS("updateHtml", writableMap);
+        writableMap.putString(MAP_KEY_UPDATE_HTML, html);
+        emitToJS(EVENT_NAME_UPDATE_HTML, writableMap);
     }
 
     @ReactMethod
