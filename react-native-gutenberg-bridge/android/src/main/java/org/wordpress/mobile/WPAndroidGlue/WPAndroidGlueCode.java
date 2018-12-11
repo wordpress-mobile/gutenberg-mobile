@@ -161,6 +161,8 @@ public class WPAndroidGlueCode {
             return;
         }
 
+        // Content can be set directly to RootView only once (per RootView instance)
+        // otherwise it should be done through module interface
         if (mShouldUpdateContent) {
             updateContent(postContent);
         } else {
@@ -180,7 +182,7 @@ public class WPAndroidGlueCode {
 
     private void updateContent(String content) {
         if (mReactContext != null) {
-            mRnReactNativeGutenbergBridgePackage.getRNReactNativeGutenbergBridgeModule().updateHtml(content);
+            mRnReactNativeGutenbergBridgePackage.getRNReactNativeGutenbergBridgeModule().setHtmlInJS(content);
         }
     }
 

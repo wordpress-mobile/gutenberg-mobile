@@ -41,7 +41,7 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
         emitToJS(EVENT_NAME_REQUEST_GET_HTML, null);
     }
 
-    public void updateHtml(String html) {
+    public void setHtmlInJS(String html) {
         WritableMap writableMap = new WritableNativeMap();
         writableMap.putString(MAP_KEY_UPDATE_HTML, html);
         emitToJS(EVENT_NAME_UPDATE_HTML, writableMap);
