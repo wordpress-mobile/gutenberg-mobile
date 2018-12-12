@@ -162,7 +162,8 @@ public class WPAndroidGlueCode {
         }
 
         // Content can be set directly to RootView only once (per RootView instance)
-        // otherwise it should be done through module interface
+        // because we don't want to bootstrap the whole Gutenberg state.
+        // Otherwise it should be done through module interface
         if (mShouldUpdateContent) {
             updateContent(postContent);
         } else {
