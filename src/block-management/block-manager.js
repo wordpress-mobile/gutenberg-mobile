@@ -62,7 +62,6 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 	keyboardDidShowListener: EventEmitter;
 	keyboardDidHideListener: EventEmitter;
 	list: FlatList;
-	viewabilityConfigCallbackPairs: mixed;
 	indexToScroll: ?number;
 
 	constructor( props: PropsType ) {
