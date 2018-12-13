@@ -230,8 +230,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 			const scrollParams = {
 				animated: true,
 				index: this.indexToScroll,
-				viewPosition: 1, //1 represents scrolling to the bottom of the viewable area
-				viewOffset: -( this.state.keyboardHeight ), //offset from the bottom of the viewable area
+				viewPosition: 0, //0 represents scrolling to the top of the viewable area
 			};
 			this.list.scrollToIndex( scrollParams );
 			this.indexToScroll = null; //clear indexToScroll after we are done
