@@ -55,7 +55,6 @@ type StateType = {
 	refresh: boolean,
 	isKeyboardVisible: boolean,
 	rootViewHeight: number,
-	indexToScroll: ?number,
 	keyboardHeight: number,
 };
 
@@ -64,6 +63,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 	keyboardDidHideListener: EventEmitter;
 	list: FlatList;
 	viewabilityConfigCallbackPairs: mixed;
+	indexToScroll: ?number;
 
 	constructor( props: PropsType ) {
 		super( props );
@@ -83,7 +83,6 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 			refresh: false,
 			isKeyboardVisible: false,
 			rootViewHeight: 0,
-			indexToScroll: null,
 			keyboardHeight: 0,
 		};
 	}
@@ -162,7 +161,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		if ( this.props.blocks.length > prevProps.blocks.length ) { //if a new block is added recently
 			const indexToScroll = this.state.blocks.findIndex( ( block ) => block.focused );
 			if ( indexToScroll > -1 ) {
-				this.setState( { ...this.state, indexToScroll } );
+				this.indexToScroll = indexToScroll;
 			}
 		}
 	}
@@ -228,15 +227,15 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 	onFlatListContentSizeChange() {
 		const { selectedBlock } = this.props;
 
-		if ( this.state.indexToScroll && selectedBlock ) {
+		if ( this.indexToScroll && selectedBlock ) {
 			const scrollParams = {
 				animated: true,
-				index: this.state.indexToScroll,
+				index: this.indexToScroll,
 				viewPosition: 1, //1 represents scrolling to the bottom of the viewable area
 				viewOffset: -( this.state.keyboardHeight ), //offset from the bottom of the viewable area
 			};
 			this.list.scrollToIndex( scrollParams );
-			this.setState( { ...this.state, indexToScroll: null } ); //clear indexToScroll after we are done
+			this.indexToScroll = null; //clear indexToScroll after we are done
 		}
 	}
 
