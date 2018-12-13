@@ -58,16 +58,39 @@ type StateType = {
 	keyboardHeight: number,
 };
 
+type ViewableItemInfoType = {
+	viewableItems: Array<ViewableItemType>,
+}
+
+type ViewableItemType = {
+	key: string,
+	item: BlockType,
+	isViewable: boolean,
+}
+
 export class BlockManager extends React.Component<PropsType, StateType> {
 	keyboardDidShowListener: EventEmitter;
 	keyboardDidHideListener: EventEmitter;
 	list: FlatList;
+	viewabilityConfigCallbackPairs: mixed;
+	viewableItems: Array<ViewableItemType>;
 	indexToScroll: ?number;
 
 	constructor( props: PropsType ) {
 		super( props );
 
 		( this: any ).onFlatListContentSizeChange = this.onFlatListContentSizeChange.bind( this );
+		( this: any ).handleViewableItemsChanged = this.handleViewableItemsChanged.bind( this );
+
+		this.viewabilityConfigCallbackPairs = [ {
+			viewabilityConfig: {
+				minimumViewTime: 10,
+				itemVisiblePercentThreshold: 30,
+			},
+			onViewableItemsChanged: this.handleViewableItemsChanged,
+		} ];
+
+		this.viewableItems = [];
 
 		const blocks = props.blocks.map( ( block ) => {
 			const newBlock = { ...block };
@@ -223,18 +246,31 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		this.props.replaceBlock( clientId, block );
 	}
 
-	onFlatListContentSizeChange() {
-		const { selectedBlock } = this.props;
+	handleViewableItemsChanged( info: ViewableItemInfoType ) {
+		this.viewableItems = info.viewableItems;
+	}
 
-		if ( this.indexToScroll && selectedBlock ) {
-			const scrollParams = {
-				animated: true,
-				index: this.indexToScroll,
-				viewPosition: 0, //0 represents scrolling to the top of the viewable area
-			};
-			this.list.scrollToIndex( scrollParams );
-			this.indexToScroll = null; //clear indexToScroll after we are done
-		}
+	isItemViewable( { clientId } ) { //returns true if item is in the viewport and visible to user
+		return this.viewableItems.filter( ( item ) => item.key === clientId ).length !== 0;
+	}
+
+	onFlatListContentSizeChange() {
+		setTimeout( () => {
+			const { selectedBlock } = this.props;
+			if ( this.indexToScroll && selectedBlock ) {
+				if ( ! this.isItemViewable( selectedBlock ) ) {
+					const scrollParams = {
+						animated: true,
+						index: this.indexToScroll,
+						viewPosition: 0, //1 represents scrolling to the bottom of the viewable area
+					};
+					this.list.scrollToIndex( scrollParams );
+				} else {
+					console.log("item is already viewable");
+				}
+				this.indexToScroll = null; //clear indexToScroll after we are done
+			}
+		}, 300 );
 	}
 
 	renderList() {
@@ -247,6 +283,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 				} }
 				// FlatList needs this property set before you can call scrollToIndex,
 				onScrollToIndexFailed={ () => { } }
+				viewabilityConfigCallbackPairs={ this.viewabilityConfigCallbackPairs }
 				onContentSizeChange={ this.onFlatListContentSizeChange }
 				keyboardShouldPersistTaps="always"
 				style={ styles.list }
