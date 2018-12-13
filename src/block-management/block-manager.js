@@ -172,8 +172,8 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		Keyboard.removeListener( keyboardDidHide, this.keyboardDidHide );
 	}
 
-	keyboardDidShow = ( { endCoordinates } ) => {
-		this.setState( { isKeyboardVisible: true, keyboardHeight: endCoordinates.height } );
+	keyboardDidShow = ( e: any ) => {
+		this.setState( { isKeyboardVisible: true, keyboardHeight: e.endCoordinates.height } );
 	}
 
 	keyboardDidHide = () => {
