@@ -54,15 +54,43 @@ type StateType = {
 	selectedBlockType: string,
 	refresh: boolean,
 	isKeyboardVisible: boolean,
-	rootViewHeight: number;
+	rootViewHeight: number,
+	indexToScroll: ?number,
+	keyboardHeight: number,
 };
+
+type ViewableItemInfoType = {
+	viewableItems: Array<ViewableItemType>,
+}
+
+type ViewableItemType = {
+	key: string,
+	item: BlockType,
+	isViewable: boolean,
+}
 
 export class BlockManager extends React.Component<PropsType, StateType> {
 	keyboardDidShowListener: EventEmitter;
 	keyboardDidHideListener: EventEmitter;
+	list: FlatList;
+	viewableItems: Array<ViewableItemType>;
+	viewabilityConfigCallbackPairs: mixed;
 
 	constructor( props: PropsType ) {
 		super( props );
+
+		( this: any ).onFlatListContentSizeChange = this.onFlatListContentSizeChange.bind( this );
+		( this: any ).handleViewableItemsChanged = this.handleViewableItemsChanged.bind( this );
+
+		this.viewabilityConfigCallbackPairs = [ {
+			viewabilityConfig: {
+				minimumViewTime: 100,
+				itemVisiblePercentThreshold: 50,
+			},
+			onViewableItemsChanged: this.handleViewableItemsChanged,
+		} ];
+
+		this.viewableItems = [];
 
 		const blocks = props.blocks.map( ( block ) => {
 			const newBlock = { ...block };
@@ -77,6 +105,8 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 			refresh: false,
 			isKeyboardVisible: false,
 			rootViewHeight: 0,
+			indexToScroll: null,
+			keyboardHeight: 0,
 		};
 	}
 
@@ -150,13 +180,22 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		this.keyboardDidHideListener = Keyboard.addListener( keyboardDidHide, this.keyboardDidHide );
 	}
 
+	componentDidUpdate( prevProps: PropsType ) {
+		if ( this.props.blocks.length > prevProps.blocks.length ) { //if a new block is added recently
+			const indexToScroll = this.state.blocks.findIndex( ( block ) => block.focused );
+			if ( indexToScroll > -1 ) {
+				this.setState( { ...this.state, indexToScroll } );
+			}
+		}
+	}
+
 	componentWillUnmount() {
 		Keyboard.removeListener( keyboardDidShow, this.keyboardDidShow );
 		Keyboard.removeListener( keyboardDidHide, this.keyboardDidHide );
 	}
 
-	keyboardDidShow = () => {
-		this.setState( { isKeyboardVisible: true } );
+	keyboardDidShow = ( { endCoordinates } ) => {
+		this.setState( { isKeyboardVisible: true, keyboardHeight: endCoordinates.height } );
 	}
 
 	keyboardDidHide = () => {
@@ -208,11 +247,43 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		this.props.replaceBlock( clientId, block );
 	}
 
+	handleViewableItemsChanged( info: ViewableItemInfoType ) {
+		this.viewableItems = info.viewableItems;
+	}
+
+	isItemViewable( { clientId } ) { //returns true if item is in the viewport and visible to user
+		return this.viewableItems.filter( ( item ) => item.key === clientId ).length !== 0;
+	}
+
+	onFlatListContentSizeChange() {
+		const { selectedBlock } = this.props;
+
+		if ( this.state.indexToScroll && selectedBlock ) {
+			if ( ! this.isItemViewable( selectedBlock ) ) {
+				const scrollParams = {
+					animated: true,
+					index: this.state.indexToScroll,
+					viewPosition: 1, //1 represents scrolling to the bottom of the viewable area
+					viewOffset: -( this.state.keyboardHeight ), //offset from the bottom of the viewable area
+				};
+				this.list.scrollToIndex( scrollParams );
+			}
+			this.setState( { ...this.state, indexToScroll: null } ); //clear indexToScroll after we are done
+		}
+	}
+
 	renderList() {
 		// TODO: we won't need this. This just a temporary solution until we implement the RecyclerViewList native code for iOS
 		// And fix problems with RecyclerViewList on Android
 		const list = (
 			<FlatList
+				ref={ ( ref ) => {
+					this.list = ref;
+				} }
+				// FlatList needs this property set before you can call scrollToIndex,
+				onScrollToIndexFailed={ () => { } }
+				viewabilityConfigCallbackPairs={ this.viewabilityConfigCallbackPairs }
+				onContentSizeChange={ this.onFlatListContentSizeChange }
 				keyboardShouldPersistTaps="always"
 				style={ styles.list }
 				data={ this.state.blocks }
