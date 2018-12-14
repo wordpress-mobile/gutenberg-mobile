@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.facebook.react.ReactInstanceManager;
+import com.facebook.react.ReactInstanceManager.ReactInstanceEventListener;
 import com.facebook.react.ReactInstanceManagerBuilder;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.ReactRootView;
@@ -35,6 +36,13 @@ public class WPAndroidGlueCode {
     private ReactContext mReactContext;
     private RNReactNativeGutenbergBridgePackage mRnReactNativeGutenbergBridgePackage;
     private MediaSelectedCallback mPendingMediaSelectedCallback;
+    private ReactInstanceEventListener mReactInstanceEventListener =
+            new ReactInstanceManager.ReactInstanceEventListener() {
+                @Override
+                public void onReactContextInitialized(ReactContext context) {
+                    mReactContext = context;
+                }
+            };
 
     private String mContentHtml = "";
     private boolean mContentChanged;
@@ -89,23 +97,27 @@ public class WPAndroidGlueCode {
                              Application application, boolean isDebug, boolean buildGutenbergFromSource) {
         mReactRootView = (ReactRootView) reactRootView;
 
-        ReactInstanceManagerBuilder builder =
-                ReactInstanceManager.builder()
-                                    .setApplication(application)
-                                    .setJSMainModulePath("index")
-                                    .addPackages(getPackages(onMediaLibraryButtonListener))
-                                    .setUseDeveloperSupport(isDebug)
-                                    .setInitialLifecycleState(LifecycleState.RESUMED);
-        if (!buildGutenbergFromSource) {
-            builder.setBundleAssetName("index.android.bundle");
-        }
-        mReactInstanceManager = builder.build();
-        mReactInstanceManager.addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener() {
-            @Override
-            public void onReactContextInitialized(ReactContext context) {
-                mReactContext = context;
+
+        if (mReactInstanceManager == null) {
+            ReactInstanceManagerBuilder builder =
+                    ReactInstanceManager.builder()
+                                        .setApplication(application)
+                                        .setJSMainModulePath("index")
+                                        .addPackages(getPackages(onMediaLibraryButtonListener))
+                                        .setUseDeveloperSupport(isDebug)
+                                        .setInitialLifecycleState(LifecycleState.RESUMED);
+            if (!buildGutenbergFromSource) {
+                builder.setBundleAssetName("index.android.bundle");
             }
-        });
+            mReactInstanceManager = builder.build();
+        } else {
+            if (mReactInstanceEventListener != null) {
+                mReactInstanceManager.removeReactInstanceEventListener(mReactInstanceEventListener);
+            }
+        }
+
+        mReactInstanceManager.addReactInstanceEventListener(mReactInstanceEventListener);
+
         Bundle initialProps = mReactRootView.getAppProperties();
         if (initialProps == null) {
             initialProps = new Bundle();
