@@ -2,22 +2,32 @@
 * @format
 * @flow
 */
-import { KeyboardAwareFlatList as IOSKeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view';
-import { FlatList } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { FlatList, ScrollView, Dimensions } from 'react-native';
 
 type PropsType = {
     ...FlatList.propTypes,
-    extraScrollHeight: number,
+	shouldPreventAutomaticScroll: void => boolean,
+	parentHeight: number,
+	extraScrollHeight: number,
 }
 
 const KeyboardAwareFlatList = ( props: PropsType ) => {
-	const { extraScrollHeight = 0 } = props;
+	const { parentHeight, extraScrollHeight } = props;
+	const { height: fullHeight } = Dimensions.get( 'window' );
+	const keyboardVerticalOffset = fullHeight - parentHeight;
+
 	var flatList;
 	var contentOffsetY;
 	var onKeyboardWillShow = false;
 
 	return (
-		<IOSKeyboardAwareFlatList { ...props }
+		<KeyboardAwareScrollView 
+			style={ { flex: 1 }} 
+			keyboardDismissMode={ 'none' }
+			enableResetScrollToCoords={ false }
+			extraScrollHeight={ extraScrollHeight*2 + keyboardVerticalOffset + 5 }
+			extraHeight={ 0 }
 			innerRef={ ( ref ) => {
 				this.flatList = ref;
 			} }
@@ -26,7 +36,10 @@ const KeyboardAwareFlatList = ( props: PropsType ) => {
 			} }
 			onKeyboardDidHide={ () => {
 				setTimeout( () => {
-					if ( ! this.onKeyboardWillShow && this.contentOffsetY !== undefined ) {
+					if ( ! this.onKeyboardWillShow 
+						&& this.contentOffsetY !== undefined 
+						&& ! props.shouldPreventAutomaticScroll() ) {
+						// Reset the content position if keyboard is still closed
 						this.flatList.props.scrollToPosition( 0, this.contentOffsetY, true );
 					}
 				}, 50 );
@@ -36,13 +49,9 @@ const KeyboardAwareFlatList = ( props: PropsType ) => {
 			} }
 			onScroll={ ( event: Object ) => {
 				this.contentOffsetY = event.nativeEvent.contentOffset.y;
-			} }
-			extraScrollHeight={ extraScrollHeight }
-			extraHeight={ 0 }
-			keyboardDismissMode={ 'none' }
-			enableAutomaticScroll={ true }
-			enableResetScrollToCoords={ false }
-		/>
+			} } >
+			<FlatList { ...props }/>
+		</KeyboardAwareScrollView>
 	);
 };
 

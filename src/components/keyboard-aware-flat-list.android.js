@@ -7,17 +7,15 @@ import { FlatList } from 'react-native';
 
 type PropsType = {
     ...FlatList.propTypes,
-    extraScrollHeight: number,
-    shouldPreventAutomaticScroll: void => boolean,
-    parentHeight: number,
+	shouldPreventAutomaticScroll: void => boolean,
+	parentHeight: number,
+	extraScrollHeight: number,
 }
 
 const KeyboardAwareFlatList = ( props: PropsType ) => {
-	const { extraScrollHeight = 0 } = props;
-
 	return (
 		<AndroidKeyboardAwareFlatList { ...props }
-			extraScrollHeight={ extraScrollHeight }
+			extraScrollHeight={ 0 }
 			extraHeight={ 0 }
 			keyboardDismissMode={ 'none' }
 			enableOnAndroid={ true }
