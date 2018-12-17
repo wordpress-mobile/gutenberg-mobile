@@ -11,6 +11,7 @@ import BlockHolder from './block-holder';
 import { InlineToolbarActions } from './inline-toolbar';
 import type { BlockType } from '../store/types';
 import styles from './block-manager.scss';
+import inlineToolbarStyles from '../block-management/inline-toolbar/style.scss';
 import toolbarStyles from './block-toolbar.scss';
 import BlockPicker from './block-picker';
 import HTMLTextInput from '../components/html-text-input';
@@ -68,6 +69,8 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 
 		( this: any ).renderItem = this.renderItem.bind( this );
 		( this: any ).shouldFlatListPreventAutomaticScroll = this.shouldFlatListPreventAutomaticScroll.bind( this );
+		( this: any ).keyExtractor = this.keyExtractor.bind( this );
+
 		const blocks = props.blocks.map( ( block ) => {
 			const newBlock = { ...block };
 			newBlock.focused = props.isBlockSelected( block.clientId );
@@ -216,18 +219,23 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		return this.state.blockTypePickerVisible;
 	}
 
+	keyExtractor( item: Object ) {
+		return item.clientId;
+	}
+
 	renderList() {
 		// TODO: we won't need this. This just a temporary solution until we implement the RecyclerViewList native code for iOS
 		// And fix problems with RecyclerViewList on Android
 		const list = (
 			<KeyboardAwareFlatList
-				extraScrollHeight={ toolbarStyles.container.height }
+				blockToolbarHeight={ toolbarStyles.container.height }
+				innerToolbarHeight={ inlineToolbarStyles.toolbar.height }
 				parentHeight={ this.state.rootViewHeight }
 				keyboardShouldPersistTaps="always"
 				style={ styles.list }
 				data={ this.state.blocks }
 				extraData={ { refresh: this.state.refresh } }
-				keyExtractor={ ( item ) => item.clientId }
+				keyExtractor={ this.keyExtractor }
 				renderItem={ this.renderItem }
 				shouldPreventAutomaticScroll={ this.shouldFlatListPreventAutomaticScroll }
 			/>

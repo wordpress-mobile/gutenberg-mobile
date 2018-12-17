@@ -3,54 +3,59 @@
 * @flow
 */
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { FlatList, ScrollView, Dimensions } from 'react-native';
+import { FlatList, Dimensions } from 'react-native';
 
 type PropsType = {
     ...FlatList.propTypes,
 	shouldPreventAutomaticScroll: void => boolean,
 	parentHeight: number,
-	extraScrollHeight: number,
+	blockToolbarHeight: number,
+	innerToolbarHeight: number,
 }
 
 const KeyboardAwareFlatList = ( props: PropsType ) => {
-	const { parentHeight, extraScrollHeight } = props;
+	const {
+		parentHeight,
+		blockToolbarHeight,
+		innerToolbarHeight,
+		shouldPreventAutomaticScroll,
+		...listProps
+	} = props;
 	const { height: fullHeight } = Dimensions.get( 'window' );
 	const keyboardVerticalOffset = fullHeight - parentHeight;
-
-	var flatList;
-	var contentOffsetY;
-	var onKeyboardWillShow = false;
+	const blockHolderPadding = 8;
+	const extraScrollHeight = blockToolbarHeight + innerToolbarHeight + blockHolderPadding + keyboardVerticalOffset;
 
 	return (
-		<KeyboardAwareScrollView 
-			style={ { flex: 1 }} 
+		<KeyboardAwareScrollView
+			style={ { flex: 1 } }
 			keyboardDismissMode={ 'none' }
 			enableResetScrollToCoords={ false }
-			extraScrollHeight={ extraScrollHeight*2 + keyboardVerticalOffset + 5 }
+			extraScrollHeight={ extraScrollHeight }
 			extraHeight={ 0 }
 			innerRef={ ( ref ) => {
-				this.flatList = ref;
+				( this: any ).flatList = ref;
 			} }
 			onKeyboardWillHide={ () => {
-				this.onKeyboardWillShow = false;
+				( this: any ).keyboardWillShowIndicator = false;
 			} }
 			onKeyboardDidHide={ () => {
 				setTimeout( () => {
-					if ( ! this.onKeyboardWillShow 
-						&& this.contentOffsetY !== undefined 
-						&& ! props.shouldPreventAutomaticScroll() ) {
+					if ( ! ( this: any ).keyboardWillShowIndicator &&
+						( this: any ).latestContentOffsetY !== undefined &&
+						! shouldPreventAutomaticScroll() ) {
 						// Reset the content position if keyboard is still closed
-						this.flatList.props.scrollToPosition( 0, this.contentOffsetY, true );
+						( this: any ).flatList.props.scrollToPosition( 0, ( this: any ).latestContentOffsetY, true );
 					}
 				}, 50 );
 			} }
 			onKeyboardWillShow={ () => {
-				this.onKeyboardWillShow = true;
+				( this: any ).keyboardWillShowIndicator = true;
 			} }
 			onScroll={ ( event: Object ) => {
-				this.contentOffsetY = event.nativeEvent.contentOffset.y;
+				( this: any ).latestContentOffsetY = event.nativeEvent.contentOffset.y;
 			} } >
-			<FlatList { ...props }/>
+			<FlatList { ...listProps } />
 		</KeyboardAwareScrollView>
 	);
 };
