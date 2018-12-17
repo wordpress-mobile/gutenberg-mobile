@@ -31,6 +31,7 @@ const KeyboardAwareFlatList = ( props: PropsType ) => {
 			style={ { flex: 1 } }
 			keyboardDismissMode={ 'none' }
 			enableResetScrollToCoords={ false }
+			keyboardShouldPersistTaps={ 'handled' }
 			extraScrollHeight={ extraScrollHeight }
 			extraHeight={ 0 }
 			innerRef={ ( ref ) => {
