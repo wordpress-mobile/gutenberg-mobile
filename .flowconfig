@@ -42,6 +42,7 @@
 <PROJECT_ROOT>/node_modules/jsx-to-string/.*
 <PROJECT_ROOT>/node_modules/jest-enzyme/.*
 <PROJECT_ROOT>/node_modules/enzyme-matchers/.*
+<PROJECT_ROOT>/node_modules/react-native-keyboard-aware-scroll-view/.*
 
 ; Ignore react-native-recyclerview-list example app
 <PROJECT_ROOT>/node_modules/react-native-recyclerview-list/example

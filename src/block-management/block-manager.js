@@ -11,7 +11,7 @@ import BlockHolder from './block-holder';
 import { InlineToolbarActions } from './inline-toolbar';
 import type { BlockType } from '../store/types';
 import styles from './block-manager.scss';
-import inlineToolbarStyles from '../block-management/inline-toolbar/style.scss';
+import inlineToolbarStyles from './inline-toolbar/style.scss';
 import toolbarStyles from './block-toolbar.scss';
 import BlockPicker from './block-picker';
 import HTMLTextInput from '../components/html-text-input';
