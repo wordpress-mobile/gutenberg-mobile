@@ -1,8 +1,8 @@
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 /**
 * @format
 * @flow
 */
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import React from 'react';
 import { FlatList, Dimensions } from 'react-native';
 
