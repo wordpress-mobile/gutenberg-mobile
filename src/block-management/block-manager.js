@@ -279,11 +279,11 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		);
 
 		return (
-			<View style={ styles.container } onLayout={ this.onRootViewLayout }>
+			<SafeAreaView style={ styles.container } onLayout={ this.onRootViewLayout }>
 				{ this.props.showHtml && this.renderHTML() }
 				{ ! this.props.showHtml && list }
 				{ this.state.blockTypePickerVisible && blockTypePicker }
-			</View>
+			</SafeAreaView>
 		);
 	}
 
