@@ -5,7 +5,7 @@
 import { FlatList, KeyboardAvoidingView } from 'react-native';
 
 type PropsType = {
-    ...FlatList.propTypes,
+	...FlatList.propTypes,
 	shouldPreventAutomaticScroll: void => boolean,
 	parentHeight: number,
 	blockToolbarHeight: number,

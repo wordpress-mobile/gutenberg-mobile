@@ -7,7 +7,7 @@ import React from 'react';
 import { FlatList, Dimensions } from 'react-native';
 
 type PropsType = {
-    ...FlatList.propTypes,
+	...FlatList.propTypes,
 	shouldPreventAutomaticScroll: void => boolean,
 	parentHeight: number,
 	blockToolbarHeight: number,
@@ -36,7 +36,7 @@ const KeyboardAwareFlatList = ( props: PropsType ) => {
 			extraScrollHeight={ extraScrollHeight }
 			extraHeight={ 0 }
 			innerRef={ ( ref ) => {
-				( this: any ).flatList = ref;
+				( this: any ).scrollViewRef = ref;
 			} }
 			onKeyboardWillHide={ () => {
 				( this: any ).keyboardWillShowIndicator = false;
@@ -47,7 +47,7 @@ const KeyboardAwareFlatList = ( props: PropsType ) => {
 						( this: any ).latestContentOffsetY !== undefined &&
 						! shouldPreventAutomaticScroll() ) {
 						// Reset the content position if keyboard is still closed
-						( this: any ).flatList.props.scrollToPosition( 0, ( this: any ).latestContentOffsetY, true );
+						( this: any ).scrollViewRef.props.scrollToPosition( 0, ( this: any ).latestContentOffsetY, true );
 					}
 				}, 50 );
 			} }
