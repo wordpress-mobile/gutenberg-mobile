@@ -226,7 +226,16 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		return item.clientId;
 	}
 
+	isAnyBlockSelected() {
+		const focusedItemIndex = this.state.blocks.findIndex( ( block ) => block.focused );
+		if ( focusedItemIndex === -1 ) {
+			return false;
+		}
+		return true;
+	}
+
 	renderList() {
+
 		// TODO: we won't need this. This just a temporary solution until we implement the RecyclerViewList native code for iOS
 		// And fix problems with RecyclerViewList on Android
 		const list = (
@@ -243,6 +252,21 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 				shouldPreventAutomaticScroll={ this.shouldFlatListPreventAutomaticScroll }
 			/>
 		);
+
+		const toolbar = (
+			<BlockToolbar
+				onInsertClick={ () => {
+					this.showBlockTypePicker( true );
+				} }
+				onKeyboardHide={ () => {
+					this.onKeyboardHide();
+				} }
+				showKeyboardHideButton={ this.state.isKeyboardVisible }
+			/>
+		);
+
+		// NOTE: workaround for alpha, toolbar should only be shown when an item is focused
+		// see https://github.com/wordpress-mobile/gutenberg-mobile/issues/405
 		return (
 			<View style={ { flex: 1 } } >
 				<DefaultBlockAppender rootClientId={ this.props.rootClientId } />
@@ -253,15 +277,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 				<KeyboardAvoidingView
 					style={ styles.blockToolbarKeyboardAvoidingView }
 					parentHeight={ this.state.rootViewHeight } >
-					<BlockToolbar
-						onInsertClick={ () => {
-							this.showBlockTypePicker( true );
-						} }
-						onKeyboardHide={ () => {
-							this.onKeyboardHide();
-						} }
-						showKeyboardHideButton={ this.state.isKeyboardVisible }
-					/>
+					{ ! this.isAnyBlockSelected() && toolbar }
 				</KeyboardAvoidingView>
 			</View>
 		);
