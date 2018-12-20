@@ -26,6 +26,7 @@ type PropsType = BlockType & {
 	onReplace: ( blocks: Array<Object> ) => void,
 	onInlineToolbarButtonPressed: ( button: number, clientId: string ) => void,
 	onSelect: void => void,
+	onAlphaSelectHack: void => boolean,
 	insertBlocksAfter: ( blocks: Array<Object> ) => void,
 	mergeBlocks: ( forward: boolean ) => void,
 	canMoveUp: boolean,
@@ -77,9 +78,10 @@ export class BlockHolder extends React.Component<PropsType> {
 
 	render() {
 		const { focused } = this.props;
-
 		return (
-			<TouchableWithoutFeedback onPress={ this.props.onSelect } >
+			<TouchableWithoutFeedback onPress={ ( event ) => {
+				this.props.onSelect( event, this.props.onAlphaSelectHack() );
+			} } >
 				<View style={ [ styles.blockHolder, focused && styles.blockHolderFocused ] }>
 					{ this.props.showTitle && this.renderBlockTitle() }
 					<View style={ [ ! focused && styles.blockContainer, focused && styles.blockContainerFocused ] }>{ this.getBlockForType() }</View>
@@ -108,14 +110,15 @@ export default compose( [
 		} = dispatch( 'core/editor' );
 
 		return {
-			onSelect: ( event ) => {
-				if ( event ) {
+			onSelect: ( event, alphaReleaseHack ) => {
+				if ( event && alphaReleaseHack ) {
 					// == Hack for the Alpha ==
 					// When moving the focus from a TextInput field to another kind of field the call that hides the keyboard is not invoked
 					// properly, resulting in keyboard up when it should not be there.
 					// The code below dismisses the keyboard (calling blur on the last TextInput field) when the field that now gets the focus is a non-textual field
 					const currentlyFocusedTextInput = TextInputState.currentlyFocusedField();
-					if ( event.nativeEvent.target !== currentlyFocusedTextInput && ! TextInputState.isTextInput( event.nativeEvent.target ) ) {
+					if (
+						event.nativeEvent.target !== currentlyFocusedTextInput && ! TextInputState.isTextInput( event.nativeEvent.target ) ) {
 						TextInputState.blurTextInput( currentlyFocusedTextInput );
 					}
 				}

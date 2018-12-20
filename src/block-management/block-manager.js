@@ -305,6 +305,18 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		return isUnmodifiedDefaultBlock( block );
 	}
 
+	alphaReleaseSelectHack = () => {
+		// == Hack for the Alpha ==
+		// We need to know if there is a textual block in the list or not
+		for ( let i = 0; i < this.state.blocks.length; i++ ) {
+			const currentBlockName = this.state.blocks[ i ].name;
+			if ( currentBlockName === 'core/paragraph' || currentBlockName === 'core/heading' || currentBlockName === 'core/code' ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	renderItem( value: { item: BlockType, index: number } ) {
 		const insertHere = (
 			<View style={ styles.containerStyleAddHere } >
@@ -329,6 +341,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 					canMoveDown={ canMoveDown }
 					insertBlocksAfter={ ( blocks ) => this.insertBlocksAfter( value.item.clientId, blocks ) }
 					mergeBlocks={ this.mergeBlocks }
+					onAlphaSelectHack={ this.alphaReleaseSelectHack }
 					onReplace={ ( block ) => this.onReplace( value.item.clientId, block ) }
 					{ ...value.item }
 				/>
