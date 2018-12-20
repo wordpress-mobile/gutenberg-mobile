@@ -28,6 +28,8 @@ import { sendNativeEditorDidLayout } from 'react-native-gutenberg-bridge';
 
 import EventEmitter from 'events';
 
+import TextInputState from 'react-native/lib/TextInputState';
+
 const keyboardDidShow = 'keyboardDidShow';
 const keyboardDidHide = 'keyboardDidHide';
 
@@ -109,6 +111,12 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		if ( this.isReplaceable( this.props.selectedBlock ) ) {
 			// do replace here
 			this.props.replaceBlock( this.props.selectedBlockClientId, newBlock );
+
+			// now remove focus if what we're going to replace is any of our handled editables, otherwise we end up having a wrong state
+			// https://github.com/wordpress-mobile/WordPress-Android/issues/8838#issuecomment-448978736
+			if ( this.isEditableBlock( this.props.selectedBlock ) && ! this.isEditableBlock( newBlock ) ) {
+				TextInputState.blurTextInput(TextInputState.currentlyFocusedField());
+			}
 		} else {
 			this.props.createBlockAction( newBlock.clientId, newBlock );
 		}
@@ -303,6 +311,13 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 			return false;
 		}
 		return isUnmodifiedDefaultBlock( block );
+	}
+
+	isEditableBlock( block: ?BlockType ) {
+		if ( ! block ) {
+			return false;
+		}
+		return ( block.name == "core/paragraph" ) || ( block.name == "core/heading" ) || ( block.name == "core/code" )
 	}
 
 	renderItem( value: { item: BlockType, index: number } ) {
