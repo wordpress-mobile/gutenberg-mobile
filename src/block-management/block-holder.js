@@ -11,6 +11,7 @@ import { withDispatch, withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 
 import type { BlockType } from '../store/types';
+import { isLandscape } from '../util/orientation.js';
 
 import styles from './block-holder.scss';
 
@@ -80,13 +81,17 @@ export class BlockHolder extends React.Component<PropsType> {
 
 		return (
 			<TouchableWithoutFeedback onPress={ this.props.onSelect } >
-				<View style={ [ styles.blockHolder, focused && styles.blockHolderFocused ] }>
+				<View style={ [ styles.blockHolder, focused && this.blockHolderFocusedStyle() ] }>
 					{ this.props.showTitle && this.renderBlockTitle() }
 					<View style={ [ ! focused && styles.blockContainer, focused && styles.blockContainerFocused ] }>{ this.getBlockForType() }</View>
 					{ this.renderToolbarIfBlockFocused() }
 				</View>
 			</TouchableWithoutFeedback>
 		);
+	}
+
+	blockHolderFocusedStyle() {
+		return isLandscape() ? styles.blockHolderFocusedLandscape : styles.blockHolderFocusedPortrait;
 	}
 }
 
