@@ -12,6 +12,7 @@ import { compose } from '@wordpress/compose';
 
 import type { BlockType } from '../store/types';
 import { isLandscape } from '../util/orientation.js';
+import { isIpad } from '../util/device.js';
 
 import styles from './block-holder.scss';
 
@@ -91,7 +92,8 @@ export class BlockHolder extends React.Component<PropsType> {
 	}
 
 	blockHolderFocusedStyle() {
-		return isLandscape() ? styles.blockHolderFocusedLandscape : styles.blockHolderFocusedPortrait;
+		return ( isLandscape() || isIpad ) ?
+			styles.blockHolderFocusedFullBordered : styles.blockHolderFocusedSemiBordered;
 	}
 }
 

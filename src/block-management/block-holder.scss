@@ -7,7 +7,7 @@
 	flex: 1 1 auto;
 }
 
-.blockHolderFocusedPortrait {
+.blockHolderFocusedSemiBordered {
 	border-color: $gray-lighten-30;
 	border-top-width: 1px;
 	border-bottom-width: 1px;
@@ -15,7 +15,7 @@
 	border-right-width: 0;
 }
 
-.blockHolderFocusedLandscape {
+.blockHolderFocusedFullBordered {
 	border-color: $gray-lighten-30;
 	border-top-width: 1px;
 	border-bottom-width: 1px;
