@@ -4,15 +4,13 @@
 */
 
 import React from 'react';
-import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TouchableWithoutFeedback, Dimensions, LayoutChangeEvent } from 'react-native';
 import InlineToolbar from './inline-toolbar';
 
 import { withDispatch, withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 
 import type { BlockType } from '../store/types';
-import { isLandscape } from '../util/orientation.js';
-import { isIpad } from '../util/device.js';
 
 import styles from './block-holder.scss';
 
@@ -35,6 +33,9 @@ type PropsType = BlockType & {
 };
 
 export class BlockHolder extends React.Component<PropsType> {
+	blockHolderWidth: number;
+	fullWidth: number;
+
 	renderToolbarIfBlockFocused() {
 		if ( this.props.isSelected ) {
 			return (
@@ -81,8 +82,8 @@ export class BlockHolder extends React.Component<PropsType> {
 		const { focused } = this.props;
 
 		return (
-			<TouchableWithoutFeedback onPress={ this.props.onSelect } >
-				<View style={ [ styles.blockHolder, focused && this.blockHolderFocusedStyle() ] }>
+			<TouchableWithoutFeedback onPress={ this.props.onSelect } onLayout={ this.onBlockHolderLayout } >
+				<View style={ [ styles.blockHolder, focused && this.blockHolderFocusedStyle() ] } >
 					{ this.props.showTitle && this.renderBlockTitle() }
 					<View style={ [ ! focused && styles.blockContainer, focused && styles.blockContainerFocused ] }>{ this.getBlockForType() }</View>
 					{ this.renderToolbarIfBlockFocused() }
@@ -91,8 +92,15 @@ export class BlockHolder extends React.Component<PropsType> {
 		);
 	}
 
+	onBlockHolderLayout = ( event: LayoutChangeEvent ) => {
+		const { width: fullWidth } = Dimensions.get( 'window' );
+		const { width } = event.nativeEvent.layout;
+		this.blockHolderWidth = width;
+		this.fullWidth = fullWidth;
+	}
+
 	blockHolderFocusedStyle() {
-		return ( isLandscape() || isIpad ) ?
+		return ( this.fullWidth > this.blockHolderWidth ) ?
 			styles.blockHolderFocusedFullBordered : styles.blockHolderFocusedSemiBordered;
 	}
 }
