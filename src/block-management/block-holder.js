@@ -32,9 +32,18 @@ type PropsType = BlockType & {
 	canMoveDown: boolean,
 };
 
-export class BlockHolder extends React.Component<PropsType> {
-	blockHolderWidth: number;
-	fullWidth: number;
+type StateType = {
+	isFullyBordered: boolean;
+}
+
+export class BlockHolder extends React.Component<PropsType, StateType> {
+	constructor( props: PropsType ) {
+		super( props );
+
+		this.state = {
+			isFullyBordered: false,
+		};
+	}
 
 	renderToolbarIfBlockFocused() {
 		if ( this.props.isSelected ) {
@@ -95,13 +104,14 @@ export class BlockHolder extends React.Component<PropsType> {
 	onBlockHolderLayout = ( event: LayoutChangeEvent ) => {
 		const { width: fullWidth } = Dimensions.get( 'window' );
 		const { width } = event.nativeEvent.layout;
-		this.blockHolderWidth = width;
-		this.fullWidth = fullWidth;
+		const isFullyBordered = fullWidth > width;
+		if ( isFullyBordered !== this.state.isFullyBordered ) {
+			this.setState( { ...this.state, isFullyBordered } );
+		}
 	}
 
 	blockHolderFocusedStyle() {
-		return ( this.fullWidth > this.blockHolderWidth ) ?
-			styles.blockHolderFocusedFullBordered : styles.blockHolderFocusedSemiBordered;
+		return this.state.isFullyBordered ? styles.blockHolderFocusedFullBordered : styles.blockHolderFocusedSemiBordered;
 	}
 }
 
