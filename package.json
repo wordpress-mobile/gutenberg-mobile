@@ -106,6 +106,7 @@
     "react-native-keyboard-aware-scroll-view": "git+https://github.com/wordpress-mobile/react-native-keyboard-aware-scroll-view.git#771f0a698c1ceef5eb4b9dbf66952cbbaa5e3572",
     "react-native-modal": "^6.5.0",
     "react-native-recyclerview-list": "git+https://github.com/wordpress-mobile/react-native-recyclerview-list.git#v1.0.0",
+    "react-native-safe-area": "^0.5.0",
     "react-native-svg": "git+https://github.com/wordpress-mobile/react-native-svg.git#cd9e20d1a2788e1d2907e1daeefe9d3002cb678e",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
