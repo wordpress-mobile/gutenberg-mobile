@@ -202,4 +202,8 @@ else:
 <!-- wp:list -->
 <ul><li><a href="https://make.wordpress.org/core/2017/01/17/editor-technical-overview">Gutenberg Editor Technical Overview</a></li><li><a href="https://wordpress.org/gutenberg/handbook/reference/design-principles/">Gutenberg Design Principles</a></li><li><a href="https://make.wordpress.org/core/tag/gutenberg/">Development updates on make.wordpress.org</a></li><li><a href="https://wordpress.tv/?s=gutenberg">WordPress.tv Talks about Gutenberg</a></li><li><a href="https://wordpress.org/gutenberg/handbook/reference/faq/">FAQs</a></li></ul>
 <!-- /wp:list -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="https://mysitefortestingetoledom.files.wordpress.com/2018/12/96ec6a71-4e54-4d9d-bb77-0d8ea75fdeed-3013-000003565d3632ce_file.jpg" alt=""/></figure>
+<!-- /wp:image -->
 `;
