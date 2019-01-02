@@ -5,9 +5,8 @@
 
 RCT_EXPORT_METHOD(measureSelectionInWindow:(nonnull NSNumber *)reactTag callback:(RCTResponseSenderBlock)callback)
 {
-    __weak typeof(self) weakSelf = self;
     [self addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
-        UIView *newResponder = [weakSelf viewForReactTag:reactTag];
+        UIView *newResponder = [uiManager viewForReactTag:reactTag];
         if ( !newResponder ) {
             RCTLogWarn(@"measureSelectionInWindow cannot find view with tag #%@", reactTag);
             callback(@[@"View doesn't exist"]);
