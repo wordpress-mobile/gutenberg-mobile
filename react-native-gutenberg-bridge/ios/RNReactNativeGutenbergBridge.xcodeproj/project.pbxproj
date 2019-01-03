@@ -11,7 +11,6 @@
 		7EA30CF321AC91E20092F894 /* RNReactNativeGutenbergBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA30CF221AC91E20092F894 /* RNReactNativeGutenbergBridge.swift */; };
 		7EA30DA721AD7A100092F894 /* GutenbergBridgeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA30DA621AD7A100092F894 /* GutenbergBridgeDelegate.swift */; };
 		7EA30DA921AD7A2F0092F894 /* GutenbergBridgeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA30DA821AD7A2F0092F894 /* GutenbergBridgeDataSource.swift */; };
-		9161F18E21D4CAD000314043 /* RCTUIManager+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9161F18D21D4CAD000314043 /* RCTUIManager+Additions.m */; };
 		B3E7B58A1CC2AC0600A0062D /* RNReactNativeGutenbergBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNReactNativeGutenbergBridge.m */; };
 /* End PBXBuildFile section */
 
@@ -36,8 +35,6 @@
 		7EA30D9721AD69370092F894 /* libRNTAztecView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNTAztecView.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA30DA621AD7A100092F894 /* GutenbergBridgeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GutenbergBridgeDelegate.swift; sourceTree = "<group>"; };
 		7EA30DA821AD7A2F0092F894 /* GutenbergBridgeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GutenbergBridgeDataSource.swift; sourceTree = "<group>"; };
-		9161F18C21D4CAD000314043 /* RCTUIManager+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RCTUIManager+Additions.h"; sourceTree = "<group>"; };
-		9161F18D21D4CAD000314043 /* RCTUIManager+Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "RCTUIManager+Additions.m"; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNReactNativeGutenbergBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNReactNativeGutenbergBridge.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,8 +60,6 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				9161F18C21D4CAD000314043 /* RCTUIManager+Additions.h */,
-				9161F18D21D4CAD000314043 /* RCTUIManager+Additions.m */,
 				B3E7B5891CC2AC0600A0062D /* RNReactNativeGutenbergBridge.m */,
 				7EA30CF221AC91E20092F894 /* RNReactNativeGutenbergBridge.swift */,
 				7EA30DA821AD7A2F0092F894 /* GutenbergBridgeDataSource.swift */,
@@ -145,7 +140,6 @@
 				7EA30DA921AD7A2F0092F894 /* GutenbergBridgeDataSource.swift in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNReactNativeGutenbergBridge.m in Sources */,
 				7EA30CEF21AC8C250092F894 /* Gutenberg.swift in Sources */,
-				9161F18E21D4CAD000314043 /* RCTUIManager+Additions.m in Sources */,
 				7EA30CF321AC91E20092F894 /* RNReactNativeGutenbergBridge.swift in Sources */,
 				7EA30DA721AD7A100092F894 /* GutenbergBridgeDelegate.swift in Sources */,
 			);
