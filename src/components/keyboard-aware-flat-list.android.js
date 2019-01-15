@@ -10,6 +10,7 @@ type PropsType = {
 	shouldPreventAutomaticScroll: void => boolean,
 	blockToolbarHeight: number,
 	innerToolbarHeight: number,
+	innerRef?: Function,
 }
 
 const KeyboardAwareFlatList = ( props: PropsType ) => {

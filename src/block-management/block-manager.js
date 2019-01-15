@@ -72,6 +72,7 @@ type StateType = {
 export class BlockManager extends React.Component<PropsType, StateType> {
 	keyboardDidShowListener: EventEmitter;
 	keyboardDidHideListener: EventEmitter;
+	scrollViewRef: Object;
 
 	constructor( props: PropsType ) {
 		super( props );
@@ -80,6 +81,8 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		( this: any ).shouldFlatListPreventAutomaticScroll = this.shouldFlatListPreventAutomaticScroll.bind( this );
 		( this: any ).keyExtractor = this.keyExtractor.bind( this );
 		( this: any ).onSafeAreaInsetsUpdate = this.onSafeAreaInsetsUpdate.bind( this );
+		( this: any ).onCaretVerticalPositionChange = this.onCaretVerticalPositionChange.bind( this );
+		( this: any ).scrollViewInnerRef = this.scrollViewInnerRef.bind( this );
 
 		const blocks = props.blocks.map( ( block ) => {
 			const newBlock = { ...block };
@@ -193,6 +196,19 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		this.setState( { isKeyboardVisible: false } );
 	}
 
+	onCaretVerticalPositionChange = ( targetId: number, caretY: number, previousCaretY: ?number ) => {
+		if ( ! this.scrollViewRef ) {
+			return;
+		}
+		if ( previousCaretY ) { //if this is not the first tap
+			this.scrollViewRef.props.refreshScrollForField( targetId );
+		}
+	}
+
+	scrollViewInnerRef( ref: Object ) {
+		this.scrollViewRef = ref;
+	}
+
 	insertBlocksAfter( clientId: string, blocks: Array<Object> ) {
 		//TODO: make sure to insert all the passed blocks
 		const newBlock = blocks[ 0 ];
@@ -251,6 +267,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		// And fix problems with RecyclerViewList on Android
 		const list = (
 			<KeyboardAwareFlatList
+				innerRef={ this.scrollViewInnerRef }
 				blockToolbarHeight={ toolbarStyles.container.height }
 				innerToolbarHeight={ inlineToolbarStyles.toolbar.height }
 				safeAreaBottomInset={ this.state.safeAreaBottomInset }
@@ -349,6 +366,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 					canMoveDown={ canMoveDown }
 					insertBlocksAfter={ ( blocks ) => this.insertBlocksAfter( value.item.clientId, blocks ) }
 					mergeBlocks={ this.mergeBlocks }
+					onCaretVerticalPositionChange={ this.onCaretVerticalPositionChange }
 					onReplace={ ( block ) => this.onReplace( value.item.clientId, block ) }
 					{ ...value.item }
 				/>

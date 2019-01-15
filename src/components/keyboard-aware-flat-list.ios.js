@@ -13,6 +13,7 @@ type PropsType = {
 	blockToolbarHeight: number,
 	innerToolbarHeight: number,
 	safeAreaBottomInset: number,
+	innerRef?: Function,
 }
 
 const KeyboardAwareFlatList = ( props: PropsType ) => {
@@ -20,6 +21,7 @@ const KeyboardAwareFlatList = ( props: PropsType ) => {
 		blockToolbarHeight,
 		innerToolbarHeight,
 		shouldPreventAutomaticScroll,
+		innerRef,
 		...listProps
 	} = props;
 
@@ -37,6 +39,7 @@ const KeyboardAwareFlatList = ( props: PropsType ) => {
 			extraHeight={ 0 }
 			innerRef={ ( ref ) => {
 				( this: any ).scrollViewRef = ref;
+				innerRef( ref );
 			} }
 			onKeyboardWillHide={ () => {
 				( this: any ).keyboardWillShowIndicator = false;
