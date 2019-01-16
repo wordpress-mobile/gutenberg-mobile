@@ -22,7 +22,7 @@ import BlockPicker from './block-picker';
 import HTMLTextInput from '../components/html-text-input';
 import BlockToolbar from './block-toolbar';
 import KeyboardAvoidingView from '../components/keyboard-avoiding-view';
-import KeyboardAwareFlatList from '../components/keyboard-aware-flat-list';
+import { KeyboardAwareFlatList, handleCaretVerticalPositionChange } from '../components/keyboard-aware-flat-list';
 import SafeArea from 'react-native-safe-area';
 
 // Gutenberg imports
@@ -197,12 +197,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 	}
 
 	onCaretVerticalPositionChange = ( targetId: number, caretY: number, previousCaretY: ?number ) => {
-		if ( ! this.scrollViewRef ) {
-			return;
-		}
-		if ( previousCaretY ) { //if this is not the first tap
-			this.scrollViewRef.props.refreshScrollForField( targetId );
-		}
+		handleCaretVerticalPositionChange( this.scrollViewRef, targetId, caretY, previousCaretY );
 	}
 
 	scrollViewInnerRef( ref: Object ) {

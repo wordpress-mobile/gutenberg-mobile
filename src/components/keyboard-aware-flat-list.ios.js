@@ -16,7 +16,7 @@ type PropsType = {
 	innerRef?: Function,
 }
 
-const KeyboardAwareFlatList = ( props: PropsType ) => {
+export const KeyboardAwareFlatList = ( props: PropsType ) => {
 	const {
 		blockToolbarHeight,
 		innerToolbarHeight,
@@ -65,4 +65,15 @@ const KeyboardAwareFlatList = ( props: PropsType ) => {
 	);
 };
 
-export default KeyboardAwareFlatList;
+export const handleCaretVerticalPositionChange = (
+	scrollView: Object,
+	targetId: number,
+	caretY: number,
+	previousCaretY: ?number
+) => {
+	if ( previousCaretY ) { //if this is not the first tap
+		scrollView.props.refreshScrollForField( targetId );
+	}
+};
+
+export default { KeyboardAwareFlatList, handleCaretVerticalPositionChange };
