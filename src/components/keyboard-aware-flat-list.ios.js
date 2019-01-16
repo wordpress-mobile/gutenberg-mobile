@@ -69,8 +69,7 @@ export const handleCaretVerticalPositionChange = (
 	scrollView: Object,
 	targetId: number,
 	caretY: number,
-	previousCaretY: ?number
-) => {
+	previousCaretY: ?number ) => {
 	if ( previousCaretY ) { //if this is not the first tap
 		scrollView.props.refreshScrollForField( targetId );
 	}
