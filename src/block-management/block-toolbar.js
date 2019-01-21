@@ -68,7 +68,7 @@ export class BlockToolbar extends Component<PropsType> {
 					<BlockControls.Slot />
 					<BlockFormatControls.Slot />
 				</ScrollView>
-				{ showKeyboardHideButton && 
+				{ showKeyboardHideButton &&
 				( <Toolbar passedStyle={ styles.keyboardHideContainer }>
 					<KeyboardHideButton
 						onPress={ this.onKeyboardHide }
