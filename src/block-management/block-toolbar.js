@@ -10,7 +10,6 @@ import { compose } from '@wordpress/compose';
 import { Toolbar, ToolbarButton } from '@wordpress/components';
 import { BlockFormatControls, BlockControls } from '@wordpress/editor';
 import { __ } from '@wordpress/i18n';
-import KeyboardHideButton from '../components/keyboard-hide-button';
 
 import styles from './block-toolbar.scss';
 
@@ -70,8 +69,10 @@ export class BlockToolbar extends Component<PropsType> {
 				</ScrollView>
 				{ showKeyboardHideButton &&
 				( <Toolbar passedStyle={ styles.keyboardHideContainer }>
-					<KeyboardHideButton
-						onPress={ this.onKeyboardHide }
+					<ToolbarButton
+						style={ styles.keyboardHideButton }
+						icon="keyboard-hide"
+						onClick={ this.onKeyboardHide }
 					/>
 				</Toolbar> ) }
 			</View>
