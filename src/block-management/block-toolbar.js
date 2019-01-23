@@ -70,7 +70,6 @@ export class BlockToolbar extends Component<PropsType> {
 				{ showKeyboardHideButton &&
 				( <Toolbar passedStyle={ styles.keyboardHideContainer }>
 					<ToolbarButton
-						style={ styles.keyboardHideButton }
 						icon="keyboard-hide"
 						onClick={ this.onKeyboardHide }
 					/>
