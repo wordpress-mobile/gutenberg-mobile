@@ -247,6 +247,10 @@ class RCTAztecView: Aztec.TextView {
     func forceTypingAttributesIfNeeded() {
         if let formatHandler = HeadingBlockFormatHandler(block: blockModel) {
             formatHandler.forceTypingFormat(on: self)
+            
+            if let font = UIFont(name: "NotoSerif", size: formatHandler.fontSize) {
+                self.defaultFont = font
+            }
         }
     }
     
