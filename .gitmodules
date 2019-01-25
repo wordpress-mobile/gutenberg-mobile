@@ -4,3 +4,6 @@
 [submodule "react-native-aztec"]
 	path = react-native-aztec-old-submodule
 	url = ../react-native-aztec.git
+[submodule "Carthage/Checkouts/AztecEditor-iOS"]
+	path = react-native-aztec/ios/Carthage/Checkouts/AztecEditor-iOS
+	url = https://github.com/wordpress-mobile/AztecEditor-iOS.git
