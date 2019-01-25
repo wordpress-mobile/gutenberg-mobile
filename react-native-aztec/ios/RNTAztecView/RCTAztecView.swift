@@ -62,6 +62,13 @@ class RCTAztecView: Aztec.TextView {
             placeholderLabel.topAnchor.constraint(equalTo: topAnchor, constant: contentInset.top + textContainerInset.top)
             ])
     }
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        if let _ = HeadingBlockFormatHandler(block: blockModel) {
+            apply(formattingIdentifier: FormattingIdentifier.bold, atRange: selectedRange, remove: false)
+        }
+    }
 
     // MARK - View Height: Match to content height
     
