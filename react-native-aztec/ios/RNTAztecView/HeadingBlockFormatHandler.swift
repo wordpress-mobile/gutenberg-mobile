@@ -3,10 +3,7 @@ import Aztec
 struct HeadingBlockFormatHandler: BlockFormatHandler {
 
     private let paragraphFormatter = HTMLParagraphFormatter(placeholderAttributes: nil)
-    private let headerFormatter: HeaderFormatter
-    var level: Header.HeaderType {
-        return headerFormatter.headerLevel
-    }
+    var level: Header.HeaderType
     
     static var gutenbergFontSizeMap: [Header.HeaderType: Float] = {
         return [
@@ -19,23 +16,22 @@ struct HeadingBlockFormatHandler: BlockFormatHandler {
             .none: 14
         ]
     }()
-    
+
     init?(block: BlockModel) {
         guard let level = HeadingBlockFormatHandler.headerLevel(from: block.tag) else {
             return nil
         }
-        headerFormatter = HeaderFormatter(headerLevel: level, fontSizeMap: HeadingBlockFormatHandler.gutenbergFontSizeMap)
+        self.level = level
     }
 
     var fontSize: CGFloat {
         return CGFloat(level.fontSize(for: HeadingBlockFormatHandler.gutenbergFontSizeMap))
     }
-    
+
     func forceTypingFormat(on textView: RCTAztecView) {
         var attributes = textView.typingAttributesSwifted
 
         attributes = paragraphFormatter.remove(from: attributes)
-        attributes = headerFormatter.apply(to: attributes, andStore: nil)
 
         textView.typingAttributesSwifted = attributes
     }

@@ -12,6 +12,7 @@ class RCTAztecView: Aztec.TextView {
     @objc var onSelectionChange: RCTBubblingEventBlock? = nil
     @objc var onActiveFormatsChange: RCTBubblingEventBlock? = nil
     @objc var onActiveFormatAttributesChange: RCTBubblingEventBlock? = nil
+    
     @objc var blockType: NSDictionary? = nil {
         didSet {
             guard let block = blockType, let tag = block["tag"] as? String else {
@@ -27,6 +28,12 @@ class RCTAztecView: Aztec.TextView {
         }
     }
 
+    var blockTypeEnum: BlockType = .other {
+        didSet {
+            rntTextStorage.blockType = blockTypeEnum
+        }
+    }
+    
     private var previousContentSize: CGSize = .zero
 
     private lazy var placeholderLabel: UILabel = {
@@ -41,16 +48,31 @@ class RCTAztecView: Aztec.TextView {
         .link: "link",
     ]
 
-    override init(defaultFont: UIFont, defaultParagraphStyle: ParagraphStyle, defaultMissingImage: UIImage) {
-        super.init(defaultFont: defaultFont, defaultParagraphStyle: defaultParagraphStyle, defaultMissingImage: defaultMissingImage)
+    lazy var boldFormatter = RNTHeaderBoldFormatter()
+    lazy var h1Formatter = RNTHeaderFormatter(headerLevel: .h1)
+    lazy var h2Formatter = RNTHeaderFormatter(headerLevel: .h2)
+    lazy var h3Formatter = RNTHeaderFormatter(headerLevel: .h3)
+    lazy var h4Formatter = RNTHeaderFormatter(headerLevel: .h4)
+    lazy var h5Formatter = RNTHeaderFormatter(headerLevel: .h5)
+    lazy var h6Formatter = RNTHeaderFormatter(headerLevel: .h6)
+
+    init(defaultFont: UIFont, defaultParagraphStyle: ParagraphStyle, defaultMissingImage: UIImage) {
+        super.init(defaultFont: defaultFont,
+                   defaultParagraphStyle: defaultParagraphStyle,
+                   defaultMissingImage: defaultMissingImage,
+                   storage: RNTTextStorage())
         commonInit()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
 
+    var rntTextStorage: RNTTextStorage {
+        return storage as! RNTTextStorage
+    }
+    
     func commonInit() {
         delegate = self
         addSubview(placeholderLabel)
@@ -62,14 +84,22 @@ class RCTAztecView: Aztec.TextView {
             placeholderLabel.topAnchor.constraint(equalTo: topAnchor, constant: contentInset.top + textContainerInset.top)
             ])
     }
-    
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        if let _ = HeadingBlockFormatHandler(block: blockModel) {
-            apply(formattingIdentifier: FormattingIdentifier.bold, atRange: selectedRange, remove: false)
-        }
-    }
 
+    override var formatterMap: [FormattingIdentifier : AttributeFormatter] {
+        if blockTypeEnum == .heading {
+            var elementFormattersMap = super.formatterMap
+            elementFormattersMap[.bold] = boldFormatter
+            elementFormattersMap[.header1] = self.h1Formatter
+            elementFormattersMap[.header2] = self.h2Formatter
+            elementFormattersMap[.header3] = self.h3Formatter
+            elementFormattersMap[.header4] = self.h4Formatter
+            elementFormattersMap[.header5] = self.h5Formatter
+            elementFormattersMap[.header6] = self.h6Formatter
+            return elementFormattersMap
+        }
+        return super.formatterMap
+    }
+    
     // MARK - View Height: Match to content height
     
     override func layoutSubviews() {
@@ -221,6 +251,14 @@ class RCTAztecView: Aztec.TextView {
         default: print("Format not recognized")
         }
     }
+    
+    override func toggleBold(range: NSRange) {
+        if blockTypeEnum == .heading {
+            toggle(formatter: RNTHeaderBoldFormatter(), atRange: range)
+            return
+        }
+        super.toggleBold(range: range)
+    }
 
     @objc
     func setLink(with url: String, and title: String?) {
@@ -253,11 +291,8 @@ class RCTAztecView: Aztec.TextView {
 
     func forceTypingAttributesIfNeeded() {
         if let formatHandler = HeadingBlockFormatHandler(block: blockModel) {
+            blockTypeEnum = .heading
             formatHandler.forceTypingFormat(on: self)
-            
-            if let font = UIFont(name: "NotoSerif", size: formatHandler.fontSize) {
-                self.defaultFont = font
-            }
         }
     }
     
