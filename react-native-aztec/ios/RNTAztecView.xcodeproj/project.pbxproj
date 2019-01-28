@@ -18,6 +18,7 @@
 		914CD98921FD044900DDD5C9 /* RNTHeaderBoldFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914CD98821FD044900DDD5C9 /* RNTHeaderBoldFormatter.swift */; };
 		914CD98B21FD0CD300DDD5C9 /* RNTAttributedStringParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914CD98A21FD0CD300DDD5C9 /* RNTAttributedStringParser.swift */; };
 		914CD98D21FD0F0500DDD5C9 /* RNTTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914CD98C21FD0F0500DDD5C9 /* RNTTextStorage.swift */; };
+		914CD99321FF61E700DDD5C9 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914CD99221FF61E700DDD5C9 /* Formatter.swift */; };
 		F121467D20ED2F81003DD17B /* RCTAztecViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F121467C20ED2F81003DD17B /* RCTAztecViewManager.m */; };
 		F13BF4A020ECF5450047D3F9 /* RCTAztecViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13BF49F20ECF5450047D3F9 /* RCTAztecViewManager.swift */; };
 		F166A38020EE6DF3008E7C9F /* Aztec.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F166A37B20EE6DD7008E7C9F /* Aztec.framework */; };
@@ -72,6 +73,7 @@
 		914CD98821FD044900DDD5C9 /* RNTHeaderBoldFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNTHeaderBoldFormatter.swift; sourceTree = "<group>"; };
 		914CD98A21FD0CD300DDD5C9 /* RNTAttributedStringParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNTAttributedStringParser.swift; sourceTree = "<group>"; };
 		914CD98C21FD0F0500DDD5C9 /* RNTTextStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNTTextStorage.swift; sourceTree = "<group>"; };
+		914CD99221FF61E700DDD5C9 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		F1017BCE20ED1B1A002B1024 /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F121467C20ED2F81003DD17B /* RCTAztecViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTAztecViewManager.m; sourceTree = "<group>"; };
 		F13BF49E20ECF5440047D3F9 /* RCTAztecView-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RCTAztecView-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			children = (
 				914CD98421FD012200DDD5C9 /* RNTHeaderFormatter.swift */,
 				914CD98821FD044900DDD5C9 /* RNTHeaderBoldFormatter.swift */,
+				914CD99221FF61E700DDD5C9 /* Formatter.swift */,
 			);
 			path = AttributeFormatter;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				914CD99321FF61E700DDD5C9 /* Formatter.swift in Sources */,
 				914CD98121FCF99500DDD5C9 /* RNTAttributedStringSerializer.swift in Sources */,
 				7ECFA94021C39BA000FC131B /* BlockFormatHandler.swift in Sources */,
 				7ECFA93C21C39B5000FC131B /* HeadingBlockFormatHandler.swift in Sources */,

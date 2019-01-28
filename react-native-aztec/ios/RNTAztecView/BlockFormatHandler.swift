@@ -5,9 +5,9 @@
 protocol BlockFormatHandler {
 
     /// Create an instance of a block formatter handler for the given block.
-    /// If the given block is not compatible, the init will fail.
+    /// If the given tag is not compatible, the init will fail.
     ///
-    init?(block: BlockModel)
+    init?(tag: String)
 
     /// Set the typing format to an specific one.
     ///

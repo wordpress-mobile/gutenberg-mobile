@@ -3,6 +3,9 @@ import Foundation
 import UIKit
 
 class RCTAztecView: Aztec.TextView {
+    
+    typealias FormattingMap = [FormattingIdentifier : AttributeFormatter]
+    
     @objc var onBackspace: RCTBubblingEventBlock? = nil
     @objc var onChange: RCTBubblingEventBlock? = nil
     @objc var onEnter: RCTBubblingEventBlock? = nil
@@ -24,16 +27,11 @@ class RCTAztecView: Aztec.TextView {
 
     var blockModel = BlockModel(tag: "") {
         didSet {
+            rntTextStorage.blockType = blockModel.type
             forceTypingAttributesIfNeeded()
         }
     }
 
-    var blockTypeEnum: BlockType = .other {
-        didSet {
-            rntTextStorage.blockType = blockTypeEnum
-        }
-    }
-    
     private var previousContentSize: CGSize = .zero
 
     private lazy var placeholderLabel: UILabel = {
@@ -47,14 +45,6 @@ class RCTAztecView: Aztec.TextView {
         .strikethrough: "strikethrough",
         .link: "link",
     ]
-
-    lazy var boldFormatter = RNTHeaderBoldFormatter()
-    lazy var h1Formatter = RNTHeaderFormatter(headerLevel: .h1)
-    lazy var h2Formatter = RNTHeaderFormatter(headerLevel: .h2)
-    lazy var h3Formatter = RNTHeaderFormatter(headerLevel: .h3)
-    lazy var h4Formatter = RNTHeaderFormatter(headerLevel: .h4)
-    lazy var h5Formatter = RNTHeaderFormatter(headerLevel: .h5)
-    lazy var h6Formatter = RNTHeaderFormatter(headerLevel: .h6)
 
     init(defaultFont: UIFont, defaultParagraphStyle: ParagraphStyle, defaultMissingImage: UIImage) {
         super.init(defaultFont: defaultFont,
@@ -70,7 +60,7 @@ class RCTAztecView: Aztec.TextView {
     }
 
     var rntTextStorage: RNTTextStorage {
-        return storage as! RNTTextStorage
+        return textStorage as! RNTTextStorage
     }
     
     func commonInit() {
@@ -83,19 +73,26 @@ class RCTAztecView: Aztec.TextView {
             placeholderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: contentInset.left + textContainerInset.left + textContainer.lineFragmentPadding),
             placeholderLabel.topAnchor.constraint(equalTo: topAnchor, constant: contentInset.top + textContainerInset.top)
             ])
+        _headingFormatterMap = updateFormatterMapForHeading(super.formatterMap)
     }
 
-    override var formatterMap: [FormattingIdentifier : AttributeFormatter] {
-        if blockTypeEnum == .heading {
-            var elementFormattersMap = super.formatterMap
-            elementFormattersMap[.bold] = boldFormatter
-            elementFormattersMap[.header1] = self.h1Formatter
-            elementFormattersMap[.header2] = self.h2Formatter
-            elementFormattersMap[.header3] = self.h3Formatter
-            elementFormattersMap[.header4] = self.h4Formatter
-            elementFormattersMap[.header5] = self.h5Formatter
-            elementFormattersMap[.header6] = self.h6Formatter
-            return elementFormattersMap
+    private func updateFormatterMapForHeading(_ formatterMap: FormattingMap) -> FormattingMap {
+        var elementFormattersMap = formatterMap
+        elementFormattersMap[.bold] = Formatters.bold
+        elementFormattersMap[.header1] = Formatters.h1
+        elementFormattersMap[.header2] = Formatters.h2
+        elementFormattersMap[.header3] = Formatters.h3
+        elementFormattersMap[.header4] = Formatters.h4
+        elementFormattersMap[.header5] = Formatters.h5
+        elementFormattersMap[.header6] = Formatters.h6
+        return elementFormattersMap
+    }
+    
+    private var _headingFormatterMap: FormattingMap = [:]
+    
+    override var formatterMap: FormattingMap {
+        if blockModel.type == .heading {
+            return _headingFormatterMap
         }
         return super.formatterMap
     }
@@ -253,7 +250,7 @@ class RCTAztecView: Aztec.TextView {
     }
     
     override func toggleBold(range: NSRange) {
-        if blockTypeEnum == .heading {
+        if blockModel.type == .heading {
             toggle(formatter: RNTHeaderBoldFormatter(), atRange: range)
             return
         }
@@ -290,8 +287,7 @@ class RCTAztecView: Aztec.TextView {
     }
 
     func forceTypingAttributesIfNeeded() {
-        if let formatHandler = HeadingBlockFormatHandler(block: blockModel) {
-            blockTypeEnum = .heading
+        if let formatHandler = HeadingBlockFormatHandler(tag: blockModel.tag) {
             formatHandler.forceTypingFormat(on: self)
         }
     }

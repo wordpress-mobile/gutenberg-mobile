@@ -1,8 +1,9 @@
 import Aztec
 
+/// HeaderFormatter for Gutenberg header blocks which applies different font sizes and bold style
 class RNTHeaderFormatter: HeaderFormatter {
     
-    static var gutenbergFontSizeMap: [Header.HeaderType: Float] = {
+    private static var gutenbergFontSizeMap: [Header.HeaderType: Float] = {
         return [
             .h1: 24,
             .h2: 22,
