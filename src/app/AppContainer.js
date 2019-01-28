@@ -18,7 +18,6 @@ type PropsType = {
 	title: string,
 	initialTitle: string,
 	initialHtml: string,
-	editTitle: string => mixed,
 	resetBlocks: Array<BlockType> => mixed,
 	setupEditor: ( mixed, ?mixed ) => mixed,
 	toggleBlockMode: ?string => mixed,
@@ -110,6 +109,7 @@ export default compose( [
 	} ),
 	withDispatch( ( dispatch ) => {
 		const {
+			editPost,
 			resetBlocks,
 			setupEditor,
 			toggleBlockMode,

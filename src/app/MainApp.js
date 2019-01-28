@@ -16,9 +16,9 @@ import type { EmitterSubscription } from 'react-native';
 
 type PropsType = {
 	rootClientId: ?string,
+	editTitle: string => mixed,
 	serializeToNativeAction: void => void,
 	toggleHtmlModeAction: void => void,
-	setTitleAction: string => void,
 	updateHtmlAction: string => void,
 	title: string,
 };
@@ -41,7 +41,7 @@ export default class MainScreen extends React.Component<PropsType, StateType> {
 		} );
 
 		this.subscriptionParentSetTitle = subscribeSetTitle( ( payload ) => {
-			this.props.setTitleAction( payload.title );
+			editPost( { title: payload.title } );
 		} );
 
 		this.subscriptionParentUpdateHtml = subscribeUpdateHtml( ( payload ) => {
