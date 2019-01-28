@@ -40,7 +40,6 @@ type PropsType = {
 	replaceBlock: ( string, BlockType ) => mixed,
 	selectedBlock: ?BlockType,
 	selectedBlockClientId: string,
-	setTitleAction: string => void,
 	selectedBlockOrder: number,
 	isBlockSelected: string => boolean,
 	showHtml: boolean,
@@ -166,7 +165,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 				<PostTitle
 					style={ styles.title }
 					title={ this.props.title }
-					onUpdate={ this.props.setTitleAction }
+					onUpdate={ this.props.editTitle }
 					placeholder={ 'Pick a title...' } />
 				<View
 					style={ styles.titleSeparator } />
@@ -293,6 +292,7 @@ export default compose( [
 	withDispatch( ( dispatch ) => {
 		const {
 			clearSelectedBlock,
+			editPost,
 			insertBlock,
 			replaceBlock,
 			selectBlock,
@@ -300,6 +300,9 @@ export default compose( [
 
 		return {
 			insertBlock,
+			editTitle( title ) {
+				editPost( { title: title } );
+			},
 			focusBlock: ( clientId ) => {
 				clearSelectedBlock();
 				selectBlock( clientId );
