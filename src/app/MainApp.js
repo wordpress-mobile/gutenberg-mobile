@@ -41,7 +41,7 @@ export default class MainScreen extends React.Component<PropsType, StateType> {
 		} );
 
 		this.subscriptionParentSetTitle = subscribeSetTitle( ( payload ) => {
-			editPost( { title: payload.title } );
+			this.props.editTitle( payload.title );
 		} );
 
 		this.subscriptionParentUpdateHtml = subscribeUpdateHtml( ( payload ) => {

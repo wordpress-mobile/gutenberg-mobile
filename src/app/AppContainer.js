@@ -18,6 +18,7 @@ type PropsType = {
 	title: string,
 	initialTitle: string,
 	initialHtml: string,
+	editTitle: string => mixed,
 	resetBlocks: Array<BlockType> => mixed,
 	setupEditor: ( mixed, ?mixed ) => mixed,
 	toggleBlockMode: ?string => mixed,
@@ -82,6 +83,7 @@ class AppContainer extends React.Component<PropsType> {
 		return (
 			<MainApp
 				rootClientId={ this.props.rootClientId }
+				editTitle={ this.props.editTitle }
 				serializeToNativeAction={ this.serializeToNativeAction }
 				toggleHtmlModeAction={ this.toggleHtmlModeAction }
 				updateHtmlAction={ this.updateHtmlAction }
@@ -116,6 +118,9 @@ export default compose( [
 		} = dispatch( 'core/editor' );
 
 		return {
+			editTitle( title ) {
+				editPost( { title: title } );
+			},
 			resetBlocks,
 			setupEditor,
 			toggleBlockMode,

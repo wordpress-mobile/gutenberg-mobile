@@ -35,6 +35,7 @@ type PropsType = {
 	rootClientId: ?string,
 	blockClientIds: Array<string>,
 	blockCount: number,
+	editTitle: string => mixed,
 	focusBlock: ( clientId: string ) => void,
 	insertBlock: ( block: BlockType, position: number ) => void,
 	replaceBlock: ( string, BlockType ) => mixed,
