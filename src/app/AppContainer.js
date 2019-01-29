@@ -87,7 +87,6 @@ class AppContainer extends React.Component<PropsType> {
 		return (
 			<MainApp
 				rootClientId={ this.props.rootClientId }
-				editTitle={ this.props.editTitle }
 				serializeToNativeAction={ this.serializeToNativeAction }
 				toggleHtmlModeAction={ this.toggleHtmlModeAction }
 				setTitleAction={ this.setTitleAction }
