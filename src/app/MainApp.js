@@ -18,7 +18,7 @@ type PropsType = {
 	rootClientId: ?string,
 	serializeToNativeAction: void => void,
 	toggleHtmlModeAction: void => void,
-	setTitleAction: string => mixed,
+	setTitleAction: string => void,
 	updateHtmlAction: string => void,
 	title: string,
 };
