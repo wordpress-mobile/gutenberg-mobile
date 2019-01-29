@@ -74,6 +74,10 @@ class AppContainer extends React.Component<PropsType> {
 		this.props.toggleBlockMode( this.props.rootClientId );
 	};
 
+	setTitleAction = ( title: string ) => {
+		this.props.editTitle( title );
+	};
+
 	updateHtmlAction = ( html: string = '' ) => {
 		const parsed = parse( html );
 		this.props.resetBlocks( parsed );
@@ -86,6 +90,7 @@ class AppContainer extends React.Component<PropsType> {
 				editTitle={ this.props.editTitle }
 				serializeToNativeAction={ this.serializeToNativeAction }
 				toggleHtmlModeAction={ this.toggleHtmlModeAction }
+				setTitleAction={ this.setTitleAction }
 				updateHtmlAction={ this.updateHtmlAction }
 				title={ this.props.title }
 			/>
