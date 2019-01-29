@@ -19,7 +19,7 @@ class RNTHeaderFormatter: HeaderFormatter {
         super.init(headerLevel: headerLevel, fontSizeMap:RNTHeaderFormatter.gutenbergFontSizeMap)
     }
     
-    override func apply(to attributes: [NSAttributedStringKey: Any], andStore representation: HTMLRepresentation?) -> [NSAttributedStringKey: Any] {
+    override func apply(to attributes: [NSAttributedString.Key: Any], andStore representation: HTMLRepresentation?) -> [NSAttributedString.Key: Any] {
         var resultingAttributes = super.apply(to: attributes, andStore: representation)
         guard let font = resultingAttributes[.font] as? UIFont else {
             return resultingAttributes

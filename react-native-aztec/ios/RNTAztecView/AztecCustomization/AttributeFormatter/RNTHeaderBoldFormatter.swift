@@ -38,9 +38,9 @@ class RNTHeaderBoldFormatter: AttributeFormatter {
         }
     }
 
-    private let htmlRepresentationKey: NSAttributedStringKey = .boldHtmlRepresentation
+    private let htmlRepresentationKey: NSAttributedString.Key = .boldHtmlRepresentation
     
-    func apply(to attributes: [NSAttributedStringKey: Any], andStore representation: HTMLRepresentation?) -> [NSAttributedStringKey: Any] {
+    func apply(to attributes: [NSAttributedString.Key: Any], andStore representation: HTMLRepresentation?) -> [NSAttributedString.Key: Any] {
         var resultingAttributes = attributes
         guard let font = resultingAttributes[.font] as? UIFont else {
             resultingAttributes[.shadow] = Shadow.shadow()
@@ -56,7 +56,7 @@ class RNTHeaderBoldFormatter: AttributeFormatter {
         return resultingAttributes
     }
     
-    func remove(from attributes: [NSAttributedStringKey: Any]) -> [NSAttributedStringKey: Any] {
+    func remove(from attributes: [NSAttributedString.Key: Any]) -> [NSAttributedString.Key: Any] {
         var resultingAttributes = attributes
         
         resultingAttributes.removeValue(forKey: .shadow)
@@ -67,7 +67,7 @@ class RNTHeaderBoldFormatter: AttributeFormatter {
         return resultingAttributes
     }
 
-    func present(in attributes: [NSAttributedStringKey: Any]) -> Bool {
+    func present(in attributes: [NSAttributedString.Key: Any]) -> Bool {
         return attributes[.shadow] != nil
     }
     
