@@ -6,39 +6,51 @@ import Aztec
 class RNTHeaderBoldFormatter: AttributeFormatter {
     
     private enum Shadow {
-        static let blurRadiusNoBlur: CGFloat = 0.0
-        enum Offset {
-            static let width: CGFloat = 0.7
-            static let height: CGFloat = 0.1
+        enum DefaultOffset {
+            static let width: CGFloat = 0.75
+            static let height: CGFloat = 0.0
         }
-        static let shadowOffsetFontSizeRatio: CGFloat = Offset.width/CGFloat(RNTHeaderFormatter.gutenbergFontSizeMap[.h3] ?? h3DefaultFontSize)
+        
+        static let blurRadiusNoBlur: CGFloat = 0.0
+        
+        // Creates a no blur NSShadow instance with given offset values
+        static func shadow(width: CGFloat = DefaultOffset.width, height: CGFloat = DefaultOffset.height) -> NSShadow {
+            let shadow = NSShadow()
+            shadow.shadowBlurRadius = Shadow.blurRadiusNoBlur
+            shadow.shadowOffset = CGSize(width: width, height: height)
+            shadow.shadowColor = UIColor.black
+            return shadow
+        }
+        
+        // Calculate Shadow offset due to font size
+        static func offset(with fontSize: CGFloat) -> CGFloat {
+            if fontSize >= 22 {
+                return 0.82
+            } else if fontSize >= 20 && fontSize < 22 {
+                return 0.78
+            } else if fontSize >= 18 && fontSize < 20 {
+                return 0.75
+            } else if fontSize >= 16 && fontSize < 18 {
+                return 0.72
+            } else {
+                return 0.7
+            }
+        }
     }
-    
-    static let letterSpacing: CGFloat = 0.6
-    static let h3DefaultFontSize: Float = 22
-    
-    private let shadowOffsetFontSizeRatio = Shadow.Offset.width/CGFloat(RNTHeaderFormatter.gutenbergFontSizeMap[.h3] ?? h3DefaultFontSize)
-    private let letterSpacingFontSizeRatio = letterSpacing/CGFloat(RNTHeaderFormatter.gutenbergFontSizeMap[.h3] ?? h3DefaultFontSize)
-    private let htmlRepresentationKey: NSAttributedStringKey = .boldHtmlRepresentation
 
-    private static func shadow(width: CGFloat = Shadow.Offset.width, height: CGFloat = Shadow.Offset.height) -> NSShadow {
-        let shadow = NSShadow()
-        shadow.shadowBlurRadius = Shadow.blurRadiusNoBlur
-        shadow.shadowOffset = CGSize(width: width, height: height)
-        shadow.shadowColor = UIColor.black
-        return shadow
-    }
+    private let htmlRepresentationKey: NSAttributedStringKey = .boldHtmlRepresentation
     
     func apply(to attributes: [NSAttributedStringKey: Any], andStore representation: HTMLRepresentation?) -> [NSAttributedStringKey: Any] {
         var resultingAttributes = attributes
         guard let font = resultingAttributes[.font] as? UIFont else {
-            resultingAttributes[.shadow] = RNTHeaderBoldFormatter.shadow()
-            resultingAttributes[.kern] =  RNTHeaderBoldFormatter.letterSpacing
+            resultingAttributes[.shadow] = Shadow.shadow()
+            resultingAttributes[.kern] =  Shadow.DefaultOffset.width
             return resultingAttributes
         }
-        //Calculate shadow density and letter spacing with respect to the font size
-        resultingAttributes[.shadow] = RNTHeaderBoldFormatter.shadow(width: shadowOffsetFontSizeRatio*font.pointSize)
-        resultingAttributes[.kern] = letterSpacingFontSizeRatio*font.pointSize
+        //Calculate letter spacing and shadow offset with respect to the font size
+        let shadowOffsetWidth = Shadow.offset(with: font.pointSize)
+        resultingAttributes[.shadow] = Shadow.shadow(width: shadowOffsetWidth)
+        resultingAttributes[.kern] = shadowOffsetWidth
         resultingAttributes[.boldHtmlRepresentation] = representation
         
         return resultingAttributes
