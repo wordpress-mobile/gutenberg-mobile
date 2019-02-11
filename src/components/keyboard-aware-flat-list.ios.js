@@ -60,7 +60,7 @@ export const KeyboardAwareFlatList = ( props: PropsType ) => {
 			onScroll={ ( event: Object ) => {
 				( this: any ).latestContentOffsetY = event.nativeEvent.contentOffset.y;
 			} } >
-			<FlatList { ...listProps } />
+			<FlatList { ...listProps } automaticallyAdjustContentInsets={ false } />
 		</KeyboardAwareScrollView>
 	);
 };
