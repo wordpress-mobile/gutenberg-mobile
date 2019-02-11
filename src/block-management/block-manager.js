@@ -21,10 +21,10 @@ import BlockPicker from './block-picker';
 import HTMLTextInput from '../components/html-text-input';
 import BlockToolbar from './block-toolbar';
 import KeyboardAvoidingView from '../components/keyboard-avoiding-view';
-import { 
-	KeyboardAwareFlatList, 
+import {
+	KeyboardAwareFlatList,
 	handleCaretVerticalPositionChange,
-	refreshScrollPositionIfNeeded 
+	refreshScrollPositionIfNeeded,
 } from '../components/keyboard-aware-flat-list';
 import SafeArea from 'react-native-safe-area';
 
@@ -132,7 +132,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		SafeArea.addEventListener( 'safeAreaInsetsForRootViewDidChange', this.onSafeAreaInsetsUpdate );
 	}
 
-	componentDidUpdate(prevProps: PropsType, prevState: StateType) {
+	componentDidUpdate( prevProps: PropsType ) {
 		if ( this.props.blockCount > prevProps.blockCount ) {
 			refreshScrollPositionIfNeeded( this.scrollViewRef );
 		}
