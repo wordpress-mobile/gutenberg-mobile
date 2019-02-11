@@ -21,7 +21,11 @@ import BlockPicker from './block-picker';
 import HTMLTextInput from '../components/html-text-input';
 import BlockToolbar from './block-toolbar';
 import KeyboardAvoidingView from '../components/keyboard-avoiding-view';
-import { KeyboardAwareFlatList, handleCaretVerticalPositionChange } from '../components/keyboard-aware-flat-list';
+import { 
+	KeyboardAwareFlatList, 
+	handleCaretVerticalPositionChange,
+	refreshScrollPositionIfNeeded 
+} from '../components/keyboard-aware-flat-list';
 import SafeArea from 'react-native-safe-area';
 
 // Gutenberg imports
@@ -126,6 +130,12 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		Keyboard.addListener( 'keyboardDidShow', this.keyboardDidShow );
 		Keyboard.addListener( 'keyboardDidHide', this.keyboardDidHide );
 		SafeArea.addEventListener( 'safeAreaInsetsForRootViewDidChange', this.onSafeAreaInsetsUpdate );
+	}
+
+	componentDidUpdate(prevProps: PropsType, prevState: StateType) {
+		if ( this.props.blockCount > prevProps.blockCount ) {
+			refreshScrollPositionIfNeeded( this.scrollViewRef );
+		}
 	}
 
 	componentWillUnmount() {

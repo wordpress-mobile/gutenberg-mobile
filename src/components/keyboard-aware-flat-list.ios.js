@@ -75,4 +75,16 @@ export const handleCaretVerticalPositionChange = (
 	}
 };
 
-export default { KeyboardAwareFlatList, handleCaretVerticalPositionChange };
+export const refreshScrollPositionIfNeeded = ( scrollView: Object ) => {
+	// This will do nothing if caret is already viewable at that time
+	// Sometimes it is necessary when layout chanages by a split
+	setTimeout(() => {
+		scrollView.props.refreshScrollForField();
+	}, 500);
+};
+
+export default { 
+	KeyboardAwareFlatList, 
+	handleCaretVerticalPositionChange, 
+	refreshScrollPositionIfNeeded
+};

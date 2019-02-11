@@ -25,4 +25,12 @@ export const handleCaretVerticalPositionChange = () => {
 	//no need to handle on Android, it is system managed
 };
 
-export default { KeyboardAwareFlatList, handleCaretVerticalPositionChange };
+export const refreshScrollPositionIfNeeded = () => {
+	//no need to handle on Android, it is system managed
+};
+
+export default { 
+	KeyboardAwareFlatList, 
+	handleCaretVerticalPositionChange, 
+	refreshScrollPositionIfNeeded
+};
