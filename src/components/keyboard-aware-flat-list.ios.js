@@ -60,7 +60,7 @@ export const KeyboardAwareFlatList = ( props: PropsType ) => {
 			onScroll={ ( event: Object ) => {
 				( this: any ).latestContentOffsetY = event.nativeEvent.contentOffset.y;
 			} } >
-			<FlatList { ...listProps } automaticallyAdjustContentInsets={ false } />
+			<FlatList { ...listProps } />
 		</KeyboardAwareScrollView>
 	);
 };
@@ -75,16 +75,4 @@ export const handleCaretVerticalPositionChange = (
 	}
 };
 
-export const refreshScrollPositionIfNeeded = ( scrollView: Object ) => {
-	// This will do nothing if caret is already viewable at that time
-	// Sometimes it is necessary when layout chanages by a split
-	setTimeout( () => {
-		scrollView.props.refreshScrollForField();
-	}, 500 );
-};
-
-export default {
-	KeyboardAwareFlatList,
-	handleCaretVerticalPositionChange,
-	refreshScrollPositionIfNeeded,
-};
+export default { KeyboardAwareFlatList, handleCaretVerticalPositionChange };
