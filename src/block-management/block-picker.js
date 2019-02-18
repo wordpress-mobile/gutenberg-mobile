@@ -3,7 +3,9 @@
  * @flow
  */
 
-// WordPress imports
+/**
+ * WordPress dependencies
+ */
 import { SVG } from '@wordpress/components';
 
 import React, { Component } from 'react';
