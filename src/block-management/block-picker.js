@@ -3,13 +3,8 @@
  * @flow
  */
 
-/**
- * WordPress dependencies
- */
-import { __ } from '@wordpress/i18n';
-
 import React, { Component } from 'react';
-import { FlatList, Text, TouchableHighlight, View } from 'react-native';
+import { FlatList, Text, TouchableHighlight, View, Dimensions } from 'react-native';
 import Modal from 'react-native-modal';
 import styles from './block-picker.scss';
 import { name as unsupportedBlockName } from '../block-types/unsupported-block';
@@ -27,7 +22,7 @@ export default class BlockPicker extends Component<PropsType> {
 	availableBlockTypes = getBlockTypes().filter( ( { name } ) => name !== unsupportedBlockName );
 
 	render() {
-		const titleForAdd = __( 'ADD BLOCK' );
+		const numberOfColumns = this.calculateNumberOfColumns();
 		return (
 			<Modal
 				transparent={ true }
@@ -41,15 +36,11 @@ export default class BlockPicker extends Component<PropsType> {
 				onBackdropPress={ this.props.onDismiss }>
 				<View style={ styles.modalContent }>
 					<View style={ styles.shortLineStyle } />
-					<View>
-						<Text style={ styles.title }>
-							{ titleForAdd }
-						</Text>
-					</View>
-					<View style={ styles.lineStyle } />
 					<FlatList
+						scrollEnabled={ false }
+						key={ `InserterUI-${ numberOfColumns }` } //re-render when numberOfColumns changes
 						keyboardShouldPersistTaps="always"
-						numColumns={ 3 }
+						numColumns={ numberOfColumns }
 						data={ this.availableBlockTypes }
 						keyExtractor={ ( item ) => item.name }
 						renderItem={ ( { item } ) =>
@@ -59,8 +50,10 @@ export default class BlockPicker extends Component<PropsType> {
 								activeOpacity={ .5 }
 								onPress={ () => this.props.onValueSelected( item.name ) }>
 								<View style={ styles.modalItem }>
-									<View style={ styles.modalIcon }>
-										{ item.icon.src }
+									<View style={ styles.modalIconWrapper }>
+										<View style={ styles.modalIcon }>
+											{ item.icon.src }
+										</View>
 									</View>
 									<Text style={ styles.modalItemLabel }>{ item.title }</Text>
 								</View>
@@ -70,5 +63,15 @@ export default class BlockPicker extends Component<PropsType> {
 				</View>
 			</Modal>
 		);
+	}
+
+	calculateNumberOfColumns() {
+		const { width: windowWidth } = Dimensions.get( 'window' );
+		const { paddingLeft: itemPaddingLeft, paddingRight: itemPaddingRight } = styles.modalItem;
+		const { paddingLeft: containerPaddingLeft, paddingRight: containerPaddingRight } = styles.modalContent;
+		const { width: itemWidth } = styles.modalIconWrapper;
+		const itemTotalWidth = itemWidth + itemPaddingLeft + itemPaddingRight;
+		const containerTotalWidth = windowWidth - ( containerPaddingLeft + containerPaddingRight );
+		return Math.floor( containerTotalWidth / itemTotalWidth );
 	}
 }
