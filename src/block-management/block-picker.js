@@ -30,6 +30,8 @@ export default class BlockPicker extends Component<PropsType> {
 
 	render() {
 		const numberOfColumns = this.calculateNumberOfColumns();
+		const paddingBottom = this.paddingBottom();
+
 		return (
 			<Modal
 				transparent={ true }
@@ -41,7 +43,7 @@ export default class BlockPicker extends Component<PropsType> {
 				backdropColor={ 'lightgrey' }
 				backdropOpacity={ 0.4 }
 				onBackdropPress={ this.props.onDismiss }>
-				<View style={ [ styles.modalContent, { paddingBottom: ( styles.modalContent.paddingBottom + this.props.safeAreaBottomInset ) } ] }>
+				<View style={ [ styles.modalContent, { paddingBottom } ] }>
 					<View style={ styles.shortLineStyle } />
 					<FlatList
 						scrollEnabled={ false }
@@ -70,6 +72,13 @@ export default class BlockPicker extends Component<PropsType> {
 				</View>
 			</Modal>
 		);
+	}
+
+	paddingBottom() {
+		if ( this.props.safeAreaBottomInset > 0 ) {
+			return this.props.safeAreaBottomInset - styles.modalItem.paddingBottom;
+		}
+		return styles.modalContent.paddingBottom;
 	}
 
 	iconWithUpdatedFillColor( color: string, icon: SVG ) {
