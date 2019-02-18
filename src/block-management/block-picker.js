@@ -73,12 +73,11 @@ export default class BlockPicker extends Component<PropsType> {
 	}
 
 	iconWithUpdatedFillColor( color: string, icon: SVG ) {
-		return <SVG
-			viewBox={ icon.src.props.viewBox }
-			xmlns={ icon.src.props.xmlns }
-			style={ { fill: color } }>
-			{ icon.src.props.children }
-		</SVG>;
+		return (
+			<SVG viewBox={ icon.src.props.viewBox } xmlns={ icon.src.props.xmlns } style={ { fill: color } }>
+				{ icon.src.props.children }
+			</SVG>
+		);
 	}
 
 	calculateNumberOfColumns() {
