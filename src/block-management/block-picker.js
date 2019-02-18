@@ -3,6 +3,9 @@
  * @flow
  */
 
+// WordPress imports
+import { SVG } from '@wordpress/components';
+
 import React, { Component } from 'react';
 import { FlatList, Text, TouchableHighlight, View, Dimensions } from 'react-native';
 import Modal from 'react-native-modal';
@@ -52,7 +55,7 @@ export default class BlockPicker extends Component<PropsType> {
 								<View style={ styles.modalItem }>
 									<View style={ styles.modalIconWrapper }>
 										<View style={ styles.modalIcon }>
-											{ item.icon.src }
+											{ this.iconWithUpdatedFillColor( styles.modalIcon.fill, item.icon ) }
 										</View>
 									</View>
 									<Text style={ styles.modalItemLabel }>{ item.title }</Text>
@@ -63,6 +66,15 @@ export default class BlockPicker extends Component<PropsType> {
 				</View>
 			</Modal>
 		);
+	}
+
+	iconWithUpdatedFillColor( color: string, icon: SVG ) {
+		return <SVG
+			viewBox={ icon.src.props.viewBox }
+			xmlns={ icon.src.props.xmlns }
+			style={ { fill: color } }>
+			{ icon.src.props.children }
+		</SVG>;
 	}
 
 	calculateNumberOfColumns() {
