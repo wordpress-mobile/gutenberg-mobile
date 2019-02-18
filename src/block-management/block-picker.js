@@ -8,7 +8,8 @@
  */
 import { SVG } from '@wordpress/components';
 
-import React, { Component } from 'react';
+import React from 'react';
+import { Component } from '@wordpress/element';
 import { FlatList, Text, TouchableHighlight, View, Dimensions } from 'react-native';
 import Modal from 'react-native-modal';
 import styles from './block-picker.scss';
@@ -21,6 +22,7 @@ type PropsType = {
 	isReplacement: boolean,
 	onValueSelected: ( itemValue: string ) => void,
 	onDismiss: () => void,
+	safeAreaBottomInset: number,
 };
 
 export default class BlockPicker extends Component<PropsType> {
@@ -39,7 +41,7 @@ export default class BlockPicker extends Component<PropsType> {
 				backdropColor={ 'lightgrey' }
 				backdropOpacity={ 0.4 }
 				onBackdropPress={ this.props.onDismiss }>
-				<View style={ styles.modalContent }>
+				<View style={ [ styles.modalContent, { paddingBottom: ( styles.modalContent.paddingBottom + this.props.safeAreaBottomInset ) } ] }>
 					<View style={ styles.shortLineStyle } />
 					<FlatList
 						scrollEnabled={ false }
@@ -89,3 +91,7 @@ export default class BlockPicker extends Component<PropsType> {
 		return Math.floor( containerTotalWidth / itemTotalWidth );
 	}
 }
+
+BlockPicker.defaultProps = {
+	safeAreaBottomInset: 0,
+};
