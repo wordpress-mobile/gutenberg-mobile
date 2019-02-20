@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { identity } from 'lodash';
 
-import { Text, View, Keyboard, LayoutChangeEvent, SafeAreaView } from 'react-native';
+import { Text, View, Keyboard, LayoutChangeEvent, SafeAreaView, Dimensions } from 'react-native';
 import BlockHolder from './block-holder';
 import type { BlockType } from '../store/types';
 import styles from './block-manager.scss';
@@ -52,6 +52,7 @@ type StateType = {
 	isKeyboardVisible: boolean,
 	rootViewHeight: number;
 	safeAreaBottomInset: number;
+	isFullyBordered: boolean;
 };
 
 export class BlockManager extends React.Component<PropsType, StateType> {
@@ -73,12 +74,16 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		( this: any ).keyboardDidHide = this.keyboardDidHide.bind( this );
 		( this: any ).onCaretVerticalPositionChange = this.onCaretVerticalPositionChange.bind( this );
 		( this: any ).scrollViewInnerRef = this.scrollViewInnerRef.bind( this );
+		( this: any ).onTitleFocusStatusChange = this.onTitleFocusStatusChange.bind( this );
+		( this: any ).onContentViewLayout = this.onContentViewLayout.bind( this );
 
 		this.state = {
 			blockTypePickerVisible: false,
 			isKeyboardVisible: false,
 			rootViewHeight: 0,
 			safeAreaBottomInset: 0,
+			isFullyBordered: false,
+			isTitleFocused: false,
 		};
 		SafeArea.getSafeAreaInsetsForRootView().then( this.onSafeAreaInsetsUpdate );
 	}
@@ -122,6 +127,19 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		this.setState( { rootViewHeight: height }, () => {
 			sendNativeEditorDidLayout();
 		} );
+	}
+
+	onContentViewLayout = ( event: LayoutChangeEvent ) => {
+		const { width: fullWidth } = Dimensions.get( 'window' );
+		const { width } = event.nativeEvent.layout;
+		const isFullyBordered = fullWidth > width;
+		if ( isFullyBordered !== this.state.isFullyBordered ) {
+			this.setState( { ...this.state, isFullyBordered } );
+		}
+	}
+
+	blockHolderFocusedStyle() {
+		return this.state.isFullyBordered ? styles.blockHolderFocusedFullBordered : styles.blockHolderFocusedSemiBordered;
 	}
 
 	componentDidMount() {
@@ -170,11 +188,16 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		);
 	}
 
+	onTitleFocusStatusChange( isFocused: boolean ) {
+		this.setState( { isTitleFocused: isFocused } );
+	}
+
 	renderHeader() {
 		const focusTitle = this.props.title === '' && this.props.blockCount === 0;
+		const { isTitleFocused } = this.state;
 
 		return (
-			<View style={ styles.titleContainer }>
+			<View style={ [ styles.titleContainer, isTitleFocused && this.blockHolderFocusedStyle() ] }>
 				<PostTitle
 					setRef={ ( ref ) => {
 						if ( focusTitle && ref ) {
@@ -182,6 +205,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 							this.titleViewRef = ref;
 						}
 					} }
+					onFocusStatusChange={ this.onTitleFocusStatusChange }
 					title={ this.props.title }
 					onUpdate={ this.props.setTitleAction }
 					placeholder={ 'Add a Title' } />
@@ -191,7 +215,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 
 	renderList() {
 		return (
-			<View style={ { flex: 1 } } >
+			<View style={ { flex: 1 } } onLayout={ this.onContentViewLayout }>
 				<KeyboardAwareFlatList
 					innerRef={ this.scrollViewInnerRef }
 					blockToolbarHeight={ toolbarStyles.container.height }
@@ -201,6 +225,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 					keyboardShouldPersistTaps="always"
 					style={ styles.list }
 					data={ this.props.blockClientIds }
+					extraData={ [ this.state.isTitleFocused, this.state.isFullyBordered ] }
 					keyExtractor={ identity }
 					renderItem={ this.renderItem }
 					shouldPreventAutomaticScroll={ this.shouldFlatListPreventAutomaticScroll }
@@ -264,6 +289,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 					clientId={ clientId }
 					rootClientId={ this.props.rootClientId }
 					onCaretVerticalPositionChange={ this.onCaretVerticalPositionChange }
+					focusedStyle={ this.blockHolderFocusedStyle() }
 				/>
 				{ this.state.blockTypePickerVisible && this.props.isBlockSelected( clientId ) && (
 					<View style={ styles.containerStyleAddHere } >
