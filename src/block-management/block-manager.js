@@ -132,7 +132,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 	onContentViewLayout = ( event: LayoutChangeEvent ) => {
 		const { width: fullWidth } = Dimensions.get( 'window' );
 		const { width } = event.nativeEvent.layout;
-		const isFullyBordered = fullWidth > width;
+		const isFullyBordered = fullWidth > width + 1; //+1 is for not letting fraction differences effect the result on Android
 		if ( isFullyBordered !== this.state.isFullyBordered ) {
 			this.setState( { ...this.state, isFullyBordered } );
 		}
