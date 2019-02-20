@@ -53,6 +53,7 @@ type StateType = {
 	rootViewHeight: number;
 	safeAreaBottomInset: number;
 	isFullyBordered: boolean;
+	isTitleFocused: boolean;
 };
 
 export class BlockManager extends React.Component<PropsType, StateType> {
