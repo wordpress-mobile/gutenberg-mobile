@@ -53,7 +53,6 @@ type StateType = {
 	rootViewHeight: number;
 	safeAreaBottomInset: number;
 	isFullyBordered: boolean;
-	isTitleFocused: boolean;
 };
 
 export class BlockManager extends React.Component<PropsType, StateType> {
@@ -83,7 +82,6 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 			rootViewHeight: 0,
 			safeAreaBottomInset: 0,
 			isFullyBordered: false,
-			isTitleFocused: false,
 		};
 		SafeArea.getSafeAreaInsetsForRootView().then( this.onSafeAreaInsetsUpdate );
 	}
