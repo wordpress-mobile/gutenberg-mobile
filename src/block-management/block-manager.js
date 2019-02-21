@@ -58,7 +58,7 @@ type StateType = {
 
 export class BlockManager extends React.Component<PropsType, StateType> {
 	scrollViewRef: Object;
-	titleViewRef: Object;
+	postTitleRef: ?Object;
 	subscriptionParentSetFocusOnTitle: ?Object;
 
 	constructor( props: PropsType ) {
@@ -75,7 +75,6 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		( this: any ).keyboardDidHide = this.keyboardDidHide.bind( this );
 		( this: any ).onCaretVerticalPositionChange = this.onCaretVerticalPositionChange.bind( this );
 		( this: any ).scrollViewInnerRef = this.scrollViewInnerRef.bind( this );
-		( this: any ).onTitleFocusStatusChange = this.onTitleFocusStatusChange.bind( this );
 		( this: any ).onContentViewLayout = this.onContentViewLayout.bind( this );
 
 		this.state = {
@@ -148,8 +147,8 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		Keyboard.addListener( 'keyboardDidHide', this.keyboardDidHide );
 		SafeArea.addEventListener( 'safeAreaInsetsForRootViewDidChange', this.onSafeAreaInsetsUpdate );
 		this.subscriptionParentSetFocusOnTitle = subscribeSetFocusOnTitle( ( ) => {
-			if ( this.titleViewRef ) {
-				this.titleViewRef.focus();
+			if ( this.postTitleRef ) {
+				this.postTitleRef.focus();
 			}
 		} );
 	}
@@ -189,24 +188,16 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		);
 	}
 
-	onTitleFocusStatusChange( isFocused: boolean ) {
-		this.setState( { isTitleFocused: isFocused } );
-	}
-
 	renderHeader() {
-		const { isTitleFocused } = this.state;
-
 		return (
-			<View style={ [ styles.titleContainer, isTitleFocused && this.blockHolderFocusedStyle() ] }>
-				<PostTitle
-					setRef={ ( ref ) => {
-						this.titleViewRef = ref;
-					} }
-					onFocusStatusChange={ this.onTitleFocusStatusChange }
-					title={ this.props.title }
-					onUpdate={ this.props.setTitleAction }
-					placeholder={ __( 'Add title' ) } />
-			</View>
+			<PostTitle
+				onRef={ ( ref ) => {
+					this.postTitleRef = ref;
+				} }
+				title={ this.props.title }
+				onUpdate={ this.props.setTitleAction }
+				placeholder={ __( 'Add title' ) }
+				focusedStyle={ this.blockHolderFocusedStyle() } />
 		);
 	}
 
@@ -222,7 +213,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 					keyboardShouldPersistTaps="always"
 					style={ styles.list }
 					data={ this.props.blockClientIds }
-					extraData={ [ this.state.isTitleFocused, this.state.isFullyBordered ] }
+					extraData={ [ this.state.isFullyBordered ] }
 					keyExtractor={ identity }
 					renderItem={ this.renderItem }
 					shouldPreventAutomaticScroll={ this.shouldFlatListPreventAutomaticScroll }
