@@ -52,18 +52,20 @@
 	left: 0;
 }
 
-.blockHolderFocusedSemiBordered {
-	border-color: $gray-lighten-30;
+.blockHolderSemiBordered {
 	border-top-width: 1px;
 	border-bottom-width: 1px;
 	border-left-width: 0;
 	border-right-width: 0;
 }
 
-.blockHolderFocusedFullBordered {
-	border-color: $gray-lighten-30;
+.blockHolderFullBordered {
 	border-top-width: 1px;
 	border-bottom-width: 1px;
 	border-left-width: 1px;
 	border-right-width: 1px;
+}
+
+.blockHolderFocused {
+	border-color: $gray-lighten-30;
 }

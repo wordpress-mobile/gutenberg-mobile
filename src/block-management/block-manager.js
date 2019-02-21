@@ -138,8 +138,8 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		}
 	}
 
-	blockHolderFocusedStyle() {
-		return this.state.isFullyBordered ? styles.blockHolderFocusedFullBordered : styles.blockHolderFocusedSemiBordered;
+	blockHolderBorderStyle() {
+		return this.state.isFullyBordered ? styles.blockHolderFullBordered : styles.blockHolderSemiBordered;
 	}
 
 	componentDidMount() {
@@ -197,7 +197,8 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 				title={ this.props.title }
 				onUpdate={ this.props.setTitleAction }
 				placeholder={ __( 'Add title' ) }
-				focusedStyle={ this.blockHolderFocusedStyle() } />
+				borderStyle={ this.blockHolderBorderStyle() }
+				focusedBorderColor={ styles.blockHolderFocused.borderColor } />
 		);
 	}
 
@@ -277,7 +278,8 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 					clientId={ clientId }
 					rootClientId={ this.props.rootClientId }
 					onCaretVerticalPositionChange={ this.onCaretVerticalPositionChange }
-					focusedStyle={ this.blockHolderFocusedStyle() }
+					borderStyle={ this.blockHolderBorderStyle() }
+					focusedBorderColor={ styles.blockHolder.borderColor }
 				/>
 				{ this.state.blockTypePickerVisible && this.props.isBlockSelected( clientId ) && (
 					<View style={ styles.containerStyleAddHere } >

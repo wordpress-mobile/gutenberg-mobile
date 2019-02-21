@@ -32,7 +32,8 @@ type PropsType = BlockType & {
 	isFirstBlock: boolean,
 	isLastBlock: boolean,
 	showTitle: boolean,
-	focusedStyle: Object,
+	borderStyle: Object,
+	focusedBorderColor: string,
 	getBlockIndex: ( clientId: string, rootClientId: string ) => number,
 	getPreviousBlockClientId: ( clientId: string ) => string,
 	getNextBlockClientId: ( clientId: string ) => string,
@@ -164,13 +165,13 @@ export class BlockHolder extends React.Component<PropsType, StateType> {
 	}
 
 	render() {
-		const { isSelected, focusedStyle } = this.props;
+		const { isSelected, borderStyle, focusedBorderColor } = this.props;
 
-		const borderColor = isSelected ? focusedStyle.borderColor : 'transparent';
+		const borderColor = isSelected ? focusedBorderColor : 'transparent';
 
 		return (
 			<TouchableWithoutFeedback onPress={ this.onFocus } >
-				<View style={ [ styles.blockHolder, focusedStyle, { borderColor } ] }>
+				<View style={ [ styles.blockHolder, borderStyle, { borderColor } ] }>
 					{ this.props.showTitle && this.renderBlockTitle() }
 					<View style={ [ ! isSelected && styles.blockContainer, isSelected && styles.blockContainerFocused ] }>{ this.getBlockForType() }</View>
 					{ this.renderToolbar() }
