@@ -194,22 +194,18 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 	}
 
 	renderHeader() {
-		const focusTitle = this.props.title === '' && this.props.blockCount === 0;
 		const { isTitleFocused } = this.state;
 
 		return (
 			<View style={ [ styles.titleContainer, isTitleFocused && this.blockHolderFocusedStyle() ] }>
 				<PostTitle
 					setRef={ ( ref ) => {
-						if ( focusTitle && ref ) {
-							ref.focus();
-							this.titleViewRef = ref;
-						}
+						this.titleViewRef = ref;
 					} }
 					onFocusStatusChange={ this.onTitleFocusStatusChange }
 					title={ this.props.title }
 					onUpdate={ this.props.setTitleAction }
-					placeholder={ 'Add a Title' } />
+					placeholder={ __( 'Add title' ) } />
 			</View>
 		);
 	}
