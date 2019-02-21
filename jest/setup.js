@@ -26,4 +26,3 @@ jest.mock( 'react-native-safe-area', () => {
 } );
 
 jest.mock( 'react-native-recyclerview-list' );
-
