@@ -189,7 +189,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 	renderHeader() {
 		return (
 			<PostTitle
-				onRef={ ( ref ) => {
+				ref={ ( ref ) => {
 					this.postTitleRef = ref;
 				} }
 				title={ this.props.title }
