@@ -277,7 +277,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 					rootClientId={ this.props.rootClientId }
 					onCaretVerticalPositionChange={ this.onCaretVerticalPositionChange }
 					borderStyle={ this.blockHolderBorderStyle() }
-					focusedBorderColor={ styles.blockHolder.borderColor }
+					focusedBorderColor={ styles.blockHolderFocused.borderColor }
 				/>
 				{ this.state.blockTypePickerVisible && this.props.isBlockSelected( clientId ) && (
 					<View style={ styles.containerStyleAddHere } >
