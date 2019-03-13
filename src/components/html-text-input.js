@@ -85,7 +85,7 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 			<KeyboardAvoidingView style={ styles.container } parentHeight={ this.props.parentHeight }>
 				<ScrollView
 					style={ { flex: 1 } }
-					keyboardDismissMode='interactive' >
+					keyboardDismissMode="interactive" >
 					<TextInput
 						autoCorrect={ false }
 						textAlignVertical="center"
