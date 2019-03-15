@@ -98,10 +98,8 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 	}
 
 	render() {
-		const { height: titleHeight } = styles.htmlViewTitle;
-
 		return (
-			<KeyboardAvoidingView style={ styles.container } parentHeight={ this.props.parentHeight - titleHeight }>
+			<KeyboardAvoidingView style={ styles.container } parentHeight={ this.props.parentHeight }>
 				<View
 					{ ...( this.isIOS ? { ...this.panResponder.panHandlers } : {} ) }
 					style={ { flex: 1 } } >
