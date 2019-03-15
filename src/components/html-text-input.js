@@ -9,7 +9,7 @@
 import { __ } from '@wordpress/i18n';
 
 import React from 'react';
-import { Platform, TextInput, View } from 'react-native';
+import { Platform, TextInput, View, UIManager, PanResponder } from 'react-native';
 import styles from './html-text-input.scss';
 import KeyboardAvoidingView from './keyboard-avoiding-view';
 
@@ -38,12 +38,26 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 	textInput: TextInput;
 	edit: string => mixed;
 	stopEditing: () => mixed;
+	panResponder: PanResponder;
 
 	constructor() {
 		super( ...arguments );
 
 		this.edit = this.edit.bind( this );
 		this.stopEditing = this.stopEditing.bind( this );
+
+		this.panResponder = PanResponder.create( {
+			onStartShouldSetPanResponder: ( ) => true,
+			onStartShouldSetPanResponderCapture: ( ) => true,
+			onMoveShouldSetPanResponder: ( ) => true,
+			onMoveShouldSetPanResponderCapture: ( ) => true,
+
+			onPanResponderMove: ( e, gestureState ) => {
+				if ( gestureState.dy > 100 && gestureState.dy < 110 ) {
+					UIManager.blur( e.target );
+				}
+			},
+		} );
 
 		this.state = {
 			isDirty: false,
@@ -86,8 +100,8 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 		return (
 			<KeyboardAvoidingView style={ styles.container } parentHeight={ this.props.parentHeight - titleHeight }>
 				<View
-					style={ { flex: 1 } }
-					keyboardDismissMode="interactive" >
+					{ ...this.panResponder.panHandlers }
+					style={ { flex: 1 } } >
 					<TextInput
 						autoCorrect={ false }
 						textAlignVertical="center"
