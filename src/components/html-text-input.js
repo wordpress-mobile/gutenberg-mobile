@@ -9,7 +9,7 @@
 import { __ } from '@wordpress/i18n';
 
 import React from 'react';
-import { Platform, TextInput, ScrollView } from 'react-native';
+import { Platform, TextInput, View } from 'react-native';
 import styles from './html-text-input.scss';
 import KeyboardAvoidingView from './keyboard-avoiding-view';
 
@@ -81,9 +81,11 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 	}
 
 	render() {
+		const { height: titleHeight } = styles.htmlViewTitle;
+
 		return (
-			<KeyboardAvoidingView style={ styles.container } parentHeight={ this.props.parentHeight }>
-				<ScrollView
+			<KeyboardAvoidingView style={ styles.container } parentHeight={ this.props.parentHeight - titleHeight }>
+				<View
 					style={ { flex: 1 } }
 					keyboardDismissMode="interactive" >
 					<TextInput
@@ -100,17 +102,13 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 						ref={ ( textInput ) => this.textInput = textInput }
 						textAlignVertical="top"
 						multiline
-						style={ { ...styles.htmlView, height: this.state.contentHeight + 16 } }
+						style={ { ...styles.htmlView } }
 						value={ this.state.value }
 						onChangeText={ this.edit }
 						onBlur={ this.stopEditing }
 						placeholder={ __( 'Start writing…' ) }
-						scrollEnabled={ false }
-						onContentSizeChange={ ( event ) => {
-							this.setState( { contentHeight: event.nativeEvent.contentSize.height } );
-						} }
 					/>
-				</ScrollView>
+				</View>
 			</KeyboardAvoidingView>
 		);
 	}
