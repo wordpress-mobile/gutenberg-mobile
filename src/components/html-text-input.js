@@ -53,7 +53,7 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 			onMoveShouldSetPanResponderCapture: ( ) => true,
 
 			onPanResponderMove: ( e, gestureState ) => {
-				if ( gestureState.dy > 100 && gestureState.dy < 110 ) {
+				if ( Platform.OS === 'ios' && ( gestureState.dy > 100 && gestureState.dy < 110 ) ) {
 					//Keyboard.dismiss() and this.textInput.blur() is not working here
 					//They require to know the currentlyFocusedID under the hood but
 					//during this gesture there's no currentlyFocusedID
