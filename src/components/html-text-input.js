@@ -53,7 +53,7 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 			onMoveShouldSetPanResponderCapture: ( ) => true,
 
 			onPanResponderMove: ( e, gestureState ) => {
-				if ( Platform.OS === 'ios' && ( gestureState.dy > 100 && gestureState.dy < 110 ) ) {
+				if ( this.isIOS && ( gestureState.dy > 100 && gestureState.dy < 110 ) ) {
 					//Keyboard.dismiss() and this.textInput.blur() is not working here
 					//They require to know the currentlyFocusedID under the hood but
 					//during this gesture there's no currentlyFocusedID
@@ -103,7 +103,7 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 		return (
 			<KeyboardAvoidingView style={ styles.container } parentHeight={ this.props.parentHeight - titleHeight }>
 				<View
-					{ ...this.panResponder.panHandlers }
+					{ ...( this.isIOS ? { ...this.panResponder.panHandlers } : {} ) }
 					style={ { flex: 1 } } >
 					<TextInput
 						autoCorrect={ false }
