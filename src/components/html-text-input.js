@@ -34,7 +34,6 @@ type StateType = {
 
 export class HTMLInputView extends React.Component<PropsType, StateType> {
 	isIOS: boolean = Platform.OS === 'ios';
-	textInput: TextInput;
 	edit: string => mixed;
 	stopEditing: () => mixed;
 	panResponder: PanResponder;
