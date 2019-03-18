@@ -9,7 +9,7 @@
 import { __ } from '@wordpress/i18n';
 
 import React from 'react';
-import { Platform, TextInput, View, UIManager, PanResponder } from 'react-native';
+import { Platform, TextInput, UIManager, PanResponder } from 'react-native';
 import styles from './html-text-input.scss';
 import KeyboardAvoidingView from './keyboard-avoiding-view';
 
@@ -30,7 +30,6 @@ type PropsType = {
 type StateType = {
 	isDirty: boolean,
 	value: string,
-	contentHeight: number,
 };
 
 export class HTMLInputView extends React.Component<PropsType, StateType> {
@@ -47,10 +46,7 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 		this.stopEditing = this.stopEditing.bind( this );
 
 		this.panResponder = PanResponder.create( {
-			onStartShouldSetPanResponder: ( ) => true,
 			onStartShouldSetPanResponderCapture: ( ) => true,
-			onMoveShouldSetPanResponder: ( ) => true,
-			onMoveShouldSetPanResponderCapture: ( ) => true,
 
 			onPanResponderMove: ( e, gestureState ) => {
 				if ( this.isIOS && ( gestureState.dy > 100 && gestureState.dy < 110 ) ) {
@@ -65,7 +61,6 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 		this.state = {
 			isDirty: false,
 			value: '',
-			contentHeight: 0,
 		};
 	}
 
@@ -99,31 +94,29 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 
 	render() {
 		return (
-			<KeyboardAvoidingView style={ styles.container } parentHeight={ this.props.parentHeight }>
-				<View
-					{ ...( this.isIOS ? { ...this.panResponder.panHandlers } : {} ) }
-					style={ { flex: 1 } } >
-					<TextInput
-						autoCorrect={ false }
-						textAlignVertical="center"
-						numberOfLines={ 1 }
-						style={ styles.htmlViewTitle }
-						value={ this.props.title }
-						placeholder={ __( 'Add title' ) }
-						onChangeText={ this.props.setTitleAction }
-					/>
-					<TextInput
-						autoCorrect={ false }
-						ref={ ( textInput ) => this.textInput = textInput }
-						textAlignVertical="top"
-						multiline
-						style={ { ...styles.htmlView } }
-						value={ this.state.value }
-						onChangeText={ this.edit }
-						onBlur={ this.stopEditing }
-						placeholder={ __( 'Start writing…' ) }
-					/>
-				</View>
+			<KeyboardAvoidingView
+				style={ styles.container }
+				{ ...( this.isIOS ? { ...this.panResponder.panHandlers } : {} ) }
+				parentHeight={ this.props.parentHeight }>
+				<TextInput
+					autoCorrect={ false }
+					textAlignVertical="center"
+					numberOfLines={ 1 }
+					style={ styles.htmlViewTitle }
+					value={ this.props.title }
+					placeholder={ __( 'Add title' ) }
+					onChangeText={ this.props.setTitleAction }
+				/>
+				<TextInput
+					autoCorrect={ false }
+					textAlignVertical="top"
+					multiline
+					style={ { ...styles.htmlView } }
+					value={ this.state.value }
+					onChangeText={ this.edit }
+					onBlur={ this.stopEditing }
+					placeholder={ __( 'Start writing…' ) }
+				/>
 			</KeyboardAvoidingView>
 		);
 	}
