@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.Selection;
 import android.text.Spannable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.ArrowKeyMovementMethod;
 import android.view.View;
@@ -69,6 +70,9 @@ public class ReactAztecText extends AztecText {
     // Ref: https://github.com/wordpress-mobile/gutenberg-mobile/issues/707
     private String mTagName = "";
 
+    private boolean mIsTouched;
+    private int mBackspaceCount;
+
     private static final HashMap<ITextFormat, String> typingFormatsMap = new HashMap<ITextFormat, String>() {
         {
             put(AztecTextFormat.FORMAT_BOLD, "bold");
@@ -100,11 +104,20 @@ public class ReactAztecText extends AztecText {
             @Override
             public boolean onBackspaceKey() {
                 if (shouldHandleOnBackspace) {
-                    return onBackspace();
+                    if (!TextUtils.isEmpty(getText()) && getText().length() == 1) {
+                        mBackspaceCount++;
+                        if (mBackspaceCount >= 2) {
+                            return onBackspace();
+                        }
+                    }
+                    else {
+                        return onBackspace();
+                    }
                 }
                 return false;
             }
         });
+
         mInputMethodManager = (InputMethodManager)
                 Assertions.assertNotNull(getContext().getSystemService(Context.INPUT_METHOD_SERVICE));
         this.setOnSelectionChangedListener(new OnSelectionChangedListener() {
@@ -245,11 +258,23 @@ public class ReactAztecText extends AztecText {
     }
 
     public void setTagName(@Nullable String tagName) {
-        this.mTagName = tagName;
+        mTagName = tagName;
     }
 
     public String getTagName() {
-        return this.mTagName;
+        return mTagName;
+    }
+
+    public void setTouched(boolean isTouched) {
+        mIsTouched = isTouched;
+    }
+
+    public boolean isTouched() {
+        return mIsTouched;
+    }
+
+    public void resetBackspaceCount() {
+        mBackspaceCount = 0;
     }
 
     private void updateToolbarButtons(int selStart, int selEnd) {

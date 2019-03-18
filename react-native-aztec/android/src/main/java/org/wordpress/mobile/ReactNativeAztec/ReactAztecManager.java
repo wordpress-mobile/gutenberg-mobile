@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.facebook.infer.annotation.Assertions;
@@ -195,6 +196,11 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
             int start = selection.getInt("start");
             int end = selection.getInt("end");
             view.setSelection(start, end);
+        }
+        else {
+            if (view.isFocused() && !view.isTouched()) {
+                view.setSelection(view.getText().toString().length());
+            }
         }
     }
 
@@ -449,6 +455,7 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
                                     new ReactAztecFocusEvent(
                                             editText.getId()));
                         } else {
+                            aztecText.setTouched(false);
                             eventDispatcher.dispatchEvent(
                                     new ReactAztecBlurEvent(
                                             editText.getId()));
@@ -460,7 +467,13 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
                         }
                     }
                 });
-
+        aztecText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                aztecText.setTouched(true);
+                return true;
+            }
+        });
         // Don't think we need to add setOnEditorActionListener here (intercept Enter for example), but
         // in case check ReactTextInputManager
     }
@@ -517,7 +530,8 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
                             start + before));
 
             // Add the outer tags when the field was started empty, and only the first time the user types in it.
-            if (mPreviousText.length() == 0 && currentEventCount == 1 && !TextUtils.isEmpty(mEditText.getTagName())) {
+            if (mPreviousText.length() == 0 && !TextUtils.isEmpty(newText) && !TextUtils.isEmpty(mEditText.getTagName())) {
+                mEditText.resetBackspaceCount();
                 mEditText.fromHtml('<' + mEditText.getTagName() + '>' + newText + "</" + mEditText.getTagName() + '>', false);
             }
         }
