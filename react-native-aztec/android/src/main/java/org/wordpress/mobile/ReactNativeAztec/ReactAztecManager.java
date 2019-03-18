@@ -471,7 +471,7 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 aztecText.setTouched(true);
-                return true;
+                return false;
             }
         });
         // Don't think we need to add setOnEditorActionListener here (intercept Enter for example), but
