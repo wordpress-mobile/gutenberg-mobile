@@ -267,21 +267,11 @@ export default compose( [
 				removeBlock( clientId );
 			},
 			onInsertBlocks( blocks: Array<Object>, index: number ) {
-				insertBlocks( blocks, index, rootClientId, false );
-				if ( Platform.OS === 'android' ) {
-					// Force selectBlock (and focus) to be called in the next loop cycle.
-					// This avoids blur to be called after focus (on Android).
-					// Hopefully this can be solved on Android Native side and remove this.
-					setTimeout(() => {
-						selectBlock( blocks[0].clientId );
-					}, 0); 
-				} else {
-					selectBlock( blocks[0].clientId );
-				}
+				insertBlocks( blocks, index, rootClientId );
 			},
 			onSelect: ( selectedClientId: string, clearCurrentSelection: boolean ) => {
 				clearCurrentSelection && clearSelectedBlock();
-				selectBlock(selectedClientId);
+				selectBlock( selectedClientId );
 			},
 			onChange: ( attributes: Object ) => {
 				updateBlockAttributes( clientId, attributes );
