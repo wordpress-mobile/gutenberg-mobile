@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Keyboard, Platform } from 'react-native';
 import { withSelect, withDispatch } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import { Toolbar, ToolbarButton } from '@wordpress/components';
@@ -26,6 +26,8 @@ type PropsType = {
 export class BlockToolbar extends Component<PropsType> {
 	onKeyboardHide = () => {
 		this.props.clearSelectedBlock()
+		const isAndroid = Platform.OS === 'android';
+		isAndroid && Keyboard.dismiss();
 	};
 
 	render() {
