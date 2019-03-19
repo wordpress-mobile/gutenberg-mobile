@@ -518,7 +518,6 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
 
             // Add the outer tags when the field was started empty, and only the first time the user types in it.
             if (mPreviousText.length() == 0 && !TextUtils.isEmpty(newText) && !TextUtils.isEmpty(mEditText.getTagName())) {
-                mEditText.resetBackspaceCount();
                 mEditText.fromHtml('<' + mEditText.getTagName() + '>' + newText + "</" + mEditText.getTagName() + '>', false);
             }
         }

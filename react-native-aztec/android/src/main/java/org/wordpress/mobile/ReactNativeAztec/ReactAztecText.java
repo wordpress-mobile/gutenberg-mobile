@@ -66,7 +66,6 @@ public class ReactAztecText extends AztecText {
     private String mTagName = "";
 
     private boolean mIsTouched;
-    private int mBackspaceCount;
 
     private static final HashMap<ITextFormat, String> typingFormatsMap = new HashMap<ITextFormat, String>() {
         {
@@ -99,14 +98,15 @@ public class ReactAztecText extends AztecText {
             @Override
             public boolean onBackspaceKey() {
                 if (shouldHandleOnBackspace) {
-                    if (!TextUtils.isEmpty(getText()) && getText().length() == 1) {
-                        mBackspaceCount++;
-                        if (mBackspaceCount >= 2) {
-                            return onBackspace();
-                        }
+                    String content = toHtml(false);
+                    if (TextUtils.isEmpty(content)) {
+                        return onBackspace();
                     }
                     else {
-                        return onBackspace();
+                        String emptyTag = "<" + getTagName() + "></" + getTagName() + ">";
+                        if (!content.equals(emptyTag)) {
+                            return onBackspace();
+                        }
                     }
                 }
                 return false;
@@ -253,10 +253,6 @@ public class ReactAztecText extends AztecText {
 
     public boolean isTouched() {
         return mIsTouched;
-    }
-
-    public void resetBackspaceCount() {
-        mBackspaceCount = 0;
     }
 
     private void updateToolbarButtons(int selStart, int selEnd) {
