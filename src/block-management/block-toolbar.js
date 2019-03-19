@@ -25,9 +25,11 @@ type PropsType = {
 
 export class BlockToolbar extends Component<PropsType> {
 	onKeyboardHide = () => {
-		this.props.clearSelectedBlock()
+		this.props.clearSelectedBlock();
 		const isAndroid = Platform.OS === 'android';
-		isAndroid && Keyboard.dismiss();
+		if ( isAndroid ) {
+			Keyboard.dismiss();
+		}
 	};
 
 	render() {

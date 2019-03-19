@@ -3,6 +3,10 @@
 * @flow
 */
 
+/**
+ * External dependencies
+ */
+
 import React from 'react';
 import {
 	View,
@@ -10,12 +14,8 @@ import {
 	TouchableWithoutFeedback,
 	NativeSyntheticEvent,
 	NativeTouchEvent,
-	Platform,
 } from 'react-native';
-import InlineToolbar, { InlineToolbarActions } from './inline-toolbar';
-import {
-	requestImageUploadCancel,
-} from 'react-native-gutenberg-bridge';
+import TextInputState from 'react-native/lib/TextInputState';
 
 /**
  * WordPress dependencies
@@ -23,16 +23,16 @@ import {
 import { withDispatch, withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import { addAction, removeAction, hasAction } from '@wordpress/hooks';
-
-import type { BlockType } from '../store/types';
-
-import styles from './block-holder.scss';
-
-// Gutenberg imports
 import { getBlockType } from '@wordpress/blocks';
 import { BlockEdit } from '@wordpress/block-editor';
 
-import TextInputState from 'react-native/lib/TextInputState';
+/**
+ * Internal dependencies
+ */
+import type { BlockType } from '../store/types';
+import styles from './block-holder.scss';
+import InlineToolbar, { InlineToolbarActions } from './inline-toolbar';
+import { requestImageUploadCancel } from 'react-native-gutenberg-bridge';
 
 type PropsType = BlockType & {
 	clientId: string,
@@ -77,7 +77,9 @@ export class BlockHolder extends React.Component<PropsType, StateType> {
 	}
 
 	onFocus = ( event: NativeSyntheticEvent<NativeTouchEvent> ) => {
-		this._isSplitting || this.props.onFocus();
+		if ( ! this._isSplitting ) {
+			this.props.onFocus();
+		}
 		this._isSplitting = false;
 
 		if ( event ) {
@@ -102,7 +104,9 @@ export class BlockHolder extends React.Component<PropsType, StateType> {
 	};
 
 	onBlur = () => {
-		this._isSplitting || this.props.onBlur();
+		if ( ! this._isSplitting ) {
+			this.props.onBlur();
+		}
 	}
 
 	onRemoveBlockCheckUpload = ( mediaId: number ) => {
@@ -288,7 +292,9 @@ export default compose( [
 				insertBlocks( blocks, index, rootClientId );
 			},
 			onSelect: ( selectedClientId: string, clearCurrentSelection: boolean ) => {
-				clearCurrentSelection && clearSelectedBlock();
+				if ( clearCurrentSelection ) {
+					clearSelectedBlock();
+				}
 				selectBlock( selectedClientId );
 			},
 			onChange: ( attributes: Object ) => {

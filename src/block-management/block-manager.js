@@ -79,8 +79,8 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		( this: any ).onCaretVerticalPositionChange = this.onCaretVerticalPositionChange.bind( this );
 		( this: any ).scrollViewInnerRef = this.scrollViewInnerRef.bind( this );
 		( this: any ).onContentViewLayout = this.onContentViewLayout.bind( this );
-		( this: any).onElementFocus = this.onElementFocus.bind( this );
-		( this: any).onElementBlur = this.onElementBlur.bind( this );
+		( this: any ).onElementFocus = this.onElementFocus.bind( this );
+		( this: any ).onElementBlur = this.onElementBlur.bind( this );
 
 		this.state = {
 			blockTypePickerVisible: false,
@@ -190,11 +190,11 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 	}
 
 	onElementFocus() {
-		this.setState( { shouldAutoscroll: true } )
+		this.setState( { shouldAutoscroll: true } );
 	}
 
 	onElementBlur() {
-		this.setState( { shouldAutoscroll: false } )
+		this.setState( { shouldAutoscroll: false } );
 	}
 
 	renderDefaultBlockAppender() {
