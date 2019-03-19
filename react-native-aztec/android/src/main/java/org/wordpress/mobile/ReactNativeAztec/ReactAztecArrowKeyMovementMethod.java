@@ -33,7 +33,7 @@ public class ReactAztecArrowKeyMovementMethod extends ArrowKeyMovementMethod {
                 Selection.setSelection(text, 0); // <-- setting caret to start of text
             }
             else if (!reactAztecText.isTouched()) {
-                Selection.setSelection(text, text.length()); // <-- setting caret to end of text when two blocks are merged
+                Selection.setSelection(text, text.length()); // <-- setting caret to end of text after two blocks are merged
             }
         } else {
             Selection.setSelection(text, text.length());  // <-- same as original Android implementation. Not sure if we should change this too
