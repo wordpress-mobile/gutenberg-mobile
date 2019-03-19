@@ -12,6 +12,8 @@ import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.ArrowKeyMovementMethod;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -135,20 +137,7 @@ public class ReactAztecText extends AztecText {
         // Fixes https://github.com/wordpress-mobile/gutenberg-mobile/issues/602
         // onTakeFocus adapted from the Android source code at:
         //  https://android.googlesource.com/platform/frameworks/base/+/refs/heads/pie-release/core/java/android/text/method/ArrowKeyMovementMethod.java#316
-        setMovementMethod(new ArrowKeyMovementMethod() {
-            @Override
-            public void onTakeFocus(TextView view, Spannable text, int dir) {
-                if ((dir & (View.FOCUS_FORWARD | View.FOCUS_DOWN)) != 0) {
-                    if (view.getLayout() == null) {
-                        // This shouldn't be null, but do something sensible if it is.
-                        Selection.setSelection(text, 0); // <-- setting caret to start of text
-                    }
-                } else {
-                    Selection.setSelection(text, text.length());  // <-- same as original Android implementation. Not sure if we should change this too
-                }
-            }
-        });
-
+        setMovementMethod(new ReactAztecArrowKeyMovementMethod());
     }
 
     @Override

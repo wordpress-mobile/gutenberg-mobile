@@ -197,11 +197,6 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
             int end = selection.getInt("end");
             view.setSelection(start, end);
         }
-        else {
-            if (view.isFocused() && !view.isTouched()) {
-                view.setSelection(view.getText().toString().length());
-            }
-        }
     }
 
     @ReactProp(name = "activeFormats", defaultBoolean = false)
@@ -455,7 +450,6 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
                                     new ReactAztecFocusEvent(
                                             editText.getId()));
                         } else {
-                            aztecText.setTouched(false);
                             eventDispatcher.dispatchEvent(
                                     new ReactAztecBlurEvent(
                                             editText.getId()));
@@ -467,13 +461,6 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
                         }
                     }
                 });
-        aztecText.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                aztecText.setTouched(true);
-                return false;
-            }
-        });
         // Don't think we need to add setOnEditorActionListener here (intercept Enter for example), but
         // in case check ReactTextInputManager
     }
