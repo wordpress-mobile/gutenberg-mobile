@@ -10,6 +10,7 @@ import {
 	TouchableWithoutFeedback,
 	NativeSyntheticEvent,
 	NativeTouchEvent,
+	Platform,
 } from 'react-native';
 import InlineToolbar, { InlineToolbarActions } from './inline-toolbar';
 
@@ -35,6 +36,9 @@ type PropsType = BlockType & {
 	showTitle: boolean,
 	borderStyle: Object,
 	focusedBorderColor: string,
+	selectedBlockClientId: string,
+	onFocus: () => void,
+	onBlur: () => void,
 	getBlockIndex: ( clientId: string, rootClientId: string ) => number,
 	getPreviousBlockClientId: ( clientId: string ) => string,
 	getNextBlockClientId: ( clientId: string ) => string,
@@ -43,7 +47,7 @@ type PropsType = BlockType & {
 	onInsertBlocks: ( blocks: Array<Object>, index: number ) => void,
 	onCaretVerticalPositionChange: ( targetId: number, caretY: number, previousCaretY: ?number ) => void,
 	onReplace: ( blocks: Array<Object> ) => void,
-	onSelect: ( clientId: string ) => void,
+	onSelect: ( clientId: string, clearCurrentSelection: boolean ) => void,
 	mergeBlocks: ( clientId: string, clientId: string ) => void,
 	moveBlockUp: () => void,
 	moveBlockDown: () => void,
@@ -55,15 +59,20 @@ type StateType = {
 }
 
 export class BlockHolder extends React.Component<PropsType, StateType> {
+	_isSplitting: boolean;
+
 	constructor( props: PropsType ) {
 		super( props );
-
+		this._isSplitting = false;
 		this.state = {
 			isFullyBordered: false,
 		};
 	}
 
 	onFocus = ( event: NativeSyntheticEvent<NativeTouchEvent> ) => {
+		this._isSplitting || this.props.onFocus();
+		this._isSplitting = false;
+
 		if ( event ) {
 			// == Hack for the Alpha ==
 			// When moving the focus from a TextInput field to another kind of field the call that hides the keyboard is not invoked
@@ -74,8 +83,20 @@ export class BlockHolder extends React.Component<PropsType, StateType> {
 				TextInputState.blurTextInput( currentlyFocusedTextInput );
 			}
 		}
-		this.props.onSelect( this.props.clientId );
+
+		const { selectedBlockClientId, clientId, onSelect } = this.props;
+		const isSelectingAlreadySelected = selectedBlockClientId && selectedBlockClientId === clientId;
+
+		if ( isSelectingAlreadySelected ) {
+			return;
+		}
+		const deselectCurrent = selectedBlockClientId ? ( selectedBlockClientId !== clientId ) : false;
+		onSelect( clientId, deselectCurrent );
 	};
+
+	onBlur = () => {
+		this._isSplitting || this.props.onBlur();
+	}
 
 	onInlineToolbarButtonPressed = ( button: number ) => {
 		switch ( button ) {
@@ -92,13 +113,10 @@ export class BlockHolder extends React.Component<PropsType, StateType> {
 	};
 
 	insertBlocksAfter = ( blocks: Array<Object> ) => {
+		// Avoid propagating blur/focus when splitting.
+		this._isSplitting = true;
 		const order = this.props.getBlockIndex( this.props.clientId, this.props.rootClientId );
 		this.props.onInsertBlocks( blocks, order + 1 );
-
-		if ( blocks[ 0 ] ) {
-			// focus on the first block inserted
-			this.props.onSelect( blocks[ 0 ].clientId );
-		}
 	};
 
 	mergeBlocks = ( forward: boolean = false ) => {
@@ -157,6 +175,7 @@ export class BlockHolder extends React.Component<PropsType, StateType> {
 				attributes={ this.props.attributes }
 				setAttributes={ this.props.onChange }
 				onFocus={ this.onFocus }
+				onBlur={ this.onBlur }
 				onReplace={ this.props.onReplace }
 				insertBlocksAfter={ this.insertBlocksAfter }
 				mergeBlocks={ this.mergeBlocks }
@@ -199,6 +218,7 @@ export default compose( [
 			getBlocks,
 			getPreviousBlockClientId,
 			getNextBlockClientId,
+			getSelectedBlockClientId,
 			isBlockSelected,
 		} = select( 'core/block-editor' );
 		const name = getBlockName( clientId );
@@ -207,6 +227,7 @@ export default compose( [
 		const isSelected = isBlockSelected( clientId );
 		const isFirstBlock = order === 0;
 		const isLastBlock = order === getBlocks().length - 1;
+		const selectedBlockClientId = getSelectedBlockClientId();
 
 		return {
 			attributes,
@@ -218,6 +239,7 @@ export default compose( [
 			isLastBlock,
 			isSelected,
 			name,
+			selectedBlockClientId,
 		};
 	} ),
 	withDispatch( ( dispatch, { clientId, rootClientId } ) => {
@@ -245,11 +267,21 @@ export default compose( [
 				removeBlock( clientId );
 			},
 			onInsertBlocks( blocks: Array<Object>, index: number ) {
-				insertBlocks( blocks, index, rootClientId );
+				insertBlocks( blocks, index, rootClientId, false );
+				if ( Platform.OS === 'android' ) {
+					// Force selectBlock (and focus) to be called in the next loop cycle.
+					// This avoids blur to be called after focus (on Android).
+					// Hopefully this can be solved on Android Native side and remove this.
+					setTimeout(() => {
+						selectBlock( blocks[0].clientId );
+					}, 0); 
+				} else {
+					selectBlock( blocks[0].clientId );
+				}
 			},
-			onSelect: ( selectedClientId: string ) => {
-				clearSelectedBlock();
-				selectBlock( selectedClientId );
+			onSelect: ( selectedClientId: string, clearCurrentSelection: boolean ) => {
+				clearCurrentSelection && clearSelectedBlock();
+				selectBlock(selectedClientId);
 			},
 			onChange: ( attributes: Object ) => {
 				updateBlockAttributes( clientId, attributes );
