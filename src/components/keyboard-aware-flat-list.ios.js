@@ -22,6 +22,7 @@ export const KeyboardAwareFlatList = ( props: PropsType ) => {
 		innerToolbarHeight,
 		shouldPreventAutomaticScroll,
 		innerRef,
+		enableAutomaticScroll,
 		...listProps
 	} = props;
 
@@ -37,6 +38,7 @@ export const KeyboardAwareFlatList = ( props: PropsType ) => {
 			extraBottomInset={ -props.safeAreaBottomInset }
 			inputAccessoryViewHeight={ blockToolbarHeight }
 			extraHeight={ 0 }
+			enableAutomaticScroll={ enableAutomaticScroll }
 			innerRef={ ( ref ) => {
 				( this: any ).scrollViewRef = ref;
 				innerRef( ref );
