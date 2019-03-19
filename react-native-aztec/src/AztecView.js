@@ -1,6 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import ReactNative, {requireNativeComponent, ViewPropTypes, UIManager, ColorPropType, TouchableWithoutFeedback} from 'react-native';
+import ReactNative, {
+  requireNativeComponent, 
+  ViewPropTypes, 
+  UIManager, 
+  ColorPropType, 
+  TouchableWithoutFeedback,
+} from 'react-native';
 import TextInputState from 'react-native/lib/TextInputState';
 
 const AztecManager = UIManager.getViewManagerConfig('RCTAztecView');
@@ -139,7 +145,10 @@ class AztecView extends React.Component {
   }
 
   render() {
-    const { onActiveFormatsChange, ...otherProps } = this.props    
+    // Avoid onFocus to be passed on `{...otherProps}` since the onPress + onFocus
+    // combination generate an infinite loop as described in https://github.com/wordpress-mobile/gutenberg-mobile/issues/302
+    const { onActiveFormatsChange, onFocus, ...otherProps } = this.props
+
     return (
       <TouchableWithoutFeedback onPress={ this._onPress }>
         <RCTAztecView {...otherProps}
@@ -147,10 +156,7 @@ class AztecView extends React.Component {
           onHTMLContentWithCursor = { this._onHTMLContentWithCursor }
           onSelectionChange = { this._onSelectionChange }
           onEnter = { this._onEnter }
-          // IMPORTANT: the onFocus events are thrown away as these are handled by onPress() in the upper level.
-          // It's necessary to do this otherwise onFocus may be set by `{...otherProps}` and thus the onPress + onFocus
-          // combination generate an infinite loop as described in https://github.com/wordpress-mobile/gutenberg-mobile/issues/302
-          onFocus = { () => {} } 
+          onFocus = { this._onPress } 
           onBlur = { this._onBlur }
           onBackspace = { this._onBackspace }
         />
