@@ -55,6 +55,7 @@ type StateType = {
 	rootViewHeight: number,
 	safeAreaBottomInset: number,
 	isFullyBordered: boolean,
+	shouldAutoscroll: boolean,
 };
 
 export class BlockManager extends React.Component<PropsType, StateType> {
@@ -78,6 +79,8 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		( this: any ).onCaretVerticalPositionChange = this.onCaretVerticalPositionChange.bind( this );
 		( this: any ).scrollViewInnerRef = this.scrollViewInnerRef.bind( this );
 		( this: any ).onContentViewLayout = this.onContentViewLayout.bind( this );
+		( this: any).onElementFocus = this.onElementFocus.bind( this );
+		( this: any).onElementBlur = this.onElementBlur.bind( this );
 
 		this.state = {
 			blockTypePickerVisible: false,
@@ -85,6 +88,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 			rootViewHeight: 0,
 			safeAreaBottomInset: 0,
 			isFullyBordered: false,
+			shouldAutoscroll: false,
 		};
 		SafeArea.getSafeAreaInsetsForRootView().then( this.onSafeAreaInsetsUpdate );
 	}
@@ -185,6 +189,14 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		return this.state.blockTypePickerVisible;
 	}
 
+	onElementFocus() {
+		this.setState( { shouldAutoscroll: true } )
+	}
+
+	onElementBlur() {
+		this.setState( { shouldAutoscroll: false } )
+	}
+
 	renderDefaultBlockAppender() {
 		return (
 			<DefaultBlockAppender
@@ -208,6 +220,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 				onUpdate={ this.props.setTitleAction }
 				placeholder={ __( 'Add title' ) }
 				borderStyle={ this.blockHolderBorderStyle() }
+				onFocus={ this.onElementFocus }
 				focusedBorderColor={ styles.blockHolderFocused.borderColor } />
 		);
 	}
@@ -228,6 +241,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 					extraData={ [ this.state.isFullyBordered ] }
 					keyExtractor={ identity }
 					renderItem={ this.renderItem }
+					enableAutomaticScroll={ this.state.shouldAutoscroll }
 					shouldPreventAutomaticScroll={ this.shouldFlatListPreventAutomaticScroll }
 					title={ this.props.title }
 					ListHeaderComponent={ this.renderHeader }
@@ -291,6 +305,8 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 					onCaretVerticalPositionChange={ this.onCaretVerticalPositionChange }
 					borderStyle={ this.blockHolderBorderStyle() }
 					focusedBorderColor={ styles.blockHolderFocused.borderColor }
+					onFocus={ this.onElementFocus }
+					onBlur={ this.onElementBlur }
 				/>
 				{ this.state.blockTypePickerVisible && this.props.isBlockSelected( clientId ) && (
 					<View style={ styles.containerStyleAddHere } >
