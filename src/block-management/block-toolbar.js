@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, ScrollView, Keyboard } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { withSelect, withDispatch } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import { Toolbar, ToolbarButton } from '@wordpress/components';
@@ -20,11 +20,12 @@ type PropsType = {
 	hasUndo: boolean,
 	redo: void => void,
 	undo: void => void,
+	clearSelectedBlock: void => void;
 };
 
 export class BlockToolbar extends Component<PropsType> {
 	onKeyboardHide = () => {
-		Keyboard.dismiss();
+		this.props.clearSelectedBlock()
 	};
 
 	render() {
@@ -86,6 +87,7 @@ export default compose( [
 		hasUndo: select( 'core/editor' ).hasEditorUndo(),
 	} ) ),
 	withDispatch( ( dispatch ) => ( {
+		clearSelectedBlock: dispatch( 'core/block-editor' ).clearSelectedBlock,
 		redo: dispatch( 'core/editor' ).redo,
 		undo: dispatch( 'core/editor' ).undo,
 	} ) ),
