@@ -7,9 +7,7 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.TypedValue;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.facebook.infer.annotation.Assertions;
@@ -461,6 +459,7 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
                         }
                     }
                 });
+        
         // Don't think we need to add setOnEditorActionListener here (intercept Enter for example), but
         // in case check ReactTextInputManager
     }
