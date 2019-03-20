@@ -37,6 +37,7 @@
 		7EC7328F21907E3F00FED2E6 /* GutenbergViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7328E21907E3F00FED2E6 /* GutenbergViewController.swift */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8C666FF0C9224FB88C2C0447 /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BFAFEB337654221B2F14D03 /* libRNSVG-tvOS.a */; };
+		91C2E1B42242321F00D5E1F5 /* libRNTKeyboardAwareScrollView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C2E1B322422C9F00D5E1F5 /* libRNTKeyboardAwareScrollView.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		CF45443564B845C8BDCFBAB6 /* libRNTAztecView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ADEFEC092CF4D00BEF1019E /* libRNTAztecView.a */; };
 		DD2AE937473A49B2B5A0E7B6 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB766FE2F6D446A80AC6E6A /* libRNSVG.a */; };
@@ -469,6 +470,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				91C2E1B42242321F00D5E1F5 /* libRNTKeyboardAwareScrollView.a in Frameworks */,
 				DD2AE937473A49B2B5A0E7B6 /* libRNSVG.a in Frameworks */,
 				CF45443564B845C8BDCFBAB6 /* libRNTAztecView.a in Frameworks */,
 				7E45CC5B218B42E000C0B2AB /* libRNReactNativeGutenbergBridge.a in Frameworks */,
