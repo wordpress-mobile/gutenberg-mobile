@@ -30,14 +30,23 @@ public class ReactAztecArrowKeyMovementMethod extends ArrowKeyMovementMethod {
         if ((dir & (View.FOCUS_FORWARD | View.FOCUS_DOWN)) != 0) {
             if (view.getLayout() == null) {
                 // This shouldn't be null, but do something sensible if it is.
-                Selection.setSelection(text, 0); // <-- setting caret to start of text
+                handleSelectionOnEnd(view, text);
             }
             else if (!reactAztecText.isTouched()) {
-                Selection.setSelection(text, text.length()); // <-- setting caret to end of text after two blocks are merged
+                handleSelectionOnEnd(view, text);  // <-- setting caret to end of text after two blocks are merged
             }
         } else {
             Selection.setSelection(text, text.length());  // <-- same as original Android implementation. Not sure if we should change this too
         }
+    }
+
+    private void handleSelectionOnEnd(TextView view, final Spannable text) {
+        view.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Selection.setSelection(text, text.length()); // <-- setting caret to end of text
+            }
+        }, 20);
     }
 
     @Override
