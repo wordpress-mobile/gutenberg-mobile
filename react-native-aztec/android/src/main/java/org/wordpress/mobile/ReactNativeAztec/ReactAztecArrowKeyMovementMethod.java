@@ -26,25 +26,66 @@ public class ReactAztecArrowKeyMovementMethod extends ArrowKeyMovementMethod {
     @Override
     public void onTakeFocus(TextView view, Spannable text, int dir) {
         ReactAztecText reactAztecText = (ReactAztecText)view;
-        setLastFocusedField(reactAztecText);
         if ((dir & (View.FOCUS_FORWARD | View.FOCUS_DOWN)) != 0) {
             if (view.getLayout() == null) {
                 // This shouldn't be null, but do something sensible if it is.
-                handleSelectionOnEnd(view, text);
-            }
-            else if (!reactAztecText.isTouched()) {
-                handleSelectionOnEnd(view, text);  // <-- setting caret to end of text after two blocks are merged
+                if (isThisABlockBreak(view)) {
+                    placeCaretBeginningOrEnd(view, text, false);
+//                } else if (isThisABlockBackspaceDelete(view)){
+//                    placeCaretBeginningOrEnd(view, text, true);
+                } else {
+                    placeCaretBeginningOrEnd(view, text, !reactAztecText.isTouched());
+                }
+            } else {
+                if (!reactAztecText.isTouched()) {
+                    placeCaretBeginningOrEnd(view, text, true);
+                }
+                //placeCaretBeginningOrEnd(view, text, reactAztecText.isTouched());
             }
         } else {
             Selection.setSelection(text, text.length());  // <-- same as original Android implementation. Not sure if we should change this too
         }
+        setLastFocusedField(reactAztecText);
     }
 
-    private void handleSelectionOnEnd(TextView view, final Spannable text) {
+    private boolean isThisABlockBreak(TextView view) {
+        if (sLastFocusedField == null) {
+            return false;
+        }
+
+        // last block needs to be touched, and the new one not touched
+        if (sLastFocusedField.isTouched() && !((ReactAztecText)view).isTouched()) {
+            // previous block focus is at the end
+            int selEnd = sLastFocusedField.getSelectionEnd();
+            int textLen = sLastFocusedField.getText().length();
+            if (selEnd != textLen && textLen != 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isThisABlockBackspaceDelete(TextView view) {
+        if (sLastFocusedField == null) {
+            return false;
+        }
+
+        // last block needs to be not touched, and the new one touched
+        if (!sLastFocusedField.isTouched() && ((ReactAztecText)view).isTouched()) {
+            return true;
+        }
+        return false;
+    }
+
+    private void placeCaretBeginningOrEnd(TextView view, final Spannable text, final boolean placeAtEnd) {
         view.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Selection.setSelection(text, text.length()); // <-- setting caret to end of text
+                if (placeAtEnd) {
+                    Selection.setSelection(text, text.length()); // <-- setting caret to end of text
+                } else {
+                    Selection.setSelection(text, 0); // <-- setting caret to beginning of text
+                }
             }
         }, 20);
     }
