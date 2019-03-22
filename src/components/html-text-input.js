@@ -8,7 +8,6 @@
 import { __ } from '@wordpress/i18n';
 
 import React from 'react';
-import { Platform } from 'react-native';
 import HTMLInputViewUI from './html-text-input-ui/html-text-input-ui';
 
 // Gutenberg imports
@@ -31,7 +30,6 @@ type StateType = {
 };
 
 export class HTMLInputView extends React.Component<PropsType, StateType> {
-	isIOS: boolean = Platform.OS === 'ios';
 	edit: string => mixed;
 	stopEditing: () => mixed;
 
