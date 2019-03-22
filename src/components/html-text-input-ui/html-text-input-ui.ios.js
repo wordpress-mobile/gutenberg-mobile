@@ -6,7 +6,7 @@
 import React from 'react';
 import { TextInput, UIManager, PanResponder } from 'react-native';
 import styles from './html-text-input-ui.scss';
-import KeyboardAvoidingView from './keyboard-avoiding-view';
+import KeyboardAvoidingView from '../keyboard-avoiding-view';
 
 type PropsType = {
     setTitleAction: string => void,

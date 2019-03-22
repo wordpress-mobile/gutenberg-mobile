@@ -6,7 +6,7 @@
 import React from 'react';
 import { TextInput, ScrollView } from 'react-native';
 import styles from './html-text-input-ui.scss';
-import KeyboardAvoidingView from './keyboard-avoiding-view';
+import KeyboardAvoidingView from '../keyboard-avoiding-view';
 
 type PropsType = {
     setTitleAction: string => void,
@@ -49,7 +49,6 @@ export default class HTMLInputViewUI extends React.Component<PropsType, StateTyp
 					/>
 					<TextInput
 						autoCorrect={ false }
-						ref={ ( textInput ) => this.textInput = textInput }
 						textAlignVertical="top"
 						multiline
 						style={ { ...styles.htmlView, height: this.state.contentHeight + 16 } }

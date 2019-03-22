@@ -9,7 +9,7 @@ import { __ } from '@wordpress/i18n';
 
 import React from 'react';
 import { Platform } from 'react-native';
-import HTMLInputViewUI from './html-text-input-ui';
+import HTMLInputViewUI from './html-text-input-ui/html-text-input-ui';
 
 // Gutenberg imports
 import { parse } from '@wordpress/blocks';
