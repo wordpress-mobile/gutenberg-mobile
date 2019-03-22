@@ -6,14 +6,19 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-
-import React from 'react';
-import HTMLInputViewUI from './html-text-input-ui/html-text-input-ui';
-
-// Gutenberg imports
 import { parse } from '@wordpress/blocks';
 import { withDispatch, withSelect } from '@wordpress/data';
 import { withInstanceId, compose } from '@wordpress/compose';
+
+/**
+ * External dependencies
+ */
+import React from 'react';
+
+/**
+ * Internal dependencies
+ */
+import HTMLInputViewUI from './html-text-input-ui/html-text-input-ui';
 
 type PropsType = {
 	onChange: string => mixed,

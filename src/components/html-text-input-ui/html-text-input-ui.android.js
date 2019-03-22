@@ -3,8 +3,15 @@
  * @flow
  */
 
+/**
+ * External dependencies
+ */
 import React from 'react';
 import { TextInput, ScrollView } from 'react-native';
+
+/**
+ * Internal dependencies
+ */
 import styles from './html-text-input-ui.scss';
 import KeyboardAvoidingView from '../keyboard-avoiding-view';
 
