@@ -335,7 +335,7 @@ class RCTAztecView: Aztec.TextView {
         }
     }
 
-    func setSelection(start: NSNumber, end: NSNumber) {        
+    func setSelection(start: NSNumber, end: NSNumber) {
         if let startPosition = position(from: beginningOfDocument, offset: start.intValue),
             let endPosition = position(from: beginningOfDocument, offset: end.intValue) {
             selectedTextRange = textRange(from: startPosition, to: endPosition)
@@ -499,5 +499,15 @@ extension RCTAztecView: UITextViewDelegate {
 
     func textViewDidEndEditing(_ textView: UITextView) {
         onBlur?([:])
+    }
+    
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+        moveCaretOnEnd()
+        return true
+    }
+    
+    func moveCaretOnEnd() {
+        let newPosition = endOfDocument
+        selectedTextRange = textRange(from: newPosition, to: newPosition);
     }
 }
