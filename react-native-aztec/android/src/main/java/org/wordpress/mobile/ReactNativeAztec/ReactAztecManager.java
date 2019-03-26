@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -181,6 +182,13 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
     }
 
     private void setTextfromJS(ReactAztecText view, String text, @Nullable ReadableMap selection) {
+        String currentText = view.toHtml(false);
+
+        // If new html content is same as current we don't want to update view
+        if (currentText.length() > 0 && text.length() > 0 && currentText.equals(text)) {
+            return;
+        }
+
         view.setIsSettingTextFromJS(true);
         view.disableOnSelectionListener();
         view.fromHtml(text, true);
