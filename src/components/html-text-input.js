@@ -28,6 +28,7 @@ type PropsType = {
 	setTitleAction: string => void,
 	value: string,
 	title: string,
+	editTitle: string => mixed,
 	parentHeight: number,
 };
 

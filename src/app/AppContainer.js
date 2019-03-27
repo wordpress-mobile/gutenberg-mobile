@@ -5,8 +5,7 @@
  * External dependencies
  */
 import React, { Fragment } from 'react';
-import type { EmitterSubscription } from 'react-native';
-import { LayoutChangeEvent, SafeAreaView } from 'react-native';
+import { type EmitterSubscription, type InputText, LayoutChangeEvent, SafeAreaView } from 'react-native';
 import RNReactNativeGutenbergBridge, {
 	subscribeParentGetHtml,
 	subscribeParentToggleHTMLMode,
@@ -57,24 +56,32 @@ type PropsType = {
 	switchMode: string => mixed,
 };
 
+type StateType = {
+	rootViewHeight: number,
+	safeAreaBottomInset: number,
+	isFullyBordered: boolean,
+}
+
 /*
  * This container combines features similar to the following components on Gutenberg:
  * - `gutenberg/packages/editor/src/components/provider/index.js`
  * - `gutenberg/packages/edit-post/src/components/layout/index.js`
  */
-class AppContainer extends React.Component<PropsType> {
+class AppContainer extends React.Component<PropsType, StateType> {
 	lastHtml: ?string;
 	lastTitle: ?string;
 	subscriptionParentGetHtml: ?EmitterSubscription;
 	subscriptionParentToggleHTMLMode: ?EmitterSubscription;
 	subscriptionParentSetTitle: ?EmitterSubscription;
 	subscriptionParentUpdateHtml: ?EmitterSubscription;
+	subscriptionParentSetFocusOnTitle: ?EmitterSubscription;
+	postTitleRef: ?InputText;
 
 	constructor( props: PropsType ) {
 		super( props );
 
-		this.onSafeAreaInsetsUpdate = this.onSafeAreaInsetsUpdate.bind( this );
-		this.onRootViewLayout = this.onRootViewLayout.bind( this );
+		( this: any ).onSafeAreaInsetsUpdate = this.onSafeAreaInsetsUpdate.bind( this );
+		( this: any ).onRootViewLayout = this.onRootViewLayout.bind( this );
 
 		const post = props.post || {
 			id: 1,
@@ -125,11 +132,13 @@ class AppContainer extends React.Component<PropsType> {
 		this.subscriptionParentUpdateHtml = subscribeUpdateHtml( ( payload ) => {
 			this.updateHtmlAction( payload.html );
 		} );
-		this.subscriptionParentSetFocusOnTitle = subscribeSetFocusOnTitle( ( ) => {
+
+		this.subscriptionParentSetFocusOnTitle = subscribeSetFocusOnTitle( () => {
 			if ( this.postTitleRef ) {
 				this.postTitleRef.focus();
 			}
 		} );
+
 		SafeArea.addEventListener( 'safeAreaInsetsForRootViewDidChange', this.onSafeAreaInsetsUpdate );
 	}
 
@@ -184,17 +193,17 @@ class AppContainer extends React.Component<PropsType> {
 
 	onSafeAreaInsetsUpdate( result ) {
 		const { safeAreaInsets } = result;
-		if ( this._isMounted && this.state.safeAreaBottomInset !== safeAreaInsets.bottom ) {
+		if ( this.state.safeAreaBottomInset !== safeAreaInsets.bottom ) {
 			this.setState( { safeAreaBottomInset: safeAreaInsets.bottom } );
 		}
 	}
 
-	onRootViewLayout( event ) {
+	onRootViewLayout( event: LayoutChangeEvent ) {
 		this.setHeightState( event );
 		this.setBorderStyleState();
 	}
 
-	setHeightState( event ) {
+	setHeightState( event: LayoutChangeEvent ) {
 		const { height } = event.nativeEvent.layout;
 		this.setState( { rootViewHeight: height }, sendNativeEditorDidLayout );
 	}
@@ -256,7 +265,7 @@ class AppContainer extends React.Component<PropsType> {
 					header={ this.renderHeader() }
 					isFullyBordered={ this.state.isFullyBordered }
 					rootViewHeight={ this.state.rootViewHeight }
-					safeAreaBottomInset={ this.state.safeAreaBottomInsetz }
+					safeAreaBottomInset={ this.state.safeAreaBottomInset }
 				/>
 			</BlockEditorProvider>
 		);
@@ -269,11 +278,7 @@ class AppContainer extends React.Component<PropsType> {
 
 		return (
 			<SafeAreaView style={ styles.container } onLayout={ this.onRootViewLayout }>
-				{
-					mode === 'text'
-						? this.renderHTML()
-						: this.renderVisual()
-				}
+				{ mode === 'text' ? this.renderHTML() : this.renderVisual() }
 			</SafeAreaView>
 		);
 	}
