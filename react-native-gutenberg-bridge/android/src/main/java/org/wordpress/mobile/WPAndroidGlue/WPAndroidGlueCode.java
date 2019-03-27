@@ -183,11 +183,9 @@ public class WPAndroidGlueCode {
             }
         });
 
-        ImagePipelineConfig imagePipelineConfig = getImagePipelineConfig(sOkHttpClient);
-        MainReactPackage mainReactPackage = new MainReactPackage(getMainPackageConfig(imagePipelineConfig));
 
         return Arrays.asList(
-                mainReactPackage,
+                new MainReactPackage(getMainPackageConfig(getImagePipelineConfig(sOkHttpClient))),
                 new SvgPackage(),
                 new ReactAztecPackage(),
                 new RNRecyclerviewListPackage(),
