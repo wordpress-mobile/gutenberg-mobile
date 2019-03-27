@@ -90,7 +90,7 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 					style={ styles.htmlViewTitle }
 					value={ this.props.title }
 					placeholder={ __( 'Add title' ) }
-					onChangeText={ this.props.setTitleAction }
+					onChangeText={ this.props.editTitle }
 				/>
 				<TextInput
 					autoCorrect={ false }
