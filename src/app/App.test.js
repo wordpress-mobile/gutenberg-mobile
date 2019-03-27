@@ -15,7 +15,7 @@ import { dispatch, select } from '@wordpress/data';
  */
 import { bootstrapEditor } from '..';
 import App from './App';
-import BlockHolder from '../block-management/block-holder';
+import BlockEdit from '@wordpress/block-editor';
 
 describe( 'App', () => {
 	beforeAll( bootstrapEditor );
@@ -39,12 +39,12 @@ describe( 'App', () => {
 	it( 'Code block is a TextInput', () => {
 		const app = renderer.create( <App /> );
 
-		app.root.findAllByType( BlockHolder )
-			.forEach( ( blockHolder ) => {
-				if ( 'core/code' === blockHolder.props.name ) {
+		app.root.findAllByType( BlockEdit )
+			.forEach( ( blockEdit ) => {
+				if ( 'core/code' === blockEdit.props.name ) {
 					// TODO: hardcoded indices are ugly and error prone. Can we do better here?
-					const blockHolderContainer = blockHolder.children[ 0 ].children[ 0 ].children[ 0 ].children[ 0 ].children[ 0 ];
-					const contentComponent = blockHolderContainer.children[ 0 ];
+					const blockEditContainer = blockEdit.children[ 0 ].children[ 0 ].children[ 0 ].children[ 0 ].children[ 0 ];
+					const contentComponent = blockEditContainer.children[ 0 ];
 					const inputComponent =
 						contentComponent.children[ 0 ].children[ 0 ].children[ 0 ].children[ 0 ].children[ 0 ]
 							.children[ 0 ].children[ 0 ].children[ 0 ].children[ 0 ].children[ 0 ].children[ 0 ].children[ 0 ];
@@ -58,10 +58,10 @@ describe( 'App', () => {
 
 	it( 'Heading block test', () => {
 		const app = renderer.create( <App /> );
-		app.root.findAllByType( BlockHolder )
-			.forEach( ( blockHolder ) => {
-				if ( 'core/heading' === blockHolder.props.name ) {
-					const aztec = blockHolder.findByType( 'RCTAztecView' );
+		app.root.findAllByType( BlockEdit )
+			.forEach( ( blockEdit ) => {
+				if ( 'core/heading' === blockEdit.props.name ) {
+					const aztec = blockEdit.findByType( 'RCTAztecView' );
 					expect( aztec.props.text.text ).toBe( '<h2>What is Gutenberg?</h2>' );
 				}
 			} );
