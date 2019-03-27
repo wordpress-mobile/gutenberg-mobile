@@ -1,6 +1,6 @@
 package org.wordpress.mobile.WPAndroidGlue;
 
-import android.util.Log;
+import android.text.TextUtils;
 
 import org.wordpress.mobile.WPAndroidGlue.WPAndroidGlueCode.OnAuthHeaderRequestedListener;
 
@@ -25,7 +25,7 @@ public class OkHttpHeaderInterceptor implements Interceptor {
         Request.Builder builder = chain.request().newBuilder();
 
         String authHeader = mOnAuthHeaderRequestedListener.onAuthHeaderRequested(chain.request().url().toString());
-        if (authHeader.length() > 0) {
+        if (!TextUtils.isEmpty(authHeader)) {
             builder.addHeader(AUTHORIZATION_HEADER_KEY, authHeader);
         }
 
