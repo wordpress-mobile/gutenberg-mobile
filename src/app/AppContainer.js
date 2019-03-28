@@ -112,11 +112,18 @@ class AppContainer extends React.Component<PropsType, StateType> {
 		SafeArea.getSafeAreaInsetsForRootView().then( this.onSafeAreaInsetsUpdate );
 	}
 
-	componentDidMount() {
-		const blocks = this.props.blocks;
-		const hasUnsupportedBlocks = ! isEmpty( blocks.filter( ( { name } ) => name === UnsupportedBlock.name ) );
-		RNReactNativeGutenbergBridge.editorDidMount( hasUnsupportedBlocks );
+	componentDidUpdate( prevProps ) {
+		if ( ! prevProps.isReady && ( prevProps.isReady !== this.props.isReady ) ) {
+			const { blocks } = this.props;
+			const isUnsupportedBlock = ( { name } ) => name === UnsupportedBlock.name;
+			const unsupportedBlocks = blocks.filter( isUnsupportedBlock );
+			const hasUnsupportedBlocks = ! isEmpty( unsupportedBlocks );
 
+			RNReactNativeGutenbergBridge.editorDidMount( hasUnsupportedBlocks );
+		}
+	}
+
+	componentDidMount() {
 		this.subscriptionParentGetHtml = subscribeParentGetHtml( () => {
 			this.serializeToNativeAction();
 		} );
