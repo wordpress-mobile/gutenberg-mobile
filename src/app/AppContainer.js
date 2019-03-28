@@ -4,7 +4,7 @@
 /**
  * External dependencies
  */
-import React, { Fragment } from 'react';
+import React from 'react';
 import { type EmitterSubscription, type InputText, LayoutChangeEvent, SafeAreaView } from 'react-native';
 import RNReactNativeGutenbergBridge, {
 	subscribeParentGetHtml,
@@ -215,6 +215,12 @@ class AppContainer extends React.Component<PropsType, StateType> {
 		}
 	}
 
+	renderHTML() {
+		return (
+			<HTMLTextInput { ...this.props } parentHeight={ this.state.rootViewHeight } />
+		);
+	}
+
 	renderHeader() {
 		const {
 			editTitle,
@@ -231,14 +237,6 @@ class AppContainer extends React.Component<PropsType, StateType> {
 				placeholder={ __( 'Add title' ) }
 				borderStyle={ this.blockHolderBorderStyle() }
 				focusedBorderColor={ styles.blockHolderFocused.borderColor } />
-		);
-	}
-
-	renderHTML() {
-		return (
-			<Fragment>
-				<HTMLTextInput { ...this.props } parentHeight={ this.state.rootViewHeight } />
-			</Fragment>
 		);
 	}
 
@@ -261,12 +259,14 @@ class AppContainer extends React.Component<PropsType, StateType> {
 				onChange={ resetEditorBlocks }
 				settings={ null }
 			>
-				<BlockList
-					header={ this.renderHeader() }
-					isFullyBordered={ this.state.isFullyBordered }
-					rootViewHeight={ this.state.rootViewHeight }
-					safeAreaBottomInset={ this.state.safeAreaBottomInset }
-				/>
+				<SafeAreaView style={ styles.container } onLayout={ this.onRootViewLayout }>
+					<BlockList
+						header={ this.renderHeader() }
+						isFullyBordered={ this.state.isFullyBordered }
+						rootViewHeight={ this.state.rootViewHeight }
+						safeAreaBottomInset={ this.state.safeAreaBottomInset }
+					/>
+				</SafeAreaView>
 			</BlockEditorProvider>
 		);
 	}
@@ -276,11 +276,11 @@ class AppContainer extends React.Component<PropsType, StateType> {
 			mode,
 		} = this.props;
 
-		return (
-			<SafeAreaView style={ styles.container } onLayout={ this.onRootViewLayout }>
-				{ mode === 'text' ? this.renderHTML() : this.renderVisual() }
-			</SafeAreaView>
-		);
+		if ( mode === 'text' ) {
+			return this.renderHTML();
+		}
+
+		return this.renderVisual();
 	}
 }
 
