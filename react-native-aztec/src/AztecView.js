@@ -168,13 +168,11 @@ class AztecView extends React.Component {
 
   render() {
     const { onActiveFormatsChange, onFocus, fontSize, ...otherProps } = this.props
-    const scaledFontSize = getScaledFontSize(fontSize, this.state.fontScale);
-
     return (
       <TouchableWithoutFeedback onPress={ this._onPress }>
         <RCTAztecView
           {...otherProps}
-          fontSize={ scaledFontSize }
+          fontSize={ getScaledFontSize(fontSize, this.state.fontScale) }
           onContentSizeChange = { this._onContentSizeChange }
           onHTMLContentWithCursor = { this._onHTMLContentWithCursor }
           onSelectionChange = { this._onSelectionChange }
