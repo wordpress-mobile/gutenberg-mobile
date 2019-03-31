@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import ReactNative, {requireNativeComponent, ViewPropTypes, UIManager, ColorPropType, TouchableWithoutFeedback, Platform} from 'react-native';
+import ReactNative, {requireNativeComponent, ViewPropTypes, UIManager, ColorPropType, TouchableWithoutFeedback, Platform, Dimensions} from 'react-native';
 import TextInputState from 'react-native/lib/TextInputState';
+import { getScaledFontSize } from './utils';
 
 const AztecManager = UIManager.getViewManagerConfig('RCTAztecView');
 
@@ -30,6 +31,23 @@ class AztecView extends React.Component {
     onCaretVerticalPositionChange: PropTypes.func,
     blockType: PropTypes.object,
     ...ViewPropTypes, // include the default view properties
+  }
+
+  constructor() {
+    super();
+    this.state = { fontScale: Dimensions.get('window').fontScale };
+  }
+
+  _onDimensionsChange = dimensions => {
+    this.setState({ fontScale: dimensions.window.fontScale });
+  }
+
+  componentWillMount() {
+    Dimensions.addEventListener('change', this._onDimensionsChange);
+  }
+
+  componentWillUnmount() {
+    Dimensions.removeEventListener('change', this._onDimensionsChange);
   }
 
   dispatch(command, params) {
@@ -149,11 +167,14 @@ class AztecView extends React.Component {
   }
 
   render() {
-    const { onActiveFormatsChange, onFocus, ...otherProps } = this.props
+    const { onActiveFormatsChange, onFocus, fontSize, ...otherProps } = this.props
+    const scaledFontSize = getScaledFontSize(fontSize, this.state.fontScale);
+
     return (
       <TouchableWithoutFeedback onPress={ this._onPress }>
         <RCTAztecView
           {...otherProps}
+          fontSize={ scaledFontSize }
           onContentSizeChange = { this._onContentSizeChange }
           onHTMLContentWithCursor = { this._onHTMLContentWithCursor }
           onSelectionChange = { this._onSelectionChange }
