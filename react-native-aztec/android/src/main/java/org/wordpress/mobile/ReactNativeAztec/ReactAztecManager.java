@@ -219,6 +219,7 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
         view.setTextSize(
                 TypedValue.COMPLEX_UNIT_PX,
                 (int) Math.ceil(PixelUtil.toPixelFromSP(fontSize)));
+        view.refreshText();
     }
 
     @ReactProp(name = ViewProps.FONT_FAMILY)
