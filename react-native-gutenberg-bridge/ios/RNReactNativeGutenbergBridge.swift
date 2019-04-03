@@ -13,11 +13,16 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
     }
     
     @objc
-    func requestMediaPickFrom(_ source: String, callback: @escaping RCTResponseSenderBlock) {
+    func requestMediaPickFrom(_ source: String, filter: [String]?, callback: @escaping RCTResponseSenderBlock) {
         let mediaSource: MediaPickerSource = MediaPickerSource(rawValue: source) ?? .deviceLibrary
-
+        let mediaFilter: [MediaFilter]? = filter?.map({
+            if let type = MediaFilter(rawValue: $0) {
+                return type
+            }
+            return MediaFilter.other
+        })
         DispatchQueue.main.async {
-            self.delegate?.gutenbergDidRequestMedia(from: mediaSource, with: { (mediaID, url) in
+            self.delegate?.gutenbergDidRequestMedia(from: mediaSource, filter: mediaFilter, with: { (mediaID, url) in
                 guard let url = url, let mediaID = mediaID else {
                     callback(nil)
                     return
@@ -137,5 +142,4 @@ extension RNReactNativeGutenbergBridge {
         }
         return [string]
     }
-
 }

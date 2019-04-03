@@ -57,12 +57,12 @@ export function subscribeMediaAppend( callback ) {
 	return gutenbergBridgeEvents.addListener( 'mediaAppend', callback );
 }
 
-export function requestMediaPickFromMediaLibrary( callback ) {
-	return RNReactNativeGutenbergBridge.requestMediaPickFrom( 'SITE_MEDIA_LIBRARY', callback );
+export function requestMediaPickFromMediaLibrary( filter, callback ) {
+	return RNReactNativeGutenbergBridge.requestMediaPickFrom( 'SITE_MEDIA_LIBRARY', filter, callback );
 }
 
-export function requestMediaPickFromDeviceLibrary( callback ) {
-	return RNReactNativeGutenbergBridge.requestMediaPickFrom( 'DEVICE_MEDIA_LIBRARY', callback );
+export function requestMediaPickFromDeviceLibrary( filter, callback ) {
+	return RNReactNativeGutenbergBridge.requestMediaPickFrom( 'DEVICE_MEDIA_LIBRARY', filter, callback );
 }
 
 export function requestMediaPickFromDeviceCamera( callback ) {
