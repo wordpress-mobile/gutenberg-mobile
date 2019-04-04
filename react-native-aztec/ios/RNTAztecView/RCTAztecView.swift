@@ -501,13 +501,4 @@ extension RCTAztecView: UITextViewDelegate {
         onBlur?([:])
     }
     
-    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
-        moveCaretOnEnd()
-        return true
-    }
-    
-    func moveCaretOnEnd() {
-        let newPosition = endOfDocument
-        selectedTextRange = textRange(from: newPosition, to: newPosition);
-    }
 }
