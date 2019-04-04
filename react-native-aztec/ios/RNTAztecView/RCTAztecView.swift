@@ -500,5 +500,4 @@ extension RCTAztecView: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         onBlur?([:])
     }
-    
 }
