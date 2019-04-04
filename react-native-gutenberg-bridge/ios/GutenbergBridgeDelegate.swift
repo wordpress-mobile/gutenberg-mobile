@@ -39,7 +39,6 @@ public protocol GutenbergBridgeDelegate: class {
     ///
     func gutenbergDidRequestMedia(from source: MediaPickerSource, filter: [MediaFilter]?, with callback: @escaping MediaPickerDidPickMediaCallback)
 
-
     /// Tells the delegate that an image block requested to reconnect with media uploads coordinator.
     ///
     func gutenbergDidRequestMediaUploadSync()
