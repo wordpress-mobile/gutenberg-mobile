@@ -65,8 +65,6 @@ public class ReactAztecText extends AztecText {
     // Ref: https://github.com/wordpress-mobile/gutenberg-mobile/issues/707
     private String mTagName = "";
 
-    private boolean mIsTouched;
-
     private static final HashMap<ITextFormat, String> typingFormatsMap = new HashMap<ITextFormat, String>() {
         {
             put(AztecTextFormat.FORMAT_BOLD, "bold");
@@ -247,13 +245,6 @@ public class ReactAztecText extends AztecText {
         return mTagName;
     }
 
-    public void setTouched(boolean isTouched) {
-        mIsTouched = isTouched;
-    }
-
-    public boolean isTouched() {
-        return mIsTouched;
-    }
 
     private void updateToolbarButtons(int selStart, int selEnd) {
         ArrayList<ITextFormat> appliedStyles = getAppliedStyles(selStart, selEnd);
