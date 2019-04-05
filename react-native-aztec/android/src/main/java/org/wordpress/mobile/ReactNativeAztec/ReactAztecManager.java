@@ -194,7 +194,11 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
         if ( selection != null ) {
             int start = selection.getInt("start");
             int end = selection.getInt("end");
-            if (view.getText().length() > end && start >= 0) {
+            // let's make sure the selection is within a valid range
+            // otherwise we'd crash here - first observed with lists
+            // and undo/redo states as expressed in
+            // https://github.com/wordpress-mobile/gutenberg-mobile/issues/208#issuecomment-480246421
+            if (view.getText().length() >= end && start >= 0) {
                 view.setSelection(start, end);
             }
         }
