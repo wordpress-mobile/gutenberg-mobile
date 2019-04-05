@@ -21,11 +21,10 @@ import { isEmpty } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { parse, serialize } from '@wordpress/blocks';
+import { parse, serialize, getUnregisteredTypeHandlerName } from '@wordpress/blocks';
 import { withDispatch, withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import { BlockEditorProvider, BlockList } from '@wordpress/block-editor';
-import { UnsupportedBlock } from '@wordpress/block-library';
 import { PostTitle } from '@wordpress/editor';
 import { ReadableContentView } from '@wordpress/components';
 
@@ -115,7 +114,7 @@ class AppContainer extends React.Component<PropsType, StateType> {
 	componentDidUpdate( prevProps ) {
 		if ( ! prevProps.isReady && ( prevProps.isReady !== this.props.isReady ) ) {
 			const { blocks } = this.props;
-			const isUnsupportedBlock = ( { name } ) => name === UnsupportedBlock.name;
+			const isUnsupportedBlock = ( { name } ) => name === getUnregisteredTypeHandlerName();
 			const unsupportedBlocks = blocks.filter( isUnsupportedBlock );
 			const hasUnsupportedBlocks = ! isEmpty( unsupportedBlocks );
 
