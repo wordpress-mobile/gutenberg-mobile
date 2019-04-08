@@ -64,6 +64,11 @@ extension GutenbergViewController: GutenbergBridgeDelegate {
         }
     }
 
+    func gutenbergDidRequestImport(from url: URL, with callback: @escaping MediaPickerDidPickMediaCallback) {
+        let id = mediaUploadCoordinator.upload(url: url)
+        callback(id, url.absoluteString)
+    }
+
     func pickAndUpload(from source: UIImagePickerController.SourceType, callback: @escaping MediaPickerDidPickMediaCallback) {
         mediaPickCoordinator = MediaPickCoordinator(presenter: self, callback: { (url) in
             guard let url = url, let mediaID = self.mediaUploadCoordinator.upload(url: url) else {
@@ -121,6 +126,19 @@ extension GutenbergViewController: GutenbergBridgeDelegate {
             return
         }
         progress.cancel()
+    }
+
+    func gutenbergDidEmitLog(message: String, logLevel: LogLevel) {
+        switch logLevel {
+        case .trace:
+            print("Debug: \(message)")
+        case .info:
+            print("Info: \(message)")
+        case .warn:
+            print("Warn: \(message)")
+        case .error:
+            print("Error: \(message)")
+        }
     }
 }
 
