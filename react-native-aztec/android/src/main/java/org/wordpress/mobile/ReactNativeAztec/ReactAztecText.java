@@ -100,6 +100,12 @@ public class ReactAztecText extends AztecText {
                     if (TextUtils.isEmpty(content)) {
                         return onBackspace();
                     }
+                    else {
+                        String emptyTag = "<" + getTagName() + "></" + getTagName() + ">";
+                        if (!content.equals(emptyTag)) {
+                            return onBackspace();
+                        }
+                    }
                 }
                 return false;
             }
