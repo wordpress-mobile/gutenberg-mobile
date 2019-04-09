@@ -23,7 +23,7 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
         })
         DispatchQueue.main.async {
             self.delegate?.gutenbergDidRequestMedia(from: mediaSource, filter: mediaFilter, with: { (mediaID, url) in
-                guard let url = url, let mediaID = mediaID else {
+                guard let mediaID = mediaID else {
                     callback(nil)
                     return
                 }

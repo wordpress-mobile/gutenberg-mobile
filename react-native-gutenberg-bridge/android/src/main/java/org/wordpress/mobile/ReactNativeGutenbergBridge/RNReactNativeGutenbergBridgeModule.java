@@ -3,6 +3,7 @@ package org.wordpress.mobile.ReactNativeGutenbergBridge;
 import android.support.annotation.Nullable;
 
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -98,7 +99,7 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     }
 
     @ReactMethod
-    public void requestMediaPickFrom(String mediaSource, final Callback onUploadMediaSelected) {
+    public void requestMediaPickFrom(String mediaSource, ReadableArray filter, final Callback onUploadMediaSelected) {
         if (mediaSource.equals(MEDIA_SOURCE_MEDIA_LIBRARY)) {
             mGutenbergBridgeJS2Parent.requestMediaPickFromMediaLibrary(getNewMediaSelectedCallback(onUploadMediaSelected));
         } else if (mediaSource.equals(MEDIA_SOURCE_DEVICE_LIBRARY)) {
