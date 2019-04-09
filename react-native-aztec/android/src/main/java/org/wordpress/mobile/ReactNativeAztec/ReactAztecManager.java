@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -34,6 +33,7 @@ import com.facebook.react.views.textinput.ReactTextInputEvent;
 import com.facebook.react.views.textinput.ReactTextInputManager;
 import com.facebook.react.views.textinput.ScrollWatcher;
 
+import org.wordpress.aztec.AztecTextFormat;
 import org.wordpress.aztec.glideloader.GlideImageLoader;
 import org.wordpress.aztec.glideloader.GlideVideoThumbnailLoader;
 import org.wordpress.aztec.plugins.CssUnderlinePlugin;
@@ -44,6 +44,7 @@ import org.wordpress.aztec.plugins.wpcomments.HiddenGutenbergPlugin;
 import org.wordpress.aztec.plugins.wpcomments.WordPressCommentsPlugin;
 import org.wordpress.aztec.plugins.wpcomments.toolbar.MoreToolbarButton;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -518,7 +519,10 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
 
             // Add the outer tags when the field was started empty, and only the first time the user types in it.
             if (mPreviousText.length() == 0 && !TextUtils.isEmpty(newText) && !TextUtils.isEmpty(mEditText.getTagName())) {
-                mEditText.fromHtml('<' + mEditText.getTagName() + '>' + newText + "</" + mEditText.getTagName() + '>', false);
+                ReactAztecTextFormat reactAztecTextFormat = ReactAztecTextFormat.get(mEditText.getTagName());
+                if(reactAztecTextFormat != null) {
+                    mEditText.toggleFormatting(reactAztecTextFormat.aztecTextFormat);
+                }
             }
         }
 
@@ -526,6 +530,36 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
         public void afterTextChanged(Editable s) {
         }
     }
+
+    private enum ReactAztecTextFormat {
+        H1("h1", AztecTextFormat.FORMAT_HEADING_1),
+        H2("h2", AztecTextFormat.FORMAT_HEADING_2),
+        H3("h3", AztecTextFormat.FORMAT_HEADING_3),
+        H4("h4", AztecTextFormat.FORMAT_HEADING_4),
+        H5("h5", AztecTextFormat.FORMAT_HEADING_5),
+        H6("h6", AztecTextFormat.FORMAT_HEADING_6);
+
+        private final String tag;
+        private final AztecTextFormat aztecTextFormat;
+
+        private static final Map<String, ReactAztecTextFormat> lookup = new HashMap<>();
+
+        static {
+            for (ReactAztecTextFormat d : ReactAztecTextFormat.values()) {
+                lookup.put(d.tag, d);
+            }
+        }
+
+        ReactAztecTextFormat(String tag, AztecTextFormat aztecTextFormat) {
+            this.tag = tag;
+            this.aztecTextFormat = aztecTextFormat;
+        }
+
+        private static ReactAztecTextFormat get(String tag) {
+            return lookup.get(tag);
+        }
+    }
+
 
     private class AztecContentSizeWatcher implements com.facebook.react.views.textinput.ContentSizeWatcher {
         private ReactAztecText mReactAztecText;
