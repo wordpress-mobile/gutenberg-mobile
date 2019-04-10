@@ -88,13 +88,13 @@ class AppContainer extends React.Component<PropsType, StateType> {
 				raw: props.initialTitle,
 			},
 			content: {
-				raw: props.initialHtml,
+				raw: props.initialHtml || '',
 			},
 			type: 'draft',
 		};
 
 		props.setupEditor( post );
-		this.lastHtml = serialize( parse( props.initialHtml ) );
+		this.lastHtml = serialize( parse( props.initialHtml || '' ) );
 		this.lastTitle = props.initialTitle;
 
 		if ( props.initialHtmlModeEnabled && props.mode === 'visual' ) {
