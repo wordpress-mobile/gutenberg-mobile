@@ -118,6 +118,7 @@ dependencies {
     if (rootProject.ext.buildGutenbergFromSource) {
         println "using gutenberg from source"
         implementation project(':react-native-svg')
+        implementation project(':react-native-video')
         implementation project(':react-native-recyclerview-list')
 
         implementation 'com.facebook.react:react-native:+'
