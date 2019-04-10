@@ -242,7 +242,9 @@ class AppContainer extends React.Component<PropsType, StateType> {
 				onUpdate={ editTitle }
 				placeholder={ __( 'Add title' ) }
 				borderStyle={ this.blockHolderBorderStyle() }
-				focusedBorderColor={ styles.blockHolderFocused.borderColor } />
+				focusedBorderColor={ styles.blockHolderFocused.borderColor }
+				accessibilityLabel="post-title"
+			/>
 		);
 	}
 
