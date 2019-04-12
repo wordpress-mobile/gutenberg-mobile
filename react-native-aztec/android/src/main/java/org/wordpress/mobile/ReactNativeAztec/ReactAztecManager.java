@@ -536,7 +536,6 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
         }
     }
 
-
     private class AztecContentSizeWatcher implements com.facebook.react.views.textinput.ContentSizeWatcher {
         private ReactAztecText mReactAztecText;
         private EventDispatcher mEventDispatcher;
