@@ -12,6 +12,7 @@ class GutenbergViewController: UIViewController {
         let mediaUploadCoordinator = MediaUploadCoordinator(gutenberg: self.gutenberg)
         return mediaUploadCoordinator
     }()
+    fileprivate var longPressGesture: UILongPressGestureRecognizer!
     
     override func loadView() {
         view = gutenberg.rootView
@@ -22,6 +23,7 @@ class GutenbergViewController: UIViewController {
         configureNavigationBar()
         gutenberg.delegate = self
         navigationController?.navigationBar.isTranslucent = false
+        registerLongPressGestureRecognizer()
     }
 
     @objc func moreButtonPressed(sender: UIBarButtonItem) {
@@ -30,6 +32,15 @@ class GutenbergViewController: UIViewController {
 
     @objc func saveButtonPressed(sender: UIBarButtonItem) {
         gutenberg.requestHTML()
+    }
+    
+    func registerLongPressGestureRecognizer() {
+        longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        view.addGestureRecognizer(longPressGesture)
+    }
+    
+    @objc func handleLongPress() {
+        NotificationCenter.default.post(Notification(name: MediaUploadCoordinator.failUpload ))
     }
 }
 
@@ -67,10 +78,10 @@ extension GutenbergViewController: GutenbergBridgeDelegate {
             }
         case .deviceLibrary:
             print("Gutenberg did request a device media picker, opening the device picker")
-            pickAndUpload(from: .savedPhotosAlbum, callback: callback)
+            pickAndUpload(from: .savedPhotosAlbum, filter: currentFilter, callback: callback)
         case .deviceCamera:
             print("Gutenberg did request a device media picker, opening the camera picker")
-            pickAndUpload(from: .camera, callback: callback)
+            pickAndUpload(from: .camera, filter: currentFilter, callback: callback)
         }
     }
 
@@ -79,8 +90,8 @@ extension GutenbergViewController: GutenbergBridgeDelegate {
         callback(id, url.absoluteString)
     }
 
-    func pickAndUpload(from source: UIImagePickerController.SourceType, callback: @escaping MediaPickerDidPickMediaCallback) {
-        mediaPickCoordinator = MediaPickCoordinator(presenter: self, callback: { (url) in
+    func pickAndUpload(from source: UIImagePickerController.SourceType, filter: MediaFilter, callback: @escaping MediaPickerDidPickMediaCallback) {
+        mediaPickCoordinator = MediaPickCoordinator(presenter: self, filter: filter, callback: { (url) in
             guard let url = url, let mediaID = self.mediaUploadCoordinator.upload(url: url) else {
                 callback(nil, nil)
                 return
@@ -108,7 +119,7 @@ extension GutenbergViewController: GutenbergBridgeDelegate {
         }
         alertController.addAction(dismissAction)
 
-        if progress.fractionCompleted < 1 {
+        if progress.fractionCompleted < 1 && mediaUploadCoordinator.successfullUpload {
             let cancelUploadAction = UIAlertAction(title: "Cancel upload", style: .destructive) { (action) in
                 self.mediaUploadCoordinator.cancelUpload(with: mediaID)
             }
