@@ -100,7 +100,7 @@ describe( 'HTMLInputView', () => {
 
 		const wrapper = shallow(
 			<HTMLInputView
-				setTitleAction={ setTitleAction }
+				editTitle={ setTitleAction }
 			/>
 		);
 

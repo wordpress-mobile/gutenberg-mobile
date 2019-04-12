@@ -5,27 +5,21 @@
  * External dependencies
  */
 import React from 'react';
-import { type EmitterSubscription, type InputText, LayoutChangeEvent, SafeAreaView } from 'react-native';
+import { type EmitterSubscription, LayoutChangeEvent, SafeAreaView } from 'react-native';
 import RNReactNativeGutenbergBridge, {
 	subscribeParentGetHtml,
 	subscribeParentToggleHTMLMode,
-	subscribeSetTitle,
 	subscribeUpdateHtml,
-	subscribeSetFocusOnTitle,
 	sendNativeEditorDidLayout,
 } from 'react-native-gutenberg-bridge';
 import SafeArea from 'react-native-safe-area';
-import { isEmpty } from 'lodash';
 
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
-import { parse, serialize, getUnregisteredTypeHandlerName } from '@wordpress/blocks';
+import { parse, serialize } from '@wordpress/blocks';
 import { withDispatch, withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
-import { BlockEditorProvider, BlockList } from '@wordpress/block-editor';
-import { PostTitle } from '@wordpress/editor';
 import { ReadableContentView } from '@wordpress/components';
 
 /**
@@ -34,23 +28,20 @@ import { ReadableContentView } from '@wordpress/components';
 import type { BlockType } from '../store/types';
 import styles from './style.scss';
 import HTMLTextInput from '../components/html-text-input';
+import VisualEditor from './VisualEditor';
 
 type PropsType = {
 	initialHtmlModeEnabled: boolean,
-	editorMode: string,
-	editedPostContent: string,
-	title: string,
 	initialTitle: string,
 	initialHtml: string,
-	editTitle: string => mixed,
-	resetEditorBlocks: Array<BlockType> => mixed,
+	isReady: boolean,
 	resetEditorBlocksWithoutUndoLevel: Array<BlockType> => mixed,
 	setupEditor: ( mixed, ?mixed ) => mixed,
 	toggleEditorMode: ?string => mixed,
-	blocks: Array<BlockType>,
-	isReady: boolean,
 	mode: string,
 	post: ?mixed,
+	getEditorBlocks: () => Array<BlockType>,
+	getEditedPostAttribute: ( string ) => string,
 	getEditedPostContent: () => string,
 	switchMode: string => mixed,
 };
@@ -59,7 +50,7 @@ type StateType = {
 	rootViewHeight: number,
 	safeAreaBottomInset: number,
 	isFullyBordered: boolean,
-}
+};
 
 /*
  * This container combines features similar to the following components on Gutenberg:
@@ -71,10 +62,8 @@ class AppContainer extends React.Component<PropsType, StateType> {
 	lastTitle: ?string;
 	subscriptionParentGetHtml: ?EmitterSubscription;
 	subscriptionParentToggleHTMLMode: ?EmitterSubscription;
-	subscriptionParentSetTitle: ?EmitterSubscription;
 	subscriptionParentUpdateHtml: ?EmitterSubscription;
-	subscriptionParentSetFocusOnTitle: ?EmitterSubscription;
-	postTitleRef: ?InputText;
+	_isMounted: boolean;
 
 	constructor( props: PropsType ) {
 		super( props );
@@ -94,6 +83,7 @@ class AppContainer extends React.Component<PropsType, StateType> {
 		};
 
 		props.setupEditor( post );
+
 		this.lastHtml = serialize( parse( props.initialHtml || '' ) );
 		this.lastTitle = props.initialTitle;
 
@@ -111,18 +101,8 @@ class AppContainer extends React.Component<PropsType, StateType> {
 		SafeArea.getSafeAreaInsetsForRootView().then( this.onSafeAreaInsetsUpdate );
 	}
 
-	componentDidUpdate( prevProps ) {
-		if ( ! prevProps.isReady && ( prevProps.isReady !== this.props.isReady ) ) {
-			const { blocks } = this.props;
-			const isUnsupportedBlock = ( { name } ) => name === getUnregisteredTypeHandlerName();
-			const unsupportedBlocks = blocks.filter( isUnsupportedBlock );
-			const hasUnsupportedBlocks = ! isEmpty( unsupportedBlocks );
-
-			RNReactNativeGutenbergBridge.editorDidMount( hasUnsupportedBlocks );
-		}
-	}
-
 	componentDidMount() {
+		this._isMounted = true;
 		this.subscriptionParentGetHtml = subscribeParentGetHtml( () => {
 			this.serializeToNativeAction();
 		} );
@@ -131,18 +111,8 @@ class AppContainer extends React.Component<PropsType, StateType> {
 			this.toggleMode();
 		} );
 
-		this.subscriptionParentSetTitle = subscribeSetTitle( ( payload ) => {
-			this.props.editTitle( payload.title );
-		} );
-
 		this.subscriptionParentUpdateHtml = subscribeUpdateHtml( ( payload ) => {
 			this.updateHtmlAction( payload.html );
-		} );
-
-		this.subscriptionParentSetFocusOnTitle = subscribeSetFocusOnTitle( () => {
-			if ( this.postTitleRef ) {
-				this.postTitleRef.focus();
-			}
 		} );
 
 		SafeArea.addEventListener( 'safeAreaInsetsForRootViewDidChange', this.onSafeAreaInsetsUpdate );
@@ -155,16 +125,11 @@ class AppContainer extends React.Component<PropsType, StateType> {
 		if ( this.subscriptionParentToggleHTMLMode ) {
 			this.subscriptionParentToggleHTMLMode.remove();
 		}
-		if ( this.subscriptionParentSetTitle ) {
-			this.subscriptionParentSetTitle.remove();
-		}
 		if ( this.subscriptionParentUpdateHtml ) {
 			this.subscriptionParentUpdateHtml.remove();
 		}
-		if ( this.subscriptionParentSetFocusOnTitle ) {
-			this.subscriptionParentSetFocusOnTitle.remove();
-		}
 		SafeArea.removeEventListener( 'safeAreaInsetsForRootViewDidChange', this.onSafeAreaInsetsUpdate );
+		this._isMounted = false;
 	}
 
 	serializeToNativeAction() {
@@ -172,8 +137,8 @@ class AppContainer extends React.Component<PropsType, StateType> {
 			this.updateHtmlAction( this.props.getEditedPostContent() );
 		}
 
-		const html = serialize( this.props.blocks );
-		const title = this.props.title;
+		const html = serialize( this.props.getEditorBlocks() );
+		const title = this.props.getEditedPostAttribute( 'title' );
 
 		const hasChanges = title !== this.lastTitle || html !== this.lastHtml;
 
@@ -193,20 +158,18 @@ class AppContainer extends React.Component<PropsType, StateType> {
 		switchMode( mode === 'visual' ? 'text' : 'visual' );
 	}
 
-	blockHolderBorderStyle() {
-		return this.state.isFullyBordered ? styles.blockHolderFullBordered : styles.blockHolderSemiBordered;
-	}
-
 	onSafeAreaInsetsUpdate( result ) {
 		const { safeAreaInsets } = result;
-		if ( this.state.safeAreaBottomInset !== safeAreaInsets.bottom ) {
+		if ( this._isMounted && this.state.safeAreaBottomInset !== safeAreaInsets.bottom ) {
 			this.setState( { safeAreaBottomInset: safeAreaInsets.bottom } );
 		}
 	}
 
 	onRootViewLayout( event: LayoutChangeEvent ) {
-		this.setHeightState( event );
-		this.setBorderStyleState();
+		if ( this._isMounted ) {
+			this.setHeightState( event );
+			this.setBorderStyleState();
+		}
 	}
 
 	setHeightState( event: LayoutChangeEvent ) {
@@ -223,37 +186,15 @@ class AppContainer extends React.Component<PropsType, StateType> {
 
 	renderHTML() {
 		return (
-			<HTMLTextInput { ...this.props } parentHeight={ this.state.rootViewHeight } />
-		);
-	}
-
-	renderHeader() {
-		const {
-			editTitle,
-			title,
-		} = this.props;
-
-		return (
-			<PostTitle
-				innerRef={ ( ref ) => {
-					this.postTitleRef = ref;
-				} }
-				title={ title }
-				onUpdate={ editTitle }
-				placeholder={ __( 'Add title' ) }
-				borderStyle={ this.blockHolderBorderStyle() }
-				focusedBorderColor={ styles.blockHolderFocused.borderColor }
-				accessibilityLabel="post-title"
+			<HTMLTextInput
+				parentHeight={ this.state.rootViewHeight }
 			/>
 		);
 	}
 
 	renderVisual() {
 		const {
-			blocks,
 			isReady,
-			resetEditorBlocks,
-			resetEditorBlocksWithoutUndoLevel,
 		} = this.props;
 
 		if ( ! isReady ) {
@@ -261,21 +202,11 @@ class AppContainer extends React.Component<PropsType, StateType> {
 		}
 
 		return (
-			<BlockEditorProvider
-				value={ blocks }
-				onInput={ resetEditorBlocksWithoutUndoLevel }
-				onChange={ resetEditorBlocks }
-				settings={ null }
-			>
-				<SafeAreaView style={ styles.container } onLayout={ this.onRootViewLayout }>
-					<BlockList
-						header={ this.renderHeader() }
-						isFullyBordered={ this.state.isFullyBordered }
-						rootViewHeight={ this.state.rootViewHeight }
-						safeAreaBottomInset={ this.state.safeAreaBottomInset }
-					/>
-				</SafeAreaView>
-			</BlockEditorProvider>
+			<VisualEditor
+				isFullyBordered={ this.state.isFullyBordered }
+				rootViewHeight={ this.state.rootViewHeight }
+				safeAreaBottomInset={ this.state.safeAreaBottomInset }
+			/>
 		);
 	}
 
@@ -284,11 +215,11 @@ class AppContainer extends React.Component<PropsType, StateType> {
 			mode,
 		} = this.props;
 
-		if ( mode === 'text' ) {
-			return this.renderHTML();
-		}
-
-		return this.renderVisual();
+		return (
+			<SafeAreaView style={ styles.container } onLayout={ this.onRootViewLayout }>
+				{ mode === 'text' ? this.renderHTML() : this.renderVisual() }
+			</SafeAreaView>
+		);
 	}
 }
 
@@ -306,15 +237,14 @@ export default compose( [
 
 		return {
 			isReady: isEditorReady(),
-			blocks: getEditorBlocks(),
 			mode: getEditorMode(),
-			title: getEditedPostAttribute( 'title' ),
+			getEditorBlocks,
+			getEditedPostAttribute,
 			getEditedPostContent,
 		};
 	} ),
 	withDispatch( ( dispatch ) => {
 		const {
-			editPost,
 			setupEditor,
 			resetEditorBlocks,
 		} = dispatch( 'core/editor' );
@@ -323,10 +253,6 @@ export default compose( [
 		} = dispatch( 'core/edit-post' );
 
 		return {
-			editTitle( title ) {
-				editPost( { title } );
-			},
-			resetEditorBlocks,
 			resetEditorBlocksWithoutUndoLevel( blocks ) {
 				resetEditorBlocks( blocks, {
 					__unstableShouldCreateUndoLevel: false,
