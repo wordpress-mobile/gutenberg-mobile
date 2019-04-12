@@ -533,7 +533,6 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
 
         @Override
         public void afterTextChanged(Editable s) {
-
         }
     }
 
