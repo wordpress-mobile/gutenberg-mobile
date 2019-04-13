@@ -88,6 +88,12 @@ export class BlockHolder extends React.Component<PropsType, StateType> {
 		this.props.onSelect( this.props.clientId );
 	};
 
+	selectBlock = ( block ) => {
+		if ( this.props.onSelect && block && block.clientId ) {
+			this.props.onSelect( block.clientId );
+		}
+	}
+
 	onRemoveBlockCheckUpload = ( mediaId: number ) => {
 		if ( hasAction( 'blocks.onRemoveBlockCheckUpload' ) ) {
 			// now remove the action as it's  a one-shot use and won't be needed anymore
@@ -181,6 +187,7 @@ export class BlockHolder extends React.Component<PropsType, StateType> {
 				setAttributes={ this.props.onChange }
 				onFocus={ this.onFocus }
 				onReplace={ this.props.onReplace }
+				selectBlock={ this.selectBlock }
 				insertBlocksAfter={ this.insertBlocksAfter }
 				mergeBlocks={ this.mergeBlocks }
 				onCaretVerticalPositionChange={ this.props.onCaretVerticalPositionChange }
