@@ -5,19 +5,13 @@
  * External dependencies
  */
 import React from 'react';
-import { type EmitterSubscription, type InputText } from 'react-native';
-import RNReactNativeGutenbergBridge, {
-	subscribeSetFocusOnTitle,
-	subscribeSetTitle,
-} from 'react-native-gutenberg-bridge';
-import { isEmpty } from 'lodash';
+import { type InputText } from 'react-native';
 
 /**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
 import { withDispatch, withSelect } from '@wordpress/data';
-import { getUnregisteredTypeHandlerName } from '@wordpress/blocks';
 import { compose } from '@wordpress/compose';
 import { BlockEditorProvider, BlockList } from '@wordpress/block-editor';
 import { PostTitle } from '@wordpress/editor';
@@ -37,6 +31,7 @@ type PropsType = {
 	rootViewHeight: number,
 	safeAreaBottomInset: number,
 	isFullyBordered: boolean,
+	setTitleRef: ?InputText => void,
 };
 
 /*
@@ -45,43 +40,6 @@ type PropsType = {
  * - `gutenberg/packages/edit-post/src/components/layout/index.js`
  */
 class VisualEditor extends React.Component<PropsType> {
-	postTitleRef: ?InputText;
-	subscriptionParentSetFocusOnTitle: ?EmitterSubscription;
-	subscriptionParentSetTitle: ?EmitterSubscription;
-
-	componentDidMount() {
-		this.subscriptionParentSetFocusOnTitle = subscribeSetFocusOnTitle( () => {
-			if ( this.postTitleRef ) {
-				this.postTitleRef.focus();
-			}
-		} );
-
-		this.subscriptionParentSetTitle = subscribeSetTitle( ( payload ) => {
-			this.props.editTitle( payload.title );
-		} );
-
-		this.signalEditorDidMount();
-	}
-
-	componentWillUnmount() {
-		if ( this.subscriptionParentSetFocusOnTitle ) {
-			this.subscriptionParentSetFocusOnTitle.remove();
-		}
-
-		if ( this.subscriptionParentSetTitle ) {
-			this.subscriptionParentSetTitle.remove();
-		}
-	}
-
-	signalEditorDidMount() {
-		const { blocks } = this.props;
-		const isUnsupportedBlock = ( { name } ) => name === getUnregisteredTypeHandlerName();
-		const unsupportedBlocks = blocks.filter( isUnsupportedBlock );
-		const hasUnsupportedBlocks = ! isEmpty( unsupportedBlocks );
-
-		RNReactNativeGutenbergBridge.editorDidMount( hasUnsupportedBlocks );
-	}
-
 	blockHolderBorderStyle() {
 		return this.props.isFullyBordered ? styles.blockHolderFullBordered : styles.blockHolderSemiBordered;
 	}
@@ -94,9 +52,7 @@ class VisualEditor extends React.Component<PropsType> {
 
 		return (
 			<PostTitle
-				innerRef={ ( ref ) => {
-					this.postTitleRef = ref;
-				} }
+				innerRef={ this.props.setTitleRef }
 				title={ title }
 				onUpdate={ editTitle }
 				placeholder={ __( 'Add title' ) }

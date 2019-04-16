@@ -32,7 +32,7 @@ export default class AppProvider extends React.Component<PropsType> {
 		return (
 			<AppContainer
 				initialHtml={ initialData }
-				initialHtmlModeEnabled={ initialHtmlModeEnabled }
+				initialHtmlModeEnabled={ true }
 				initialTitle={ initialTitle } />
 		);
 	}
