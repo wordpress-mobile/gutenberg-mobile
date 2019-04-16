@@ -40,11 +40,34 @@ public interface GutenbergBridgeJS2Parent {
         }
     }
 
+    enum MediaType {
+        IMAGE("image"),
+        VIDEO("video"),
+        AUDIO("audio"),
+        OTHER("other");
+
+        String name;
+
+        MediaType(String name) {
+            this.name = name;
+        }
+
+        public static MediaType getEnum(String value) {
+            for (MediaType mediaType : values()) {
+                if (mediaType.name.equals(value)) {
+                    return mediaType;
+                }
+            }
+
+            return OTHER;
+        }
+    }
+
     void requestMediaPickFromMediaLibrary(MediaSelectedCallback mediaSelectedCallback);
 
-    void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback);
+    void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback, MediaType mediaType);
 
-    void requestMediaPickerFromDeviceCamera(MediaUploadCallback mediaUploadCallback);
+    void requestMediaPickerFromDeviceCamera(MediaUploadCallback mediaUploadCallback, MediaType mediaType);
 
     void requestMediaImport(String url, MediaSelectedCallback mediaSelectedCallback);
 

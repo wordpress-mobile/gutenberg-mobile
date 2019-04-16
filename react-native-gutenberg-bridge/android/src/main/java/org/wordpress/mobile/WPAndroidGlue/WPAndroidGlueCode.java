@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout.LayoutParams;
 
+import com.brentvatne.react.ReactVideoPackage;
 import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.react.ReactInstanceManager;
@@ -98,8 +99,10 @@ public class WPAndroidGlueCode {
 
     public interface OnMediaLibraryButtonListener {
         void onMediaLibraryButtonClicked();
-        void onUploadMediaButtonClicked();
+        void onUploadPhotoButtonClicked();
         void onCapturePhotoButtonClicked();
+        void onUploadVideoButtonClicked();
+        void onCaptureVideoButtonClicked();
         void onRetryUploadForMediaClicked(int mediaId);
         void onCancelUploadForMediaClicked(int mediaId);
         void onCancelUploadForMediaDueToDeletedBlock(int mediaId);
@@ -137,17 +140,25 @@ public class WPAndroidGlueCode {
             }
 
             @Override
-            public void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback) {
+            public void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback, MediaType mediaType) {
                 mMediaPickedByUserOnBlock = true;
                 mPendingMediaUploadCallback = mediaUploadCallback;
-                mOnMediaLibraryButtonListener.onUploadMediaButtonClicked();
+                if (mediaType == MediaType.AUDIO) {
+                    mOnMediaLibraryButtonListener.onUploadPhotoButtonClicked();
+                } else if (mediaType == MediaType.VIDEO) {
+                    mOnMediaLibraryButtonListener.onUploadVideoButtonClicked();
+                }
             }
 
             @Override
-            public void requestMediaPickerFromDeviceCamera(MediaUploadCallback mediaUploadCallback) {
+            public void requestMediaPickerFromDeviceCamera(MediaUploadCallback mediaUploadCallback, MediaType mediaType) {
                 mMediaPickedByUserOnBlock = true;
                 mPendingMediaUploadCallback = mediaUploadCallback;
-                mOnMediaLibraryButtonListener.onCapturePhotoButtonClicked();
+                if (mediaType == MediaType.AUDIO) {
+                    mOnMediaLibraryButtonListener.onCapturePhotoButtonClicked();
+                } else if (mediaType == MediaType.VIDEO) {
+                    mOnMediaLibraryButtonListener.onCaptureVideoButtonClicked();
+                }
             }
 
             @Override
@@ -214,6 +225,7 @@ public class WPAndroidGlueCode {
                 new SvgPackage(),
                 new ReactAztecPackage(),
                 new RNRecyclerviewListPackage(),
+                new ReactVideoPackage(),
                 mRnReactNativeGutenbergBridgePackage);
     }
 

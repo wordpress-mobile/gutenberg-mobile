@@ -103,10 +103,19 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
         if (mediaSource.equals(MEDIA_SOURCE_MEDIA_LIBRARY)) {
             mGutenbergBridgeJS2Parent.requestMediaPickFromMediaLibrary(getNewMediaSelectedCallback(onUploadMediaSelected));
         } else if (mediaSource.equals(MEDIA_SOURCE_DEVICE_LIBRARY)) {
-            mGutenbergBridgeJS2Parent.requestMediaPickFromDeviceLibrary(getNewUploadMediaCallback(onUploadMediaSelected));
+            mGutenbergBridgeJS2Parent.requestMediaPickFromDeviceLibrary(getNewUploadMediaCallback(onUploadMediaSelected), getMediaTypeFromFilter(filter));
         } else if (mediaSource.equals(MEDIA_SOURCE_DEVICE_CAMERA)) {
-            mGutenbergBridgeJS2Parent.requestMediaPickerFromDeviceCamera(getNewUploadMediaCallback(onUploadMediaSelected));
+            mGutenbergBridgeJS2Parent.requestMediaPickerFromDeviceCamera(getNewUploadMediaCallback(onUploadMediaSelected), getMediaTypeFromFilter(filter));
         }
+    }
+
+    private GutenbergBridgeJS2Parent.MediaType getMediaTypeFromFilter(ReadableArray filter) {
+        for (Object object : filter.toArrayList()) {
+            String filterValue = (String) object;
+            return GutenbergBridgeJS2Parent.MediaType.getEnum(filterValue);
+        }
+
+        return GutenbergBridgeJS2Parent.MediaType.OTHER;
     }
 
     @ReactMethod
