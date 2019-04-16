@@ -53,18 +53,12 @@ type PropsType = {
 	editTitle: string => void,
 };
 
-type StateType = {
-	rootViewHeight: number,
-	safeAreaBottomInset: number,
-	isFullyBordered: boolean,
-};
-
 /*
  * This container combines features similar to the following components on Gutenberg:
  * - `gutenberg/packages/editor/src/components/provider/index.js`
  * - `gutenberg/packages/edit-post/src/components/layout/index.js`
  */
-class AppContainer extends React.Component<PropsType, StateType> {
+class AppContainer extends React.Component<PropsType> {
 	post: PostType;
 	postTitleRef: ?InputText;
 	subscriptionParentGetHtml: ?EmitterSubscription;
