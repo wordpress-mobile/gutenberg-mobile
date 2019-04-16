@@ -193,7 +193,9 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
         if ( selection != null ) {
             int start = selection.getInt("start");
             int end = selection.getInt("end");
-            view.setSelection(start, end);
+            if (view.length() >= end && start >= 0) {
+                view.setSelection(start, end);
+            }
         }
     }
 
