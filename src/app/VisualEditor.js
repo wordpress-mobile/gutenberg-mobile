@@ -32,6 +32,7 @@ type PropsType = {
 	rootViewHeight: number,
 	safeAreaBottomInset: number,
 	isFullyBordered: boolean,
+	setTitleRef: ?InputText => void,
 };
 
 /*
@@ -40,14 +41,6 @@ type PropsType = {
  * - `gutenberg/packages/edit-post/src/components/layout/index.js`
  */
 class VisualEditor extends React.Component<PropsType> {
-	postTitleRef: ?InputText;
-
-	componentDidMount() {
-		if ( this.postTitleRef ) {
-			this.postTitleRef.focus();
-		}
-	}
-
 	blockHolderBorderStyle() {
 		return this.props.isFullyBordered ? styles.blockHolderFullBordered : styles.blockHolderSemiBordered;
 	}
@@ -61,7 +54,7 @@ class VisualEditor extends React.Component<PropsType> {
 		return (
 			<ReadableContentView>
 				<PostTitle
-					innerRef={ ( titleRef: ?InputText ) => this.postTitleRef = titleRef }
+					innerRef={ this.props.setTitleRef }
 					title={ title }
 					onUpdate={ editTitle }
 					placeholder={ __( 'Add title' ) }

@@ -5,7 +5,7 @@
  * External dependencies
  */
 import React from 'react';
-import { LayoutChangeEvent, SafeAreaView } from 'react-native';
+import { type InputText, LayoutChangeEvent, SafeAreaView } from 'react-native';
 import SafeArea from 'react-native-safe-area';
 
 /**
@@ -26,6 +26,7 @@ type PropsType = {
 	isReady: boolean,
 	mode: string,
 	onNativeEditorDidLayout: () => ?mixed,
+	setTitleRef: ?InputText => void,
 };
 
 type StateType = {
@@ -115,6 +116,7 @@ class MainScreen extends React.Component<PropsType, StateType> {
 				isFullyBordered={ this.state.isFullyBordered }
 				rootViewHeight={ this.state.rootViewHeight }
 				safeAreaBottomInset={ this.state.safeAreaBottomInset }
+				setTitleRef={ this.props.setTitleRef }
 			/>
 		);
 	}

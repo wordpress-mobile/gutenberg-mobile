@@ -5,11 +5,12 @@
  * External dependencies
  */
 import React from 'react';
-import { type EmitterSubscription } from 'react-native';
+import { type EmitterSubscription, type InputText } from 'react-native';
 import RNReactNativeGutenbergBridge, {
 	subscribeParentGetHtml,
 	subscribeParentToggleHTMLMode,
 	subscribeUpdateHtml,
+	subscribeSetFocusOnTitle,
 	subscribeSetTitle,
 	sendNativeEditorDidLayout,
 } from 'react-native-gutenberg-bridge';
@@ -59,13 +60,17 @@ type PropsType = {
  */
 class AppContainer extends React.Component<PropsType> {
 	post: PostType;
+	postTitleRef: ?InputText;
 	subscriptionParentGetHtml: ?EmitterSubscription;
 	subscriptionParentToggleHTMLMode: ?EmitterSubscription;
 	subscriptionParentUpdateHtml: ?EmitterSubscription;
+	subscriptionParentSetFocusOnTitle: ?EmitterSubscription;
 	subscriptionParentSetTitle: ?EmitterSubscription;
 
 	constructor( props: PropsType ) {
 		super( props );
+
+		( this: any ).setTitleRef = this.setTitleRef.bind( this );
 
 		this.post = props.post || {
 			id: 1,
@@ -99,6 +104,12 @@ class AppContainer extends React.Component<PropsType> {
 			this.updateHtmlAction( payload.html );
 		} );
 
+		this.subscriptionParentSetFocusOnTitle = subscribeSetFocusOnTitle( () => {
+			if ( this.postTitleRef ) {
+				this.postTitleRef.focus();
+			}
+		} );
+
 		this.subscriptionParentSetTitle = subscribeSetTitle( ( payload ) => {
 			this.props.editTitle( payload.title );
 		} );
@@ -115,6 +126,10 @@ class AppContainer extends React.Component<PropsType> {
 
 		if ( this.subscriptionParentUpdateHtml ) {
 			this.subscriptionParentUpdateHtml.remove();
+		}
+
+		if ( this.subscriptionParentSetFocusOnTitle ) {
+			this.subscriptionParentSetFocusOnTitle.remove();
 		}
 
 		if ( this.subscriptionParentSetTitle ) {
@@ -161,9 +176,14 @@ class AppContainer extends React.Component<PropsType> {
 		this.props.resetEditorBlocksWithoutUndoLevel( parsed );
 	}
 
+	setTitleRef( titleRef: ?InputText ) {
+		this.postTitleRef = titleRef;
+	}
+
 	render() {
 		return (
 			<MainScreen
+				setTitleRef={ this.setTitleRef }
 				onNativeEditorDidLayout={ sendNativeEditorDidLayout }
 			/>
 		);
