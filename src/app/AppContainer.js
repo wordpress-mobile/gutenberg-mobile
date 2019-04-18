@@ -78,7 +78,7 @@ class AppContainer extends React.Component<PropsType> {
 				raw: props.initialTitle,
 			},
 			content: {
-				raw: props.initialHtml || '',
+				raw: serialize( parse( props.initialHtml || '' ) ),
 			},
 			type: 'draft',
 		};
