@@ -15,6 +15,7 @@ import { withDispatch, withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import { BlockEditorProvider, BlockList } from '@wordpress/block-editor';
 import { PostTitle } from '@wordpress/editor';
+import { ReadableContentView } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -58,15 +59,17 @@ class VisualEditor extends React.Component<PropsType> {
 		} = this.props;
 
 		return (
-			<PostTitle
-				innerRef={ ( titleRef: ?InputText ) => this.postTitleRef = titleRef }
-				title={ title }
-				onUpdate={ editTitle }
-				placeholder={ __( 'Add title' ) }
-				borderStyle={ this.blockHolderBorderStyle() }
-				focusedBorderColor={ styles.blockHolderFocused.borderColor }
-				accessibilityLabel="post-title"
-			/>
+			<ReadableContentView>
+				<PostTitle
+					innerRef={ ( titleRef: ?InputText ) => this.postTitleRef = titleRef }
+					title={ title }
+					onUpdate={ editTitle }
+					placeholder={ __( 'Add title' ) }
+					borderStyle={ this.blockHolderBorderStyle() }
+					focusedBorderColor={ styles.blockHolderFocused.borderColor }
+					accessibilityLabel="post-title"
+				/>
+			</ReadableContentView>
 		);
 	}
 
