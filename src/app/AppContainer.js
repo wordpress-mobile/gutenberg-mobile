@@ -78,12 +78,17 @@ class AppContainer extends React.Component<PropsType> {
 				raw: props.initialTitle,
 			},
 			content: {
-				raw: serialize( parse( props.initialHtml || '' ) ),
+				raw: props.initialHtml || '',
 			},
 			type: 'draft',
 		};
 
 		props.setupEditor( this.post );
+
+		// make sure the post content is in sync with gutenberg store
+		// to avoid marking the post as modified when simply loaded
+		// For now, let's assume: serialize( parse( html ) ) !== html
+		this.post.content.raw = serialize( this.props.getEditorBlocks() );
 
 		if ( props.initialHtmlModeEnabled && props.mode === 'visual' ) {
 			// enable html mode if the initial mode the parent wants it but we're not already in it
