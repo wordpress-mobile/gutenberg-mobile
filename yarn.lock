@@ -9924,7 +9924,7 @@ react-native-sass-transformer@^1.1.1:
   version "9.3.3"
   resolved "git+https://github.com/wordpress-mobile/react-native-svg.git#55244dc79ab876550599c82dca763c3eba0153c5"
 
-react-native-video@^4.4.1:
+react-native-video@4.4.1:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/react-native-video/-/react-native-video-4.4.1.tgz#12c6a8bfbabfa7641338a52db3d857ac3073a4fd"
   integrity sha512-gTZKRqa4NkEBx6t6iAzTFlgxDY23IZW/8YClR0hMzhOD0/9I/AzOBBaOXDyFeKj4EQF+uZ/LUS3r+oDnz1ks5w==
