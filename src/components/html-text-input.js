@@ -25,7 +25,6 @@ import styles from './html-text-input-ui/html-text-input-ui.scss';
 type PropsType = {
 	onChange: string => mixed,
 	onPersist: string => mixed,
-	setTitleAction: string => void,
 	value: string,
 	title: string,
 	editTitle: string => mixed,
