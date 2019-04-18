@@ -63,9 +63,9 @@ class AppContainer extends React.Component<PropsType> {
 	postTitleRef: ?InputText;
 	subscriptionParentGetHtml: ?EmitterSubscription;
 	subscriptionParentToggleHTMLMode: ?EmitterSubscription;
+	subscriptionParentSetTitle: ?EmitterSubscription;
 	subscriptionParentUpdateHtml: ?EmitterSubscription;
 	subscriptionParentSetFocusOnTitle: ?EmitterSubscription;
-	subscriptionParentSetTitle: ?EmitterSubscription;
 
 	constructor( props: PropsType ) {
 		super( props );
@@ -100,6 +100,10 @@ class AppContainer extends React.Component<PropsType> {
 			this.toggleMode();
 		} );
 
+		this.subscriptionParentSetTitle = subscribeSetTitle( ( payload ) => {
+			this.props.editTitle( payload.title );
+		} );
+
 		this.subscriptionParentUpdateHtml = subscribeUpdateHtml( ( payload ) => {
 			this.updateHtmlAction( payload.html );
 		} );
@@ -108,10 +112,6 @@ class AppContainer extends React.Component<PropsType> {
 			if ( this.postTitleRef ) {
 				this.postTitleRef.focus();
 			}
-		} );
-
-		this.subscriptionParentSetTitle = subscribeSetTitle( ( payload ) => {
-			this.props.editTitle( payload.title );
 		} );
 	}
 
@@ -124,6 +124,10 @@ class AppContainer extends React.Component<PropsType> {
 			this.subscriptionParentToggleHTMLMode.remove();
 		}
 
+		if ( this.subscriptionParentSetTitle ) {
+			this.subscriptionParentSetTitle.remove();
+		}
+
 		if ( this.subscriptionParentUpdateHtml ) {
 			this.subscriptionParentUpdateHtml.remove();
 		}
@@ -131,26 +135,6 @@ class AppContainer extends React.Component<PropsType> {
 		if ( this.subscriptionParentSetFocusOnTitle ) {
 			this.subscriptionParentSetFocusOnTitle.remove();
 		}
-
-		if ( this.subscriptionParentSetTitle ) {
-			this.subscriptionParentSetTitle.remove();
-		}
-	}
-
-	componentDidUpdate( prevProps ) {
-		if ( ! prevProps.isReady && this.props.isReady ) {
-			const blocks = this.props.getEditorBlocks();
-			const isUnsupportedBlock = ( { name } ) => name === getUnregisteredTypeHandlerName();
-			const unsupportedBlocks = blocks.filter( isUnsupportedBlock );
-			const hasUnsupportedBlocks = ! isEmpty( unsupportedBlocks );
-
-			RNReactNativeGutenbergBridge.editorDidMount( hasUnsupportedBlocks );
-		}
-	}
-
-	toggleMode() {
-		const { mode, switchMode } = this.props;
-		switchMode( mode === 'visual' ? 'text' : 'visual' );
 	}
 
 	serializeToNativeAction() {
@@ -174,6 +158,22 @@ class AppContainer extends React.Component<PropsType> {
 	updateHtmlAction( html: string = '' ) {
 		const parsed = parse( html );
 		this.props.resetEditorBlocksWithoutUndoLevel( parsed );
+	}
+
+	toggleMode() {
+		const { mode, switchMode } = this.props;
+		switchMode( mode === 'visual' ? 'text' : 'visual' );
+	}
+
+	componentDidUpdate( prevProps ) {
+		if ( ! prevProps.isReady && this.props.isReady ) {
+			const blocks = this.props.getEditorBlocks();
+			const isUnsupportedBlock = ( { name } ) => name === getUnregisteredTypeHandlerName();
+			const unsupportedBlocks = blocks.filter( isUnsupportedBlock );
+			const hasUnsupportedBlocks = ! isEmpty( unsupportedBlocks );
+
+			RNReactNativeGutenbergBridge.editorDidMount( hasUnsupportedBlocks );
+		}
 	}
 
 	setTitleRef( titleRef: ?InputText ) {
