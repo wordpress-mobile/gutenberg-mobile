@@ -132,6 +132,24 @@ jobs:
           JEST_JUNIT_OUTPUT: "reports/test-results/ios-test-results.xml"
     - store_test_results:
         path: ./reports/test-results
+  build-android-bridge:
+    docker:
+      - image: circleci/android:api-28-node8-alpha
+    steps:
+      - checkout
+      - checkout-gutenberg
+      - yarn-install
+      - run:
+          name:  Bundle Android
+          command: yarn bundle:android
+      - run:
+          name: Build .aar
+          command: |
+            cd react-native-gutenberg-bridge/android
+            ./gradlew install --stacktrace -Pversion="$CIRCLE_SHA1"
+            ./gradlew assembleRelease --stacktrace
+      - store_artifacts:
+          path: ~/.m2/repository/com/github/wordpress-mobile/gutenberg-mobile
 
 workflows:
   gutenberg-mobile:
@@ -151,3 +169,5 @@ workflows:
           name: Test iOS on Device
       - android-device-checks:
           name: Test Android on Device
+      - build-android-bridge:
+          name: Build Android Bridge

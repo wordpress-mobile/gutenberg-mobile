@@ -5,20 +5,13 @@ buildscript {
         jcenter()
         google()
 
-        if (isJitPack) {
-            maven {
-                url "https://plugins.gradle.org/m2/"
-            }
-        }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.1'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-
-        if (isJitPack) {
-            classpath "com.moowork.gradle:gradle-node-plugin:1.2.0"
-        }
+        classpath "com.moowork.gradle:gradle-node-plugin:1.2.0"
     }
 }
 
@@ -74,7 +67,8 @@ apply from: 'https://gist.githubusercontent.com/hypest/ceaf20a8e7d9b8404e4a5ff2e
 // import the `waitJitpack()` function
 apply from: 'https://gist.githubusercontent.com/hypest/f526fe0775dedce0ce0133f1400d22a4/raw/0008b271a0d28fc79957fd3c2a027f57e98f796a/wait-jitpack.gradle'
 
-group='com.github.wordpress-mobile.gutenberg-mobile'
+group = 'com.github.wordpress-mobile.gutenberg-mobile'
+version = findProperty('version') ?: '1.0'
 
 // fallback flag value for when lib is compiled individually (e.g. via jitpack)
 project.ext.buildGutenbergFromSource = false
@@ -132,36 +126,37 @@ dependencies {
     }
 }
 
-if (isJitPack) {
-    def assetsFolder = 'src/main/assets'
+def assetsFolder = 'src/main/assets'
 
+task ensureAssetsDirectory << {
+    mkdir assetsFolder
+}
+
+task copyJSBundle(type: Copy) {
+    def origFileName = 'App.js'
+    def origWithPath = "../../bundle/android/${origFileName}"
+    def target = 'index.android.bundle'
+    from origWithPath
+    into assetsFolder
+    rename origFileName, target
+} << {
+    println "Done copying the Android JS bundle to assets folder"
+}
+
+if (isJitPack) {
     task buildJSBundle(type: YarnTask) {
         args = ['bundle:android']
-    }
-
-    task ensureAssetsDirectory << {
-        mkdir assetsFolder
-    }
-
-    task copyJSBundle(type: Copy) {
-        def origFileName = 'App.js'
-        def origWithPath = "../../bundle/android/${origFileName}"
-        def target = 'index.android.bundle'
-        from origWithPath
-        into assetsFolder
-        rename origFileName, target
-    } << {
-        println "Done copying the Android JS bundle to assets folder"
     }
 
     task cleanupNodeModulesFolder(type: Delete) {
         delete '../../node_modules'
     }
 
-    if (isJitPack) {
-        preBuild.dependsOn(cleanupNodeModulesFolder)
-        cleanupNodeModulesFolder.dependsOn(copyJSBundle)
-        copyJSBundle.dependsOn(buildJSBundle)
-        buildJSBundle.dependsOn(yarn_install, ensureAssetsDirectory)
-    }
+    preBuild.dependsOn(cleanupNodeModulesFolder)
+    cleanupNodeModulesFolder.dependsOn(copyJSBundle)
+    copyJSBundle.dependsOn(buildJSBundle)
+    buildJSBundle.dependsOn(yarn_install, ensureAssetsDirectory)
+} else if (!rootProject.ext.buildGutenbergFromSource) {
+    preBuild.dependsOn(copyJSBundle)
+    copyJSBundle.dependsOn(ensureAssetsDirectory)
 }
