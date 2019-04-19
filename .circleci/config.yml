@@ -132,7 +132,7 @@ jobs:
           JEST_JUNIT_OUTPUT: "reports/test-results/ios-test-results.xml"
     - store_test_results:
         path: ./reports/test-results
-  build-android-bridge:
+  bintray-publish:
     docker:
       - image: circleci/android:api-28-node8-alpha
     steps:
@@ -148,6 +148,24 @@ jobs:
             cd react-native-gutenberg-bridge/android
             ./gradlew install --stacktrace -Pversion="$CIRCLE_SHA1"
             ./gradlew assembleRelease --stacktrace
+      - run:
+          name: Install jFrog CLI
+          command: |
+            mkdir ~/bin && cd ~/bin
+            curl -fL https://getcli.jfrog.io | sh
+            echo 'export PATH="$HOME/bin:$PATH"' >> $BASH_ENV
+      - run:
+          name: Install xmlstarlet
+          command: |
+            sudo apt-get install xmlstarlet
+      - run:
+          name: Publish react-native-aztec
+          command: |
+            ./bin/update-bintray-package.sh "$HOME/.m2/repository/com/github/wordpress-mobile/gutenberg-mobile/react-native-aztec" "wordpress-mobile/gutenberg-mobile"
+      - run:
+          name: Publish react-native-gutenberg-bridge
+          command: |
+            ./bin/update-bintray-package.sh "$HOME/.m2/repository/com/github/wordpress-mobile/gutenberg-mobile/react-native-gutenberg-bridge" "wordpress-mobile/gutenberg-mobile"
       - store_artifacts:
           path: ~/.m2/repository/com/github/wordpress-mobile/gutenberg-mobile
 
@@ -169,5 +187,5 @@ workflows:
           name: Test iOS on Device
       - android-device-checks:
           name: Test Android on Device
-      - build-android-bridge:
-          name: Build Android Bridge
+      - bintray-publish:
+          name: Publish to Bintray
