@@ -63,7 +63,7 @@ public interface GutenbergBridgeJS2Parent {
         }
     }
 
-    void requestMediaPickFromMediaLibrary(MediaSelectedCallback mediaSelectedCallback);
+    void requestMediaPickFromMediaLibrary(MediaSelectedCallback mediaSelectedCallback, MediaType mediaType);
 
     void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback, MediaType mediaType);
 

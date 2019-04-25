@@ -98,7 +98,8 @@ public class WPAndroidGlueCode {
     }
 
     public interface OnMediaLibraryButtonListener {
-        void onMediaLibraryButtonClicked();
+        void onMediaLibraryImageButtonClicked();
+        void onMediaLibraryVideoButtonClicked();
         void onUploadPhotoButtonClicked();
         void onCapturePhotoButtonClicked();
         void onUploadVideoButtonClicked();
@@ -133,10 +134,14 @@ public class WPAndroidGlueCode {
             }
 
             @Override
-            public void requestMediaPickFromMediaLibrary(MediaSelectedCallback mediaSelectedCallback) {
+            public void requestMediaPickFromMediaLibrary(MediaSelectedCallback mediaSelectedCallback, MediaType mediaType) {
                 mMediaPickedByUserOnBlock = true;
                 mPendingMediaSelectedCallback = mediaSelectedCallback;
-                mOnMediaLibraryButtonListener.onMediaLibraryButtonClicked();
+                if (mediaType == MediaType.IMAGE) {
+                    mOnMediaLibraryButtonListener.onMediaLibraryImageButtonClicked();
+                } else if (mediaType == MediaType.VIDEO) {
+                    mOnMediaLibraryButtonListener.onMediaLibraryVideoButtonClicked();
+                }
             }
 
             @Override
