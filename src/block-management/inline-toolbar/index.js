@@ -60,7 +60,7 @@ export default class InlineToolbar extends React.Component<PropsType> {
 					isDisabled={ ! this.props.canMoveUp }
 					onClick={ this.onUpPressed }
 					icon="arrow-up-alt"
-					extraProps={ { hint: __( 'Double tap to move up the block' ) } }
+					extraProps={ { hint: __( 'Double tap to move the block up' ) } }
 				/>
 
 				<ToolbarButton
@@ -68,7 +68,7 @@ export default class InlineToolbar extends React.Component<PropsType> {
 					isDisabled={ ! this.props.canMoveDown }
 					onClick={ this.onDownPressed }
 					icon="arrow-down-alt"
-					extraProps={ { hint: __( 'Double tap to move down the block' ) } }
+					extraProps={ { hint: __( 'Double tap to move the block down' ) } }
 				/>
 
 				<View style={ styles.spacer } />
