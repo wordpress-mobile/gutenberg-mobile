@@ -168,15 +168,15 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		} );
 
 		this.subscriptionParentMediaAppend = subscribeMediaAppend( ( payload ) => {
-			// create an empty image block
-			const newImageBlock = createBlock( 'core/image' );
+			// create an empty media block
+			const newMediaBlock = createBlock( 'core/' + payload.mediaType );
 
 			// now set the url and id
-			newImageBlock.attributes.url = payload.mediaUrl;
-			newImageBlock.attributes.id = payload.mediaId;
+			newMediaBlock.attributes.url = payload.mediaUrl;
+			newMediaBlock.attributes.id = payload.mediaId;
 
 			// finally append or replace as appropriate
-			this.finishBlockAppendingOrReplacing( newImageBlock );
+			this.finishBlockAppendingOrReplacing( newMediaBlock );
 		} );
 	}
 
