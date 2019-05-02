@@ -184,7 +184,7 @@ class RCTAztecView: Aztec.TextView {
     }
 
     private func cleanHTML() -> String {
-        let html = getHTML(prettify: false).replacingOccurrences(of: "\n", with: "")
+        let html = getHTML(prettify: false)
         return html
     }
 
