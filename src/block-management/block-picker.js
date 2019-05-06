@@ -1,6 +1,5 @@
 /**
  * @format
- * @flow
  */
 
 /**
@@ -22,15 +21,7 @@ import { getBlockTypes, getUnregisteredTypeHandlerName } from '@wordpress/blocks
  */
 import styles from './block-picker.scss';
 
-type PropsType = {
-	style?: StyleSheet,
-	isReplacement: boolean,
-	onValueSelected: ( itemValue: string ) => void,
-	onDismiss: () => void,
-	addExtraBottomPadding: boolean,
-};
-
-export default class BlockPicker extends Component<PropsType> {
+export default class BlockPicker extends Component {
 	availableBlockTypes = getBlockTypes().filter( ( { name } ) => name !== getUnregisteredTypeHandlerName() );
 
 	render() {
@@ -76,7 +67,7 @@ export default class BlockPicker extends Component<PropsType> {
 		);
 	}
 
-	iconWithUpdatedFillColor( color: string, icon: SVG ) {
+	iconWithUpdatedFillColor( color, icon ) {
 		return (
 			<SVG viewBox={ icon.src.props.viewBox } xmlns={ icon.src.props.xmlns } style={ { fill: color } }>
 				{ icon.src.props.children }
