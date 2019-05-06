@@ -1,6 +1,5 @@
 /**
  * @format
- * @flow
  */
 
 /**
@@ -14,11 +13,7 @@ import { View, Dimensions } from 'react-native';
  */
 import styles from './readable-content-view.scss';
 
-type PropsType = {
-	children?: React.Node,
-};
-
-const ReadableContentView = ( props: PropsType ) => {
+const ReadableContentView = ( props ) => {
 	return (
 		<View style={ styles.container } >
 			<View style={ styles.centeredContent } >
@@ -28,7 +23,7 @@ const ReadableContentView = ( props: PropsType ) => {
 	);
 };
 
-const isContentMaxWidth = (): boolean => {
+const isContentMaxWidth = () => {
 	const { width } = Dimensions.get( 'window' );
 	return width > styles.centeredContent.maxWidth;
 };
