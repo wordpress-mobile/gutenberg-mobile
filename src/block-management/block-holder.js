@@ -1,6 +1,6 @@
 /**
 * @format
-* @flow
+*
 */
 
 /**
@@ -11,8 +11,6 @@ import {
 	View,
 	Text,
 	TouchableWithoutFeedback,
-	NativeSyntheticEvent,
-	NativeTouchEvent,
 	Keyboard,
 } from 'react-native';
 import TextInputState from 'react-native/lib/TextInputState';
@@ -32,41 +30,11 @@ import { BlockEdit } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
-import type { BlockType } from '../store/types';
 import styles from './block-holder.scss';
 import InlineToolbar, { InlineToolbarActions } from './inline-toolbar';
 
-type PropsType = BlockType & {
-	clientId: string,
-	rootClientId: string,
-	isSelected: boolean,
-	isFirstBlock: boolean,
-	isLastBlock: boolean,
-	showTitle: boolean,
-	borderStyle: Object,
-	testID: string,
-	focusedBorderColor: string,
-	getBlockIndex: ( clientId: string, rootClientId: string ) => number,
-	getPreviousBlockClientId: ( clientId: string ) => string,
-	getNextBlockClientId: ( clientId: string ) => string,
-	getBlockName: ( clientId: string ) => string,
-	onChange: ( attributes: mixed ) => void,
-	onInsertBlocks: ( blocks: Array<Object>, index: number ) => void,
-	onCaretVerticalPositionChange: ( targetId: number, caretY: number, previousCaretY: ?number ) => void,
-	onReplace: ( blocks: Array<Object> ) => void,
-	onSelect: ( clientId: string ) => void,
-	mergeBlocks: ( clientId: string, clientId: string ) => void,
-	moveBlockUp: () => void,
-	moveBlockDown: () => void,
-	removeBlock: () => void,
-};
-
-type StateType = {
-	isFullyBordered: boolean;
-}
-
-export class BlockHolder extends React.Component<PropsType, StateType> {
-	constructor( props: PropsType ) {
+export class BlockHolder extends React.Component {
+	constructor( props ) {
 		super( props );
 
 		this.state = {
@@ -74,7 +42,7 @@ export class BlockHolder extends React.Component<PropsType, StateType> {
 		};
 	}
 
-	onFocus = ( event: NativeSyntheticEvent<NativeTouchEvent> ) => {
+	onFocus = ( event ) => {
 		if ( event ) {
 			// == Hack for the Alpha ==
 			// When moving the focus from a TextInput field to another kind of field the call that hides the keyboard is not invoked
@@ -88,7 +56,7 @@ export class BlockHolder extends React.Component<PropsType, StateType> {
 		this.props.onSelect( this.props.clientId );
 	};
 
-	onRemoveBlockCheckUpload = ( mediaId: number ) => {
+	onRemoveBlockCheckUpload = ( mediaId ) => {
 		if ( hasAction( 'blocks.onRemoveBlockCheckUpload' ) ) {
 			// now remove the action as it's  a one-shot use and won't be needed anymore
 			removeAction( 'blocks.onRemoveBlockCheckUpload', 'gutenberg-mobile/blocks' );
@@ -96,7 +64,7 @@ export class BlockHolder extends React.Component<PropsType, StateType> {
 		}
 	}
 
-	onInlineToolbarButtonPressed = ( button: number ) => {
+	onInlineToolbarButtonPressed = ( button ) => {
 		Keyboard.dismiss();
 		switch ( button ) {
 			case InlineToolbarActions.UP:
@@ -114,7 +82,7 @@ export class BlockHolder extends React.Component<PropsType, StateType> {
 		}
 	};
 
-	insertBlocksAfter = ( blocks: Array<Object> ) => {
+	insertBlocksAfter = ( blocks ) => {
 		const order = this.props.getBlockIndex( this.props.clientId, this.props.rootClientId );
 		this.props.onInsertBlocks( blocks, order + 1 );
 
@@ -124,7 +92,7 @@ export class BlockHolder extends React.Component<PropsType, StateType> {
 		}
 	};
 
-	mergeBlocks = ( forward: boolean = false ) => {
+	mergeBlocks = ( forward = false ) => {
 		const {
 			clientId,
 			getPreviousBlockClientId,
@@ -280,17 +248,17 @@ export default compose( [
 			removeBlock() {
 				removeBlock( clientId );
 			},
-			onInsertBlocks( blocks: Array<Object>, index: number ) {
+			onInsertBlocks( blocks, index ) {
 				insertBlocks( blocks, index, rootClientId );
 			},
-			onSelect: ( selectedClientId: string ) => {
+			onSelect: ( selectedClientId ) => {
 				clearSelectedBlock();
 				selectBlock( selectedClientId );
 			},
-			onChange: ( attributes: Object ) => {
+			onChange: ( attributes ) => {
 				updateBlockAttributes( clientId, attributes );
 			},
-			onReplace( blocks: Array<Object> ) {
+			onReplace( blocks ) {
 				replaceBlocks( [ clientId ], blocks );
 			},
 		};
