@@ -1,6 +1,5 @@
 /**
  * @format
- * @flow
  */
 
 /**
@@ -23,17 +22,7 @@ import { __ } from '@wordpress/i18n';
  */
 import styles from './block-toolbar.scss';
 
-type PropsType = {
-	onInsertClick: void => void,
-	showKeyboardHideButton: boolean,
-	hasRedo: boolean,
-	hasUndo: boolean,
-	redo: void => void,
-	undo: void => void,
-	clearSelectedBlock: void => void,
-};
-
-export class BlockToolbar extends Component<PropsType> {
+export class BlockToolbar extends Component {
 	onKeyboardHide = () => {
 		this.props.clearSelectedBlock();
 		if ( Platform.OS === 'android' ) {
