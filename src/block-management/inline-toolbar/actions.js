@@ -1,6 +1,6 @@
 /**
  * @format
- * @flow
+ *
  */
 
 const InlineToolbarActions = {

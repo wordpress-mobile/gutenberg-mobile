@@ -1,4 +1,4 @@
-/** @flow
+/**
  * @format */
 
 /**
@@ -22,21 +22,14 @@ import InlineToolbarActions from './actions';
 
 export { InlineToolbarActions };
 
-type PropsType = {
-	clientId: string,
-	canMoveUp: boolean,
-	canMoveDown: boolean,
-	onButtonPressed: ( button: number ) => void,
-};
-
-export default class InlineToolbar extends React.Component<PropsType> {
+export default class InlineToolbar extends React.Component {
 	constructor() {
 		super( ...arguments );
 		// Flow gets picky about reassigning methods on classes
 		// https://github.com/facebook/flow/issues/1517#issuecomment-194538151
-		( this: any ).onUpPressed = this.onUpPressed.bind( this );
-		( this: any ).onDownPressed = this.onDownPressed.bind( this );
-		( this: any ).onDeletePressed = this.onDeletePressed.bind( this );
+		this.onUpPressed = this.onUpPressed.bind( this );
+		this.onDownPressed = this.onDownPressed.bind( this );
+		this.onDeletePressed = this.onDeletePressed.bind( this );
 	}
 
 	onUpPressed() {

@@ -1,4 +1,4 @@
-/** @flow
+/**
  * @format */
 
 /**
@@ -17,13 +17,7 @@ import { Dashicon } from '@wordpress/components';
  */
 import styles from './style.scss';
 
-type PropsType = {
-	disabled: boolean,
-	icon: string,
-	onPress: () => void,
-};
-
-export default class InlineToolbarButton extends React.Component<PropsType> {
+export default class InlineToolbarButton extends React.Component {
 	static defaultProps = {
 		disabled: false,
 	};
