@@ -1,20 +1,14 @@
 /**
 * @format
-* @flow
 */
 
 /**
  * External dependencies
  */
 import React from 'react';
-import { View, KeyboardAvoidingView as AndroidKeyboardAvoidingView } from 'react-native';
+import { KeyboardAvoidingView as AndroidKeyboardAvoidingView } from 'react-native';
 
-type PropsType = {
-	...View.propTypes,
-	parentHeight: number;
-}
-
-const KeyboardAvoidingView = ( propsType: PropsType ) => {
+const KeyboardAvoidingView = ( propsType ) => {
 	const { ...props } = propsType;
 
 	return (
