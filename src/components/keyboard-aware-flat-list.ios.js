@@ -1,6 +1,5 @@
 /**
 * @format
-* @flow
 */
 
 /**
@@ -15,16 +14,7 @@ import { FlatList } from 'react-native';
  */
 import styles from '../block-management/block-holder.scss';
 
-type PropsType = {
-	...FlatList.propTypes,
-	shouldPreventAutomaticScroll: void => boolean,
-	blockToolbarHeight: number,
-	innerToolbarHeight: number,
-	safeAreaBottomInset: number,
-	innerRef?: Function,
-}
-
-export const KeyboardAwareFlatList = ( props: PropsType ) => {
+export const KeyboardAwareFlatList = ( props ) => {
 	const {
 		blockToolbarHeight,
 		innerToolbarHeight,
@@ -46,27 +36,27 @@ export const KeyboardAwareFlatList = ( props: PropsType ) => {
 			inputAccessoryViewHeight={ blockToolbarHeight }
 			extraHeight={ 0 }
 			innerRef={ ( ref ) => {
-				( this: any ).scrollViewRef = ref;
+				this.scrollViewRef = ref;
 				innerRef( ref );
 			} }
 			onKeyboardWillHide={ () => {
-				( this: any ).keyboardWillShowIndicator = false;
+				this.keyboardWillShowIndicator = false;
 			} }
 			onKeyboardDidHide={ () => {
 				setTimeout( () => {
-					if ( ! ( this: any ).keyboardWillShowIndicator &&
-						( this: any ).latestContentOffsetY !== undefined &&
+					if ( ! this.keyboardWillShowIndicator &&
+						this.latestContentOffsetY !== undefined &&
 						! shouldPreventAutomaticScroll() ) {
 						// Reset the content position if keyboard is still closed
-						( this: any ).scrollViewRef.props.scrollToPosition( 0, ( this: any ).latestContentOffsetY, true );
+						this.scrollViewRef.props.scrollToPosition( 0, this.latestContentOffsetY, true );
 					}
 				}, 50 );
 			} }
 			onKeyboardWillShow={ () => {
-				( this: any ).keyboardWillShowIndicator = true;
+				this.keyboardWillShowIndicator = true;
 			} }
-			onScroll={ ( event: Object ) => {
-				( this: any ).latestContentOffsetY = event.nativeEvent.contentOffset.y;
+			onScroll={ ( event ) => {
+				this.latestContentOffsetY = event.nativeEvent.contentOffset.y;
 			} } >
 			<FlatList { ...listProps } />
 		</KeyboardAwareScrollView>
@@ -74,10 +64,10 @@ export const KeyboardAwareFlatList = ( props: PropsType ) => {
 };
 
 export const handleCaretVerticalPositionChange = (
-	scrollView: Object,
-	targetId: number,
-	caretY: number,
-	previousCaretY: ?number ) => {
+	scrollView,
+	targetId,
+	caretY,
+	previousCaretY ) => {
 	if ( previousCaretY ) { //if this is not the first tap
 		scrollView.props.refreshScrollForField( targetId );
 	}
