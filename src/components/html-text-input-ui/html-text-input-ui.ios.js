@@ -1,6 +1,5 @@
 /**
  * @format
- * @flow
  */
 
 /**
@@ -15,18 +14,7 @@ import { UIManager, PanResponder } from 'react-native';
 import styles from './html-text-input-ui.scss';
 import KeyboardAvoidingView from '../keyboard-avoiding-view';
 
-type PropsType = {
-	parentHeight: number,
-	children: React.Node,
-};
-
-type StateType = {
-};
-
-class HTMLInputContainer extends React.Component<PropsType, StateType> {
-	static scrollEnabled: boolean;
-	panResponder: PanResponder;
-
+class HTMLInputContainer extends React.Component {
 	constructor() {
 		super( ...arguments );
 

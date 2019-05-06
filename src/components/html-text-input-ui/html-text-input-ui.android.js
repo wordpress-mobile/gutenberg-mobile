@@ -1,6 +1,5 @@
 /**
  * @format
- * @flow
  */
 
 /**
@@ -15,17 +14,7 @@ import { ScrollView } from 'react-native';
 import styles from './html-text-input-ui.scss';
 import KeyboardAvoidingView from '../keyboard-avoiding-view';
 
-type PropsType = {
-	parentHeight: number,
-	children: React.Node,
-};
-
-type StateType = {
-};
-
-class HTMLInputContainer extends React.Component<PropsType, StateType> {
-	static scrollEnabled: boolean;
-
+class HTMLInputContainer extends React.Component {
 	render() {
 		return (
 			<KeyboardAvoidingView style={ styles.keyboardAvoidingView } parentHeight={ this.props.parentHeight }>

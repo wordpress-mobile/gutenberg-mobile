@@ -1,6 +1,5 @@
 /**
  * @format
- * @flow
  */
 /**
  * WordPress dependencies
@@ -22,24 +21,7 @@ import { TextInput } from 'react-native';
 import HTMLInputContainer from './html-text-input-ui/html-text-input-ui';
 import styles from './html-text-input-ui/html-text-input-ui.scss';
 
-type PropsType = {
-	onChange: string => mixed,
-	onPersist: string => mixed,
-	setTitleAction: string => void,
-	value: string,
-	title: string,
-	parentHeight: number,
-};
-
-type StateType = {
-	isDirty: boolean,
-	value: string,
-};
-
-export class HTMLInputView extends React.Component<PropsType, StateType> {
-	edit: string => mixed;
-	stopEditing: () => mixed;
-
+export class HTMLInputView extends React.Component {
 	constructor() {
 		super( ...arguments );
 
@@ -52,7 +34,7 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 		};
 	}
 
-	static getDerivedStateFromProps( props: PropsType, state: StateType ) {
+	static getDerivedStateFromProps( props, state ) {
 		if ( state.isDirty ) {
 			return null;
 		}
@@ -68,7 +50,7 @@ export class HTMLInputView extends React.Component<PropsType, StateType> {
 		this.stopEditing();
 	}
 
-	edit( html: string ) {
+	edit( html ) {
 		this.props.onChange( html );
 		this.setState( { value: html, isDirty: true } );
 	}
