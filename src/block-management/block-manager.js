@@ -37,7 +37,6 @@ import SafeArea from 'react-native-safe-area';
 import ReadableContentView from '../components/readable-content-view';
 
 export class BlockManager extends React.Component {
-
 	constructor( props ) {
 		super( props );
 
