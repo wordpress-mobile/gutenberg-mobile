@@ -1,6 +1,5 @@
 /**
  * @format
- * @flow
  */
 
 /**
@@ -8,7 +7,7 @@
  */
 import React from 'react';
 import { identity } from 'lodash';
-import { Text, View, Keyboard, LayoutChangeEvent, SafeAreaView, Platform } from 'react-native';
+import { Text, View, Keyboard, SafeAreaView, Platform } from 'react-native';
 
 /**
  * WordPress dependencies
@@ -25,7 +24,6 @@ import { sendNativeEditorDidLayout, subscribeSetFocusOnTitle, subscribeMediaAppe
  * Internal dependencies
  */
 import BlockHolder from './block-holder';
-import type { BlockType } from '../store/types';
 import styles from './block-manager.scss';
 import blockHolderStyles from './block-holder.scss';
 import inlineToolbarStyles from './inline-toolbar/style.scss';
@@ -38,52 +36,22 @@ import { KeyboardAwareFlatList, handleCaretVerticalPositionChange } from '../com
 import SafeArea from 'react-native-safe-area';
 import ReadableContentView from '../components/readable-content-view';
 
-type PropsType = {
-	rootClientId: ?string,
-	blockClientIds: Array<string>,
-	blockCount: number,
-	focusBlock: ( clientId: string ) => void,
-	insertBlock: ( block: BlockType, position: number ) => void,
-	replaceBlock: ( string, BlockType ) => mixed,
-	getBlockName: string => string,
-	selectedBlock: ?BlockType,
-	selectedBlockClientId: string,
-	setTitleAction: string => void,
-	selectedBlockOrder: number,
-	isBlockSelected: string => boolean,
-	showHtml: boolean,
-	title: string,
-};
+export class BlockManager extends React.Component {
 
-type StateType = {
-	blockTypePickerVisible: boolean,
-	isKeyboardVisible: boolean,
-	rootViewHeight: number,
-	safeAreaBottomInset: number,
-	isFullyBordered: boolean,
-};
-
-export class BlockManager extends React.Component<PropsType, StateType> {
-	scrollViewRef: Object;
-	postTitleRef: ?Object;
-	subscriptionParentSetFocusOnTitle: ?Object;
-	subscriptionParentMediaAppend: ?Object;
-	_isMounted: boolean;
-
-	constructor( props: PropsType ) {
+	constructor( props ) {
 		super( props );
 
-		( this: any ).renderItem = this.renderItem.bind( this );
-		( this: any ).shouldFlatListPreventAutomaticScroll = this.shouldFlatListPreventAutomaticScroll.bind( this );
-		( this: any ).renderDefaultBlockAppender = this.renderDefaultBlockAppender.bind( this );
-		( this: any ).renderHeader = this.renderHeader.bind( this );
-		( this: any ).onSafeAreaInsetsUpdate = this.onSafeAreaInsetsUpdate.bind( this );
-		( this: any ).onBlockTypeSelected = this.onBlockTypeSelected.bind( this );
-		( this: any ).onRootViewLayout = this.onRootViewLayout.bind( this );
-		( this: any ).keyboardDidShow = this.keyboardDidShow.bind( this );
-		( this: any ).keyboardDidHide = this.keyboardDidHide.bind( this );
-		( this: any ).onCaretVerticalPositionChange = this.onCaretVerticalPositionChange.bind( this );
-		( this: any ).scrollViewInnerRef = this.scrollViewInnerRef.bind( this );
+		this.renderItem = this.renderItem.bind( this );
+		this.shouldFlatListPreventAutomaticScroll = this.shouldFlatListPreventAutomaticScroll.bind( this );
+		this.renderDefaultBlockAppender = this.renderDefaultBlockAppender.bind( this );
+		this.renderHeader = this.renderHeader.bind( this );
+		this.onSafeAreaInsetsUpdate = this.onSafeAreaInsetsUpdate.bind( this );
+		this.onBlockTypeSelected = this.onBlockTypeSelected.bind( this );
+		this.onRootViewLayout = this.onRootViewLayout.bind( this );
+		this.keyboardDidShow = this.keyboardDidShow.bind( this );
+		this.keyboardDidHide = this.keyboardDidHide.bind( this );
+		this.onCaretVerticalPositionChange = this.onCaretVerticalPositionChange.bind( this );
+		this.scrollViewInnerRef = this.scrollViewInnerRef.bind( this );
 
 		this.state = {
 			blockTypePickerVisible: false,
@@ -97,11 +65,11 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 
 	// TODO: in the near future this will likely be changed to onShowBlockTypePicker and bound to this.props
 	// once we move the action to the toolbar
-	showBlockTypePicker( show: boolean ) {
+	showBlockTypePicker( show ) {
 		this.setState( { blockTypePickerVisible: show } );
 	}
 
-	onBlockTypeSelected( itemValue: string ) {
+	onBlockTypeSelected( itemValue ) {
 		this.setState( { blockTypePickerVisible: false } );
 
 		// create an empty block of the selected type
@@ -110,7 +78,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		this.finishBlockAppendingOrReplacing( newBlock );
 	}
 
-	finishBlockAppendingOrReplacing( newBlock: Object ) {
+	finishBlockAppendingOrReplacing( newBlock ) {
 		// now determine whether we need to replace the currently selected block (if it's empty)
 		// or just add a new block as usual
 		if ( this.isReplaceable( this.props.selectedBlock ) ) {
@@ -126,19 +94,19 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		this.props.focusBlock( newBlock.clientId );
 	}
 
-	onSafeAreaInsetsUpdate( result: Object ) {
+	onSafeAreaInsetsUpdate( result ) {
 		const { safeAreaInsets } = result;
 		if ( this._isMounted && this.state.safeAreaBottomInset !== safeAreaInsets.bottom ) {
 			this.setState( { ...this.state, safeAreaBottomInset: safeAreaInsets.bottom } );
 		}
 	}
 
-	onRootViewLayout( event: LayoutChangeEvent ) {
+	onRootViewLayout( event ) {
 		this.setHeightState( event );
 		this.setBorderStyleState();
 	}
 
-	setHeightState( event: LayoutChangeEvent ) {
+	setHeightState( event ) {
 		const { height } = event.nativeEvent.layout;
 		this.setState( { rootViewHeight: height }, () => {
 			sendNativeEditorDidLayout();
@@ -201,11 +169,11 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		this.setState( { isKeyboardVisible: false } );
 	}
 
-	onCaretVerticalPositionChange( targetId: number, caretY: number, previousCaretY: ?number ) {
+	onCaretVerticalPositionChange( targetId, caretY, previousCaretY ) {
 		handleCaretVerticalPositionChange( this.scrollViewRef, targetId, caretY, previousCaretY );
 	}
 
-	scrollViewInnerRef( ref: Object ) {
+	scrollViewInnerRef( ref ) {
 		this.scrollViewRef = ref;
 	}
 
@@ -306,14 +274,14 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 		);
 	}
 
-	isReplaceable( block: ?BlockType ) {
+	isReplaceable( block ) {
 		if ( ! block ) {
 			return false;
 		}
 		return isUnmodifiedDefaultBlock( block );
 	}
 
-	renderItem( value: { item: string, index: number } ) {
+	renderItem( value ) {
 		const clientId = value.item;
 		const testID = `block-${ value.index }-${ this.props.getBlockName( clientId ) }`;
 
