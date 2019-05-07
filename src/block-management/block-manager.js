@@ -172,7 +172,12 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 			const newMediaBlock = createBlock( 'core/' + payload.mediaType );
 
 			// now set the url and id
-			newMediaBlock.attributes.url = payload.mediaUrl;
+			if ( payload.mediaType === 'image' ) {
+				newMediaBlock.attributes.url = payload.mediaUrl;
+			} else if ( payload.mediaType === 'video' ) {
+				newMediaBlock.attributes.src = payload.mediaUrl;
+			}
+
 			newMediaBlock.attributes.id = payload.mediaId;
 
 			// finally append or replace as appropriate
