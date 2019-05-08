@@ -25,6 +25,7 @@ module.exports = function( api ) {
 						'@babel/plugin-transform-react-jsx',
 						{
 							pragma: 'createElement',
+							pragmaFrag: 'Fragment',
 						},
 					],
 				],
@@ -36,6 +37,7 @@ module.exports = function( api ) {
 						'@wordpress/babel-plugin-import-jsx-pragma',
 						{
 							scopeVariable: 'createElement',
+							scopeVariableFrag: 'Fragment',
 							source: '@wordpress/element',
 							isDefault: false,
 						},
