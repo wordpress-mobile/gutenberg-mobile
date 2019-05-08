@@ -183,7 +183,7 @@ class RCTAztecView: Aztec.TextView {
     }
 
     private func cleanHTML() -> String {
-        let html = getHTML(prettify: false)
+        let html = getHTML(prettify: false).replacingOccurrences(of: String(.paragraphSeparator), with: "")
         return html
     }
 
