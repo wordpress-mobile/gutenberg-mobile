@@ -401,7 +401,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
-"@babel/plugin-proposal-async-generator-functions@^7.2.0":
+"@babel/plugin-proposal-async-generator-functions@7.2.0", "@babel/plugin-proposal-async-generator-functions@^7.2.0":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-async-generator-functions/-/plugin-proposal-async-generator-functions-7.2.0.tgz#b289b306669dce4ad20b0252889a15768c9d417e"
   integrity sha512-+Dfo/SCQqrwx48ptLVGLdE39YtWRuKc/Y9I5Fy0P1DDBB9lsAHpjcEJQt+4IifuSOSTLBKJObJqMvaO1pIE8LQ==
@@ -1962,8 +1962,8 @@
     "@babel/plugin-transform-runtime" "^7.4.4"
     "@babel/preset-env" "^7.4.4"
     "@babel/runtime" "^7.4.4"
-    "@wordpress/babel-plugin-import-jsx-pragma" "file:../../Library/Caches/Yarn/v4/npm-@wordpress-babel-preset-default-4.1.0-99d32fb3-a519-483b-86d6-cfc8d7fc8776-1557226269227/node_modules/@wordpress/babel-plugin-import-jsx-pragma"
-    "@wordpress/browserslist-config" "file:../../Library/Caches/Yarn/v4/npm-@wordpress-babel-preset-default-4.1.0-99d32fb3-a519-483b-86d6-cfc8d7fc8776-1557226269227/node_modules/@wordpress/browserslist-config"
+    "@wordpress/babel-plugin-import-jsx-pragma" "file:../../Library/Caches/Yarn/v4/npm-@wordpress-babel-preset-default-4.1.0-b774f199-7e03-4e0b-95d7-9c4b0621e8bb-1557302541502/node_modules/@wordpress/babel-plugin-import-jsx-pragma"
+    "@wordpress/browserslist-config" "file:../../Library/Caches/Yarn/v4/npm-@wordpress-babel-preset-default-4.1.0-b774f199-7e03-4e0b-95d7-9c4b0621e8bb-1557302541502/node_modules/@wordpress/browserslist-config"
 
 "@wordpress/browserslist-config@file:gutenberg/packages/browserslist-config":
   version "2.3.0"
