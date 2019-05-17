@@ -42,7 +42,7 @@ public class MainApplication extends Application implements ReactApplication {
                 public void responseHtml(String title, String html, boolean changed) {}
 
                 @Override
-                public void requestMediaPickFromMediaLibrary(MediaSelectedCallback mediaSelectedCallback) {}
+                public void requestMediaPickFromMediaLibrary(MediaSelectedCallback mediaSelectedCallback, MediaType mediaType) {}
 
                 @Override
                 public void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback, MediaType mediaType) {}
