@@ -3,13 +3,8 @@
  */
 import { shallow } from 'enzyme';
 import {
-	subscribeMediaUpload,
+	sendMediaUpload,
 } from 'react-native-gutenberg-bridge';
-jest.mock( 'react-native-gutenberg-bridge', () => (
-	{
-		subscribeMediaUpload: jest.fn(),
-	}
-) );
 
 /**
  * Internal dependencies
@@ -21,6 +16,19 @@ import {
 	MEDIA_UPLOAD_STATE_FAILED,
 	MEDIA_UPLOAD_STATE_RESET,
 } from '../../gutenberg/packages/block-library/src/image/media-upload-progress.native.js';
+
+jest.mock( 'react-native-gutenberg-bridge', () => {
+	const callUploadCallback = ( payload ) => {
+		this.uploadCallBack( payload );
+	};
+	const subscribeMediaUpload = ( callback ) => {
+		this.uploadCallBack = callback;
+	};
+	return {
+		subscribeMediaUpload,
+		sendMediaUpload: callUploadCallback,
+	};
+} );
 
 const MEDIA_ID = 123;
 
@@ -36,10 +44,6 @@ describe( 'MediaUploadProgress component', () => {
 		const progress = 10;
 		const payload = { state: MEDIA_UPLOAD_STATE_UPLOADING, mediaId: MEDIA_ID, progress };
 
-		subscribeMediaUpload.mockImplementation( ( callback ) => {
-			callback( payload );
-		} );
-
 		const onUpdateMediaProgress = jest.fn();
 
 		const wrapper = shallow(
@@ -49,6 +53,8 @@ describe( 'MediaUploadProgress component', () => {
 				renderContent={ () => {} }
 			/>
 		);
+
+		sendMediaUpload( payload );
 
 		expect( wrapper.instance().state.progress ).toEqual( progress );
 		expect( wrapper.instance().state.isUploadInProgress ).toEqual( true );
@@ -59,10 +65,6 @@ describe( 'MediaUploadProgress component', () => {
 
 	it( 'does not get affected by unrelated media uploads', () => {
 		const payload = { state: MEDIA_UPLOAD_STATE_UPLOADING, mediaId: 1, progress: 20 };
-
-		subscribeMediaUpload.mockImplementation( ( callback ) => {
-			callback( payload );
-		} );
 		const onUpdateMediaProgress = jest.fn();
 		const wrapper = shallow(
 			<MediaUploadProgress
@@ -71,6 +73,9 @@ describe( 'MediaUploadProgress component', () => {
 				renderContent={ () => {} }
 			/>
 		);
+
+		sendMediaUpload( payload );
+
 		expect( wrapper.instance().state.progress ).toEqual( 0 );
 		expect( onUpdateMediaProgress ).toHaveBeenCalledTimes( 0 );
 	} );
@@ -79,10 +84,6 @@ describe( 'MediaUploadProgress component', () => {
 		const progress = 10;
 		const payloadSuccess = { state: MEDIA_UPLOAD_STATE_SUCCEEDED, mediaId: MEDIA_ID };
 		const payloadUploading = { state: MEDIA_UPLOAD_STATE_UPLOADING, mediaId: MEDIA_ID, progress };
-
-		subscribeMediaUpload.mockImplementation( ( callback ) => {
-			callback( payloadUploading );
-		} );
 
 		const onFinishMediaUploadWithSuccess = jest.fn();
 
@@ -94,15 +95,11 @@ describe( 'MediaUploadProgress component', () => {
 			/>
 		);
 
+		sendMediaUpload( payloadUploading );
+
 		expect( wrapper.instance().state.progress ).toEqual( progress );
 
-		subscribeMediaUpload.mockImplementation( ( callback ) => {
-			callback( payloadSuccess );
-		} );
-
-		subscribeMediaUpload( ( payload ) => {
-			wrapper.instance().mediaUpload( payload );
-		} );
+		sendMediaUpload( payloadSuccess );
 
 		expect( wrapper.instance().state.isUploadInProgress ).toEqual( false );
 		expect( onFinishMediaUploadWithSuccess ).toHaveBeenCalledTimes( 1 );
@@ -114,10 +111,6 @@ describe( 'MediaUploadProgress component', () => {
 		const payloadFail = { state: MEDIA_UPLOAD_STATE_FAILED, mediaId: MEDIA_ID };
 		const payloadUploading = { state: MEDIA_UPLOAD_STATE_UPLOADING, mediaId: MEDIA_ID, progress };
 
-		subscribeMediaUpload.mockImplementation( ( callback ) => {
-			callback( payloadUploading );
-		} );
-
 		const onFinishMediaUploadWithFailure = jest.fn();
 
 		const wrapper = shallow(
@@ -128,15 +121,11 @@ describe( 'MediaUploadProgress component', () => {
 			/>
 		);
 
+		sendMediaUpload( payloadUploading );
+
 		expect( wrapper.instance().state.progress ).toEqual( progress );
 
-		subscribeMediaUpload.mockImplementation( ( callback ) => {
-			callback( payloadFail );
-		} );
-
-		subscribeMediaUpload( ( payload ) => {
-			wrapper.instance().mediaUpload( payload );
-		} );
+		sendMediaUpload( payloadFail );
 
 		expect( wrapper.instance().state.isUploadInProgress ).toEqual( false );
 		expect( wrapper.instance().state.isUploadFailed ).toEqual( true );
@@ -149,10 +138,6 @@ describe( 'MediaUploadProgress component', () => {
 		const payloadReset = { state: MEDIA_UPLOAD_STATE_RESET, mediaId: MEDIA_ID };
 		const payloadUploading = { state: MEDIA_UPLOAD_STATE_UPLOADING, mediaId: MEDIA_ID, progress };
 
-		subscribeMediaUpload.mockImplementation( ( callback ) => {
-			callback( payloadUploading );
-		} );
-
 		const onMediaUploadStateReset = jest.fn();
 
 		const wrapper = shallow(
@@ -163,15 +148,11 @@ describe( 'MediaUploadProgress component', () => {
 			/>
 		);
 
+		sendMediaUpload( payloadUploading );
+
 		expect( wrapper.instance().state.progress ).toEqual( progress );
 
-		subscribeMediaUpload.mockImplementation( ( callback ) => {
-			callback( payloadReset );
-		} );
-
-		subscribeMediaUpload( ( payload ) => {
-			wrapper.instance().mediaUpload( payload );
-		} );
+		sendMediaUpload( payloadReset );
 
 		expect( wrapper.instance().state.isUploadInProgress ).toEqual( false );
 		expect( wrapper.instance().state.isUploadFailed ).toEqual( false );

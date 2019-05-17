@@ -8,13 +8,6 @@ import {
 	requestMediaPickFromDeviceLibrary,
 	requestMediaPickFromDeviceCamera,
 } from 'react-native-gutenberg-bridge';
-jest.mock( 'react-native-gutenberg-bridge', () => (
-	{
-		requestMediaPickFromMediaLibrary: jest.fn(),
-		requestMediaPickFromDeviceLibrary: jest.fn(),
-		requestMediaPickFromDeviceCamera: jest.fn(),
-	}
-) );
 
 /**
  * Internal dependencies
@@ -29,6 +22,14 @@ import {
 	OPTION_TAKE_VIDEO,
 	OPTION_TAKE_PHOTO,
 } from '../../gutenberg/packages/block-editor/src/components/media-upload/index.native.js';
+
+jest.mock( 'react-native-gutenberg-bridge', () => (
+	{
+		requestMediaPickFromMediaLibrary: jest.fn(),
+		requestMediaPickFromDeviceLibrary: jest.fn(),
+		requestMediaPickFromDeviceCamera: jest.fn(),
+	}
+) );
 
 const MEDIA_URL = 'http://host.media.type';
 const MEDIA_ID = 123;
@@ -55,7 +56,7 @@ describe( 'MediaUpload component', () => {
 	} );
 
 	it( 'shows right media capture option for media type', () => {
-		const expectOptionForVideoType = ( mediaType, expectedOption ) => {
+		const expectOptionForMediaType = ( mediaType, expectedOption ) => {
 			const wrapper = shallow(
 				<MediaUpload
 					mediaType={ mediaType }
@@ -69,8 +70,8 @@ describe( 'MediaUpload component', () => {
 			);
 			expect( wrapper.find( 'Picker' ).props().options.filter( ( item ) => item.label === expectedOption ).length ).toEqual( 1 );
 		};
-		expectOptionForVideoType( MEDIA_TYPE_IMAGE, OPTION_TAKE_PHOTO );
-		expectOptionForVideoType( MEDIA_TYPE_VIDEO, OPTION_TAKE_VIDEO );
+		expectOptionForMediaType( MEDIA_TYPE_IMAGE, OPTION_TAKE_PHOTO );
+		expectOptionForMediaType( MEDIA_TYPE_VIDEO, OPTION_TAKE_VIDEO );
 	} );
 
 	const expectMediaPickerForOption = ( option, requestFunction ) => {
@@ -100,15 +101,15 @@ describe( 'MediaUpload component', () => {
 		expect( onSelectURL ).toHaveBeenCalledWith( MEDIA_ID, MEDIA_URL );
 	};
 
-	it( 'opens device library', () => {
+	it( 'can select media from device library', () => {
 		expectMediaPickerForOption( MEDIA_UPLOAD_BOTTOM_SHEET_VALUE_CHOOSE_FROM_DEVICE, requestMediaPickFromDeviceLibrary );
 	} );
 
-	it( 'opens WP media library', () => {
+	it( 'can select media from WP media library', () => {
 		expectMediaPickerForOption( MEDIA_UPLOAD_BOTTOM_SHEET_VALUE_WORD_PRESS_LIBRARY, requestMediaPickFromMediaLibrary );
 	} );
 
-	it( 'opens media capture', () => {
+	it( 'can select media by capturig', () => {
 		expectMediaPickerForOption( MEDIA_UPLOAD_BOTTOM_SHEET_VALUE_TAKE_MEDIA, requestMediaPickFromDeviceCamera );
 	} );
 } );
