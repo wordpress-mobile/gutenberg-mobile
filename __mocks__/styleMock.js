@@ -64,4 +64,7 @@ module.exports = {
 	iconRetry: {
 		fill: 'gray',
 	},
+	iconUploading: {
+		fill: 'gray',
+	},
 };
