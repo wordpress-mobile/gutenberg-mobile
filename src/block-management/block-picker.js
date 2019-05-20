@@ -12,7 +12,7 @@ import { FlatList, Text, TouchableHighlight, View } from 'react-native';
 /**
  * WordPress dependencies
  */
-import { Icon } from '@wordpress/components';
+import { SVG } from '@wordpress/components';
 import { BottomSheet } from '@wordpress/block-editor';
 import { Component } from '@wordpress/element';
 import { getBlockTypes, getUnregisteredTypeHandlerName } from '@wordpress/blocks';
@@ -64,7 +64,7 @@ export default class BlockPicker extends Component<PropsType> {
 							<View style={ styles.modalItem }>
 								<View style={ styles.modalIconWrapper }>
 									<View style={ styles.modalIcon }>
-										<Icon icon={ item.icon.src } style={ styles.icon } />
+										{ this.iconWithUpdatedFillColor( styles.modalIcon.fill, item.icon ) }
 									</View>
 								</View>
 								<Text style={ styles.modalItemLabel }>{ item.title }</Text>
@@ -73,6 +73,14 @@ export default class BlockPicker extends Component<PropsType> {
 					}
 				/>
 			</BottomSheet>
+		);
+	}
+
+	iconWithUpdatedFillColor( color: string, icon: SVG ) {
+		return (
+			<SVG viewBox={ icon.src.props.viewBox } xmlns={ icon.src.props.xmlns } style={ { fill: color } }>
+				{ icon.src.props.children }
+			</SVG>
 		);
 	}
 
