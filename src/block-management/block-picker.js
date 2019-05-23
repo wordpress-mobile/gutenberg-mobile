@@ -12,8 +12,7 @@ import { FlatList, Text, TouchableHighlight, View } from 'react-native';
 /**
  * WordPress dependencies
  */
-import { Icon } from '@wordpress/components';
-import { BottomSheet, Dashicon, SVG } from '@wordpress/components';
+import { BottomSheet, Icon } from '@wordpress/components';
 import { Component } from '@wordpress/element';
 import { getBlockTypes, getUnregisteredTypeHandlerName } from '@wordpress/blocks';
 
