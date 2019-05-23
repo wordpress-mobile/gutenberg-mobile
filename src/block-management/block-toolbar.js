@@ -66,21 +66,21 @@ export class BlockToolbar extends Component<PropsType> {
 							title={ __( 'Add block' ) }
 							icon={ ( <Dashicon icon="plus-alt" style={ styles.addBlockButton } color={ styles.addBlockButton.color } /> ) }
 							onClick={ onInsertClick }
-							extraProps={ { hint: __( 'Double tap to add a block' ) } }
+							extraProps={ { hint: __( 'Double tap to add a block' ), testIdentifier: 'addBlockButton' } }
 						/>
 						<ToolbarButton
 							title={ __( 'Undo' ) }
 							icon="undo"
 							isDisabled={ ! hasUndo }
 							onClick={ undo }
-							extraProps={ { hint: __( 'Double tap to undo last change' ) } }
+							extraProps={ { hint: __( 'Double tap to undo last change' ), testIdentifier: 'undoButton' } }
 						/>
 						<ToolbarButton
 							title={ __( 'Redo' ) }
 							icon="redo"
 							isDisabled={ ! hasRedo }
 							onClick={ redo }
-							extraProps={ { hint: __( 'Double tap to redo last change' ) } }
+							extraProps={ { hint: __( 'Double tap to redo last change' ), testIdentifier: 'redoButton' } }
 						/>
 					</Toolbar>
 					<BlockControls.Slot />
@@ -92,7 +92,7 @@ export class BlockToolbar extends Component<PropsType> {
 						title={ __( 'Hide keyboard' ) }
 						icon="keyboard-hide"
 						onClick={ this.onKeyboardHide }
-						extraProps={ { hint: __( 'Tap to hide the keyboard' ) } }
+						extraProps={ { hint: __( 'Tap to hide the keyboard' ), testIdentifier: 'hideKeyboardButton' } }
 					/>
 				</Toolbar> ) }
 			</View>

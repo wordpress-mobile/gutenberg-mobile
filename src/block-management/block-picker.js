@@ -59,6 +59,7 @@ export default class BlockPicker extends Component<PropsType> {
 							underlayColor={ 'transparent' }
 							activeOpacity={ .5 }
 							accessibilityLabel={ item.title }
+							testID={ item.testID }
 							onPress={ () => this.props.onValueSelected( item.name ) }>
 							<View style={ styles.modalItem }>
 								<View style={ styles.modalIconWrapper }>
