@@ -185,10 +185,10 @@ export class BlockHolder extends React.Component<PropsType, StateType> {
 		blockName += '. ' + sprintf( __( 'Row %d.' ), order + 1 );
 
 		// Disable adding any specific block accessibility information when running e2e tests
-		if ( getAccessibilityLabelExtra ) {
-			const blockAccessibilityLabel = getAccessibilityLabelExtra( attributes );
-			blockName += blockAccessibilityLabel ? ' ' + blockAccessibilityLabel : '';
-		}
+		// if ( getAccessibilityLabelExtra ) {
+		// 	const blockAccessibilityLabel = getAccessibilityLabelExtra( attributes );
+		// 	blockName += blockAccessibilityLabel ? ' ' + blockAccessibilityLabel : '';
+		// }
 
 		return blockName; // Use one indexing for better accessibility
 	}
@@ -205,13 +205,12 @@ export class BlockHolder extends React.Component<PropsType, StateType> {
 			// https://facebook.github.io/react-native/docs/accessibility#accessible-ios-android
 			<TouchableWithoutFeedback
 				onPress={ this.onFocus }
+				accessible={ ! isSelected }
 			>
 				<View style={ [ styles.blockHolder, borderStyle, { borderColor } ] }>
 					{ this.props.showTitle && this.renderBlockTitle() }
 					<View
-						accessible={ ! isSelected }
 						accessibilityLabel={ accessibilityLabel }
-						accessibilityRole={ 'button' }
 						style={ [ ! isSelected && styles.blockContainer, isSelected && styles.blockContainerFocused ] }
 					>
 						{ isValid && this.getBlockForType() }

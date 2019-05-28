@@ -39,15 +39,20 @@ export default class EditorPage {
 	// and accessibilityId attributes on this object and selects the block
 	// position uses one based numbering
 	async getBlockAtPosition( position: number, blockName: string ) {
-		const blockLocator = `//*[contains(@${ this.accessibilityIdXPathAttrib }, "${ blockName } Block. Row ${ position }.")]`;
-		const elements = await this.driver.elementsByXPath( blockLocator );
-		return elements[ elements.length - 1 ];
+		const blockLocator = `${ blockName } Block. Row ${ position }.`;
+		return await this.driver.elementByAccessibilityId( blockLocator );
 	}
 
 	async hasBlockAtPosition( position: number, blockName: string = '' ) {
-		return undefined !== await this.getBlockAtPosition( position, blockName );
+		if ( blockName !== '' ) {
+			const blockLocator = `${ blockName } Block. Row ${ position }.`;
+			const elements = await this.driver.elementsByAccessibilityId( blockLocator );
+			return elements.length > 0;
+		}
+		const blockLocator = `//*[contains(@${ this.accessibilityIdXPathAttrib }, "Block. Row ${ position }.")]`;
+		const elements = await this.driver.elementsByXPath( blockLocator );
+		return elements.length > 0;
 	}
-
 	// =========================
 	// Block toolbar functions
 	// =========================
