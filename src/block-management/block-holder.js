@@ -185,10 +185,10 @@ export class BlockHolder extends React.Component<PropsType, StateType> {
 		blockName += '. ' + sprintf( __( 'Row %d.' ), order + 1 );
 
 		// Disable adding any specific block accessibility information when running e2e tests
-		if ( getAccessibilityLabelExtra ) {
-			const blockAccessibilityLabel = getAccessibilityLabelExtra( attributes );
-			blockName += blockAccessibilityLabel ? ' ' + blockAccessibilityLabel : '';
-		}
+		// if ( getAccessibilityLabelExtra ) {
+		// 	const blockAccessibilityLabel = getAccessibilityLabelExtra( attributes );
+		// 	blockName += blockAccessibilityLabel ? ' ' + blockAccessibilityLabel : '';
+		// }
 
 		return blockName; // Use one indexing for better accessibility
 	}
