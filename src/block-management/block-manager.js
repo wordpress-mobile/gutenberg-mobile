@@ -20,6 +20,7 @@ import { createBlock, isUnmodifiedDefaultBlock } from '@wordpress/blocks';
 import { PostTitle } from '@wordpress/editor';
 import { DefaultBlockAppender } from '@wordpress/block-editor';
 import { sendNativeEditorDidLayout, subscribeSetFocusOnTitle, subscribeMediaAppend } from 'react-native-gutenberg-bridge';
+import { KeyboardAvoidingView, KeyboardAwareFlatList, ReadableContentView } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -33,16 +34,14 @@ import toolbarStyles from './block-toolbar.scss';
 import BlockPicker from './block-picker';
 import HTMLTextInput from '../components/html-text-input';
 import BlockToolbar from './block-toolbar';
-import KeyboardAvoidingView from '../components/keyboard-avoiding-view';
-import { KeyboardAwareFlatList, handleCaretVerticalPositionChange } from '../components/keyboard-aware-flat-list';
 import SafeArea from 'react-native-safe-area';
-import ReadableContentView from '../components/readable-content-view';
 
 type PropsType = {
 	rootClientId: ?string,
 	blockClientIds: Array<string>,
 	blockCount: number,
-	selectBlock: ( clientId: string ) => void,
+	clearSelectedBlock: () => void,
+	focusBlock: ( clientId: string ) => void,
 	insertBlock: ( block: BlockType, position: number ) => void,
 	replaceBlock: ( string, BlockType ) => mixed,
 	getBlockName: string => string,
@@ -121,9 +120,6 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 			const insertionIndex = indexAfterSelected || this.props.blockCount;
 			this.props.insertBlock( newBlock, insertionIndex );
 		}
-
-		// now set the focus
-		this.props.selectBlock( newBlock.clientId );
 	}
 
 	onSafeAreaInsetsUpdate( result: Object ) {
@@ -207,7 +203,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 	}
 
 	onCaretVerticalPositionChange( targetId: number, caretY: number, previousCaretY: ?number ) {
-		handleCaretVerticalPositionChange( this.scrollViewRef, targetId, caretY, previousCaretY );
+		KeyboardAwareFlatList.handleCaretVerticalPositionChange( this.scrollViewRef, targetId, caretY, previousCaretY );
 	}
 
 	scrollViewInnerRef( ref: Object ) {
@@ -253,7 +249,10 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 
 	renderList() {
 		return (
-			<View style={ { flex: 1 } } >
+			<View
+				style={ { flex: 1 } }
+				onAccessibilityEscape={ this.props.clearSelectedBlock }
+			>
 				<KeyboardAwareFlatList
 					{ ...( Platform.OS === 'android' ? { removeClippedSubviews: false } : {} ) } // Disable clipping on Android to fix focus losing. See https://github.com/wordpress-mobile/gutenberg-mobile/pull/741#issuecomment-472746541
 					accessibilityLabel="block-list"
@@ -378,12 +377,12 @@ export default compose( [
 		const {
 			insertBlock,
 			replaceBlock,
-			selectBlock,
+			clearSelectedBlock,
 		} = dispatch( 'core/block-editor' );
 
 		return {
+			clearSelectedBlock,
 			insertBlock,
-			selectBlock,
 			replaceBlock,
 		};
 	} ),

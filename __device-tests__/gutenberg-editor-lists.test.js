@@ -3,18 +3,15 @@
  * */
 
 /**
- * External dependencies
- */
-import { Platform } from 'react-native';
-
-/**
  * Internal dependencies
  */
 import EditorPage from './pages/editor-page';
 import {
 	setupDriver,
 	isLocalEnvironment,
-	stopDriver } from './helpers/utils';
+	stopDriver,
+	isAndroid,
+} from './helpers/utils';
 import testData from './helpers/test-data';
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 240000;
@@ -48,21 +45,22 @@ describe( 'Gutenberg Editor tests', () => {
 		await editorPage.addNewListBlock();
 		const listBlockElement = await editorPage.getListBlockAtPosition( 1 );
 
+		// Click List block on Android to force EditText focus
+		if ( isAndroid() ) {
+			await listBlockElement.click();
+		}
+
 		// Send the first list item text
 		await editorPage.sendTextToListBlock( listBlockElement, testData.listItem1 );
 
 		// send an Enter
-		await editorPage.sendTextToParagraphBlock( listBlockElement, '\n' );
+		await editorPage.sendTextToListBlock( listBlockElement, '\n' );
 
 		// Send the second list item text
 		await editorPage.sendTextToListBlock( listBlockElement, testData.listItem2 );
 
-		if ( Platform.OS === 'android' ) {
-			// switch to html and verify html
-			await editorPage.verifyHtmlContent( testData.listHtml );
-		} else {
-			// TODO: implement html verification on iOS too
-		}
+		// switch to html and verify html
+		await editorPage.verifyHtmlContent( testData.listHtml );
 	} );
 
 	afterAll( async () => {
