@@ -63,7 +63,7 @@ export default class BlockPicker extends Component<PropsType> {
 							<View style={ styles.modalItem }>
 								<View style={ styles.modalIconWrapper }>
 									<View style={ styles.modalIcon }>
-										<Icon icon={ item.icon.src } style={ { fill: styles.modalIcon.fill } } size={ styles.modalIcon.width } />
+										<Icon icon={ item.icon.src } fill={ styles.modalIcon.fill } size={ styles.modalIcon.width } />
 									</View>
 								</View>
 								<Text style={ styles.modalItemLabel }>{ item.title }</Text>
