@@ -25,6 +25,7 @@ import com.facebook.react.views.textinput.ScrollWatcher;
 import org.wordpress.aztec.AztecText;
 import org.wordpress.aztec.AztecTextFormat;
 import org.wordpress.aztec.ITextFormat;
+import org.wordpress.aztec.formatting.LinkFormatter;
 import org.wordpress.aztec.plugins.IAztecPlugin;
 import org.wordpress.aztec.plugins.IToolbarButton;
 
@@ -320,6 +321,10 @@ public class ReactAztecText extends AztecText {
         UIManagerModule uiManager = reactContext.getNativeModule(UIManagerModule.class);
         final ReactTextInputLocalData localData = new ReactTextInputLocalData(this);
         uiManager.setViewLocalData(getId(), localData);
+    }
+
+    public void setLinkStyle(Integer color) {
+       linkFormatter.setLinkStyle(new LinkFormatter.LinkStyle(color, true));
     }
 
     //// Text changed events
