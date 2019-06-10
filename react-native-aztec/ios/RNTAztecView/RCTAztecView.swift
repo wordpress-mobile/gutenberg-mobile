@@ -193,7 +193,7 @@ class RCTAztecView: Aztec.TextView {
     }
 
     private func cleanHTML() -> String {
-        let html = getHTML(prettify: false)
+        let html = getHTML(prettify: false).replacingOccurrences(of: String(.paragraphSeparator), with: String(.lineSeparator))
         return html
     }
 
@@ -220,13 +220,13 @@ class RCTAztecView: Aztec.TextView {
         let imagesURLs = images.compactMap({ saveToDisk(image: $0)?.absoluteString })
         return imagesURLs
     }
-    
+
     override func paste(_ sender: Any?) {
         let start = selectedRange.location
         let end = selectedRange.location + selectedRange.length
         
         let pasteboard = UIPasteboard.general
-        let text = self.text(from: pasteboard) ?? ""
+        let text = self.text(from: pasteboard)?.replacingOccurrences(of: String(.paragraphSeparator), with: String(.lineFeed)) ?? ""
         let html = self.html(from: pasteboard) ?? ""
         let imagesURLs = self.images(from: pasteboard)
 
