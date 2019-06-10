@@ -171,9 +171,7 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
 
     @ReactProp(name = "text")
     public void setText(ReactAztecText view, ReadableMap inputMap) {
-        String linkTextColor = inputMap.getString("linkTextColor");
         if (!inputMap.hasKey("eventCount")) {
-            view.setLinkStyle(parseLinkTextColor(linkTextColor));
             setTextfromJS(view, inputMap.getString("text"), inputMap.getMap("selection"));
         } else {
             // Don't think there is necessity of this branch, but justin case we want to
@@ -181,10 +179,14 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecText> {
             int eventCount = inputMap.getInt("eventCount");
 
             if (view.mNativeEventCount < eventCount) {
-                view.setLinkStyle(parseLinkTextColor(linkTextColor));
                 setTextfromJS(view, inputMap.getString("text"), inputMap.getMap("selection"));
             }
         }
+    }
+
+    @ReactProp(name = "linkTextColor")
+    public void setLinkTextColor(ReactAztecText view, String linkTextColor) {
+        view.setLinkStyle(parseLinkTextColor(linkTextColor));
     }
 
     private void setTextfromJS(ReactAztecText view, String text, @Nullable ReadableMap selection) {
