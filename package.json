@@ -145,7 +145,7 @@
     "react-native-recyclerview-list": "git+https://github.com/wordpress-mobile/react-native-recyclerview-list.git#eadaa2f62d2f488d4dc80f9148e52b62047297ab",
     "react-native-safe-area": "^0.5.0",
     "react-native-svg": "git+https://github.com/wordpress-mobile/react-native-svg.git#55244dc79ab876550599c82dca763c3eba0153c5",
-    "react-native-video": "git+https://github.com/wordpress-mobile/react-native-video.git#57ad4e840ae91cbb080b142636df7534e4e95410",
+    "react-native-video": "git+https://github.com/wordpress-mobile/react-native-video.git#5a68a0033a209693485d98ed3e0e389809821ccd",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
     "redux-multi": "^0.1.12",
