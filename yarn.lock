@@ -10674,9 +10674,9 @@ react-native-sass-transformer@^1.1.1:
   version "9.3.3"
   resolved "git+https://github.com/wordpress-mobile/react-native-svg.git#55244dc79ab876550599c82dca763c3eba0153c5"
 
-"react-native-video@git+https://github.com/wordpress-mobile/react-native-video.git#57ad4e840ae91cbb080b142636df7534e4e95410":
+"react-native-video@git+https://github.com/wordpress-mobile/react-native-video.git#5a68a0033a209693485d98ed3e0e389809821ccd":
   version "4.4.1"
-  resolved "git+https://github.com/wordpress-mobile/react-native-video.git#57ad4e840ae91cbb080b142636df7534e4e95410"
+  resolved "git+https://github.com/wordpress-mobile/react-native-video.git#5a68a0033a209693485d98ed3e0e389809821ccd"
   dependencies:
     keymirror "^0.1.1"
     prop-types "^15.5.10"
