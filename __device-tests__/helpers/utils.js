@@ -114,7 +114,22 @@ const setupDriver = async () => {
 
 	await driver.setImplicitWaitTimeout( 2000 );
 	await timer( 3000 );
-	return driver;
+
+	return new Proxy( driver, {
+		get: ( original, property ) => {
+			const propertiesToPatch = [
+				'elementByAccessibilityId',
+				'hasElementByAccessibilityId',
+			];
+			if ( isAndroid() && ( propertiesToPatch.includes( property ) ) ) {
+				return async function( value, cb ) {
+					// Add a comma and a space to all ids
+					return await original[ property ]( `${ value }, `, cb );
+				};
+			}
+			return original[ property ];
+		},
+	} );
 };
 
 const stopDriver = async ( driver: wd.PromiseChainWebdriver ) => {
