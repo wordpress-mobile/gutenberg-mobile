@@ -115,6 +115,11 @@ const setupDriver = async () => {
 	await driver.setImplicitWaitTimeout( 2000 );
 	await timer( 3000 );
 
+	// Proxy driver to patch functions on Android
+	// This is needed to adapt to changes in the way accessibility ids are being
+	// assigned after migrating to AndroidX and React Native 0.60. See:
+	// https://github.com/wordpress-mobile/gutenberg-mobile/pull/1112#issuecomment-501165250
+	// for more details.
 	return new Proxy( driver, {
 		get: ( original, property ) => {
 			const propertiesToPatch = [

@@ -18,6 +18,11 @@ export default class EditorPage {
 	accessibilityIdXPathAttrib: string;
 	paragraphBlockName = 'Paragraph';
 	listBlockName = 'List';
+
+	// This is needed to adapt to changes in the way accessibility ids are being
+	// assigned after migrating to AndroidX and React Native 0.60. See:
+	// https://github.com/wordpress-mobile/gutenberg-mobile/pull/1112#issuecomment-501165250
+	// for more details.
 	accessibilityIdSuffix = '';
 
 	constructor( driver: wd.PromiseChainWebdriver ) {
