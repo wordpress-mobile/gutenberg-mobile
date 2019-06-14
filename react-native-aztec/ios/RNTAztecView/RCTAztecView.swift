@@ -34,6 +34,16 @@ class RCTAztecView: Aztec.TextView {
         }
     }
 
+    @objc var plainText: NSDictionary? {
+        didSet {
+            self.text = plainText?["text"] as? String
+            if let content = plainText {
+                setSelection(from: content)
+            }
+            updatePlaceholderVisibility()
+        }
+    }
+
     override var textAlignment: NSTextAlignment {
         didSet {
             super.textAlignment = textAlignment
@@ -389,6 +399,10 @@ class RCTAztecView: Aztec.TextView {
         setHTML(html)
         updatePlaceholderVisibility()
         refreshFont()
+        setSelection(from: contents)
+    }
+
+    func setSelection(from contents: NSDictionary) {
         if let selection = contents["selection"] as? NSDictionary,
             let start = selection["start"] as? NSNumber,
             let end = selection["end"]  as? NSNumber {
@@ -552,6 +566,14 @@ class RCTAztecView: Aztec.TextView {
         }
     }
 
+    func propagatePlainTextChanges() {
+        guard let onChange = onChange else {
+            return
+        }
+        let content = packForRN(text, withName: "plainText")
+        onChange(content)
+    }
+
     func propagateSelectionChanges() {
         guard let onSelectionChange = onSelectionChange else {
             return
@@ -577,9 +599,16 @@ extension RCTAztecView: UITextViewDelegate {
             return
         }
 
+        updatePlaceholderVisibility()
+
+        guard plainText == nil else {
+            propagatePlainTextChanges()
+            return
+        }
+
         forceTypingAttributesIfNeeded()
         propagateContentChanges()
-        updatePlaceholderVisibility()
+
         //Necessary to send height information to JS after pasting text.
         textView.setNeedsLayout()
     }

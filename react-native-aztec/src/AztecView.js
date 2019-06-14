@@ -172,7 +172,7 @@ class AztecView extends React.Component {
           // combination generate an infinite loop as described in https://github.com/wordpress-mobile/gutenberg-mobile/issues/302
           onFocus = { this._onAztecFocus } 
           onBlur = { this._onBlur }
-		      onBackspace = { this._onBackspace }
+          onBackspace = { this.props.onBackspace }
         />
       </TouchableWithoutFeedback>
     );
