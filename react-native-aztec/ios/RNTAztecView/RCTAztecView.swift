@@ -36,6 +36,9 @@ class RCTAztecView: Aztec.TextView {
 
     @objc var plainText: NSDictionary? {
         didSet {
+            guard plainText?["eventCount"] == nil else {
+                return
+            }
             self.text = plainText?["text"] as? String
             if let content = plainText {
                 setSelection(from: content)
