@@ -114,6 +114,7 @@ const setupDriver = async () => {
 
 	await driver.setImplicitWaitTimeout( 2000 );
 	await timer( 3000 );
+	await driver.setOrientation( 'PORTRAIT' );
 
 	// Proxy driver to patch functions on Android
 	// This is needed to adapt to changes in the way accessibility ids are being
@@ -203,6 +204,51 @@ const clickBeginningOfElement = async ( driver: wd.PromiseChainWebdriver, elemen
 	await action.perform();
 };
 
+// long press to activate context menu
+const longPressMiddleOfElement = async ( driver: wd.PromiseChainWebdriver, element: wd.PromiseChainWebdriver.Element ) => {
+	const location = await element.getLocation();
+	const size = await element.getSize();
+
+	const action = await new wd.TouchAction( driver );
+	const x = location.x + ( size.width / 2 );
+	const y = location.y + ( size.height / 2 );
+	action.press( { x, y } );
+	action.wait( 2000 );
+	action.release();
+	await action.perform();
+};
+
+// press "Select All" in floating context menu
+const tapSelectAllAboveElement = async ( driver: wd.PromiseChainWebdriver, element: wd.PromiseChainWebdriver.Element ) => {
+	const location = await element.getLocation();
+	const action = await new wd.TouchAction( driver );
+	const x = location.x + 300;
+	const y = location.y - 50;
+	action.press( { x, y } );
+	action.release();
+	await action.perform();
+};
+
+// press "Copy" in floating context menu
+const tapCopyAboveElement = async ( driver: wd.PromiseChainWebdriver, element: wd.PromiseChainWebdriver.Element ) => {
+	const location = await element.getLocation();
+	const action = await new wd.TouchAction( driver );
+	const x = location.x + 220;
+	const y = location.y - 50;
+	action.press( { x, y } );
+	action.release();
+	await action.perform();
+};
+
+// press "Paste" in floating context menu
+const tapPasteAboveElement = async ( driver: wd.PromiseChainWebdriver, element: wd.PromiseChainWebdriver.Element ) => {
+	const location = await element.getLocation();
+	const action = await new wd.TouchAction( driver );
+	action.press( { x: location.x + 100, y: location.y - 50 } );
+	action.release();
+	await action.perform();
+};
+
 // Starts from the middle of the screen or the element(if specified)
 // and swipes upwards
 const swipeUp = async ( driver: wd.PromiseChainWebdriver, element: wd.PromiseChainWebdriver.Element = undefined ) => {
@@ -253,6 +299,15 @@ const toggleHtmlMode = async ( driver: wd.PromiseChainWebdriver, toggleOn: boole
 	}
 };
 
+const toggleOrientation = async ( driver: wd.PromiseChainWebdriver ) => {
+	const orientation = await driver.getOrientation();
+	if ( orientation === 'LANDSCAPE' ) {
+		await driver.setOrientation( 'PORTRAIT' );
+	} else {
+		await driver.setOrientation( 'LANDSCAPE' );
+	}
+};
+
 module.exports = {
 	timer,
 	setupDriver,
@@ -261,7 +316,12 @@ module.exports = {
 	typeString,
 	clickMiddleOfElement,
 	clickBeginningOfElement,
+	longPressMiddleOfElement,
+	tapSelectAllAboveElement,
+	tapCopyAboveElement,
+	tapPasteAboveElement,
 	swipeUp,
 	stopDriver,
 	toggleHtmlMode,
+	toggleOrientation,
 };
