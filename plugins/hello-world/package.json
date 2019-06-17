@@ -1,0 +1,8 @@
+{
+  "name": "gutenberg-plugin-hello-world",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+  }
+}
