@@ -35,6 +35,17 @@ const editorSetup = () => {
 	editPost.initializeEditor();
 };
 
+const loadPlugins = () => {
+	window.wp = {
+		blocks: require( '@wordpress/blocks' ),
+		data: require( '@wordpress/data' ),
+		editor: require( '@wordpress/editor' ),
+		element: require( '@wordpress/element' ),
+		i18n: require( '@wordpress/i18n' ),
+	};
+	require( '@wordpress-mobile/gutenberg-plugin-hello-world' );
+};
+
 const setupLocale = ( locale, extraTranslations ) => {
 	I18nManager.forceRTL( false ); // Change to `true` to debug RTL layout easily.
 
@@ -81,4 +92,5 @@ export function registerApp() {
 export function bootstrapEditor() {
 	gutenbergSetup();
 	editorSetup();
+	loadPlugins();
 }
