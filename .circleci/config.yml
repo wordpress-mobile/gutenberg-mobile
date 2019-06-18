@@ -121,13 +121,9 @@ jobs:
         name: Bundle iOS and Generate debug .app file for testing
         command: yarn test:e2e:build-app:ios
     - run:
-        name: Upload .app to sauce labs
-        command: |
-          curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg.app.zip?overwrite=true --data-binary @./ios/Gutenberg.app.zip
-    - run:
         name: Run Device Tests
         command: |
-          yarn device-tests
+          TEST_ENV=local yarn device-tests
         environment:
           JEST_JUNIT_OUTPUT: "reports/test-results/ios-test-results.xml"
     - store_test_results:
