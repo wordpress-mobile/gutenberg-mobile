@@ -14,7 +14,7 @@ class PlainText extends TextInput {
 			this._editor.blur();
 		}
 
-		super.componentDidMount( prevProps );
+		super.componentDidUpdate( prevProps );
 	}
 
 	render() {
