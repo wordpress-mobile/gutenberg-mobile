@@ -155,6 +155,7 @@ dependencies {
     implementation project(':react-native-aztec')
     implementation project(':react-native-recyclerview-list')
     implementation project(':react-native-gutenberg-bridge')
+    implementation project(':react-native-plain-text')
     implementation "org.wordpress:utils:$wordpressUtilsVersion"
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
