@@ -20,7 +20,6 @@ class PlainText extends TextInput {
 	render() {
 		const props = Object.assign( {}, this.props );
 		props.style = [ this.props.style ];
-		props.style.unshift( styles.multilineInput );
 
 		if ( props.selection && props.selection.end === null ) {
 			props.selection = {
@@ -50,12 +49,6 @@ class PlainText extends TextInput {
 		);
 	}
 }
-
-const styles = StyleSheet.create( {
-	multilineInput: {
-		paddingTop: 5,
-	},
-} );
 
 const RNPlainText = requireNativeComponent( 'RNPlainText', PlainText );
 
