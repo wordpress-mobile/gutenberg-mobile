@@ -1,10 +1,12 @@
+/**
+ * External dependencies
+ */
 import React from 'react';
 import { requireNativeComponent, TextInput, StyleSheet } from 'react-native';
 
 const emptyFunctionThatReturnsTrue = () => true;
 
 class PlainText extends TextInput {
-
 	componentDidUpdate( prevProps ) {
 		if ( this.props.isSelected && ! prevProps.isSelected ) {
 			this._editor.focus();
@@ -20,7 +22,7 @@ class PlainText extends TextInput {
 		props.style = [ this.props.style ];
 		props.style.unshift( styles.multilineInput );
 
-		if ( props.selection && props.selection.end == null ) {
+		if ( props.selection && props.selection.end === null ) {
 			props.selection = {
 				start: props.selection.start,
 				end: props.selection.start,
@@ -29,7 +31,7 @@ class PlainText extends TextInput {
 
 		return (
 			<RNPlainText
-				ref={ (ref) => {
+				ref={ ( ref ) => {
 					this._editor = ref;
 					this._setNativeRef( ref );
 				} }
@@ -49,14 +51,11 @@ class PlainText extends TextInput {
 	}
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create( {
 	multilineInput: {
-	  // This default top inset makes RCTMultilineTextInputView seem as close as possible
-	  // to single-line RCTSinglelineTextInputView defaults, using the system defaults
-	  // of font size 17 and a height of 31 points.
-	  paddingTop: 5,
+		paddingTop: 5,
 	},
-  });
+} );
 
 const RNPlainText = requireNativeComponent( 'RNPlainText', PlainText );
 
