@@ -15,6 +15,8 @@ import { setLocaleData } from '@wordpress/i18n';
 import './globals';
 import { getTranslation } from '../i18n-cache';
 
+import 'gutenberg-plugin-hello-world';
+
 const gutenbergSetup = () => {
 	const apiFetch = require( '@wordpress/api-fetch' ).default;
 	const wpData = require( '@wordpress/data' );
@@ -33,18 +35,6 @@ const editorSetup = () => {
 	const editPost = require( '@wordpress/edit-post' );
 
 	editPost.initializeEditor();
-	exposeGlobals();
-	require( 'gutenberg-plugin-hello-world' );
-};
-
-const exposeGlobals = () => {
-	window.wp = {
-		blocks: require( '@wordpress/blocks' ),
-		data: require( '@wordpress/data' ),
-		editor: require( '@wordpress/editor' ),
-		element: require( '@wordpress/element' ),
-		i18n: require( '@wordpress/i18n' ),
-	};
 };
 
 const setupLocale = ( locale, extraTranslations ) => {
