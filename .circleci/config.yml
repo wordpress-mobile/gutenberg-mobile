@@ -99,7 +99,7 @@ jobs:
         name: Set Environment Variables
         command: |
           echo 'export TEST_RN_PLATFORM=ios' >> $BASH_ENV
-          echo 'export TEST_ENV=sauce' >> $BASH_ENV
+          echo 'export TEST_ENV=local' >> $BASH_ENV
     - restore_cache:
         name: Restore Dependencies Cache
         keys:
@@ -123,7 +123,7 @@ jobs:
     - run:
         name: Run Device Tests
         command: |
-          TEST_ENV=local yarn device-tests
+          yarn device-tests
         environment:
           JEST_JUNIT_OUTPUT: "reports/test-results/ios-test-results.xml"
     - store_test_results:
