@@ -33,6 +33,7 @@
     "eslint-plugin-react-native": "^3.6.0",
     "eslint-plugin-wordpress": "git://github.com/WordPress-Coding-Standards/eslint-plugin-wordpress.git#552af1454d175e15f6d25aadc2ccde30a1922d4f",
     "flow-bin": "0.92.0",
+    "haul": "^1.0.0-rc.15",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.1.0",
     "jest-junit": "^6.3.0",
@@ -116,7 +117,8 @@
     "clean:i18n-cache": "rm -rf ./i18n-cache/data/*.json && rm -f ./i18n-cache/index.native.js",
     "lint": "eslint . --ext .js",
     "lint:fix": "yarn lint --fix",
-    "version": "yarn bundle && git add -A bundle"
+    "version": "yarn bundle && git add -A bundle",
+    "haul": "haul"
   },
   "dependencies": {
     "@babel/runtime": "^7.3.1",
