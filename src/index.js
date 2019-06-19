@@ -3,7 +3,7 @@
  */
 import { AppRegistry, I18nManager, YellowBox } from 'react-native';
 import React from 'react';
-
+import HelloWorld from  'gutenberg-plugin-hello-world';
 /**
  * WordPress dependencies
  */

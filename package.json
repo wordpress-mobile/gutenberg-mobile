@@ -122,6 +122,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.3.1",
+    "@wordpress-mobile/gutenberg-plugin-hello-world": "1.0.2",
     "classnames": "^2.2.5",
     "dom-react": "^2.2.1",
     "domutils": "^1.7.0",

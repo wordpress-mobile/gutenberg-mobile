@@ -44,14 +44,16 @@ function getWatchFolders(nodeModules) {
 const options = { 
 	projectRoot: path.resolve(__dirname),
 	watchFolders: getWatchFolders(path.resolve(__dirname, '..')),
-	extraNodeModules: extend ({
-      		'react-native': path.resolve(__dirname, 'node_modules/react-native'), 
-  		},
-      	enm
-     ),
+	extraNodeModules: extend (
+    {
+  		'react-native': path.resolve(__dirname, 'node_modules/react-native'), 
+      'gutenberg-plugin-hello-world': path.resolve(__dirname, '../plugins/gutenberg-plugin-hello-world')
+  	},
+    enm
+  ),
 	resolver: {
 		sourceExts: [ 'js', 'json', 'scss', 'sass' ],
-		blacklistRE: getBlacklistRE()
+		blacklistRE: getBlacklistRE(),
 	},
 	transformer: {
 		babelTransformerPath: require.resolve( './sass-transformer.js' ),
