@@ -5,6 +5,14 @@ import { createWebpackConfig } from 'haul';
 import merge from 'webpack-merge';
 import path from 'path';
 
+const gutenbergPackages = ( () => {
+	const dependencies = require( './gutenberg/package' ).dependencies;
+	return Object.keys( dependencies ).reduce( ( memo, module ) => {
+		memo[ module ] = path.resolve( dependencies[ module ].replace( /^file:/, 'gutenberg/' ) );
+		return memo;
+	}, {} );
+} )();
+
 export default {
 	webpack: ( env ) => {
 		const { platform } = env;
@@ -17,6 +25,10 @@ export default {
 			{
 				module: {
 					rules: [
+						{
+							test: /\.js?$/,
+							loaders: [ 'babel-loader' ],
+						},
 						{
 							test: /\.scss$/,
 							use: [
@@ -55,7 +67,8 @@ export default {
 				},
 				resolve: {
 					alias: {
-						'^@wordpress/(.+)': 'gutenberg/packages/\\1',
+						...gutenbergPackages,
+						'react-native-aztec': path.resolve( 'react-native-aztec' ),
 						'react-native-gutenberg-bridge': path.resolve( 'react-native-gutenberg-bridge' ),
 					},
 				},

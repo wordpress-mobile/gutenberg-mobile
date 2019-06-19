@@ -19,6 +19,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^24.1.0",
+    "babel-loader": "^8.0.6",
     "babel-plugin-module-resolver": "^3.2.0",
     "babel-plugin-react-native-classname-to-style": "^1.2.1",
     "babel-plugin-react-native-platform-specific-extensions": "^1.1.1",
