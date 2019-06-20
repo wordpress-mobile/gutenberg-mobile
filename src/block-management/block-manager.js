@@ -18,22 +18,20 @@ import { withDispatch, withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import { createBlock, isUnmodifiedDefaultBlock } from '@wordpress/blocks';
 import { PostTitle } from '@wordpress/editor';
-import { DefaultBlockAppender, Inserter } from '@wordpress/block-editor';
+import { BlockListBlock, BlockToolbar, DefaultBlockAppender, Inserter } from '@wordpress/block-editor';
 import { sendNativeEditorDidLayout, subscribeSetFocusOnTitle, subscribeMediaAppend } from 'react-native-gutenberg-bridge';
 import { KeyboardAvoidingView, KeyboardAwareFlatList, ReadableContentView } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import BlockHolder from './block-holder';
 import type { BlockType } from '../store/types';
 import styles from './block-manager.scss';
-import blockHolderStyles from './block-holder.scss';
-import inlineToolbarStyles from './inline-toolbar/style.scss';
-import toolbarStyles from './block-toolbar.scss';
 import HTMLTextInput from '../components/html-text-input';
-import BlockToolbar from './block-toolbar';
 import SafeArea from 'react-native-safe-area';
+
+const blockMobileToolbarHeight = 44;
+const toolbarHeight = 44;
 
 type PropsType = {
 	rootClientId: ?string,
@@ -219,7 +217,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 				<DefaultBlockAppender
 					rootClientId={ this.props.rootClientId }
 					containerStyle={ [
-						blockHolderStyles.blockContainerFocused,
+						styles.blockContainerFocused,
 						this.blockHolderBorderStyle(),
 						{ borderColor: 'transparent' },
 					] }
@@ -256,8 +254,8 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 					{ ...( Platform.OS === 'android' ? { removeClippedSubviews: false } : {} ) } // Disable clipping on Android to fix focus losing. See https://github.com/wordpress-mobile/gutenberg-mobile/pull/741#issuecomment-472746541
 					accessibilityLabel="block-list"
 					innerRef={ this.scrollViewInnerRef }
-					blockToolbarHeight={ toolbarStyles.container.height }
-					innerToolbarHeight={ inlineToolbarStyles.toolbar.height }
+					blockToolbarHeight={ toolbarHeight }
+					innerToolbarHeight={ blockMobileToolbarHeight }
 					safeAreaBottomInset={ this.state.safeAreaBottomInset }
 					parentHeight={ this.state.rootViewHeight }
 					keyboardShouldPersistTaps="always"
@@ -272,7 +270,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 					ListEmptyComponent={ this.renderDefaultBlockAppender }
 				/>
 				<SafeAreaView>
-					<View style={ { height: toolbarStyles.container.height } } />
+					<View style={ { height: toolbarHeight } } />
 				</SafeAreaView>
 				<KeyboardAvoidingView
 					style={ styles.blockToolbarKeyboardAvoidingView }
@@ -321,7 +319,7 @@ export class BlockManager extends React.Component<PropsType, StateType> {
 
 		return (
 			<ReadableContentView>
-				<BlockHolder
+				<BlockListBlock
 					key={ clientId }
 					showTitle={ false }
 					clientId={ clientId }
