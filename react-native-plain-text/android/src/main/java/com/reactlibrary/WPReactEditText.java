@@ -35,6 +35,7 @@ public class WPReactEditText extends ReactEditText {
             private int start = 0;
             private int selStart;
             private int selEnd;
+            private boolean shouldDelteEnter = false;
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -53,13 +54,17 @@ public class WPReactEditText extends ReactEditText {
                         EventDispatcher eventDispatcher = reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher();
                         eventDispatcher.dispatchEvent(
                                 new WPReactEnterEvent(getId(), newTextCopy.replace(this.start, this.start+1, "").toString(), selStart, selEnd, true, incrementAndGetEventCounter()));
+                        shouldDelteEnter = true;
                     }
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (shouldDelteEnter && s.length() > 0 && this.start < s.length() && s.charAt(this.start) == '\n') {
+                    s.replace(start, start + 1, "");
+                    shouldDelteEnter = false;
+                }
             }
         });
     }
