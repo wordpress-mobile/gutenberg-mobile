@@ -16,6 +16,9 @@ const gutenbergPackages = ( () => {
 export default {
 	webpack: ( env ) => {
 		const { platform } = env;
+		// Hot reloading wraps components in a proxy component
+		// breaking Gutenberg's serialization.
+		env.disableHotReloading = true;
 		const defaultConfig = createWebpackConfig( {
 			entry: `./index.js`,
 		} )( env );
