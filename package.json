@@ -46,7 +46,6 @@
     "prettier-eslint": "^8.8.2",
     "prettier-eslint-cli": "^4.7.1",
     "react-dom": "16.6.1",
-    "react-hot-loader": "^4.11.1",
     "react-native-sass-transformer": "^1.1.1",
     "react-test-renderer": "16.8.3",
     "regenerator-runtime": "^0.12.1",
