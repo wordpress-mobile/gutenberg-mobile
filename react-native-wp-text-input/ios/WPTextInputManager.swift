@@ -1,12 +1,12 @@
 import Foundation
 
-@objc (RNPlainTextManager)
-public class RNPlainTextManager: RCTBaseTextInputViewManager {
+@objc (WPTextInputManager)
+public class WPTextInputManager: RCTBaseTextInputViewManager {
     public override static func requiresMainQueueSetup() -> Bool {
         return true
     }
 
     @objc public override func view() -> UIView {
-        return RNBackedPlainTextView(bridge: self.bridge)
+        return WPBackedTextInputView(bridge: self.bridge)
     }
 }

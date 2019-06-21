@@ -1,16 +1,16 @@
 import UIKit
 
-protocol RNPlainTextDelegate: class {
+protocol WPTextInputDelegate: class {
     var shouldInterceptEnter: Bool { get }
     func onEnterPress()
 }
 
-class RNPlainText: RCTUITextView {
-    weak var plainTextDelegate: RNPlainTextDelegate?
+class WPTextInptu: RCTUITextView {
+    weak var wpTextInputDelegate: WPTextInputDelegate?
 
     private func interceptEnter(_ text: String) -> Bool {
         guard
-            let delegate = plainTextDelegate,
+            let delegate = wpTextInputDelegate,
             delegate.shouldInterceptEnter,
             text == "\n"
         else {

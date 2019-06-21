@@ -3,10 +3,11 @@
  */
 import React from 'react';
 import { requireNativeComponent, TextInput, StyleSheet, Platform, UIManager, TouchableWithoutFeedback } from 'react-native';
+const NativeWPTextInput = requireNativeComponent( 'WPTextInput' );
 
 const emptyFunctionThatReturnsTrue = () => true;
 
-class PlainText extends TextInput {
+export default class WPTextInput extends TextInput {
 	componentDidUpdate( prevProps ) {
 		if ( this.props.isSelected && ! prevProps.isSelected ) {
 			this._editor.focus();
@@ -38,7 +39,7 @@ class PlainText extends TextInput {
 		}
 
 		return (
-			<RNPlainText
+			<NativeWPTextInput
 				ref={ ( ref ) => {
 					this._editor = ref;
 					this._setNativeRef( ref );
@@ -123,7 +124,3 @@ class PlainText extends TextInput {
 		);
 	  }
 }
-
-const RNPlainText = requireNativeComponent( 'RNPlainText', PlainText );
-
-export default PlainText;
