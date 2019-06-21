@@ -5,7 +5,7 @@ protocol WPTextInputDelegate: class {
     func onEnterPress()
 }
 
-class WPTextInptu: RCTUITextView {
+class WPTextInput: RCTUITextView {
     weak var wpTextInputDelegate: WPTextInputDelegate?
 
     private func interceptEnter(_ text: String) -> Bool {

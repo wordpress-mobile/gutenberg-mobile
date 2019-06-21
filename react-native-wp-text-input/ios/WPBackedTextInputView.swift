@@ -1,8 +1,8 @@
 import UIKit
 
 class WPBackedTextInputView: RCTBaseTextInputView {
-    lazy var _backedTextInputView: WPTextInptu = {
-        let textInput = WPTextInptu(frame: self.bounds)
+    lazy var _backedTextInputView: WPTextInput = {
+        let textInput = WPTextInput(frame: self.bounds)
         textInput.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         textInput.backgroundColor = .clear
         textInput.textColor = .black
