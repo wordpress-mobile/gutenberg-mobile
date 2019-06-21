@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7E66026322B7E440009AA34D /* WPTextInptuManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E66026222B7E440009AA34D /* WPTextInptuManager.m */; };
+		7E66026322B7E440009AA34D /* WPTextInputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E66026222B7E440009AA34D /* WPTextInputManager.m */; };
 		7E66026722B7FD27009AA34D /* WPTextInputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E66026622B7FD27009AA34D /* WPTextInputManager.swift */; };
-		7E66026922B7FE3C009AA34D /* WPTextInptu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E66026822B7FE3C009AA34D /* WPTextInptu.swift */; };
+		7E66026922B7FE3C009AA34D /* WPTextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E66026822B7FE3C009AA34D /* WPTextInput.swift */; };
 		7E6602B722B8B8BF009AA34D /* WPBackedTextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6602B622B8B8BF009AA34D /* WPBackedTextInputView.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,10 +51,10 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libWPTextInput.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWPTextInput.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E66026222B7E440009AA34D /* WPTextInptuManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WPTextInptuManager.m; sourceTree = "<group>"; };
+		7E66026222B7E440009AA34D /* WPTextInputManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WPTextInputManager.m; sourceTree = "<group>"; };
 		7E66026522B7FD27009AA34D /* WPTextInput-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WPTextInput-Bridging-Header.h"; sourceTree = "<group>"; };
 		7E66026622B7FD27009AA34D /* WPTextInputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPTextInputManager.swift; sourceTree = "<group>"; };
-		7E66026822B7FE3C009AA34D /* WPTextInptu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPTextInptu.swift; sourceTree = "<group>"; };
+		7E66026822B7FE3C009AA34D /* WPTextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPTextInput.swift; sourceTree = "<group>"; };
 		7E66027F22B8065D009AA34D /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		7E6602B622B8B8BF009AA34D /* WPBackedTextInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPBackedTextInputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,10 +81,10 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				7E66026222B7E440009AA34D /* WPTextInptuManager.m */,
+				7E66026222B7E440009AA34D /* WPTextInputManager.m */,
 				7E66026622B7FD27009AA34D /* WPTextInputManager.swift */,
 				7E6602B622B8B8BF009AA34D /* WPBackedTextInputView.swift */,
-				7E66026822B7FE3C009AA34D /* WPTextInptu.swift */,
+				7E66026822B7FE3C009AA34D /* WPTextInput.swift */,
 				7E66026522B7FD27009AA34D /* WPTextInput-Bridging-Header.h */,
 				134814211AA4EA7D00B7C361 /* Products */,
 				7E66027E22B80652009AA34D /* Libraries */,
@@ -191,9 +191,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E6602B722B8B8BF009AA34D /* WPBackedTextInputView.swift in Sources */,
-				7E66026922B7FE3C009AA34D /* WPTextInptu.swift in Sources */,
+				7E66026922B7FE3C009AA34D /* WPTextInput.swift in Sources */,
 				7E66026722B7FD27009AA34D /* WPTextInputManager.swift in Sources */,
-				7E66026322B7E440009AA34D /* WPTextInptuManager.m in Sources */,
+				7E66026322B7E440009AA34D /* WPTextInputManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
