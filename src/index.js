@@ -33,6 +33,7 @@ const editorSetup = () => {
 	const editPost = require( '@wordpress/edit-post' );
 
 	editPost.initializeEditor();
+  require('gutenberg-mobile-plugins');
 };
 
 const setupLocale = ( locale, extraTranslations ) => {
