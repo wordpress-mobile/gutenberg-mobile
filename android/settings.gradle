@@ -10,7 +10,7 @@ project(':react-native-recyclerview-list').projectDir = new File(rootProject.pro
 include ':react-native-gutenberg-bridge'
 project(':react-native-gutenberg-bridge').projectDir = new File(rootProject.projectDir, '../react-native-gutenberg-bridge/android')
 
-include ':react-native-plain-text'
-project(':react-native-plain-text').projectDir = new File(rootProject.projectDir, '../react-native-plain-text/android')
+include ':react-native-wp-text-input'
+project(':react-native-wp-text-input').projectDir = new File(rootProject.projectDir, '../react-native-wp-text-input/android')
 
 include ':app'

@@ -10,7 +10,7 @@ import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 
-public class RNPlainTextPackage implements ReactPackage {
+public class WPTextInputPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         return Collections.emptyList();
@@ -19,7 +19,7 @@ public class RNPlainTextPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         List<ViewManager> views = new ArrayList<>();
-        views.add(new RNPlainTextManager());
+        views.add(new WPTextInputManager());
         return views;
     }
 }

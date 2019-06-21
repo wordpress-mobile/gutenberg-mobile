@@ -89,7 +89,7 @@ export default class WPTextInput extends TextInput {
 		}
 
 		const textContainer = (
-		  <RNPlainText
+		  <NativeWPTextInput
 			ref={ ( ref ) => {
 				this._editor = ref;
 				this._setNativeRef( ref );

@@ -10,7 +10,7 @@ import com.facebook.react.views.textinput.ReactTextInputManager;
 
 import java.util.Map;
 
-public class RNPlainTextManager extends ReactTextInputManager {
+public class WPTextInputManager extends ReactTextInputManager {
 
     @Override
     public ReactEditText createViewInstance(ThemedReactContext reactContext) {
@@ -35,6 +35,6 @@ public class RNPlainTextManager extends ReactTextInputManager {
 
     @Override
     public String getName() {
-        return "RNPlainText";
+        return "WPTextInput";
     }
 }

@@ -18,7 +18,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.reactlibrary.RNPlainTextPackage;
+import com.reactlibrary.WPTextInputPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -106,7 +106,7 @@ public class MainApplication extends Application implements ReactApplication {
                         new SvgPackage(),
                         new ReactAztecPackage(),
                         new RNRecyclerviewListPackage(),
-                        new RNPlainTextPackage(),
+                        new WPTextInputPackage(),
                         mRnReactNativeGutenbergBridgePackage);
             }
 
