@@ -30,7 +30,12 @@ export default {
 					rules: [
 						{
 							test: /\.js?$/,
-							loaders: [ 'babel-loader' ],
+              use: [ 'babel-loader' ],
+						},
+						{
+							test: /\.js?$/,
+              use: [ 'source-map-loader' ],
+              enforce: 'pre'
 						},
 						{
 							test: /\.scss$/,
