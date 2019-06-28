@@ -7,23 +7,41 @@ set -e
 cd "$( dirname $0 )"
 cd ..
 
-# Check for cocoapods
+# Check for cocoapods & jq
 command -v pod > /dev/null || ( echo Cocoapods is required to generate podspecs; exit 1 )
+command -v jq > /dev/null || ( echo jq is required to generate podspecs; exit 1 )
 
-PODSPECS=$(cat <<EOP
-node_modules/react-native/React.podspec
-node_modules/react-native/ReactCommon/yoga/yoga.podspec
-node_modules/react-native/third-party-podspecs/Folly.podspec
-node_modules/react-native/third-party-podspecs/DoubleConversion.podspec
-node_modules/react-native/third-party-podspecs/glog.podspec
-EOP
-)
+# Change to the React Native directory to get relative paths
+WD=$(pwd)
+cd "node_modules/react-native"
 
-DEST="react-native-gutenberg-bridge/third-party-podspecs"
+RN_PODSPECS=$(find * -type f -name "*.podspec" -not -path "third-party-podspecs/*" -print)
+EXTERNAL_PODSPECS=$(find "third-party-podspecs" -type f -name "*.podspec" -print)
 
-for podspec in $PODSPECS
+DEST="${WD}/react-native-gutenberg-bridge/third-party-podspecs"
+TMP_DEST=$(mktemp -d)
+
+for podspec in $RN_PODSPECS
 do
-    pod=`basename $podspec .podspec`
+    pod=$(basename "$podspec" .podspec)
+    path=$(dirname "$podspec")
+
+    echo "Generating podspec for $pod with path $path"
+    pod ipc spec $podspec > "$TMP_DEST/$pod.podspec.json"
+    cat "$TMP_DEST/$pod.podspec.json" | jq > "$DEST/$pod.podspec.json"
+
+    # Add a "prepare_command" entry to each podspec so that 'pod install' will fetch sources from the correct directory
+    # and retains the existing prepare_command if it exists
+    prepare_command="TMP_DIR=\$(mktemp -d); mv * \$TMP_DIR; cp -R \"\$TMP_DIR/${path}\"/* ."
+    cat "$TMP_DEST/$pod.podspec.json" | jq --arg CMD "$prepare_command" '.prepare_command = "\($CMD) && \(.prepare_command // true)"
+                                                                         # Point to React Native fork. To be removed once https://github.com/facebook/react-native/issues/25349 is closed
+                                                                         | .source.git = "https://github.com/jtreanor/react-native.git"' > "$DEST/$pod.podspec.json"
+done
+
+for podspec in $EXTERNAL_PODSPECS
+do
+    pod=$(basename "$podspec" .podspec)
+
     echo "Generating podspec for $pod"
-    INSTALL_YOGA_WITHOUT_PATH_OPTION=1 pod ipc spec $podspec > "$DEST/$pod.podspec.json"
+    pod ipc spec $podspec > "$DEST/$pod.podspec.json"
 done
