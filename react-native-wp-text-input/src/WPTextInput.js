@@ -61,7 +61,6 @@ export default class WPTextInput extends TextInput {
 	_wpRenderAndroid() {
 		const props = Object.assign( {}, this.props );
 		props.style = [ this.props.style ];
-		debugger
 		const config = UIManager.getViewManagerConfig(
 			'AndroidTextInput',
 		);

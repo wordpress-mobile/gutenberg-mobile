@@ -49,12 +49,12 @@ if ( ! global.window.matchMedia ) {
 const mockNativeModules = {
 	UIManager: {
 		...NativeModules.UIManager,
-		getViewManagerConfig: jest.fn( () => ( { 
-			Commands: {}, 
+		getViewManagerConfig: jest.fn( () => ( {
+			Commands: {},
 			Constants: {
 				AutoCapitalizationType: {},
 			},
-		}) ),
+		} ) ),
 	},
 };
 
