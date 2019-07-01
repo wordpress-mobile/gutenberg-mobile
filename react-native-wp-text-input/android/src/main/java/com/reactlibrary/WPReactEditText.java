@@ -14,15 +14,15 @@ import com.facebook.react.views.textinput.ReactEditText;
 
 public class WPReactEditText extends ReactEditText {
 
+    boolean shouldHandleOnEnter = false;
+
     public WPReactEditText(Context context) {
         super(context);
 
         setOnKeyListener(new OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                    // Check if the external listener has consumed the enter pressed event
-                    // In that case stop the execution
+                if (shouldHandleOnEnter && event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                     emitEnterKeyDetected();
                     return true;
                 }
@@ -35,7 +35,7 @@ public class WPReactEditText extends ReactEditText {
             private int start = 0;
             private int selStart;
             private int selEnd;
-            private boolean shouldDelteEnter = false;
+            private boolean done = false;
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -47,23 +47,23 @@ public class WPReactEditText extends ReactEditText {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (textBefore.length() == s.length() - 1) {
+                if (shouldHandleOnEnter && textBefore.length() == s.length() - 1) {
                     if (s.charAt(this.start) == '\n') {
                         StringBuilder newTextCopy = new StringBuilder(s);
                         ReactContext reactContext = (ReactContext) getContext();
                         EventDispatcher eventDispatcher = reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher();
                         eventDispatcher.dispatchEvent(
                                 new WPReactEnterEvent(getId(), newTextCopy.replace(this.start, this.start+1, "").toString(), selStart, selEnd, true, incrementAndGetEventCounter()));
-                        shouldDelteEnter = true;
+                        done = false;
                     }
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (shouldDelteEnter && s.length() > 0 && this.start < s.length() && s.charAt(this.start) == '\n') {
+                if (shouldHandleOnEnter && !done && s.length() > 0 && this.start < s.length() && s.charAt(this.start) == '\n') {
                     s.replace(start, start + 1, "");
-                    shouldDelteEnter = false;
+                    done = true;
                 }
             }
         });

@@ -5,6 +5,7 @@ import android.text.InputType;
 
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.views.textinput.ReactEditText;
 import com.facebook.react.views.textinput.ReactTextInputManager;
 
@@ -36,5 +37,10 @@ public class WPTextInputManager extends ReactTextInputManager {
     @Override
     public String getName() {
         return "WPTextInput";
+    }
+
+    @ReactProp(name = "onEnter", defaultBoolean = false)
+    public void setOnEnterHandling(final WPReactEditText view, boolean onEnterHandling) {
+        view.shouldHandleOnEnter = onEnterHandling;
     }
 }
