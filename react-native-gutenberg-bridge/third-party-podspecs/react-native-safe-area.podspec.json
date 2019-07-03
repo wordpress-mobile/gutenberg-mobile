@@ -15,7 +15,7 @@
   "source_files": "ios/RNSafeArea/*.{h,m}",
   "preserve_paths": "**/*.js",
   "dependencies": {
-    "React": [
+    "React-Core": [
 
     ]
   }
