@@ -11,14 +11,29 @@ cd ..
 command -v pod > /dev/null || ( echo Cocoapods is required to generate podspecs; exit 1 )
 command -v jq > /dev/null || ( echo jq is required to generate podspecs; exit 1 )
 
-# Change to the React Native directory to get relative paths
 WD=$(pwd)
+DEST="${WD}/react-native-gutenberg-bridge/third-party-podspecs"
+
+# Generate the external (non-RN podspecs)
+EXTERNAL_PODSPECS=$(find "node_modules/react-native/third-party-podspecs" \
+                         "node_modules/react-native-svg" \
+                         "node_modules/react-native-keyboard-aware-scroll-view" \
+                         "node_modules/react-native-recyclerview-list" \
+                         "node_modules/react-native-safe-area" -type f -name "*.podspec" -print)
+
+for podspec in $EXTERNAL_PODSPECS
+do
+    pod=$(basename "$podspec" .podspec)
+
+    echo "Generating podspec for $pod"
+    pod ipc spec $podspec > "$DEST/$pod.podspec.json"
+done
+
+# Generate the React Native podspecs
+# Change to the React Native directory to get relative paths for the RN podspecs
 cd "node_modules/react-native"
 
 RN_PODSPECS=$(find * -type f -name "*.podspec" -not -path "third-party-podspecs/*" -print)
-EXTERNAL_PODSPECS=$(find "third-party-podspecs" -type f -name "*.podspec" -print)
-
-DEST="${WD}/react-native-gutenberg-bridge/third-party-podspecs"
 TMP_DEST=$(mktemp -d)
 
 for podspec in $RN_PODSPECS
@@ -36,12 +51,4 @@ do
     cat "$TMP_DEST/$pod.podspec.json" | jq --arg CMD "$prepare_command" '.prepare_command = "\($CMD) && \(.prepare_command // true)"
                                                                          # Point to React Native fork. To be removed once https://github.com/facebook/react-native/issues/25349 is closed
                                                                          | .source.git = "https://github.com/jtreanor/react-native.git"' > "$DEST/$pod.podspec.json"
-done
-
-for podspec in $EXTERNAL_PODSPECS
-do
-    pod=$(basename "$podspec" .podspec)
-
-    echo "Generating podspec for $pod"
-    pod ipc spec $podspec > "$DEST/$pod.podspec.json"
 done
