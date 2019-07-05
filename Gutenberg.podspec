@@ -18,11 +18,8 @@ Pod::Spec.new do |s|
   s.preserve_paths = 'bundle/ios/*'
   s.swift_version = '4.2'
 
-  s.dependency 'React-Core', react_native_version
-  s.dependency 'React-DevSupport', react_native_version
+  s.dependency 'React', react_native_version
   s.dependency 'React-RCTImage', react_native_version
-  s.dependency 'React-RCTText', react_native_version
-  s.dependency 'React-RCTWebSocket', react_native_version
 
   s.dependency 'WordPress-Aztec-iOS'
   s.dependency 'RNTAztecView'
