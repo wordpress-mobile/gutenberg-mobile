@@ -20,6 +20,8 @@ Pod::Spec.new do |s|
 
   s.dependency 'React-Core', react_native_version
   s.dependency 'React-RCTImage', react_native_version
+  s.dependency 'React-RCTText', react_native_version
+  s.dependency 'React-RCTWebSocket', react_native_version
 
   s.dependency 'WordPress-Aztec-iOS'
   s.dependency 'RNTAztecView'
