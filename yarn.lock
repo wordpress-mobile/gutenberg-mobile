@@ -2213,6 +2213,19 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.11.3.tgz#7c6b0f8eaf16ae530795de2ad1b85d34bf2f5c58"
   integrity sha512-wp6IOGu1lxsfnrD+5mX6qwSwWuqsdkKKxTN4aQc4wByHAKZJf9/D4KXPQ1POUjEbnCP5LMggB0OEFNY9OTsMqg==
 
+"@types/prop-types@*":
+  version "15.7.1"
+  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.1.tgz#f1a11e7babb0c3cad68100be381d1e064c68f1f6"
+  integrity sha512-CFzn9idOEpHrgdw8JsoTkaDDyRWk1jrzIV8djzcgpq0y9tG4B4lFT+Nxh52DVpDXV+n4+NPNv7M1Dj5uMp6XFg==
+
+"@types/react@^16.8.8":
+  version "16.8.23"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.23.tgz#ec6be3ceed6353a20948169b6cb4c97b65b97ad2"
+  integrity sha512-abkEOIeljniUN9qB5onp++g0EY38h7atnDHxwKUFz1r3VH1+yG1OKi2sNPTyObL40goBmfKFpdii2lEzwLX1cA==
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^2.2.0"
+
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
@@ -4669,6 +4682,11 @@ cssstyle@^1.0.0:
   integrity sha512-7DYm8qe+gPx/h77QlCyFmX80+fGaE/6A/Ekl0zaszYOubvySO2saYFdQ78P29D0UsULxFKCetDGNaNRUdSF+2A==
   dependencies:
     cssom "0.3.x"
+
+csstype@^2.2.0:
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.5.tgz#1cd1dff742ebf4d7c991470ae71e12bb6751e034"
+  integrity sha512-JsTaiksRsel5n7XwqPAfB0l3TFKdpjW/kgAELf9vrb5adGA7UCPLajKK5s3nFrcFm3Rkyp/Qkgl73ENc1UY3cA==
 
 csv-parser@^1.6.0:
   version "1.12.1"
@@ -10632,9 +10650,9 @@ react-native-iphone-x-helper@^1.0.3:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.0.tgz#9f8a376eb00bc712115abff4420318a0063fa796"
   integrity sha512-xIeTo4s77wwKgBZLVRIZC9tM9/PkXS46Ul76NXmvmixEb3ZwqGdQesR3zRiLMOoIdfOURB6N9bba9po7+x9Bag==
 
-"react-native-keyboard-aware-scroll-view@git+https://github.com/wordpress-mobile/react-native-keyboard-aware-scroll-view.git#382ae9b44e2baa650838c703b969c26ecd64bf97":
+"react-native-keyboard-aware-scroll-view@git+https://github.com/wordpress-mobile/react-native-keyboard-aware-scroll-view.git#gb-v0.8.7":
   version "0.8.7"
-  resolved "git+https://github.com/wordpress-mobile/react-native-keyboard-aware-scroll-view.git#382ae9b44e2baa650838c703b969c26ecd64bf97"
+  resolved "git+https://github.com/wordpress-mobile/react-native-keyboard-aware-scroll-view.git#ab9d6b88ff6366e49b8a6f97a7dcb114f7d0bbae"
   dependencies:
     prop-types "^15.6.2"
     react-native-iphone-x-helper "^1.0.3"
@@ -10655,15 +10673,18 @@ react-native-randombytes@^3.5.1:
     buffer "^4.9.1"
     sjcl "^1.0.3"
 
-"react-native-recyclerview-list@git+https://github.com/wordpress-mobile/react-native-recyclerview-list.git#afeed73685b5ffde4f70431ececb7fcb9e96b6b6":
+"react-native-recyclerview-list@git+https://github.com/wordpress-mobile/react-native-recyclerview-list.git#eadaa2f62d2f488d4dc80f9148e52b62047297ab":
   version "1.0.0"
-  resolved "git+https://github.com/wordpress-mobile/react-native-recyclerview-list.git#afeed73685b5ffde4f70431ececb7fcb9e96b6b6"
+  resolved "git+https://github.com/wordpress-mobile/react-native-recyclerview-list.git#eadaa2f62d2f488d4dc80f9148e52b62047297ab"
   dependencies:
     prop-types "^15.6.0"
 
-"react-native-safe-area@git+https://github.com/wordpress-mobile/react-native-safe-area#ff1002a03e34bfabf0bb65da0644af8f1b31fb87":
-  version "0.5.0"
-  resolved "git+https://github.com/wordpress-mobile/react-native-safe-area#ff1002a03e34bfabf0bb65da0644af8f1b31fb87"
+react-native-safe-area@^0.5.0:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area/-/react-native-safe-area-0.5.1.tgz#b0263f5fcd1341c74dee0e5f0b296da965242a14"
+  integrity sha512-gBLv93P90sM6hk5HzUwTXzFuSDazTpg2ONi5iL9pnUsUfwdw2L9SKgjgVroxX10leGB9+0zz6/ycV+mItqr8OQ==
+  dependencies:
+    "@types/react" "^16.8.8"
 
 react-native-sass-transformer@^1.1.1:
   version "1.4.0"
@@ -10678,9 +10699,9 @@ react-native-sass-transformer@^1.1.1:
   version "9.3.3"
   resolved "git+https://github.com/wordpress-mobile/react-native-svg.git#466a40ec77080e1b64b5a1a3c779cdfdc04b3abe"
 
-"react-native-video@git+https://github.com/wordpress-mobile/react-native-video.git#6223b6213a017a2e8b7b8f940fa14760625c87f6":
+"react-native-video@git+https://github.com/wordpress-mobile/react-native-video.git#3a0e2fa6fc6bf1fe1a54adb2dbf94545b28c2bc4":
   version "4.4.1"
-  resolved "git+https://github.com/wordpress-mobile/react-native-video.git#6223b6213a017a2e8b7b8f940fa14760625c87f6"
+  resolved "git+https://github.com/wordpress-mobile/react-native-video.git#3a0e2fa6fc6bf1fe1a54adb2dbf94545b28c2bc4"
   dependencies:
     keymirror "^0.1.1"
     prop-types "^15.5.10"

@@ -15,7 +15,7 @@
   "source_files": "ios/RNTKeyboardAwareScrollView/*.{h,m}",
   "preserve_paths": "**/*.js",
   "dependencies": {
-    "React-Core": [
+    "React": [
 
     ]
   }

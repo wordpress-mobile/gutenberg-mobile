@@ -18,7 +18,7 @@
   "source_files": "RNReactNativeRecyclerviewList/**/*.{h,m}",
   "requires_arc": true,
   "dependencies": {
-    "React-Core": [
+    "React": [
 
     ]
   }
