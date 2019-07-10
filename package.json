@@ -133,7 +133,7 @@
     "dom-react": "^2.2.1",
     "domutils": "^1.7.0",
     "fast-average-color": "^4.3.0",
-    "gutenberg-mobile-plugins": "mkevins/gutenberg-mobile-plugins#try/externals",
+    "gutenberg-mobile-plugins": "mkevins/gutenberg-mobile-plugins#try/custom-sourcemap-urls",
     "hpq": "^1.2.0",
     "jed": "^1.1.1",
     "jest-serializer-enzyme": "^1.0.0",
