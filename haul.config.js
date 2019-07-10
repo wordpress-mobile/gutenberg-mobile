@@ -74,6 +74,7 @@ export default {
 					],
 				},
 				resolve: {
+          symlinks: false,
 					alias: {
 						...gutenbergPackages,
 						'react-native-aztec': path.resolve( 'react-native-aztec' ),
