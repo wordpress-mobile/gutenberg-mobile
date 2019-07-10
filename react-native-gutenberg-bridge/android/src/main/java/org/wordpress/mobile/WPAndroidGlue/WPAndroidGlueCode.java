@@ -38,6 +38,7 @@ import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.
 import org.wordpress.mobile.ReactNativeGutenbergBridge.RNReactNativeGutenbergBridgePackage;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -115,7 +116,7 @@ public class WPAndroidGlueCode {
     }
 
     public interface OnEditorMountListener {
-        void onEditorDidMount(ReadableArray unsupportedBlockNames);
+        void onEditorDidMount(ArrayList<Object> unsupportedBlockNames);
     }
 
     public interface OnAuthHeaderRequestedListener {
@@ -202,7 +203,7 @@ public class WPAndroidGlueCode {
 
             @Override
             public void editorDidMount(ReadableArray unsupportedBlockNames) {
-                mOnEditorMountListener.onEditorDidMount(unsupportedBlockNames);
+                mOnEditorMountListener.onEditorDidMount(unsupportedBlockNames.toArrayList());
                 mIsEditorMounted = true;
                 if (TextUtils.isEmpty(mTitle) && TextUtils.isEmpty(mContentHtml)) {
                     setFocusOnTitle();
