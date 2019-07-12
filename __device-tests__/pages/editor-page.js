@@ -56,6 +56,12 @@ export default class EditorPage {
 		return undefined !== await this.getBlockAtPosition( position, blockName );
 	}
 
+	async getTitleElement() {
+		//TODO: Improve the identifier for this element
+		const elements = await this.driver.elementsByXPath( `//*[contains(@${ this.accessibilityIdXPathAttrib }, "Post title.")]` );
+		return elements[ elements.length - 1 ];
+	}
+
 	async getTextViewForHtmlViewContent() {
 		const accessibilityId = `html-view-content${ this.accessibilityIdSuffix }`;
 		let blockLocator = `//*[@${ this.accessibilityIdXPathAttrib }="${ accessibilityId }"]`;
@@ -96,6 +102,11 @@ export default class EditorPage {
 	}
 
 	async dismissKeyboard() {
+		await this.driver.sleep( 1000 ); /// wait for any keyboard animations
+		const keyboardShown = await this.driver.isKeyboardShown();
+		if ( ! keyboardShown ) {
+			return;
+		}
 		if ( isAndroid() ) {
 			return await this.driver.hideDeviceKeyboard();
 		}
