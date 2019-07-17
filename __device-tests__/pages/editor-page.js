@@ -72,13 +72,6 @@ export default class EditorPage {
 		return await this.driver.elementByXPath( blockLocator );
 	}
 
-	async getTitleElement() {
-		//TODO: Improve the identifier for this element
-		const titleIdentifier = isAndroid() ? '//android.view.ViewGroup[@content-desc="Post title. Welcome to Gutenberg!"]/android.widget.EditText' :
-			'//XCUIElementTypeOther[@name="Add title"]/XCUIElementTypeTextView';
-		return await this.driver.elementByXPath( titleIdentifier );
-	}
-
 	// Converts to lower case and checks for a match to lowercased html content
 	// Ensure to take additional steps to handle text being changed by auto correct
 	async verifyHtmlContent( html: string ) {
