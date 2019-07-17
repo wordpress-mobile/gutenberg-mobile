@@ -50,6 +50,7 @@
     "remote-redux-devtools": "^0.5.12",
     "rungen": "^0.3.2",
     "sass-loader": "^7.1.0",
+    "source-map-loader": "^0.2.4",
     "sprintf-js": "^1.1.1",
     "wd": "^1.11.1"
   },

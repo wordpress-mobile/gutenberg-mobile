@@ -22,6 +22,11 @@ export default makeConfig( {
 				config.module.rules = [
 					...config.module.rules,
 					{
+						test: /\.js$/,
+						use: [ 'source-map-loader' ],
+						enforce: 'pre',
+					},
+					{
 						test: /\.scss$/,
 						use: [
 							{
