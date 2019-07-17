@@ -12,6 +12,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.3.3",
+    "@haul-bundler/cli": "^0.7.0",
+    "@haul-bundler/preset-0.60": "^0.7.0",
     "@wordpress/babel-preset-default": "^4.0.0",
     "@wordpress/eslint-plugin": "^2.0.0",
     "@wordpress/jest-preset-default": "^4.0.0",
@@ -47,6 +49,7 @@
     "regenerator-runtime": "^0.12.1",
     "remote-redux-devtools": "^0.5.12",
     "rungen": "^0.3.2",
+    "sass-loader": "^7.1.0",
     "sprintf-js": "^1.1.1",
     "wd": "^1.11.1"
   },
@@ -121,7 +124,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.3.1",
-    "@react-native-community/cli": "^1.5.2",
+    "@react-native-community/cli": "^2.6.2",
     "classnames": "^2.2.5",
     "dom-react": "^2.2.1",
     "domutils": "^1.7.0",
