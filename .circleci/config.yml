@@ -126,12 +126,6 @@ jobs:
         paths:
         - react-native-aztec/ios/Carthage
         - ~/.rncache
-    - run: 
-        name: Build (if needed)
-        command: test -e ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app || yarn react-native run-ios --configuration Release --no-packager
-    - run:
-        name: Bundle iOS
-        command: yarn test:e2e:bundle:ios
     - run:
         name: Build (if needed)
         command: test -e ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app || yarn react-native run-ios --configuration Release --no-packager
