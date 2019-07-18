@@ -52,6 +52,7 @@ export class RootComponent extends React.Component {
 		super( props );
 		setupLocale( props.locale, props.translations );
 		require( '@wordpress/edit-post' ).initializeEditor();
+		require('gutenberg-mobile-plugins');
 	}
 
 	render() {
