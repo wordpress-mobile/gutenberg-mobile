@@ -62,11 +62,15 @@ export default makeConfig( {
 					},
 				];
 
-				config.resolve.alias = {
-					...config.resolve.alias,
-					...gutenbergPackages,
-					'react-native-aztec': path.resolve( 'react-native-aztec' ),
-					'react-native-gutenberg-bridge': path.resolve( 'react-native-gutenberg-bridge' ),
+				config.resolve = {
+					...config.resolve,
+					symlinks: false,
+					alias: {
+						...config.resolve.alias,
+						...gutenbergPackages,
+						'react-native-aztec': path.resolve( 'react-native-aztec' ),
+						'react-native-gutenberg-bridge': path.resolve( 'react-native-gutenberg-bridge' ),
+					}
 				};
 			},
 		},
