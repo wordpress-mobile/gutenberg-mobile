@@ -12,8 +12,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.3.3",
-    "@haul-bundler/cli": "^0.7.0",
-    "@haul-bundler/preset-0.60": "^0.7.0",
+    "@haul-bundler/cli": "^0.9.0",
+    "@haul-bundler/preset-0.60": "^0.9.0",
     "@wordpress/babel-preset-default": "^4.0.0",
     "@wordpress/eslint-plugin": "^2.0.0",
     "@wordpress/jest-preset-default": "^4.0.0",
