@@ -16,7 +16,7 @@ export default makeConfig( {
 	bundles: {
 		index: {
 			entry: withPolyfills( './index.js' ),
-			transform( { bundleName, env, runtime, config } ) {
+			transform( { env, config } ) {
 				const { platform } = env;
 
 				config.module.rules = [
