@@ -47,11 +47,23 @@ const setupLocale = ( locale, extraTranslations ) => {
 	}
 };
 
+const exposeGlobals = () => {
+	window.wp = {
+		blocks: require( '@wordpress/blocks' ),
+		data: require( '@wordpress/data' ),
+		editor: require( '@wordpress/editor' ),
+		element: require( '@wordpress/element' ),
+		i18n: require( '@wordpress/i18n' ),
+	};
+};
+
 export class RootComponent extends React.Component {
 	constructor( props ) {
 		super( props );
 		setupLocale( props.locale, props.translations );
+		exposeGlobals();
 		require( '@wordpress/edit-post' ).initializeEditor();
+		require( '@wordpress-mobile/gutenberg-plugin-hello-world' );
 	}
 
 	render() {
