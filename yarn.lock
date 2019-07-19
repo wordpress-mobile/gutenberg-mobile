@@ -2639,10 +2639,10 @@
     "@webassemblyjs/wast-parser" "1.8.5"
     "@xtuc/long" "4.2.2"
 
-"@wordpress-mobile/gutenberg-plugin-hello-world@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@wordpress-mobile/gutenberg-plugin-hello-world/-/gutenberg-plugin-hello-world-1.0.2.tgz#f185d017791e73cccc7935fd34a1f6e6cadf8a9e"
-  integrity sha512-xeGe18YFOKMqUYfdgx0daWTiukS27AAn3ynCx1101v7M5O29EnhjQnsT775qp435JlBB+QdT9x1OjOlFxRvElw==
+"@wordpress-mobile/gutenberg-plugin-hello-world@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@wordpress-mobile/gutenberg-plugin-hello-world/-/gutenberg-plugin-hello-world-1.0.3.tgz#8000f99f031eab796df8f77a602d71808ae5d1fd"
+  integrity sha512-+YmA1Ha4k04REcQ0v5NjA9UZZp5fTxJllzqy/BS0DXW9TXEMo941/Vc+3cm9kIDvYFtcFOVgv0QrmYHQF/4epQ==
 
 "@wordpress/babel-plugin-import-jsx-pragma@^2.2.0":
   version "2.2.0"
