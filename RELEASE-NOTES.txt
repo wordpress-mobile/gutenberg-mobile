@@ -1,5 +1,12 @@
+1.10.0
+------
+* Adding a block from the post title now shows the add block here indicator.
+* Deselect post title any time a block is added
+* Fix merging of empty paragraph blocks when added from a post's title
+
 1.9.0
 ------
+* Enable video block on Android platform
 * Tapping on an empty editor area will create a new paragraph block
 * Fix content loss issue when loading unsupported blocks containing inner blocks.
 * Adding a block from the Post Title now inserts the block at the top of the Post.
