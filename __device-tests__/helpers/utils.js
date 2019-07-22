@@ -56,6 +56,8 @@ const isLocalEnvironment = () => {
 
 // Initialises the driver and desired capabilities for appium
 const setupDriver = async () => {
+	const branch = process.env.CIRCLE_BRANCH || '';
+	const safeBranchName = branch.replace( '/', '-' );
 	if ( isLocalEnvironment() ) {
 		try {
 			appiumProcess = await AppiumLocal.start( localAppiumPort );
@@ -79,28 +81,26 @@ const setupDriver = async () => {
 					.execSync( 'adb shell getprop ro.build.version.release' )
 					.toString()
 					.replace( /^\s+|\s+$/g, '' );
-				if ( ! isNaN( androidVersion ) ) {
-					delete desiredCaps.platformVersion;
-					// eslint-disable-next-line no-console
-					console.log( 'Detected Android device running Android %s', androidVersion );
-				}
+				delete desiredCaps.platformVersion;
+				desiredCaps.deviceName = 'Android Emulator';
+				// eslint-disable-next-line no-console
+				console.log( 'Detected Android device running Android %s', androidVersion );
 			} catch ( error ) {
 				// ignore error
 			}
 		} else {
-			desiredCaps.app = 'sauce-storage:Gutenberg.apk'; // App should be preloaded to sauce storage, this can also be a URL
+			desiredCaps.app = `sauce-storage:Gutenberg-${ safeBranchName }.apk`; // App should be preloaded to sauce storage, this can also be a URL
 		}
 	} else {
 		desiredCaps = _.clone( ios12 );
 		if ( isLocalEnvironment() ) {
 			desiredCaps.app = path.resolve( localIOSAppPath );
 		} else {
-			desiredCaps.app = 'sauce-storage:Gutenberg.app.zip'; // App should be preloaded to sauce storage, this can also be a URL
+			desiredCaps.app = `sauce-storage:Gutenberg-${ safeBranchName }.app.zip`; // App should be preloaded to sauce storage, this can also be a URL
 		}
 	}
 
 	if ( ! isLocalEnvironment() ) {
-		const branch = process.env.CIRCLE_BRANCH || '';
 		desiredCaps.name = `Gutenberg Editor Tests[${ rnPlatform }]-${ branch }`;
 		desiredCaps.tags = [ 'Gutenberg', branch ];
 	}
@@ -114,9 +114,28 @@ const setupDriver = async () => {
 
 	await driver.setImplicitWaitTimeout( 2000 );
 	await timer( 3000 );
-
 	await driver.setOrientation( 'PORTRAIT' );
-	return driver;
+
+	// Proxy driver to patch functions on Android
+	// This is needed to adapt to changes in the way accessibility ids are being
+	// assigned after migrating to AndroidX and React Native 0.60. See:
+	// https://github.com/wordpress-mobile/gutenberg-mobile/pull/1112#issuecomment-501165250
+	// for more details.
+	return new Proxy( driver, {
+		get: ( original, property ) => {
+			const propertiesToPatch = [
+				'elementByAccessibilityId',
+				'hasElementByAccessibilityId',
+			];
+			if ( isAndroid() && ( propertiesToPatch.includes( property ) ) ) {
+				return async function( value, cb ) {
+					// Add a comma and a space to all ids
+					return await original[ property ]( `${ value }, `, cb );
+				};
+			}
+			return original[ property ];
+		},
+	} );
 };
 
 const stopDriver = async ( driver: wd.PromiseChainWebdriver ) => {
@@ -216,7 +235,9 @@ const tapCopyAboveElement = async ( driver: wd.PromiseChainWebdriver, element: w
 	const action = await new wd.TouchAction( driver );
 	const x = location.x + 220;
 	const y = location.y - 50;
+	action.wait( 2000 );
 	action.press( { x, y } );
+	action.wait( 2000 );
 	action.release();
 	await action.perform();
 };
@@ -225,7 +246,9 @@ const tapCopyAboveElement = async ( driver: wd.PromiseChainWebdriver, element: w
 const tapPasteAboveElement = async ( driver: wd.PromiseChainWebdriver, element: wd.PromiseChainWebdriver.Element ) => {
 	const location = await element.getLocation();
 	const action = await new wd.TouchAction( driver );
+	action.wait( 2000 );
 	action.press( { x: location.x + 100, y: location.y - 50 } );
+	action.wait( 2000 );
 	action.release();
 	await action.perform();
 };
