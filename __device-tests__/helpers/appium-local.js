@@ -40,7 +40,6 @@ export const stop = async ( appium: ?childProcess.ChildProcess ) => {
 	if ( ! appium ) {
 		return;
 	}
-	const pid = appium.pid;
 	await appium.kill( 'SIGKILL' );
 };
 
