@@ -10,6 +10,7 @@ import childProcess from 'child_process';
 import wd from 'wd';
 import crypto from 'crypto';
 import path from 'path';
+import { promisify } from 'util';
 
 /**
  * Internal dependencies
@@ -35,6 +36,7 @@ const localAndroidAppPath = process.env.ANDROID_APP_PATH || defaultAndroidAppPat
 const localIOSAppPath = process.env.IOS_APP_PATH || defaultIOSAppPath;
 
 const localAppiumPort = serverConfigs.local.port; // Port to spawn appium process for local runs
+const wdaLocalPort = serverConfigs.local.wdaLocalPort; // Port used for the WebDriver Agent, this needs to be unique to the session to avioid errors
 let appiumProcess: ?childProcess.ChildProcess;
 
 // Used to map unicode and special values to keycodes on Android
@@ -54,17 +56,64 @@ const isLocalEnvironment = () => {
 	return testEnvironment.toLowerCase() === 'local';
 };
 
+const getIOSDevices = async () => {
+	const exec = promisify( childProcess.exec );
+	const { stderr, stdout } = await exec( 'instruments -s devices' );
+	// TODO: handle error case
+	if ( stderr ) {
+		// eslint-disable-next-line no-console
+		console.log( `error running instruments command ${ stderr }` );
+		return;
+	}
+
+	/*
+	Turns simulator output from
+
+	[
+	'iPhone Xʀ (12.4) [0FAC088F-64FC-4555-A47C-584C1C6AB2A3] (Simulator)',
+      'iPhone Xs Max (12.4) + Apple Watch Series 4 - 44mm (5.3) [0F828AEB-92C4-4C70-BC61-09AB06DCE132] (Simulator)',
+      ...
+      ]
+
+      to
+
+      [
+      { platformVersion: '12.4',
+        udid: '0FAC088F-64FC-4555-A47C-584C1C6AB2A3' },
+      { platformVersion: '12.4',
+        udid: 'F414048A-15CB-4FFD-9CD4-0B2467E66B54' },
+      ...
+      ]
+
+	 */
+	let simulatorList = stdout.split( '\n' ).reverse();
+	simulatorList = simulatorList.filter(
+		( simulatorData ) => simulatorData.includes( 'iPhone' ) && ! simulatorData.includes( 'Apple Watch' ) // Only get iPhone sims not linked to WatchOS sim
+	);
+
+	const re = /\([0-9]+\.[0-9](\.[0-9])?\) \[[0-9A-Z-]+\]/m; // Regex for simulator name to platform version with UDID
+	simulatorList = simulatorList.map( ( simulatorData ) => simulatorData.match( re )[ 0 ].replace( /[()\[\]r]/g, '' ).split( ' ' ) ); // Get Platform version and UDID for devices
+	simulatorList = simulatorList.map( ( simulatorData ) => { // Build final array
+		return {
+			platformVersion: simulatorData[ 0 ],
+			udid: simulatorData[ 1 ],
+		};
+	} );
+	return simulatorList;
+};
+
 // Initialises the driver and desired capabilities for appium
 const setupDriver = async () => {
 	const branch = process.env.CIRCLE_BRANCH || '';
 	const safeBranchName = branch.replace( '/', '-' );
+
 	if ( isLocalEnvironment() ) {
 		try {
 			appiumProcess = await AppiumLocal.start( localAppiumPort );
 		} catch ( err ) {
 			// Ignore error here, Appium is probably already running (Appium desktop has its own server for instance)
 			// eslint-disable-next-line no-console
-			console.log( 'Could not start Appium server', err.toString() );
+			console.log( 'Could not start Appium server on port ', localAppiumPort, ' - ', err.toString() );
 		}
 	}
 
@@ -94,6 +143,10 @@ const setupDriver = async () => {
 	} else {
 		desiredCaps = _.clone( ios12 );
 		if ( isLocalEnvironment() ) {
+			const simulators = await getIOSDevices();
+			const { platformVersion, udid } = simulators[ process.env.JEST_WORKER_ID - 1 ]; // Pick a unique simulator for this run
+			desiredCaps.platformVersion = platformVersion;
+			desiredCaps.udid = udid;
 			desiredCaps.app = path.resolve( localIOSAppPath );
 		} else {
 			desiredCaps.app = `sauce-storage:Gutenberg-${ safeBranchName }.app.zip`; // App should be preloaded to sauce storage, this can also be a URL
@@ -103,6 +156,8 @@ const setupDriver = async () => {
 	if ( ! isLocalEnvironment() ) {
 		desiredCaps.name = `Gutenberg Editor Tests[${ rnPlatform }]-${ branch }`;
 		desiredCaps.tags = [ 'Gutenberg', branch ];
+	} else {
+		desiredCaps.wdaLocalPort = wdaLocalPort;
 	}
 
 	await driver.init( desiredCaps );
