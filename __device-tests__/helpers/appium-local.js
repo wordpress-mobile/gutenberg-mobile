@@ -40,7 +40,8 @@ export const stop = async ( appium: ?childProcess.ChildProcess ) => {
 	if ( ! appium ) {
 		return;
 	}
-	await appium.kill( 'SIGINT' );
+	const pid = appium.pid;
+	await appium.kill( 'SIGKILL' );
 };
 
 export default {
