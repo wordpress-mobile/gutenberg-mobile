@@ -85,13 +85,11 @@ describe( 'Gutenberg Editor Image Block tests', () => {
 			await editorPage.dismissKeyboard();
 		}
 
-		await swipeUp( driver, imageBlock );
+		await swipeUp( driver );
 
 		await editorPage.addNewParagraphBlock();
 		const paragraphBlockElement = await editorPage.getParagraphBlockAtPosition( 2 );
-		if ( isAndroid() ) {
-			await paragraphBlockElement.click();
-		}
+		await paragraphBlockElement.click();
 		await editorPage.sendTextToParagraphBlockAtPosition( 2, testData.longText );
 
 		// skip HTML check for Android since we couldn't add image from media library
