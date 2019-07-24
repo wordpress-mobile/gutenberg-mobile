@@ -85,8 +85,6 @@ describe( 'Gutenberg Editor Image Block tests', () => {
 			await editorPage.dismissKeyboard();
 		}
 
-		await swipeUp( driver );
-
 		await editorPage.addNewParagraphBlock();
 		const paragraphBlockElement = await editorPage.getParagraphBlockAtPosition( 2 );
 		await paragraphBlockElement.click();

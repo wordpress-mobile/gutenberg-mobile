@@ -143,8 +143,8 @@ const setupDriver = async () => {
 	} else {
 		desiredCaps = _.clone( ios12 );
 		if ( isLocalEnvironment() ) {
-			const simulators = await getIOSDevices();
-			const { platformVersion, udid } = simulators[ parseInt(process.env.JEST_WORKER_ID) - 1 ]; // Pick a unique simulator for this run
+			const simulators = await getIOSDevices() || [];
+			const { platformVersion, udid } = simulators[ parseInt( process.env.JEST_WORKER_ID ) - 1 ]; // Pick a unique simulator for this run
 			desiredCaps.platformVersion = platformVersion;
 			desiredCaps.udid = udid;
 			desiredCaps.app = path.resolve( localIOSAppPath );
