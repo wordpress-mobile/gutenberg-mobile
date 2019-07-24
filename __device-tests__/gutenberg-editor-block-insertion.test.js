@@ -12,6 +12,7 @@ import {
 	stopDriver,
 	isAndroid,
 	clickMiddleOfElement,
+	swipeDown,
 } from './helpers/utils';
 import testData from './helpers/test-data';
 
@@ -93,8 +94,8 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 			await driver.hideDeviceKeyboard();
 		}
 
+		await swipeDown( driver );
 		const titleElement = await editorPage.getTitleElement();
-		await titleElement.click();
 		await titleElement.click();
 
 		await editorPage.addNewParagraphBlock();
