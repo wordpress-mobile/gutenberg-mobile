@@ -87,6 +87,8 @@ const getIOSDevices = async () => {
 
 	 */
 	let simulatorList = stdout.split( '\n' ).reverse();
+	// eslint-disable-next-line no-console
+	console.log(simulatorList);
 	simulatorList = simulatorList.filter(
 		( simulatorData ) => simulatorData.includes( 'iPhone' ) && ! simulatorData.includes( 'Apple Watch' ) // Only get iPhone sims not linked to WatchOS sim
 	);
@@ -99,6 +101,8 @@ const getIOSDevices = async () => {
 			udid: simulatorData[ 1 ],
 		};
 	} );
+	// eslint-disable-next-line no-console
+	console.log(simulatorList);
 	return simulatorList;
 };
 
