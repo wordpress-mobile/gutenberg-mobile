@@ -34,7 +34,6 @@ const defaultIOSAppPath = './ios/build/gutenberg/Build/Products/Release-iphonesi
 
 const localAndroidAppPath = process.env.ANDROID_APP_PATH || defaultAndroidAppPath;
 const localIOSAppPath = process.env.IOS_APP_PATH || defaultIOSAppPath;
-const useGrid = process.env.grid || true; // Use selenium grid by default
 
 const localAppiumPort = serverConfigs.local.port; // Port to spawn appium process for local runs
 const wdaLocalPort = serverConfigs.local.wdaLocalPort; // Port used for the WebDriver Agent, this needs to be unique to the session to avioid errors
@@ -110,7 +109,7 @@ const setupDriver = async () => {
 
 	if ( isLocalEnvironment() ) {
 		try {
-			appiumProcess = await AppiumLocal.start( localAppiumPort, useGrid );
+			appiumProcess = await AppiumLocal.start( localAppiumPort );
 		} catch ( err ) {
 			// Ignore error here, Appium is probably already running (Appium desktop has its own server for instance)
 			// eslint-disable-next-line no-console

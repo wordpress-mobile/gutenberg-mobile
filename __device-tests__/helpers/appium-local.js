@@ -9,7 +9,7 @@
 import childProcess from 'child_process';
 
 // Spawns an appium process
-export const start = ( localAppiumPort: number, useGrid: boolean = false ) => new Promise < childProcess.ChildProcess > ( ( resolve, reject ) => {
+export const start = ( localAppiumPort: number ) => new Promise < childProcess.ChildProcess > ( ( resolve, reject ) => {
 	const params = [
 		'--port', localAppiumPort.toString(),
 		'--log', './appium-out.log',
