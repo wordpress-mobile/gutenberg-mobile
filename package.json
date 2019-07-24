@@ -22,6 +22,7 @@
     "babel-plugin-react-native-classname-to-style": "^1.2.1",
     "babel-plugin-react-native-platform-specific-extensions": "^1.1.1",
     "cross-env": "^5.1.4",
+    "css-calc-transform": "^0.11.0",
     "empty": "^0.10.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
