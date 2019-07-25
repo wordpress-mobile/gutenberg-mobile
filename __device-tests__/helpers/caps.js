@@ -6,7 +6,6 @@ exports.ios12 = {
 	os: 'iOS',
 	deviceOrientation: 'portrait',
 	automationName: 'XCUITest',
-	useNewWDA: true,
 	app: undefined, // will be set later, locally this is relative to root of project
 };
 
