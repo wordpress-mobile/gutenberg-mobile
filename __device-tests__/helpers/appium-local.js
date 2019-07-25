@@ -12,7 +12,7 @@ import childProcess from 'child_process';
 export const start = ( localAppiumPort: number ) => new Promise < childProcess.ChildProcess > ( ( resolve, reject ) => {
 	const params = [
 		'--port', localAppiumPort.toString(),
-		'--log', './appium-out.log',
+		'--log', `./appium-out-${ localAppiumPort }.log`,
 		'--log-no-colors',
 		'--relaxed-security', // Needed for mobile:shell command for text entry on Android
 	];
