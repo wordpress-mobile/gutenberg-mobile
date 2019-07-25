@@ -6,7 +6,7 @@ exports.ios12 = {
 	os: 'iOS',
 	deviceOrientation: 'portrait',
 	automationName: 'XCUITest',
-	appiumVersion: '1.13.0', // SauceLabs requires appiumVersion to be specified.
+	useNewWDA: true,
 	app: undefined, // will be set later, locally this is relative to root of project
 };
 
