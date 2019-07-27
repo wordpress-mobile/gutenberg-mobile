@@ -1,0 +1,976 @@
+2019-07-26 21:12:27:227 [Appium] Welcome to Appium v1.14.0
+2019-07-26 21:12:27:229 [Appium] Non-default server args:
+2019-07-26 21:12:27:231 [Appium]   port: 4726
+2019-07-26 21:12:27:231 [Appium]   logFile: ./appium-out-4726.log
+2019-07-26 21:12:27:232 [Appium]   logNoColors: true
+2019-07-26 21:12:27:232 [Appium]   relaxedSecurityEnabled: true
+2019-07-26 21:12:27:281 [Appium] Appium REST http interface listener started on 0.0.0.0:4726
+2019-07-26 21:12:29:784 [HTTP] --> POST /wd/hub/session
+2019-07-26 21:12:29:784 [HTTP] {"desiredCapabilities":{"browserName":"","platformName":"iOS","platformVersion":"12.4","deviceName":"iPhone Simulator","os":"iOS","deviceOrientation":"portrait","automationName":"XCUITest","app":"/Users/javon/Automattic-Projects/gutenberg-mobile/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app","udid":"14D3AB56-B915-41A1-B07E-2B483CBA3C0B","wdaLocalPort":8103}}
+2019-07-26 21:12:29:789 [MJSONWP] Calling AppiumDriver.createSession() with args: [{"browserName":"","platformName":"iOS","platformVersion":"12.4","deviceName":"iPhone Simulator","os":"iOS","deviceOrientation":"portrait","automationName":"XCUITest","app":"/Users/javon/Automattic-Projects/gutenberg-mobile/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app","udid":"14D3AB56-B915-41A1-B07E-2B483CBA3C0B","wdaLocalPort":8103},null,null]
+2019-07-26 21:12:29:791 [BaseDriver] Event 'newSessionRequested' logged at 1564175549790 (16:12:29 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:30:300 [Appium] Appium v1.14.0 creating new XCUITestDriver (v2.122.0) session
+2019-07-26 21:12:30:300 [Appium] Capabilities:
+2019-07-26 21:12:30:300 [Appium]   browserName: 
+2019-07-26 21:12:30:301 [Appium]   platformName: iOS
+2019-07-26 21:12:30:301 [Appium]   platformVersion: 12.4
+2019-07-26 21:12:30:302 [Appium]   deviceName: iPhone Simulator
+2019-07-26 21:12:30:302 [Appium]   os: iOS
+2019-07-26 21:12:30:303 [Appium]   deviceOrientation: portrait
+2019-07-26 21:12:30:303 [Appium]   automationName: XCUITest
+2019-07-26 21:12:30:303 [Appium]   app: /Users/javon/Automattic-Projects/gutenberg-mobile/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app
+2019-07-26 21:12:30:303 [Appium]   udid: 14D3AB56-B915-41A1-B07E-2B483CBA3C0B
+2019-07-26 21:12:30:304 [Appium]   wdaLocalPort: 8103
+2019-07-26 21:12:30:306 [Appium] Applying relaxed security to 'XCUITestDriver' as per server command line argument. All insecure features will be enabled unless explicitly disabled by --deny-insecure
+2019-07-26 21:12:30:308 [BaseDriver] Creating session with MJSONWP desired capabilities: {
+2019-07-26 21:12:30:308 [BaseDriver]   "browserName": "",
+2019-07-26 21:12:30:308 [BaseDriver]   "platformName": "iOS",
+2019-07-26 21:12:30:309 [BaseDriver]   "platformVersion": "12.4",
+2019-07-26 21:12:30:309 [BaseDriver]   "deviceName": "iPhone Simulator",
+2019-07-26 21:12:30:309 [BaseDriver]   "os": "iOS",
+2019-07-26 21:12:30:309 [BaseDriver]   "deviceOrientation": "portrait",
+2019-07-26 21:12:30:309 [BaseDriver]   "automationName": "XCUITest",
+2019-07-26 21:12:30:309 [BaseDriver]   "app": "/Users/javon/Automattic-Projects/gutenberg-mobile/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app",
+2019-07-26 21:12:30:309 [BaseDriver]   "udid": "14D3AB56-B915-41A1-B07E-2B483CBA3C0B",
+2019-07-26 21:12:30:310 [BaseDriver]   "wdaLocalPort": 8103
+2019-07-26 21:12:30:310 [BaseDriver] }
+2019-07-26 21:12:30:316 [BaseDriver] The following capabilities were provided, but are not recognized by Appium:
+2019-07-26 21:12:30:316 [BaseDriver]   os
+2019-07-26 21:12:30:316 [BaseDriver]   deviceOrientation
+2019-07-26 21:12:30:319 [BaseDriver] Session created with session id: 22245500-9420-4394-910a-13ee4a2a6f52
+2019-07-26 21:12:30:356 [XCUITest] Current user: 'javon'
+2019-07-26 21:12:30:357 [XCUITest] Changing deviceName from 'iPhone Simulator' to 'iPhone 6'
+2019-07-26 21:12:30:372 [XCUITest] Available devices: 
+2019-07-26 21:12:30:985 [iOSSim] Constructing iOS simulator for Xcode version 10.3 with udid '14D3AB56-B915-41A1-B07E-2B483CBA3C0B'
+2019-07-26 21:12:30:987 [XCUITest] Determining device to run tests on: udid: '14D3AB56-B915-41A1-B07E-2B483CBA3C0B', real device: false
+2019-07-26 21:12:30:993 [BaseDriver] Event 'xcodeDetailsRetrieved' logged at 1564175550993 (16:12:30 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:30:996 [BaseDriver] Using local app '/Users/javon/Automattic-Projects/gutenberg-mobile/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app'
+2019-07-26 21:12:30:999 [BaseDriver] Event 'appConfigured' logged at 1564175550999 (16:12:30 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:31:000 [XCUITest] Checking whether app '/Users/javon/Automattic-Projects/gutenberg-mobile/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app' is actually present on file system
+2019-07-26 21:12:31:000 [XCUITest] App is present
+2019-07-26 21:12:31:003 [iOS] Getting bundle ID from app '/Users/javon/Automattic-Projects/gutenberg-mobile/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app': 'org.reactjs.native.example.gutenberg'
+2019-07-26 21:12:31:004 [BaseDriver] Event 'resetStarted' logged at 1564175551003 (16:12:31 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:31:610 [XCUITest] Not scrubbing third party app in anticipation of uninstall
+2019-07-26 21:12:31:610 [BaseDriver] Event 'resetComplete' logged at 1564175551610 (16:12:31 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:31:889 [IOSSimulatorLog] Starting log capture for iOS Simulator with udid '14D3AB56-B915-41A1-B07E-2B483CBA3C0B', using 'xcrun simctl spawn 14D3AB56-B915-41A1-B07E-2B483CBA3C0B log stream --style compact'
+2019-07-26 21:12:32:371 [BaseDriver] Event 'logCaptureStarted' logged at 1564175552370 (16:12:32 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:32:371 [XCUITest] Setting up simulator
+2019-07-26 21:12:32:371 [iOS] No reason to set locale
+2019-07-26 21:12:32:372 [iOS] No iOS / app preferences to set
+2019-07-26 21:12:32:372 [iOS] Setting did not need to be updated
+2019-07-26 21:12:32:373 [iOSSim] Setting preferences of 14D3AB56-B915-41A1-B07E-2B483CBA3C0B Simulator to {"ConnectHardwareKeyboard":false}
+2019-07-26 21:12:32:373 [iOSSim] Setting common Simulator preferences to {"RotateWindowWhenSignaledByGuest":true,"ConnectHardwareKeyboard":false}
+2019-07-26 21:12:32:438 [iOSSim] Updated 14D3AB56-B915-41A1-B07E-2B483CBA3C0B Simulator preferences at '/Users/javon/Library/Preferences/com.apple.iphonesimulator.plist' with {"DevicePreferences":{"14D3AB56-B915-41A1-B07E-2B483CBA3C0B":{"ConnectHardwareKeyboard":false}},"RotateWindowWhenSignaledByGuest":true,"ConnectHardwareKeyboard":false}
+2019-07-26 21:12:32:848 [iOSSim] Got Simulator UI client PID: 2553
+2019-07-26 21:12:32:848 [iOSSim] Both Simulator with UDID 14D3AB56-B915-41A1-B07E-2B483CBA3C0B and the UI client are currently running
+2019-07-26 21:12:32:849 [IDB] Connecting idb service to '14D3AB56-B915-41A1-B07E-2B483CBA3C0B'
+2019-07-26 21:12:32:854 [XCUITest] idb will not be used for Simulator interaction. Original error: 'idb' has not been found in PATH. Is it installed? Read https://www.fbidb.io for more details
+2019-07-26 21:12:32:854 [BaseDriver] Event 'simStarted' logged at 1564175552854 (16:12:32 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:32:855 [XCUITest] Verifying application platform
+2019-07-26 21:12:32:856 [XCUITest] CFBundleSupportedPlatforms: ["iPhoneSimulator"]
+2019-07-26 21:12:33:137 [XCUITest] Reset requested. Removing app with id 'org.reactjs.native.example.gutenberg' from the device
+2019-07-26 21:12:34:524 [XCUITest] Cleaning installd cache to save the disk space
+2019-07-26 21:12:34:527 [XCUITest] Installing '/Users/javon/Automattic-Projects/gutenberg-mobile/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app' on Simulator with UUID '14D3AB56-B915-41A1-B07E-2B483CBA3C0B'...
+2019-07-26 21:12:36:135 [XCUITest] The app has been installed successfully.
+2019-07-26 21:12:36:139 [BaseDriver] Event 'appInstalled' logged at 1564175556139 (16:12:36 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:36:140 [XCUITest] Using WDA path: '/Users/javon/Automattic-Projects/gutenberg-mobile/node_modules/appium-webdriveragent'
+2019-07-26 21:12:36:141 [XCUITest] Using WDA agent: '/Users/javon/Automattic-Projects/gutenberg-mobile/node_modules/appium-webdriveragent/WebDriverAgent.xcodeproj'
+2019-07-26 21:12:36:353 [XCUITest] No obsolete cached processes from previous WDA sessions listening on port 8103 have been found
+2019-07-26 21:12:36:354 [XCUITest] Starting WebDriverAgent initialization with the synchronization key 'XCUITestDriver'
+2019-07-26 21:12:36:357 [WD Proxy] Matched '/status' to command name 'getStatus'
+2019-07-26 21:12:36:358 [WD Proxy] Proxying [GET /status] to [GET http://localhost:8103/status] with no body
+2019-07-26 21:12:36:375 [WD Proxy] Got response with status 200: {
+2019-07-26 21:12:36:375 [WD Proxy]   "value" : {
+2019-07-26 21:12:36:375 [WD Proxy]     "state" : "success",
+2019-07-26 21:12:36:376 [WD Proxy]     "os" : {
+2019-07-26 21:12:36:376 [WD Proxy]       "name" : "iOS",
+2019-07-26 21:12:36:376 [WD Proxy]       "version" : "12.4",
+2019-07-26 21:12:36:376 [WD Proxy]       "sdkVersion" : "12.2"
+2019-07-26 21:12:36:376 [WD Proxy]     },
+2019-07-26 21:12:36:377 [WD Proxy]     "ios" : {
+2019-07-26 21:12:36:377 [WD Proxy]       "simulatorVersion" : "12.4",
+2019-07-26 21:12:36:377 [WD Proxy]       "ip" : "192.168.100.202"
+2019-07-26 21:12:36:377 [WD Proxy]     },
+2019-07-26 21:12:36:378 [WD Proxy]     "build" : {
+2019-07-26 21:12:36:378 [WD Proxy]       "upgradedAt" : "1563847592837",
+2019-07-26 21:12:36:378 [WD Proxy]       "time" : "Jul 24 2019 23:42:45",
+2019-07-26 21:12:36:378 [WD Proxy]       "productBundleIdentifier" : "com.facebook.WebDriverAgentRunner"
+2019-07-26 21:12:36:378 [WD Proxy]     }
+2019-07-26 21:12:36:378 [WD Proxy]   },
+2019-07-26 21:12:36:379 [WD Proxy]   "sessionId" : "E14F8772-20BF-4D00-9111-841730533FBD",
+2019-07-26 21:12:36:379 [WD Proxy]   "status" : 0
+2019-07-26 21:12:36:379 [WD Proxy] }
+2019-07-26 21:12:36:379 [WD Proxy] Determined the downstream protocol for the proxy as 'MJSONWP'
+2019-07-26 21:12:36:381 [XCUITest] Upgrade timestamp of the currently bundled WDA: 1563847592837
+2019-07-26 21:12:36:381 [XCUITest] Upgrade timestamp of the WDA on the device: 1563847592837
+2019-07-26 21:12:36:381 [XCUITest] Will reuse previously cached WDA instance at 'http://localhost:8103/' with 'com.facebook.WebDriverAgentRunner'. Set the wdaLocalPort capability to a value different from 8103 if this is an undesired behavior.
+2019-07-26 21:12:36:381 [XCUITest] Trying to start WebDriverAgent 2 times with 10000ms interval
+2019-07-26 21:12:36:382 [XCUITest] These values can be customized by changing wdaStartupRetries/wdaStartupRetryInterval capabilities
+2019-07-26 21:12:36:382 [BaseDriver] Event 'wdaStartAttempted' logged at 1564175556382 (16:12:36 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:36:385 [XCUITest] Using provided WebdriverAgent at 'http://localhost:8103/'
+2019-07-26 21:12:36:385 [WD Proxy] Matched '/status' to command name 'getStatus'
+2019-07-26 21:12:36:386 [WD Proxy] Proxying [GET /status] to [GET http://localhost:8103/status] with no body
+2019-07-26 21:12:36:393 [WD Proxy] Got response with status 200: {
+2019-07-26 21:12:36:393 [WD Proxy]   "value" : {
+2019-07-26 21:12:36:394 [WD Proxy]     "state" : "success",
+2019-07-26 21:12:36:394 [WD Proxy]     "os" : {
+2019-07-26 21:12:36:394 [WD Proxy]       "name" : "iOS",
+2019-07-26 21:12:36:394 [WD Proxy]       "version" : "12.4",
+2019-07-26 21:12:36:395 [WD Proxy]       "sdkVersion" : "12.2"
+2019-07-26 21:12:36:395 [WD Proxy]     },
+2019-07-26 21:12:36:395 [WD Proxy]     "ios" : {
+2019-07-26 21:12:36:395 [WD Proxy]       "simulatorVersion" : "12.4",
+2019-07-26 21:12:36:396 [WD Proxy]       "ip" : "192.168.100.202"
+2019-07-26 21:12:36:396 [WD Proxy]     },
+2019-07-26 21:12:36:396 [WD Proxy]     "build" : {
+2019-07-26 21:12:36:396 [WD Proxy]       "upgradedAt" : "1563847592837",
+2019-07-26 21:12:36:397 [WD Proxy]       "time" : "Jul 24 2019 23:42:45",
+2019-07-26 21:12:36:397 [WD Proxy]       "productBundleIdentifier" : "com.facebook.WebDriverAgentRunner"
+2019-07-26 21:12:36:397 [WD Proxy]     }
+2019-07-26 21:12:36:397 [WD Proxy]   },
+2019-07-26 21:12:36:397 [WD Proxy]   "sessionId" : "E14F8772-20BF-4D00-9111-841730533FBD",
+2019-07-26 21:12:36:398 [WD Proxy]   "status" : 0
+2019-07-26 21:12:36:398 [WD Proxy] }
+2019-07-26 21:12:36:398 [WD Proxy] Determined the downstream protocol for the proxy as 'MJSONWP'
+2019-07-26 21:12:36:399 [BaseDriver] Event 'wdaSessionAttempted' logged at 1564175556399 (16:12:36 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:36:399 [XCUITest] Sending createSession command to WDA
+2019-07-26 21:12:36:401 [WD Proxy] Matched '/session' to command name 'createSession'
+2019-07-26 21:12:36:402 [WD Proxy] Proxying [POST /session] to [POST http://localhost:8103/session] with body: {"desiredCapabilities":{"bundleId":"org.reactjs.native.example.gutenberg","arguments":[],"environment":{},"eventloopIdleDelaySec":0,"shouldWaitForQuiescence":true,"shouldUseTestManagerForVisibilityDetection":false,"maxTypingFrequency":60,"shouldUseSingletonTestManager":true}}
+2019-07-26 21:12:36:463 [WD Proxy] Got an unexpected response: {"code":"ECONNRESET"}
+2019-07-26 21:12:36:483 [XCUITest] Failed to create WDA session (An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: socket hang up). Retrying...
+2019-07-26 21:12:37:484 [BaseDriver] Event 'wdaSessionAttempted' logged at 1564175557484 (16:12:37 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:37:485 [XCUITest] Sending createSession command to WDA
+2019-07-26 21:12:37:485 [WD Proxy] Matched '/session' to command name 'createSession'
+2019-07-26 21:12:37:486 [WD Proxy] Proxying [POST /session] to [POST http://localhost:8103/session] with body: {"desiredCapabilities":{"bundleId":"org.reactjs.native.example.gutenberg","arguments":[],"environment":{},"eventloopIdleDelaySec":0,"shouldWaitForQuiescence":true,"shouldUseTestManagerForVisibilityDetection":false,"maxTypingFrequency":60,"shouldUseSingletonTestManager":true}}
+2019-07-26 21:12:37:492 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:12:37:493 [XCUITest] Failed to create WDA session (An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 127.0.0.1:8103). Retrying...
+2019-07-26 21:12:38:496 [BaseDriver] Event 'wdaSessionAttempted' logged at 1564175558495 (16:12:38 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:38:496 [XCUITest] Sending createSession command to WDA
+2019-07-26 21:12:38:497 [WD Proxy] Matched '/session' to command name 'createSession'
+2019-07-26 21:12:38:497 [WD Proxy] Proxying [POST /session] to [POST http://localhost:8103/session] with body: {"desiredCapabilities":{"bundleId":"org.reactjs.native.example.gutenberg","arguments":[],"environment":{},"eventloopIdleDelaySec":0,"shouldWaitForQuiescence":true,"shouldUseTestManagerForVisibilityDetection":false,"maxTypingFrequency":60,"shouldUseSingletonTestManager":true}}
+2019-07-26 21:12:38:502 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:12:38:503 [XCUITest] Failed to create WDA session (An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 127.0.0.1:8103). Retrying...
+2019-07-26 21:12:39:504 [BaseDriver] Event 'wdaSessionAttempted' logged at 1564175559504 (16:12:39 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:39:504 [XCUITest] Sending createSession command to WDA
+2019-07-26 21:12:39:505 [WD Proxy] Matched '/session' to command name 'createSession'
+2019-07-26 21:12:39:505 [WD Proxy] Proxying [POST /session] to [POST http://localhost:8103/session] with body: {"desiredCapabilities":{"bundleId":"org.reactjs.native.example.gutenberg","arguments":[],"environment":{},"eventloopIdleDelaySec":0,"shouldWaitForQuiescence":true,"shouldUseTestManagerForVisibilityDetection":false,"maxTypingFrequency":60,"shouldUseSingletonTestManager":true}}
+2019-07-26 21:12:39:509 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:12:39:510 [XCUITest] Failed to create WDA session (An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 127.0.0.1:8103). Retrying...
+2019-07-26 21:12:40:510 [BaseDriver] Event 'wdaSessionAttempted' logged at 1564175560510 (16:12:40 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:40:510 [XCUITest] Sending createSession command to WDA
+2019-07-26 21:12:40:511 [WD Proxy] Matched '/session' to command name 'createSession'
+2019-07-26 21:12:40:511 [WD Proxy] Proxying [POST /session] to [POST http://localhost:8103/session] with body: {"desiredCapabilities":{"bundleId":"org.reactjs.native.example.gutenberg","arguments":[],"environment":{},"eventloopIdleDelaySec":0,"shouldWaitForQuiescence":true,"shouldUseTestManagerForVisibilityDetection":false,"maxTypingFrequency":60,"shouldUseSingletonTestManager":true}}
+2019-07-26 21:12:40:514 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:12:40:514 [XCUITest] Failed to create WDA session (An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 127.0.0.1:8103). Retrying...
+2019-07-26 21:12:41:515 [BaseDriver] Event 'wdaSessionAttempted' logged at 1564175561515 (16:12:41 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:41:515 [XCUITest] Sending createSession command to WDA
+2019-07-26 21:12:41:516 [WD Proxy] Matched '/session' to command name 'createSession'
+2019-07-26 21:12:41:516 [WD Proxy] Proxying [POST /session] to [POST http://localhost:8103/session] with body: {"desiredCapabilities":{"bundleId":"org.reactjs.native.example.gutenberg","arguments":[],"environment":{},"eventloopIdleDelaySec":0,"shouldWaitForQuiescence":true,"shouldUseTestManagerForVisibilityDetection":false,"maxTypingFrequency":60,"shouldUseSingletonTestManager":true}}
+2019-07-26 21:12:41:519 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:12:41:519 [XCUITest] Failed to create WDA session (An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 127.0.0.1:8103). Retrying...
+2019-07-26 21:12:42:520 [BaseDriver] Event 'wdaSessionAttempted' logged at 1564175562519 (16:12:42 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:42:520 [XCUITest] Sending createSession command to WDA
+2019-07-26 21:12:42:521 [WD Proxy] Matched '/session' to command name 'createSession'
+2019-07-26 21:12:42:521 [WD Proxy] Proxying [POST /session] to [POST http://localhost:8103/session] with body: {"desiredCapabilities":{"bundleId":"org.reactjs.native.example.gutenberg","arguments":[],"environment":{},"eventloopIdleDelaySec":0,"shouldWaitForQuiescence":true,"shouldUseTestManagerForVisibilityDetection":false,"maxTypingFrequency":60,"shouldUseSingletonTestManager":true}}
+2019-07-26 21:12:42:526 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:12:42:526 [XCUITest] Failed to create WDA session (An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 127.0.0.1:8103). Retrying...
+2019-07-26 21:12:43:527 [BaseDriver] Event 'wdaSessionAttempted' logged at 1564175563527 (16:12:43 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:43:527 [XCUITest] Sending createSession command to WDA
+2019-07-26 21:12:43:528 [WD Proxy] Matched '/session' to command name 'createSession'
+2019-07-26 21:12:43:528 [WD Proxy] Proxying [POST /session] to [POST http://localhost:8103/session] with body: {"desiredCapabilities":{"bundleId":"org.reactjs.native.example.gutenberg","arguments":[],"environment":{},"eventloopIdleDelaySec":0,"shouldWaitForQuiescence":true,"shouldUseTestManagerForVisibilityDetection":false,"maxTypingFrequency":60,"shouldUseSingletonTestManager":true}}
+2019-07-26 21:12:43:531 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:12:43:531 [XCUITest] Failed to create WDA session (An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 127.0.0.1:8103). Retrying...
+2019-07-26 21:12:44:535 [BaseDriver] Event 'wdaSessionAttempted' logged at 1564175564534 (16:12:44 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:44:535 [XCUITest] Sending createSession command to WDA
+2019-07-26 21:12:44:535 [WD Proxy] Matched '/session' to command name 'createSession'
+2019-07-26 21:12:44:535 [WD Proxy] Proxying [POST /session] to [POST http://localhost:8103/session] with body: {"desiredCapabilities":{"bundleId":"org.reactjs.native.example.gutenberg","arguments":[],"environment":{},"eventloopIdleDelaySec":0,"shouldWaitForQuiescence":true,"shouldUseTestManagerForVisibilityDetection":false,"maxTypingFrequency":60,"shouldUseSingletonTestManager":true}}
+2019-07-26 21:12:44:538 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:12:44:539 [XCUITest] Failed to create WDA session (An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 127.0.0.1:8103). Retrying...
+2019-07-26 21:12:45:541 [BaseDriver] Event 'wdaSessionAttempted' logged at 1564175565541 (16:12:45 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:45:541 [XCUITest] Sending createSession command to WDA
+2019-07-26 21:12:45:542 [WD Proxy] Matched '/session' to command name 'createSession'
+2019-07-26 21:12:45:542 [WD Proxy] Proxying [POST /session] to [POST http://localhost:8103/session] with body: {"desiredCapabilities":{"bundleId":"org.reactjs.native.example.gutenberg","arguments":[],"environment":{},"eventloopIdleDelaySec":0,"shouldWaitForQuiescence":true,"shouldUseTestManagerForVisibilityDetection":false,"maxTypingFrequency":60,"shouldUseSingletonTestManager":true}}
+2019-07-26 21:12:45:545 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:12:45:545 [XCUITest] Failed to create WDA session (An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 127.0.0.1:8103). Retrying...
+2019-07-26 21:12:46:549 [BaseDriver] Event 'wdaSessionAttempted' logged at 1564175566549 (16:12:46 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:46:549 [XCUITest] Sending createSession command to WDA
+2019-07-26 21:12:46:549 [WD Proxy] Matched '/session' to command name 'createSession'
+2019-07-26 21:12:46:550 [WD Proxy] Proxying [POST /session] to [POST http://localhost:8103/session] with body: {"desiredCapabilities":{"bundleId":"org.reactjs.native.example.gutenberg","arguments":[],"environment":{},"eventloopIdleDelaySec":0,"shouldWaitForQuiescence":true,"shouldUseTestManagerForVisibilityDetection":false,"maxTypingFrequency":60,"shouldUseSingletonTestManager":true}}
+2019-07-26 21:12:46:553 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:12:46:553 [XCUITest] Failed to create WDA session (An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 127.0.0.1:8103). Retrying...
+2019-07-26 21:12:47:556 [BaseDriver] Event 'wdaSessionAttempted' logged at 1564175567556 (16:12:47 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:47:556 [XCUITest] Sending createSession command to WDA
+2019-07-26 21:12:47:557 [WD Proxy] Matched '/session' to command name 'createSession'
+2019-07-26 21:12:47:557 [WD Proxy] Proxying [POST /session] to [POST http://localhost:8103/session] with body: {"desiredCapabilities":{"bundleId":"org.reactjs.native.example.gutenberg","arguments":[],"environment":{},"eventloopIdleDelaySec":0,"shouldWaitForQuiescence":true,"shouldUseTestManagerForVisibilityDetection":false,"maxTypingFrequency":60,"shouldUseSingletonTestManager":true}}
+2019-07-26 21:12:47:560 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:12:47:561 [XCUITest] Failed to create WDA session (An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 127.0.0.1:8103). Retrying...
+2019-07-26 21:12:48:565 [BaseDriver] Event 'wdaSessionAttempted' logged at 1564175568565 (16:12:48 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:48:566 [XCUITest] Sending createSession command to WDA
+2019-07-26 21:12:48:566 [WD Proxy] Matched '/session' to command name 'createSession'
+2019-07-26 21:12:48:566 [WD Proxy] Proxying [POST /session] to [POST http://localhost:8103/session] with body: {"desiredCapabilities":{"bundleId":"org.reactjs.native.example.gutenberg","arguments":[],"environment":{},"eventloopIdleDelaySec":0,"shouldWaitForQuiescence":true,"shouldUseTestManagerForVisibilityDetection":false,"maxTypingFrequency":60,"shouldUseSingletonTestManager":true}}
+2019-07-26 21:12:48:569 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:12:48:569 [XCUITest] Failed to create WDA session (An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 127.0.0.1:8103). Retrying...
+2019-07-26 21:12:49:571 [BaseDriver] Event 'wdaSessionAttempted' logged at 1564175569571 (16:12:49 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:49:572 [XCUITest] Sending createSession command to WDA
+2019-07-26 21:12:49:572 [WD Proxy] Matched '/session' to command name 'createSession'
+2019-07-26 21:12:49:572 [WD Proxy] Proxying [POST /session] to [POST http://localhost:8103/session] with body: {"desiredCapabilities":{"bundleId":"org.reactjs.native.example.gutenberg","arguments":[],"environment":{},"eventloopIdleDelaySec":0,"shouldWaitForQuiescence":true,"shouldUseTestManagerForVisibilityDetection":false,"maxTypingFrequency":60,"shouldUseSingletonTestManager":true}}
+2019-07-26 21:12:49:575 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:12:49:575 [XCUITest] Failed to create WDA session (An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 127.0.0.1:8103). Retrying...
+2019-07-26 21:12:50:576 [BaseDriver] Event 'wdaSessionAttempted' logged at 1564175570576 (16:12:50 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:12:50:576 [XCUITest] Sending createSession command to WDA
+2019-07-26 21:12:50:577 [WD Proxy] Matched '/session' to command name 'createSession'
+2019-07-26 21:12:50:577 [WD Proxy] Proxying [POST /session] to [POST http://localhost:8103/session] with body: {"desiredCapabilities":{"bundleId":"org.reactjs.native.example.gutenberg","arguments":[],"environment":{},"eventloopIdleDelaySec":0,"shouldWaitForQuiescence":true,"shouldUseTestManagerForVisibilityDetection":false,"maxTypingFrequency":60,"shouldUseSingletonTestManager":true}}
+2019-07-26 21:12:50:580 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:12:50:580 [XCUITest] Failed to create WDA session (An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 127.0.0.1:8103). Retrying...
+2019-07-26 21:12:50:581 [XCUITest] UnknownError: An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 127.0.0.1:8103
+2019-07-26 21:12:50:581 [XCUITest]     at JWProxy.command (/Users/javon/Automattic-Projects/gutenberg-mobile/node_modules/appium-base-driver/lib/jsonwp-proxy/proxy.js:248:13)
+2019-07-26 21:12:50:581 [XCUITest] Unable to start WebDriverAgent session because of xcodebuild failure: An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: connect ECONNREFUSED 127.0.0.1:8103
+2019-07-26 21:12:50:581 [XCUITest] Quitting and uninstalling WebDriverAgent
+2019-07-26 21:12:50:582 [XCUITest] Shutting down sub-processes
+2019-07-26 21:12:50:582 [XCUITest] Removing WDA application from device
+2019-07-26 21:13:01:915 [BaseDriver] Event 'wdaStartAttempted' logged at 1564175581914 (16:13:01 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:13:01:915 [XCUITest] Launching WebDriverAgent on the device
+2019-07-26 21:13:01:916 [WebDriverAgent] Fetching dependencies
+2019-07-26 21:13:01:921 [WebDriverAgent] Dependencies up-to-date
+2019-07-26 21:13:01:921 [XCUITest] Killing running processes 'xcodebuild.*14D3AB56-B915-41A1-B07E-2B483CBA3C0B, 14D3AB56-B915-41A1-B07E-2B483CBA3C0B.*XCTRunner' for the device 14D3AB56-B915-41A1-B07E-2B483CBA3C0B...
+2019-07-26 21:13:02:009 [XCUITest] 'pgrep -ifn xcodebuild.*14D3AB56-B915-41A1-B07E-2B483CBA3C0B' didn't detect any matching processes. Return code: 1
+2019-07-26 21:13:02:072 [XCUITest] 'pgrep -ifn 14D3AB56-B915-41A1-B07E-2B483CBA3C0B.*XCTRunner' didn't detect any matching processes. Return code: 1
+2019-07-26 21:13:02:075 [XCUITest] Beginning test with command 'xcodebuild build-for-testing test-without-building -project /Users/javon/Automattic-Projects/gutenberg-mobile/node_modules/appium-webdriveragent/WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination id=14D3AB56-B915-41A1-B07E-2B483CBA3C0B IPHONEOS_DEPLOYMENT_TARGET=12.4 GCC_TREAT_WARNINGS_AS_ERRORS=0 COMPILER_INDEX_STORE_ENABLE=NO' in directory '/Users/javon/Automattic-Projects/gutenberg-mobile/node_modules/appium-webdriveragent'
+2019-07-26 21:13:02:077 [XCUITest] Output from xcodebuild will only be logged if any errors are present there. To change this, use 'showXcodeLog' desired capability
+2019-07-26 21:13:03:002 [XCUITest] Waiting up to 60000ms for WebDriverAgent to start
+2019-07-26 21:13:03:003 [WD Proxy] Matched '/status' to command name 'getStatus'
+2019-07-26 21:13:03:003 [WD Proxy] Proxying [GET /status] to [GET http://localhost:8103/status] with no body
+2019-07-26 21:13:03:009 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:13:04:010 [WD Proxy] Matched '/status' to command name 'getStatus'
+2019-07-26 21:13:04:011 [WD Proxy] Proxying [GET /status] to [GET http://localhost:8103/status] with no body
+2019-07-26 21:13:04:015 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:13:05:021 [WD Proxy] Matched '/status' to command name 'getStatus'
+2019-07-26 21:13:05:021 [WD Proxy] Proxying [GET /status] to [GET http://localhost:8103/status] with no body
+2019-07-26 21:13:05:027 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:13:06:031 [WD Proxy] Matched '/status' to command name 'getStatus'
+2019-07-26 21:13:06:032 [WD Proxy] Proxying [GET /status] to [GET http://localhost:8103/status] with no body
+2019-07-26 21:13:06:036 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:13:06:576 [XCUITest] Log file for xcodebuild test: /Users/javon/Library/Developer/Xcode/DerivedData/WebDriverAgent-bgqsmdooqqyyzqbqnyqdvtzsmpvo/Logs/Test/Test-WebDriverAgentRunner-2019.07.26_16-13-04--0500.xcresult/2_Test/Diagnostics/WebDriverAgentRunner-3481F634-541F-49EC-9031-7A909A6CE1B3/WebDriverAgentRunner-6B5B1E9D-C1B6-4873-B34E-9EC890325DA1/Session-WebDriverAgentRunner-2019-07-26_161306-1vVt6m.log
+2019-07-26 21:13:07:039 [WD Proxy] Matched '/status' to command name 'getStatus'
+2019-07-26 21:13:07:043 [WD Proxy] Proxying [GET /status] to [GET http://localhost:8103/status] with no body
+2019-07-26 21:13:07:047 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:13:08:048 [WD Proxy] Matched '/status' to command name 'getStatus'
+2019-07-26 21:13:08:048 [WD Proxy] Proxying [GET /status] to [GET http://localhost:8103/status] with no body
+2019-07-26 21:13:08:052 [WD Proxy] Got an unexpected response: {"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":8103}
+2019-07-26 21:13:09:055 [WD Proxy] Matched '/status' to command name 'getStatus'
+2019-07-26 21:13:09:056 [WD Proxy] Proxying [GET /status] to [GET http://localhost:8103/status] with no body
+2019-07-26 21:13:09:062 [WD Proxy] Got response with status 200: {
+2019-07-26 21:13:09:062 [WD Proxy]   "value" : {
+2019-07-26 21:13:09:062 [WD Proxy]     "state" : "success",
+2019-07-26 21:13:09:062 [WD Proxy]     "os" : {
+2019-07-26 21:13:09:063 [WD Proxy]       "name" : "iOS",
+2019-07-26 21:13:09:063 [WD Proxy]       "version" : "12.4",
+2019-07-26 21:13:09:063 [WD Proxy]       "sdkVersion" : "12.2"
+2019-07-26 21:13:09:064 [WD Proxy]     },
+2019-07-26 21:13:09:064 [WD Proxy]     "ios" : {
+2019-07-26 21:13:09:064 [WD Proxy]       "simulatorVersion" : "12.4",
+2019-07-26 21:13:09:064 [WD Proxy]       "ip" : "192.168.100.202"
+2019-07-26 21:13:09:065 [WD Proxy]     },
+2019-07-26 21:13:09:065 [WD Proxy]     "build" : {
+2019-07-26 21:13:09:065 [WD Proxy]       "upgradedAt" : "1563847592837",
+2019-07-26 21:13:09:065 [WD Proxy]       "time" : "Jul 24 2019 23:42:45",
+2019-07-26 21:13:09:065 [WD Proxy]       "productBundleIdentifier" : "com.facebook.WebDriverAgentRunner"
+2019-07-26 21:13:09:065 [WD Proxy]     }
+2019-07-26 21:13:09:066 [WD Proxy]   },
+2019-07-26 21:13:09:066 [WD Proxy]   "sessionId" : "A1CA935F-E1A4-47BF-8173-B1CF44DA93C1",
+2019-07-26 21:13:09:066 [WD Proxy]   "status" : 0
+2019-07-26 21:13:09:066 [WD Proxy] }
+2019-07-26 21:13:09:066 [WD Proxy] Determined the downstream protocol for the proxy as 'MJSONWP'
+2019-07-26 21:13:09:066 [XCUITest] WebDriverAgent information:
+2019-07-26 21:13:09:066 [XCUITest] {
+2019-07-26 21:13:09:067 [XCUITest]   "state": "success",
+2019-07-26 21:13:09:067 [XCUITest]   "os": {
+2019-07-26 21:13:09:067 [XCUITest]     "name": "iOS",
+2019-07-26 21:13:09:067 [XCUITest]     "version": "12.4",
+2019-07-26 21:13:09:067 [XCUITest]     "sdkVersion": "12.2"
+2019-07-26 21:13:09:067 [XCUITest]   },
+2019-07-26 21:13:09:067 [XCUITest]   "ios": {
+2019-07-26 21:13:09:068 [XCUITest]     "simulatorVersion": "12.4",
+2019-07-26 21:13:09:068 [XCUITest]     "ip": "192.168.100.202"
+2019-07-26 21:13:09:068 [XCUITest]   },
+2019-07-26 21:13:09:068 [XCUITest]   "build": {
+2019-07-26 21:13:09:068 [XCUITest]     "upgradedAt": "1563847592837",
+2019-07-26 21:13:09:068 [XCUITest]     "time": "Jul 24 2019 23:42:45",
+2019-07-26 21:13:09:068 [XCUITest]     "productBundleIdentifier": "com.facebook.WebDriverAgentRunner"
+2019-07-26 21:13:09:069 [XCUITest]   }
+2019-07-26 21:13:09:069 [XCUITest] }
+2019-07-26 21:13:09:069 [XCUITest] WebDriverAgent successfully started after 6991ms
+2019-07-26 21:13:09:070 [BaseDriver] Event 'wdaSessionAttempted' logged at 1564175589070 (16:13:09 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:13:09:070 [XCUITest] Sending createSession command to WDA
+2019-07-26 21:13:09:071 [WD Proxy] Matched '/session' to command name 'createSession'
+2019-07-26 21:13:09:071 [WD Proxy] Proxying [POST /session] to [POST http://localhost:8103/session] with body: {"desiredCapabilities":{"bundleId":"org.reactjs.native.example.gutenberg","arguments":[],"environment":{},"eventloopIdleDelaySec":0,"shouldWaitForQuiescence":true,"shouldUseTestManagerForVisibilityDetection":false,"maxTypingFrequency":60,"shouldUseSingletonTestManager":true}}
+2019-07-26 21:13:11:887 [WD Proxy] Got response with status 200: {"value":{"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","capabilities":{"device":"iphone","browserName":"Gutenberg","sdkVersion":"12.4","CFBundleIdentifier":"org.reactjs.native.example.gutenberg"}},"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:11:888 [WD Proxy] Determined the downstream protocol for the proxy as 'MJSONWP'
+2019-07-26 21:13:11:888 [BaseDriver] Event 'wdaSessionStarted' logged at 1564175591888 (16:13:11 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:13:11:889 [BaseDriver] Event 'wdaStarted' logged at 1564175591888 (16:13:11 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:13:11:889 [XCUITest] Skipping setting of the initial display orientation. Set the "orientation" capability to either "LANDSCAPE" or "PORTRAIT", if this is an undesired behavior.
+2019-07-26 21:13:11:890 [BaseDriver] Event 'orientationSet' logged at 1564175591889 (16:13:11 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:13:11:891 [Appium] New XCUITestDriver session created successfully, session 22245500-9420-4394-910a-13ee4a2a6f52 added to master session list
+2019-07-26 21:13:11:892 [BaseDriver] Event 'newSessionStarted' logged at 1564175591891 (16:13:11 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:13:11:895 [MJSONWP (22245500)] Cached the protocol value 'MJSONWP' for the new session 22245500-9420-4394-910a-13ee4a2a6f52
+2019-07-26 21:13:11:896 [MJSONWP (22245500)] Responding to client with driver.createSession() result: {"webStorageEnabled":false,"locationContextEnabled":false,"browserName":"","platform":"MAC","javascriptEnabled":true,"databaseEnabled":false,"takesScreenshot":true,"networkConnectionEnabled":false,"platformName":"iOS","platformVersion":"12.4","deviceName":"iPhone Simulator","os":"iOS","deviceOrientation":"portrait","automationName":"XCUITest","app":"/Users/javon/Automattic-Projects/gutenberg-mobile/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app","udid":"14D3AB56-B915-41A1-B07E-2B483CBA3C0B","wdaLocalPort":8103}
+2019-07-26 21:13:11:903 [HTTP] <-- POST /wd/hub/session 200 42121 ms - 614
+2019-07-26 21:13:11:903 [HTTP] 
+2019-07-26 21:13:11:919 [HTTP] --> GET /wd/hub/status
+2019-07-26 21:13:11:919 [HTTP] {}
+2019-07-26 21:13:11:920 [GENERIC] Calling AppiumDriver.getStatus() with args: []
+2019-07-26 21:13:11:920 [GENERIC] Responding to client with driver.getStatus() result: {"build":{"version":"1.14.0"}}
+2019-07-26 21:13:11:922 [HTTP] <-- GET /wd/hub/status 200 2 ms - 68
+2019-07-26 21:13:11:922 [HTTP] 
+2019-07-26 21:13:11:945 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/timeouts/implicit_wait
+2019-07-26 21:13:11:945 [HTTP] {"ms":2000}
+2019-07-26 21:13:11:947 [MJSONWP (22245500)] Calling AppiumDriver.implicitWait() with args: [2000,"22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:11:947 [XCUITest] Executing command 'implicitWait'
+2019-07-26 21:13:12:028 [BaseDriver] Set implicit wait to 2000ms
+2019-07-26 21:13:12:029 [MJSONWP (22245500)] Responding to client with driver.implicitWait() result: null
+2019-07-26 21:13:12:031 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/timeouts/implicit_wait 200 85 ms - 76
+2019-07-26 21:13:12:031 [HTTP] 
+2019-07-26 21:13:15:040 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation
+2019-07-26 21:13:15:040 [HTTP] {"orientation":"PORTRAIT"}
+2019-07-26 21:13:15:042 [MJSONWP (22245500)] Driver proxy active, passing request on via HTTP proxy
+2019-07-26 21:13:15:043 [XCUITest] Executing command 'proxyReqRes'
+2019-07-26 21:13:15:046 [WD Proxy] Matched '/wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation' to command name 'setOrientation'
+2019-07-26 21:13:15:046 [WD Proxy] Proxying [POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/orientation] with body: {"orientation":"PORTRAIT"}
+2019-07-26 21:13:16:586 [WD Proxy] Got response with status 200: {"value":{},"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:16:586 [WD Proxy] Replacing sessionId A43E9F53-0B9B-46A7-9BF2-771D542D3FBF with 22245500-9420-4394-910a-13ee4a2a6f52
+2019-07-26 21:13:16:587 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation 200 1547 ms - 74
+2019-07-26 21:13:16:587 [HTTP] 
+2019-07-26 21:13:16:597 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/elements
+2019-07-26 21:13:16:597 [HTTP] {"using":"accessibility id","value":"block-list"}
+2019-07-26 21:13:16:597 [MJSONWP (22245500)] Calling AppiumDriver.findElements() with args: ["accessibility id","block-list","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:16:597 [XCUITest] Executing command 'findElements'
+2019-07-26 21:13:16:598 [BaseDriver] Valid locator strategies for this request: xpath, id, name, class name, -ios predicate string, -ios class chain, accessibility id
+2019-07-26 21:13:16:599 [BaseDriver] Waiting up to 2000 ms for condition
+2019-07-26 21:13:16:600 [WD Proxy] Matched '/elements' to command name 'findElements'
+2019-07-26 21:13:16:601 [WD Proxy] Proxying [POST /elements] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/elements] with body: {"using":"accessibility id","value":"block-list"}
+2019-07-26 21:13:16:917 [WD Proxy] Got response with status 200: {"value":[{"ELEMENT":"54000000-0000-0000-42C7-000000000000"},{"ELEMENT":"5A000000-0000-0000-42C7-000000000000"},{"ELEMENT":"5C000000-0000-0000-42C7-000000000000"}],"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:16:918 [MJSONWP (22245500)] Responding to client with driver.findElements() result: [{"element-6066-11e4-a52e-4f735466cecf":"54000000-0000-0000-42C7-000000000000","ELEMENT":"54000000-0000-0000-42C7-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"5A000000-0000-0000-42C7-000000000000","ELEMENT":"5A000000-0000-0000-42C7-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"5C000000-0000-0000-42C7-000000000000","ELEMENT":"5C000000-0000-0000-42C7-000000000000"}]
+2019-07-26 21:13:16:918 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/elements 200 322 ms - 457
+2019-07-26 21:13:16:919 [HTTP] 
+2019-07-26 21:13:16:927 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element
+2019-07-26 21:13:16:927 [HTTP] {"using":"accessibility id","value":"Add block"}
+2019-07-26 21:13:16:928 [MJSONWP (22245500)] Calling AppiumDriver.findElement() with args: ["accessibility id","Add block","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:16:928 [XCUITest] Executing command 'findElement'
+2019-07-26 21:13:16:929 [BaseDriver] Valid locator strategies for this request: xpath, id, name, class name, -ios predicate string, -ios class chain, accessibility id
+2019-07-26 21:13:16:929 [BaseDriver] Waiting up to 2000 ms for condition
+2019-07-26 21:13:16:929 [WD Proxy] Matched '/element' to command name 'findElement'
+2019-07-26 21:13:16:930 [WD Proxy] Proxying [POST /element] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element] with body: {"using":"accessibility id","value":"Add block"}
+2019-07-26 21:13:17:156 [WD Proxy] Got response with status 200: {"value":{"ELEMENT":"65000000-0000-0000-42C7-000000000000"},"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:17:156 [MJSONWP (22245500)] Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"65000000-0000-0000-42C7-000000000000","ELEMENT":"65000000-0000-0000-42C7-000000000000"}
+2019-07-26 21:13:17:157 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element 200 230 ms - 199
+2019-07-26 21:13:17:157 [HTTP] 
+2019-07-26 21:13:17:163 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/65000000-0000-0000-42C7-000000000000/click
+2019-07-26 21:13:17:163 [HTTP] {}
+2019-07-26 21:13:17:164 [MJSONWP (22245500)] Driver proxy active, passing request on via HTTP proxy
+2019-07-26 21:13:17:164 [XCUITest] Executing command 'proxyReqRes'
+2019-07-26 21:13:17:165 [WD Proxy] Matched '/wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/65000000-0000-0000-42C7-000000000000/click' to command name 'click'
+2019-07-26 21:13:17:165 [WD Proxy] Proxying [POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/65000000-0000-0000-42C7-000000000000/click] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element/65000000-0000-0000-42C7-000000000000/click] with body: {}
+2019-07-26 21:13:17:717 [WD Proxy] Got response with status 200: {"status":0,"id":"65000000-0000-0000-42C7-000000000000","value":"","sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF"}
+2019-07-26 21:13:17:718 [WD Proxy] Replacing sessionId A43E9F53-0B9B-46A7-9BF2-771D542D3FBF with 22245500-9420-4394-910a-13ee4a2a6f52
+2019-07-26 21:13:17:718 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/65000000-0000-0000-42C7-000000000000/click 200 555 ms - 118
+2019-07-26 21:13:17:719 [HTTP] 
+2019-07-26 21:13:17:727 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element
+2019-07-26 21:13:17:728 [HTTP] {"using":"accessibility id","value":"Paragraph"}
+2019-07-26 21:13:17:728 [MJSONWP (22245500)] Calling AppiumDriver.findElement() with args: ["accessibility id","Paragraph","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:17:728 [XCUITest] Executing command 'findElement'
+2019-07-26 21:13:17:731 [BaseDriver] Valid locator strategies for this request: xpath, id, name, class name, -ios predicate string, -ios class chain, accessibility id
+2019-07-26 21:13:17:731 [BaseDriver] Waiting up to 2000 ms for condition
+2019-07-26 21:13:17:732 [WD Proxy] Matched '/element' to command name 'findElement'
+2019-07-26 21:13:17:732 [WD Proxy] Proxying [POST /element] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element] with body: {"using":"accessibility id","value":"Paragraph"}
+2019-07-26 21:13:18:027 [WD Proxy] Got response with status 200: {"value":{"ELEMENT":"8C000000-0000-0000-42C7-000000000000"},"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:18:028 [MJSONWP (22245500)] Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"8C000000-0000-0000-42C7-000000000000","ELEMENT":"8C000000-0000-0000-42C7-000000000000"}
+2019-07-26 21:13:18:029 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element 200 302 ms - 199
+2019-07-26 21:13:18:029 [HTTP] 
+2019-07-26 21:13:18:035 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/8C000000-0000-0000-42C7-000000000000/click
+2019-07-26 21:13:18:035 [HTTP] {}
+2019-07-26 21:13:18:036 [MJSONWP (22245500)] Driver proxy active, passing request on via HTTP proxy
+2019-07-26 21:13:18:036 [XCUITest] Executing command 'proxyReqRes'
+2019-07-26 21:13:18:038 [WD Proxy] Matched '/wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/8C000000-0000-0000-42C7-000000000000/click' to command name 'click'
+2019-07-26 21:13:18:038 [WD Proxy] Proxying [POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/8C000000-0000-0000-42C7-000000000000/click] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element/8C000000-0000-0000-42C7-000000000000/click] with body: {}
+2019-07-26 21:13:18:765 [WD Proxy] Got response with status 200: {"status":0,"id":"8C000000-0000-0000-42C7-000000000000","value":"","sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF"}
+2019-07-26 21:13:18:765 [WD Proxy] Replacing sessionId A43E9F53-0B9B-46A7-9BF2-771D542D3FBF with 22245500-9420-4394-910a-13ee4a2a6f52
+2019-07-26 21:13:18:765 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/8C000000-0000-0000-42C7-000000000000/click 200 730 ms - 118
+2019-07-26 21:13:18:766 [HTTP] 
+2019-07-26 21:13:18:772 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/elements
+2019-07-26 21:13:18:772 [HTTP] {"using":"xpath","value":"//*[contains(@name, \"Paragraph Block. Row 1.\")]"}
+2019-07-26 21:13:18:773 [MJSONWP (22245500)] Calling AppiumDriver.findElements() with args: ["xpath","//*[contains(@name, \"Paragraph Block. Row 1.\")]","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:18:773 [XCUITest] Executing command 'findElements'
+2019-07-26 21:13:18:774 [BaseDriver] Valid locator strategies for this request: xpath, id, name, class name, -ios predicate string, -ios class chain, accessibility id
+2019-07-26 21:13:18:775 [BaseDriver] Waiting up to 2000 ms for condition
+2019-07-26 21:13:18:776 [WD Proxy] Matched '/elements' to command name 'findElements'
+2019-07-26 21:13:18:776 [WD Proxy] Proxying [POST /elements] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/elements] with body: {"using":"xpath","value":"//*[contains(@name, \"Paragraph Block. Row 1.\")]"}
+2019-07-26 21:13:22:542 [WD Proxy] Got response with status 200: {"value":[{"ELEMENT":"60000000-0000-0000-42C7-000000000000"},{"ELEMENT":"AB000000-0000-0000-42C7-000000000000"},{"ELEMENT":"B2000000-0000-0000-42C7-000000000000"},{"ELEMENT":"B5000000-0000-0000-42C7-000000000000"},{"ELEMENT":"B6000000-0000-0000-42C7-000000000000"},{"ELEMENT":"B7000000-0000-0000-42C7-000000000000"}],"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:22:543 [MJSONWP (22245500)] Responding to client with driver.findElements() result: [{"element-6066-11e4-a52e-4f735466cecf":"60000000-0000-0000-42C7-000000000000","ELEMENT":"60000000-0000-0000-42C7-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"AB000000-0000-0000-42C7-000000000000","ELEMENT":"AB000000-0000-0000-42C7-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"B2000000-0000-0000-42C7-000000000000","ELEMENT":"B2000000-0000-0000-42C7-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"B5000000-0000-0000-42C7-000000000000","ELEMENT":"B5000000-0000-0000-42C7-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"B6000000-0000-0000-42C7-000000000000","ELEMENT":"B6000000-0000-0000-42C7-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"B7000000-0000-0000-42C7-000000000000","ELEMENT":"B7000000-0000-0000-42C7-000000000000"}]
+2019-07-26 21:13:22:543 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/elements 200 3771 ms - 841
+2019-07-26 21:13:22:544 [HTTP] 
+2019-07-26 21:13:22:551 [HTTP] --> GET /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/B7000000-0000-0000-42C7-000000000000/attribute/name
+2019-07-26 21:13:22:552 [HTTP] {}
+2019-07-26 21:13:22:552 [MJSONWP (22245500)] Calling AppiumDriver.getAttribute() with args: ["name","B7000000-0000-0000-42C7-000000000000","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:22:552 [XCUITest] Executing command 'getAttribute'
+2019-07-26 21:13:22:555 [WD Proxy] Matched '/element/B7000000-0000-0000-42C7-000000000000/attribute/name' to command name 'getAttribute'
+2019-07-26 21:13:22:556 [WD Proxy] Proxying [GET /element/B7000000-0000-0000-42C7-000000000000/attribute/name] to [GET http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element/B7000000-0000-0000-42C7-000000000000/attribute/name] with no body
+2019-07-26 21:13:22:780 [WD Proxy] Got response with status 200: {
+2019-07-26 21:13:22:780 [WD Proxy]   "value" : "Paragraph Block. Row 1. Empty",
+2019-07-26 21:13:22:781 [WD Proxy]   "sessionId" : "A43E9F53-0B9B-46A7-9BF2-771D542D3FBF",
+2019-07-26 21:13:22:781 [WD Proxy]   "status" : 0
+2019-07-26 21:13:22:781 [WD Proxy] }
+2019-07-26 21:13:22:782 [MJSONWP (22245500)] Responding to client with driver.getAttribute() result: "Paragraph Block. Row 1. Empty"
+2019-07-26 21:13:22:782 [HTTP] <-- GET /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/B7000000-0000-0000-42C7-000000000000/attribute/name 200 231 ms - 103
+2019-07-26 21:13:22:783 [HTTP] 
+2019-07-26 21:13:22:790 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element
+2019-07-26 21:13:22:791 [HTTP] {"using":"xpath","value":"//*[@name=\"Paragraph Block. Row 1. Empty\"]//XCUIElementTypeTextView"}
+2019-07-26 21:13:22:791 [MJSONWP (22245500)] Calling AppiumDriver.findElement() with args: ["xpath","//*[@name=\"Paragraph Block. Row 1. Empty\"]//XCUIElementTypeTextView","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:22:792 [XCUITest] Executing command 'findElement'
+2019-07-26 21:13:22:793 [BaseDriver] Valid locator strategies for this request: xpath, id, name, class name, -ios predicate string, -ios class chain, accessibility id
+2019-07-26 21:13:22:793 [BaseDriver] Waiting up to 2000 ms for condition
+2019-07-26 21:13:22:794 [WD Proxy] Matched '/element' to command name 'findElement'
+2019-07-26 21:13:22:794 [WD Proxy] Proxying [POST /element] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element] with body: {"using":"xpath","value":"//*[@name=\"Paragraph Block. Row 1. Empty\"]//XCUIElementTypeTextView"}
+2019-07-26 21:13:25:977 [WD Proxy] Got response with status 200: {"value":{"ELEMENT":"97000000-0000-0000-42C7-000000000000"},"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:25:977 [MJSONWP (22245500)] Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"97000000-0000-0000-42C7-000000000000","ELEMENT":"97000000-0000-0000-42C7-000000000000"}
+2019-07-26 21:13:25:979 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element 200 3188 ms - 199
+2019-07-26 21:13:25:979 [HTTP] 
+2019-07-26 21:13:25:989 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/97000000-0000-0000-42C7-000000000000/value
+2019-07-26 21:13:25:989 [HTTP] {"value":["The finer continuum interprets the polynomial rabbit. When can the geology runs? An astronomer runs. Should a communist consent?"],"text":"The finer continuum interprets the polynomial rabbit. When can the geology runs? An astronomer runs. Should a communist consent?"}
+2019-07-26 21:13:25:990 [MJSONWP (22245500)] Calling AppiumDriver.setValue() with args: [["The finer continuum interprets the polynomial rabbit. When can the geology runs? An astronomer runs. Should a communist consent?"],"97000000-0000-0000-42C7-000000000000","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:25:991 [XCUITest] Executing command 'setValue'
+2019-07-26 21:13:25:997 [WD Proxy] Matched '/element/97000000-0000-0000-42C7-000000000000/value' to command name 'setValue'
+2019-07-26 21:13:25:998 [Protocol Converter] Added 'text' property "The finer continuum interprets the polynomial rabbit. When can the geology runs? An astronomer runs. Should a communist consent?" to 'setValue' request body
+2019-07-26 21:13:25:999 [WD Proxy] Proxying [POST /element/97000000-0000-0000-42C7-000000000000/value] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element/97000000-0000-0000-42C7-000000000000/value] with body: {"value":["T","h","e"," ","f","i","n","e","r"," ","c","o","n","t","i","n","u","u","m"," ","i","n","t","e","r","p","r","e","t","s"," ","t","h","e"," ","p","o","l","y","n","o","m","i","a","l"," ","r","a","b","b","i","t","."," ","W","h","e","n"," ","c","a","n"," ","t","h","e"," ","g","e","o","l","o","g","y"," ","r","u","n","s","?"," ","A","n"," ","a","s","t","r","o","n","o","m","e","r"," ","r","u","n","s","."," ","S","h","o","u","l","d"," ","a"," ","c","o","m","m","u","n","i","s","t"," ","c","o","n","s","e","n","t","?"],"text":"The finer continuum interprets the polynomial rabbit. When can the geology runs? An astronomer runs. Should a communist consent?"}
+2019-07-26 21:13:29:018 [WD Proxy] Got response with status 200: {"status":0,"id":"97000000-0000-0000-42C7-000000000000","value":"","sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF"}
+2019-07-26 21:13:29:019 [MJSONWP (22245500)] Responding to client with driver.setValue() result: null
+2019-07-26 21:13:29:020 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/97000000-0000-0000-42C7-000000000000/value 200 3030 ms - 76
+2019-07-26 21:13:29:020 [HTTP] 
+2019-07-26 21:13:30:032 [HTTP] --> GET /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation
+2019-07-26 21:13:30:033 [HTTP] {}
+2019-07-26 21:13:30:033 [MJSONWP (22245500)] Driver proxy active, passing request on via HTTP proxy
+2019-07-26 21:13:30:034 [XCUITest] Executing command 'proxyReqRes'
+2019-07-26 21:13:30:037 [WD Proxy] Matched '/wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation' to command name 'getOrientation'
+2019-07-26 21:13:30:038 [WD Proxy] Proxying [GET /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation] to [GET http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/orientation] with body: {}
+2019-07-26 21:13:30:055 [WD Proxy] Got response with status 200: {
+2019-07-26 21:13:30:055 [WD Proxy]   "value" : "PORTRAIT",
+2019-07-26 21:13:30:055 [WD Proxy]   "sessionId" : "A43E9F53-0B9B-46A7-9BF2-771D542D3FBF",
+2019-07-26 21:13:30:056 [WD Proxy]   "status" : 0
+2019-07-26 21:13:30:056 [WD Proxy] }
+2019-07-26 21:13:30:056 [WD Proxy] Replacing sessionId A43E9F53-0B9B-46A7-9BF2-771D542D3FBF with 22245500-9420-4394-910a-13ee4a2a6f52
+2019-07-26 21:13:30:058 [HTTP] <-- GET /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation 200 25 ms - 82
+2019-07-26 21:13:30:058 [HTTP] 
+2019-07-26 21:13:30:067 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation
+2019-07-26 21:13:30:067 [HTTP] {"orientation":"LANDSCAPE"}
+2019-07-26 21:13:30:068 [MJSONWP (22245500)] Driver proxy active, passing request on via HTTP proxy
+2019-07-26 21:13:30:068 [XCUITest] Executing command 'proxyReqRes'
+2019-07-26 21:13:30:069 [WD Proxy] Matched '/wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation' to command name 'setOrientation'
+2019-07-26 21:13:30:069 [WD Proxy] Proxying [POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/orientation] with body: {"orientation":"LANDSCAPE"}
+2019-07-26 21:13:31:615 [WD Proxy] Got response with status 200: {"value":{},"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:31:615 [WD Proxy] Replacing sessionId A43E9F53-0B9B-46A7-9BF2-771D542D3FBF with 22245500-9420-4394-910a-13ee4a2a6f52
+2019-07-26 21:13:31:616 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation 200 1549 ms - 74
+2019-07-26 21:13:31:616 [HTTP] 
+2019-07-26 21:13:31:623 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element
+2019-07-26 21:13:31:623 [HTTP] {"using":"accessibility id","value":"Add block"}
+2019-07-26 21:13:31:623 [MJSONWP (22245500)] Calling AppiumDriver.findElement() with args: ["accessibility id","Add block","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:31:624 [XCUITest] Executing command 'findElement'
+2019-07-26 21:13:31:624 [BaseDriver] Valid locator strategies for this request: xpath, id, name, class name, -ios predicate string, -ios class chain, accessibility id
+2019-07-26 21:13:31:625 [BaseDriver] Waiting up to 2000 ms for condition
+2019-07-26 21:13:31:625 [WD Proxy] Matched '/element' to command name 'findElement'
+2019-07-26 21:13:31:625 [WD Proxy] Proxying [POST /element] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element] with body: {"using":"accessibility id","value":"Add block"}
+2019-07-26 21:13:31:876 [WD Proxy] Got response with status 200: {"value":{"ELEMENT":"65000000-0000-0000-42C7-000000000000"},"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:31:876 [MJSONWP (22245500)] Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"65000000-0000-0000-42C7-000000000000","ELEMENT":"65000000-0000-0000-42C7-000000000000"}
+2019-07-26 21:13:31:877 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element 200 254 ms - 199
+2019-07-26 21:13:31:877 [HTTP] 
+2019-07-26 21:13:31:884 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/65000000-0000-0000-42C7-000000000000/click
+2019-07-26 21:13:31:885 [HTTP] {}
+2019-07-26 21:13:31:885 [MJSONWP (22245500)] Driver proxy active, passing request on via HTTP proxy
+2019-07-26 21:13:31:885 [XCUITest] Executing command 'proxyReqRes'
+2019-07-26 21:13:31:887 [WD Proxy] Matched '/wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/65000000-0000-0000-42C7-000000000000/click' to command name 'click'
+2019-07-26 21:13:31:887 [WD Proxy] Proxying [POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/65000000-0000-0000-42C7-000000000000/click] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element/65000000-0000-0000-42C7-000000000000/click] with body: {}
+2019-07-26 21:13:32:451 [WD Proxy] Got response with status 200: {"status":0,"id":"65000000-0000-0000-42C7-000000000000","value":"","sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF"}
+2019-07-26 21:13:32:451 [WD Proxy] Replacing sessionId A43E9F53-0B9B-46A7-9BF2-771D542D3FBF with 22245500-9420-4394-910a-13ee4a2a6f52
+2019-07-26 21:13:32:452 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/65000000-0000-0000-42C7-000000000000/click 200 567 ms - 118
+2019-07-26 21:13:32:452 [HTTP] 
+2019-07-26 21:13:32:459 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element
+2019-07-26 21:13:32:460 [HTTP] {"using":"accessibility id","value":"Paragraph"}
+2019-07-26 21:13:32:460 [MJSONWP (22245500)] Calling AppiumDriver.findElement() with args: ["accessibility id","Paragraph","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:32:460 [XCUITest] Executing command 'findElement'
+2019-07-26 21:13:32:461 [BaseDriver] Valid locator strategies for this request: xpath, id, name, class name, -ios predicate string, -ios class chain, accessibility id
+2019-07-26 21:13:32:461 [BaseDriver] Waiting up to 2000 ms for condition
+2019-07-26 21:13:32:462 [WD Proxy] Matched '/element' to command name 'findElement'
+2019-07-26 21:13:32:462 [WD Proxy] Proxying [POST /element] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element] with body: {"using":"accessibility id","value":"Paragraph"}
+2019-07-26 21:13:32:798 [WD Proxy] Got response with status 200: {"value":{"ELEMENT":"F9000000-0000-0000-42C7-000000000000"},"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:32:799 [MJSONWP (22245500)] Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"F9000000-0000-0000-42C7-000000000000","ELEMENT":"F9000000-0000-0000-42C7-000000000000"}
+2019-07-26 21:13:32:799 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element 200 340 ms - 199
+2019-07-26 21:13:32:799 [HTTP] 
+2019-07-26 21:13:32:806 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/F9000000-0000-0000-42C7-000000000000/click
+2019-07-26 21:13:32:807 [HTTP] {}
+2019-07-26 21:13:32:807 [MJSONWP (22245500)] Driver proxy active, passing request on via HTTP proxy
+2019-07-26 21:13:32:810 [XCUITest] Executing command 'proxyReqRes'
+2019-07-26 21:13:32:811 [WD Proxy] Matched '/wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/F9000000-0000-0000-42C7-000000000000/click' to command name 'click'
+2019-07-26 21:13:32:811 [WD Proxy] Proxying [POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/F9000000-0000-0000-42C7-000000000000/click] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element/F9000000-0000-0000-42C7-000000000000/click] with body: {}
+2019-07-26 21:13:33:729 [WD Proxy] Got response with status 200: {"status":0,"id":"F9000000-0000-0000-42C7-000000000000","value":"","sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF"}
+2019-07-26 21:13:33:729 [WD Proxy] Replacing sessionId A43E9F53-0B9B-46A7-9BF2-771D542D3FBF with 22245500-9420-4394-910a-13ee4a2a6f52
+2019-07-26 21:13:33:730 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/F9000000-0000-0000-42C7-000000000000/click 200 923 ms - 118
+2019-07-26 21:13:33:730 [HTTP] 
+2019-07-26 21:13:33:736 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/elements
+2019-07-26 21:13:33:736 [HTTP] {"using":"xpath","value":"//*[contains(@name, \"Paragraph Block. Row 2.\")]"}
+2019-07-26 21:13:33:737 [MJSONWP (22245500)] Calling AppiumDriver.findElements() with args: ["xpath","//*[contains(@name, \"Paragraph Block. Row 2.\")]","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:33:737 [XCUITest] Executing command 'findElements'
+2019-07-26 21:13:33:738 [BaseDriver] Valid locator strategies for this request: xpath, id, name, class name, -ios predicate string, -ios class chain, accessibility id
+2019-07-26 21:13:33:738 [BaseDriver] Waiting up to 2000 ms for condition
+2019-07-26 21:13:33:739 [WD Proxy] Matched '/elements' to command name 'findElements'
+2019-07-26 21:13:33:739 [WD Proxy] Proxying [POST /elements] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/elements] with body: {"using":"xpath","value":"//*[contains(@name, \"Paragraph Block. Row 2.\")]"}
+2019-07-26 21:13:37:627 [WD Proxy] Got response with status 200: {"value":[{"ELEMENT":"60000000-0000-0000-42C7-000000000000"},{"ELEMENT":"35010000-0000-0000-42C7-000000000000"},{"ELEMENT":"3A010000-0000-0000-42C7-000000000000"},{"ELEMENT":"3F010000-0000-0000-42C7-000000000000"},{"ELEMENT":"40010000-0000-0000-42C7-000000000000"},{"ELEMENT":"41010000-0000-0000-42C7-000000000000"}],"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:37:627 [MJSONWP (22245500)] Responding to client with driver.findElements() result: [{"element-6066-11e4-a52e-4f735466cecf":"60000000-0000-0000-42C7-000000000000","ELEMENT":"60000000-0000-0000-42C7-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"35010000-0000-0000-42C7-000000000000","ELEMENT":"35010000-0000-0000-42C7-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"3A010000-0000-0000-42C7-000000000000","ELEMENT":"3A010000-0000-0000-42C7-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"3F010000-0000-0000-42C7-000000000000","ELEMENT":"3F010000-0000-0000-42C7-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"40010000-0000-0000-42C7-000000000000","ELEMENT":"40010000-0000-0000-42C7-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"41010000-0000-0000-42C7-000000000000","ELEMENT":"41010000-0000-0000-42C7-000000000000"}]
+2019-07-26 21:13:37:628 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/elements 200 3892 ms - 841
+2019-07-26 21:13:37:628 [HTTP] 
+2019-07-26 21:13:37:635 [HTTP] --> GET /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/41010000-0000-0000-42C7-000000000000/attribute/name
+2019-07-26 21:13:37:635 [HTTP] {}
+2019-07-26 21:13:37:636 [MJSONWP (22245500)] Calling AppiumDriver.getAttribute() with args: ["name","41010000-0000-0000-42C7-000000000000","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:37:636 [XCUITest] Executing command 'getAttribute'
+2019-07-26 21:13:37:638 [WD Proxy] Matched '/element/41010000-0000-0000-42C7-000000000000/attribute/name' to command name 'getAttribute'
+2019-07-26 21:13:37:638 [WD Proxy] Proxying [GET /element/41010000-0000-0000-42C7-000000000000/attribute/name] to [GET http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element/41010000-0000-0000-42C7-000000000000/attribute/name] with no body
+2019-07-26 21:13:37:796 [WD Proxy] Got response with status 200: {
+2019-07-26 21:13:37:796 [WD Proxy]   "value" : "Paragraph Block. Row 2. Empty",
+2019-07-26 21:13:37:796 [WD Proxy]   "sessionId" : "A43E9F53-0B9B-46A7-9BF2-771D542D3FBF",
+2019-07-26 21:13:37:796 [WD Proxy]   "status" : 0
+2019-07-26 21:13:37:796 [WD Proxy] }
+2019-07-26 21:13:37:796 [MJSONWP (22245500)] Responding to client with driver.getAttribute() result: "Paragraph Block. Row 2. Empty"
+2019-07-26 21:13:37:797 [HTTP] <-- GET /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/41010000-0000-0000-42C7-000000000000/attribute/name 200 162 ms - 103
+2019-07-26 21:13:37:797 [HTTP] 
+2019-07-26 21:13:37:803 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element
+2019-07-26 21:13:37:803 [HTTP] {"using":"xpath","value":"//*[@name=\"Paragraph Block. Row 2. Empty\"]//XCUIElementTypeTextView"}
+2019-07-26 21:13:37:804 [MJSONWP (22245500)] Calling AppiumDriver.findElement() with args: ["xpath","//*[@name=\"Paragraph Block. Row 2. Empty\"]//XCUIElementTypeTextView","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:37:804 [XCUITest] Executing command 'findElement'
+2019-07-26 21:13:37:805 [BaseDriver] Valid locator strategies for this request: xpath, id, name, class name, -ios predicate string, -ios class chain, accessibility id
+2019-07-26 21:13:37:805 [BaseDriver] Waiting up to 2000 ms for condition
+2019-07-26 21:13:37:805 [WD Proxy] Matched '/element' to command name 'findElement'
+2019-07-26 21:13:37:806 [WD Proxy] Proxying [POST /element] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element] with body: {"using":"xpath","value":"//*[@name=\"Paragraph Block. Row 2. Empty\"]//XCUIElementTypeTextView"}
+2019-07-26 21:13:40:201 [WD Proxy] Got response with status 200: {"value":{"ELEMENT":"06010000-0000-0000-42C7-000000000000"},"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:40:201 [MJSONWP (22245500)] Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"06010000-0000-0000-42C7-000000000000","ELEMENT":"06010000-0000-0000-42C7-000000000000"}
+2019-07-26 21:13:40:202 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element 200 2399 ms - 199
+2019-07-26 21:13:40:202 [HTTP] 
+2019-07-26 21:13:40:208 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/06010000-0000-0000-42C7-000000000000/value
+2019-07-26 21:13:40:208 [HTTP] {"value":["The finer continuum interprets the polynomial rabbit. When can the geology runs? An astronomer runs. Should a communist consent?"],"text":"The finer continuum interprets the polynomial rabbit. When can the geology runs? An astronomer runs. Should a communist consent?"}
+2019-07-26 21:13:40:208 [MJSONWP (22245500)] Calling AppiumDriver.setValue() with args: [["The finer continuum interprets the polynomial rabbit. When can the geology runs? An astronomer runs. Should a communist consent?"],"06010000-0000-0000-42C7-000000000000","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:40:209 [XCUITest] Executing command 'setValue'
+2019-07-26 21:13:40:210 [WD Proxy] Matched '/element/06010000-0000-0000-42C7-000000000000/value' to command name 'setValue'
+2019-07-26 21:13:40:211 [Protocol Converter] Added 'text' property "The finer continuum interprets the polynomial rabbit. When can the geology runs? An astronomer runs. Should a communist consent?" to 'setValue' request body
+2019-07-26 21:13:40:211 [WD Proxy] Proxying [POST /element/06010000-0000-0000-42C7-000000000000/value] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element/06010000-0000-0000-42C7-000000000000/value] with body: {"value":["T","h","e"," ","f","i","n","e","r"," ","c","o","n","t","i","n","u","u","m"," ","i","n","t","e","r","p","r","e","t","s"," ","t","h","e"," ","p","o","l","y","n","o","m","i","a","l"," ","r","a","b","b","i","t","."," ","W","h","e","n"," ","c","a","n"," ","t","h","e"," ","g","e","o","l","o","g","y"," ","r","u","n","s","?"," ","A","n"," ","a","s","t","r","o","n","o","m","e","r"," ","r","u","n","s","."," ","S","h","o","u","l","d"," ","a"," ","c","o","m","m","u","n","i","s","t"," ","c","o","n","s","e","n","t","?"],"text":"The finer continuum interprets the polynomial rabbit. When can the geology runs? An astronomer runs. Should a communist consent?"}
+2019-07-26 21:13:43:059 [WD Proxy] Got response with status 200: {"status":0,"id":"06010000-0000-0000-42C7-000000000000","value":"","sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF"}
+2019-07-26 21:13:43:060 [MJSONWP (22245500)] Responding to client with driver.setValue() result: null
+2019-07-26 21:13:43:060 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/06010000-0000-0000-42C7-000000000000/value 200 2852 ms - 76
+2019-07-26 21:13:43:060 [HTTP] 
+2019-07-26 21:13:44:068 [HTTP] --> GET /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation
+2019-07-26 21:13:44:068 [HTTP] {}
+2019-07-26 21:13:44:069 [MJSONWP (22245500)] Driver proxy active, passing request on via HTTP proxy
+2019-07-26 21:13:44:069 [XCUITest] Executing command 'proxyReqRes'
+2019-07-26 21:13:44:070 [WD Proxy] Matched '/wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation' to command name 'getOrientation'
+2019-07-26 21:13:44:070 [WD Proxy] Proxying [GET /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation] to [GET http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/orientation] with body: {}
+2019-07-26 21:13:44:081 [WD Proxy] Got response with status 200: {
+2019-07-26 21:13:44:081 [WD Proxy]   "value" : "LANDSCAPE",
+2019-07-26 21:13:44:082 [WD Proxy]   "sessionId" : "A43E9F53-0B9B-46A7-9BF2-771D542D3FBF",
+2019-07-26 21:13:44:082 [WD Proxy]   "status" : 0
+2019-07-26 21:13:44:082 [WD Proxy] }
+2019-07-26 21:13:44:082 [WD Proxy] Replacing sessionId A43E9F53-0B9B-46A7-9BF2-771D542D3FBF with 22245500-9420-4394-910a-13ee4a2a6f52
+2019-07-26 21:13:44:083 [HTTP] <-- GET /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation 200 14 ms - 83
+2019-07-26 21:13:44:083 [HTTP] 
+2019-07-26 21:13:44:088 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation
+2019-07-26 21:13:44:088 [HTTP] {"orientation":"PORTRAIT"}
+2019-07-26 21:13:44:089 [MJSONWP (22245500)] Driver proxy active, passing request on via HTTP proxy
+2019-07-26 21:13:44:089 [XCUITest] Executing command 'proxyReqRes'
+2019-07-26 21:13:44:090 [WD Proxy] Matched '/wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation' to command name 'setOrientation'
+2019-07-26 21:13:44:090 [WD Proxy] Proxying [POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/orientation] with body: {"orientation":"PORTRAIT"}
+2019-07-26 21:13:45:626 [WD Proxy] Got response with status 200: {"value":{},"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:45:627 [WD Proxy] Replacing sessionId A43E9F53-0B9B-46A7-9BF2-771D542D3FBF with 22245500-9420-4394-910a-13ee4a2a6f52
+2019-07-26 21:13:45:627 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/orientation 200 1539 ms - 74
+2019-07-26 21:13:45:627 [HTTP] 
+2019-07-26 21:13:45:636 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element
+2019-07-26 21:13:45:636 [HTTP] {"using":"accessibility id","value":"..."}
+2019-07-26 21:13:45:636 [MJSONWP (22245500)] Calling AppiumDriver.findElement() with args: ["accessibility id","...","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:45:636 [XCUITest] Executing command 'findElement'
+2019-07-26 21:13:45:638 [BaseDriver] Valid locator strategies for this request: xpath, id, name, class name, -ios predicate string, -ios class chain, accessibility id
+2019-07-26 21:13:45:638 [BaseDriver] Waiting up to 2000 ms for condition
+2019-07-26 21:13:45:640 [WD Proxy] Matched '/element' to command name 'findElement'
+2019-07-26 21:13:45:640 [WD Proxy] Proxying [POST /element] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element] with body: {"using":"accessibility id","value":"..."}
+2019-07-26 21:13:45:901 [WD Proxy] Got response with status 200: {"value":{"ELEMENT":"13000000-0000-0000-42C7-000000000000"},"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:45:901 [MJSONWP (22245500)] Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"13000000-0000-0000-42C7-000000000000","ELEMENT":"13000000-0000-0000-42C7-000000000000"}
+2019-07-26 21:13:45:902 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element 200 266 ms - 199
+2019-07-26 21:13:45:902 [HTTP] 
+2019-07-26 21:13:45:908 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/13000000-0000-0000-42C7-000000000000/click
+2019-07-26 21:13:45:908 [HTTP] {}
+2019-07-26 21:13:45:909 [MJSONWP (22245500)] Driver proxy active, passing request on via HTTP proxy
+2019-07-26 21:13:45:909 [XCUITest] Executing command 'proxyReqRes'
+2019-07-26 21:13:45:911 [WD Proxy] Matched '/wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/13000000-0000-0000-42C7-000000000000/click' to command name 'click'
+2019-07-26 21:13:45:911 [WD Proxy] Proxying [POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/13000000-0000-0000-42C7-000000000000/click] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element/13000000-0000-0000-42C7-000000000000/click] with body: {}
+2019-07-26 21:13:46:572 [WD Proxy] Got response with status 200: {"status":0,"id":"13000000-0000-0000-42C7-000000000000","value":"","sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF"}
+2019-07-26 21:13:46:572 [WD Proxy] Replacing sessionId A43E9F53-0B9B-46A7-9BF2-771D542D3FBF with 22245500-9420-4394-910a-13ee4a2a6f52
+2019-07-26 21:13:46:573 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/13000000-0000-0000-42C7-000000000000/click 200 664 ms - 118
+2019-07-26 21:13:46:573 [HTTP] 
+2019-07-26 21:13:46:582 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element
+2019-07-26 21:13:46:582 [HTTP] {"using":"accessibility id","value":"Switch to HTML"}
+2019-07-26 21:13:46:583 [MJSONWP (22245500)] Calling AppiumDriver.findElement() with args: ["accessibility id","Switch to HTML","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:46:583 [XCUITest] Executing command 'findElement'
+2019-07-26 21:13:46:585 [BaseDriver] Valid locator strategies for this request: xpath, id, name, class name, -ios predicate string, -ios class chain, accessibility id
+2019-07-26 21:13:46:585 [BaseDriver] Waiting up to 2000 ms for condition
+2019-07-26 21:13:46:586 [WD Proxy] Matched '/element' to command name 'findElement'
+2019-07-26 21:13:46:586 [WD Proxy] Proxying [POST /element] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element] with body: {"using":"accessibility id","value":"Switch to HTML"}
+2019-07-26 21:13:46:943 [WD Proxy] Got response with status 200: {"value":{"ELEMENT":"8F010000-0000-0000-42C7-000000000000"},"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:46:944 [MJSONWP (22245500)] Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"8F010000-0000-0000-42C7-000000000000","ELEMENT":"8F010000-0000-0000-42C7-000000000000"}
+2019-07-26 21:13:46:945 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element 200 363 ms - 199
+2019-07-26 21:13:46:946 [HTTP] 
+2019-07-26 21:13:46:953 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/8F010000-0000-0000-42C7-000000000000/click
+2019-07-26 21:13:46:953 [HTTP] {}
+2019-07-26 21:13:46:953 [MJSONWP (22245500)] Driver proxy active, passing request on via HTTP proxy
+2019-07-26 21:13:46:954 [XCUITest] Executing command 'proxyReqRes'
+2019-07-26 21:13:46:955 [WD Proxy] Matched '/wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/8F010000-0000-0000-42C7-000000000000/click' to command name 'click'
+2019-07-26 21:13:46:955 [WD Proxy] Proxying [POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/8F010000-0000-0000-42C7-000000000000/click] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element/8F010000-0000-0000-42C7-000000000000/click] with body: {}
+2019-07-26 21:13:47:628 [WD Proxy] Got response with status 200: {"status":0,"id":"8F010000-0000-0000-42C7-000000000000","value":"","sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF"}
+2019-07-26 21:13:47:628 [WD Proxy] Replacing sessionId A43E9F53-0B9B-46A7-9BF2-771D542D3FBF with 22245500-9420-4394-910a-13ee4a2a6f52
+2019-07-26 21:13:47:629 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/8F010000-0000-0000-42C7-000000000000/click 200 676 ms - 118
+2019-07-26 21:13:47:630 [HTTP] 
+2019-07-26 21:13:47:636 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element
+2019-07-26 21:13:47:637 [HTTP] {"using":"xpath","value":"//*[@name=\"html-view-content\"]//XCUIElementTypeTextView"}
+2019-07-26 21:13:47:637 [MJSONWP (22245500)] Calling AppiumDriver.findElement() with args: ["xpath","//*[@name=\"html-view-content\"]//XCUIElementTypeTextView","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:47:637 [XCUITest] Executing command 'findElement'
+2019-07-26 21:13:47:638 [BaseDriver] Valid locator strategies for this request: xpath, id, name, class name, -ios predicate string, -ios class chain, accessibility id
+2019-07-26 21:13:47:639 [BaseDriver] Waiting up to 2000 ms for condition
+2019-07-26 21:13:47:639 [WD Proxy] Matched '/element' to command name 'findElement'
+2019-07-26 21:13:47:639 [WD Proxy] Proxying [POST /element] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element] with body: {"using":"xpath","value":"//*[@name=\"html-view-content\"]//XCUIElementTypeTextView"}
+2019-07-26 21:13:52:649 [Xcode] 2019-07-26 16:13:52.648481-0500 WebDriverAgentRunner-Runner[50999:3108590] Internal error: Error Domain=com.apple.dt.xctest.automation-support.error Code=8 "Error getting main window kAXErrorIllegalArgument" UserInfo={NSLocalizedDescription=Error getting main window kAXErrorIllegalArgument}
+2019-07-26 21:13:52:649 [Xcode] 
+2019-07-26 21:13:52:650 [Xcode]     t =    43.96s Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:52:650 [Xcode] 
+2019-07-26 21:13:52:650 [Xcode]     t =    43.97s Find: Descendants matching type Window
+2019-07-26 21:13:52:651 [Xcode] 
+2019-07-26 21:13:52:652 [Xcode]     t =    43.97s Find: Elements matching predicate 'wdUID IN {"05000000-0000-0000-42C7-000000000000", "06000000-0000-0000-42C7-000000000000", "07000000-0000-0000-42C7-000000000000", "96010000-0000-0000-42C7-000000000000"} AND (1 == 1 OR identifier == 0 OR frame == 0 OR value == 0 OR title == 0 OR label == 0 OR elementType == 0 OR enabled == 0 OR placeholderValue == 0)'
+2019-07-26 21:13:52:652 [Xcode] 
+2019-07-26 21:13:52:652 [Xcode]     t =    43.97s Find: Identity Binding
+2019-07-26 21:13:52:653 [Xcode] 
+2019-07-26 21:13:52:654 [Xcode] 2019-07-26 16:13:52.653552-0500 WebDriverAgentRunner-Runner[50999:3108590] Skipping source dumping for Window because its snapshot cannot be resolved
+2019-07-26 21:13:52:654 [Xcode] 
+2019-07-26 21:13:52:655 [Xcode]     t =    43.97s Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:52:656 [Xcode] 
+2019-07-26 21:13:52:681 [Xcode]     t =    44.00s Checking existence of `TextView`
+2019-07-26 21:13:52:681 [Xcode] 
+2019-07-26 21:13:52:683 [Xcode]     t =    44.00s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:52:683 [Xcode] 
+2019-07-26 21:13:52:704 [Xcode]     t =    44.02s     Find: Descendants matching type TextView
+2019-07-26 21:13:52:704 [Xcode] 
+2019-07-26 21:13:52:705 [Xcode]     t =    44.02s     Find: Elements matching predicate 'wdUID IN {"C6010000-0000-0000-42C7-000000000000"} AND (1 == 1 OR identifier == 0 OR frame == 0 OR value == 0 OR title == 0 OR label == 0 OR elementType == 0 OR enabled == 0 OR placeholderValue == 0)'
+2019-07-26 21:13:52:705 [Xcode] 
+2019-07-26 21:13:52:707 [Xcode]     t =    44.02s Get all elements bound by accessibility element for: Elements matching predicate 'wdUID IN {"C6010000-0000-0000-42C7-000000000000"} AND (1 == 1 OR identifier == 0 OR frame == 0 OR value == 0 OR title == 0 OR label == 0 OR elementType == 0 OR enabled == 0 OR placeholderValue == 0)'
+2019-07-26 21:13:52:707 [Xcode] 
+2019-07-26 21:13:52:708 [Xcode]     t =    44.02s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:52:708 [Xcode] 
+2019-07-26 21:13:52:729 [Xcode]     t =    44.04s     Find: Descendants matching type TextView
+2019-07-26 21:13:52:730 [Xcode] 
+2019-07-26 21:13:52:730 [Xcode]     t =    44.05s     Find: Elements matching predicate 'wdUID IN {"C6010000-0000-0000-42C7-000000000000"} AND (1 == 1 OR identifier == 0 OR frame == 0 OR value == 0 OR title == 0 OR label == 0 OR elementType == 0 OR enabled == 0 OR placeholderValue == 0)'
+2019-07-26 21:13:52:731 [Xcode] 
+2019-07-26 21:13:52:732 [Xcode]     t =    44.05s Checking existence of `"html-view-content" TextView`
+2019-07-26 21:13:52:733 [Xcode] 
+2019-07-26 21:13:52:734 [Xcode]     t =    44.05s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:52:734 [Xcode] 
+2019-07-26 21:13:52:755 [Xcode]     t =    44.07s     Find: Descendants matching type TextView
+2019-07-26 21:13:52:755 [Xcode] 
+2019-07-26 21:13:52:756 [Xcode]     t =    44.07s     Find: Elements matching predicate 'wdUID IN {"C6010000-0000-0000-42C7-000000000000"} AND (1 == 1 OR identifier == 0 OR frame == 0 OR value == 0 OR title == 0 OR label == 0 OR elementType == 0 OR enabled == 0 OR placeholderValue == 0)'
+2019-07-26 21:13:52:756 [Xcode] 
+2019-07-26 21:13:52:757 [Xcode]     t =    44.07s     Find: Identity Binding
+2019-07-26 21:13:52:757 [Xcode] 
+2019-07-26 21:13:52:759 [Xcode]     t =    44.07s Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:52:759 [Xcode] 
+2019-07-26 21:13:52:760 [Xcode]     t =    44.07s Find: Descendants matching type TextView
+2019-07-26 21:13:52:760 [Xcode] 
+2019-07-26 21:13:52:761 [Xcode]     t =    44.08s Find: Elements matching predicate 'wdUID IN {"C6010000-0000-0000-42C7-000000000000"} AND (1 == 1 OR identifier == 0 OR frame == 0 OR value == 0 OR title == 0 OR label == 0 OR elementType == 0 OR enabled == 0 OR placeholderValue == 0)'
+2019-07-26 21:13:52:761 [Xcode] 
+2019-07-26 21:13:52:762 [Xcode]     t =    44.08s Find: Identity Binding
+2019-07-26 21:13:52:762 [Xcode] 
+2019-07-26 21:13:52:765 [WD Proxy] Got response with status 200: {"value":{"ELEMENT":"C6010000-0000-0000-42C7-000000000000"},"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:52:766 [MJSONWP (22245500)] Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"C6010000-0000-0000-42C7-000000000000","ELEMENT":"C6010000-0000-0000-42C7-000000000000"}
+2019-07-26 21:13:52:766 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element 200 5130 ms - 199
+2019-07-26 21:13:52:766 [HTTP] 
+2019-07-26 21:13:52:772 [HTTP] --> GET /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/C6010000-0000-0000-42C7-000000000000/text
+2019-07-26 21:13:52:772 [HTTP] {}
+2019-07-26 21:13:52:772 [MJSONWP (22245500)] Driver proxy active, passing request on via HTTP proxy
+2019-07-26 21:13:52:772 [XCUITest] Executing command 'proxyReqRes'
+2019-07-26 21:13:52:773 [WD Proxy] Matched '/wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/C6010000-0000-0000-42C7-000000000000/text' to command name 'getText'
+2019-07-26 21:13:52:774 [WD Proxy] Proxying [GET /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/C6010000-0000-0000-42C7-000000000000/text] to [GET http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element/C6010000-0000-0000-42C7-000000000000/text] with body: {}
+2019-07-26 21:13:52:776 [Xcode]     t =    44.09s Find the "html-view-content" TextView
+2019-07-26 21:13:52:776 [Xcode] 
+2019-07-26 21:13:52:777 [Xcode]     t =    44.09s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:52:777 [Xcode] 
+2019-07-26 21:13:52:799 [Xcode]     t =    44.11s     Find: Descendants matching type TextView
+2019-07-26 21:13:52:799 [Xcode] 
+2019-07-26 21:13:52:800 [Xcode]     t =    44.11s     Find: Elements matching predicate 'wdUID IN {"C6010000-0000-0000-42C7-000000000000"} AND (1 == 1 OR identifier == 0 OR frame == 0 OR value == 0 OR title == 0 OR label == 0 OR elementType == 0 OR enabled == 0 OR placeholderValue == 0)'
+2019-07-26 21:13:52:800 [Xcode] 
+2019-07-26 21:13:52:801 [Xcode]     t =    44.12s     Find: Identity Binding
+2019-07-26 21:13:52:801 [Xcode] 
+2019-07-26 21:13:52:803 [Xcode]     t =    44.12s Checking existence of `"html-view-content" TextView`
+2019-07-26 21:13:52:803 [Xcode] 
+2019-07-26 21:13:52:804 [Xcode]     t =    44.12s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:52:805 [Xcode] 
+2019-07-26 21:13:52:826 [Xcode]     t =    44.14s     Find: Descendants matching type TextView
+2019-07-26 21:13:52:826 [Xcode] 
+2019-07-26 21:13:52:827 [Xcode]     t =    44.14s     Find: Elements matching predicate 'wdUID IN {"C6010000-0000-0000-42C7-000000000000"} AND (1 == 1 OR identifier == 0 OR frame == 0 OR value == 0 OR title == 0 OR label == 0 OR elementType == 0 OR enabled == 0 OR placeholderValue == 0)'
+2019-07-26 21:13:52:827 [Xcode] 
+2019-07-26 21:13:52:828 [Xcode]     t =    44.14s     Find: Identity Binding
+2019-07-26 21:13:52:828 [Xcode] 
+2019-07-26 21:13:52:830 [Xcode]     t =    44.14s Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:52:830 [Xcode] 
+2019-07-26 21:13:52:831 [Xcode]     t =    44.15s Find: Descendants matching type TextView
+2019-07-26 21:13:52:831 [Xcode] 
+2019-07-26 21:13:52:832 [Xcode]     t =    44.15s Find: Elements matching predicate 'wdUID IN {"C6010000-0000-0000-42C7-000000000000"} AND (1 == 1 OR identifier == 0 OR frame == 0 OR value == 0 OR title == 0 OR label == 0 OR elementType == 0 OR enabled == 0 OR placeholderValue == 0)'
+2019-07-26 21:13:52:833 [Xcode] 
+2019-07-26 21:13:52:833 [Xcode]     t =    44.15s Find: Identity Binding
+2019-07-26 21:13:52:833 [Xcode] 
+2019-07-26 21:13:52:835 [WD Proxy] Got response with status 200: {
+2019-07-26 21:13:52:835 [WD Proxy]   "value" : "<!-- wp:paragraph -->\n<p>The finer continuum interprets the polynomial rabbit. When can the geology runs? An astronomer runs. Should a communist consent?<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:paragraph -->\n<p>The finer continuum interprets the polynomial rabbit. When can the geology runs? An astronomer runs. Should a communist consent?<\/p>\n<!-- \/wp:paragraph -->",
+2019-07-26 21:13:52:835 [WD Proxy]   "sessionId" : "A43E9F53-0B9B-46A7-9BF2-771D542D3FBF",
+2019-07-26 21:13:52:835 [WD Proxy]   "status" : 0
+2019-07-26 21:13:52:835 [WD Proxy] }
+2019-07-26 21:13:52:836 [WD Proxy] Replacing sessionId A43E9F53-0B9B-46A7-9BF2-771D542D3FBF with 22245500-9420-4394-910a-13ee4a2a6f52
+2019-07-26 21:13:52:836 [HTTP] <-- GET /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/C6010000-0000-0000-42C7-000000000000/text 200 64 ms - 442
+2019-07-26 21:13:52:836 [HTTP] 
+2019-07-26 21:13:52:842 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element
+2019-07-26 21:13:52:842 [HTTP] {"using":"accessibility id","value":"..."}
+2019-07-26 21:13:52:842 [MJSONWP (22245500)] Calling AppiumDriver.findElement() with args: ["accessibility id","...","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:52:842 [XCUITest] Executing command 'findElement'
+2019-07-26 21:13:52:843 [BaseDriver] Valid locator strategies for this request: xpath, id, name, class name, -ios predicate string, -ios class chain, accessibility id
+2019-07-26 21:13:52:843 [BaseDriver] Waiting up to 2000 ms for condition
+2019-07-26 21:13:52:844 [WD Proxy] Matched '/element' to command name 'findElement'
+2019-07-26 21:13:52:844 [WD Proxy] Proxying [POST /element] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element] with body: {"using":"accessibility id","value":"..."}
+2019-07-26 21:13:52:854 [Xcode]     t =    44.17s Find the Application 'org.reactjs.native.example.gutenberg'
+2019-07-26 21:13:52:854 [Xcode] 
+2019-07-26 21:13:52:855 [Xcode]     t =    44.17s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:52:855 [Xcode] 
+2019-07-26 21:13:52:874 [Xcode]     t =    44.19s Checking existence of `"..." Any`
+2019-07-26 21:13:52:874 [Xcode] 
+2019-07-26 21:13:52:874 [Xcode]     t =    44.19s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:52:875 [Xcode] 
+2019-07-26 21:13:52:894 [Xcode]     t =    44.21s     Find: Descendants matching type Any
+2019-07-26 21:13:52:894 [Xcode] 
+2019-07-26 21:13:52:895 [Xcode]     t =    44.21s     Find: Elements matching predicate '"..." IN identifiers'
+2019-07-26 21:13:52:895 [Xcode] 
+2019-07-26 21:13:52:897 [Xcode]     t =    44.21s Get all elements bound by accessibility element for: Elements matching predicate '"..." IN identifiers'
+2019-07-26 21:13:52:897 [Xcode] 
+2019-07-26 21:13:52:898 [Xcode]     t =    44.21s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:52:898 [Xcode] 
+2019-07-26 21:13:52:917 [Xcode]     t =    44.23s     Find: Descendants matching type Any
+2019-07-26 21:13:52:917 [Xcode] 
+2019-07-26 21:13:52:918 [Xcode]     t =    44.23s     Find: Elements matching predicate '"..." IN identifiers'
+2019-07-26 21:13:52:918 [Xcode] 
+2019-07-26 21:13:52:920 [Xcode]     t =    44.23s Checking existence of `"..." Button`
+2019-07-26 21:13:52:920 [Xcode] 
+2019-07-26 21:13:52:921 [Xcode]     t =    44.24s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:52:921 [Xcode] 
+2019-07-26 21:13:52:939 [Xcode]     t =    44.25s     Find: Descendants matching type Any
+2019-07-26 21:13:52:940 [Xcode] 
+2019-07-26 21:13:52:940 [Xcode]     t =    44.26s     Find: Elements matching predicate '"..." IN identifiers'
+2019-07-26 21:13:52:940 [Xcode] 
+2019-07-26 21:13:52:942 [Xcode]     t =    44.26s     Find: Identity Binding
+2019-07-26 21:13:52:942 [Xcode] 
+2019-07-26 21:13:52:943 [Xcode]     t =    44.26s Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:52:943 [Xcode] 
+2019-07-26 21:13:52:944 [Xcode]     t =    44.26s Find: Descendants matching type Any
+2019-07-26 21:13:52:944 [Xcode] 
+2019-07-26 21:13:52:945 [Xcode]     t =    44.26s Find: Elements matching predicate '"..." IN identifiers'
+2019-07-26 21:13:52:945 [Xcode] 
+2019-07-26 21:13:52:946 [Xcode]     t =    44.26s Find: Identity Binding
+2019-07-26 21:13:52:947 [Xcode] 
+2019-07-26 21:13:52:949 [WD Proxy] Got response with status 200: {"value":{"ELEMENT":"13000000-0000-0000-42C7-000000000000"},"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:52:949 [MJSONWP (22245500)] Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"13000000-0000-0000-42C7-000000000000","ELEMENT":"13000000-0000-0000-42C7-000000000000"}
+2019-07-26 21:13:52:950 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element 200 108 ms - 199
+2019-07-26 21:13:52:950 [HTTP] 
+2019-07-26 21:13:52:955 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/13000000-0000-0000-42C7-000000000000/click
+2019-07-26 21:13:52:956 [HTTP] {}
+2019-07-26 21:13:52:956 [MJSONWP (22245500)] Driver proxy active, passing request on via HTTP proxy
+2019-07-26 21:13:52:956 [XCUITest] Executing command 'proxyReqRes'
+2019-07-26 21:13:52:957 [WD Proxy] Matched '/wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/13000000-0000-0000-42C7-000000000000/click' to command name 'click'
+2019-07-26 21:13:52:957 [WD Proxy] Proxying [POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/13000000-0000-0000-42C7-000000000000/click] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element/13000000-0000-0000-42C7-000000000000/click] with body: {}
+2019-07-26 21:13:52:959 [Xcode]     t =    44.27s Find the "..." Button
+2019-07-26 21:13:52:959 [Xcode] 
+2019-07-26 21:13:52:960 [Xcode]     t =    44.27s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:52:960 [Xcode] 
+2019-07-26 21:13:52:980 [Xcode]     t =    44.29s     Find: Descendants matching type Any
+2019-07-26 21:13:52:980 [Xcode] 
+2019-07-26 21:13:52:981 [Xcode]     t =    44.30s     Find: Elements matching predicate '"..." IN identifiers'
+2019-07-26 21:13:52:981 [Xcode] 
+2019-07-26 21:13:52:982 [Xcode]     t =    44.30s     Find: Identity Binding
+2019-07-26 21:13:52:982 [Xcode] 
+2019-07-26 21:13:52:984 [Xcode]     t =    44.30s Find the "..." Button
+2019-07-26 21:13:52:984 [Xcode] 
+2019-07-26 21:13:52:985 [Xcode]     t =    44.30s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:52:985 [Xcode] 
+2019-07-26 21:13:53:005 [Xcode]     t =    44.32s     Find: Descendants matching type Any
+2019-07-26 21:13:53:005 [Xcode] 
+2019-07-26 21:13:53:006 [Xcode]     t =    44.32s     Find: Elements matching predicate '"..." IN identifiers'
+2019-07-26 21:13:53:006 [Xcode] 
+2019-07-26 21:13:53:007 [Xcode]     t =    44.32s     Find: Identity Binding
+2019-07-26 21:13:53:007 [Xcode] 
+2019-07-26 21:13:53:115 [Xcode]     t =    44.43s Find the "..." Button
+2019-07-26 21:13:53:115 [Xcode] 
+2019-07-26 21:13:53:116 [Xcode]     t =    44.43s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:53:117 [Xcode] 
+2019-07-26 21:13:53:137 [Xcode]     t =    44.45s     Find: Descendants matching type Any
+2019-07-26 21:13:53:138 [Xcode] 
+2019-07-26 21:13:53:139 [Xcode]     t =    44.45s     Find: Elements matching predicate '"..." IN identifiers'
+2019-07-26 21:13:53:139 [Xcode] 
+2019-07-26 21:13:53:140 [Xcode]     t =    44.45s     Find: Identity Binding
+2019-07-26 21:13:53:140 [Xcode] 
+2019-07-26 21:13:53:144 [Xcode]     t =    44.46s Find the "..." Button
+2019-07-26 21:13:53:144 [Xcode] 
+2019-07-26 21:13:53:145 [Xcode]     t =    44.46s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:53:145 [Xcode] 
+2019-07-26 21:13:53:165 [Xcode]     t =    44.48s     Find: Descendants matching type Any
+2019-07-26 21:13:53:165 [Xcode] 
+2019-07-26 21:13:53:166 [Xcode]     t =    44.48s     Find: Elements matching predicate '"..." IN identifiers'
+2019-07-26 21:13:53:166 [Xcode] 
+2019-07-26 21:13:53:167 [Xcode]     t =    44.48s     Find: Identity Binding
+2019-07-26 21:13:53:168 [Xcode] 
+2019-07-26 21:13:53:171 [Xcode]     t =    44.49s Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:53:171 [Xcode] 
+2019-07-26 21:13:53:197 [Xcode]     t =    44.51s Find: Descendants matching type Any
+2019-07-26 21:13:53:198 [Xcode] 
+2019-07-26 21:13:53:199 [Xcode]     t =    44.51s Find: Elements matching predicate '"..." IN identifiers'
+2019-07-26 21:13:53:199 [Xcode] 
+2019-07-26 21:13:53:200 [Xcode]     t =    44.51s Find: Identity Binding
+2019-07-26 21:13:53:200 [Xcode] 
+2019-07-26 21:13:53:311 [WD Proxy] Got response with status 200: {"status":0,"id":"13000000-0000-0000-42C7-000000000000","value":"","sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF"}
+2019-07-26 21:13:53:312 [WD Proxy] Replacing sessionId A43E9F53-0B9B-46A7-9BF2-771D542D3FBF with 22245500-9420-4394-910a-13ee4a2a6f52
+2019-07-26 21:13:53:312 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/13000000-0000-0000-42C7-000000000000/click 200 357 ms - 118
+2019-07-26 21:13:53:312 [HTTP] 
+2019-07-26 21:13:53:318 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element
+2019-07-26 21:13:53:318 [HTTP] {"using":"accessibility id","value":"Switch To Visual"}
+2019-07-26 21:13:53:318 [MJSONWP (22245500)] Calling AppiumDriver.findElement() with args: ["accessibility id","Switch To Visual","22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:53:318 [XCUITest] Executing command 'findElement'
+2019-07-26 21:13:53:319 [BaseDriver] Valid locator strategies for this request: xpath, id, name, class name, -ios predicate string, -ios class chain, accessibility id
+2019-07-26 21:13:53:319 [BaseDriver] Waiting up to 2000 ms for condition
+2019-07-26 21:13:53:320 [WD Proxy] Matched '/element' to command name 'findElement'
+2019-07-26 21:13:53:320 [WD Proxy] Proxying [POST /element] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element] with body: {"using":"accessibility id","value":"Switch To Visual"}
+2019-07-26 21:13:53:334 [Xcode]     t =    44.65s Find the Application 'org.reactjs.native.example.gutenberg'
+2019-07-26 21:13:53:334 [Xcode] 
+2019-07-26 21:13:53:335 [Xcode]     t =    44.65s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:53:335 [Xcode] 
+2019-07-26 21:13:53:393 [Xcode]     t =    44.71s Checking existence of `"Switch To Visual" Any`
+2019-07-26 21:13:53:393 [Xcode] 
+2019-07-26 21:13:53:395 [Xcode]     t =    44.71s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:53:395 [Xcode] 
+2019-07-26 21:13:53:436 [Xcode]     t =    44.75s     Find: Descendants matching type Any
+2019-07-26 21:13:53:437 [Xcode] 
+2019-07-26 21:13:53:437 [Xcode]     t =    44.75s     Find: Elements matching predicate '"Switch To Visual" IN identifiers'
+2019-07-26 21:13:53:437 [Xcode] 
+2019-07-26 21:13:53:440 [Xcode]     t =    44.75s Get all elements bound by accessibility element for: Elements matching predicate '"Switch To Visual" IN identifiers'
+2019-07-26 21:13:53:440 [Xcode] 
+2019-07-26 21:13:53:441 [Xcode]     t =    44.76s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:53:441 [Xcode] 
+2019-07-26 21:13:53:485 [Xcode]     t =    44.80s     Find: Descendants matching type Any
+2019-07-26 21:13:53:485 [Xcode] 
+2019-07-26 21:13:53:486 [Xcode]     t =    44.80s     Find: Elements matching predicate '"Switch To Visual" IN identifiers'
+2019-07-26 21:13:53:487 [Xcode] 
+2019-07-26 21:13:53:489 [Xcode]     t =    44.80s Checking existence of `"Switch To Visual" Button`
+2019-07-26 21:13:53:490 [Xcode] 
+2019-07-26 21:13:53:491 [Xcode]     t =    44.81s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:53:491 [Xcode] 
+2019-07-26 21:13:53:534 [Xcode]     t =    44.85s     Find: Descendants matching type Any
+2019-07-26 21:13:53:534 [Xcode] 
+2019-07-26 21:13:53:536 [Xcode]     t =    44.85s     Find: Elements matching predicate '"Switch To Visual" IN identifiers'
+2019-07-26 21:13:53:536 [Xcode] 
+2019-07-26 21:13:53:538 [Xcode]     t =    44.85s     Find: Identity Binding
+2019-07-26 21:13:53:538 [Xcode] 
+2019-07-26 21:13:53:540 [Xcode]     t =    44.85s Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:53:541 [Xcode] 
+2019-07-26 21:13:53:543 [Xcode]     t =    44.86s Find: Descendants matching type Any
+2019-07-26 21:13:53:543 [Xcode] 
+2019-07-26 21:13:53:544 [Xcode]     t =    44.86s Find: Elements matching predicate '"Switch To Visual" IN identifiers'
+2019-07-26 21:13:53:544 [Xcode] 
+2019-07-26 21:13:53:546 [Xcode]     t =    44.86s Find: Identity Binding
+2019-07-26 21:13:53:546 [Xcode] 
+2019-07-26 21:13:53:548 [WD Proxy] Got response with status 200: {"value":{"ELEMENT":"E4010000-0000-0000-42C7-000000000000"},"sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF","status":0}
+2019-07-26 21:13:53:548 [MJSONWP (22245500)] Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"E4010000-0000-0000-42C7-000000000000","ELEMENT":"E4010000-0000-0000-42C7-000000000000"}
+2019-07-26 21:13:53:549 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element 200 231 ms - 199
+2019-07-26 21:13:53:549 [HTTP] 
+2019-07-26 21:13:53:558 [HTTP] --> POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/E4010000-0000-0000-42C7-000000000000/click
+2019-07-26 21:13:53:558 [HTTP] {}
+2019-07-26 21:13:53:559 [MJSONWP (22245500)] Driver proxy active, passing request on via HTTP proxy
+2019-07-26 21:13:53:559 [XCUITest] Executing command 'proxyReqRes'
+2019-07-26 21:13:53:561 [WD Proxy] Matched '/wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/E4010000-0000-0000-42C7-000000000000/click' to command name 'click'
+2019-07-26 21:13:53:561 [WD Proxy] Proxying [POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/E4010000-0000-0000-42C7-000000000000/click] to [POST http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF/element/E4010000-0000-0000-42C7-000000000000/click] with body: {}
+2019-07-26 21:13:53:563 [Xcode]     t =    44.88s Find the "Switch To Visual" Button
+2019-07-26 21:13:53:564 [Xcode] 
+2019-07-26 21:13:53:565 [Xcode]     t =    44.88s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:53:566 [Xcode] 
+2019-07-26 21:13:53:611 [Xcode]     t =    44.92s     Find: Descendants matching type Any
+2019-07-26 21:13:53:611 [Xcode] 
+2019-07-26 21:13:53:613 [Xcode]     t =    44.93s     Find: Elements matching predicate '"Switch To Visual" IN identifiers'
+2019-07-26 21:13:53:613 [Xcode] 
+2019-07-26 21:13:53:615 [Xcode]     t =    44.93s     Find: Identity Binding
+2019-07-26 21:13:53:616 [Xcode] 
+2019-07-26 21:13:53:618 [Xcode]     t =    44.93s Find the "Switch To Visual" Button
+2019-07-26 21:13:53:618 [Xcode] 
+2019-07-26 21:13:53:619 [Xcode]     t =    44.93s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:53:619 [Xcode] 
+2019-07-26 21:13:53:656 [Xcode]     t =    44.97s     Find: Descendants matching type Any
+2019-07-26 21:13:53:657 [Xcode] 
+2019-07-26 21:13:53:658 [Xcode]     t =    44.97s     Find: Elements matching predicate '"Switch To Visual" IN identifiers'
+2019-07-26 21:13:53:658 [Xcode] 
+2019-07-26 21:13:53:661 [Xcode]     t =    44.98s     Find: Identity Binding
+2019-07-26 21:13:53:662 [Xcode] 
+2019-07-26 21:13:53:767 [Xcode]     t =    45.08s Find the "Switch To Visual" Button
+2019-07-26 21:13:53:767 [Xcode] 
+2019-07-26 21:13:53:770 [Xcode]     t =    45.08s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:53:770 [Xcode] 
+2019-07-26 21:13:53:806 [Xcode]     t =    45.12s     Find: Descendants matching type Any
+2019-07-26 21:13:53:806 [Xcode] 
+2019-07-26 21:13:53:808 [Xcode]     t =    45.12s     Find: Elements matching predicate '"Switch To Visual" IN identifiers'
+2019-07-26 21:13:53:809 [Xcode] 
+2019-07-26 21:13:53:810 [Xcode]     t =    45.12s     Find: Identity Binding
+2019-07-26 21:13:53:811 [Xcode] 
+2019-07-26 21:13:53:816 [Xcode]     t =    45.13s Find the "Switch To Visual" Button
+2019-07-26 21:13:53:816 [Xcode] 
+2019-07-26 21:13:53:818 [Xcode]     t =    45.13s     Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:53:818 [Xcode] 
+2019-07-26 21:13:53:850 [Xcode]     t =    45.16s     Find: Descendants matching type Any
+2019-07-26 21:13:53:850 [Xcode] 
+2019-07-26 21:13:53:852 [Xcode]     t =    45.17s     Find: Elements matching predicate '"Switch To Visual" IN identifiers'
+2019-07-26 21:13:53:852 [Xcode] 
+2019-07-26 21:13:53:853 [Xcode]     t =    45.17s     Find: Identity Binding
+2019-07-26 21:13:53:853 [Xcode] 
+2019-07-26 21:13:53:859 [Xcode]     t =    45.17s Snapshot accessibility hierarchy for app with pid 51010
+2019-07-26 21:13:53:859 [Xcode] 
+2019-07-26 21:13:53:906 [Xcode]     t =    45.22s Find: Descendants matching type Any
+2019-07-26 21:13:53:906 [Xcode] 
+2019-07-26 21:13:53:908 [Xcode]     t =    45.22s Find: Elements matching predicate '"Switch To Visual" IN identifiers'
+2019-07-26 21:13:53:908 [Xcode] 
+2019-07-26 21:13:53:910 [Xcode]     t =    45.22s Find: Identity Binding
+2019-07-26 21:13:53:910 [Xcode] 
+2019-07-26 21:13:54:132 [WD Proxy] Got response with status 200: {"status":0,"id":"E4010000-0000-0000-42C7-000000000000","value":"","sessionId":"A43E9F53-0B9B-46A7-9BF2-771D542D3FBF"}
+2019-07-26 21:13:54:132 [WD Proxy] Replacing sessionId A43E9F53-0B9B-46A7-9BF2-771D542D3FBF with 22245500-9420-4394-910a-13ee4a2a6f52
+2019-07-26 21:13:54:133 [HTTP] <-- POST /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52/element/E4010000-0000-0000-42C7-000000000000/click 200 575 ms - 118
+2019-07-26 21:13:54:133 [HTTP] 
+2019-07-26 21:13:54:143 [HTTP] --> DELETE /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52
+2019-07-26 21:13:54:144 [HTTP] {}
+2019-07-26 21:13:54:144 [MJSONWP (22245500)] Calling AppiumDriver.deleteSession() with args: ["22245500-9420-4394-910a-13ee4a2a6f52"]
+2019-07-26 21:13:54:144 [BaseDriver] Event 'quitSessionRequested' logged at 1564175634144 (16:13:54 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:13:54:145 [Appium] Removing session 22245500-9420-4394-910a-13ee4a2a6f52 from our master session list
+2019-07-26 21:13:54:146 [WD Proxy] Matched '/session/22245500-9420-4394-910a-13ee4a2a6f52' to command name 'deleteSession'
+2019-07-26 21:13:54:146 [WD Proxy] Proxying [DELETE /session/22245500-9420-4394-910a-13ee4a2a6f52] to [DELETE http://localhost:8103/session/A43E9F53-0B9B-46A7-9BF2-771D542D3FBF] with no body
+2019-07-26 21:13:54:148 [Xcode]     t =    45.46s Terminate org.reactjs.native.example.gutenberg:51010
+2019-07-26 21:13:54:148 [Xcode] 
+2019-07-26 21:13:55:209 [WD Proxy] Got response with status 200: {
+2019-07-26 21:13:55:209 [WD Proxy]   "value" : {
+2019-07-26 21:13:55:210 [WD Proxy] 
+2019-07-26 21:13:55:210 [WD Proxy]   },
+2019-07-26 21:13:55:210 [WD Proxy]   "sessionId" : "36C1535B-21F1-493C-8FCC-595848FEC6D8",
+2019-07-26 21:13:55:210 [WD Proxy]   "status" : 0
+2019-07-26 21:13:55:210 [WD Proxy] }
+2019-07-26 21:13:57:685 [XCUITest] Parsed BUILD_DIR configuration value: '/Users/javon/Library/Developer/Xcode/DerivedData/WebDriverAgent-bgqsmdooqqyyzqbqnyqdvtzsmpvo/Build/Products'
+2019-07-26 21:13:57:685 [XCUITest] Got derived data root: '/Users/javon/Library/Developer/Xcode/DerivedData/WebDriverAgent-bgqsmdooqqyyzqbqnyqdvtzsmpvo'
+2019-07-26 21:13:57:685 [XCUITest] Not clearing log files. Use `clearSystemFiles` capability to turn on.
+2019-07-26 21:13:57:686 [IOSSimulatorLog] Stopping iOS log capture
+2019-07-26 21:13:57:702 [BaseDriver] Event 'quitSessionFinished' logged at 1564175637702 (16:13:57 GMT-0500 (Eastern Standard Time))
+2019-07-26 21:13:57:703 [MJSONWP (22245500)] Received response: null
+2019-07-26 21:13:57:703 [MJSONWP (22245500)] But deleting session, so not returning
+2019-07-26 21:13:57:703 [MJSONWP (22245500)] Responding to client with driver.deleteSession() result: null
+2019-07-26 21:13:57:704 [HTTP] <-- DELETE /wd/hub/session/22245500-9420-4394-910a-13ee4a2a6f52 200 3561 ms - 76
+2019-07-26 21:13:57:704 [HTTP] 
