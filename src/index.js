@@ -12,7 +12,6 @@ import { setLocaleData } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import './globals';
 import { getTranslation } from '../i18n-cache';
 import initialHtml from './initial-html';
 

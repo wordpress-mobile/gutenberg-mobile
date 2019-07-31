@@ -9,11 +9,6 @@ import jsdomLevel1Core from 'jsdom-jscore-rn/lib/jsdom/level1/core';
 import { nativeLoggingHook } from 'react-native-gutenberg-bridge';
 
 /**
- * WordPress dependencies
- */
-import { createElement } from '@wordpress/element';
-
-/**
  * Internal dependencies
  */
 
@@ -25,12 +20,6 @@ import { createElement } from '@wordpress/element';
  * More details are available within the comments in the file.
  */
 import './jsdom-patches';
-
-global.wp = {
-	element: {
-		createElement, // load the element creation function, needed by Gutenberg-web
-	},
-};
 
 const doc = jsdom.html( '', null, null );
 
