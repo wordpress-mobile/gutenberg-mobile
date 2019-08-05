@@ -2044,11 +2044,6 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
-app-root-path@^2.1.0:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/app-root-path/-/app-root-path-2.2.1.tgz#d0df4a682ee408273583d43f6f79e9892624bc9a"
-  integrity sha512-91IFKeKk7FjfmezPKkwtaRvSpnUc4gDwPAjA1YZ9Gn0q0PPeW+vbeUsZuyDwjI7+QTHhcLen2v25fi/AmhvbJA==
-
 appium-adb@^7.0.0, appium-adb@^7.4.0, appium-adb@^7.8.0:
   version "7.10.0"
   resolved "https://registry.yarnpkg.com/appium-adb/-/appium-adb-7.10.0.tgz#6f97d06eba1d41b90155af1ff41d00f0705ed076"
@@ -4137,16 +4132,15 @@ css-select@~1.2.0:
     domutils "1.5.1"
     nth-check "~1.0.1"
 
-css-to-react-native-transform@^1.8.1:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/css-to-react-native-transform/-/css-to-react-native-transform-1.9.0.tgz#63369f479048ab7662f5320f8010840ad91344e7"
-  integrity sha512-darzotx5xx+Q0bzASkvNBasztLCssNerzf9jpMZx0H4CTY6J/y2Wh50ZtYAJ3FmESEux1bJcGa6T0zfISTuFqw==
+"css-to-react-native-transform@https://github.com/wordpress-mobile/css-to-react-native-transform/releases/download/v1.9.1-pre1/css-to-react-native-transform-1.9.1-pre1.tgz":
+  version "1.9.1-pre1"
+  resolved "https://github.com/wordpress-mobile/css-to-react-native-transform/releases/download/v1.9.1-pre1/css-to-react-native-transform-1.9.1-pre1.tgz#966895e05b5cb4ca68dd88b5a5a0d335adbb8832"
   dependencies:
     css "^2.2.4"
     css-mediaquery "^0.1.2"
-    css-to-react-native "^2.3.0"
+    css-to-react-native "^2.3.1"
 
-css-to-react-native@^2.3.0:
+css-to-react-native@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/css-to-react-native/-/css-to-react-native-2.3.1.tgz#cf0f61e0514846e2d4dc188b0886e29d8bef64a2"
   integrity sha512-yO+oEx1Lf+hDKasqQRVrAvzMCz825Huh1VMlEEDlRWyAhFb/FWb6I0KpEF1PkyKQ7NEdcx9d5M2ZEWgJAsgPvQ==
@@ -10130,15 +10124,6 @@ react-native-safe-area@^0.5.0:
   integrity sha512-gBLv93P90sM6hk5HzUwTXzFuSDazTpg2ONi5iL9pnUsUfwdw2L9SKgjgVroxX10leGB9+0zz6/ycV+mItqr8OQ==
   dependencies:
     "@types/react" "^16.8.8"
-
-react-native-sass-transformer@^1.1.1:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-sass-transformer/-/react-native-sass-transformer-1.4.0.tgz#1b6a1ed6f2b6338ba42f2a46afd1f23f9ada3439"
-  integrity sha512-PlRiaJIcDzYpIVDH0OQuabkMGy/zp7N/A14rqhBrFqhADXC0xR2W53Cb7CicL9CsOL4y7Sh2dv4pgMvqgMdwqQ==
-  dependencies:
-    app-root-path "^2.1.0"
-    css-to-react-native-transform "^1.8.1"
-    semver "^5.6.0"
 
 "react-native-svg@git+https://github.com/wordpress-mobile/react-native-svg.git#f16e9adae71c6cf3158f2356cf95fff5c2075e0f":
   version "9.3.3-gb"

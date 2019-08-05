@@ -139,7 +139,7 @@ function transform( src, filename, options ) {
 			},
 		} );
 		const css = result.css.toString();
-		const cssObject = css2rn( css, { parseMediaQueries: true } );
+		const cssObject = css2rn( css, { parseMediaQueries: true, includeRawTransform: true } );
 
 		return upstreamTransformer.transform( {
 			src: 'module.exports = ' + JSON.stringify( cssObject ),
