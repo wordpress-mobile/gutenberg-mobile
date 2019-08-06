@@ -5,6 +5,9 @@ module.exports = function( api ) {
 			'module:metro-react-native-babel-preset',
 		],
 		plugins: [
+      [
+        'babel-plugin-html-components',
+      ],
 			'@babel/plugin-proposal-async-generator-functions',
 			'@babel/plugin-transform-runtime',
 			[
