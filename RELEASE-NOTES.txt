@@ -1,6 +1,6 @@
 1.10.1
 ------
-* Fix missing content on long posts in html mode
+* Fix missing content on long posts in html mode on Android
 
 1.10.0
 ------
