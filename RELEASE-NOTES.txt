@@ -1,3 +1,7 @@
+1.10.1
+------
+* Fix missing content on long posts in html mode
+
 1.10.0
 ------
 * Adding a block from the post title now shows the add block here indicator.
