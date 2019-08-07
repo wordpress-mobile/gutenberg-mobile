@@ -255,6 +255,7 @@ public class WPAndroidGlueCode {
                              Application application, boolean isDebug, boolean buildGutenbergFromSource,
                              boolean isNewPost, String localeString, Bundle translations) {
         mReactRootView = new ReactRootView(new MutableContextWrapper(initContext));
+        mReactRootView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
         ReactInstanceManagerBuilder builder =
                 ReactInstanceManager.builder()
