@@ -49,7 +49,8 @@ describe( 'Gutenberg Editor Image Block tests', () => {
                     await editorPage.removeBlockAtPosition( 1 );
                 } else {
                     let blockElement = await editorPage.getBlockAtPosition( 2 );
-                    await clickMiddleOfElement( driver, blockElement );
+                    await blockElement.click();
+					await swipeUp( driver, blockElement);
                     await editorPage.removeBlockAtPosition( 2 );
                 }
                 blockExist = true;

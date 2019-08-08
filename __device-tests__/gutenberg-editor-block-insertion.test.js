@@ -49,7 +49,8 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
                     await editorPage.removeBlockAtPosition( 1 );
                 } else {
                     let blockElement = await editorPage.getBlockAtPosition( 2 );
-                    await clickMiddleOfElement( driver, blockElement );
+					await blockElement.click();
+					await swipeUp( driver, blockElement);
                     await editorPage.removeBlockAtPosition( 2 );
                 }
                 blockExist = true;
@@ -95,9 +96,9 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 			}
 		} else {
 			for ( let i = 4; i > 0; i-- ) {
-				paragraphBlockElement = await editorPage.getParagraphBlockAtPosition( 1 );
+				paragraphBlockElement = await editorPage.getParagraphBlockAtPosition( i );
 				await clickMiddleOfElement( driver, paragraphBlockElement );
-				await editorPage.removeParagraphBlockAtPosition( 1 );
+				await editorPage.removeParagraphBlockAtPosition( i );
 			}
 		} */
 	} );

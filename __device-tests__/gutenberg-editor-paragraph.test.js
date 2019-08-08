@@ -13,6 +13,7 @@ import {
 	clickBeginningOfElement,
 	stopDriver,
 	isAndroid,
+	swipeUp,
 } from './helpers/utils';
 import testData from './helpers/test-data';
 
@@ -49,7 +50,8 @@ describe( 'Gutenberg Editor tests for Paragraph Block', () => {
                     await editorPage.removeBlockAtPosition( 1 );
                 } else {
                     let blockElement = await editorPage.getBlockAtPosition( 2 );
-                    await clickMiddleOfElement( driver, blockElement );
+                    await blockElement.click();
+					await swipeUp( driver, blockElement);
                     await editorPage.removeBlockAtPosition( 2 );
                 }
                 blockExist = true;
