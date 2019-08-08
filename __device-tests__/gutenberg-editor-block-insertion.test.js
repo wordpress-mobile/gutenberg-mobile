@@ -12,6 +12,7 @@ import {
 	stopDriver,
 	isAndroid,
 	clickMiddleOfElement,
+	swipeUp
 } from './helpers/utils';
 import testData from './helpers/test-data';
 
@@ -38,6 +39,27 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 		editorPage = new EditorPage( driver );
 	} );
 
+	afterEach( async () => {
+		let blockExist = await editorPage.hasBlockAtPosition( 1 );
+        while( blockExist ) {
+            if ( await editorPage.hasBlockAtPosition( 2 ) ){
+                if ( isAndroid() ) {
+                    let blockElement = await editorPage.getBlockAtPosition( 1 );
+                    await blockElement.click();
+                    await editorPage.removeBlockAtPosition( 1 );
+                } else {
+                    let blockElement = await editorPage.getBlockAtPosition( 2 );
+                    await clickMiddleOfElement( driver, blockElement );
+                    await editorPage.removeBlockAtPosition( 2 );
+                }
+                blockExist = true;
+            } else {
+                await editorPage.removeBlockAtPosition( 1 );
+                return;
+            }
+        } 
+	} ); 
+
 	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );
 	} );
@@ -62,7 +84,7 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 		await editorPage.verifyHtmlContent( testData.blockInsertionHtml );
 
 		// Workaround for now since deleting the first element causes a crash on CI for Android
-		if ( isAndroid() ) {
+		/* if ( isAndroid() ) {
 			paragraphBlockElement = await editorPage.getParagraphBlockAtPosition( 3 );
 			await paragraphBlockElement.click();
 			await editorPage.removeParagraphBlockAtPosition( 3 );
@@ -77,7 +99,7 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 				await clickMiddleOfElement( driver, paragraphBlockElement );
 				await editorPage.removeParagraphBlockAtPosition( 1 );
 			}
-		}
+		} */
 	} );
 
 	it( 'should be able to insert block at the beginning of post from the title', async () => {

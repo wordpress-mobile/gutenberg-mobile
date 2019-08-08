@@ -39,6 +39,27 @@ describe( 'Gutenberg Editor Image Block tests', () => {
 		editorPage = new EditorPage( driver );
 	} );
 
+	afterEach( async () => {
+		let blockExist = await editorPage.hasBlockAtPosition( 1 );
+        while( blockExist ) {
+            if ( await editorPage.hasBlockAtPosition( 2 ) ){
+                if ( isAndroid() ) {
+                    let blockElement = await editorPage.getBlockAtPosition( 1 );
+                    await blockElement.click();
+                    await editorPage.removeBlockAtPosition( 1 );
+                } else {
+                    let blockElement = await editorPage.getBlockAtPosition( 2 );
+                    await clickMiddleOfElement( driver, blockElement );
+                    await editorPage.removeBlockAtPosition( 2 );
+                }
+                blockExist = true;
+            } else {
+                await editorPage.removeBlockAtPosition( 1 );
+                return;
+            }
+        } 
+	} ); 
+
 	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );
 	} );
@@ -66,7 +87,7 @@ describe( 'Gutenberg Editor Image Block tests', () => {
 			imageBlock = await editorPage.getImageBlockAtPosition( 1 );
 			await imageBlock.click();
 		}
-		await editorPage.removeImageBlockAtPosition( 1 );
+		// await editorPage.removeImageBlockAtPosition( 1 );
 	} );
 
 	it( 'should be able to add an image block with multiple paragraph blocks', async () => {

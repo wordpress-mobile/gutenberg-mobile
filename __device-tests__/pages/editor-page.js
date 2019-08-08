@@ -46,7 +46,7 @@ export default class EditorPage {
 	// Finds the wd element for new block that was added and sets the element attribute
 	// and accessibilityId attributes on this object and selects the block
 	// position uses one based numbering
-	async getBlockAtPosition( position: number, blockName: string ) {
+	async getBlockAtPosition( position: number, blockName: string = '' ) {
 		const blockLocator = `//*[contains(@${ this.accessibilityIdXPathAttrib }, "${ blockName } Block. Row ${ position }.")]`;
 		const elements = await this.driver.elementsByXPath( blockLocator );
 		return elements[ elements.length - 1 ];
@@ -168,7 +168,7 @@ export default class EditorPage {
 		if ( ! await this.hasBlockAtPosition( position, blockName ) ) {
 			throw Error( `No Block at position ${ position }` );
 		}
-
+		
 		const parentId = `${ blockName } Block. Row ${ position }.`;
 		const parentLocator = `//*[contains(@${ this.accessibilityIdXPathAttrib }, "${ parentId }")]`;
 		let removeBlockLocator = `${ parentLocator }/following-sibling::*`;
