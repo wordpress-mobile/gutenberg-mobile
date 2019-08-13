@@ -351,6 +351,10 @@ public class WPAndroidGlueCode {
         }
     }
 
+    public void onDetach(Activity activity) {
+        mReactInstanceManager.onHostDestroy(activity);
+    }
+
     public void onDestroy(Activity activity) {
         if (mReactRootView != null) {
             mReactRootView.unmountReactApplication();
