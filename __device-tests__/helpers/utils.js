@@ -281,13 +281,7 @@ const toggleHtmlMode = async ( driver: wd.PromiseChainWebdriver, toggleOn: boole
 	if ( isAndroid() ) {
 		// Hit the "Menu" key
 		await driver.pressKeycode( 82 );
-
-		// Go at the end of the popup to hit the "Show html"
-		// TODO: c'mon, find a more robust way to hit that item! :(
-		/* for ( let i = 0; i < 10; i++ ) {
-			await driver.pressKeycode( 20 );
-		} */
-
+		
 		await driver.pressKeycode( 20 );
 		await driver.pressKeycode( 123 );
 
