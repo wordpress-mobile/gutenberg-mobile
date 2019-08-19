@@ -168,7 +168,7 @@ export default class EditorPage {
 		if ( ! await this.hasBlockAtPosition( position, blockName ) ) {
 			throw Error( `No Block at position ${ position }` );
 		}
-		
+
 		const parentId = `${ blockName } Block. Row ${ position }.`;
 		const parentLocator = `//*[contains(@${ this.accessibilityIdXPathAttrib }, "${ parentId }")]`;
 		let removeBlockLocator = `${ parentLocator }/following-sibling::*`;

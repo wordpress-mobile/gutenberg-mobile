@@ -12,7 +12,7 @@ import {
 	stopDriver,
 	isAndroid,
 	clickMiddleOfElement,
-	swipeUp
+	swipeUp,
 } from './helpers/utils';
 import testData from './helpers/test-data';
 
@@ -41,25 +41,25 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 
 	afterEach( async () => {
 		let blockExist = await editorPage.hasBlockAtPosition( 1 );
-        while( blockExist ) {
-            if ( await editorPage.hasBlockAtPosition( 2 ) ){
-                if ( isAndroid() ) {
-                    let blockElement = await editorPage.getBlockAtPosition( 1 );
-                    await blockElement.click();
-                    await editorPage.removeBlockAtPosition( 1 );
-                } else {
-                    let blockElement = await editorPage.getBlockAtPosition( 2 );
+		while ( blockExist ) {
+			if ( await editorPage.hasBlockAtPosition( 2 ) ) {
+				if ( isAndroid() ) {
+					const blockElement = await editorPage.getBlockAtPosition( 1 );
 					await blockElement.click();
-					await swipeUp( driver, blockElement);
-                    await editorPage.removeBlockAtPosition( 2 );
-                }
-                blockExist = true;
-            } else {
-                await editorPage.removeBlockAtPosition( 1 );
-                return;
-            }
-        } 
-	} ); 
+					await editorPage.removeBlockAtPosition( 1 );
+				} else {
+					const blockElement = await editorPage.getBlockAtPosition( 2 );
+					await blockElement.click();
+					await swipeUp( driver, blockElement );
+					await editorPage.removeBlockAtPosition( 2 );
+				}
+				blockExist = true;
+			} else {
+				await editorPage.removeBlockAtPosition( 1 );
+				return;
+			}
+		}
+	} );
 
 	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );
