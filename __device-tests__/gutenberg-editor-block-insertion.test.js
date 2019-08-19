@@ -83,24 +83,6 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 		await editorPage.sendTextToParagraphBlockAtPosition( 3, testData.mediumText );
 
 		await editorPage.verifyHtmlContent( testData.blockInsertionHtml );
-
-		// Workaround for now since deleting the first element causes a crash on CI for Android
-		/* if ( isAndroid() ) {
-			paragraphBlockElement = await editorPage.getParagraphBlockAtPosition( 3 );
-			await paragraphBlockElement.click();
-			await editorPage.removeParagraphBlockAtPosition( 3 );
-			for ( let i = 3; i > 0; i-- ) {
-				paragraphBlockElement = await editorPage.getParagraphBlockAtPosition( i );
-				await paragraphBlockElement.click();
-				await editorPage.removeParagraphBlockAtPosition( i );
-			}
-		} else {
-			for ( let i = 4; i > 0; i-- ) {
-				paragraphBlockElement = await editorPage.getParagraphBlockAtPosition( i );
-				await clickMiddleOfElement( driver, paragraphBlockElement );
-				await editorPage.removeParagraphBlockAtPosition( i );
-			}
-		} */
 	} );
 
 	it( 'should be able to insert block at the beginning of post from the title', async () => {
@@ -110,7 +92,6 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 			await paragraphBlockElement.click();
 		}
 		await editorPage.sendTextToParagraphBlockAtPosition( 1, testData.longText );
-		// Should have 3 paragraph blocks at this point
 
 		if ( isAndroid() ) {
 			await driver.hideDeviceKeyboard();

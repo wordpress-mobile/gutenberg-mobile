@@ -88,7 +88,6 @@ describe( 'Gutenberg Editor Image Block tests', () => {
 			imageBlock = await editorPage.getImageBlockAtPosition( 1 );
 			await imageBlock.click();
 		}
-		// await editorPage.removeImageBlockAtPosition( 1 );
 	} );
 
 	it( 'should be able to add an image block with multiple paragraph blocks', async () => {
