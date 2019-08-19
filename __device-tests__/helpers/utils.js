@@ -281,12 +281,12 @@ const toggleHtmlMode = async ( driver: wd.PromiseChainWebdriver, toggleOn: boole
 	if ( isAndroid() ) {
 		// Hit the "Menu" key
 		await driver.pressKeycode( 82 );
-		
+
 		await driver.pressKeycode( 20 );
 		await driver.pressKeycode( 123 );
 
 		// Hit Enter
-		 await driver.pressKeycode( 66 );
+		await driver.pressKeycode( 66 );
 	} else {
 		const menuButton = await driver.elementByAccessibilityId( '...' );
 		await menuButton.click();
