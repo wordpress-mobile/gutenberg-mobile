@@ -285,7 +285,7 @@ const toggleHtmlMode = async ( driver: wd.PromiseChainWebdriver, toggleOn: boole
 		await driver.pressKeycode( 20 );
 		await driver.pressKeycode( 123 );
 
-		// hit Enter
+		// Hit Enter
 		 await driver.pressKeycode( 66 );
 	} else {
 		const menuButton = await driver.elementByAccessibilityId( '...' );
