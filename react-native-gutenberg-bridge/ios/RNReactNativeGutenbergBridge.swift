@@ -13,7 +13,7 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
     }
     
     @objc
-    func requestMediaPickFrom(_ source: String, filter: [String]?, callback: @escaping RCTResponseSenderBlock) {
+    func requestMediaPickFrom(_ source: String, filter: [String]?, allowMultipleSelection: Bool, callback: @escaping RCTResponseSenderBlock) {
         let mediaSource: MediaPickerSource = MediaPickerSource(rawValue: source) ?? .deviceLibrary
         let mediaFilter: [MediaFilter]? = filter?.map({
             if let type = MediaFilter(rawValue: $0) {
@@ -22,12 +22,23 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
             return MediaFilter.other
         })
         DispatchQueue.main.async {
-            self.delegate?.gutenbergDidRequestMedia(from: mediaSource, filter: mediaFilter, with: { (mediaID, url) in
-                guard let mediaID = mediaID else {
+            self.delegate?.gutenbergDidRequestMedia(from: mediaSource, filter: mediaFilter, allowMultipleSelection: allowMultipleSelection, with: { media in
+                guard let media = media else {
                     callback(nil)
                     return
                 }
-                callback([mediaID, url])
+                if (allowMultipleSelection) {
+                    let formattedMedia = media.map { (id, url) in
+                        return ["id": id, "url": url]
+                    }
+                    callback([formattedMedia])
+                } else {
+                    guard let (mediaID, mediaURL) = media.first else {
+                        callback(nil)
+                        return
+                    }
+                    callback([["id": mediaID, "url": mediaURL]])
+                }
             })
         }
     }
@@ -39,12 +50,12 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
             return
         }
         DispatchQueue.main.async {
-            self.delegate?.gutenbergDidRequestImport(from: url, with: { (mediaID, url) in
-                guard let url = url, let mediaID = mediaID else {
+            self.delegate?.gutenbergDidRequestImport(from: url, with: { media in
+                guard let media = media else {
                     callback(nil)
                     return
                 }
-                callback([mediaID, url])
+                callback(media)
             })
         }
     }
