@@ -61,7 +61,7 @@ public protocol GutenbergBridgeDelegate: class {
     ///
     /// - Parameters:
     ///     - source: the source from where the picker will get the media
-    ///     - callback: A callback block to be called with an upload mediaIdentifier and a placeholder image file url, use nil on both parameters to signal that the action was canceled.
+    ///     - callback: A callback block to be called with an array of upload mediaIdentifiers and a placeholder images file url, use nil on both parameters to signal that the action was canceled.
     ///
     func gutenbergDidRequestMedia(from source: MediaPickerSource, filter: [MediaFilter]?, allowMultipleSelection: Bool, with callback: @escaping MediaPickerDidPickMediaCallback)
 
@@ -69,7 +69,7 @@ public protocol GutenbergBridgeDelegate: class {
     ///
     /// - Parameters:
     ///   - url: the url to import
-    ///   - callback: A callback block to be called with an upload mediaIdentifier and a placeholder image file url, use nil on both parameters to signal that the action has failed.
+    ///   - callback: A callback block to be called with an array of upload mediaIdentifiers and a placeholder images file url, use nil on both parameters to signal that the action has failed.
     //
     func gutenbergDidRequestImport(from url: URL, with callback: @escaping MediaPickerDidPickMediaCallback)
 

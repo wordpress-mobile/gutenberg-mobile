@@ -29,7 +29,7 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
                 }
                 if (allowMultipleSelection) {
                     let formattedMedia = media.map { (id, url) in
-                        return ["id": id, "url": url]
+                        return [mediaDictKeys.IDKey: id, mediaDictKeys.URLKey: url]
                     }
                     callback([formattedMedia])
                 } else {
@@ -37,7 +37,7 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
                         callback(nil)
                         return
                     }
-                    callback([["id": mediaID, "url": mediaURL]])
+                    callback([[mediaDictKeys.IDKey: mediaID, mediaDictKeys.URLKey: mediaURL]])
                 }
             })
         }
@@ -50,12 +50,12 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
             return
         }
         DispatchQueue.main.async {
-            self.delegate?.gutenbergDidRequestImport(from: url, with: { media in
-                guard let media = media else {
+            self.delegate?.gutenbergDidRequestImport(from: url, with: { mediaList in
+                guard let mediaList = mediaList else {
                     callback(nil)
                     return
                 }
-                callback(media)
+                callback(mediaList)
             })
         }
     }
@@ -180,5 +180,12 @@ extension RNReactNativeGutenbergBridge {
             return nil
         }
         return [string]
+    }
+}
+
+extension RNReactNativeGutenbergBridge {
+    enum mediaDictKeys {
+        static let IDKey = "id"
+        static let URLKey = "url"
     }
 }
