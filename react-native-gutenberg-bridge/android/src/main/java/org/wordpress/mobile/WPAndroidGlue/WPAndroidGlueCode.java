@@ -142,7 +142,7 @@ public class WPAndroidGlueCode {
             }
 
             @Override
-            public void requestMediaPickFromMediaLibrary(MediaSelectedCallback mediaSelectedCallback, MediaType mediaType) {
+            public void requestMediaPickFromMediaLibrary(MediaSelectedCallback mediaSelectedCallback, Boolean allowMultipleSelection, MediaType mediaType) {
                 mMediaPickedByUserOnBlock = true;
                 mPendingMediaSelectedCallback = mediaSelectedCallback;
                 if (mediaType == MediaType.IMAGE) {
@@ -153,7 +153,7 @@ public class WPAndroidGlueCode {
             }
 
             @Override
-            public void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback, MediaType mediaType) {
+            public void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection, MediaType mediaType) {
                 mMediaPickedByUserOnBlock = true;
                 mPendingMediaUploadCallback = mediaUploadCallback;
                 if (mediaType == MediaType.IMAGE) {
@@ -498,7 +498,9 @@ public class WPAndroidGlueCode {
     public void appendMediaFile(int mediaId, final String mediaUrl, final boolean isVideo) {
         if (mPendingMediaSelectedCallback != null && mMediaPickedByUserOnBlock) {
             mMediaPickedByUserOnBlock = false;
-            mPendingMediaSelectedCallback.onMediaSelected(mediaId, mediaUrl);
+            List<GutenbergBridgeJS2Parent.Media> mediaList = new ArrayList<>();
+            mediaList.add(new GutenbergBridgeJS2Parent.Media(mediaId, mediaUrl));
+            mPendingMediaSelectedCallback.onMediaSelected(mediaList);
             mPendingMediaSelectedCallback = null;
         } else {
             // we can assume we're being passed a new image from share intent as there was no selectMedia callback
@@ -513,7 +515,9 @@ public class WPAndroidGlueCode {
     public void appendUploadMediaFile(final int mediaId, final String mediaUri, final boolean isVideo) {
        if (isMediaUploadCallbackRegistered() && mMediaPickedByUserOnBlock) {
            mMediaPickedByUserOnBlock = false;
-           mPendingMediaUploadCallback.onUploadMediaFileSelected(mediaId, mediaUri);
+           List<GutenbergBridgeJS2Parent.Media> mediaList = new ArrayList<>();
+           mediaList.add(new GutenbergBridgeJS2Parent.Media(mediaId, mediaUri));
+           mPendingMediaUploadCallback.onUploadMediaFileSelected(mediaList);
        } else {
            // we can assume we're being passed a new image from share intent as there was no selectMedia callback
            sendOrDeferAppendMediaSignal(mediaId, mediaUri, isVideo);

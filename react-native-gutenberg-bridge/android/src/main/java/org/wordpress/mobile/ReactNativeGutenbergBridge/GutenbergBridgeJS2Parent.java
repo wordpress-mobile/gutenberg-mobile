@@ -1,18 +1,38 @@
 package org.wordpress.mobile.ReactNativeGutenbergBridge;
 
 import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeMap;
+
+import java.util.List;
 
 public interface GutenbergBridgeJS2Parent {
+
+    class Media {
+        private int id;
+        private String url;
+        public Media(int id, String url) {
+            this.id = id;
+            this.url = url;
+        }
+        WritableMap toMap() {
+            WritableMap map = new WritableNativeMap();
+            map.putInt("id", id);
+            map.putString("url", url);
+            return map;
+        }
+    }
+
     void responseHtml(String title, String html, boolean changed);
 
     void editorDidMount(ReadableArray unsupportedBlockNames);
 
     interface MediaSelectedCallback {
-        void onMediaSelected(int mediaId, String mediaUrl);
+        void onMediaSelected(List<Media> mediaList);
     }
 
     interface MediaUploadCallback {
-        void onUploadMediaFileSelected(int mediaId, String mediaUri);
+        void onUploadMediaFileSelected(List<Media> mediaList);
         void onUploadMediaFileClear(int mediaId);
         void onMediaFileUploadProgress(int mediaId, float progress);
         void onMediaFileUploadSucceeded(int mediaId, String mediaUrl, int serverId);
@@ -65,9 +85,9 @@ public interface GutenbergBridgeJS2Parent {
         }
     }
 
-    void requestMediaPickFromMediaLibrary(MediaSelectedCallback mediaSelectedCallback, MediaType mediaType);
+    void requestMediaPickFromMediaLibrary(MediaSelectedCallback mediaSelectedCallback, Boolean allowMultipleSelection, MediaType mediaType);
 
-    void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback, MediaType mediaType);
+    void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection, MediaType mediaType);
 
     void requestMediaPickerFromDeviceCamera(MediaUploadCallback mediaUploadCallback, MediaType mediaType);
 
