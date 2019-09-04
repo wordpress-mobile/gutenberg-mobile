@@ -513,7 +513,6 @@ class RCTAztecView: Aztec.TextView {
             let oldFont = font(from: attributes)
             let newFont = applyFontConstraints(to: oldFont)
             
-            textStorage.removeAttribute(.font, range: subrange)
             textStorage.addAttribute(.font, value: newFont, range: subrange)
         }
         textStorage.endEditing()
