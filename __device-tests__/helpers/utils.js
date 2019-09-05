@@ -300,7 +300,10 @@ const toggleHtmlMode = async ( driver: wd.PromiseChainWebdriver, toggleOn: boole
 		// Hit the "Menu" key
 		await driver.pressKeycode( 82 );
 
+		// Scrolls down
 		await driver.pressKeycode( 20 );
+
+		// Jumps cursor to "Show HTML"
 		await driver.pressKeycode( 123 );
 
 		// Hit Enter
