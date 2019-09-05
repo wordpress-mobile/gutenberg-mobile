@@ -4,7 +4,6 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-                
         {
             "name": "Debug Android",
             "program": "${workspaceRoot}/.vscode/launchReactNative.js",
@@ -12,7 +11,7 @@
             "request": "launch",
             "platform": "android",
             "sourceMaps": true,
-            "cwd": "${workspaceRoot}/.vscode/.react"
+            "outDir": "${workspaceRoot}/.vscode/.react"
         },
         {
             "name": "Debug iOS",
@@ -21,7 +20,7 @@
             "request": "launch",
             "platform": "ios",
             "sourceMaps": true,
-            "cwd": "${workspaceRoot}/.vscode/.react"
+            "outDir": "${workspaceRoot}/.vscode/.react"
         },
         {
             "name": "Attach to packager",
@@ -29,7 +28,7 @@
             "type": "reactnative",
             "request": "attach",
             "sourceMaps": true,
-            "cwd": "${workspaceRoot}/.vscode/.react"
+            "outDir": "${workspaceRoot}/.vscode/.react"
         },
     ]
 }
