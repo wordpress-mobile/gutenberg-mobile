@@ -109,8 +109,7 @@ const getIOSDevices = async () => {
 // Initialises the driver and desired capabilities for appium
 const setupDriver = async () => {
 	const branch = process.env.CIRCLE_BRANCH || '';
-	const safeBranchName = branch.replace( '/', '-' );
-
+	const safeBranchName = branch.replace( /\//g, '-' );
 	if ( isLocalEnvironment() ) {
 		try {
 			appiumProcess = await AppiumLocal.start( localAppiumPort );
@@ -409,8 +408,8 @@ module.exports = {
 	tapSelectAllAboveElement,
 	tapCopyAboveElement,
 	tapPasteAboveElement,
-	swipeUp,
 	swipeDown,
+	swipeUp,
 	stopDriver,
 	toggleHtmlMode,
 	toggleOrientation,
