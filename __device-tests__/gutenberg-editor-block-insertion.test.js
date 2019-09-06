@@ -16,7 +16,7 @@ import {
 } from './helpers/utils';
 import testData from './helpers/test-data';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 400000;
 
 describe( 'Gutenberg Editor tests for Block insertion', () => {
 	let driver;
@@ -83,6 +83,34 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 		await editorPage.sendTextToParagraphBlockAtPosition( 3, testData.mediumText );
 
 		await editorPage.verifyHtmlContent( testData.blockInsertionHtml );
+<<<<<<< HEAD
+=======
+
+		// wait for the block editor to load and for accessibility ids to update
+		await driver.sleep( 3000 );
+
+		// Workaround for now since deleting the first element causes a crash on CI for Android
+		if ( isAndroid() ) {
+			paragraphBlockElement = await editorPage.getParagraphBlockAtPosition( 3, { autoscroll: true } );
+			await paragraphBlockElement.click();
+			await editorPage.removeParagraphBlockAtPosition( 3 );
+			for ( let i = 3; i > 0; i-- ) {
+				// wait for accessibility ids to update
+				await driver.sleep( 1000 );
+				paragraphBlockElement = await editorPage.getParagraphBlockAtPosition( i, { autoscroll: true } );
+				await paragraphBlockElement.click();
+				await editorPage.removeParagraphBlockAtPosition( i );
+			}
+		} else {
+			for ( let i = 4; i > 0; i-- ) {
+				// wait for accessibility ids to update
+				await driver.sleep( 1000 );
+				paragraphBlockElement = await editorPage.getParagraphBlockAtPosition( 1 );
+				await clickMiddleOfElement( driver, paragraphBlockElement );
+				await editorPage.removeParagraphBlockAtPosition( 1 );
+			}
+		}
+>>>>>>> eeace3d67d1fce375799cff63e14094f2802a70b
 	} );
 
 	it( 'should be able to insert block at the beginning of post from the title', async () => {
@@ -94,10 +122,10 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 		await editorPage.sendTextToParagraphBlockAtPosition( 1, testData.longText );
 
 		if ( isAndroid() ) {
-			await driver.hideDeviceKeyboard();
+			await editorPage.dismissKeyboard();
 		}
 
-		const titleElement = await editorPage.getTitleElement();
+		const titleElement = await editorPage.getTitleElement( { autoscroll: true } );
 		await titleElement.click();
 		await titleElement.click();
 
