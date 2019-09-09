@@ -2,25 +2,14 @@ package org.wordpress.mobile.ReactNativeGutenbergBridge;
 
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.WritableNativeMap;
 
 import java.util.List;
 
 public interface GutenbergBridgeJS2Parent {
-
-    class Media {
-        private int id;
-        private String url;
-        public Media(int id, String url) {
-            this.id = id;
-            this.url = url;
-        }
-        WritableMap toMap() {
-            WritableMap map = new WritableNativeMap();
-            map.putInt("id", id);
-            map.putString("url", url);
-            return map;
-        }
+    interface RNMedia {
+        String getUrl();
+        int getId();
+        WritableMap toMap();
     }
 
     void responseHtml(String title, String html, boolean changed);
@@ -28,11 +17,11 @@ public interface GutenbergBridgeJS2Parent {
     void editorDidMount(ReadableArray unsupportedBlockNames);
 
     interface MediaSelectedCallback {
-        void onMediaSelected(List<Media> mediaList);
+        void onMediaSelected(List<RNMedia> mediaList);
     }
 
     interface MediaUploadCallback {
-        void onUploadMediaFileSelected(List<Media> mediaList);
+        void onUploadMediaFileSelected(List<RNMedia> mediaList);
         void onUploadMediaFileClear(int mediaId);
         void onMediaFileUploadProgress(int mediaId, float progress);
         void onMediaFileUploadSucceeded(int mediaId, String mediaUrl, int serverId);

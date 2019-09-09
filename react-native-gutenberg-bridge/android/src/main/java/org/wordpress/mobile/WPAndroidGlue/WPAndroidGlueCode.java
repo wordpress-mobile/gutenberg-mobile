@@ -35,6 +35,7 @@ import org.wordpress.mobile.ReactNativeAztec.ReactAztecPackage;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaSelectedCallback;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaUploadCallback;
+import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.RNMedia;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.RNReactNativeGutenbergBridgePackage;
 
 import java.lang.ref.WeakReference;
@@ -100,9 +101,9 @@ public class WPAndroidGlueCode {
     }
 
     public interface OnMediaLibraryButtonListener {
-        void onMediaLibraryImageButtonClicked();
-        void onMediaLibraryVideoButtonClicked();
-        void onUploadPhotoButtonClicked();
+        void onMediaLibraryImageButtonClicked(boolean allowMultipleSelection);
+        void onMediaLibraryVideoButtonClicked(boolean allowMultipleSelection);
+        void onUploadPhotoButtonClicked(boolean allowMultipleSelection);
         void onCapturePhotoButtonClicked();
         void onUploadVideoButtonClicked();
         void onCaptureVideoButtonClicked();
@@ -146,9 +147,9 @@ public class WPAndroidGlueCode {
                 mMediaPickedByUserOnBlock = true;
                 mPendingMediaSelectedCallback = mediaSelectedCallback;
                 if (mediaType == MediaType.IMAGE) {
-                    mOnMediaLibraryButtonListener.onMediaLibraryImageButtonClicked();
+                    mOnMediaLibraryButtonListener.onMediaLibraryImageButtonClicked(allowMultipleSelection);
                 } else if (mediaType == MediaType.VIDEO) {
-                    mOnMediaLibraryButtonListener.onMediaLibraryVideoButtonClicked();
+                    mOnMediaLibraryButtonListener.onMediaLibraryVideoButtonClicked(allowMultipleSelection);
                 }
             }
 
@@ -157,7 +158,7 @@ public class WPAndroidGlueCode {
                 mMediaPickedByUserOnBlock = true;
                 mPendingMediaUploadCallback = mediaUploadCallback;
                 if (mediaType == MediaType.IMAGE) {
-                    mOnMediaLibraryButtonListener.onUploadPhotoButtonClicked();
+                    mOnMediaLibraryButtonListener.onUploadPhotoButtonClicked(allowMultipleSelection);
                 } else if (mediaType == MediaType.VIDEO) {
                     mOnMediaLibraryButtonListener.onUploadVideoButtonClicked();
                 }
@@ -498,8 +499,8 @@ public class WPAndroidGlueCode {
     public void appendMediaFile(int mediaId, final String mediaUrl, final boolean isVideo) {
         if (mPendingMediaSelectedCallback != null && mMediaPickedByUserOnBlock) {
             mMediaPickedByUserOnBlock = false;
-            List<GutenbergBridgeJS2Parent.Media> mediaList = new ArrayList<>();
-            mediaList.add(new GutenbergBridgeJS2Parent.Media(mediaId, mediaUrl));
+            List<RNMedia> mediaList = new ArrayList<>();
+            mediaList.add(new Media(mediaId, mediaUrl));
             mPendingMediaSelectedCallback.onMediaSelected(mediaList);
             mPendingMediaSelectedCallback = null;
         } else {
@@ -508,6 +509,19 @@ public class WPAndroidGlueCode {
         }
     }
 
+    public void appendMediaFiles(ArrayList<Media> mediaList) {
+        if (mPendingMediaSelectedCallback != null && mMediaPickedByUserOnBlock) {
+            mMediaPickedByUserOnBlock = false;
+            List<RNMedia> rnMediaList = new ArrayList<>();
+            for (Media media : mediaList) {
+                rnMediaList.add(new Media(media.getId(), media.getUrl()));
+            }
+            mPendingMediaSelectedCallback.onMediaSelected(rnMediaList);
+            mPendingMediaSelectedCallback = null;
+        }
+    }
+
+
     public void toggleEditorMode() {
         mRnReactNativeGutenbergBridgePackage.getRNReactNativeGutenbergBridgeModule().toggleEditorMode();
     }
@@ -515,8 +529,8 @@ public class WPAndroidGlueCode {
     public void appendUploadMediaFile(final int mediaId, final String mediaUri, final boolean isVideo) {
        if (isMediaUploadCallbackRegistered() && mMediaPickedByUserOnBlock) {
            mMediaPickedByUserOnBlock = false;
-           List<GutenbergBridgeJS2Parent.Media> mediaList = new ArrayList<>();
-           mediaList.add(new GutenbergBridgeJS2Parent.Media(mediaId, mediaUri));
+           List<RNMedia> mediaList = new ArrayList<>();
+           mediaList.add(new Media(mediaId, mediaUri));
            mPendingMediaUploadCallback.onUploadMediaFileSelected(mediaList);
        } else {
            // we can assume we're being passed a new image from share intent as there was no selectMedia callback
@@ -546,9 +560,9 @@ public class WPAndroidGlueCode {
             Map.Entry<Integer, Media> entry = iter.next();
             Integer mediaId = entry.getKey();
             Media media = entry.getValue();
-            if (!TextUtils.isEmpty(media.mediaUrl) && mediaId > 0) {
+            if (!TextUtils.isEmpty(media.getUrl()) && mediaId > 0) {
                 // send signal to JS
-                appendNewMediaBlock(mediaId, media.mediaUrl, media.mediaType);
+                appendNewMediaBlock(mediaId, media.getUrl(), media.getType());
                 iter.remove();
             }
         }
@@ -580,19 +594,6 @@ public class WPAndroidGlueCode {
 
     private boolean isMediaUploadCallbackRegistered() {
         return mPendingMediaUploadCallback != null;
-    }
-
-    private class Media {
-
-        private int mediaId;
-        private String mediaUrl;
-        private String mediaType;
-
-        public Media(int mediaId, String mediaUrl, String mediaType) {
-            this.mediaId = mediaId;
-            this.mediaUrl = mediaUrl;
-            this.mediaType = mediaType;
-        }
     }
 }
 

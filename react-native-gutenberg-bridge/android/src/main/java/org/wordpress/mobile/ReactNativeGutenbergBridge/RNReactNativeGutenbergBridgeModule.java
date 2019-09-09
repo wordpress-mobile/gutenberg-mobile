@@ -14,6 +14,7 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaSelectedCallback;
+import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.RNMedia;
 
 import java.util.List;
 
@@ -157,10 +158,10 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
 
     private MediaSelectedCallback getNewMediaSelectedCallback(final Boolean allowMultipleSelection, final Callback jsCallback) {
         return new MediaSelectedCallback() {
-            @Override public void onMediaSelected(List<GutenbergBridgeJS2Parent.Media> mediaList) {
+            @Override public void onMediaSelected(List<RNMedia> mediaList) {
                 if(allowMultipleSelection) {
                     WritableArray writableArray = new WritableNativeArray();
-                    for (GutenbergBridgeJS2Parent.Media media : mediaList) {
+                    for (RNMedia media : mediaList) {
                         writableArray.pushMap(media.toMap());
                     }
                     jsCallback.invoke(writableArray);
@@ -174,10 +175,10 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     private GutenbergBridgeJS2Parent.MediaUploadCallback getNewUploadMediaCallback(final Boolean allowMultipleSelection, final Callback jsCallback) {
         return new GutenbergBridgeJS2Parent.MediaUploadCallback() {
             @Override
-            public void onUploadMediaFileSelected(List<GutenbergBridgeJS2Parent.Media> mediaList) {
+            public void onUploadMediaFileSelected(List<RNMedia> mediaList) {
                 if(allowMultipleSelection) {
                     WritableArray writableArray = new WritableNativeArray();
-                    for (GutenbergBridgeJS2Parent.Media media : mediaList) {
+                    for (RNMedia media : mediaList) {
                         writableArray.pushMap(media.toMap());
                     }
                     jsCallback.invoke(writableArray);
