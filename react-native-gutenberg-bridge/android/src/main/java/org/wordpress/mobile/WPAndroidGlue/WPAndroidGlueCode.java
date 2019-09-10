@@ -538,6 +538,18 @@ public class WPAndroidGlueCode {
        }
     }
 
+    public void appendUploadMediaFiles(ArrayList<Media> mediaList) {
+        if (isMediaUploadCallbackRegistered() && mMediaPickedByUserOnBlock) {
+            mMediaPickedByUserOnBlock = false;
+            List<RNMedia> rnMediaList = new ArrayList<>();
+            for (Media media : mediaList) {
+                rnMediaList.add(new Media(media.getId(), media.getUrl()));
+            }
+            mPendingMediaUploadCallback.onUploadMediaFileSelected(rnMediaList);
+            mPendingMediaUploadCallback = null;
+        }
+    }
+
     private void sendOrDeferAppendMediaSignal(final int mediaId, final String mediaUri, final boolean isVideo) {
         // if editor is mounted, let's append the media file
         String mediaType = isVideo ? "video" : "image";
