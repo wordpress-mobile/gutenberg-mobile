@@ -78,6 +78,11 @@ jobs:
           name: Bundle Android and Generate debug .apk file for testing
           command: yarn test:e2e:build-app:android
       - run:
+          name: Attach artifacts
+          command: |
+            mkdir -p Artifacts
+            mv ./android/app/build/outputs/apk/debug/app-debug.apk "Artifacts/Gutenberg-$SAUCE_FILENAME.apk"
+      - run:
           name: Upload apk to sauce labs
           command: |
             source bin/sauce-pre-upload.sh
