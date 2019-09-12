@@ -81,7 +81,7 @@ jobs:
           name: Attach artifacts
           command: |
             mkdir -p Artifacts
-            cp ./android/app/build/outputs/apk/debug/app-debug.apk "Artifacts/Gutenberg-$SAUCE_FILENAME.apk"
+            cp ./android/app/build/outputs/apk/debug/app-debug.apk "Artifacts/Gutenberg-$CIRCLE_BUILD_NUM.apk"
       - run:
           name: Upload apk to sauce labs
           command: |
