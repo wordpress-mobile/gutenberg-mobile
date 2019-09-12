@@ -46,11 +46,7 @@ export default class EditorPage {
 	// Finds the wd element for new block that was added and sets the element attribute
 	// and accessibilityId attributes on this object and selects the block
 	// position uses one based numbering
-<<<<<<< HEAD
-	async getBlockAtPosition( position: number, blockName: string = '' ) {
-=======
 	async getBlockAtPosition( position: number, blockName: string, options: { autoscroll: boolean } = { autoscroll: false } ) {
->>>>>>> eeace3d67d1fce375799cff63e14094f2802a70b
 		const blockLocator = `//*[contains(@${ this.accessibilityIdXPathAttrib }, "${ blockName } Block. Row ${ position }.")]`;
 		const elements = await this.driver.elementsByXPath( blockLocator );
 		const lastElementFound = elements[ elements.length - 1 ];
@@ -96,6 +92,12 @@ export default class EditorPage {
 
 	async hasBlockAtPosition( position: number, blockName: string = '' ) {
 		return undefined !== await this.getBlockAtPosition( position, blockName );
+	}
+
+	async removeAllBlocks() {
+		const block = await this.getLastBlockVisible();
+		block.click();
+		this.removeBlockAtPosition( 1 , 'Paragraph');
 	}
 
 	async getTitleElement( options: { autoscroll: boolean } = { autoscroll: false } ) {

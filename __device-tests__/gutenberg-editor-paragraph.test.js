@@ -41,7 +41,9 @@ describe( 'Gutenberg Editor tests for Paragraph Block', () => {
 	} );
 
 	afterEach( async () => {
-		let blockExist = await editorPage.hasBlockAtPosition( 1 );
+		editorPage.removeAllBlocks();
+		
+		/* let blockExist = await editorPage.hasBlockAtPosition( 1 );
 		while ( blockExist ) {
 			if ( await editorPage.hasBlockAtPosition( 2 ) ) {
 				if ( isAndroid() ) {
@@ -59,8 +61,8 @@ describe( 'Gutenberg Editor tests for Paragraph Block', () => {
 				await editorPage.removeBlockAtPosition( 1 );
 				return;
 			}
-		}
-	} );
+		} */
+	} ); 
 
 	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );
