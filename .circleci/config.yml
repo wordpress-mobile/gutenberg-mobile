@@ -94,6 +94,9 @@ jobs:
             JEST_JUNIT_OUTPUT: "reports/test-results/android-test-results.xml"
       - store_test_results:
           path: ./reports/test-results
+      - store_artifacts:
+          path: Artifacts
+          destination: Artifacts
   ios-device-checks:
     macos:
       xcode: "10.2.0"
