@@ -70,9 +70,17 @@ extension GutenbergViewController: GutenbergBridgeDelegate {
             print("Gutenberg did request media picker, passing a sample url in callback")
             switch currentFilter {
             case .image:
-                callback([(id: 1, url: "https://cldup.com/cXyG__fTLN.jpg")])
+                if(allowMultipleSelection) {
+                    callback([(1, "https://cldup.com/cXyG__fTLN.jpg"), (3, "https://cldup.com/cXyG__fTLN.jpg")])
+                } else {
+                    callback([(1, "https://cldup.com/cXyG__fTLN.jpg")])
+                }
             case .video:
-                callback([(2, "https://i.cloudup.com/YtZFJbuQCE.mov")])
+                if(allowMultipleSelection) {
+                    callback([(2, "https://i.cloudup.com/YtZFJbuQCE.mov"), (4, "https://i.cloudup.com/YtZFJbuQCE.mov")])
+                } else {
+                    callback([(2, "https://i.cloudup.com/YtZFJbuQCE.mov")])
+                }
             default:
                 break
             }
