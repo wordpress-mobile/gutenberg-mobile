@@ -36,7 +36,7 @@ import com.horcrux.svg.SvgPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.reactnativecommunity.slider.ReactSliderPackage;
 
-import org.wordpress.android.util.AppLog;
+//import org.wordpress.android.util.AppLog;
 import org.wordpress.mobile.ReactNativeAztec.ReactAztecPackage;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.GutenbergUserEvent;
@@ -274,16 +274,16 @@ public class WPAndroidGlueCode {
             public void editorDidEmitLog(String message, LogLevel logLevel) {
                 switch (logLevel) {
                     case TRACE:
-                        AppLog.d(AppLog.T.EDITOR, message);
+//                        AppLog.d(AppLog.T.EDITOR, message);
                         break;
                     case INFO:
-                        AppLog.i(AppLog.T.EDITOR, message);
+//                        AppLog.i(AppLog.T.EDITOR, message);
                         break;
                     case WARN:
-                        AppLog.w(AppLog.T.EDITOR, message);
+//                        AppLog.w(AppLog.T.EDITOR, message);
                         break;
                     case ERROR:
-                        AppLog.e(AppLog.T.EDITOR, message);
+//                        AppLog.e(AppLog.T.EDITOR, message);
                         break;
                 }
             }

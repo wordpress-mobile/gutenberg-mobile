@@ -16,3 +16,11 @@ include ':react-native-linear-gradient'
 project(':react-native-linear-gradient').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-linear-gradient/android')
 
 include ':app'
+
+
+include ':aztec', ':glide-loader', ':wordpress-comments', ':wordpress-shortcodes'
+def aztecEditorPath = "/Users/matt/dev/a8c/AztecEditor-Android"
+project(":aztec").projectDir = file("${aztecEditorPath}/aztec")
+project(":glide-loader").projectDir = file( "${aztecEditorPath}/glide-loader")
+project(":wordpress-comments").projectDir = file("${aztecEditorPath}/wordpress-comments")
+project(":wordpress-shortcodes").projectDir = file("${aztecEditorPath}/wordpress-shortcodes")
