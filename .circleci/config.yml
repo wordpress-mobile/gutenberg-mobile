@@ -102,6 +102,13 @@ jobs:
         command: |
           echo 'export TEST_RN_PLATFORM=ios' >> $BASH_ENV
           echo 'export TEST_ENV=local' >> $BASH_ENV
+    - run:
+        name: Prepare build cache key
+        command: find yarn.lock ios react-native-aztec/ios react-native-gutenberg-bridge/ios -type f -print0 | sort -z | xargs -0 shasum | tee ios-checksums.txt
+    - restore_cache:
+        name: Restore Build Cache
+        keys:
+          - ios-build-cache-{{ checksum "ios-checksums.txt" }}
     - restore_cache:
         name: Restore Dependencies Cache
         keys:
