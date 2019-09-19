@@ -117,6 +117,9 @@ const setupDriver = async () => {
 			// Ignore error here, Appium is probably already running (Appium desktop has its own server for instance)
 			// eslint-disable-next-line no-console
 			console.log( 'Could not start Appium server on port ', localAppiumPort, ' - ', err.toString() );
+			// eslint-disable-next-line no-console
+			console.log( 'Killing any process on port ', localAppiumPort, ' and trying again' );
+			childProcess.execSync( `lsof -nti:${ localAppiumPort } | xargs kill -9` );
 			return await setupDriver();
 		}
 	}
