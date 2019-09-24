@@ -84,6 +84,28 @@ export default class EditorPage {
 		return elements[ 0 ];
 	}
 
+	async removeAllBlocks() {
+		let blockExist = await this.hasBlockAtPosition( 1 );
+		while ( blockExist ) {
+			if ( await this.hasBlockAtPosition( 2 ) ) {
+				if ( isAndroid() ) {
+					const blockElement = await this.getBlockAtPosition( 1 , '');
+					await blockElement.click();
+					await this.removeBlockAtPosition( 1 );
+				} else {
+					const blockElement = await this.getBlockAtPosition( 2, '' );
+					await blockElement.click();
+					//await swipeUp( driver, blockElement );
+					await this.removeBlockAtPosition( 2 );
+				}
+				blockExist = true;
+			} else {
+				await this.removeBlockAtPosition( 1 );
+				return;
+			}
+		}
+	}
+
 	async getLastBlockVisible() {
 		const firstBlockLocator = `//*[contains(@${ this.accessibilityIdXPathAttrib }, " Block. Row ")]`;
 		const elements = await this.driver.elementsByXPath( firstBlockLocator );
@@ -92,12 +114,6 @@ export default class EditorPage {
 
 	async hasBlockAtPosition( position: number, blockName: string = '' ) {
 		return undefined !== await this.getBlockAtPosition( position, blockName );
-	}
-
-	async removeAllBlocks() {
-		const block = await this.getLastBlockVisible();
-		block.click();
-		this.removeBlockAtPosition( 1 , 'Paragraph');
 	}
 
 	async getTitleElement( options: { autoscroll: boolean } = { autoscroll: false } ) {

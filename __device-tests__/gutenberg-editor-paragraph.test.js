@@ -13,6 +13,7 @@ import {
 	clickBeginningOfElement,
 	stopDriver,
 	isAndroid,
+	swipeDown,
 	swipeUp,
 } from './helpers/utils';
 import testData from './helpers/test-data';
@@ -41,20 +42,18 @@ describe( 'Gutenberg Editor tests for Paragraph Block', () => {
 	} );
 
 	afterEach( async () => {
-		editorPage.removeAllBlocks();
-		
+		await this.removeAllBlocks();
 		/* let blockExist = await editorPage.hasBlockAtPosition( 1 );
 		while ( blockExist ) {
 			if ( await editorPage.hasBlockAtPosition( 2 ) ) {
 				if ( isAndroid() ) {
-					const blockElement = await editorPage.getBlockAtPosition( 1 );
-					await blockElement.click();
-					await editorPage.removeBlockAtPosition( 1 );
+					let firstBlock = await editorPage.getFirstBlockVisible();
+					await firstBlock.click();
+					await editorPage.removeBlockAtPosition( 1 , firstBlock);
 				} else {
-					const blockElement = await editorPage.getBlockAtPosition( 2 );
-					await blockElement.click();
-					await swipeUp( driver, blockElement );
-					await editorPage.removeBlockAtPosition( 2 );
+					let lastBlock = await editorPage.getLastBlockVisible();
+					await lastBlock.click();
+					await editorPage.removeBlockAtPosition( 2 , lastBlock);
 				}
 				blockExist = true;
 			} else {
