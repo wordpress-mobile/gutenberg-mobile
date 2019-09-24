@@ -7,11 +7,12 @@ import android.content.MutableContextWrapper;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import androidx.fragment.app.Fragment;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout.LayoutParams;
+
+import androidx.fragment.app.Fragment;
 
 import com.brentvatne.react.ReactVideoPackage;
 import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
@@ -48,6 +49,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 
 
@@ -63,6 +65,7 @@ public class WPAndroidGlueCode {
     private OnMediaLibraryButtonListener mOnMediaLibraryButtonListener;
     private OnReattachQueryListener mOnReattachQueryListener;
     private OnEditorMountListener mOnEditorMountListener;
+    private OnEditorAutosaveListener mOnEditorAutosaveListener;
     private boolean mIsEditorMounted;
 
     private String mContentHtml = "";
@@ -122,6 +125,10 @@ public class WPAndroidGlueCode {
 
     public interface OnAuthHeaderRequestedListener {
         String onAuthHeaderRequested(String url);
+    }
+
+    public interface OnEditorAutosaveListener {
+        void onEditorAutosave();
     }
 
     protected List<ReactPackage> getPackages() {
@@ -215,6 +222,13 @@ public class WPAndroidGlueCode {
             }
 
             @Override
+            public void editorDidAutosave() {
+                if (mOnEditorAutosaveListener != null) {
+                    mOnEditorAutosaveListener.onEditorAutosave();
+                }
+            }
+
+            @Override
             public void editorDidEmitLog(String message, LogLevel logLevel) {
                 switch (logLevel) {
                     case TRACE:
@@ -232,7 +246,6 @@ public class WPAndroidGlueCode {
                 }
             }
         });
-
 
         return Arrays.asList(
                 new MainReactPackage(getMainPackageConfig(getImagePipelineConfig(sOkHttpClient))),
@@ -292,6 +305,7 @@ public class WPAndroidGlueCode {
     public void attachToContainer(ViewGroup viewGroup, OnMediaLibraryButtonListener onMediaLibraryButtonListener,
                                   OnReattachQueryListener onReattachQueryListener,
                                   OnEditorMountListener onEditorMountListener,
+                                  OnEditorAutosaveListener onEditorAutosaveListener,
                                   OnAuthHeaderRequestedListener onAuthHeaderRequestedListener) {
         MutableContextWrapper contextWrapper = (MutableContextWrapper) mReactRootView.getContext();
         contextWrapper.setBaseContext(viewGroup.getContext());
@@ -299,6 +313,7 @@ public class WPAndroidGlueCode {
         mOnMediaLibraryButtonListener = onMediaLibraryButtonListener;
         mOnReattachQueryListener = onReattachQueryListener;
         mOnEditorMountListener = onEditorMountListener;
+        mOnEditorAutosaveListener = onEditorAutosaveListener;
 
         sAddCookiesInterceptor.setOnAuthHeaderRequestedListener(onAuthHeaderRequestedListener);
 
