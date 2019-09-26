@@ -4,4 +4,3 @@
 [submodule "react-native-aztec"]
 	path = react-native-aztec-old-submodule
 	url = ../react-native-aztec.git
-	
