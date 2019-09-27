@@ -142,6 +142,10 @@ jobs:
         name: Run Device Tests
         command: |
           yarn device-tests
+    - run:
+        name: Run Device Tests(again)
+        command: |
+          yarn device-tests
         environment:
           JEST_JUNIT_OUTPUT: "reports/test-results/ios-test-results.xml"
     - store_test_results:
