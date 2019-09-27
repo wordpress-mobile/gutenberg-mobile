@@ -137,7 +137,7 @@ jobs:
         command: WORK_DIR=$(pwd) && cd ./ios/build/gutenberg/Build/Products/Release-iphonesimulator && zip -r $WORK_DIR/ios/Gutenberg.app.zip gutenberg.app
     - run:
         name: Install Appium globally
-        command: npm install -g appium@latest
+        command: npm install -g appium
     - run:
         name: Run Device Tests
         command: |
