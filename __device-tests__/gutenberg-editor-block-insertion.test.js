@@ -40,15 +40,16 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 	} );
 
 	afterEach( async () => {
+		//await this.removeAllBlocks();
 		let blockExist = await editorPage.hasBlockAtPosition( 1 );
 		while ( blockExist ) {
 			if ( await editorPage.hasBlockAtPosition( 2 ) ) {
 				if ( isAndroid() ) {
-					const blockElement = await editorPage.getBlockAtPosition( 1 );
+					const blockElement = await editorPage.getBlockAtPosition( 1 , '' );
 					await blockElement.click();
 					await editorPage.removeBlockAtPosition( 1 );
 				} else {
-					const blockElement = await editorPage.getBlockAtPosition( 2 );
+					const blockElement = await editorPage.getBlockAtPosition( 2 , '' );
 					await blockElement.click();
 					await swipeUp( driver, blockElement );
 					await editorPage.removeBlockAtPosition( 2 );
@@ -59,7 +60,7 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 				return;
 			}
 		}
-	} );
+	} ); 
 
 	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );
@@ -83,8 +84,6 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 		await editorPage.sendTextToParagraphBlockAtPosition( 3, testData.mediumText );
 
 		await editorPage.verifyHtmlContent( testData.blockInsertionHtml );
-<<<<<<< HEAD
-=======
 
 		// wait for the block editor to load and for accessibility ids to update
 		await driver.sleep( 3000 );
@@ -110,7 +109,6 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 				await editorPage.removeParagraphBlockAtPosition( 1 );
 			}
 		}
->>>>>>> eeace3d67d1fce375799cff63e14094f2802a70b
 	} );
 
 	it( 'should be able to insert block at the beginning of post from the title', async () => {

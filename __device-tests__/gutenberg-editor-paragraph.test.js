@@ -47,13 +47,14 @@ describe( 'Gutenberg Editor tests for Paragraph Block', () => {
 		while ( blockExist ) {
 			if ( await editorPage.hasBlockAtPosition( 2 ) ) {
 				if ( isAndroid() ) {
-					let firstBlock = await editorPage.getFirstBlockVisible();
-					await firstBlock.click();
-					await editorPage.removeBlockAtPosition( 1 , firstBlock);
+					const blockElement = await editorPage.getBlockAtPosition( 1 , '' );
+					await blockElement.click();
+					await editorPage.removeBlockAtPosition( 1 );
 				} else {
-					let lastBlock = await editorPage.getLastBlockVisible();
-					await lastBlock.click();
-					await editorPage.removeBlockAtPosition( 2 , lastBlock);
+					const blockElement = await editorPage.getBlockAtPosition( 2 , '' );
+					await blockElement.click();
+					await swipeUp( driver, blockElement );
+					await editorPage.removeBlockAtPosition( 2 );
 				}
 				blockExist = true;
 			} else {
