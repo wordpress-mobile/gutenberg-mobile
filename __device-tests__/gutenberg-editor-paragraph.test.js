@@ -13,8 +13,6 @@ import {
 	clickBeginningOfElement,
 	stopDriver,
 	isAndroid,
-	swipeDown,
-	swipeUp,
 } from './helpers/utils';
 import testData from './helpers/test-data';
 
@@ -62,7 +60,7 @@ describe( 'Gutenberg Editor tests for Paragraph Block', () => {
 				return;
 			}
 		} */
-	} ); 
+	} );
 
 	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );

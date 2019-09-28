@@ -45,11 +45,11 @@ describe( 'Gutenberg Editor Image Block tests', () => {
 		while ( blockExist ) {
 			if ( await editorPage.hasBlockAtPosition( 2 ) ) {
 				if ( isAndroid() ) {
-					const blockElement = await editorPage.getBlockAtPosition( 1 , '' );
+					const blockElement = await editorPage.getBlockAtPosition( 1, '' );
 					await blockElement.click();
 					await editorPage.removeBlockAtPosition( 1 );
 				} else {
-					const blockElement = await editorPage.getBlockAtPosition( 2 , '' );
+					const blockElement = await editorPage.getBlockAtPosition( 2, '' );
 					await blockElement.click();
 					await swipeUp( driver, blockElement );
 					await editorPage.removeBlockAtPosition( 2 );
@@ -60,7 +60,7 @@ describe( 'Gutenberg Editor Image Block tests', () => {
 				return;
 			}
 		}
-	} ); 
+	} );
 
 	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );

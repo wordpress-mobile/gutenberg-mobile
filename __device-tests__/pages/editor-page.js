@@ -89,11 +89,11 @@ export default class EditorPage {
 		while ( blockExist ) {
 			if ( await this.hasBlockAtPosition( 2 ) ) {
 				if ( isAndroid() ) {
-					const blockElement = await this.getBlockAtPosition( 1 , '' );
+					const blockElement = await this.getBlockAtPosition( 1, '' );
 					await blockElement.click();
 					await this.removeBlockAtPosition( 1 );
 				} else {
-					const blockElement = await this.getBlockAtPosition( 2 , '' );
+					const blockElement = await this.getBlockAtPosition( 2, '' );
 					await blockElement.click();
 					await swipeUp( this.driver, blockElement );
 					await this.removeBlockAtPosition( 2 );
