@@ -1,4 +1,4 @@
-1.13.0
+1.15.0
 ------
 * Fix issue when multiple media selection adds only one image or video block
 * Fix issue when force Touch app shortcut doesn't work properly selecting "New Photo Post"
