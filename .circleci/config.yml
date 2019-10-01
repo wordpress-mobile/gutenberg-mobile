@@ -139,6 +139,11 @@ jobs:
         name: Install Appium globally
         command: npm install -g appium
     - run:
+        name: Start appium servers
+        command: |
+          appium -p 4724 &
+          appium -p 4725 &
+    - run:
         name: Run Device Tests
         command: |
           yarn device-tests

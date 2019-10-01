@@ -63,7 +63,6 @@ const getIOSDevices = async () => {
 	if ( stderr ) {
 		// eslint-disable-next-line no-console
 		console.log( `error running instruments command ${ stderr }` );
-		return;
 	}
 
 	/*
@@ -109,7 +108,7 @@ const getIOSDevices = async () => {
 // Initialises the driver and desired capabilities for appium
 const setupDriver = async () => {
 	const branch = process.env.CIRCLE_BRANCH || '';
-
+	/*
 	if ( isLocalEnvironment() ) {
 		try {
 			appiumProcess = await AppiumLocal.start( localAppiumPort );
@@ -120,7 +119,7 @@ const setupDriver = async () => {
 			// eslint-disable-next-line no-console
 			console.log( 'Killing any process on port ', localAppiumPort, ' and trying again' );
 		}
-	}
+	}*/
 
 	const safeBranchName = branch.replace( /\//g, '-' );
 	const serverConfig = isLocalEnvironment() ? serverConfigs.local : serverConfigs.sauce;
