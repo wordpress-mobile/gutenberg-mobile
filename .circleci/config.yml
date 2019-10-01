@@ -140,9 +140,16 @@ jobs:
         command: npm install -g appium
     - run:
         name: Start appium servers
-        command: |
-          appium -p 4724 &
-          appium -p 4725 &
+        command: appium -p 4724
+        background: true
+    - run:
+        name: Start appium servers
+        command: appium -p 4725
+        background: true
+    - run:
+        name: Start appium servers
+        command: appium -p 4726
+        background: true
     - run:
         name: Run Device Tests
         command: |
