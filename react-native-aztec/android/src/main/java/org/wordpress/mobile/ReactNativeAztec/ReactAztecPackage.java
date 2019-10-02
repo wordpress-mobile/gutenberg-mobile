@@ -16,6 +16,7 @@ public class ReactAztecPackage implements ReactPackage {
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         List<ViewManager> views = new ArrayList<>();
         views.add(new ReactAztecManager());
+        views.add(new WPScrollViewManager());
         return views;
     }
 
