@@ -2,7 +2,7 @@ import React from 'react';
 import { requireNativeComponent, ScrollView, Platform } from 'react-native';
 const NativeWPScrollView = requireNativeComponent( 'WPScrollView' );
 
- // let AndroidScrollView = NativeWPScrollView;
+let AndroidScrollView = NativeWPScrollView;
 
 export default class WPScrollView extends ScrollView {
     render() {
