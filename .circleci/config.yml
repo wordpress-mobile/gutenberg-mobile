@@ -153,6 +153,9 @@ jobs:
     - run:
         name: Run Device Tests
         command: |
+          rm /Users/distiller/Library/Caches/org.carthage.CarthageKit/dependencies/YYCache/index.lock
+          rm /Users/distiller/Library/Caches/org.carthage.CarthageKit/dependencies/CocoaAsyncSocket/index.lock
+          rm /Users/distiller/Library/Caches/org.carthage.CarthageKit/dependencies/RoutingHTTPServer/index.lock
           yarn device-tests
         environment:
           JEST_JUNIT_OUTPUT: "reports/test-results/ios-test-results.xml"

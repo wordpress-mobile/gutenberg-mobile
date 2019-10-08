@@ -109,7 +109,7 @@ const getIOSDevices = async () => {
 // Initialises the driver and desired capabilities for appium
 const setupDriver = async () => {
 	const branch = process.env.CIRCLE_BRANCH || '';
-	/*
+
 	if ( isLocalEnvironment() ) {
 		try {
 			appiumProcess = await AppiumLocal.start( localAppiumPort );
@@ -117,10 +117,8 @@ const setupDriver = async () => {
 			// Ignore error here, Appium is probably already running (Appium desktop has its own server for instance)
 			// eslint-disable-next-line no-console
 			console.log( 'Could not start Appium server on port ', localAppiumPort, ' - ', err.toString() );
-			// eslint-disable-next-line no-console
-			console.log( 'Killing any process on port ', localAppiumPort, ' and trying again' );
 		}
-	}*/
+	}
 
 	const safeBranchName = branch.replace( /\//g, '-' );
 	const serverConfig = isLocalEnvironment() ? serverConfigs.local : serverConfigs.sauce;
