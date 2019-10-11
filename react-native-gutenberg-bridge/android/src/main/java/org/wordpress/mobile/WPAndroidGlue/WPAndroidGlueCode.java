@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.MutableContextWrapper;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -511,16 +512,35 @@ public class WPAndroidGlueCode {
         return "";
     }
 
+    private String getMediaType(final boolean isVideo) {
+        return isVideo ? "video" : "image";
+    }
+
     public void appendMediaFile(int mediaId, final String mediaUrl, final boolean isVideo) {
         if (mPendingMediaSelectedCallback != null && mMediaPickedByUserOnBlock) {
+            String mediaType = getMediaType(isVideo);
             mMediaPickedByUserOnBlock = false;
             List<RNMedia> mediaList = new ArrayList<>();
-            mediaList.add(new Media(mediaId, mediaUrl));
+            mediaList.add(new Media(mediaId, mediaUrl, mediaType));
             mPendingMediaSelectedCallback.onMediaSelected(mediaList);
             mPendingMediaSelectedCallback = null;
         } else {
             // we can assume we're being passed a new image from share intent as there was no selectMedia callback
             sendOrDeferAppendMediaSignal(mediaId, mediaUrl, isVideo);
+        }
+    }
+
+
+    public void toggleEditorMode(boolean htmlModeEnabled) {
+        // Turn off hardware acceleration for Oreo
+        // see https://github.com/wordpress-mobile/gutenberg-mobile/issues/1268#issuecomment-535887390
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
+                && Build.VERSION.SDK_INT <= Build.VERSION_CODES.O_MR1) {
+            if (htmlModeEnabled) {
+                mReactRootView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+            } else {
+                mReactRootView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+            }
         }
     }
 
@@ -543,9 +563,10 @@ public class WPAndroidGlueCode {
 
     public void appendUploadMediaFile(final int mediaId, final String mediaUri, final boolean isVideo) {
        if (isMediaUploadCallbackRegistered() && mMediaPickedByUserOnBlock) {
+           String mediaType = getMediaType(isVideo);
            mMediaPickedByUserOnBlock = false;
            List<RNMedia> mediaList = new ArrayList<>();
-           mediaList.add(new Media(mediaId, mediaUri));
+           mediaList.add(new Media(mediaId, mediaUri, mediaType));
            mPendingMediaUploadCallback.onUploadMediaFileSelected(mediaList);
        } else {
            // we can assume we're being passed a new image from share intent as there was no selectMedia callback
@@ -558,7 +579,7 @@ public class WPAndroidGlueCode {
             mMediaPickedByUserOnBlock = false;
             List<RNMedia> rnMediaList = new ArrayList<>();
             for (Media media : mediaList) {
-                rnMediaList.add(new Media(media.getId(), media.getUrl()));
+                rnMediaList.add(new Media(media.getId(), media.getUrl(), media.getType()));
             }
             mPendingMediaUploadCallback.onUploadMediaFileSelected(rnMediaList);
             mPendingMediaUploadCallback = null;
@@ -567,7 +588,7 @@ public class WPAndroidGlueCode {
 
     private void sendOrDeferAppendMediaSignal(final int mediaId, final String mediaUri, final boolean isVideo) {
         // if editor is mounted, let's append the media file
-        String mediaType = isVideo ? "video" : "image";
+        String mediaType = getMediaType(isVideo);
         if (mIsEditorMounted) {
             if (!TextUtils.isEmpty(mediaUri) && mediaId > 0) {
                 // send signal to JS
