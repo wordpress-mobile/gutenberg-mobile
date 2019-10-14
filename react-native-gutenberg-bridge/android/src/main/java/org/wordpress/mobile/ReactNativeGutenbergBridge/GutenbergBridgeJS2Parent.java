@@ -9,6 +9,7 @@ public interface GutenbergBridgeJS2Parent {
     interface RNMedia {
         String getUrl();
         int getId();
+        String getType();
         WritableMap toMap();
     }
 
@@ -54,6 +55,7 @@ public interface GutenbergBridgeJS2Parent {
     enum MediaType {
         IMAGE("image"),
         VIDEO("video"),
+        MEDIA("media"),
         AUDIO("audio"),
         OTHER("other");
 
