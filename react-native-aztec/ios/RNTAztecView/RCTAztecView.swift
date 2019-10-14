@@ -132,9 +132,7 @@ class RCTAztecView: Aztec.TextView {
         textContainerInset = .zero
         contentInset = .zero
         addPlaceholder()
-        if #available(iOS 11.0, *) {
-            textDragInteraction?.isEnabled = false
-        }
+        textDragInteraction?.isEnabled = false        
         storage.htmlConverter.characterToReplaceLastEmptyLine = Character(.zeroWidthSpace)
         shouldNotifyOfNonUserChanges = false
     }
@@ -245,14 +243,23 @@ class RCTAztecView: Aztec.TextView {
     }
     
     override func paste(_ sender: Any?) {
-        let start = selectedRange.location
-        let end = selectedRange.location + selectedRange.length
-        
         let pasteboard = UIPasteboard.general
         let text = readText(from: pasteboard) ?? ""
         let html = readHTML(from: pasteboard) ?? ""
         let imagesURLs = readImages(from: pasteboard)
+        sendPasteCallback(text: text, html: html, imagesURLs: imagesURLs);
+    }
 
+    override func pasteWithoutFormatting(_ sender: Any?) {
+        let pasteboard = UIPasteboard.general
+        let text = readText(from: pasteboard) ?? ""
+        let imagesURLs = readImages(from: pasteboard)
+        sendPasteCallback(text: text, html: "", imagesURLs: imagesURLs);
+    }
+
+    private func sendPasteCallback(text: String, html: String, imagesURLs: [String]) {
+        let start = selectedRange.location
+        let end = selectedRange.location + selectedRange.length
         onPaste?([
             "currentContent": cleanHTML(),
             "selectionStart": start,
@@ -398,18 +405,36 @@ class RCTAztecView: Aztec.TextView {
         }
     }
 
+    override var textColor: UIColor? {
+        didSet {
+            typingAttributes[NSAttributedString.Key.foregroundColor] = self.textColor
+        }
+    }
+
+    override var typingAttributes: [NSAttributedString.Key : Any] {
+        didSet {
+            // Keep placeholder attributes in sync with typing attributes.
+            placeholderLabel.attributedText = NSAttributedString(string: placeholderLabel.text ?? "", attributes: placeholderAttributes)
+        }
+    }
+
     // MARK: - Placeholder
 
     @objc var placeholder: String {
         set {
-            var placeholderAttributes = typingAttributes
-            placeholderAttributes[.foregroundColor] = placeholderTextColor
             placeholderLabel.attributedText = NSAttributedString(string: newValue, attributes: placeholderAttributes)
         }
 
         get {
             return placeholderLabel.text ?? ""
         }
+    }
+
+    /// Attributes to use on the placeholder.
+    var placeholderAttributes: [NSAttributedString.Key: Any] {
+        var placeholderAttributes = typingAttributes
+        placeholderAttributes[.foregroundColor] = placeholderTextColor
+        return placeholderAttributes
     }
 
     @objc var placeholderTextColor: UIColor {
@@ -508,12 +533,14 @@ class RCTAztecView: Aztec.TextView {
         
         let fullRange = NSRange(location: 0, length: textStorage.length)
         
+        textStorage.beginEditing()
         textStorage.enumerateAttributes(in: fullRange, options: []) { (attributes, subrange, stop) in
             let oldFont = font(from: attributes)
             let newFont = applyFontConstraints(to: oldFont)
             
             textStorage.addAttribute(.font, value: newFont, range: subrange)
         }
+        textStorage.endEditing()
         
         refreshTypingAttributesAndPlaceholderFont()
     }
@@ -568,8 +595,8 @@ class RCTAztecView: Aztec.TextView {
 // MARK: UITextView Delegate Methods
 extension RCTAztecView: UITextViewDelegate {
 
-    func textViewDidChangeSelection(_ textView: UITextView) {
-        guard isInsertingDictationResult == false else {
+    func textViewDidChangeSelection(_ textView: UITextView) {        
+        guard isFirstResponder, isInsertingDictationResult == false else {
             return
         }
 
@@ -597,5 +624,21 @@ extension RCTAztecView: UITextViewDelegate {
 
     func textViewDidEndEditing(_ textView: UITextView) {
         onBlur?([:])
+    }
+
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        if #available(iOS 13.1, *) {
+            return false
+        } else if #available(iOS 13.0.0, *) {
+            // Sergio Estevao: This shouldn't happen in an editable textView, but it looks we have a system bug in iOS13 so we need this workaround
+            let position = characterRange.location
+            textView.selectedRange = NSRange(location: position, length: 0)
+            textView.typingAttributes = textView.attributedText.attributes(at: position, effectiveRange: nil)
+            textView.delegate?.textViewDidChangeSelection?(textView)
+        } else {
+            return false
+        }
+
+        return false
     }
 }
