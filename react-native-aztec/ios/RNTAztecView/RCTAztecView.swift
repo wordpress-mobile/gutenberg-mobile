@@ -39,6 +39,8 @@ class RCTAztecView: Aztec.TextView {
             super.textAlignment = textAlignment
             defaultParagraphStyle.alignment = textAlignment
             placeholderLabel.textAlignment = textAlignment
+            
+            recalculateTypingAttributes()
         }
     }
 
