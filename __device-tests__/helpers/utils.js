@@ -300,13 +300,13 @@ const toggleHtmlMode = async ( driver: wd.PromiseChainWebdriver, toggleOn: boole
 		// Hit the "Menu" key
 		await driver.pressKeycode( 82 );
 
-		// Go at the end of the popup to hit the "Show html"
-		// TODO: c'mon, find a more robust way to hit that item! :(
-		for ( let i = 0; i < 10; i++ ) {
-			await driver.pressKeycode( 20 );
-		}
+		// Navigate down
+		await driver.pressKeycode( 20 );
 
-		// hit Enter
+		// Highlight "Show HTML" key
+		await driver.pressKeycode( 123 );
+
+		// Hit Enter
 		await driver.pressKeycode( 66 );
 	} else {
 		const menuButton = await driver.elementByAccessibilityId( '...' );
