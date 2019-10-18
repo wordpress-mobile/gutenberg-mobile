@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout.LayoutParams;
@@ -37,6 +38,7 @@ import org.wordpress.mobile.ReactNativeAztec.ReactAztecPackage;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaSelectedCallback;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaUploadCallback;
+import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.OtherMediaOptionsReceivedCallback;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.RNMedia;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.RNReactNativeGutenbergBridgePackage;
 
@@ -79,6 +81,9 @@ public class WPAndroidGlueCode {
     private CountDownLatch mGetContentCountDownLatch;
     private WeakReference<View> mLastFocusedView = null;
 
+    public static final String MEDIA_SOURCE_STOCK_MEDIA = "MEDIA_SOURCE_STOCK_MEDIA";
+    public static final String MEDIA_SOURCE_GIPHY_MEDIA = "MEDIA_SOURCE_GIPHY_MEDIA";
+
     private static final String PROP_NAME_INITIAL_DATA = "initialData";
     private static final String PROP_NAME_INITIAL_TITLE = "initialTitle";
     private static final String PROP_NAME_INITIAL_HTML_MODE_ENABLED = "initialHtmlModeEnabled";
@@ -116,6 +121,9 @@ public class WPAndroidGlueCode {
         void onRetryUploadForMediaClicked(int mediaId);
         void onCancelUploadForMediaClicked(int mediaId);
         void onCancelUploadForMediaDueToDeletedBlock(int mediaId);
+        ArrayList<MediaOption> onGetOtherMediaImageOptions();
+        void onOtherMediaStockMediaButtonClicked(boolean allowMultipleSelection);
+        void onOtherMediaGiphyMediaButtonClicked(boolean allowMultipleSelection);
     }
 
     public interface OnReattachQueryListener {
@@ -251,6 +259,31 @@ public class WPAndroidGlueCode {
                         AppLog.e(AppLog.T.EDITOR, message);
                         break;
                 }
+            }
+
+            @Override
+            public void getOtherMediaPickerOptions(OtherMediaOptionsReceivedCallback otherMediaOptionsReceivedCallback,
+                                                   MediaType mediaType) {
+                if (mediaType == MediaType.IMAGE || mediaType == MediaType.MEDIA) {
+                    ArrayList<MediaOption> otherMediaImageOptions = mOnMediaLibraryButtonListener.onGetOtherMediaImageOptions();
+                    otherMediaOptionsReceivedCallback.onOtherMediaOptionsReceived(otherMediaImageOptions);
+                } else {
+                    otherMediaOptionsReceivedCallback.onOtherMediaOptionsReceived(new ArrayList<MediaOption>());
+                }
+            }
+
+            @Override
+            public void requestMediaPickFromStockMedia(MediaSelectedCallback mediaSelectedCallback, Boolean allowMultipleSelection) {
+                mPendingMediaSelectedCallback = mediaSelectedCallback;
+                mMediaPickedByUserOnBlock = true;
+                mOnMediaLibraryButtonListener.onOtherMediaStockMediaButtonClicked(allowMultipleSelection);
+            }
+
+            @Override
+            public void requestMediaPickFromGiphyMedia(MediaUploadCallback mediaSelectedCallback, Boolean allowMultipleSelection) {
+                mPendingMediaUploadCallback = mediaSelectedCallback;
+                mMediaPickedByUserOnBlock = true;
+                mOnMediaLibraryButtonListener.onOtherMediaGiphyMediaButtonClicked(allowMultipleSelection);
             }
         });
 

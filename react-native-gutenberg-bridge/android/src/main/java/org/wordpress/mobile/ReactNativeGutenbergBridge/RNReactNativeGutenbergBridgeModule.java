@@ -15,8 +15,14 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaSelectedCallback;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaType;
+import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.OtherMediaOptionsReceivedCallback;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.RNMedia;
+import org.wordpress.mobile.WPAndroidGlue.MediaOption;
 
+import static org.wordpress.mobile.WPAndroidGlue.WPAndroidGlueCode.MEDIA_SOURCE_GIPHY_MEDIA;
+import static org.wordpress.mobile.WPAndroidGlue.WPAndroidGlueCode.MEDIA_SOURCE_STOCK_MEDIA;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModule {
@@ -118,6 +124,17 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
         }
     }
 
+    @ReactMethod
+    public void requesOtherMediaPickFrom(String mediaSource, Boolean allowMultipleSelection, final Callback onUploadMediaSelected) {
+        if (mediaSource.equals(MEDIA_SOURCE_STOCK_MEDIA)) {
+            // For media stock we don't have information about upload process
+            // which means that we need to listen for MediaSelectedCallback ( and not  MediaUploadCallback )
+            mGutenbergBridgeJS2Parent.requestMediaPickFromStockMedia(getNewMediaSelectedCallback(allowMultipleSelection, onUploadMediaSelected), allowMultipleSelection);
+        } else if (mediaSource.equals(MEDIA_SOURCE_GIPHY_MEDIA)) {
+            mGutenbergBridgeJS2Parent.requestMediaPickFromGiphyMedia(getNewUploadMediaCallback(allowMultipleSelection, onUploadMediaSelected), allowMultipleSelection);
+        }
+    }
+
     private MediaType getMediaTypeFromFilter(ReadableArray filter) {
         switch (filter.size()) {
             case 1:
@@ -168,6 +185,25 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     @ReactMethod
     public void editorDidAutosave() {
         mGutenbergBridgeJS2Parent.editorDidAutosave();
+    }
+
+    @ReactMethod
+    public void getOtherMediaOptions(ReadableArray filter, final Callback jsCallback) {
+        OtherMediaOptionsReceivedCallback otherMediaOptionsReceivedCallback = getNewOtherMediaReceivedCallback(jsCallback);
+        MediaType mediaType = getMediaTypeFromFilter(filter);
+        mGutenbergBridgeJS2Parent.getOtherMediaPickerOptions(otherMediaOptionsReceivedCallback, mediaType);
+    }
+
+    private OtherMediaOptionsReceivedCallback getNewOtherMediaReceivedCallback(final Callback jsCallback) {
+        return new OtherMediaOptionsReceivedCallback() {
+            @Override public void onOtherMediaOptionsReceived(ArrayList<MediaOption> mediaOptions) {
+                WritableArray writableArray = new WritableNativeArray();
+                for (MediaOption mediaOption : mediaOptions) {
+                    writableArray.pushMap(mediaOption.toMap());
+                }
+                jsCallback.invoke(writableArray);
+            }
+        };
     }
 
     private MediaSelectedCallback getNewMediaSelectedCallback(final Boolean allowMultipleSelection, final Callback jsCallback) {

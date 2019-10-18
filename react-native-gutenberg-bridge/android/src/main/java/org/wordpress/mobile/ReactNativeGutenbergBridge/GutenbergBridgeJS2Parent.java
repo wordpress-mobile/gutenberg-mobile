@@ -3,6 +3,9 @@ package org.wordpress.mobile.ReactNativeGutenbergBridge;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableMap;
 
+import org.wordpress.mobile.WPAndroidGlue.MediaOption;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public interface GutenbergBridgeJS2Parent {
@@ -19,6 +22,10 @@ public interface GutenbergBridgeJS2Parent {
 
     interface MediaSelectedCallback {
         void onMediaSelected(List<RNMedia> mediaList);
+    }
+
+    interface OtherMediaOptionsReceivedCallback {
+        void onOtherMediaOptionsReceived(ArrayList<MediaOption> mediaList);
     }
 
     interface MediaUploadCallback {
@@ -95,4 +102,10 @@ public interface GutenbergBridgeJS2Parent {
     void editorDidEmitLog(String message, LogLevel logLevel);
 
     void editorDidAutosave();
+
+    void getOtherMediaPickerOptions(OtherMediaOptionsReceivedCallback otherMediaOptionsReceivedCallback, MediaType mediaType);
+
+    void requestMediaPickFromStockMedia(MediaSelectedCallback mediaSelectedCallback, Boolean allowMultipleSelection);
+
+    void requestMediaPickFromGiphyMedia(MediaUploadCallback mediaSelectedCallback, Boolean allowMultipleSelection);
 }
