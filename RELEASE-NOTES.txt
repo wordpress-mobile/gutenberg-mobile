@@ -1,6 +1,6 @@
 1.16.0
 ------
-* Add support for giphy and pexel images
+* Add support for giphy and pexels images
 
 1.15.0
 ------
