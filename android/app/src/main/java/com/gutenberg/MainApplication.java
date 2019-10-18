@@ -78,6 +78,21 @@ public class MainApplication extends Application implements ReactApplication {
             }
 
             @Override
+            public void getOtherMediaPickerOptions(OtherMediaOptionsReceivedCallback otherMediaOptionsReceivedCallback, MediaType mediaType) {
+
+            }
+
+            @Override
+            public void requestMediaPickFromStockMedia(MediaSelectedCallback mediaSelectedCallback, Boolean allowMultipleSelection) {
+
+            }
+
+            @Override
+            public void requestMediaPickFromGiphyMedia(MediaUploadCallback mediaSelectedCallback, Boolean allowMultipleSelection) {
+
+            }
+
+            @Override
             public void editorDidEmitLog(String message, LogLevel logLevel) {
                 switch (logLevel) {
                     case TRACE:
