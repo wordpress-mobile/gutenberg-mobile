@@ -39,6 +39,29 @@ describe( 'Gutenberg Editor tests for Paragraph Block', () => {
 		editorPage = new EditorPage( driver );
 	} );
 
+	afterEach( async () => {
+		await this.removeAllBlocks();
+		/* let blockExist = await editorPage.hasBlockAtPosition( 1 );
+		while ( blockExist ) {
+			if ( await editorPage.hasBlockAtPosition( 2 ) ) {
+				if ( isAndroid() ) {
+					const blockElement = await editorPage.getBlockAtPosition( 1 , '' );
+					await blockElement.click();
+					await editorPage.removeBlockAtPosition( 1 );
+				} else {
+					const blockElement = await editorPage.getBlockAtPosition( 2 , '' );
+					await blockElement.click();
+					await swipeUp( driver, blockElement );
+					await editorPage.removeBlockAtPosition( 2 );
+				}
+				blockExist = true;
+			} else {
+				await editorPage.removeBlockAtPosition( 1 );
+				return;
+			}
+		} */
+	} );
+
 	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );
 	} );
@@ -50,7 +73,6 @@ describe( 'Gutenberg Editor tests for Paragraph Block', () => {
 			await paragraphBlockElement.click();
 		}
 		await editorPage.sendTextToParagraphBlock( paragraphBlockElement, testData.shortText );
-		await editorPage.removeParagraphBlockAtPosition( 1 );
 	} );
 
 	it( 'should be able to split one paragraph block into two', async () => {
@@ -71,9 +93,6 @@ describe( 'Gutenberg Editor tests for Paragraph Block', () => {
 		expect( text0 ).not.toBe( '' );
 		expect( text1 ).not.toBe( '' );
 		expect( testData.shortText ).toMatch( new RegExp( `${ text0 + text1 }|${ text0 } ${ text1 }` ) );
-
-		await editorPage.removeParagraphBlockAtPosition( 2 );
-		await editorPage.removeParagraphBlockAtPosition( 1 );
 	} );
 
 	it( 'should be able to merge 2 paragraph blocks into 1', async () => {
@@ -103,7 +122,6 @@ describe( 'Gutenberg Editor tests for Paragraph Block', () => {
 		expect( text0 + text1 ).toMatch( text );
 
 		expect( await editorPage.hasParagraphBlockAtPosition( 2 ) ).toBe( false );
-		await editorPage.removeParagraphBlockAtPosition( 1 );
 	} );
 
 	it( 'should be able to create a post with multiple paragraph blocks', async () => {
@@ -113,10 +131,6 @@ describe( 'Gutenberg Editor tests for Paragraph Block', () => {
 			await paragraphBlockElement.click();
 		}
 		await editorPage.sendTextToParagraphBlockAtPosition( 1, testData.longText );
-
-		for ( let i = 3; i > 0; i-- ) {
-			await editorPage.removeParagraphBlockAtPosition( i );
-		}
 	} );
 
 	afterAll( async () => {
