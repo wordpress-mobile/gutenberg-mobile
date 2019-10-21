@@ -107,9 +107,11 @@ public class WPAndroidGlueCode {
     public interface OnMediaLibraryButtonListener {
         void onMediaLibraryImageButtonClicked(boolean allowMultipleSelection);
         void onMediaLibraryVideoButtonClicked(boolean allowMultipleSelection);
+        void onMediaLibraryMediaButtonClicked(boolean allowMultipleSelection);
         void onUploadPhotoButtonClicked(boolean allowMultipleSelection);
         void onCapturePhotoButtonClicked();
         void onUploadVideoButtonClicked(boolean allowMultipleSelection);
+        void onUploadMediaButtonClicked(boolean allowMultipleSelection);
         void onCaptureVideoButtonClicked();
         void onRetryUploadForMediaClicked(int mediaId);
         void onCancelUploadForMediaClicked(int mediaId);
@@ -158,6 +160,8 @@ public class WPAndroidGlueCode {
                     mOnMediaLibraryButtonListener.onMediaLibraryImageButtonClicked(allowMultipleSelection);
                 } else if (mediaType == MediaType.VIDEO) {
                     mOnMediaLibraryButtonListener.onMediaLibraryVideoButtonClicked(allowMultipleSelection);
+                } else if (mediaType == MediaType.MEDIA) {
+                    mOnMediaLibraryButtonListener.onMediaLibraryMediaButtonClicked(allowMultipleSelection);
                 }
             }
 
@@ -169,8 +173,10 @@ public class WPAndroidGlueCode {
                     mOnMediaLibraryButtonListener.onUploadPhotoButtonClicked(allowMultipleSelection);
                 } else if (mediaType == MediaType.VIDEO) {
                     mOnMediaLibraryButtonListener.onUploadVideoButtonClicked(allowMultipleSelection);
-                }
+                } else if (mediaType == MediaType.MEDIA) {
+                mOnMediaLibraryButtonListener.onUploadMediaButtonClicked(allowMultipleSelection);
             }
+        }
 
             @Override
             public void requestMediaPickerFromDeviceCamera(MediaUploadCallback mediaUploadCallback, MediaType mediaType) {
@@ -512,11 +518,16 @@ public class WPAndroidGlueCode {
         return "";
     }
 
+    private String getMediaType(final boolean isVideo) {
+        return isVideo ? "video" : "image";
+    }
+
     public void appendMediaFile(int mediaId, final String mediaUrl, final boolean isVideo) {
         if (mPendingMediaSelectedCallback != null && mMediaPickedByUserOnBlock) {
+            String mediaType = getMediaType(isVideo);
             mMediaPickedByUserOnBlock = false;
             List<RNMedia> mediaList = new ArrayList<>();
-            mediaList.add(new Media(mediaId, mediaUrl));
+            mediaList.add(new Media(mediaId, mediaUrl, mediaType));
             mPendingMediaSelectedCallback.onMediaSelected(mediaList);
             mPendingMediaSelectedCallback = null;
         } else {
@@ -537,6 +548,7 @@ public class WPAndroidGlueCode {
                 mReactRootView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
             }
         }
+        mRnReactNativeGutenbergBridgePackage.getRNReactNativeGutenbergBridgeModule().toggleEditorMode();
     }
 
     public void appendMediaFiles(ArrayList<Media> mediaList) {
@@ -558,9 +570,10 @@ public class WPAndroidGlueCode {
 
     public void appendUploadMediaFile(final int mediaId, final String mediaUri, final boolean isVideo) {
        if (isMediaUploadCallbackRegistered() && mMediaPickedByUserOnBlock) {
+           String mediaType = getMediaType(isVideo);
            mMediaPickedByUserOnBlock = false;
            List<RNMedia> mediaList = new ArrayList<>();
-           mediaList.add(new Media(mediaId, mediaUri));
+           mediaList.add(new Media(mediaId, mediaUri, mediaType));
            mPendingMediaUploadCallback.onUploadMediaFileSelected(mediaList);
        } else {
            // we can assume we're being passed a new image from share intent as there was no selectMedia callback
@@ -573,7 +586,7 @@ public class WPAndroidGlueCode {
             mMediaPickedByUserOnBlock = false;
             List<RNMedia> rnMediaList = new ArrayList<>();
             for (Media media : mediaList) {
-                rnMediaList.add(new Media(media.getId(), media.getUrl()));
+                rnMediaList.add(new Media(media.getId(), media.getUrl(), media.getType()));
             }
             mPendingMediaUploadCallback.onUploadMediaFileSelected(rnMediaList);
             mPendingMediaUploadCallback = null;
@@ -582,7 +595,7 @@ public class WPAndroidGlueCode {
 
     private void sendOrDeferAppendMediaSignal(final int mediaId, final String mediaUri, final boolean isVideo) {
         // if editor is mounted, let's append the media file
-        String mediaType = isVideo ? "video" : "image";
+        String mediaType = getMediaType(isVideo);
         if (mIsEditorMounted) {
             if (!TextUtils.isEmpty(mediaUri) && mediaId > 0) {
                 // send signal to JS
