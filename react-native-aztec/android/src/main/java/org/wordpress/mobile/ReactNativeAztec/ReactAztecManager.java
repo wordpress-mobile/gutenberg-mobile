@@ -210,14 +210,20 @@ public class ReactAztecManager extends BaseViewManager<ReactAztecText, LayoutSha
         view.fromHtml(text, true);
         view.enableOnSelectionListener();
         view.setIsSettingTextFromJS(false);
-        updateSelectionIfNeeded(view, selection);
+        updateSelectionIfNeeded(view, selection, text.equals("<p>Crash</p>"));
     }
 
-    private void updateSelectionIfNeeded(ReactAztecText view, @Nullable ReadableMap selection) {
+    private void updateSelectionIfNeeded(ReactAztecText view, @Nullable ReadableMap selection, boolean crash)
+            throws ReactAztecSpanIndexOutOfBoundsException {
         if ( selection != null ) {
             int start = selection.getInt("start");
             int end = selection.getInt("end");
-            view.setSelection(start, end);
+            try {
+                view.setSelection(start, end);
+                if (crash) throw new IndexOutOfBoundsException("Danilo TEst");
+            } catch (IndexOutOfBoundsException IOBException) {
+                throw new ReactAztecSpanIndexOutOfBoundsException(IOBException);
+            }
         }
     }
 

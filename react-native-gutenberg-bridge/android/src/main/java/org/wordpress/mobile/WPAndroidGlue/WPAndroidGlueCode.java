@@ -22,6 +22,8 @@ import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactInstanceManagerBuilder;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.ReactRootView;
+import com.facebook.react.bridge.DefaultNativeModuleCallExceptionHandler;
+import com.facebook.react.bridge.JSApplicationIllegalArgumentException;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.common.LifecycleState;
@@ -33,7 +35,9 @@ import com.github.godness84.RNRecyclerViewList.RNRecyclerviewListPackage;
 import com.horcrux.svg.SvgPackage;
 
 import org.wordpress.android.util.AppLog;
+import org.wordpress.aztec.util.AztecLog;
 import org.wordpress.mobile.ReactNativeAztec.ReactAztecPackage;
+import org.wordpress.mobile.ReactNativeAztec.ReactAztecSpanIndexOutOfBoundsException;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaSelectedCallback;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaUploadCallback;
@@ -41,6 +45,7 @@ import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.
 import org.wordpress.mobile.ReactNativeGutenbergBridge.RNReactNativeGutenbergBridgePackage;
 
 import java.lang.ref.WeakReference;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -87,6 +92,9 @@ public class WPAndroidGlueCode {
 
     private static OkHttpHeaderInterceptor sAddCookiesInterceptor = new OkHttpHeaderInterceptor();
     private static OkHttpClient sOkHttpClient = new OkHttpClient.Builder().addInterceptor(sAddCookiesInterceptor).build();
+
+    private AztecLog.ExternalLogger mlogger;
+
 
     public void onCreate(Context context) {
         SoLoader.init(context, /* native exopackage */ false);
@@ -284,6 +292,27 @@ public class WPAndroidGlueCode {
                                     .addPackages(getPackages())
                                     .setUseDeveloperSupport(isDebug)
                                     .setInitialLifecycleState(LifecycleState.BEFORE_CREATE);
+
+        if (!isDebug) {
+            builder.setNativeModuleCallExceptionHandler(new DefaultNativeModuleCallExceptionHandler() {
+                @Override
+                public void handleException(Exception e) {
+                    if (e instanceof JSApplicationIllegalArgumentException
+                        && e.getCause() instanceof InvocationTargetException) {
+                        Throwable targetEX = ((InvocationTargetException) e.getCause()).getTargetException();
+                        if (targetEX instanceof ReactAztecSpanIndexOutOfBoundsException
+                            && mlogger != null) {
+                            // log the error and eat it. do not crash the app
+                            mlogger.logException(
+                                    ((ReactAztecSpanIndexOutOfBoundsException) targetEX).getOriginalException()
+                            );
+                            return;
+                        }
+                    }
+                    super.handleException(e);
+                }
+            });
+        }
         if (!buildGutenbergFromSource) {
             builder.setBundleAssetName("index.android.bundle");
         }
@@ -649,6 +678,10 @@ public class WPAndroidGlueCode {
 
     private boolean isMediaUploadCallbackRegistered() {
         return mPendingMediaUploadCallback != null;
+    }
+
+    public void setExternalLogger(AztecLog.ExternalLogger logger) {
+        mlogger = logger;
     }
 }
 
