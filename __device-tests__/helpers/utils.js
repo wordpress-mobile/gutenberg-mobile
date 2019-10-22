@@ -109,10 +109,13 @@ const getIOSDevices = async () => {
 // Initialises the driver and desired capabilities for appium
 const setupDriver = async () => {
 	const branch = process.env.CIRCLE_BRANCH || '';
+	let mID = process.env.TEST_ID || -1;
+	mID += 1;
+	process.env.TEST_ID = mID;
 
 	if ( isLocalEnvironment() ) {
 		try {
-			appiumProcess = await AppiumLocal.start( localAppiumPort );
+			appiumProcess = await AppiumLocal.start( localAppiumPort, mID );
 		} catch ( err ) {
 			// Ignore error here, Appium is probably already running (Appium desktop has its own server for instance)
 			// eslint-disable-next-line no-console
