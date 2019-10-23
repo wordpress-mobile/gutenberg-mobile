@@ -13,14 +13,10 @@ import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
-import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaSelectedCallback;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaType;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.OtherMediaOptionsReceivedCallback;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.RNMedia;
 import org.wordpress.mobile.WPAndroidGlue.MediaOption;
-
-import static org.wordpress.mobile.WPAndroidGlue.WPAndroidGlueCode.MEDIA_SOURCE_GIPHY_MEDIA;
-import static org.wordpress.mobile.WPAndroidGlue.WPAndroidGlueCode.MEDIA_SOURCE_STOCK_MEDIA;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,7 +112,7 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     public void requestMediaPickFrom(String mediaSource, ReadableArray filter, Boolean allowMultipleSelection, final Callback onUploadMediaSelected) {
         MediaType mediaType = getMediaTypeFromFilter(filter);
         if (mediaSource.equals(MEDIA_SOURCE_MEDIA_LIBRARY)) {
-            mGutenbergBridgeJS2Parent.requestMediaPickFromMediaLibrary(getNewMediaSelectedCallback(allowMultipleSelection, onUploadMediaSelected), allowMultipleSelection, mediaType);
+            mGutenbergBridgeJS2Parent.requestMediaPickFromMediaLibrary(getNewUploadMediaCallback(allowMultipleSelection, onUploadMediaSelected), allowMultipleSelection, mediaType);
         } else if (mediaSource.equals(MEDIA_SOURCE_DEVICE_LIBRARY)) {
             mGutenbergBridgeJS2Parent.requestMediaPickFromDeviceLibrary(getNewUploadMediaCallback(allowMultipleSelection, onUploadMediaSelected), allowMultipleSelection, mediaType);
         } else if (mediaSource.equals(MEDIA_SOURCE_DEVICE_CAMERA)) {
@@ -126,13 +122,7 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
 
     @ReactMethod
     public void requesOtherMediaPickFrom(String mediaSource, Boolean allowMultipleSelection, final Callback onUploadMediaSelected) {
-        if (mediaSource.equals(MEDIA_SOURCE_STOCK_MEDIA)) {
-            // For media stock we don't have information about upload process
-            // which means that we need to listen for MediaSelectedCallback ( and not  MediaUploadCallback )
-            mGutenbergBridgeJS2Parent.requestMediaPickFromStockMedia(getNewMediaSelectedCallback(allowMultipleSelection, onUploadMediaSelected), allowMultipleSelection);
-        } else if (mediaSource.equals(MEDIA_SOURCE_GIPHY_MEDIA)) {
-            mGutenbergBridgeJS2Parent.requestMediaPickFromGiphyMedia(getNewUploadMediaCallback(allowMultipleSelection, onUploadMediaSelected), allowMultipleSelection);
-        }
+        mGutenbergBridgeJS2Parent.requestMediaPickFrom(mediaSource, getNewUploadMediaCallback(allowMultipleSelection, onUploadMediaSelected), allowMultipleSelection);
     }
 
     private MediaType getMediaTypeFromFilter(ReadableArray filter) {
@@ -154,7 +144,7 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
 
     @ReactMethod
     public void requestMediaImport(String url, final Callback onUploadMediaSelected) {
-        mGutenbergBridgeJS2Parent.requestMediaImport(url, getNewMediaSelectedCallback(false, onUploadMediaSelected));
+        mGutenbergBridgeJS2Parent.requestMediaImport(url, getNewUploadMediaCallback(false, onUploadMediaSelected));
     }
 
     @ReactMethod
@@ -202,22 +192,6 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
                     writableArray.pushMap(mediaOption.toMap());
                 }
                 jsCallback.invoke(writableArray);
-            }
-        };
-    }
-
-    private MediaSelectedCallback getNewMediaSelectedCallback(final Boolean allowMultipleSelection, final Callback jsCallback) {
-        return new MediaSelectedCallback() {
-            @Override public void onMediaSelected(List<RNMedia> mediaList) {
-                if(allowMultipleSelection) {
-                    WritableArray writableArray = new WritableNativeArray();
-                    for (RNMedia media : mediaList) {
-                        writableArray.pushMap(media.toMap());
-                    }
-                    jsCallback.invoke(writableArray);
-                } else {
-                    jsCallback.invoke(mediaList.get(0).toMap());
-                }
             }
         };
     }

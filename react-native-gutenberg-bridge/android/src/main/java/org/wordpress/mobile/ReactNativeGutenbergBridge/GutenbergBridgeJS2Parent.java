@@ -20,10 +20,6 @@ public interface GutenbergBridgeJS2Parent {
 
     void editorDidMount(ReadableArray unsupportedBlockNames);
 
-    interface MediaSelectedCallback {
-        void onMediaSelected(List<RNMedia> mediaList);
-    }
-
     interface OtherMediaOptionsReceivedCallback {
         void onOtherMediaOptionsReceived(ArrayList<MediaOption> mediaList);
     }
@@ -83,13 +79,13 @@ public interface GutenbergBridgeJS2Parent {
         }
     }
 
-    void requestMediaPickFromMediaLibrary(MediaSelectedCallback mediaSelectedCallback, Boolean allowMultipleSelection, MediaType mediaType);
+    void requestMediaPickFromMediaLibrary(MediaUploadCallback mediaSelectedCallback, Boolean allowMultipleSelection, MediaType mediaType);
 
     void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection, MediaType mediaType);
 
     void requestMediaPickerFromDeviceCamera(MediaUploadCallback mediaUploadCallback, MediaType mediaType);
 
-    void requestMediaImport(String url, MediaSelectedCallback mediaSelectedCallback);
+    void requestMediaImport(String url, MediaUploadCallback mediaSelectedCallback);
 
     void mediaUploadSync(MediaUploadCallback mediaUploadCallback);
 
@@ -105,7 +101,5 @@ public interface GutenbergBridgeJS2Parent {
 
     void getOtherMediaPickerOptions(OtherMediaOptionsReceivedCallback otherMediaOptionsReceivedCallback, MediaType mediaType);
 
-    void requestMediaPickFromStockMedia(MediaSelectedCallback mediaSelectedCallback, Boolean allowMultipleSelection);
-
-    void requestMediaPickFromGiphyMedia(MediaUploadCallback mediaSelectedCallback, Boolean allowMultipleSelection);
+    void requestMediaPickFrom(String mediaSource, MediaUploadCallback mediaSelectedCallback, Boolean allowMultipleSelection);
 }
