@@ -79,13 +79,13 @@ public interface GutenbergBridgeJS2Parent {
         }
     }
 
-    void requestMediaPickFromMediaLibrary(MediaUploadCallback mediaSelectedCallback, Boolean allowMultipleSelection, MediaType mediaType);
+    void requestMediaPickFromMediaLibrary(MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection, MediaType mediaType);
 
     void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection, MediaType mediaType);
 
     void requestMediaPickerFromDeviceCamera(MediaUploadCallback mediaUploadCallback, MediaType mediaType);
 
-    void requestMediaImport(String url, MediaUploadCallback mediaSelectedCallback);
+    void requestMediaImport(String url, MediaUploadCallback mediaUploadCallback);
 
     void mediaUploadSync(MediaUploadCallback mediaUploadCallback);
 
@@ -101,5 +101,5 @@ public interface GutenbergBridgeJS2Parent {
 
     void getOtherMediaPickerOptions(OtherMediaOptionsReceivedCallback otherMediaOptionsReceivedCallback, MediaType mediaType);
 
-    void requestMediaPickFrom(String mediaSource, MediaUploadCallback mediaSelectedCallback, Boolean allowMultipleSelection);
+    void requestMediaPickFrom(String mediaSource, MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection);
 }
