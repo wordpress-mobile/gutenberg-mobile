@@ -93,8 +93,8 @@ export function getOtherMediaOptions( filter, callback ) {
 	return RNReactNativeGutenbergBridge.getOtherMediaOptions( filter, callback );
 }
 
-export function requesOtherMediaPickFrom( mediaSource, multiple, callback ) {
-	return RNReactNativeGutenbergBridge.requesOtherMediaPickFrom( mediaSource, multiple, callback );
+export function requestOtherMediaPickFrom( mediaSource, multiple, callback ) {
+	return RNReactNativeGutenbergBridge.requestOtherMediaPickFrom( mediaSource, multiple, callback );
 }
 
 export default RNReactNativeGutenbergBridge;
