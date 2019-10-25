@@ -49,9 +49,8 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
     }
     
     @objc
-    func getOtherMediaOptions(filter: [String]?, callback: @escaping RCTResponseSenderBlock) {
+    func getOtherMediaOptions(_ filter: [String]?, callback: @escaping RCTResponseSenderBlock) {
         //TODO implement me
-        callback(nil)
     }
 
     @objc
