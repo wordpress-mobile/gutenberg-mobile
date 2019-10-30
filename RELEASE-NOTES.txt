@@ -1,3 +1,8 @@
+1.16.0
+------
+* Add support for pexels images
+* Add left, center, and right image alignment controls
+
 1.15.0
 ------
 * Fix issue when multiple media selection adds only one image or video block on Android
