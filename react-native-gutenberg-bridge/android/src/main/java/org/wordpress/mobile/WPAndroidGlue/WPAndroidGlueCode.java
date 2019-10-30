@@ -84,6 +84,8 @@ public class WPAndroidGlueCode {
     private static final String PROP_NAME_INITIAL_HTML_MODE_ENABLED = "initialHtmlModeEnabled";
     private static final String PROP_NAME_LOCALE = "locale";
     private static final String PROP_NAME_TRANSLATIONS = "translations";
+    private static final String PROP_NAME_SITE_SLUG = "siteSlug";
+    private static final String PROP_NAME_EXTRA_HTTP_HEADERS = "extraHTTPHeaders";
 
     private static OkHttpHeaderInterceptor sAddCookiesInterceptor = new OkHttpHeaderInterceptor();
     private static OkHttpClient sOkHttpClient = new OkHttpClient.Builder().addInterceptor(sAddCookiesInterceptor).build();
@@ -274,7 +276,9 @@ public class WPAndroidGlueCode {
 
     public void onCreateView(Context initContext, boolean htmlModeEnabled,
                              Application application, boolean isDebug, boolean buildGutenbergFromSource,
-                             boolean isNewPost, String localeString, Bundle translations) {
+                             String localeString, Bundle translations,
+                             String siteSlug,
+                             Bundle extraHttpHeaders) {
         mReactRootView = new ReactRootView(new MutableContextWrapper(initContext));
 
         ReactInstanceManagerBuilder builder =
@@ -303,6 +307,8 @@ public class WPAndroidGlueCode {
         initialProps.putBoolean(PROP_NAME_INITIAL_HTML_MODE_ENABLED, htmlModeEnabled);
         initialProps.putString(PROP_NAME_LOCALE, localeString);
         initialProps.putBundle(PROP_NAME_TRANSLATIONS, translations);
+        initialProps.putString(PROP_NAME_SITE_SLUG, siteSlug);
+        initialProps.putBundle(PROP_NAME_EXTRA_HTTP_HEADERS, extraHttpHeaders);
 
         // The string here (e.g. "MyReactNativeApp") has to match
         // the string in AppRegistry.registerComponent() in index.js
