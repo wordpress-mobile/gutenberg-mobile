@@ -53,7 +53,6 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 
-
 public class WPAndroidGlueCode {
     private ReactRootView mReactRootView;
     private ReactInstanceManager mReactInstanceManager;
@@ -78,14 +77,6 @@ public class WPAndroidGlueCode {
     private boolean mShouldUpdateContent;
     private CountDownLatch mGetContentCountDownLatch;
     private WeakReference<View> mLastFocusedView = null;
-
-    private static final String PROP_NAME_INITIAL_DATA = "initialData";
-    private static final String PROP_NAME_INITIAL_TITLE = "initialTitle";
-    private static final String PROP_NAME_INITIAL_HTML_MODE_ENABLED = "initialHtmlModeEnabled";
-    private static final String PROP_NAME_LOCALE = "locale";
-    private static final String PROP_NAME_TRANSLATIONS = "translations";
-    private static final String PROP_NAME_SITE_SLUG = "siteSlug";
-    private static final String PROP_NAME_EXTRA_HTTP_HEADERS = "extraHTTPHeaders";
 
     private static OkHttpHeaderInterceptor sAddCookiesInterceptor = new OkHttpHeaderInterceptor();
     private static OkHttpClient sOkHttpClient = new OkHttpClient.Builder().addInterceptor(sAddCookiesInterceptor).build();
@@ -274,11 +265,11 @@ public class WPAndroidGlueCode {
                 .newBuilder(mReactRootView.getContext(), client).build();
     }
 
-    public void onCreateView(Context initContext, boolean htmlModeEnabled,
-                             Application application, boolean isDebug, boolean buildGutenbergFromSource,
-                             String localeString, Bundle translations,
-                             String siteSlug,
-                             Bundle extraHttpHeaders) {
+    public void onCreateView(Context initContext,
+                             Application application,
+                             boolean isDebug,
+                             boolean buildGutenbergFromSource,
+                             InitialProps initialProps) {
         mReactRootView = new ReactRootView(new MutableContextWrapper(initContext));
 
         ReactInstanceManagerBuilder builder =
@@ -298,21 +289,14 @@ public class WPAndroidGlueCode {
                 mReactContext = context;
             }
         });
-        Bundle initialProps = mReactRootView.getAppProperties();
-        if (initialProps == null) {
-            initialProps = new Bundle();
-        }
-        initialProps.putString(PROP_NAME_INITIAL_DATA, "");
-        initialProps.putString(PROP_NAME_INITIAL_TITLE, "");
-        initialProps.putBoolean(PROP_NAME_INITIAL_HTML_MODE_ENABLED, htmlModeEnabled);
-        initialProps.putString(PROP_NAME_LOCALE, localeString);
-        initialProps.putBundle(PROP_NAME_TRANSLATIONS, translations);
-        initialProps.putString(PROP_NAME_SITE_SLUG, siteSlug);
-        initialProps.putBundle(PROP_NAME_EXTRA_HTTP_HEADERS, extraHttpHeaders);
+
+
+        Bundle previousProps = mReactRootView.getAppProperties();
+        Bundle initialPropsBundle = initialProps.toBundle(previousProps);
 
         // The string here (e.g. "MyReactNativeApp") has to match
         // the string in AppRegistry.registerComponent() in index.js
-        mReactRootView.setAppProperties(initialProps);
+        mReactRootView.setAppProperties(initialPropsBundle);
     }
 
     public void attachToContainer(ViewGroup viewGroup, OnMediaLibraryButtonListener onMediaLibraryButtonListener,
@@ -448,19 +432,22 @@ public class WPAndroidGlueCode {
     }
 
     private void initContent(String title, String content) {
-        Bundle appProps = mReactRootView.getAppProperties();
-        if (appProps == null) {
-            appProps = new Bundle();
-        }
+
+        InitialProps initialProps = new InitialProps();
+
         if (content != null) {
-            appProps.putString(PROP_NAME_INITIAL_DATA, content);
+            initialProps.setData(content);
             mContentHtml = content;
         }
+
         if (title != null) {
-            appProps.putString(PROP_NAME_INITIAL_TITLE, title);
+            initialProps.setTitle(title);
             mTitle = title;
         }
-        mReactRootView.startReactApplication(mReactInstanceManager, "gutenberg", appProps);
+
+        Bundle previousProps = mReactRootView.getAppProperties();
+        Bundle newProps = initialProps.toBundle(previousProps);
+        mReactRootView.startReactApplication(mReactInstanceManager, "gutenberg", newProps);
     }
 
     private void updateContent(String title, String content) {
