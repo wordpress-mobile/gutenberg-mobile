@@ -100,7 +100,7 @@ xdescribe( 'Gutenberg Editor tests for Block insertion', () => {
 			await editorPage.dismissKeyboard();
 		}
 
-		const titleElement = await editorPage.getTitleElement( { autoscroll: true } );
+		const titleElement = await editorPage.getTitleElement();
 		await titleElement.click();
 		await titleElement.click();
 
