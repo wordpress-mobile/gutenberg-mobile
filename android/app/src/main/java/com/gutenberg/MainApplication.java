@@ -1,6 +1,7 @@
 package com.gutenberg;
 
 import android.app.Application;
+import android.os.CountDownTimer;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
@@ -13,6 +14,7 @@ import com.horcrux.svg.SvgPackage;
 import org.wordpress.mobile.ReactNativeAztec.ReactAztecPackage;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.RNReactNativeGutenbergBridgePackage;
+import org.wordpress.mobile.WPAndroidGlue.Media;
 
 import com.github.godness84.RNRecyclerViewList.RNRecyclerviewListPackage;
 import com.facebook.react.ReactNativeHost;
@@ -31,80 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
     private RNReactNativeGutenbergBridgePackage mRnReactNativeGutenbergBridgePackage;
 
     private ReactNativeHost createReactNativeHost() {
-        mRnReactNativeGutenbergBridgePackage = new RNReactNativeGutenbergBridgePackage(new GutenbergBridgeJS2Parent() {
-            @Override
-            public void responseHtml(String title, String html, boolean changed) {
-            }
-
-            @Override
-            public void requestMediaImport(String url, MediaUploadCallback mediaUploadCallback) {
-            }
-
-            @Override
-            public void requestMediaPickerFromDeviceCamera(MediaUploadCallback mediaUploadCallback, MediaType mediaType) {
-            }
-
-            @Override
-            public void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection, MediaType mediaType) {
-            }
-
-            @Override
-            public void requestMediaPickFromMediaLibrary(MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection, MediaType mediaType) {
-            }
-
-
-            @Override
-            public void mediaUploadSync(MediaUploadCallback mediaUploadCallback) {
-            }
-
-            @Override
-            public void requestImageFailedRetryDialog(int mediaId) {
-            }
-
-            @Override
-            public void requestImageUploadCancelDialog(int mediaId) {
-            }
-
-            @Override
-            public void requestImageUploadCancel(int mediaId) {
-            }
-
-            @Override
-            public void editorDidMount(ReadableArray unsupportedBlockNames) {
-            }
-
-            @Override
-            public void editorDidAutosave() {
-            }
-
-            @Override
-            public void getOtherMediaPickerOptions(OtherMediaOptionsReceivedCallback otherMediaOptionsReceivedCallback, MediaType mediaType) {
-
-            }
-
-            @Override
-            public void requestMediaPickFrom(String mediaSource, MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection) {
-
-            }
-
-            @Override
-            public void editorDidEmitLog(String message, LogLevel logLevel) {
-                switch (logLevel) {
-                    case TRACE:
-                        Log.d(TAG, message);
-                        break;
-                    case INFO:
-                        Log.i(TAG, message);
-                        break;
-                    case WARN:
-                        Log.w(TAG, message);
-                        break;
-                    case ERROR:
-                        Log.e(TAG, message);
-                        break;
-                }
-            }
-        });
+        mRnReactNativeGutenbergBridgePackage = new RNReactNativeGutenbergBridgePackage(new FakeBridgeJS2Parent());
 
         return new ReactNativeHost(this) {
             @Override
