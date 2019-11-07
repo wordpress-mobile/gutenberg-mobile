@@ -577,7 +577,7 @@ public class WPAndroidGlueCode {
                 rnMediaList.add(new Media(media.getId(), media.getUrl(), media.getType()));
             }
             mPendingMediaUploadCallback.onUploadMediaFileSelected(rnMediaList);
-            mPendingMediaUploadCallback = null;
+//            mPendingMediaUploadCallback = null;
         }
     }
 
