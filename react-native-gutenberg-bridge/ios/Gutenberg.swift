@@ -46,13 +46,15 @@ public class Gutenberg: NSObject {
     }()
 
     private var initialProps: [String: Any]? {
-        return [
-            "initialData": dataSource.gutenbergInitialContent(),
-            "initialTitle": dataSource.gutenbergInitialTitle(),
-            "locale": dataSource.gutenbergLocale(),
-            "translations": dataSource.gutenbergTranslations(),
-            "postType": dataSource.gutenbergPostType(),
-        ];
+        var initialProps = [String: Any]()
+
+        initialProps["initialData"] = dataSource.gutenbergInitialContent()
+        initialProps["initialTitle"] = dataSource.gutenbergInitialTitle()
+        initialProps["locale"] = dataSource.gutenbergLocale()
+        initialProps["translations"] = dataSource.gutenbergTranslations()
+        initialProps["postType"] = dataSource.gutenbergPostType()
+
+        return initialProps
     }
 
     public init(dataSource: GutenbergBridgeDataSource, extraModules: [RCTBridgeModule] = []) {
