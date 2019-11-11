@@ -57,21 +57,19 @@ export class RootComponent extends React.Component {
 	}
 
 	render() {
-		const { initialHtmlModeEnabled } = this.props;
-		let initialData = this.props.initialData;
-		let initialTitle = this.props.initialTitle;
-		if ( initialData === undefined && __DEV__ ) {
-			initialData = initialHtml;
-		}
-		if ( initialTitle === undefined ) {
-			initialTitle = 'Welcome to Gutenberg!';
-		}
+		const {
+			initialHtmlModeEnabled,
+			initialData = __DEV__ && initialHtml,
+			initialTitle = 'Welcome to Gutenberg!',
+			postType = 'post',
+		} = this.props;
 		const Editor = require( '@wordpress/edit-post' ).Editor;
 		return (
 			<Editor
 				initialHtml={ initialData }
 				initialHtmlModeEnabled={ initialHtmlModeEnabled }
 				initialTitle={ initialTitle }
+				postType={ postType }
 			/>
 		);
 	}
