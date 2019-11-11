@@ -64,12 +64,16 @@ export class RootComponent extends React.Component {
 			postType = 'post',
 		} = this.props;
 		const Editor = require( '@wordpress/edit-post' ).Editor;
+		const settings = {
+			__experimentalEnablePageTemplates: !! __DEV__,
+		};
 		return (
 			<Editor
 				initialHtml={ initialData }
 				initialHtmlModeEnabled={ initialHtmlModeEnabled }
 				initialTitle={ initialTitle }
 				postType={ postType }
+				settings={ settings }
 			/>
 		);
 	}
