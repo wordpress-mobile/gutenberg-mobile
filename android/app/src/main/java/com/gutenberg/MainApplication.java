@@ -1,6 +1,8 @@
 package com.gutenberg;
 
+import android.app.Activity;
 import android.app.Application;
+import android.content.DialogInterface;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
@@ -23,6 +25,8 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
+
 public class MainApplication extends Application implements ReactApplication {
 
     private static final String TAG = "MainApplication";
@@ -34,6 +38,22 @@ public class MainApplication extends Application implements ReactApplication {
         mRnReactNativeGutenbergBridgePackage = new RNReactNativeGutenbergBridgePackage(new GutenbergBridgeJS2Parent() {
             @Override
             public void responseHtml(String title, String html, boolean changed) {
+                Activity act = getReactNativeHost().getReactInstanceManager().getCurrentReactContext().getCurrentActivity();
+                act.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        AlertDialog alertDialog = new AlertDialog.Builder(act).create();
+                        alertDialog.setTitle("Response html");
+                        alertDialog.setMessage("hasChanges: " + changed + "\n\nTitle: " + title + "\n\nContent follows:\n" + html);
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
+                });
             }
 
             @Override
@@ -148,6 +168,13 @@ public class MainApplication extends Application implements ReactApplication {
 
     private void createCustomDevOptions(ReactNativeHost reactNativeHost) {
         DevSupportManager devSupportManager = reactNativeHost.getReactInstanceManager().getDevSupportManager();
+
+        devSupportManager.addCustomDevOption("Get html", new DevOptionHandler() {
+            @Override
+            public void onOptionSelected() {
+                mRnReactNativeGutenbergBridgePackage.getRNReactNativeGutenbergBridgeModule().getHtmlFromJS();
+            }
+        });
 
         devSupportManager.addCustomDevOption("Show html", new DevOptionHandler() {
             @Override
