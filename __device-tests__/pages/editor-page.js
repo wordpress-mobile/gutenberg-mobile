@@ -85,7 +85,10 @@ export default class EditorPage {
 	}
 
 	async removeAllBlocks() {
-		let blockExist = await this.hasBlockAtPosition( 1 );
+		const blockElement = await this.hasBlockAtPosition( 1 );
+		await blockElement.click(true);
+		await this.removeBlockAtPosition( 1 );
+		/* let blockExist = await this.hasBlockAtPosition( 1 );
 		while ( blockExist ) {
 			if ( await this.hasBlockAtPosition( 2 ) ) {
 				if ( isAndroid() ) {
@@ -103,7 +106,7 @@ export default class EditorPage {
 				await this.removeBlockAtPosition( 1 );
 				return;
 			}
-		}
+		} */
 	}
 
 	async getLastBlockVisible() {
