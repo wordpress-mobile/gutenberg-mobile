@@ -38,13 +38,8 @@ describe( 'Gutenberg Editor tests for List block', () => {
 	} );
 
 	afterEach( async () => {
-<<<<<<< HEAD
         await editorPage.removeBlocks();
     } );
-=======
-		await editorPage.removeBlocks();
-	} );
->>>>>>> 21d935cc80dc23beb5bab59a9b85e9ce4e0f3223
 
 	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );
