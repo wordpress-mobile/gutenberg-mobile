@@ -40,8 +40,8 @@ describe( 'Gutenberg Editor Image Block tests', () => {
 	} );
 
 	afterEach( async () => {
-        await editorPage.removeBlocks();
-    } );
+		await editorPage.removeBlocks();
+	} );
 
 	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );

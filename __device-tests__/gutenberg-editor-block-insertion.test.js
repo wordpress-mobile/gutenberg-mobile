@@ -39,8 +39,8 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 	} );
 
 	afterEach( async () => {
-        await editorPage.removeBlocks();
-    } );
+		await editorPage.removeBlocks();
+	} );
 
 	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );
