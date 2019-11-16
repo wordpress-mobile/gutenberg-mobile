@@ -39,8 +39,13 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 	} );
 
 	afterEach( async () => {
+<<<<<<< HEAD
         await editorPage.removeBlocks();
     } );
+=======
+		await editorPage.removeBlocks();
+	} );
+>>>>>>> 21d935cc80dc23beb5bab59a9b85e9ce4e0f3223
 
 	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );
@@ -98,7 +103,6 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 			await paragraphBlockElement.click();
 		}
 		await editorPage.sendTextToParagraphBlockAtPosition( 1, testData.longText );
-		// Should have 3 paragraph blocks at this point
 
 		if ( isAndroid() ) {
 			await editorPage.dismissKeyboard();

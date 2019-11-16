@@ -50,8 +50,13 @@ describe( 'Gutenberg Editor paste tests', () => {
 	} );
 
 	afterEach( async () => {
+<<<<<<< HEAD
         await editorPage.removeBlocks();
     } );
+=======
+		await editorPage.removeBlocks();
+	} );
+>>>>>>> 21d935cc80dc23beb5bab59a9b85e9ce4e0f3223
 
 	it( 'copies plain text from one paragraph block and pastes in another', async () => {
 		await editorPage.addNewParagraphBlock();

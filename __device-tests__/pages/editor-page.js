@@ -154,6 +154,7 @@ export default class EditorPage {
 	// =========================
 
 	async removeBlocks() {
+<<<<<<< HEAD
         let blockExist = await this.hasBlockAtPosition( 1 );
         while ( blockExist ) {
             if ( await this.hasBlockAtPosition( 2 ) ) {
@@ -177,6 +178,31 @@ export default class EditorPage {
         }
 	}
 	
+=======
+		let blockExist = await this.hasBlockAtPosition( 1 );
+		while ( blockExist ) {
+			if ( await this.hasBlockAtPosition( 2 ) ) {
+				if ( isAndroid() ) {
+					const blockElement = await this.getBlockAtPosition( 1, '' );
+					await blockElement.click();
+					await this.removeBlockAtPosition( 1 );
+				} else {
+					const blockElement = await this.getBlockAtPosition( 2, '' );
+					await blockElement.click();
+					await swipeUp( this.driver );
+					await this.removeBlockAtPosition( 2 );
+				}
+				blockExist = true;
+			} else {
+				const blockElement = await this.getBlockAtPosition( 1, '' );
+				await blockElement.click();
+				await this.removeBlockAtPosition( 1 );
+				return;
+			}
+		}
+	}
+
+>>>>>>> 21d935cc80dc23beb5bab59a9b85e9ce4e0f3223
 	async addNewBlock( blockName: string ) {
 		// Click add button
 		let identifier = 'Add block';

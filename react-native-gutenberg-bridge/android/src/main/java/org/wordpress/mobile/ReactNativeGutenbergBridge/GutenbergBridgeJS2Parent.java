@@ -1,18 +1,31 @@
 package org.wordpress.mobile.ReactNativeGutenbergBridge;
 
 import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.WritableMap;
+
+import org.wordpress.mobile.WPAndroidGlue.MediaOption;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public interface GutenbergBridgeJS2Parent {
+    interface RNMedia {
+        String getUrl();
+        int getId();
+        String getType();
+        WritableMap toMap();
+    }
+
     void responseHtml(String title, String html, boolean changed);
 
     void editorDidMount(ReadableArray unsupportedBlockNames);
 
-    interface MediaSelectedCallback {
-        void onMediaSelected(int mediaId, String mediaUrl);
+    interface OtherMediaOptionsReceivedCallback {
+        void onOtherMediaOptionsReceived(ArrayList<MediaOption> mediaList);
     }
 
     interface MediaUploadCallback {
-        void onUploadMediaFileSelected(int mediaId, String mediaUri);
+        void onUploadMediaFileSelected(List<RNMedia> mediaList);
         void onUploadMediaFileClear(int mediaId);
         void onMediaFileUploadProgress(int mediaId, float progress);
         void onMediaFileUploadSucceeded(int mediaId, String mediaUrl, int serverId);
@@ -45,6 +58,7 @@ public interface GutenbergBridgeJS2Parent {
     enum MediaType {
         IMAGE("image"),
         VIDEO("video"),
+        MEDIA("media"),
         AUDIO("audio"),
         OTHER("other");
 
@@ -65,13 +79,13 @@ public interface GutenbergBridgeJS2Parent {
         }
     }
 
-    void requestMediaPickFromMediaLibrary(MediaSelectedCallback mediaSelectedCallback, MediaType mediaType);
+    void requestMediaPickFromMediaLibrary(MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection, MediaType mediaType);
 
-    void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback, MediaType mediaType);
+    void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection, MediaType mediaType);
 
     void requestMediaPickerFromDeviceCamera(MediaUploadCallback mediaUploadCallback, MediaType mediaType);
 
-    void requestMediaImport(String url, MediaSelectedCallback mediaSelectedCallback);
+    void requestMediaImport(String url, MediaUploadCallback mediaUploadCallback);
 
     void mediaUploadSync(MediaUploadCallback mediaUploadCallback);
 
@@ -84,4 +98,8 @@ public interface GutenbergBridgeJS2Parent {
     void editorDidEmitLog(String message, LogLevel logLevel);
 
     void editorDidAutosave();
+
+    void getOtherMediaPickerOptions(OtherMediaOptionsReceivedCallback otherMediaOptionsReceivedCallback, MediaType mediaType);
+
+    void requestMediaPickFrom(String mediaSource, MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection);
 }

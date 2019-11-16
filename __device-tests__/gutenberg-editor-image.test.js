@@ -40,8 +40,13 @@ describe( 'Gutenberg Editor Image Block tests', () => {
 	} );
 
 	afterEach( async () => {
+<<<<<<< HEAD
         await editorPage.removeBlocks();
     } );
+=======
+		await editorPage.removeBlocks();
+	} );
+>>>>>>> 21d935cc80dc23beb5bab59a9b85e9ce4e0f3223
 
 	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );
@@ -70,7 +75,6 @@ describe( 'Gutenberg Editor Image Block tests', () => {
 			imageBlock = await editorPage.getImageBlockAtPosition( 1 );
 			await imageBlock.click();
 		}
-		await editorPage.removeImageBlockAtPosition( 1 );
 	} );
 
 	it( 'should be able to add an image block with multiple paragraph blocks', async () => {
