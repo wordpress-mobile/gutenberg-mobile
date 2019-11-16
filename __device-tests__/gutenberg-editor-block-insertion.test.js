@@ -12,7 +12,6 @@ import {
 	stopDriver,
 	isAndroid,
 	clickMiddleOfElement,
-	swipeUp,
 } from './helpers/utils';
 import testData from './helpers/test-data';
 

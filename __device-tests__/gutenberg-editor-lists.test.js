@@ -39,7 +39,7 @@ describe( 'Gutenberg Editor tests for List block', () => {
 
 	afterEach( async () => {
 		await editorPage.removeBlocks();
-	} ); 
+	} );
 
 	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );
