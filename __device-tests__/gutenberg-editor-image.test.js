@@ -39,6 +39,10 @@ describe( 'Gutenberg Editor Image Block tests', () => {
 		editorPage = new EditorPage( driver );
 	} );
 
+	afterEach( async () => {
+        await editorPage.removeBlocks();
+    } );
+
 	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );
 	} );
