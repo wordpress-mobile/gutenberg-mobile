@@ -3,6 +3,7 @@ package org.wordpress.mobile.ReactNativeAztec;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Looper;
@@ -23,6 +24,7 @@ import com.facebook.react.views.textinput.ContentSizeWatcher;
 import com.facebook.react.views.textinput.ReactTextInputLocalData;
 import com.facebook.react.views.textinput.ScrollWatcher;
 
+import org.jetbrains.annotations.NotNull;
 import org.wordpress.aztec.AztecText;
 import org.wordpress.aztec.AztecTextFormat;
 import org.wordpress.aztec.ITextFormat;
@@ -80,6 +82,7 @@ public class ReactAztecText extends AztecText {
             put(AztecTextFormat.FORMAT_CITE, "italic");
             put(AztecTextFormat.FORMAT_STRIKETHROUGH, "strikethrough");
             put(AztecTextFormat.FORMAT_UNDERLINE, "underline");
+            put(AztecTextFormat.FORMAT_PREFORMAT, "pre");
         }
     };
 
@@ -164,6 +167,16 @@ public class ReactAztecText extends AztecText {
         }
 
         return super.onTextContextMenuItem(id);
+    }
+
+    @Override
+    public float getPreformatBackgroundAlpha(@NotNull TypedArray styles) {
+        return 0;
+    }
+
+    @Override
+    public boolean shouldSkipTidying() {
+        return mTagName.equals("pre");
     }
 
     // VisibleForTesting from {@link TextInputEventsTestCase}.
