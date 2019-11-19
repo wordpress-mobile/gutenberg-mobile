@@ -157,4 +157,9 @@ public class FakeBridgeJS2Parent implements GutenbergBridgeJS2Parent {
     public void requestMediaPickFrom(String mediaSource, MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection) {
 
     }
+
+    @Override
+    public void requestImageFullscreenPreview(String mediaUrl) {
+
+    }
 }
