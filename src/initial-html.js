@@ -9,10 +9,6 @@ export default `
 <!-- /wp:image -->
 
 <!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link">Button</a></div>
-<!-- /wp:button -->
-
-<!-- wp:button -->
 <div class="wp-block-button"><a class="wp-block-button__link"></a></div>
 <!-- /wp:button -->
 `;
