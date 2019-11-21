@@ -3,6 +3,8 @@ package com.gutenberg;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.core.util.Consumer;
+
 import com.facebook.react.ReactApplication;
 import com.brentvatne.react.ReactVideoPackage;
 import com.facebook.react.bridge.ReadableArray;
