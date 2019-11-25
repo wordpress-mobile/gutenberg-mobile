@@ -85,7 +85,6 @@ public class ReactAztecText extends AztecText {
             put(AztecTextFormat.FORMAT_CITE, "italic");
             put(AztecTextFormat.FORMAT_STRIKETHROUGH, "strikethrough");
             put(AztecTextFormat.FORMAT_UNDERLINE, "underline");
-            put(AztecTextFormat.FORMAT_PREFORMAT, PRE_TAG);
         }
     };
 
