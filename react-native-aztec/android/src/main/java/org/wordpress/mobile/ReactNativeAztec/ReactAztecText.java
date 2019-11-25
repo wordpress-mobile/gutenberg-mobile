@@ -30,6 +30,7 @@ import org.wordpress.aztec.AztecTextFormat;
 import org.wordpress.aztec.ITextFormat;
 import org.wordpress.aztec.plugins.IAztecPlugin;
 import org.wordpress.aztec.plugins.IToolbarButton;
+import org.wordpress.aztec.watchers.EndOfBufferMarkerAdder;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -40,6 +41,8 @@ import java.util.HashMap;
 import static android.content.ClipData.*;
 
 public class ReactAztecText extends AztecText {
+
+    private static final String PRE_TAG = "pre";
 
     private final InputMethodManager mInputMethodManager;
     // This flag is set to true when we set the text of the EditText explicitly. In that case, no
@@ -82,7 +85,7 @@ public class ReactAztecText extends AztecText {
             put(AztecTextFormat.FORMAT_CITE, "italic");
             put(AztecTextFormat.FORMAT_STRIKETHROUGH, "strikethrough");
             put(AztecTextFormat.FORMAT_UNDERLINE, "underline");
-            put(AztecTextFormat.FORMAT_PREFORMAT, "pre");
+            put(AztecTextFormat.FORMAT_PREFORMAT, PRE_TAG);
         }
     };
 
@@ -176,7 +179,7 @@ public class ReactAztecText extends AztecText {
 
     @Override
     public boolean shouldSkipTidying() {
-        return mTagName.equals("pre");
+        return isPreTag();
     }
 
     // VisibleForTesting from {@link TextInputEventsTestCase}.
@@ -518,18 +521,22 @@ public class ReactAztecText extends AztecText {
     private class TextWatcherDelegator implements TextWatcher {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            if (!mIsSettingTextFromJS && mListeners != null) {
+            if (mListeners != null) {
                 for (TextWatcher listener : mListeners) {
-                    listener.beforeTextChanged(s, start, count, after);
+                    if (isTextWatcherEnabled(listener)) {
+                        listener.beforeTextChanged(s, start, count, after);
+                    }
                 }
             }
         }
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (!mIsSettingTextFromJS && mListeners != null) {
+            if (mListeners != null) {
                 for (TextWatcher listener : mListeners) {
-                    listener.onTextChanged(s, start, before, count);
+                    if (isTextWatcherEnabled(listener)) {
+                        listener.onTextChanged(s, start, before, count);
+                    }
                 }
             }
 
@@ -538,11 +545,21 @@ public class ReactAztecText extends AztecText {
 
         @Override
         public void afterTextChanged(Editable s) {
-            if (!mIsSettingTextFromJS && mListeners != null) {
+            if (mListeners != null) {
                 for (TextWatcher listener : mListeners) {
-                    listener.afterTextChanged(s);
+                    if (isTextWatcherEnabled(listener)) {
+                        listener.afterTextChanged(s);
+                    }
                 }
             }
         }
+    }
+
+    private boolean isTextWatcherEnabled(TextWatcher textWatcher) {
+        return (isPreTag() && (textWatcher instanceof EndOfBufferMarkerAdder)) || !mIsSettingTextFromJS;
+    }
+
+    private boolean isPreTag() {
+        return !TextUtils.isEmpty(mTagName) && mTagName.equals(PRE_TAG);
     }
 }
