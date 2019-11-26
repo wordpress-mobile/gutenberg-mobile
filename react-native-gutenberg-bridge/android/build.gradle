@@ -130,6 +130,7 @@ dependencies {
         implementation project(':react-native-svg')
         implementation project(':react-native-recyclerview-list')
         implementation project(':react-native-video')
+        implementation project(':@react-native-community_slider')
 
         implementation 'com.facebook.react:react-native:+'
     } else {
