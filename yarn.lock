@@ -1800,19 +1800,19 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@wdio/config@5.16.6":
-  version "5.16.6"
-  resolved "https://registry.yarnpkg.com/@wdio/config/-/config-5.16.6.tgz#72d657f7437b9980f9cd011ec35ece92236d9a09"
-  integrity sha512-L8ug03UwZCsMixGSFE0zbhT62H55MxhsAWXOcZ1rio/u2zXEIlllOpiolRpsQQS2w5KMDQoRzZo5SKhHa3FCow==
+"@wdio/config@5.16.10":
+  version "5.16.10"
+  resolved "https://registry.yarnpkg.com/@wdio/config/-/config-5.16.10.tgz#2dff77474be9a9c64040113598f86d4a25bd0810"
+  integrity sha512-L+kRR05aTV00GRQ1fTY9GTLT4qgFdiPCx3GaGWXab93K7VXM7LjqX7y4zEufmUEgkH0W6RYP2UtWg+d2i/RGaQ==
   dependencies:
-    "@wdio/logger" "5.16.5"
+    "@wdio/logger" "5.16.10"
     deepmerge "^4.0.0"
     glob "^7.1.2"
 
-"@wdio/logger@5.16.5":
-  version "5.16.5"
-  resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-5.16.5.tgz#3c82a4f55d689e76e54e3718e4402b465c202214"
-  integrity sha512-6HGhoc1/la9zaw8CPGJD3YAzo0yefM8SpcF7YKTSU3YA545nhbrGAU2rLb0spquR3cJm1yqK0TzHvf3EhgHdwA==
+"@wdio/logger@5.16.10":
+  version "5.16.10"
+  resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-5.16.10.tgz#45d0ea485d52c8a7c526954ccc980d54c3e29e56"
+  integrity sha512-hRKhxgd9uB48Dtj2xe2ckxU4KwI/RO8IwguySuaI2SLFj6EDbdonwzpVkq111/fjBuq7R1NauAaNcm3AMEbIFA==
   dependencies:
     chalk "^3.0.0"
     loglevel "^1.6.0"
@@ -1824,19 +1824,19 @@
   resolved "https://registry.yarnpkg.com/@wdio/protocols/-/protocols-5.16.7.tgz#cf8af4fe9e362e879e9b39543ec8ad1770847764"
   integrity sha512-fBlK/lfKeyxTQOfzgnpE0F7tBwb9maTgVkqv2LlvameB0Rsy18js1/cUhjJkpESXiK9md0si/CROdNaNliBKmg==
 
-"@wdio/repl@5.16.5":
-  version "5.16.5"
-  resolved "https://registry.yarnpkg.com/@wdio/repl/-/repl-5.16.5.tgz#68c6ea2a58535cc3414d090c3bfa727d3074e5d6"
-  integrity sha512-LzQVxbZ9P3zUPS/M5//KR8kNGkYVhS3MOEx+vHtXyvxdoMj8qCkmzIbGj8SqnfAdHcTyeixI5qwFZ3PCnqo/LQ==
+"@wdio/repl@5.16.10":
+  version "5.16.10"
+  resolved "https://registry.yarnpkg.com/@wdio/repl/-/repl-5.16.10.tgz#db94fe6b28b25294308ca7710f739bb7e792686b"
+  integrity sha512-QqBOhJPjvyLf0/Ln1By6aOCx0g8VOaOg9bjcvsCiaQlR3+lO/j4QSZwwgvFrkLXWTu20T/0GR0ElaQ4Gp6epAA==
   dependencies:
-    "@wdio/utils" "5.16.5"
+    "@wdio/utils" "5.16.10"
 
-"@wdio/utils@5.16.5":
-  version "5.16.5"
-  resolved "https://registry.yarnpkg.com/@wdio/utils/-/utils-5.16.5.tgz#d1cf15643d2dd15d1f79c344d039f1f434826fb6"
-  integrity sha512-gi8KByrTX2H2aZKuvD+mpjt0Q4c9zmi8K8dkmGNkMm0YglZpOkEHL5zj/1W+Lkq1XXcNdg0ecHYRkmUHBN0MEA==
+"@wdio/utils@5.16.10":
+  version "5.16.10"
+  resolved "https://registry.yarnpkg.com/@wdio/utils/-/utils-5.16.10.tgz#886206b89f3388d7cc72ceaf35feda1d6e82cfb5"
+  integrity sha512-aDx+/28QWtLk/zrnWZvlyjTTSkziX5Vka5sw+9Elxj67ii5bh7NtBd3euJK2NhphJXlF1vUZY2JT9KYs9jWSAA==
   dependencies:
-    "@wdio/logger" "5.16.5"
+    "@wdio/logger" "5.16.10"
     deepmerge "^4.0.0"
 
 "@wordpress/babel-plugin-import-jsx-pragma@^2.3.0":
@@ -4203,9 +4203,9 @@ copy-descriptor@^0.1.0:
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
 
 core-js-compat@^3.1.1:
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.4.2.tgz#652fa7c54652b7f6586a893e37001df55ea2ac37"
-  integrity sha512-W0Aj+LM3EAxxjD0Kp2o4be8UlnxIZHNupBv2znqrheR4aY2nOn91794k/xoSp+SxqqriiZpTsSwBtZr60cbkwQ==
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.4.3.tgz#54f2c5cd77b8b5acc5048904cc795722c9d590d1"
+  integrity sha512-HgW7pxjAdq6EMxT5uOhbTfjgZo8fvWn0D6QXVlWs3z1Eerux7tRrJ4gcgnZNn6S0OMPHlClJuIEPp0hnow44Sg==
   dependencies:
     browserslist "^4.7.3"
     semver "^6.3.0"
@@ -4221,9 +4221,9 @@ core-js@^2.2.2, core-js@^2.4.0, core-js@^2.4.1, core-js@^2.5.7, core-js@^2.6.5:
   integrity sha512-I39t74+4t+zau64EN1fE5v2W31Adtc/REhzWN+gWRRXg6WH5qAsZm62DHpQ1+Yhe4047T55jvzz7MUqF/dBBlA==
 
 core-js@^3.1.4:
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.4.2.tgz#ee2b1a60b50388d8ddcda8cdb44a92c7a9ea76df"
-  integrity sha512-bUTfqFWtNKWp73oNIfRkqwYZJeNT3lstzZcAkhhiuvDraRSgOH1/+F9ZklbpR4zpdKuo4cpXN8tKP7s61yjX+g==
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.4.3.tgz#09ea102412a368d5f73d24f082e41ac90c633a49"
+  integrity sha512-BVvHidX8uAmLCYPfLpXTEex7jz1uZJ1mW+shhIsBdA716O8Fg6TOwSgenSyO/bvEtnGdOTpKRZPSh4bSVI1k9w==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -12964,27 +12964,27 @@ wd@^1.11.1:
     request "2.88.0"
     vargs "^0.1.0"
 
-webdriver@5.16.7:
-  version "5.16.7"
-  resolved "https://registry.yarnpkg.com/webdriver/-/webdriver-5.16.7.tgz#fcf48bfbb0a3c3898603bcbf3885e23bba12b8ce"
-  integrity sha512-2C05VoOm1W5MxpD1EazaUp3BZ9wvx6qAzmjcx2Blhnju95TjvlBbyt6cy9GC+3P0d9bUw1gU3HL0APjKu+9MGw==
+webdriver@5.16.10:
+  version "5.16.10"
+  resolved "https://registry.yarnpkg.com/webdriver/-/webdriver-5.16.10.tgz#5e1ddc62f6e78b5d9891534bbbb4be33ab68e48b"
+  integrity sha512-uXWQmEkiQZAveYlquUS4azC9aQznf1l1A1zaJBXUjM3n5FMRloS2Q1L0hjq0eCHWKdfQk1vlDCiOLiIoMMdgmQ==
   dependencies:
-    "@wdio/config" "5.16.6"
-    "@wdio/logger" "5.16.5"
+    "@wdio/config" "5.16.10"
+    "@wdio/logger" "5.16.10"
     "@wdio/protocols" "5.16.7"
-    "@wdio/utils" "5.16.5"
+    "@wdio/utils" "5.16.10"
     lodash.merge "^4.6.1"
     request "^2.83.0"
 
 webdriverio@^5.10.9:
-  version "5.16.9"
-  resolved "https://registry.yarnpkg.com/webdriverio/-/webdriverio-5.16.9.tgz#c4cad71e27c42edfd58e92d8762508e7c14f4b09"
-  integrity sha512-mL27IqtK9LAggW9md2MdXGLzS29I/Qu66Kiejw2NVF+CA8Z2DQwiSlx/rWnrE3HKi8o0nt/T4/qJdE5rNvaWRg==
+  version "5.16.10"
+  resolved "https://registry.yarnpkg.com/webdriverio/-/webdriverio-5.16.10.tgz#9a5cd3085b81ae7e9198b1e217f0952656d13a04"
+  integrity sha512-HZb4We1O63SphZ88/hrATX9+joALXrmWZL3lIvXQWFBkC76Ic+Q9NyE1O6xa42jDqllqbCYeN2r0lUbXPYfqmw==
   dependencies:
-    "@wdio/config" "5.16.6"
-    "@wdio/logger" "5.16.5"
-    "@wdio/repl" "5.16.5"
-    "@wdio/utils" "5.16.5"
+    "@wdio/config" "5.16.10"
+    "@wdio/logger" "5.16.10"
+    "@wdio/repl" "5.16.10"
+    "@wdio/utils" "5.16.10"
     archiver "^3.0.0"
     css-value "^0.0.1"
     grapheme-splitter "^1.0.2"
@@ -12995,7 +12995,7 @@ webdriverio@^5.10.9:
     resq "^1.6.0"
     rgb2hex "^0.1.0"
     serialize-error "^5.0.0"
-    webdriver "5.16.7"
+    webdriver "5.16.10"
 
 webidl-conversions@^4.0.2:
   version "4.0.2"
