@@ -139,7 +139,7 @@
   "dependencies": {
     "@babel/runtime": "^7.3.1",
     "@react-native-community/cli": "^1.5.2",
-    "@react-native-community/slider": "git+https://github.com/lukewalczak/react-native-slider.git#6d11837422ed701598f5e0a58c1f19a3d523f7ce",
+    "@react-native-community/slider": "git+https://github.com/lukewalczak/react-native-slider.git#0ca3724bd05115df88bfe896f8ab2cb5b58fa256",
     "classnames": "^2.2.5",
     "dom-react": "^2.2.1",
     "domutils": "^1.7.0",

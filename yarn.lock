@@ -1659,9 +1659,9 @@
     xcode "^2.0.0"
     xmldoc "^0.4.0"
 
-"@react-native-community/slider@git+https://github.com/lukewalczak/react-native-slider.git#6d11837422ed701598f5e0a58c1f19a3d523f7ce":
+"@react-native-community/slider@git+https://github.com/lukewalczak/react-native-slider.git#0ca3724bd05115df88bfe896f8ab2cb5b58fa256":
   version "2.0.7"
-  resolved "git+https://github.com/lukewalczak/react-native-slider.git#6d11837422ed701598f5e0a58c1f19a3d523f7ce"
+  resolved "git+https://github.com/lukewalczak/react-native-slider.git#0ca3724bd05115df88bfe896f8ab2cb5b58fa256"
 
 "@tannin/compile@^1.0.3":
   version "1.0.3"
