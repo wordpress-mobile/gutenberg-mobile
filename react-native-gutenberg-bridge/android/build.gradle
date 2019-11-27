@@ -71,9 +71,6 @@ apply from: 'https://gist.githubusercontent.com/hypest/742448b9588b3a0aa580a5e80
 // import the `readHashedVersion()` function
 apply from: 'https://gist.githubusercontent.com/hypest/ceaf20a8e7d9b8404e4a5ff2e6c36650/raw/e1460a128e4b9863963410d719c7d44c3adefd02/readHashedVersion.gradle'
 
-// import the `readNPMVersion()` function
-apply from: 'https://gist.githubusercontent.com/lukewalczak/4c7fc671acad9db9effd50d92000417b/raw/a737b5a27306a8edec8ae01164fa5216ea8fe617/readNPMVersion.gradle'
-
 // import the `waitJitpack()` function
 apply from: 'https://gist.githubusercontent.com/hypest/f526fe0775dedce0ce0133f1400d22a4/raw/0008b271a0d28fc79957fd3c2a027f57e98f796a/wait-jitpack.gradle'
 
@@ -140,7 +137,7 @@ dependencies {
         implementation (waitJitpack('com.github.wordpress-mobile', 'react-native-svg', readHashedVersion('../../package.json', 'react-native-svg', 'dependencies')))
         implementation (waitJitpack('com.github.wordpress-mobile', 'react-native-recyclerview-list', 'f845b3c2c4411b8e97db23724bf1a535530c5435'))
         implementation (waitJitpack('com.github.wordpress-mobile', 'react-native-video', readHashedVersion('../../package.json', 'react-native-video', 'dependencies')))
-        implementation (waitJitpack('com.github.lukewalczak', 'react-native-slider', readHashedVersion('../../package.json', '@react-native-community/slider', 'dependencies')))
+        implementation (waitJitpack('com.github.wordpress-mobile', 'react-native-slider', readHashedVersion('../../package.json', '@react-native-community/slider', 'dependencies')))
 
         def rnVersion = readReactNativeVersion('../package.json', 'peerDependencies')
         implementation "com.facebook.react:react-native:${rnVersion}"
