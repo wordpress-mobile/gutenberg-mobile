@@ -3,6 +3,8 @@ package com.gutenberg;
 import android.os.CountDownTimer;
 import android.util.Log;
 
+import androidx.core.util.Consumer;
+
 import com.facebook.react.bridge.ReadableArray;
 
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
@@ -156,6 +158,16 @@ public class FakeBridgeJS2Parent implements GutenbergBridgeJS2Parent {
 
     @Override
     public void requestMediaPickFrom(String mediaSource, MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection) {
+
+    }
+
+    @Override
+    public void requestImageFullscreenPreview(String mediaUrl) {
+
+    }
+
+    @Override
+    public void performRequest(String path, Consumer<String> onSuccess, Consumer<String> onError) {
 
     }
 }

@@ -1,20 +1,15 @@
 package com.gutenberg;
 
 import android.app.Application;
-import android.os.CountDownTimer;
-import android.util.Log;
 
 import com.facebook.react.ReactApplication;
 import com.brentvatne.react.ReactVideoPackage;
-import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.devsupport.interfaces.DevOptionHandler;
 import com.facebook.react.devsupport.interfaces.DevSupportManager;
 import com.horcrux.svg.SvgPackage;
 
 import org.wordpress.mobile.ReactNativeAztec.ReactAztecPackage;
-import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.RNReactNativeGutenbergBridgePackage;
-import org.wordpress.mobile.WPAndroidGlue.Media;
 
 import com.github.godness84.RNRecyclerViewList.RNRecyclerviewListPackage;
 import com.facebook.react.ReactNativeHost;
