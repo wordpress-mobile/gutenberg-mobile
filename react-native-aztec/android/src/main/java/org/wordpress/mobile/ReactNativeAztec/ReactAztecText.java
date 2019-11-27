@@ -516,26 +516,29 @@ public class ReactAztecText extends AztecText {
     /**
      * This class will redirect *TextChanged calls to the listeners only in the case where the text
      * is changed by the user, and not explicitly set by JS.
+     *
+     * Update:
+     * There is a special case when block is preformatted.
+     * In that case we want to propagate TextWatcher method calls even if text is set from JS.
+     * Otherwise, couple of bugs will be introduced
+     * bug 1# https://github.com/wordpress-mobile/AztecEditor-Android/pull/869#issuecomment-552864686
+     * bug 2# https://github.com/wordpress-mobile/gutenberg-mobile/pull/1615#pullrequestreview-323274540
      */
     private class TextWatcherDelegator implements TextWatcher {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            if (mListeners != null) {
+            if ((isPreTag() || !mIsSettingTextFromJS) && mListeners != null) {
                 for (TextWatcher listener : mListeners) {
-                    if (isTextWatcherEnabled(listener)) {
-                        listener.beforeTextChanged(s, start, count, after);
-                    }
+                    listener.beforeTextChanged(s, start, count, after);
                 }
             }
         }
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (mListeners != null) {
+            if ((isPreTag() || !mIsSettingTextFromJS) && mListeners != null) {
                 for (TextWatcher listener : mListeners) {
-                    if (isTextWatcherEnabled(listener)) {
-                        listener.onTextChanged(s, start, before, count);
-                    }
+                    listener.onTextChanged(s, start, before, count);
                 }
             }
 
@@ -544,18 +547,12 @@ public class ReactAztecText extends AztecText {
 
         @Override
         public void afterTextChanged(Editable s) {
-            if (mListeners != null) {
+            if ((isPreTag() || !mIsSettingTextFromJS) && mListeners != null) {
                 for (TextWatcher listener : mListeners) {
-                    if (isTextWatcherEnabled(listener)) {
-                        listener.afterTextChanged(s);
-                    }
+                    listener.afterTextChanged(s);
                 }
             }
         }
-    }
-
-    private boolean isTextWatcherEnabled(TextWatcher textWatcher) {
-        return (isPreTag() && (textWatcher instanceof EndOfBufferMarkerAdder)) || !mIsSettingTextFromJS;
     }
 
     private boolean isPreTag() {
