@@ -140,7 +140,7 @@ dependencies {
         implementation (waitJitpack('com.github.wordpress-mobile', 'react-native-svg', readHashedVersion('../../package.json', 'react-native-svg', 'dependencies')))
         implementation (waitJitpack('com.github.wordpress-mobile', 'react-native-recyclerview-list', 'f845b3c2c4411b8e97db23724bf1a535530c5435'))
         implementation (waitJitpack('com.github.wordpress-mobile', 'react-native-video', readHashedVersion('../../package.json', 'react-native-video', 'dependencies')))
-        implementation (waitJitpack('com.github.react-native-community', 'react-native-slider', readNPMVersion('../../package.json', '@react-native-community/slider', 'dependencies')))
+        implementation (waitJitpack('com.github.lukewalczak', 'react-native-slider', readHashedVersion('../../package.json', '@react-native-community/slider', 'dependencies')))
 
         def rnVersion = readReactNativeVersion('../package.json', 'peerDependencies')
         implementation "com.facebook.react:react-native:${rnVersion}"
