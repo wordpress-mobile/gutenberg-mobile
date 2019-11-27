@@ -62,6 +62,7 @@ public class WPAndroidGlueCode {
     private RNReactNativeGutenbergBridgePackage mRnReactNativeGutenbergBridgePackage;
     private MediaUploadCallback mPendingMediaUploadCallback;
     private boolean mMediaPickedByUserOnBlock;
+    private boolean mAppendsMultipleSelectedToSiblingBlocks;
 
     private OnMediaLibraryButtonListener mOnMediaLibraryButtonListener;
     private OnReattachQueryListener mOnReattachQueryListener;
@@ -142,6 +143,10 @@ public class WPAndroidGlueCode {
         void onEditorAutosave();
     }
 
+    public void mediaSelectionCancelled() {
+        mAppendsMultipleSelectedToSiblingBlocks = false;
+    }
+
     protected List<ReactPackage> getPackages() {
         mRnReactNativeGutenbergBridgePackage = new RNReactNativeGutenbergBridgePackage(new GutenbergBridgeJS2Parent() {
             @Override
@@ -163,6 +168,8 @@ public class WPAndroidGlueCode {
             @Override
             public void requestMediaPickFromMediaLibrary(MediaUploadCallback mediaSelectedCallback, Boolean allowMultipleSelection, MediaType mediaType) {
                 mMediaPickedByUserOnBlock = true;
+                // flag to append as siblings when allowMultipleSelection = false is not respected
+                mAppendsMultipleSelectedToSiblingBlocks = !allowMultipleSelection;
                 mPendingMediaUploadCallback = mediaSelectedCallback;
                 if (mediaType == MediaType.IMAGE) {
                     mOnMediaLibraryButtonListener.onMediaLibraryImageButtonClicked(allowMultipleSelection);
@@ -579,33 +586,42 @@ public class WPAndroidGlueCode {
     }
 
     public void appendUploadMediaFile(final int mediaId, final String mediaUri, final boolean isVideo) {
-       if (isMediaUploadCallbackRegistered() && mMediaPickedByUserOnBlock) {
-           String mediaType = getMediaType(isVideo);
-           mMediaPickedByUserOnBlock = false;
-           List<RNMedia> mediaList = new ArrayList<>();
-           mediaList.add(new Media(mediaId, mediaUri, mediaType));
-           mPendingMediaUploadCallback.onUploadMediaFileSelected(mediaList);
-       } else {
-           // we can assume we're being passed a new image from share intent as there was no selectMedia callback
-           sendOrDeferAppendMediaSignal(mediaId, mediaUri, isVideo);
-       }
+//       if (isMediaUploadCallbackRegistered() && mMediaPickedByUserOnBlock) {
+//           String mediaType = getMediaType(isVideo);
+//           mMediaPickedByUserOnBlock = false;
+//           List<RNMedia> mediaList = new ArrayList<>();
+//           mediaList.add(new Media(mediaId, mediaUri, mediaType));
+//           mPendingMediaUploadCallback.onUploadMediaFileSelected(mediaList);
+//       } else {
+//           // we can assume we're being passed a new image from share intent as there was no selectMedia callback
+//           sendOrDeferAppendMediaSignal(mediaId, mediaUri, isVideo);
+//       }
     }
 
     public void appendUploadMediaFiles(ArrayList<Media> mediaList) {
         if (isMediaUploadCallbackRegistered() && mMediaPickedByUserOnBlock) {
             mMediaPickedByUserOnBlock = false;
             List<RNMedia> rnMediaList = new ArrayList<>();
-            for (Media media : mediaList) {
-                rnMediaList.add(new Media(media.getId(), media.getUrl(), media.getType()));
+
+            if (mAppendsMultipleSelectedToSiblingBlocks && 1 < mediaList.size()) {
+                rnMediaList.add(mediaList.get(0));
+                mPendingMediaUploadCallback.onUploadMediaFileSelected(rnMediaList);
+
+                for (Media mediaToAppend : mediaList.subList(1, mediaList.size())) {
+                    sendOrDeferAppendMediaSignal(mediaToAppend.getId(), mediaToAppend.getUrl(),
+                            mediaToAppend.getType());
+                }
+            } else {
+                rnMediaList.addAll(mediaList);
+                mPendingMediaUploadCallback.onUploadMediaFileSelected(rnMediaList);
             }
-            mPendingMediaUploadCallback.onUploadMediaFileSelected(rnMediaList);
-//            mPendingMediaUploadCallback = null;
         }
+
+        mAppendsMultipleSelectedToSiblingBlocks = false;
     }
 
-    private void sendOrDeferAppendMediaSignal(final int mediaId, final String mediaUri, final boolean isVideo) {
+    private void sendOrDeferAppendMediaSignal(final int mediaId, final String mediaUri, final String mediaType) {
         // if editor is mounted, let's append the media file
-        String mediaType = getMediaType(isVideo);
         if (mIsEditorMounted) {
             if (!TextUtils.isEmpty(mediaUri) && mediaId > 0) {
                 // send signal to JS
