@@ -527,7 +527,7 @@ public class ReactAztecText extends AztecText {
     private class TextWatcherDelegator implements TextWatcher {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            if ((isPreTag() || !mIsSettingTextFromJS) && mListeners != null) {
+            if (shouldRedirectTextChangeCalls()) {
                 for (TextWatcher listener : mListeners) {
                     listener.beforeTextChanged(s, start, count, after);
                 }
@@ -536,7 +536,7 @@ public class ReactAztecText extends AztecText {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if ((isPreTag() || !mIsSettingTextFromJS) && mListeners != null) {
+            if (shouldRedirectTextChangeCalls()) {
                 for (TextWatcher listener : mListeners) {
                     listener.onTextChanged(s, start, before, count);
                 }
@@ -547,12 +547,16 @@ public class ReactAztecText extends AztecText {
 
         @Override
         public void afterTextChanged(Editable s) {
-            if ((isPreTag() || !mIsSettingTextFromJS) && mListeners != null) {
+            if (shouldRedirectTextChangeCalls()) {
                 for (TextWatcher listener : mListeners) {
                     listener.afterTextChanged(s);
                 }
             }
         }
+    }
+
+    private boolean shouldRedirectTextChangeCalls() {
+        return (!mIsSettingTextFromJS || isPreTag()) && mListeners != null;
     }
 
     private boolean isPreTag() {
