@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout.LayoutParams;
 
+import androidx.core.util.Consumer;
 import androidx.fragment.app.Fragment;
 
 import com.brentvatne.react.ReactVideoPackage;
@@ -22,6 +23,7 @@ import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactInstanceManagerBuilder;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.ReactRootView;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.common.LifecycleState;
@@ -65,6 +67,7 @@ public class WPAndroidGlueCode {
     private OnReattachQueryListener mOnReattachQueryListener;
     private OnEditorMountListener mOnEditorMountListener;
     private OnEditorAutosaveListener mOnEditorAutosaveListener;
+    private OnImageFullscreenPreviewListener mOnImageFullscreenPreviewListener;
     private boolean mIsEditorMounted;
 
     private String mContentHtml = "";
@@ -76,10 +79,12 @@ public class WPAndroidGlueCode {
     private boolean mShouldUpdateContent;
     private CountDownLatch mGetContentCountDownLatch;
     private WeakReference<View> mLastFocusedView = null;
+    private RequestExecutor mRequestExecutor;
 
     private static final String PROP_NAME_INITIAL_DATA = "initialData";
     private static final String PROP_NAME_INITIAL_TITLE = "initialTitle";
     private static final String PROP_NAME_INITIAL_HTML_MODE_ENABLED = "initialHtmlModeEnabled";
+    private static final String PROP_NAME_POST_TYPE = "postType";
     private static final String PROP_NAME_LOCALE = "locale";
     private static final String PROP_NAME_TRANSLATIONS = "translations";
 
@@ -116,6 +121,10 @@ public class WPAndroidGlueCode {
         void onCancelUploadForMediaDueToDeletedBlock(int mediaId);
         ArrayList<MediaOption> onGetOtherMediaImageOptions();
         void onOtherMediaButtonClicked(String mediaSource, boolean allowMultipleSelection);
+    }
+
+    public interface OnImageFullscreenPreviewListener {
+        void onImageFullscreenPreviewClicked(String mediaUrl);
     }
 
     public interface OnReattachQueryListener {
@@ -272,6 +281,16 @@ public class WPAndroidGlueCode {
                 mMediaPickedByUserOnBlock = true;
                 mOnMediaLibraryButtonListener.onOtherMediaButtonClicked(mediaSource, allowMultipleSelection);
             }
+
+            @Override
+            public void performRequest(String pathFromJS, Consumer<String> onSuccess, Consumer<String> onError) {
+                mRequestExecutor.performRequest(pathFromJS, onSuccess, onError);
+            }
+
+            @Override
+            public void requestImageFullscreenPreview(String mediaUrl) {
+                mOnImageFullscreenPreviewListener.onImageFullscreenPreviewClicked(mediaUrl);
+            }
         });
 
         return Arrays.asList(
@@ -292,9 +311,17 @@ public class WPAndroidGlueCode {
                 .newBuilder(mReactRootView.getContext(), client).build();
     }
 
+    @Deprecated
     public void onCreateView(Context initContext, boolean htmlModeEnabled,
                              Application application, boolean isDebug, boolean buildGutenbergFromSource,
                              boolean isNewPost, String localeString, Bundle translations) {
+        onCreateView(initContext, htmlModeEnabled, application, isDebug, buildGutenbergFromSource, "post", isNewPost
+        , localeString, translations);
+    }
+
+    public void onCreateView(Context initContext, boolean htmlModeEnabled,
+                             Application application, boolean isDebug, boolean buildGutenbergFromSource,
+                             String postType, boolean isNewPost, String localeString, Bundle translations) {
         mReactRootView = new ReactRootView(new MutableContextWrapper(initContext));
 
         ReactInstanceManagerBuilder builder =
@@ -321,6 +348,7 @@ public class WPAndroidGlueCode {
         initialProps.putString(PROP_NAME_INITIAL_DATA, "");
         initialProps.putString(PROP_NAME_INITIAL_TITLE, "");
         initialProps.putBoolean(PROP_NAME_INITIAL_HTML_MODE_ENABLED, htmlModeEnabled);
+        initialProps.putString(PROP_NAME_POST_TYPE, postType);
         initialProps.putString(PROP_NAME_LOCALE, localeString);
         initialProps.putBundle(PROP_NAME_TRANSLATIONS, translations);
 
@@ -333,7 +361,9 @@ public class WPAndroidGlueCode {
                                   OnReattachQueryListener onReattachQueryListener,
                                   OnEditorMountListener onEditorMountListener,
                                   OnEditorAutosaveListener onEditorAutosaveListener,
-                                  OnAuthHeaderRequestedListener onAuthHeaderRequestedListener) {
+                                  OnAuthHeaderRequestedListener onAuthHeaderRequestedListener,
+                                  RequestExecutor fetchExecutor,
+                                  OnImageFullscreenPreviewListener onImageFullscreenPreviewListener) {
         MutableContextWrapper contextWrapper = (MutableContextWrapper) mReactRootView.getContext();
         contextWrapper.setBaseContext(viewGroup.getContext());
 
@@ -341,6 +371,8 @@ public class WPAndroidGlueCode {
         mOnReattachQueryListener = onReattachQueryListener;
         mOnEditorMountListener = onEditorMountListener;
         mOnEditorAutosaveListener = onEditorAutosaveListener;
+        mRequestExecutor = fetchExecutor;
+        mOnImageFullscreenPreviewListener = onImageFullscreenPreviewListener;
 
         sAddCookiesInterceptor.setOnAuthHeaderRequestedListener(onAuthHeaderRequestedListener);
 
