@@ -138,6 +138,10 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.3.1",
+    "@emotion/core": "^10.0.22",
+    "@emotion/css": "^10.0.22",
+    "@emotion/native": "^10.0.22",
+    "@emotion/styled": "^10.0.23",
     "@react-native-community/cli": "^1.5.2",
     "classnames": "^2.2.5",
     "dom-react": "^2.2.1",
