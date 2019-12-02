@@ -21,6 +21,7 @@ import { setLocaleData } from '@wordpress/i18n';
 import './globals';
 import { getTranslation } from '../i18n-cache';
 import initialHtml from './initial-html';
+import setupApiFetch from './api-fetch-setup';
 
 const gutenbergSetup = () => {
 	const wpData = require( '@wordpress/data' );
@@ -53,16 +54,25 @@ export class RootComponent extends React.Component {
 	constructor( props ) {
 		super( props );
 		setupLocale( props.locale, props.translations );
+		setupApiFetch();
 		require( '@wordpress/edit-post' ).initializeEditor();
 	}
 
 	render() {
-		const {
-			initialHtmlModeEnabled,
-			initialData = __DEV__ && initialHtml,
-			initialTitle = 'Welcome to Gutenberg!',
-			postType = 'post',
-		} = this.props;
+		const { initialHtmlModeEnabled } = this.props;
+		let initialData = this.props.initialData;
+		let initialTitle = this.props.initialTitle;
+		let postType = this.props.postType;
+
+		if ( initialData === undefined && __DEV__ ) {
+			initialData = initialHtml;
+		}
+		if ( initialTitle === undefined ) {
+			initialTitle = 'Welcome to Gutenberg!';
+		}
+		if ( postType === undefined ) {
+			postType = 'post';
+		}
 		const Editor = require( '@wordpress/edit-post' ).Editor;
 		const settings = {
 			__experimentalEnablePageTemplates: !! __DEV__,

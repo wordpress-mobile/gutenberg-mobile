@@ -48,11 +48,23 @@ public class Gutenberg: NSObject {
     private var initialProps: [String: Any]? {
         var initialProps = [String: Any]()
 
-        initialProps["initialData"] = dataSource.gutenbergInitialContent()
-        initialProps["initialTitle"] = dataSource.gutenbergInitialTitle()
-        initialProps["locale"] = dataSource.gutenbergLocale()
-        initialProps["translations"] = dataSource.gutenbergTranslations()
+        if let initialContent = dataSource.gutenbergInitialContent() {
+            initialProps["initialData"] = initialContent
+        }
+
+        if let initialTitle = dataSource.gutenbergInitialTitle() {
+            initialProps["initialTitle"] = initialTitle
+        }
+
         initialProps["postType"] = dataSource.gutenbergPostType()
+
+        if let locale = dataSource.gutenbergLocale() {
+            initialProps["locale"] = locale
+        }
+        
+        if let translations = dataSource.gutenbergTranslations() {
+            initialProps["translations"] = translations
+        }
 
         return initialProps
     }
