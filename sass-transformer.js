@@ -32,7 +32,6 @@
 // TODO: create a new npm package with this transformer, or extend 'react-native-sass-transformer'
 
 const fs = require( 'fs' );
-
 const sass = require( 'node-sass' );
 const semver = require( 'semver' );
 const css2rn = require( 'css-to-react-native-transform' ).default;
