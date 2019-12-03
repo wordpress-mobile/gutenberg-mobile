@@ -62,7 +62,11 @@ public class WPAndroidGlueCode {
     private RNReactNativeGutenbergBridgePackage mRnReactNativeGutenbergBridgePackage;
     private MediaUploadCallback mPendingMediaUploadCallback;
     private boolean mMediaPickedByUserOnBlock;
-    private boolean mAppendsMultipleSelectedToSiblingBlocks;
+
+    /**
+     * Flag to append as siblings when allowMultipleSelection = false is not respected
+     */
+    private boolean mAppendsMultipleSelectedToSiblingBlocks = false;
 
     private OnMediaLibraryButtonListener mOnMediaLibraryButtonListener;
     private OnReattachQueryListener mOnReattachQueryListener;
@@ -85,6 +89,7 @@ public class WPAndroidGlueCode {
     private static final String PROP_NAME_INITIAL_DATA = "initialData";
     private static final String PROP_NAME_INITIAL_TITLE = "initialTitle";
     private static final String PROP_NAME_INITIAL_HTML_MODE_ENABLED = "initialHtmlModeEnabled";
+    private static final String PROP_NAME_POST_TYPE = "postType";
     private static final String PROP_NAME_LOCALE = "locale";
     private static final String PROP_NAME_TRANSLATIONS = "translations";
 
@@ -168,7 +173,6 @@ public class WPAndroidGlueCode {
             @Override
             public void requestMediaPickFromMediaLibrary(MediaUploadCallback mediaSelectedCallback, Boolean allowMultipleSelection, MediaType mediaType) {
                 mMediaPickedByUserOnBlock = true;
-                // flag to append as siblings when allowMultipleSelection = false is not respected
                 mAppendsMultipleSelectedToSiblingBlocks = !allowMultipleSelection;
                 mPendingMediaUploadCallback = mediaSelectedCallback;
                 if (mediaType == MediaType.IMAGE) {
@@ -183,6 +187,7 @@ public class WPAndroidGlueCode {
             @Override
             public void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection, MediaType mediaType) {
                 mMediaPickedByUserOnBlock = true;
+                mAppendsMultipleSelectedToSiblingBlocks = false;
                 mPendingMediaUploadCallback = mediaUploadCallback;
                 if (mediaType == MediaType.IMAGE) {
                     mOnMediaLibraryButtonListener.onUploadPhotoButtonClicked(allowMultipleSelection);
@@ -196,6 +201,7 @@ public class WPAndroidGlueCode {
             @Override
             public void requestMediaPickerFromDeviceCamera(MediaUploadCallback mediaUploadCallback, MediaType mediaType) {
                 mMediaPickedByUserOnBlock = true;
+                mAppendsMultipleSelectedToSiblingBlocks = false;
                 mPendingMediaUploadCallback = mediaUploadCallback;
                 if (mediaType == MediaType.IMAGE) {
                     mOnMediaLibraryButtonListener.onCapturePhotoButtonClicked();
@@ -285,6 +291,7 @@ public class WPAndroidGlueCode {
                                                        Boolean allowMultipleSelection) {
                 mPendingMediaUploadCallback = mediaSelectedCallback;
                 mMediaPickedByUserOnBlock = true;
+                mAppendsMultipleSelectedToSiblingBlocks = false;
                 mOnMediaLibraryButtonListener.onOtherMediaButtonClicked(mediaSource, allowMultipleSelection);
             }
 
@@ -317,9 +324,17 @@ public class WPAndroidGlueCode {
                 .newBuilder(mReactRootView.getContext(), client).build();
     }
 
+    @Deprecated
     public void onCreateView(Context initContext, boolean htmlModeEnabled,
                              Application application, boolean isDebug, boolean buildGutenbergFromSource,
                              boolean isNewPost, String localeString, Bundle translations) {
+        onCreateView(initContext, htmlModeEnabled, application, isDebug, buildGutenbergFromSource, "post", isNewPost
+        , localeString, translations);
+    }
+
+    public void onCreateView(Context initContext, boolean htmlModeEnabled,
+                             Application application, boolean isDebug, boolean buildGutenbergFromSource,
+                             String postType, boolean isNewPost, String localeString, Bundle translations) {
         mReactRootView = new ReactRootView(new MutableContextWrapper(initContext));
 
         ReactInstanceManagerBuilder builder =
@@ -346,6 +361,7 @@ public class WPAndroidGlueCode {
         initialProps.putString(PROP_NAME_INITIAL_DATA, "");
         initialProps.putString(PROP_NAME_INITIAL_TITLE, "");
         initialProps.putBoolean(PROP_NAME_INITIAL_HTML_MODE_ENABLED, htmlModeEnabled);
+        initialProps.putString(PROP_NAME_POST_TYPE, postType);
         initialProps.putString(PROP_NAME_LOCALE, localeString);
         initialProps.putBundle(PROP_NAME_TRANSLATIONS, translations);
 
@@ -585,23 +601,19 @@ public class WPAndroidGlueCode {
         mRnReactNativeGutenbergBridgePackage.getRNReactNativeGutenbergBridgeModule().toggleEditorMode();
     }
 
-    public void appendUploadMediaFile(final int mediaId, final String mediaUri, final boolean isVideo) {
-//       if (isMediaUploadCallbackRegistered() && mMediaPickedByUserOnBlock) {
-//           String mediaType = getMediaType(isVideo);
-//           mMediaPickedByUserOnBlock = false;
-//           List<RNMedia> mediaList = new ArrayList<>();
-//           mediaList.add(new Media(mediaId, mediaUri, mediaType));
-//           mPendingMediaUploadCallback.onUploadMediaFileSelected(mediaList);
-//       } else {
-//           // we can assume we're being passed a new image from share intent as there was no selectMedia callback
-//           sendOrDeferAppendMediaSignal(mediaId, mediaUri, isVideo);
-//       }
-    }
-
     public void appendUploadMediaFiles(ArrayList<Media> mediaList) {
         if (isMediaUploadCallbackRegistered() && mMediaPickedByUserOnBlock) {
             mMediaPickedByUserOnBlock = false;
             List<RNMedia> rnMediaList = new ArrayList<>();
+
+            // We have special handling here for the image block when the user selects multiple items from the
+            // WordPress Media Library: We pass the first image to the callback, and the remaining images will be
+            // appended as blocks via sendOrDeferAppendMediaSignal
+            //
+            // All other media selection results should be passed to the callback at once (as a collection)
+            //
+            // Note: In the future, after image block <-> gallery block transforms have been implemented, this special
+            // handling will no longer be necessary
 
             if (mAppendsMultipleSelectedToSiblingBlocks && 1 < mediaList.size()) {
                 rnMediaList.add(mediaList.get(0));
