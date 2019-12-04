@@ -5,12 +5,14 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* gutenbergTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* gutenbergTests.m */; };
+		03B50584AEC04E34B12ADBD2 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F172BE00F66843D7AA2DCD2B /* libBVLinearGradient.a */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -53,7 +55,6 @@
 		FF6836C822035EAB00A0C562 /* MediaUploadCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6836C722035EAB00A0C562 /* MediaUploadCoordinator.swift */; };
 		FF83DAA92226905A00A34C93 /* CustomImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF83DAA82226905A00A34C93 /* CustomImageLoader.swift */; };
 		FF9A6F4121FA8E2500D36D14 /* MediaPickCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9A6F1621FA8E2500D36D14 /* MediaPickCoordinator.swift */; };
-		03B50584AEC04E34B12ADBD2 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F172BE00F66843D7AA2DCD2B /* libBVLinearGradient.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -419,6 +420,7 @@
 		3D53EF8FEF024C98A7AC9A56 /* libRCTVideo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTVideo.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		69F3DF692A7C4E5994CD3CBB /* libRNSafeArea.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSafeArea.a; sourceTree = "<group>"; };
+		715E0AAAE72E471295E65C85 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7E45CC55218B42C000C0B2AB /* RNReactNativeGutenbergBridge.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNReactNativeGutenbergBridge.xcodeproj; path = "../react-native-gutenberg-bridge/ios/RNReactNativeGutenbergBridge.xcodeproj"; sourceTree = "<group>"; };
 		7E8FA9292301CA9E00D007F0 /* RNDarkMode.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDarkMode.xcodeproj; path = "../node_modules/react-native-dark-mode/ios/RNDarkMode.xcodeproj"; sourceTree = "<group>"; };
@@ -436,6 +438,7 @@
 		F15198372100DC3C000F6E97 /* gutenberg-Bridging-Header.h */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = "gutenberg-Bridging-Header.h"; sourceTree = "<group>"; tabWidth = 1; };
 		F15198392100DC3D000F6E97 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = gutenberg/AppDelegate.swift; sourceTree = "<group>"; tabWidth = 1; };
 		F151983A2100DC3D000F6E97 /* MediaProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; name = MediaProvider.swift; path = gutenberg/MediaProvider.swift; sourceTree = "<group>"; tabWidth = 1; usesTabs = 0; };
+		F172BE00F66843D7AA2DCD2B /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 		F1EE6F7421E7F0A500241744 /* NotoSerif-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerif-BoldItalic.ttf"; sourceTree = "<group>"; };
 		F1EE6F7521E7F0A500241744 /* NotoSerif-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerif-Regular.ttf"; sourceTree = "<group>"; };
 		F1EE6F7621E7F0A500241744 /* NotoSerif-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerif-Italic.ttf"; sourceTree = "<group>"; };
@@ -445,8 +448,6 @@
 		FF6836C722035EAB00A0C562 /* MediaUploadCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaUploadCoordinator.swift; path = gutenberg/MediaUploadCoordinator.swift; sourceTree = "<group>"; };
 		FF83DAA82226905A00A34C93 /* CustomImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageLoader.swift; sourceTree = "<group>"; };
 		FF9A6F1621FA8E2500D36D14 /* MediaPickCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaPickCoordinator.swift; path = gutenberg/MediaPickCoordinator.swift; sourceTree = "<group>"; };
-		715E0AAAE72E471295E65C85 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; name = "BVLinearGradient.xcodeproj"; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		F172BE00F66843D7AA2DCD2B /* libBVLinearGradient.a */ = {isa = PBXFileReference; name = "libBVLinearGradient.a"; path = "libBVLinearGradient.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -775,6 +776,7 @@
 				9BFAFEB337654221B2F14D03 /* libRNSVG-tvOS.a */,
 				69F3DF692A7C4E5994CD3CBB /* libRNSafeArea.a */,
 				3D53EF8FEF024C98A7AC9A56 /* libRCTVideo.a */,
+				F172BE00F66843D7AA2DCD2B /* libBVLinearGradient.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
