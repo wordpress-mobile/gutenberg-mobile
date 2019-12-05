@@ -24,7 +24,6 @@ import com.facebook.react.views.textinput.ContentSizeWatcher;
 import com.facebook.react.views.textinput.ReactTextInputLocalData;
 import com.facebook.react.views.textinput.ScrollWatcher;
 
-import org.jetbrains.annotations.NotNull;
 import org.wordpress.aztec.AztecText;
 import org.wordpress.aztec.AztecTextFormat;
 import org.wordpress.aztec.ITextFormat;
@@ -171,7 +170,7 @@ public class ReactAztecText extends AztecText {
     }
 
     @Override
-    public float getPreformatBackgroundAlpha(@NotNull TypedArray styles) {
+    public float getPreformatBackgroundAlpha(@Nullable TypedArray styles) {
         return 0;
     }
 
@@ -555,7 +554,17 @@ public class ReactAztecText extends AztecText {
     }
 
     private boolean shouldDelegateTextChangeCalls() {
-        return (!mIsSettingTextFromJS || isPreTag()) && mListeners != null;
+        if (mListeners == null) {
+            // No listeners so, no one to delegate the calls to
+            return false;
+        }
+
+        if (isPreTag()) {
+            // If tag is pre tag we want to delegate calls in every case
+            return true;
+        }
+
+        return !mIsSettingTextFromJS;
     }
 
     private boolean isPreTag() {
