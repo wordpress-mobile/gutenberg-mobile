@@ -7,6 +7,7 @@ import androidx.core.util.Consumer;
 
 import com.facebook.react.ReactApplication;
 import com.BV.LinearGradient.LinearGradientPackage;
+import com.reactnativecommunity.slider.ReactSliderPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.devsupport.interfaces.DevOptionHandler;
@@ -126,13 +127,15 @@ public class MainApplication extends Application implements ReactApplication {
             @Override
             protected List<ReactPackage> getPackages() {
                 return Arrays.asList(
-                        new MainReactPackage(),
+                    new MainReactPackage(),
             new LinearGradientPackage(),
-                        new ReactVideoPackage(),
-                        new SvgPackage(),
-                        new ReactAztecPackage(),
-                        new RNRecyclerviewListPackage(),
-                        mRnReactNativeGutenbergBridgePackage);
+                    new LinearGradientPackage(),
+                    new ReactSliderPackage(),
+                    new ReactVideoPackage(),
+                    new SvgPackage(),
+                    new ReactAztecPackage(),
+                    new RNRecyclerviewListPackage(),
+                    mRnReactNativeGutenbergBridgePackage);
             }
 
             @Override
