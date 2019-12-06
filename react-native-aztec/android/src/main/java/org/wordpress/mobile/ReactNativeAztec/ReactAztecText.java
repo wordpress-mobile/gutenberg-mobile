@@ -7,6 +7,7 @@ import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Looper;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputType;
@@ -170,7 +171,7 @@ public class ReactAztecText extends AztecText {
     }
 
     @Override
-    public float getPreformatBackgroundAlpha(@Nullable TypedArray styles) {
+    public float getPreformatBackgroundAlpha(@NonNull TypedArray styles) {
         return 0;
     }
 
