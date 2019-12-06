@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.core.util.Consumer;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.slider.ReactSliderPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.devsupport.interfaces.DevOptionHandler;
@@ -33,7 +34,88 @@ public class MainApplication extends Application implements ReactApplication {
     private RNReactNativeGutenbergBridgePackage mRnReactNativeGutenbergBridgePackage;
 
     private ReactNativeHost createReactNativeHost() {
-        mRnReactNativeGutenbergBridgePackage = new RNReactNativeGutenbergBridgePackage(new FakeBridgeJS2Parent());
+        mRnReactNativeGutenbergBridgePackage = new RNReactNativeGutenbergBridgePackage(new GutenbergBridgeJS2Parent() {
+            @Override
+            public void responseHtml(String title, String html, boolean changed) {
+            }
+
+            @Override
+            public void requestMediaImport(String url, MediaUploadCallback mediaUploadCallback) {
+            }
+
+            @Override
+            public void requestMediaPickerFromDeviceCamera(MediaUploadCallback mediaUploadCallback, MediaType mediaType) {
+            }
+
+            @Override
+            public void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection, MediaType mediaType) {
+            }
+
+            @Override
+            public void requestMediaPickFromMediaLibrary(MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection, MediaType mediaType) {
+            }
+
+
+            @Override
+            public void mediaUploadSync(MediaUploadCallback mediaUploadCallback) {
+            }
+
+            @Override
+            public void requestImageFailedRetryDialog(int mediaId) {
+            }
+
+            @Override
+            public void requestImageUploadCancelDialog(int mediaId) {
+            }
+
+            @Override
+            public void requestImageUploadCancel(int mediaId) {
+            }
+
+            @Override
+            public void editorDidMount(ReadableArray unsupportedBlockNames) {
+            }
+
+            @Override
+            public void editorDidAutosave() {
+            }
+
+            @Override
+            public void getOtherMediaPickerOptions(OtherMediaOptionsReceivedCallback otherMediaOptionsReceivedCallback, MediaType mediaType) {
+
+            }
+
+            @Override
+            public void requestMediaPickFrom(String mediaSource, MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection) {
+
+            }
+
+            @Override
+            public void requestImageFullscreenPreview(String mediaUrl) {
+
+            }
+
+            @Override
+            public void editorDidEmitLog(String message, LogLevel logLevel) {
+                switch (logLevel) {
+                    case TRACE:
+                        Log.d(TAG, message);
+                        break;
+                    case INFO:
+                        Log.i(TAG, message);
+                        break;
+                    case WARN:
+                        Log.w(TAG, message);
+                        break;
+                    case ERROR:
+                        Log.e(TAG, message);
+                        break;
+                }
+            }
+
+            @Override
+            public void performRequest(String path, Consumer<String> onSuccess, Consumer<String> onError) {}
+        });
 
         return new ReactNativeHost(this) {
             @Override
@@ -45,6 +127,7 @@ public class MainApplication extends Application implements ReactApplication {
             protected List<ReactPackage> getPackages() {
                 return Arrays.asList(
                         new MainReactPackage(),
+                        new ReactSliderPackage(),
                         new ReactVideoPackage(),
                         new SvgPackage(),
                         new ReactAztecPackage(),
