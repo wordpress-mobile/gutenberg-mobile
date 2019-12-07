@@ -569,6 +569,6 @@ public class ReactAztecText extends AztecText {
     }
 
     private boolean isPreTag() {
-        return !TextUtils.isEmpty(mTagName) && mTagName.equals(PRE_TAG);
+        return PRE_TAG.equals(mTagName);
     }
 }
