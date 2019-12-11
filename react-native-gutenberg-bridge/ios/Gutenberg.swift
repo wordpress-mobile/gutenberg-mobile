@@ -56,6 +56,8 @@ public class Gutenberg: NSObject {
             initialProps["initialTitle"] = initialTitle
         }
 
+        initialProps["postType"] = dataSource.gutenbergPostType()
+
         if let locale = dataSource.gutenbergLocale() {
             initialProps["locale"] = locale
         }
@@ -63,7 +65,7 @@ public class Gutenberg: NSObject {
         if let translations = dataSource.gutenbergTranslations() {
             initialProps["translations"] = translations
         }
-        
+
         return initialProps
     }
 
@@ -71,6 +73,7 @@ public class Gutenberg: NSObject {
         self.dataSource = dataSource
         self.extraModules = extraModules
         super.init()
+        bridgeModule.dataSource = dataSource
         logThreshold = isPackagerRunning ? .trace : .error
     }
 
@@ -105,8 +108,12 @@ public class Gutenberg: NSObject {
         bridgeModule.sendEventIfNeeded(name: EventName.mediaUpload, body: data)
     }
 
-    public func appendMedia(id: Int32, url: URL) {
-        let data: [String: Any] = ["mediaId": id, "mediaUrl": url.absoluteString];
+    public func appendMedia(id: Int32, url: URL, type: MediaType) {
+        let data: [String: Any] = [
+            "mediaId"  : id,
+            "mediaUrl" : url.absoluteString,
+            "mediaType": type.rawValue,
+        ]
         bridgeModule.sendEventIfNeeded(name: EventName.mediaAppend, body: data)
     }
 
@@ -152,4 +159,47 @@ extension Gutenberg {
         case reset = 4
     }
     
+}
+
+extension Gutenberg {
+    public enum MediaType: String {
+        case image
+        case video
+        case audio
+        case other
+    }
+}
+
+extension Gutenberg.MediaType {
+    init(fromJSString rawValue: String) {
+        self = Gutenberg.MediaType(rawValue: rawValue) ?? .other
+    }
+}
+
+extension Gutenberg {
+    public struct MediaSource: Hashable {
+        /// The label string that will be shown to the user.
+        let label: String
+
+        /// A unique identifier of this media source option.
+        let id: String
+
+        /// The types of media this source can provide.
+        let types: Set<MediaType>
+
+        var jsRepresentation: [String: String] {
+            return [
+                "label": label,
+                "value": id,
+            ]
+        }
+    }
+}
+
+public extension Gutenberg.MediaSource {
+    public init(id: String, label: String, types: [Gutenberg.MediaType]) {
+        self.id = id
+        self.label = label
+        self.types = Set(types)
+    }
 }

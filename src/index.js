@@ -1,7 +1,13 @@
 /**
  * External dependencies
+ *
+ * @format
  */
-import { AppRegistry, I18nManager, YellowBox } from 'react-native';
+
+/**
+ * External dependencies
+ */
+import { AppRegistry, I18nManager } from 'react-native';
 import React from 'react';
 
 /**
@@ -15,13 +21,10 @@ import { setLocaleData } from '@wordpress/i18n';
 import './globals';
 import { getTranslation } from '../i18n-cache';
 import initialHtml from './initial-html';
+import setupApiFetch from './api-fetch-setup';
 
 const gutenbergSetup = () => {
-	const apiFetch = require( '@wordpress/api-fetch' ).default;
 	const wpData = require( '@wordpress/data' );
-
-	// wp-api-fetch
-	apiFetch.use( apiFetch.createRootURLMiddleware( 'https://public-api.wordpress.com/' ) );
 
 	// wp-data
 	const userId = 1;
@@ -51,6 +54,7 @@ export class RootComponent extends React.Component {
 	constructor( props ) {
 		super( props );
 		setupLocale( props.locale, props.translations );
+		setupApiFetch();
 		require( '@wordpress/edit-post' ).initializeEditor();
 	}
 
@@ -58,11 +62,16 @@ export class RootComponent extends React.Component {
 		const { initialHtmlModeEnabled } = this.props;
 		let initialData = this.props.initialData;
 		let initialTitle = this.props.initialTitle;
+		let postType = this.props.postType;
+
 		if ( initialData === undefined && __DEV__ ) {
 			initialData = initialHtml;
 		}
 		if ( initialTitle === undefined ) {
 			initialTitle = 'Welcome to Gutenberg!';
+		}
+		if ( postType === undefined ) {
+			postType = 'post';
 		}
 		const Editor = require( '@wordpress/edit-post' ).Editor;
 		return (
@@ -70,14 +79,16 @@ export class RootComponent extends React.Component {
 				initialHtml={ initialData }
 				initialHtmlModeEnabled={ initialHtmlModeEnabled }
 				initialTitle={ initialTitle }
+				postType={ postType }
 			/>
 		);
 	}
 }
 
 export function registerApp() {
-	// Disable require circle warnings showing up in the app (they will still be visible in the console)
-	YellowBox.ignoreWarnings( [ 'Require cycle:' ] );
+	// Disable warnings as they disrupt the user experience in dev mode
+	// eslint-disable-next-line no-console
+	console.disableYellowBox = true;
 
 	gutenbergSetup();
 

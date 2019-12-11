@@ -1,16 +1,33 @@
-public typealias MediaPickerDidPickMediaCallback = (_ id: Int32?, _ url: String?) -> Void
+public struct MediaInfo {
+    public let id: Int32?
+    public let url: String?
+    public let type: String?
 
-public enum MediaPickerSource: String {
-    case mediaLibrary = "SITE_MEDIA_LIBRARY"
-    case deviceLibrary = "DEVICE_MEDIA_LIBRARY"
-    case deviceCamera = "DEVICE_CAMERA"
+    public init(id: Int32?, url: String?, type: String?) {
+        self.id = id
+        self.url = url
+        self.type = type
+    }
 }
 
-public enum MediaFilter: String {
-    case image
-    case video
-    case audio
-    case other
+public typealias MediaPickerDidPickMediaCallback = (_ media: [MediaInfo]?) -> Void
+public typealias MediaImportCallback = (_ media: MediaInfo?) -> Void
+
+/// Declare internal Media Sources.
+/// Label and Type are not relevant since they are delcared on the JS side.
+/// Hopefully soon, this will need to be declared on the client side.
+extension Gutenberg.MediaSource {
+    public static let mediaLibrary = Gutenberg.MediaSource(id: "SITE_MEDIA_LIBRARY", label: "", types: [.image, .video])
+    public static let deviceLibrary = Gutenberg.MediaSource(id: "DEVICE_MEDIA_LIBRARY", label: "", types: [.image, .video])
+    public static let deviceCamera = Gutenberg.MediaSource(id: "DEVICE_CAMERA", label: "", types: [.image, .video])
+
+    static var registeredInternalSources: [Gutenberg.MediaSource] {
+        return [
+            .deviceCamera,
+            .deviceLibrary,
+            .mediaLibrary,
+        ]
+    }
 }
 
 /// Ref. https://github.com/facebook/react-native/blob/master/Libraries/polyfills/console.js#L376
@@ -61,17 +78,17 @@ public protocol GutenbergBridgeDelegate: class {
     ///
     /// - Parameters:
     ///     - source: the source from where the picker will get the media
-    ///     - callback: A callback block to be called with an upload mediaIdentifier and a placeholder image file url, use nil on both parameters to signal that the action was canceled.
+    ///     - callback: A callback block to be called with an array of upload mediaIdentifiers and a placeholder images file url, use nil on both parameters to signal that the action was canceled.
     ///
-    func gutenbergDidRequestMedia(from source: MediaPickerSource, filter: [MediaFilter]?, with callback: @escaping MediaPickerDidPickMediaCallback)
+    func gutenbergDidRequestMedia(from source: Gutenberg.MediaSource, filter: [Gutenberg.MediaType], allowMultipleSelection: Bool, with callback: @escaping MediaPickerDidPickMediaCallback)
 
     /// Tells the delegate that gutenberg JS requested the import of media item based on the provided URL
     ///
     /// - Parameters:
     ///   - url: the url to import
-    ///   - callback: A callback block to be called with an upload mediaIdentifier and a placeholder image file url, use nil on both parameters to signal that the action has failed.
+    ///   - callback: A callback block to be called with an array of upload mediaIdentifiers and a placeholder images file url, use nil on both parameters to signal that the action has failed.
     //
-    func gutenbergDidRequestImport(from url: URL, with callback: @escaping MediaPickerDidPickMediaCallback)
+    func gutenbergDidRequestImport(from url: URL, with callback: @escaping MediaImportCallback)
 
     /// Tells the delegate that an image block requested to reconnect with media uploads coordinator.
     ///
@@ -89,7 +106,6 @@ public protocol GutenbergBridgeDelegate: class {
     ///
     func gutenbergDidLoad()
 
-
     /// Tells the delegate every time the editor has finished layout.
     ///
     func gutenbergDidLayout()
@@ -103,6 +119,21 @@ public protocol GutenbergBridgeDelegate: class {
     /// Tells the delegate that logger method is called.
     ///
     func gutenbergDidEmitLog(message: String, logLevel: LogLevel)
+
+    /// Tells the delegate that the editor has sent an autosave event.
+    ///
+    func editorDidAutosave()
+
+    /// Tells the delegate that the editor needs to perform a network request.
+    /// The paths given to perform the request are from the WP ORG REST API.
+    /// https://developer.wordpress.org/rest-api/reference/
+    /// - Parameter path: The path to perform the request.
+    /// - Parameter completion: Completion handler to be called with the result or an error.
+    func gutenbergDidRequestFetch(path: String, completion: @escaping (Swift.Result<Any, NSError>) -> Void)
+
+    /// Tells the delegate to display a fullscreen image from a given URL
+    ///
+    func gutenbergDidRequestFullscreenImage(with mediaUrl: URL)
 }
 
 // MARK: - Optional GutenbergBridgeDelegate methods

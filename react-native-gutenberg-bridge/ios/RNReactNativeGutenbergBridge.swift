@@ -1,8 +1,10 @@
 @objc (RNReactNativeGutenbergBridge)
 public class RNReactNativeGutenbergBridge: RCTEventEmitter {
     weak var delegate: GutenbergBridgeDelegate?
+    weak var dataSource: GutenbergBridgeDataSource?
     private var isJSLoading = true
     private var hasObservers = false
+
     // MARK: - Messaging methods
 
     @objc
@@ -13,23 +15,48 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
     }
     
     @objc
-    func requestMediaPickFrom(_ source: String, filter: [String]?, callback: @escaping RCTResponseSenderBlock) {
-        let mediaSource: MediaPickerSource = MediaPickerSource(rawValue: source) ?? .deviceLibrary
-        let mediaFilter: [MediaFilter]? = filter?.map({
-            if let type = MediaFilter(rawValue: $0) {
-                return type
-            }
-            return MediaFilter.other
-        })
+    func requestMediaPickFrom(_ source: String, filter: [String]?, allowMultipleSelection: Bool, callback: @escaping RCTResponseSenderBlock) {
+        let mediaSource = getMediaSource(withId: source)
+        let mediaFilter = getMediaTypes(from: filter)
+
         DispatchQueue.main.async {
-            self.delegate?.gutenbergDidRequestMedia(from: mediaSource, filter: mediaFilter, with: { (mediaID, url) in
-                guard let mediaID = mediaID else {
+            self.delegate?.gutenbergDidRequestMedia(from: mediaSource, filter: mediaFilter, allowMultipleSelection: allowMultipleSelection, with: { media in
+                guard let media = media else {
                     callback(nil)
                     return
                 }
-                callback([mediaID, url])
+                let mediaToReturn: [MediaInfo]
+                if allowMultipleSelection {
+                    mediaToReturn = media
+                } else {
+                    mediaToReturn = Array(media.prefix(1))
+                }
+
+                let jsFormattedMedia = mediaToReturn.map { mediaInfo in
+                    return mediaInfo.encodeForJS()
+                }
+                if allowMultipleSelection {
+                    callback([jsFormattedMedia])
+                } else {
+                    callback(jsFormattedMedia)
+                }
             })
         }
+    }
+
+    @objc
+    func getOtherMediaOptions(_ filter: [String]?, callback: @escaping RCTResponseSenderBlock) {
+        guard let dataSource = dataSource else {
+            return callback([])
+        }
+
+        let mediaSources = dataSource.gutenbergMediaSources()
+        let allowedTypes = getMediaTypes(from: filter)
+        let filteredSources = mediaSources.filter {
+            return $0.types.intersection(allowedTypes).isEmpty == false
+        }
+        let jsMediaSources = filteredSources.map { $0.jsRepresentation }
+        callback([jsMediaSources])
     }
 
     @objc
@@ -39,12 +66,12 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
             return
         }
         DispatchQueue.main.async {
-            self.delegate?.gutenbergDidRequestImport(from: url, with: { (mediaID, url) in
-                guard let url = url, let mediaID = mediaID else {
+            self.delegate?.gutenbergDidRequestImport(from: url, with: { mediaInfo in
+                guard let mediaInfo = mediaInfo else {
                     callback(nil)
                     return
-                }
-                callback([mediaID, url])
+                }                
+                callback([mediaInfo.id as Any, mediaInfo.url as Any])
             })
         }
     }
@@ -103,6 +130,18 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
 
         delegate?.gutenbergDidEmitLog(message: message, logLevel: logLevel)
     }
+    
+    @objc
+    func requestImageFullscreenPreview(_ urlString: String) {
+        guard let url = URL(string: urlString) else {
+            assertionFailure("Given String is not a URL")
+            return
+        }
+        
+        DispatchQueue.main.async {
+            self.delegate?.gutenbergDidRequestFullscreenImage(with: url)
+        }
+    }
 
     private func shouldLog(with level: Int) -> Bool {
         return level >= RCTGetLogThreshold().rawValue
@@ -116,6 +155,25 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
     override public func stopObserving() {
         super.stopObserving()
         hasObservers = false
+    }
+
+    @objc
+    func editorDidAutosave() {
+        DispatchQueue.main.async {
+            self.delegate?.editorDidAutosave()
+        }
+    }
+
+    @objc
+    func fetchRequest(_ path: String, resolver: @escaping RCTPromiseResolveBlock, rejecter: @escaping RCTPromiseRejectBlock) {
+        self.delegate?.gutenbergDidRequestFetch(path: path, completion: { (result) in
+            switch result {
+            case .success(let response):
+                resolver(response)
+            case .failure(let error):
+                rejecter("\(error.code)", error.description, error)
+            }
+        })
     }
 
 
@@ -163,11 +221,38 @@ extension RNReactNativeGutenbergBridge {
 // MARK: - Helpers
 
 extension RNReactNativeGutenbergBridge {
-    
     func optionalArray(from optionalString: String?) -> [String]? {
         guard let string = optionalString else {
             return nil
         }
         return [string]
+    }
+
+    private func getMediaSource(withId mediaSourceID: String) -> Gutenberg.MediaSource {
+        let allMediaSources = Gutenberg.MediaSource.registeredInternalSources + (dataSource?.gutenbergMediaSources() ?? [])
+        return allMediaSources.first{ $0.id == mediaSourceID } ?? .deviceLibrary
+    }
+
+    private func getMediaTypes(from jsMediaTypes: [String]?) -> [Gutenberg.MediaType] {
+        return (jsMediaTypes ?? []).map { Gutenberg.MediaType(fromJSString: $0) }
+    }
+}
+
+extension RNReactNativeGutenbergBridge {
+    enum mediaDictKeys {
+        static let IDKey = "id"
+        static let URLKey = "url"
+        static let TypeKey = "type"
+    }
+}
+
+extension MediaInfo {
+
+    func encodeForJS() -> [String: Any] {
+        return [
+            RNReactNativeGutenbergBridge.mediaDictKeys.IDKey: id as Any,
+            RNReactNativeGutenbergBridge.mediaDictKeys.URLKey: url as Any,
+            RNReactNativeGutenbergBridge.mediaDictKeys.TypeKey: type as Any
+        ]
     }
 }
