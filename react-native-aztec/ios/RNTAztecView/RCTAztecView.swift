@@ -178,26 +178,16 @@ class RCTAztecView: Aztec.TextView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        measureWidth()
+        adjustWidth()
         fixLabelPositionForRTLLayout()
         updateContentSizeInRN()
     }
 
-    private func textSize(for width: CGFloat) -> CGSize {
-        let containerSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
-        let container = NSTextContainer(size: containerSize)
-        let storage = NSTextStorage(attributedString: attributedText)
-        let layoutManager = NSLayoutManager()
-        layoutManager.addTextContainer(container)
-        storage.addLayoutManager(layoutManager)
-        let rawSize =  layoutManager.usedRect(for: container).size
-        return rawSize
-    }
-    
-    private func measureWidth() {
-        if(maxWidth > 0 && minWidth > 0) {
-            let newWidth = textSize(for: maxWidth).width
-            if(newWidth != frame.size.width) {
+    private func adjustWidth() {
+        if (maxWidth > 0 && minWidth > 0) {
+            let maxSize = CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)
+            let newWidth = sizeThatFits(maxSize).width
+            if (newWidth != frame.size.width) {
                 frame.size.width = max(newWidth, minWidth)
             }
         }
