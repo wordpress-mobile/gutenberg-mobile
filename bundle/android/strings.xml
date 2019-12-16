@@ -13,6 +13,7 @@
     <string name="gutenberg_native_annotations_sidebar" tools:ignore="UnusedResources">"Annotations Sidebar"</string>
     <string name="gutenberg_native_choose_from_device" tools:ignore="UnusedResources">"Choose from device"</string>
     <string name="gutenberg_native_clear_all_settings" tools:ignore="UnusedResources">"Clear All Settings"</string>
+    <string name="gutenberg_native_coming_soon" tools:ignore="UnusedResources">"Coming Soon"</string>
     <string name="gutenberg_native_content" tools:ignore="UnusedResources">"Content…"</string>
     <string name="gutenberg_native_current_value_is_s" tools:ignore="UnusedResources">"Current value is %s"</string>
     <string name="gutenberg_native_double_tap_and_hold_to_edit" tools:ignore="UnusedResources">"Double tap and hold to edit"</string>
@@ -28,6 +29,8 @@
     <string name="gutenberg_native_double_tap_to_select" tools:ignore="UnusedResources">"Double tap to select"</string>
     <string name="gutenberg_native_double_tap_to_select_a_video" tools:ignore="UnusedResources">"Double tap to select a video"</string>
     <string name="gutenberg_native_double_tap_to_select_an_image" tools:ignore="UnusedResources">"Double tap to select an image"</string>
+    <!-- translators: accessibility text (hint for opening a bottom sheet with help message) -->
+    <string name="gutenberg_native_double_tap_to_show_help" tools:ignore="UnusedResources">"Double tap to show help"</string>
     <!-- translators: accessibility text (hint for switches) -->
     <string name="gutenberg_native_double_tap_to_toggle_setting" tools:ignore="UnusedResources">"Double tap to toggle setting"</string>
     <string name="gutenberg_native_double_tap_to_undo_last_change" tools:ignore="UnusedResources">"Double tap to undo last change"</string>
@@ -73,9 +76,10 @@
     <string name="gutenberg_native_remove_annotations" tools:ignore="UnusedResources">"Remove annotations"</string>
     <!-- translators: accessibility text. %s: current block position (number). -->
     <string name="gutenberg_native_remove_block_at_row_s" tools:ignore="UnusedResources">"Remove block at row %s"</string>
-    <string name="gutenberg_native_reset" tools:ignore="UnusedResources">"RESET"</string>
     <string name="gutenberg_native_reset_block" tools:ignore="UnusedResources">"Reset Block"</string>
     <string name="gutenberg_native_row_d" tools:ignore="UnusedResources">"Row %d."</string>
+    <string name="gutenberg_native_s_aren_t_yet_supported_on_wordpress_for_android" tools:ignore="UnusedResources">"'%s' aren't yet supported on WordPress for Android"</string>
+    <string name="gutenberg_native_s_aren_t_yet_supported_on_wordpress_for_ios" tools:ignore="UnusedResources">"'%s' aren't yet supported on WordPress for iOS"</string>
     <!-- translators: accessibility text. %s: block name. -->
     <string name="gutenberg_native_s_block" tools:ignore="UnusedResources">"%s Block"</string>
     <!-- translators: accessibility text for the media block empty state. %s: media type -->

@@ -1,6 +1,8 @@
 import Foundation
 
 private func dummy() {
+    _ = NSLocalizedString("'%s' aren't yet supported on WordPress for Android", comment: "")
+    _ = NSLocalizedString("'%s' aren't yet supported on WordPress for iOS", comment: "")
     _ = NSLocalizedString("'%s' isn't yet supported on WordPress for Android", comment: "translators: %s: Name of the block")
     _ = NSLocalizedString("'%s' isn't yet supported on WordPress for iOS", comment: "")
     _ = NSLocalizedString("%s Block", comment: "translators: accessibility text. %s: block name.")
@@ -19,6 +21,7 @@ private func dummy() {
     _ = NSLocalizedString("Annotations Sidebar", comment: "")
     _ = NSLocalizedString("Choose from device", comment: "")
     _ = NSLocalizedString("Clear All Settings", comment: "")
+    _ = NSLocalizedString("Coming Soon", comment: "")
     _ = NSLocalizedString("Content…", comment: "")
     _ = NSLocalizedString("Current value is %s", comment: "")
     _ = NSLocalizedString("Double tap and hold to edit", comment: "")
@@ -32,6 +35,7 @@ private func dummy() {
     _ = NSLocalizedString("Double tap to select", comment: "")
     _ = NSLocalizedString("Double tap to select a video", comment: "")
     _ = NSLocalizedString("Double tap to select an image", comment: "")
+    _ = NSLocalizedString("Double tap to show help", comment: "translators: accessibility text (hint for opening a bottom sheet with help message)")
     _ = NSLocalizedString("Double tap to toggle setting", comment: "translators: accessibility text (hint for switches)")
     _ = NSLocalizedString("Double tap to undo last change", comment: "")
     _ = NSLocalizedString("Empty", comment: "")
@@ -66,7 +70,6 @@ private func dummy() {
     _ = NSLocalizedString("Problem opening the video", comment: "")
     _ = NSLocalizedString("Remove annotations", comment: "")
     _ = NSLocalizedString("Remove block at row %s", comment: "translators: accessibility text. %s: current block position (number).")
-    _ = NSLocalizedString("RESET", comment: "")
     _ = NSLocalizedString("Reset Block", comment: "")
     _ = NSLocalizedString("Row %d.", comment: "")
     _ = NSLocalizedString("Show section", comment: "translators: Checkbox toggle label")
