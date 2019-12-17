@@ -1,13 +1,13 @@
 import Foundation
 
 private func dummy() {
-    _ = NSLocalizedString("'%s' aren't yet supported on WordPress for Android", comment: "")
-    _ = NSLocalizedString("'%s' aren't yet supported on WordPress for iOS", comment: "")
-    _ = NSLocalizedString("'%s' isn't yet supported on WordPress for Android", comment: "translators: %s: Name of the block")
-    _ = NSLocalizedString("'%s' isn't yet supported on WordPress for iOS", comment: "")
+    _ = NSLocalizedString("%s aren't yet supported on WordPress for Android", comment: "")
+    _ = NSLocalizedString("%s aren't yet supported on WordPress for iOS", comment: "")
     _ = NSLocalizedString("%s Block", comment: "translators: accessibility text. %s: block name.")
     _ = NSLocalizedString("%s block. Empty", comment: "translators: accessibility text for the media block empty state. %s: media type")
     _ = NSLocalizedString("%s block. This block has invalid content", comment: "translators: accessibility text for blocks with invalid content. %d: localized block title")
+    _ = NSLocalizedString("%s isn't yet supported on WordPress for Android", comment: "translators: %s: Name of the block")
+    _ = NSLocalizedString("%s isn't yet supported on WordPress for iOS", comment: "")
     _ = NSLocalizedString("Add a description", comment: "")
     _ = NSLocalizedString("Add annotation", comment: "")
     _ = NSLocalizedString("ADD BLOCK HERE", comment: "")

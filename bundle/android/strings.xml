@@ -78,8 +78,8 @@
     <string name="gutenberg_native_remove_block_at_row_s" tools:ignore="UnusedResources">"Remove block at row %s"</string>
     <string name="gutenberg_native_reset_block" tools:ignore="UnusedResources">"Reset Block"</string>
     <string name="gutenberg_native_row_d" tools:ignore="UnusedResources">"Row %d."</string>
-    <string name="gutenberg_native_s_aren_t_yet_supported_on_wordpress_for_android" tools:ignore="UnusedResources">"'%s' aren't yet supported on WordPress for Android"</string>
-    <string name="gutenberg_native_s_aren_t_yet_supported_on_wordpress_for_ios" tools:ignore="UnusedResources">"'%s' aren't yet supported on WordPress for iOS"</string>
+    <string name="gutenberg_native_s_aren_t_yet_supported_on_wordpress_for_android" tools:ignore="UnusedResources">"%s aren't yet supported on WordPress for Android"</string>
+    <string name="gutenberg_native_s_aren_t_yet_supported_on_wordpress_for_ios" tools:ignore="UnusedResources">"%s aren't yet supported on WordPress for iOS"</string>
     <!-- translators: accessibility text. %s: block name. -->
     <string name="gutenberg_native_s_block" tools:ignore="UnusedResources">"%s Block"</string>
     <!-- translators: accessibility text for the media block empty state. %s: media type -->
@@ -87,8 +87,8 @@
     <!-- translators: accessibility text for blocks with invalid content. %d: localized block title -->
     <string name="gutenberg_native_s_block_this_block_has_invalid_content" tools:ignore="UnusedResources">"%s block. This block has invalid content"</string>
     <!-- translators: %s: Name of the block -->
-    <string name="gutenberg_native_s_isn_t_yet_supported_on_wordpress_for_android" tools:ignore="UnusedResources">"'%s' isn't yet supported on WordPress for Android"</string>
-    <string name="gutenberg_native_s_isn_t_yet_supported_on_wordpress_for_ios" tools:ignore="UnusedResources">"'%s' isn't yet supported on WordPress for iOS"</string>
+    <string name="gutenberg_native_s_isn_t_yet_supported_on_wordpress_for_android" tools:ignore="UnusedResources">"%s isn't yet supported on WordPress for Android"</string>
+    <string name="gutenberg_native_s_isn_t_yet_supported_on_wordpress_for_ios" tools:ignore="UnusedResources">"%s isn't yet supported on WordPress for iOS"</string>
     <!-- translators: Checkbox toggle label -->
     <string name="gutenberg_native_show_section" tools:ignore="UnusedResources">"Show section"</string>
     <string name="gutenberg_native_sidebar_title_plugin" tools:ignore="UnusedResources">"Sidebar title plugin"</string>
