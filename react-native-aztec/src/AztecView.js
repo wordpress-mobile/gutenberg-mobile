@@ -7,6 +7,7 @@ const AztecManager = UIManager.getViewManagerConfig('RCTAztecView');
 
 class AztecView extends React.Component {
   selectionEndCaretY: number;
+  focused: Boolean = false;
 
   static propTypes = {
     activeFormats: PropTypes.array,
@@ -57,10 +58,6 @@ class AztecView extends React.Component {
   }
 
   _onEnter = (event) => {
-    if (!this.isFocused()) {
-      return;
-    }
-
     if (!this.props.onEnter) {
       return;
     }
@@ -91,34 +88,32 @@ class AztecView extends React.Component {
   }
 
   _onFocus = (event) => {
-    if (!this.props.onFocus) {
-      return;
-    }
-
+    this.focused = true;
     const { onFocus } = this.props;
-    onFocus(event);
+
+    if (onFocus) {
+      onFocus(event);
+    }
   }
   
   _onBlur = (event) => {
+    this.focused = false;
     this.selectionEndCaretY = null;
-    TextInputState.blurTextInput(ReactNative.findNodeHandle(this));
-
-    if (!this.props.onBlur) {
-      return;
-    }
-
     const { onBlur } = this.props;
-    onBlur(event);
+
+    if (onBlur) {
+      onBlur(event);
+    }
   }
 
   _onSelectionChange = (event) => {
-    if ( this.props.onSelectionChange ) {
+    if ( this.focused && this.props.onSelectionChange ) {
       const { selectionStart, selectionEnd, text } = event.nativeEvent;
       const { onSelectionChange } = this.props;
       onSelectionChange( selectionStart, selectionEnd, text, event );
     }
 
-    if ( this.props.onCaretVerticalPositionChange && 
+    if ( this.focused && this.props.onCaretVerticalPositionChange && 
       this.selectionEndCaretY != event.nativeEvent.selectionEndCaretY ) {
         const caretY = event.nativeEvent.selectionEndCaretY;
         this.props.onCaretVerticalPositionChange( event.target, caretY, this.selectionEndCaretY );
@@ -127,23 +122,33 @@ class AztecView extends React.Component {
   }
 
   blur = () => {
-    TextInputState.blurTextInput(ReactNative.findNodeHandle(this));
+    if ( this.focused ) {
+      if (Platform.OS === "ios") {
+        UIManager.blur(ReactNative.findNodeHandle(this))
+      } else {
+        this.dispatch(UIManager.getViewManagerConfig('AndroidTextInput').Commands.focusTextInput)
+      }
+    }
+    this.focused = false;
   }
 
   focus = () => {
-    TextInputState.focusTextInput(ReactNative.findNodeHandle(this));
+    if ( !this.focused ) {
+      if (Platform.OS === "ios") {
+        UIManager.focus(ReactNative.findNodeHandle(this))
+      } else {
+        this.dispatch(UIManager.getViewManagerConfig('AndroidTextInput').Commands.blurTextInput)
+      }
+    }
+    this.focused = true;
   }
 
   isFocused = () => {
-    const focusedField = TextInputState.currentlyFocusedField();
-    return focusedField && ( focusedField === ReactNative.findNodeHandle(this) );
+    return this.focused
   }
 
   _onPress = (event) => {
-	if ( ! this.isFocused() ) {
-		this.focus(event); // Call to move the focus in RN way (TextInputState)
 		this._onFocus(event); // Check if there are listeners set on the focus event
-	}
   }
 
   _onAztecFocus = (event) => {
