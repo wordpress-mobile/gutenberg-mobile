@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactNative, {requireNativeComponent, TextViewPropTypes, UIManager, ColorPropType, TouchableWithoutFeedback, Platform} from 'react-native';
-import TextInputState from 'react-native/lib/TextInputState';
 
 const AztecManager = UIManager.getViewManagerConfig('RCTAztecView');
 
@@ -107,14 +106,14 @@ class AztecView extends React.Component {
   }
 
   _onSelectionChange = (event) => {
-    if ( this.focused && this.props.onSelectionChange ) {
+    if (this.focused && this.props.onSelectionChange) {
       const { selectionStart, selectionEnd, text } = event.nativeEvent;
       const { onSelectionChange } = this.props;
       onSelectionChange( selectionStart, selectionEnd, text, event );
     }
 
-    if ( this.focused && this.props.onCaretVerticalPositionChange && 
-      this.selectionEndCaretY != event.nativeEvent.selectionEndCaretY ) {
+    if (this.focused && this.props.onCaretVerticalPositionChange && 
+      this.selectionEndCaretY != event.nativeEvent.selectionEndCaretY) {
         const caretY = event.nativeEvent.selectionEndCaretY;
         this.props.onCaretVerticalPositionChange( event.target, caretY, this.selectionEndCaretY );
         this.selectionEndCaretY = caretY;
@@ -122,30 +121,28 @@ class AztecView extends React.Component {
   }
 
   blur = () => {
-    if ( this.focused ) {
+    if (this.focused) {
       if (Platform.OS === "ios") {
         UIManager.blur(ReactNative.findNodeHandle(this))
       } else {
-        this.dispatch(UIManager.getViewManagerConfig('AndroidTextInput').Commands.focusTextInput)
+        this.dispatch(UIManager.getViewManagerConfig('AndroidTextInput').Commands.blurTextInput)
       }
     }
     this.focused = false;
   }
 
   focus = () => {
-    if ( !this.focused ) {
+    if (!this.focused) {
       if (Platform.OS === "ios") {
         UIManager.focus(ReactNative.findNodeHandle(this))
       } else {
-        this.dispatch(UIManager.getViewManagerConfig('AndroidTextInput').Commands.blurTextInput)
+        this.dispatch(UIManager.getViewManagerConfig('AndroidTextInput').Commands.focusTextInput)
       }
     }
     this.focused = true;
   }
 
-  isFocused = () => {
-    return this.focused
-  }
+  isFocused = () => this.focused
 
   _onPress = (event) => {
 		this._onFocus(event); // Check if there are listeners set on the focus event
