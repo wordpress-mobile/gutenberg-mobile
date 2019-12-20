@@ -66,8 +66,8 @@ class AztecView extends React.Component {
   }
 
   _onEnter = (event) => {
-    if (!this.isFocused()) {	
-      return;	
+    if (!this.isFocused()) {
+      return;
     }
 
     if (!this.props.onEnter) {
@@ -100,31 +100,35 @@ class AztecView extends React.Component {
   }
 
   _onFocus = (event) => {
-    const { onFocus } = this.props;
-    if (onFocus) {
-      onFocus(event);
+    if (!this.props.onFocus) {
+      return;
     }
+
+    const { onFocus } = this.props;
+    onFocus(event);
   }
   
   _onBlur = (event) => {
     this.selectionEndCaretY = null;
-    const { onBlur } = this.props;
     TextInputState.blurTextInput(ReactNative.findNodeHandle(this));
 
-    if (onBlur) {
-      onBlur(event);
+    if (!this.props.onBlur) {
+      return;
     }
+
+    const { onBlur } = this.props;
+    onBlur(event);
   }
 
   _onSelectionChange = (event) => {
-    if (this.props.onSelectionChange) {
+    if ( this.props.onSelectionChange ) {
       const { selectionStart, selectionEnd, text } = event.nativeEvent;
       const { onSelectionChange } = this.props;
       onSelectionChange( selectionStart, selectionEnd, text, event );
     }
 
-    if (this.props.onCaretVerticalPositionChange && 
-      this.selectionEndCaretY != event.nativeEvent.selectionEndCaretY) {
+    if ( this.props.onCaretVerticalPositionChange && 
+      this.selectionEndCaretY != event.nativeEvent.selectionEndCaretY ) {
         const caretY = event.nativeEvent.selectionEndCaretY;
         this.props.onCaretVerticalPositionChange( event.target, caretY, this.selectionEndCaretY );
         this.selectionEndCaretY = caretY;
@@ -140,15 +144,15 @@ class AztecView extends React.Component {
   }
 
   isFocused = () => {
-    const focusedField = TextInputState.currentlyFocusedField();	
+    const focusedField = TextInputState.currentlyFocusedField();
     return focusedField && ( focusedField === ReactNative.findNodeHandle(this) );
   }
 
   _onPress = (event) => {
-    if( !this.isFocused() ) {
-      this.focus();
-      this._onFocus(event); // Check if there are listeners set on the focus event
-    }
+	if ( ! this.isFocused() ) {
+		this.focus(); // Call to move the focus in RN way (TextInputState)
+		this._onFocus(event); // Check if there are listeners set on the focus event
+	}
   }
 
   _onAztecFocus = (event) => {
