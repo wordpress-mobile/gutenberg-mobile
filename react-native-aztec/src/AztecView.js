@@ -7,7 +7,6 @@ const AztecManager = UIManager.getViewManagerConfig('RCTAztecView');
 
 class AztecView extends React.Component {
   selectionEndCaretY: number;
-  focused: Boolean = false;
 
   static propTypes = {
     activeFormats: PropTypes.array,
