@@ -34,14 +34,6 @@ class AztecView extends React.Component {
     ...TextViewPropTypes, // include the default view properties
   }
 
-  componentDidMount() {
-    TextInputState.registerInput(ReactNative.findNodeHandle(this))
-  }
-
-  componentWillUnmount() {
-    TextInputState.unregisterInput(ReactNative.findNodeHandle(this))
-  }
-
   dispatch(command, params) {
     params = params || [];
     UIManager.dispatchViewManagerCommand(
