@@ -143,6 +143,7 @@ jobs:
     - run:
         name: Run Device Tests
         command: |
+          xcrun simctl list
           yarn device-tests
         environment:
           JEST_JUNIT_OUTPUT: "reports/test-results/ios-test-results.xml"
