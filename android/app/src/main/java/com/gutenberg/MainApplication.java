@@ -115,6 +115,11 @@ public class MainApplication extends Application implements ReactApplication {
 
             @Override
             public void performRequest(String path, Consumer<String> onSuccess, Consumer<String> onError) {}
+
+            @Override
+            public void getPreferredColorScheme(PreferredColorSchemeReceivedCallback preferredColorSchemeReceivedCallback) {
+                preferredColorSchemeReceivedCallback.onPreferredColorSchemeReceived("light");
+            }
         });
 
         return new ReactNativeHost(this) {
