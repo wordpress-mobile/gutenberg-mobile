@@ -1,3 +1,7 @@
+1.21.0
+------
+* [Android] Dark Mode
+
 1.20.0
 ------
 * Fix bug where image placeholders would sometimes not be shown
