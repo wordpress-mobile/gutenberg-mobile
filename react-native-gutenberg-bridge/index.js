@@ -109,4 +109,8 @@ export function fetchRequest( path ) {
 	return RNReactNativeGutenbergBridge.fetchRequest( path );
 }
 
+export function getPreferredColorScheme( callback ) {
+	return RNReactNativeGutenbergBridge.getPreferredColorScheme( callback );
+}
+
 export default RNReactNativeGutenbergBridge;

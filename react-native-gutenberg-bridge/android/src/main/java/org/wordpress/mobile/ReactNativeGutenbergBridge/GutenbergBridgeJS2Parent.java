@@ -1,6 +1,5 @@
 package org.wordpress.mobile.ReactNativeGutenbergBridge;
 
-import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableMap;
 
@@ -32,6 +31,10 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
         void onMediaFileUploadProgress(int mediaId, float progress);
         void onMediaFileUploadSucceeded(int mediaId, String mediaUrl, int serverId);
         void onMediaFileUploadFailed(int mediaId);
+    }
+
+    interface PreferredColorSchemeReceivedCallback {
+        void onPreferredColorSchemeReceived(String preferredColorScheme);
     }
 
     // Ref: https://github.com/facebook/react-native/blob/master/Libraries/polyfills/console.js#L376
@@ -106,4 +109,6 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
     void requestMediaPickFrom(String mediaSource, MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection);
 
     void requestImageFullscreenPreview(String mediaUrl);
+
+    void getPreferredColorScheme(PreferredColorSchemeReceivedCallback preferredColorSchemeReceivedCallback);
 }
