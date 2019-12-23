@@ -12,6 +12,7 @@ import {
 	stopDriver,
 	isAndroid,
 	swipeDown,
+	swipeUp,
 	clickMiddleOfElement,
 } from './helpers/utils';
 import testData from './helpers/test-data';
@@ -68,14 +69,15 @@ describe( 'Gutenberg Editor tests for Block insertion', () => {
 
 		// Workaround for now since deleting the first element causes a crash on CI for Android
 		if ( isAndroid() ) {
-			paragraphBlockElement = await editorPage.getParagraphBlockAtPosition( 3, { autoscroll: true } );
-			await paragraphBlockElement.click();
-			await editorPage.removeParagraphBlockAtPosition( 3 );
-			for ( let i = 3; i > 0; i-- ) {
+			for ( let i = 4; i > 0; i-- ) {
 				// wait for accessibility ids to update
 				await driver.sleep( 1000 );
 				paragraphBlockElement = await editorPage.getParagraphBlockAtPosition( i, { autoscroll: true } );
 				await paragraphBlockElement.click();
+
+				await driver.sleep( 500 ); // wait for the click to finish reliably
+				await swipeUp( driver ); // swipe up to bring the Trash icon into view
+
 				await editorPage.removeParagraphBlockAtPosition( i );
 			}
 		} else {
