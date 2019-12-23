@@ -51,6 +51,9 @@ describe( 'Gutenberg Editor tests', () => {
 
 		await editorPage.sendTextToParagraphBlock( paragraphBlockElement, testData.mediumText );
 
+		// wait for text sending to settle before rotating
+		await driver.sleep( 1000 );
+
 		await toggleOrientation( driver );
 		// On Android the keyboard hides the add block button, let's hide it after rotation
 		if ( isAndroid() ) {
@@ -69,6 +72,10 @@ describe( 'Gutenberg Editor tests', () => {
 			paragraphBlockElement = await editorPage.getParagraphBlockAtPosition( 2 );
 		}
 		await editorPage.sendTextToParagraphBlock( paragraphBlockElement, testData.mediumText );
+
+		// wait for text sending to settle before rotating
+		await driver.sleep( 1000 );
+
 		await toggleOrientation( driver );
 
 		await editorPage.verifyHtmlContent( testData.deviceRotationHtml );
