@@ -49,7 +49,7 @@ describe( 'Gutenberg Editor tests', () => {
 			await paragraphBlockElement.click();
 		}
 
-		await editorPage.sendTextToParagraphBlock( paragraphBlockElement, testData.mediumText );
+		await editorPage.sendTextToParagraphBlock( paragraphBlockElement, testData.shortText );
 
 		// wait for text sending to settle before rotating
 		await driver.sleep( 5000 );
@@ -71,7 +71,7 @@ describe( 'Gutenberg Editor tests', () => {
 			await driver.hideDeviceKeyboard();
 			paragraphBlockElement = await editorPage.getParagraphBlockAtPosition( 2 );
 		}
-		await editorPage.sendTextToParagraphBlock( paragraphBlockElement, testData.mediumText );
+		await editorPage.sendTextToParagraphBlock( paragraphBlockElement, testData.shortText );
 
 		// wait for text sending to settle before rotating
 		await driver.sleep( 5000 );
