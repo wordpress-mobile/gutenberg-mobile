@@ -170,7 +170,7 @@ const typeString = async ( driver: wd.PromiseChainWebdriver, element: wd.Promise
 		const paragraphs = str.split( '\n' );
 
 		for ( let i = 0; i < paragraphs.length; i++ ) {
-			const paragraph = paragraphs[ i ];
+			const paragraph = paragraphs[ i ].replace( /[ ]/g, '%s' );
 			if ( paragraph in strToKeycode ) {
 				await driver.pressKeycode( strToKeycode[ paragraph ] );
 			} else {
