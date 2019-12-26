@@ -23,7 +23,6 @@ import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactInstanceManagerBuilder;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.ReactRootView;
-import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.common.LifecycleState;
@@ -341,15 +340,17 @@ public class WPAndroidGlueCode {
     @Deprecated
     public void onCreateView(Context initContext, boolean htmlModeEnabled,
                              Application application, boolean isDebug, boolean buildGutenbergFromSource,
-                             boolean isNewPost, String localeString, Bundle translations) {
+                             boolean isNewPost, String localeString, Bundle translations, int colorBackground) {
         onCreateView(initContext, htmlModeEnabled, application, isDebug, buildGutenbergFromSource, "post", isNewPost
-        , localeString, translations);
+        , localeString, translations, colorBackground);
     }
 
     public void onCreateView(Context initContext, boolean htmlModeEnabled,
                              Application application, boolean isDebug, boolean buildGutenbergFromSource,
-                             String postType, boolean isNewPost, String localeString, Bundle translations) {
+                             String postType, boolean isNewPost, String localeString, Bundle translations,
+                             int colorBackground) {
         mReactRootView = new ReactRootView(new MutableContextWrapper(initContext));
+        mReactRootView.setBackgroundColor(colorBackground);
 
         ReactInstanceManagerBuilder builder =
                 ReactInstanceManager.builder()
