@@ -1,6 +1,7 @@
 package com.gutenberg;
 
 import android.app.Application;
+import android.content.res.Configuration;
 import android.util.Log;
 
 import androidx.core.util.Consumer;
@@ -118,7 +119,15 @@ public class MainApplication extends Application implements ReactApplication {
 
             @Override
             public void getPreferredColorScheme(PreferredColorSchemeReceivedCallback preferredColorSchemeReceivedCallback) {
-                preferredColorSchemeReceivedCallback.onPreferredColorSchemeReceived("light");
+                Configuration configuration = getResources().getConfiguration();
+                int currentNightMode = configuration.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+                String preferredColorScheme = "light";
+                if (currentNightMode == Configuration.UI_MODE_NIGHT_YES) {
+                    preferredColorScheme = "dark";
+                }
+
+                preferredColorSchemeReceivedCallback.onPreferredColorSchemeReceived(preferredColorScheme);
             }
         });
 
