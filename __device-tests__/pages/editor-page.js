@@ -174,18 +174,18 @@ export default class EditorPage {
 				if ( isAndroid() ) {
 					const blockElement = await this.getBlockAtPosition( 1, '' );
 					await blockElement.click();
-					await this.removeBlockAtPosition( 1 );
+					await this.removeBlockAtPosition( 1, '' );
 				} else {
 					const blockElement = await this.getBlockAtPosition( 2, '' );
 					await blockElement.click();
 					await swipeUp( this.driver );
-					await this.removeBlockAtPosition( 2 );
+					await this.removeBlockAtPosition( 2, '' );
 				}
 				blockExist = true;
 			} else {
 				const blockElement = await this.getBlockAtPosition( 1, '' );
 				await blockElement.click();
-				await this.removeBlockAtPosition( 1 );
+				await this.removeBlockAtPosition( 1, '' );
 				return;
 			}
 		}
