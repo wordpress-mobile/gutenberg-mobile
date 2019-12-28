@@ -152,7 +152,7 @@ export default class EditorPage {
 	// =========================
 	// Block toolbar functions
 	// =========================
-
+ 
 	async addNewBlock( blockName: string ) {
 		// Click add button
 		let identifier = 'Add block';
@@ -166,6 +166,30 @@ export default class EditorPage {
 		const blockButton = await this.driver.elementByAccessibilityId( blockName );
 		await blockButton.click();
 	}
+
+	async removeBlocks() {
+        let blockExist = await this.hasBlockAtPosition( 1 );
+        while ( blockExist ) {
+            if ( await this.hasBlockAtPosition( 2 ) ) {
+                if ( isAndroid() ) {
+                    const blockElement = await this.getBlockAtPosition( 1, '' );
+                    await blockElement.click();
+                    await this.removeBlockAtPosition( 1 );
+                } else {
+                    const blockElement = await this.getBlockAtPosition( 2, '' );
+                    await blockElement.click();
+                    await swipeUp( this.driver );
+                    await this.removeBlockAtPosition( 2 );
+                }
+                blockExist = true;
+            } else {
+                const blockElement = await this.getBlockAtPosition( 1, '' );
+                await blockElement.click();
+                await this.removeBlockAtPosition( 1 );
+                return;
+            }
+        }
+    }
 
 	// =========================
 	// Inline toolbar functions
