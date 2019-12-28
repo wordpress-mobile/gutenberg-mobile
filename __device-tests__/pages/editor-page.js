@@ -40,7 +40,7 @@ export default class EditorPage {
 	}
 
 	async getBlockList() {
-		return this.driver.hasElementByAccessibilityId( 'block-list' );
+		return await this.driver.hasElementByAccessibilityId( 'block-list' );
 	}
 
 	// Finds the wd element for new block that was added and sets the element attribute
@@ -153,30 +153,6 @@ export default class EditorPage {
 	// Block toolbar functions
 	// =========================
 
-	async removeBlocks() {
-		let blockExist = await this.hasBlockAtPosition( 1 );
-		while ( blockExist ) {
-			if ( await this.hasBlockAtPosition( 2 ) ) {
-				if ( isAndroid() ) {
-					const blockElement = await this.getBlockAtPosition( 1, '' );
-					await blockElement.click();
-					await this.removeBlockAtPosition( 1 );
-				} else {
-					const blockElement = await this.getBlockAtPosition( 2, '' );
-					await blockElement.click();
-					await swipeUp( this.driver );
-					await this.removeBlockAtPosition( 2 );
-				}
-				blockExist = true;
-			} else {
-				const blockElement = await this.getBlockAtPosition( 1, '' );
-				await blockElement.click();
-				await this.removeBlockAtPosition( 1 );
-				return;
-			}
-		}
-	}
-
 	async addNewBlock( blockName: string ) {
 		// Click add button
 		let identifier = 'Add block';
@@ -237,8 +213,8 @@ export default class EditorPage {
 
 		const parentId = `${ blockName } Block. Row ${ position }.`;
 		const parentLocator = `//*[contains(@${ this.accessibilityIdXPathAttrib }, "${ parentId }")]`;
-		let removeBlockLocator = `${ parentLocator }/following-sibling::*`;
-		removeBlockLocator += isAndroid() ? '' : '//*';
+		let removeBlockLocator = `${ parentLocator }`;
+		removeBlockLocator += isAndroid() ? '//*' : '//XCUIElementTypeButton';
 		let removeButtonIdentifier = `Remove block at row ${ position }`;
 
 		if ( isAndroid() ) {

@@ -37,10 +37,6 @@ describe( 'Gutenberg Editor tests for List block (end)', () => {
 		editorPage = new EditorPage( driver );
 	} );
 
-	afterEach( async () => {
-		await editorPage.removeBlocks();
-	} );
-
 	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );
 	} );

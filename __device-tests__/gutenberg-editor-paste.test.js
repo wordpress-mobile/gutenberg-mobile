@@ -49,10 +49,6 @@ describe( 'Gutenberg Editor paste tests', () => {
 		editorPage = new EditorPage( driver );
 	} );
 
-	afterEach( async () => {
-		await editorPage.removeBlocks();
-	} );
-
 	it( 'copies plain text from one paragraph block and pastes in another', async () => {
 		await editorPage.addNewParagraphBlock();
 		const paragraphBlockElement = await editorPage.getParagraphBlockAtPosition( 1 );

@@ -39,10 +39,6 @@ describe( 'Gutenberg Editor Image Block tests', () => {
 		editorPage = new EditorPage( driver );
 	} );
 
-	afterEach( async () => {
-		await editorPage.removeBlocks();
-	} );
-
 	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );
 	} );
@@ -70,6 +66,7 @@ describe( 'Gutenberg Editor Image Block tests', () => {
 			imageBlock = await editorPage.getImageBlockAtPosition( 1 );
 			await imageBlock.click();
 		}
+		await editorPage.removeImageBlockAtPosition( 1 );
 	} );
 
 	it( 'should be able to add an image block with multiple paragraph blocks', async () => {
