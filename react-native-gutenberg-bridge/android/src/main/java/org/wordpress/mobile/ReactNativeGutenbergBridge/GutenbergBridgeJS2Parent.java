@@ -1,14 +1,11 @@
 package org.wordpress.mobile.ReactNativeGutenbergBridge;
 
-import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableMap;
-
-import org.wordpress.mobile.WPAndroidGlue.MediaOption;
-import org.wordpress.mobile.WPAndroidGlue.RequestExecutor;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.wordpress.mobile.WPAndroidGlue.MediaOption;
+import org.wordpress.mobile.WPAndroidGlue.RequestExecutor;
 
 public interface GutenbergBridgeJS2Parent extends RequestExecutor {
     interface RNMedia {

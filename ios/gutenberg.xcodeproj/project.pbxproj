@@ -20,6 +20,7 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		16AEBAC87CB24520ADA106D7 /* libRNSafeArea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F3DF692A7C4E5994CD3CBB /* libRNSafeArea.a */; };
+		1EE61FB623C0E47F003727EC /* ShortcutCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE61FB523C0E47F003727EC /* ShortcutCoordinator.swift */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4C21E0B4AEC006451C7 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157351DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		2D02E4C31E0B4AEC006451C7 /* libRCTImage-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */; };
@@ -419,6 +420,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = gutenberg/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = gutenberg/Info.plist; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		1EE61FB523C0E47F003727EC /* ShortcutCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShortcutCoordinator.swift; path = gutenberg/ShortcutCoordinator.swift; sourceTree = "<group>"; };
 		24AEC4495B174D4C9E96E630 /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTVideo.xcodeproj; path = "../node_modules/react-native-video/ios/RCTVideo.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* gutenberg-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gutenberg-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* gutenberg-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gutenberg-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -600,6 +602,7 @@
 				7EC7328E21907E3F00FED2E6 /* GutenbergViewController.swift */,
 				FF9A6F1621FA8E2500D36D14 /* MediaPickCoordinator.swift */,
 				FF6836C722035EAB00A0C562 /* MediaUploadCoordinator.swift */,
+				1EE61FB523C0E47F003727EC /* ShortcutCoordinator.swift */,
 				F151983A2100DC3D000F6E97 /* MediaProvider.swift */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -921,6 +924,7 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						LastSwiftMigration = 1130;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
@@ -1434,6 +1438,7 @@
 				F151983C2100DC3D000F6E97 /* AppDelegate.swift in Sources */,
 				FF83DAA92226905A00A34C93 /* CustomImageLoader.swift in Sources */,
 				FF9A6F4121FA8E2500D36D14 /* MediaPickCoordinator.swift in Sources */,
+				1EE61FB623C0E47F003727EC /* ShortcutCoordinator.swift in Sources */,
 				F151983D2100DC3D000F6E97 /* MediaProvider.swift in Sources */,
 				FF6836C822035EAB00A0C562 /* MediaUploadCoordinator.swift in Sources */,
 				7EC7328F21907E3F00FED2E6 /* GutenbergViewController.swift in Sources */,
@@ -1493,6 +1498,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1522,6 +1528,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gutenberg.app/gutenberg";
 			};
 			name = Debug;
@@ -1531,6 +1539,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1557,6 +1566,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gutenberg.app/gutenberg";
 			};
 			name = Release;
