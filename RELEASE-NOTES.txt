@@ -1,6 +1,7 @@
 1.20.0
 ------
 * Fix bug where image placeholders would sometimes not be shown
+* Add keyboard shortcuts for bold, italics, and insert/edit link
 
 1.19.0
 ------

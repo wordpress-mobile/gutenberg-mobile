@@ -97,6 +97,11 @@ public class Gutenberg: NSObject {
         bridgeModule.sendEvent(withName: EventName.updateHtml, body: ["html": html])
     }
     
+    public func sendShortcut(_ shortcut: Shortcut) {
+        let event = mapShortcutToEvent(shortcut)
+        bridgeModule.sendEvent(withName: event, body: nil)
+    }
+    
     public func mediaUploadUpdate(id: Int32, state: MediaUploadState, progress: Float, url: URL?, serverID: Int32?) {
         var data: [String: Any] = ["mediaId": id, "state": state.rawValue, "progress": progress];
         if let url = url {
@@ -125,6 +130,14 @@ public class Gutenberg: NSObject {
         let url = sourceURL(for: bridge)
         return !(url?.isFileURL ?? true)
     }
+    
+    private func mapShortcutToEvent(_ shortcut: Shortcut) -> String {
+        switch(shortcut) {
+        case .bold: return EventName.toggleBold
+        case .italic: return EventName.toggleItalic
+        case .addEditLink: return EventName.addEditLink
+        }
+    }
 }
 
 extension Gutenberg: RCTBridgeDelegate {
@@ -150,6 +163,15 @@ extension Gutenberg {
         static let mediaUpload = "mediaUpload"
         static let setFocusOnTitle = "setFocusOnTitle"
         static let mediaAppend = "mediaAppend"
+        static let toggleBold = "toggleBold"
+        static let toggleItalic = "toggleItalic"
+        static let addEditLink = "addEditLink"
+    }
+        
+    public enum Shortcut {
+        case bold
+        case italic
+        case addEditLink
     }
     
     public enum MediaUploadState: Int {

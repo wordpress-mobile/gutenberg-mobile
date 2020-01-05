@@ -13,6 +13,10 @@ class GutenbergViewController: UIViewController {
         return mediaUploadCoordinator
     }()
     fileprivate var longPressGesture: UILongPressGestureRecognizer!
+    fileprivate lazy var shortcutCoordinator: ShortcutCoordinator = {
+        let shortcutCoordinator = ShortcutCoordinator(gutenberg: gutenberg)
+        return shortcutCoordinator
+    }()
     
     override func loadView() {
         view = gutenberg.rootView
@@ -41,6 +45,12 @@ class GutenbergViewController: UIViewController {
     
     @objc func handleLongPress() {
         NotificationCenter.default.post(Notification(name: MediaUploadCoordinator.failUpload ))
+    }
+    
+    override var next: UIResponder? {
+        let originalNext = super.next
+        shortcutCoordinator.responder = originalNext
+        return shortcutCoordinator
     }
 }
 

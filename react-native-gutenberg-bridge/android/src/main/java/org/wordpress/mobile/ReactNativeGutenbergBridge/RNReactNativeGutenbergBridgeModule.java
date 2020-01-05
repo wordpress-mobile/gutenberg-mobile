@@ -12,6 +12,7 @@ import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
+import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaType;
@@ -22,6 +23,7 @@ import org.wordpress.mobile.WPAndroidGlue.MediaOption;
 import java.util.ArrayList;
 import java.util.List;
 
+@ReactModule(name = "RNReactNativeGutenbergBridge")
 public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModule {
     private final ReactApplicationContext mReactContext;
     private final GutenbergBridgeJS2Parent mGutenbergBridgeJS2Parent;
@@ -32,6 +34,9 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     private static final String EVENT_NAME_FOCUS_TITLE = "setFocusOnTitle";
     private static final String EVENT_NAME_MEDIA_UPLOAD = "mediaUpload";
     private static final String EVENT_NAME_MEDIA_APPEND = "mediaAppend";
+    private static final String EVENT_NAME_TOGGLE_BOLD = "toggleBold";
+    private static final String EVENT_NAME_TOGGLE_ITALIC = "toggleItalic";
+    private static final String EVENT_NAME_ADD_EDIT_LINK = "addEditLink";
 
     private static final String MAP_KEY_UPDATE_HTML = "html";
     private static final String MAP_KEY_UPDATE_TITLE = "title";
@@ -55,7 +60,7 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
 
 
     public RNReactNativeGutenbergBridgeModule(ReactApplicationContext reactContext,
-            GutenbergBridgeJS2Parent gutenbergBridgeJS2Parent) {
+                                              GutenbergBridgeJS2Parent gutenbergBridgeJS2Parent) {
         super(reactContext);
         mReactContext = reactContext;
         mGutenbergBridgeJS2Parent = gutenbergBridgeJS2Parent;
@@ -70,8 +75,36 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
         mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, data);
     }
 
+    private void emitToJS(String eventName) {
+        emitToJS(eventName, null);
+    }
+
     public void getHtmlFromJS() {
-        emitToJS(EVENT_NAME_REQUEST_GET_HTML, null);
+        emitToJS(EVENT_NAME_REQUEST_GET_HTML);
+    }
+
+    public enum Shortcut {
+        Bold,
+        Italic,
+        AddEditLink
+    }
+
+    public void emitShortcutEventToJs(Shortcut shortcut) {
+        String eventName;
+        switch (shortcut) {
+            case Bold:
+                eventName = EVENT_NAME_TOGGLE_BOLD;
+                break;
+            case Italic:
+                eventName = EVENT_NAME_TOGGLE_ITALIC;
+                break;
+            case AddEditLink:
+                eventName = EVENT_NAME_ADD_EDIT_LINK;
+                break;
+            default:
+                return;
+        }
+        emitToJS(eventName);
     }
 
     public void setHtmlInJS(String html) {
@@ -132,7 +165,7 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
                 MediaType filter1 = MediaType.getEnum(filter.getString(1));
 
                 if ((filter0.equals(MediaType.VIDEO) && filter1.equals(MediaType.IMAGE))
-                    || (filter0.equals(MediaType.IMAGE) && filter1.equals(MediaType.VIDEO))) {
+                        || (filter0.equals(MediaType.IMAGE) && filter1.equals(MediaType.VIDEO))) {
                     return MediaType.MEDIA;
                 }
             default:
@@ -147,7 +180,7 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
 
     @ReactMethod
     public void mediaUploadSync() {
-        mGutenbergBridgeJS2Parent.mediaUploadSync(getNewUploadMediaCallback(false,null));
+        mGutenbergBridgeJS2Parent.mediaUploadSync(getNewUploadMediaCallback(false, null));
     }
 
     @ReactMethod
@@ -196,7 +229,8 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
 
     private OtherMediaOptionsReceivedCallback getNewOtherMediaReceivedCallback(final Callback jsCallback) {
         return new OtherMediaOptionsReceivedCallback() {
-            @Override public void onOtherMediaOptionsReceived(ArrayList<MediaOption> mediaOptions) {
+            @Override
+            public void onOtherMediaOptionsReceived(ArrayList<MediaOption> mediaOptions) {
                 WritableArray writableArray = new WritableNativeArray();
                 for (MediaOption mediaOption : mediaOptions) {
                     writableArray.pushMap(mediaOption.toMap());
@@ -225,7 +259,8 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
                 }
             }
 
-            @Override public void onUploadMediaFileClear(int mediaId) {
+            @Override
+            public void onUploadMediaFileClear(int mediaId) {
                 setMediaFileUploadDataInJS(MEDIA_UPLOAD_STATE_RESET, mediaId, null, 0);
             }
 
