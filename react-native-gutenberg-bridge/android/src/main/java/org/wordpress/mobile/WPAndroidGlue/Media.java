@@ -7,6 +7,8 @@ import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 
+import java.util.Locale;
+
 public class Media implements RNMedia {
     private int mId;
     private String mUrl;
@@ -27,12 +29,12 @@ public class Media implements RNMedia {
     public static Media createRNMediaUsingMimeType(final int id, final String url, @NonNull final String mimeType) {
         String type;
 
-        if (mimeType.startsWith(MediaType.IMAGE.name().toLowerCase())) {
-            type =  MediaType.IMAGE.name().toLowerCase();
-        } else if (mimeType.startsWith(MediaType.VIDEO.name().toLowerCase())) {
-            type =  MediaType.VIDEO.name().toLowerCase();
+        if (mimeType.startsWith(MediaType.IMAGE.name().toLowerCase(Locale.ENGLISH))) {
+            type =  MediaType.IMAGE.name().toLowerCase(Locale.ENGLISH);
+        } else if (mimeType.startsWith(MediaType.VIDEO.name().toLowerCase(Locale.ENGLISH))) {
+            type =  MediaType.VIDEO.name().toLowerCase(Locale.ENGLISH);
         } else {
-            type = MediaType.OTHER.name().toLowerCase();
+            type = MediaType.OTHER.name().toLowerCase(Locale.ENGLISH);
         }
 
         return new Media(id, url, type);
