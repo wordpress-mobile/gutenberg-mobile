@@ -171,10 +171,10 @@ export default class EditorPage {
 		let blockExist = await this.hasBlockAtPosition( 1 );
 		while ( blockExist ) {
 			if ( await this.hasBlockAtPosition( 2 ) ) {
-				if ( isAndroid() ){
+				if ( isAndroid() ) {
 					const blockElement = await this.getBlockAtPosition( 1, '' );
-                    await blockElement.click();
-                    await this.removeBlockAtPosition( 1 , '' );
+					await blockElement.click();
+					await this.removeBlockAtPosition( 1, '' );
 				} else {
 					const blockElement = await this.getBlockAtPosition( 2, '' );
 					await blockElement.click();
