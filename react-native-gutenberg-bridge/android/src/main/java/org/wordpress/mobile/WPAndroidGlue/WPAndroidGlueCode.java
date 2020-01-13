@@ -311,10 +311,8 @@ public class WPAndroidGlueCode {
             }
 
             @Override
-            public void getPreferredColorScheme(
-                    PreferredColorSchemeReceivedCallback preferredColorSchemeReceivedCallback) {
-                String preferredColorScheme = mOnPreferredColorSchemeListener.getPreferredColorScheme();
-                preferredColorSchemeReceivedCallback.onPreferredColorSchemeReceived(preferredColorScheme);
+            public String getPreferredColorScheme() {
+                return mOnPreferredColorSchemeListener.getPreferredColorScheme();
             }
         });
 

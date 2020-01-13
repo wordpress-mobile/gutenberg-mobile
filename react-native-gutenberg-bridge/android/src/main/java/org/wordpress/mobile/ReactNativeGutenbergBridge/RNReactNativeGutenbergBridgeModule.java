@@ -17,7 +17,6 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaType;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.OtherMediaOptionsReceivedCallback;
-import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.PreferredColorSchemeReceivedCallback;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.RNMedia;
 import org.wordpress.mobile.WPAndroidGlue.MediaOption;
 
@@ -198,16 +197,8 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
 
     @ReactMethod
     public void getPreferredColorScheme(Callback callback) {
-        PreferredColorSchemeReceivedCallback preferredColorSchemeReceivedCallback = getPreferredColorSchemeReceivedCallback(callback);
-        mGutenbergBridgeJS2Parent.getPreferredColorScheme(preferredColorSchemeReceivedCallback);
-    }
-
-    private PreferredColorSchemeReceivedCallback getPreferredColorSchemeReceivedCallback(final  Callback jsCallback) {
-        return new PreferredColorSchemeReceivedCallback() {
-            @Override public void onPreferredColorSchemeReceived(String preferredColorScheme) {
-                jsCallback.invoke(preferredColorScheme);
-            }
-        };
+        String preferredColorScheme = mGutenbergBridgeJS2Parent.getPreferredColorScheme();
+        callback.invoke(preferredColorScheme);
     }
 
     private OtherMediaOptionsReceivedCallback getNewOtherMediaReceivedCallback(final Callback jsCallback) {
