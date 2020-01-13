@@ -37,3 +37,6 @@ allprojects {
         }
     }
 }
+
+apply from: 'shared_settings.gradle'
+setupRootGutenbergProject()

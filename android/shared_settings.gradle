@@ -1,0 +1,12 @@
+def reactNativeVersion = '0.60.0-patched'
+
+ext.setupRootGutenbergProject = {
+    allprojects {
+        configurations.all {
+            resolutionStrategy {
+                // Force all dependencies to use this version of React Native is used in all dependencies
+                force "com.facebook.react:react-native:$reactNativeVersion"
+            }
+        }
+    }
+}
