@@ -5,11 +5,12 @@ import com.facebook.react.bridge.WritableMap;
 
 import org.wordpress.mobile.WPAndroidGlue.MediaOption;
 import org.wordpress.mobile.WPAndroidGlue.RequestExecutor;
+import org.wordpress.mobile.WPAndroidGlue.WPAndroidGlueCode.OnPreferredColorSchemeListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public interface GutenbergBridgeJS2Parent extends RequestExecutor {
+public interface GutenbergBridgeJS2Parent extends RequestExecutor, OnPreferredColorSchemeListener {
     interface RNMedia {
         String getUrl();
         int getId();
@@ -105,6 +106,4 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
     void requestMediaPickFrom(String mediaSource, MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection);
 
     void requestImageFullscreenPreview(String mediaUrl);
-
-    String getPreferredColorScheme();
 }
