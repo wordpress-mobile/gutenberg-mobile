@@ -1,5 +1,4 @@
 package org.wordpress.mobile.ReactNativeGutenbergBridge;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -17,12 +16,13 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaType;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.OtherMediaOptionsReceivedCallback;
-import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.PreferredColorSchemeReceivedCallback;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.RNMedia;
 import org.wordpress.mobile.WPAndroidGlue.MediaOption;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModule {
     private final ReactApplicationContext mReactContext;
@@ -34,6 +34,7 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     private static final String EVENT_NAME_FOCUS_TITLE = "setFocusOnTitle";
     private static final String EVENT_NAME_MEDIA_UPLOAD = "mediaUpload";
     private static final String EVENT_NAME_MEDIA_APPEND = "mediaAppend";
+    private static final String EVENT_NAME_PREFERRED_COLOR_SCHEME = "preferredColorScheme";
 
     private static final String MAP_KEY_UPDATE_HTML = "html";
     private static final String MAP_KEY_UPDATE_TITLE = "title";
@@ -43,6 +44,8 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     private static final String MAP_KEY_MEDIA_FILE_UPLOAD_MEDIA_TYPE = "mediaType";
     private static final String MAP_KEY_MEDIA_FILE_UPLOAD_MEDIA_PROGRESS = "progress";
     private static final String MAP_KEY_MEDIA_FILE_UPLOAD_MEDIA_SERVER_ID = "mediaServerId";
+
+    private static final String MAP_KEY_IS_PREFERRED_COLOR_SCHEME_DARK = "isPreferredColorSchemeDark";
 
     private static final int MEDIA_UPLOAD_STATE_UPLOADING = 1;
     private static final int MEDIA_UPLOAD_STATE_SUCCEEDED = 2;
@@ -55,10 +58,12 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     private static final String MEDIA_SOURCE_DEVICE_LIBRARY = "DEVICE_MEDIA_LIBRARY";
     private static final String MEDIA_SOURCE_DEVICE_CAMERA = "DEVICE_CAMERA";
 
+    private boolean mIsDarkMode;
 
     public RNReactNativeGutenbergBridgeModule(ReactApplicationContext reactContext,
-            GutenbergBridgeJS2Parent gutenbergBridgeJS2Parent) {
+            GutenbergBridgeJS2Parent gutenbergBridgeJS2Parent, boolean isDarkMode) {
         super(reactContext);
+        mIsDarkMode = isDarkMode;
         mReactContext = reactContext;
         mGutenbergBridgeJS2Parent = gutenbergBridgeJS2Parent;
     }
@@ -66,6 +71,14 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     @Override
     public String getName() {
         return "RNReactNativeGutenbergBridge";
+    }
+
+
+    @Override
+    public Map<String, Object> getConstants() {
+        final HashMap<String, Object> constants = new HashMap<>();
+        constants.put("isInitialColorSchemeDark", mIsDarkMode);
+        return constants;
     }
 
     private void emitToJS(String eventName, @Nullable WritableMap data) {
@@ -99,6 +112,12 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
         writableMap.putString(MAP_KEY_MEDIA_FILE_UPLOAD_MEDIA_URL, mediaUri);
         writableMap.putInt(MAP_KEY_MEDIA_FILE_UPLOAD_MEDIA_ID, mediaId);
         emitToJS(EVENT_NAME_MEDIA_APPEND, writableMap);
+    }
+
+    public void setPreferredColorScheme(boolean isDarkMode) {
+        WritableMap writableMap = new WritableNativeMap();
+        writableMap.putBoolean(MAP_KEY_IS_PREFERRED_COLOR_SCHEME_DARK, isDarkMode);
+        emitToJS(EVENT_NAME_PREFERRED_COLOR_SCHEME, writableMap);
     }
 
     @ReactMethod
@@ -194,20 +213,6 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
         mGutenbergBridgeJS2Parent.performRequest(path,
                 promise::resolve,
                 errorMessage -> promise.reject(new Error(errorMessage)));
-    }
-
-    @ReactMethod
-    public void getPreferredColorScheme(Callback callback) {
-        PreferredColorSchemeReceivedCallback preferredColorSchemeReceivedCallback = getPreferredColorSchemeReceivedCallback(callback);
-        mGutenbergBridgeJS2Parent.getPreferredColorScheme(preferredColorSchemeReceivedCallback);
-    }
-
-    private PreferredColorSchemeReceivedCallback getPreferredColorSchemeReceivedCallback(final  Callback jsCallback) {
-        return new PreferredColorSchemeReceivedCallback() {
-            @Override public void onPreferredColorSchemeReceived(String preferredColorScheme) {
-                jsCallback.invoke(preferredColorScheme);
-            }
-        };
     }
 
     private OtherMediaOptionsReceivedCallback getNewOtherMediaReceivedCallback(final Callback jsCallback) {
