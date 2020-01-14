@@ -33,10 +33,6 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
         void onMediaFileUploadFailed(int mediaId);
     }
 
-    interface PreferredColorSchemeReceivedCallback {
-        void onPreferredColorSchemeReceived(String preferredColorScheme);
-    }
-
     // Ref: https://github.com/facebook/react-native/blob/master/Libraries/polyfills/console.js#L376
     enum LogLevel {
         TRACE(0),

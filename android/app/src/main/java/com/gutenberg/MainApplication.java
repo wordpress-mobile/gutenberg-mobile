@@ -117,19 +117,7 @@ public class MainApplication extends Application implements ReactApplication {
             @Override
             public void performRequest(String path, Consumer<String> onSuccess, Consumer<String> onError) {}
 
-            @Override
-            public void getPreferredColorScheme(PreferredColorSchemeReceivedCallback preferredColorSchemeReceivedCallback) {
-                Configuration configuration = getResources().getConfiguration();
-                int currentNightMode = configuration.uiMode & Configuration.UI_MODE_NIGHT_MASK;
-
-                String preferredColorScheme = "light";
-                if (currentNightMode == Configuration.UI_MODE_NIGHT_YES) {
-                    preferredColorScheme = "dark";
-                }
-
-                preferredColorSchemeReceivedCallback.onPreferredColorSchemeReceived(preferredColorScheme);
-            }
-        });
+        }, isDarkMode());
 
         return new ReactNativeHost(this) {
             @Override
@@ -154,6 +142,13 @@ public class MainApplication extends Application implements ReactApplication {
                 return "index";
             }
         };
+    }
+
+    private boolean isDarkMode() {
+        Configuration configuration = getResources().getConfiguration();
+        int currentNightMode = configuration.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+        return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
     }
 
     @Override
