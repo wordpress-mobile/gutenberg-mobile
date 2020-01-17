@@ -26,8 +26,8 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
         void onOtherMediaOptionsReceived(ArrayList<MediaOption> mediaList);
     }
 
-    interface MediaUploadCallback {
-        void onUploadMediaFileSelected(List<RNMedia> mediaList);
+    interface MediaCallback {
+        void onMediaFileSelected(List<RNMedia> mediaList);
         void onUploadMediaFileClear(int mediaId);
         void onMediaFileUploadProgress(int mediaId, float progress);
         void onMediaFileUploadSucceeded(int mediaId, String mediaUrl, int serverId);
@@ -81,15 +81,15 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
         }
     }
 
-    void requestMediaPickFromMediaLibrary(MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection, MediaType mediaType);
+    void requestMediaPickFromMediaLibrary(MediaCallback mediaCallback, Boolean allowMultipleSelection, MediaType mediaType);
 
-    void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection, MediaType mediaType);
+    void requestMediaPickFromDeviceLibrary(MediaCallback mediaCallback, Boolean allowMultipleSelection, MediaType mediaType);
 
-    void requestMediaPickerFromDeviceCamera(MediaUploadCallback mediaUploadCallback, MediaType mediaType);
+    void requestMediaPickerFromDeviceCamera(MediaCallback mediaCallback, MediaType mediaType);
 
-    void requestMediaImport(String url, MediaUploadCallback mediaUploadCallback);
+    void requestMediaImport(String url, MediaCallback mediaCallback);
 
-    void mediaUploadSync(MediaUploadCallback mediaUploadCallback);
+    void mediaUploadSync(MediaCallback mediaCallback);
 
     void requestImageFailedRetryDialog(int mediaId);
 
@@ -103,7 +103,7 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
 
     void getOtherMediaPickerOptions(OtherMediaOptionsReceivedCallback otherMediaOptionsReceivedCallback, MediaType mediaType);
 
-    void requestMediaPickFrom(String mediaSource, MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection);
+    void requestMediaPickFrom(String mediaSource, MediaCallback mediaCallback, Boolean allowMultipleSelection);
 
     void requestImageFullscreenPreview(String mediaUrl);
 }
