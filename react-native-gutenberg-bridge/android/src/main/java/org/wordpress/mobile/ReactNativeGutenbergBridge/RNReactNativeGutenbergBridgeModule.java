@@ -152,17 +152,17 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
 
     @ReactMethod
     public void requestImageFailedRetryDialog(final int mediaId) {
-        mGutenbergBridgeJS2Parent.requestImageFailedRetryDialog(mediaId);
+        mGutenbergBridgeJS2Parent.requestImageFailedRetryDialog(-mediaId); // local id positive again
     }
 
     @ReactMethod
     public void requestImageUploadCancelDialog(final int mediaId) {
-        mGutenbergBridgeJS2Parent.requestImageUploadCancelDialog(mediaId);
+        mGutenbergBridgeJS2Parent.requestImageUploadCancelDialog(-mediaId); // local id positive again
     }
 
     @ReactMethod
     public void requestImageUploadCancel(final int mediaId) {
-        mGutenbergBridgeJS2Parent.requestImageUploadCancel(mediaId);
+        mGutenbergBridgeJS2Parent.requestImageUploadCancel(-mediaId); // local id positive again
     }
 
     @ReactMethod
@@ -253,7 +253,7 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     private void setMediaFileUploadDataInJS(int state, int mediaId, String mediaUrl, float progress, int mediaServerId) {
         WritableMap writableMap = new WritableNativeMap();
         writableMap.putInt(MAP_KEY_MEDIA_FILE_UPLOAD_STATE, state);
-        writableMap.putInt(MAP_KEY_MEDIA_FILE_UPLOAD_MEDIA_ID, mediaId);
+        writableMap.putInt(MAP_KEY_MEDIA_FILE_UPLOAD_MEDIA_ID, -mediaId); // negate local media id here
         writableMap.putString(MAP_KEY_MEDIA_FILE_UPLOAD_MEDIA_URL, mediaUrl);
         writableMap.putDouble(MAP_KEY_MEDIA_FILE_UPLOAD_MEDIA_PROGRESS, progress);
         if (mediaServerId != MEDIA_SERVER_ID_UNKNOWN) {
