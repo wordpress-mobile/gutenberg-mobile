@@ -65,9 +65,6 @@ if (isJitPack) {
     }
 }
 
-// import the `readReactNativeVersion()` function
-apply from: 'https://gist.githubusercontent.com/hypest/742448b9588b3a0aa580a5e80ae95bdf/raw/8eb62d40ee7a5104d2fcaeff21ce6f29bd93b054/readReactNativeVersion.gradle'
-
 // import the `readHashedVersion()` function
 apply from: 'https://gist.githubusercontent.com/hypest/ceaf20a8e7d9b8404e4a5ff2e6c36650/raw/e1460a128e4b9863963410d719c7d44c3adefd02/readHashedVersion.gradle'
 
@@ -133,18 +130,17 @@ dependencies {
         implementation project(':react-native-video')
         implementation project(':@react-native-community_slider')
 
-        implementation 'com.facebook.react:react-native:+'
+        implementation 'com.facebook.react:react-native:+' // from node_modules
     } else {
-        hermesPath = "../../bundle/";
+        hermesPath = "../../bundle/"
 
         implementation (waitJitpack('com.github.wordpress-mobile', 'react-native-svg', readHashedVersion('../../package.json', 'react-native-svg', 'dependencies')))
         implementation (waitJitpack('com.github.wordpress-mobile', 'react-native-video', readHashedVersion('../../package.json', 'react-native-video', 'dependencies')))
         implementation (waitJitpack('com.github.wordpress-mobile', 'react-native-slider', readHashedVersion('../../package.json', '@react-native-community/slider', 'dependencies')))
 
-        // FIXME Temporary fix to get Jitpack builds to green while I work on a solution without hardcoded values.
-        //def rnVersion = readReactNativeVersion('../package.json', 'peerDependencies')
-        def rnVersion = '0.61.5'
-        implementation "com.facebook.react:react-native:${rnVersion}"
+        // import 'getRnVersion' function
+        apply from: '../../android/shared_config.gradle'
+        implementation "com.facebook.react:react-native:${getRnVersion('../package.json', 'peerDependencies')}"
     }
 
     debugImplementation files(hermesPath + "hermes-debug.aar")

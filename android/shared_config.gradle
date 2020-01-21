@@ -1,0 +1,11 @@
+import groovy.json.JsonSlurper
+
+/*
+ * This function returns the relevant React Native version for Android as parsed from
+ * the provided package.json file.
+ */
+ext.getRnVersion = { String pathToPackageJson, String section ->
+    def packageSlurper = new JsonSlurper()
+    def packageJson = packageSlurper.parse(file(pathToPackageJson))
+    return packageJson.get(section).get('react-native')
+}
