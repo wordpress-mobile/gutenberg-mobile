@@ -1,10 +1,10 @@
-project 'gutenberg.xcodeproj'
+project 'GutenbergDemo.xcodeproj'
 
 # Uncomment the next line to define a global platform for your project
 platform :ios, '11.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'gutenberg' do
+target 'GutenbergDemo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
@@ -40,7 +40,7 @@ target 'gutenberg' do
   pod 'RNTAztecView', :path => '../RNTAztecView.podspec'
   pod 'Gutenberg', :path => '../Gutenberg.podspec'
 
-  target 'gutenbergTests' do
+  target 'GutenbergDemoTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -48,13 +48,13 @@ target 'gutenberg' do
   use_native_modules!
 end
 
-target 'gutenberg-tvOS' do
+target 'GutenbergDemo-tvOS' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
   # Pods for gutenberg-tvOS
 
-  target 'gutenberg-tvOSTests' do
+  target 'GutenbergDemo-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

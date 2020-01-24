@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "gutenberg-tvOS.app"
-               BlueprintName = "gutenberg-tvOS"
-               ReferencedContainer = "container:gutenberg.xcodeproj">
+               BuildableName = "GutenbergDemo-tvOS.app"
+               BlueprintName = "GutenbergDemo-tvOS"
+               ReferencedContainer = "container:GutenbergDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "gutenberg-tvOSTests.xctest"
-               BlueprintName = "gutenberg-tvOSTests"
-               ReferencedContainer = "container:gutenberg.xcodeproj">
+               BuildableName = "GutenbergDemo-tvOSTests.xctest"
+               BlueprintName = "GutenbergDemo-tvOSTests"
+               ReferencedContainer = "container:GutenbergDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -55,29 +55,27 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
+            BuildableName = "GutenbergDemo-tvOS.app"
+            BlueprintName = "GutenbergDemo-tvOS"
+            ReferencedContainer = "container:GutenbergDemo.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "gutenberg-tvOSTests.xctest"
-               BlueprintName = "gutenberg-tvOSTests"
-               ReferencedContainer = "container:gutenberg.xcodeproj">
+               BuildableName = "GutenbergDemo-tvOSTests.xctest"
+               BlueprintName = "GutenbergDemo-tvOSTests"
+               ReferencedContainer = "container:GutenbergDemo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "gutenberg-tvOS.app"
-            BlueprintName = "gutenberg-tvOS"
-            ReferencedContainer = "container:gutenberg.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -94,13 +92,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "gutenberg-tvOS.app"
-            BlueprintName = "gutenberg-tvOS"
-            ReferencedContainer = "container:gutenberg.xcodeproj">
+            BuildableName = "GutenbergDemo-tvOS.app"
+            BlueprintName = "GutenbergDemo-tvOS"
+            ReferencedContainer = "container:GutenbergDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -113,9 +109,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "gutenberg-tvOS.app"
-            BlueprintName = "gutenberg-tvOS"
-            ReferencedContainer = "container:gutenberg.xcodeproj">
+            BuildableName = "GutenbergDemo-tvOS.app"
+            BlueprintName = "GutenbergDemo-tvOS"
+            ReferencedContainer = "container:GutenbergDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
