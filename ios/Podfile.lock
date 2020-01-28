@@ -263,7 +263,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-keyboard-aware-scroll-view (from `../node_modules/react-native-keyboard-aware-scroll-view`)
   - react-native-safe-area (from `../node_modules/react-native-safe-area`)
-  - react-native-slider (from `../node_modules/@react-native-community/slider`)
+  - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
   - react-native-video (from `../node_modules/react-native-video`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
