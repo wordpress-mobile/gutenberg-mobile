@@ -18,7 +18,6 @@ import org.wordpress.mobile.ReactNativeAztec.ReactAztecPackage;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.RNReactNativeGutenbergBridgePackage;
 
-import com.github.godness84.RNRecyclerViewList.RNRecyclerviewListPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -127,15 +126,13 @@ public class MainApplication extends Application implements ReactApplication {
             @Override
             protected List<ReactPackage> getPackages() {
                 return Arrays.asList(
-                    new MainReactPackage(),
-                    new LinearGradientPackage(),
-                    new LinearGradientPackage(),
-                    new ReactSliderPackage(),
-                    new ReactVideoPackage(),
-                    new SvgPackage(),
-                    new ReactAztecPackage(),
-                    new RNRecyclerviewListPackage(),
-                    mRnReactNativeGutenbergBridgePackage);
+                        new MainReactPackage(),
+                        new ReactSliderPackage(),
+                        new ReactVideoPackage(),
+                        new SvgPackage(),
+                        new ReactAztecPackage(),
+                        new LinearGradientPackage(),
+                        mRnReactNativeGutenbergBridgePackage);
             }
 
             @Override
