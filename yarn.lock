@@ -11676,16 +11676,16 @@ react-native-sass-transformer@^1.1.1:
     css-to-react-native-transform "^1.8.1"
     semver "^5.6.0"
 
-"react-native-svg@git+https://github.com/wordpress-mobile/react-native-svg.git#a628e92990a2404e30a0086f168bd2b5b7b4ce96":
+"react-native-svg@git+https://github.com/wordpress-mobile/react-native-svg.git#b868119a087170723551591e74e5e114f97e416f":
   version "9.13.6-gb"
-  resolved "git+https://github.com/wordpress-mobile/react-native-svg.git#a628e92990a2404e30a0086f168bd2b5b7b4ce96"
+  resolved "git+https://github.com/wordpress-mobile/react-native-svg.git#b868119a087170723551591e74e5e114f97e416f"
   dependencies:
     css-select "^2.0.2"
     css-tree "^1.0.0-alpha.37"
 
-"react-native-video@git+https://github.com/wordpress-mobile/react-native-video.git#c43bdf6b06d361da399b98b8d2e32b578fa188ac":
+"react-native-video@git+https://github.com/wordpress-mobile/react-native-video.git#5a7b297447f5bf0def37a8eb794d7ff605b7d19a":
   version "5.0.1"
-  resolved "git+https://github.com/wordpress-mobile/react-native-video.git#c43bdf6b06d361da399b98b8d2e32b578fa188ac"
+  resolved "git+https://github.com/wordpress-mobile/react-native-video.git#5a7b297447f5bf0def37a8eb794d7ff605b7d19a"
   dependencies:
     keymirror "^0.1.1"
     prop-types "^15.5.10"
