@@ -176,5 +176,11 @@ workflows:
           check-tests: true
       - ios-device-checks:
           name: Test iOS on Device
+          filters:
+            branches:
+              ignore: /pull\/[0-9]+/   # ignore pull requests from forks
       - android-device-checks:
           name: Test Android on Device
+          filters:
+            branches:
+              ignore: /pull\/[0-9]+/   # ignore pull requests from forks
