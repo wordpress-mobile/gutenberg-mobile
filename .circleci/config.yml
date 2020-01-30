@@ -174,7 +174,39 @@ workflows:
           name: Test Android
           platform: android
           check-tests: true
+
+      # e2e tests for PRs from main repo run automatically
       - ios-device-checks:
           name: Test iOS on Device
+          filters:
+            branches:
+              ignore: /pull\/[0-9]+/     # ignore pull requests from forks
       - android-device-checks:
           name: Test Android on Device
+          filters:
+            branches:
+              ignore: /pull\/[0-9]+/     # ignore pull requests from forks
+
+      # e2e test for PRs from forks must be manually approved in order to
+      # not automatically expose secrets to untrusted code
+      - manual-approval-for-forks:
+          name: Manual Approval For E2E Tests on Forks
+          type: approval
+          filters:
+            branches:
+              only: /pull\/[0-9]+/   # only run on pull requests from forks
+
+      - ios-device-checks:
+          name: Test iOS on Device (hold for forks)
+          requires:
+            - Manual Approval For E2E Tests on Forks
+          filters:
+            branches:
+              only: /pull\/[0-9]+/   # only run on pull requests from forks
+      - android-device-checks:
+          name: Test Android on Device (hold for forks)
+          requires:
+            - Manual Approval For E2E Tests on Forks
+          filters:
+            branches:
+              only: /pull\/[0-9]+/   # only run on pull requests from forks
