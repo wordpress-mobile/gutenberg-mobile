@@ -1,6 +1,7 @@
 package com.gutenberg;
 
 import android.app.Application;
+import android.os.Bundle;
 import android.util.Log;
 
 import androidx.core.util.Consumer;
@@ -96,6 +97,11 @@ public class MainApplication extends Application implements ReactApplication {
             }
 
             @Override
+            public void requestMediaEditor(MediaUploadCallback mediaUploadCallback, String mediaUrl) {
+
+            }
+
+            @Override
             public void editorDidEmitLog(String message, LogLevel logLevel) {
                 switch (logLevel) {
                     case TRACE:
@@ -114,7 +120,7 @@ public class MainApplication extends Application implements ReactApplication {
             }
 
             @Override
-            public void performRequest(String path, Consumer<String> onSuccess, Consumer<String> onError) {}
+            public void performRequest(String path, Consumer<String> onSuccess, Consumer<Bundle> onError) {}
         });
 
         return new ReactNativeHost(this) {
