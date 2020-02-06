@@ -105,4 +105,6 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
     void requestMediaPickFrom(String mediaSource, MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection);
 
     void requestImageFullscreenPreview(String mediaUrl);
+
+    void requestMediaEditor(MediaUploadCallback mediaUploadCallback, String mediaUrl);
 }
