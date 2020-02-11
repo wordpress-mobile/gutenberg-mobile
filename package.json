@@ -142,11 +142,14 @@
     "version": "yarn bundle && git add -A bundle"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.22",
+    "@emotion/native": "^10.0.22",
     "@react-native-community/cli": "^3.0.4",
     "@react-native-community/slider": "git+https://github.com/wordpress-mobile/react-native-slider.git#5ad284d92b8d886e366445bf215be741ed53ddc6",
     "classnames": "^2.2.5",
     "dom-react": "^2.2.1",
     "domutils": "^1.7.0",
+    "emotion-theming": "^10.0.19",
     "fast-average-color": "^4.3.0",
     "gettext-parser": "^4.0.2",
     "hpq": "^1.2.0",
@@ -181,6 +184,7 @@
     "shallowequal": "^1.0.2",
     "showdown": "^1.8.6",
     "simple-html-tokenizer": "^0.4.1",
+    "styled-system": "^5.1.4",
     "tannin": "^1.0.1",
     "tinycolor2": "^1.4.1",
     "traverse": "^0.6.6",
