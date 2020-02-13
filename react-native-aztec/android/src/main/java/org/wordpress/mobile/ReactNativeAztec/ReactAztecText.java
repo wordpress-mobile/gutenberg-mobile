@@ -3,16 +3,23 @@ package org.wordpress.mobile.ReactNativeAztec;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.text.Editable;
 import android.text.InputType;
 import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 
 import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.bridge.ReactContext;
@@ -29,6 +36,7 @@ import org.wordpress.aztec.ITextFormat;
 import org.wordpress.aztec.plugins.IAztecPlugin;
 import org.wordpress.aztec.plugins.IToolbarButton;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Set;
@@ -38,6 +46,8 @@ import java.util.HashMap;
 import static android.content.ClipData.*;
 
 public class ReactAztecText extends AztecText {
+
+    private static final String PRE_TAG = "pre";
 
     private final InputMethodManager mInputMethodManager;
     // This flag is set to true when we set the text of the EditText explicitly. In that case, no
@@ -164,6 +174,16 @@ public class ReactAztecText extends AztecText {
         }
 
         return super.onTextContextMenuItem(id);
+    }
+
+    @Override
+    public float getPreformatBackgroundAlpha(@NonNull TypedArray styles) {
+        return 0;
+    }
+
+    @Override
+    public boolean shouldSkipTidying() {
+        return isPreTag();
     }
 
     // VisibleForTesting from {@link TextInputEventsTestCase}.
@@ -501,11 +521,18 @@ public class ReactAztecText extends AztecText {
     /**
      * This class will redirect *TextChanged calls to the listeners only in the case where the text
      * is changed by the user, and not explicitly set by JS.
+     *
+     * Update:
+     * There is a special case when block is preformatted.
+     * In that case we want to propagate TextWatcher method calls even if text is set from JS.
+     * Otherwise, couple of bugs will be introduced
+     * bug 1# https://github.com/wordpress-mobile/AztecEditor-Android/pull/869#issuecomment-552864686
+     * bug 2# https://github.com/wordpress-mobile/gutenberg-mobile/pull/1615#pullrequestreview-323274540
      */
     private class TextWatcherDelegator implements TextWatcher {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            if (!mIsSettingTextFromJS && mListeners != null) {
+            if (shouldDelegateTextChangeCalls()) {
                 for (TextWatcher listener : mListeners) {
                     listener.beforeTextChanged(s, start, count, after);
                 }
@@ -514,7 +541,7 @@ public class ReactAztecText extends AztecText {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (!mIsSettingTextFromJS && mListeners != null) {
+            if (shouldDelegateTextChangeCalls()) {
                 for (TextWatcher listener : mListeners) {
                     listener.onTextChanged(s, start, before, count);
                 }
@@ -525,11 +552,74 @@ public class ReactAztecText extends AztecText {
 
         @Override
         public void afterTextChanged(Editable s) {
-            if (!mIsSettingTextFromJS && mListeners != null) {
+            if (shouldDelegateTextChangeCalls()) {
                 for (TextWatcher listener : mListeners) {
                     listener.afterTextChanged(s);
                 }
             }
+        }
+    }
+
+    private boolean shouldDelegateTextChangeCalls() {
+        if (mListeners == null) {
+            // No listeners so, no one to delegate the calls to
+            return false;
+        }
+
+        if (isPreTag()) {
+            // If tag is pre tag we want to delegate calls in every case
+            return true;
+        }
+
+        return !mIsSettingTextFromJS;
+    }
+
+    private boolean isPreTag() {
+        return PRE_TAG.equals(mTagName);
+    }
+
+    public void setCursorColor(@NonNull Integer color) {
+        // This is combination of the patterns taken in:
+        // - https://github.com/facebook/react-native/blob/233fdfc014bb4b919c7624c90e5dac614479076f/ReactAndroid/src/main/java/com/facebook/react/views/textinput/ReactTextInputManager.java#L422-L457
+        // - https://stackoverflow.com/a/44333069/1350218
+        // Note: This only works in API 27 and below as it uses reflection to look up the drawable fields.
+        // API 29 supports setTextCursorDrawable which would be a cleaner way to handle this when
+        // an upgrade to that API level occurs.
+
+        try {
+            Resources res = getContext().getResources();
+
+            Field field = TextView.class.getDeclaredField("mEditor");
+            field.setAccessible(true);
+            Object editor = field.get(this);
+
+            String[] resFieldNames = {"mCursorDrawableRes", "mTextSelectHandleLeftRes", "mTextSelectHandleRightRes", "mTextSelectHandleRes"};
+            String[] drawableFieldNames = {"mCursorDrawable", "mSelectHandleLeft", "mSelectHandleRight", "mSelectHandleCenter"};
+
+            for (int i = 0; i < resFieldNames.length; i++) {
+
+                String resFieldName = resFieldNames[i];
+                String drawableFieldName = drawableFieldNames[i];
+
+                Field resField = TextView.class.getDeclaredField(resFieldName);
+                resField.setAccessible(true);
+                int drawableResId = resField.getInt(this);
+
+                Drawable cursorDrawable = res.getDrawable(drawableResId).mutate();
+                cursorDrawable.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+
+                Field drawableField = editor.getClass().getDeclaredField(drawableFieldName);
+                drawableField.setAccessible(true);
+
+                if ( drawableFieldName.equals("mCursorDrawable")) {
+                    Drawable[] drawables = {cursorDrawable, cursorDrawable};
+                    drawableField.set(editor, drawables);
+                } else {
+                    drawableField.set(editor, cursorDrawable);
+                }
+            }
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            // Ignore errors to avoid crashing if these private fields don't exist on modified or future android versions.
         }
     }
 }

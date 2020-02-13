@@ -1,11 +1,14 @@
 package com.gutenberg;
 
 import android.app.Application;
+import android.os.Bundle;
 import android.util.Log;
 
 import androidx.core.util.Consumer;
 
 import com.facebook.react.ReactApplication;
+import com.BV.LinearGradient.LinearGradientPackage;
+import com.reactnativecommunity.slider.ReactSliderPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.devsupport.interfaces.DevOptionHandler;
@@ -16,7 +19,6 @@ import org.wordpress.mobile.ReactNativeAztec.ReactAztecPackage;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.RNReactNativeGutenbergBridgePackage;
 
-import com.github.godness84.RNRecyclerViewList.RNRecyclerviewListPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -95,6 +97,11 @@ public class MainApplication extends Application implements ReactApplication {
             }
 
             @Override
+            public void requestMediaEditor(MediaUploadCallback mediaUploadCallback, String mediaUrl) {
+
+            }
+
+            @Override
             public void editorDidEmitLog(String message, LogLevel logLevel) {
                 switch (logLevel) {
                     case TRACE:
@@ -113,7 +120,7 @@ public class MainApplication extends Application implements ReactApplication {
             }
 
             @Override
-            public void performRequest(String path, Consumer<String> onSuccess, Consumer<String> onError) {}
+            public void performRequest(String path, Consumer<String> onSuccess, Consumer<Bundle> onError) {}
         });
 
         return new ReactNativeHost(this) {
@@ -126,10 +133,11 @@ public class MainApplication extends Application implements ReactApplication {
             protected List<ReactPackage> getPackages() {
                 return Arrays.asList(
                         new MainReactPackage(),
+                        new ReactSliderPackage(),
                         new ReactVideoPackage(),
                         new SvgPackage(),
                         new ReactAztecPackage(),
-                        new RNRecyclerviewListPackage(),
+                        new LinearGradientPackage(),
                         mRnReactNativeGutenbergBridgePackage);
             }
 

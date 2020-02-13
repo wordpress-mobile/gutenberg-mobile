@@ -56,10 +56,17 @@ export class RootComponent extends React.Component {
 		setupLocale( props.locale, props.translations );
 		setupApiFetch();
 		require( '@wordpress/edit-post' ).initializeEditor();
+
+		const isHermes = () => global.HermesInternal !== null;
+		// eslint-disable-next-line no-console
+		console.log( 'Hermes is: ' + isHermes() );
 	}
 
 	render() {
 		const { initialHtmlModeEnabled } = this.props;
+		const settings = {
+			__mobileEnablePageTemplates: !! __DEV__,
+		};
 		let initialData = this.props.initialData;
 		let initialTitle = this.props.initialTitle;
 		let postType = this.props.postType;
@@ -80,6 +87,7 @@ export class RootComponent extends React.Component {
 				initialHtmlModeEnabled={ initialHtmlModeEnabled }
 				initialTitle={ initialTitle }
 				postType={ postType }
+				settings={ settings }
 			/>
 		);
 	}
