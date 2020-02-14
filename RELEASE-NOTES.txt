@@ -3,7 +3,7 @@
 * New block: Group
 * Add support for upload options in Gallery block
 * New block: Button
-* Add support for scroll ability inside block picker
+* Add scroll support inside block picker and block settings
 
 1.22.0
 ------
