@@ -1,3 +1,4 @@
 [submodule "gutenberg"]
 	path = gutenberg
-	url = ../../WordPress/gutenberg.git
+	url = ../../guarani/gutenberg.git
+	branch = rnmobile/add-verse-block-to-mobile
