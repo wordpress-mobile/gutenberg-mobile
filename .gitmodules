@@ -1,4 +1,3 @@
 [submodule "gutenberg"]
 	path = gutenberg
 	url = ../../guarani/gutenberg.git
-	branch = rnmobile/add-verse-block-to-mobile
