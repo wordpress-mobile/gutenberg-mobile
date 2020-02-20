@@ -312,9 +312,9 @@ public class WPAndroidGlueCode {
             }
 
             @Override
-            public void requestMediaEditor(MediaUploadCallback mediaUploadCallback, String mediaUrl) {
+            public void requestMediaEditor(MediaCallback mediaUploadCallback, String mediaUrl) {
                 mMediaPickedByUserOnBlock = true;
-                mPendingMediaUploadCallback = mediaUploadCallback;
+                mPendingMediaCallback = mediaUploadCallback;
                 mOnMediaEditorListener.onMediaEditorClicked(mediaUrl);
             }
         });

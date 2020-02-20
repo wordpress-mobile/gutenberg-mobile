@@ -107,5 +107,5 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
 
     void requestImageFullscreenPreview(String mediaUrl);
 
-    void requestMediaEditor(MediaUploadCallback mediaUploadCallback, String mediaUrl);
+    void requestMediaEditor(MediaCallback mediaUploadCallback, String mediaUrl);
 }
