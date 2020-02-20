@@ -12,6 +12,8 @@ class RCTAztecView: Aztec.TextView {
     @objc var onPaste: RCTBubblingEventBlock? = nil
     @objc var onContentSizeChange: RCTBubblingEventBlock? = nil
     @objc var onSelectionChange: RCTBubblingEventBlock? = nil
+    @objc var minWidth: CGFloat = 0
+    @objc var maxWidth: CGFloat = 0
     @objc var blockType: NSDictionary? = nil {
         didSet {
             guard let block = blockType, let tag = block["tag"] as? String else {
@@ -135,11 +137,11 @@ class RCTAztecView: Aztec.TextView {
     }
 
     func commonInit() {
+        Configuration.headersWithBoldTrait = true
         delegate = self
         textContainerInset = .zero
         contentInset = .zero
-        textContainer.lineFragmentPadding = 0
-        Aztec.Metrics.listTextIndentation = 24
+        textContainer.lineFragmentPadding = 0        
         addPlaceholder()
         textDragInteraction?.isEnabled = false
         storage.htmlConverter.characterToReplaceLastEmptyLine = Character(.zeroWidthSpace)
@@ -174,12 +176,23 @@ class RCTAztecView: Aztec.TextView {
         recognizer.isEnabled = false
     }
 
-    // MARK - View Height: Match to content height
+    // MARK: - View height and width: Match to the content
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        adjustWidth()
         fixLabelPositionForRTLLayout()
         updateContentSizeInRN()
+    }
+
+    private func adjustWidth() {
+        if (maxWidth > 0 && minWidth > 0) {
+            let maxSize = CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)
+            let newWidth = sizeThatFits(maxSize).width
+            if (newWidth != frame.size.width) {
+                frame.size.width = max(newWidth, minWidth)
+            }
+        }
     }
 
     private func fixLabelPositionForRTLLayout() {

@@ -2,6 +2,7 @@ package org.wordpress.mobile.ReactNativeGutenbergBridge;
 
 import androidx.annotation.Nullable;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -52,6 +53,7 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     private static final String MEDIA_SOURCE_MEDIA_LIBRARY = "SITE_MEDIA_LIBRARY";
     private static final String MEDIA_SOURCE_DEVICE_LIBRARY = "DEVICE_MEDIA_LIBRARY";
     private static final String MEDIA_SOURCE_DEVICE_CAMERA = "DEVICE_CAMERA";
+    private static final String MEDIA_SOURCE_MEDIA_EDITOR = "MEDIA_EDITOR";
 
 
     public RNReactNativeGutenbergBridgeModule(ReactApplicationContext reactContext,
@@ -117,7 +119,7 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
         } else if (mediaSource.equals(MEDIA_SOURCE_DEVICE_LIBRARY)) {
             mGutenbergBridgeJS2Parent.requestMediaPickFromDeviceLibrary(getNewMediaCallback(allowMultipleSelection, onMediaSelected), allowMultipleSelection, mediaType);
         } else if (mediaSource.equals(MEDIA_SOURCE_DEVICE_CAMERA)) {
-            mGutenbergBridgeJS2Parent.requestMediaPickerFromDeviceCamera(getNewMediaCallback(false, onMediaSelected), mediaType);
+            mGutenbergBridgeJS2Parent.requestMediaPickerFromDeviceCamera(getNewMediaCallback(allowMultipleSelection, onMediaSelected), mediaType);
         } else {
             mGutenbergBridgeJS2Parent.requestMediaPickFrom(mediaSource, getNewMediaCallback(allowMultipleSelection, onMediaSelected), allowMultipleSelection);
         }
@@ -171,6 +173,11 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     }
 
     @ReactMethod
+    public void requestMediaEditor(String mediaUrl, final Callback onUploadMediaSelected) {
+        mGutenbergBridgeJS2Parent.requestMediaEditor(getNewMediaCallback(false, onUploadMediaSelected), mediaUrl);
+    }
+
+    @ReactMethod
     public void editorDidEmitLog(String message, int logLevel) {
         mGutenbergBridgeJS2Parent.editorDidEmitLog(message, GutenbergBridgeJS2Parent.LogLevel.valueOf(logLevel));
     }
@@ -191,7 +198,15 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     public void fetchRequest(String path, Promise promise) {
         mGutenbergBridgeJS2Parent.performRequest(path,
                 promise::resolve,
-                errorMessage -> promise.reject(new Error(errorMessage)));
+                errorBundle -> {
+                    WritableMap writableMap = Arguments.makeNativeMap(errorBundle);
+                    if (writableMap.hasKey("code")) {
+                        String code = String.valueOf(writableMap.getInt("code"));
+                        promise.reject(code, new Error(), writableMap);
+                    } else {
+                        promise.reject(new Error(), writableMap);
+                    }
+                });
     }
 
     private OtherMediaOptionsReceivedCallback getNewOtherMediaReceivedCallback(final Callback jsCallback) {

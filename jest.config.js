@@ -33,10 +33,7 @@ module.exports = {
 		'/__device-tests__/',
 	],
 	testURL: 'http://localhost/',
-	modulePathIgnorePatterns: [
-		'<rootDir>/gutenberg/gutenberg-mobile',
-		'react-native-aztec-old-submodule',
-	],
+	modulePathIgnorePatterns: [ '<rootDir>/gutenberg/gutenberg-mobile' ],
 	moduleDirectories: [ 'node_modules', 'symlinked-packages' ],
 	moduleNameMapper: {
 		// Mock the CSS modules. See https://facebook.github.io/jest/docs/en/webpack.html#handling-static-assets
@@ -45,7 +42,6 @@ module.exports = {
 	haste: {
 		defaultPlatform: rnPlatform,
 		platforms: [ 'android', 'ios', 'native' ],
-		hasteImplModulePath: '<rootDir>/node_modules/react-native/jest/hasteImpl.js',
 		providesModuleNodeModules: [ 'react-native', 'react-native-svg' ],
 	},
 	transformIgnorePatterns: [

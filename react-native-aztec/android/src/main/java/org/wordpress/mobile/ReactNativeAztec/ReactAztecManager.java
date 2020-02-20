@@ -5,6 +5,10 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.ColorUtils;
+
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.Layout;
 import android.text.TextUtils;
@@ -363,6 +367,14 @@ public class ReactAztecManager extends BaseViewManager<ReactAztecText, LayoutSha
         view.setTextColor(newColor);
     }
 
+    @ReactProp(name = "selectionColor", customType = "Color")
+    public void setSelectionColor(ReactAztecText view, @Nullable Integer color) {
+        if (color != null) {
+            view.setHighlightColor(ColorUtils.setAlphaComponent(color, 51));
+            view.setCursorColor(color);
+        }
+    }
+
     @ReactProp(name = "blockType")
     public void setBlockType(ReactAztecText view, ReadableMap inputMap) {
         if (inputMap.hasKey(BLOCK_TYPE_TAG_KEY)) {
@@ -478,7 +490,13 @@ public class ReactAztecManager extends BaseViewManager<ReactAztecText, LayoutSha
     public void receiveCommand(final ReactAztecText parent, int commandType, @Nullable ReadableArray args) {
         Assertions.assertNotNull(parent);
         if (commandType == mFocusTextInputCommandCode) {
-            parent.requestFocusFromJS();
+            // schedule a request to focus in the next layout, to fix https://github.com/wordpress-mobile/gutenberg-mobile/issues/1870
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    parent.requestFocusFromJS();
+                }
+            });
             return;
         } else if (commandType == mBlurTextInputCommandCode) {
             parent.clearFocusFromJS();
