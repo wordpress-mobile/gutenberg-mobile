@@ -20,7 +20,6 @@ import { setLocaleData } from '@wordpress/i18n';
  */
 import './globals';
 import { getTranslation } from '../i18n-cache';
-import initialHtml from './initial-html';
 import setupApiFetch from './api-fetch-setup';
 
 const gutenbergSetup = () => {
@@ -56,6 +55,7 @@ export class RootComponent extends React.Component {
 		setupLocale( props.locale, props.translations );
 		setupApiFetch();
 		require( '@wordpress/edit-post' ).initializeEditor();
+		require( '../extra-blocks' ).registerAll();
 
 		const isHermes = () => global.HermesInternal !== null;
 		// eslint-disable-next-line no-console
@@ -72,7 +72,7 @@ export class RootComponent extends React.Component {
 		let postType = this.props.postType;
 
 		if ( initialData === undefined && __DEV__ ) {
-			initialData = initialHtml;
+			initialData = '';
 		}
 		if ( initialTitle === undefined ) {
 			initialTitle = 'Welcome to Gutenberg!';
