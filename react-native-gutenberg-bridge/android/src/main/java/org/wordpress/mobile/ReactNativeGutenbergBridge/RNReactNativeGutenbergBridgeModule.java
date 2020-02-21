@@ -150,7 +150,7 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
 
     @ReactMethod
     public void mediaUploadSync() {
-        mGutenbergBridgeJS2Parent.mediaUploadSync(getNewMediaCallback(false,null));
+        mGutenbergBridgeJS2Parent.mediaUploadSync(getNewMediaCallback(false, null));
     }
 
     @ReactMethod
@@ -174,8 +174,8 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     }
 
     @ReactMethod
-    public void requestMediaEditor(String mediaUrl, final Callback onUploadMediaSelected) {
-        mGutenbergBridgeJS2Parent.requestMediaEditor(getNewMediaCallback(false, onUploadMediaSelected), mediaUrl);
+    public void requestMediaEditor(String mediaUrl, final Callback onMediaSelected) {
+        mGutenbergBridgeJS2Parent.requestMediaEditor(getNewMediaCallback(false, onMediaSelected), mediaUrl);
     }
 
     @ReactMethod
