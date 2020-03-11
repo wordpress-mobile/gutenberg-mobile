@@ -24,7 +24,7 @@ class OverflowView(context: Context) : ReactViewGroup(context), ReactCompoundVie
 
     fun hitTest(viewGroup:ViewGroup, touch: Point): Int? {
 
-        for (i in 0..viewGroup.childCount - 1) {
+        for (i in 0.until(viewGroup.childCount)) {
             val child = viewGroup.getChildAt(i)
             var nestedId: Int? = null
             if (child is ViewGroup && child.childCount > 0) {
@@ -38,16 +38,16 @@ class OverflowView(context: Context) : ReactViewGroup(context), ReactCompoundVie
             }
         }
 
+        if (viewContainsTouch(viewGroup, touch)) {
+            return viewGroup.id
+        }
+
         return null
     }
 
     private fun viewContainsTouch(view: View, touch: Point): Boolean {
         val hitRect = Rect()
-        view.getHitRect(hitRect)
-        val location = IntArray(2)
-        view.getLocationOnScreen(location)
-        hitRect.offset(location[0], location[1])
-
+        view.getGlobalVisibleRect(hitRect)
         return hitRect.contains(touch)
     }
 
