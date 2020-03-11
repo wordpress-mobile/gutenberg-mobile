@@ -19,6 +19,7 @@ import com.horcrux.svg.SvgPackage;
 import org.wordpress.mobile.ReactNativeAztec.ReactAztecPackage;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.RNReactNativeGutenbergBridgePackage;
+import org.wordpress.mobile.react_native_overflow_view.OverflowViewPackage;
 
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -143,6 +144,7 @@ public class MainApplication extends Application implements ReactApplication {
                         new SvgPackage(),
                         new ReactAztecPackage(),
                         new LinearGradientPackage(),
+                        new OverflowViewPackage(),
                         mRnReactNativeGutenbergBridgePackage);
             }
 
