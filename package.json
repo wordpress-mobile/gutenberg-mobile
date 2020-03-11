@@ -74,6 +74,8 @@
     "postbundle:android": "yarn un-patch-metro-no-file-watch",
     "bundle": "yarn bundle:android && yarn bundle:ios && yarn clean:pot && yarn genstrings",
     "bundle:android": "mkdir -p bundle/android && react-native bundle --platform android --dev false --entry-file index.js --assets-dest bundle/android --bundle-output bundle/android/App.js --sourcemap-output bundle/android/App.js.map",
+    "bundle:android:bytecode:osx": "./node_modules/hermes-engine/osx-bin/hermes -emit-binary -O -out bundle/android/App.bytecode bundle/android/App.js -output-source-map",
+    "bundle:android:bytecode:linux": "./node_modules/hermes-engine/linux64-bin/hermes -emit-binary -O -out bundle/android/App.bytecode bundle/android/App.js -output-source-map",
     "bundle:ios": "mkdir -p bundle/ios && react-native bundle --platform ios --dev false --entry-file index.js --assets-dest bundle/ios --bundle-output bundle/ios/App.js --sourcemap-output bundle/ios/App.js.map",
     "i18n-cache": "node i18n-cache/index.js",
     "i18n-cache:force": "cross-env REFRESH_I18N_CACHE=1 node i18n-cache/index.js",
