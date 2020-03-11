@@ -1,6 +1,7 @@
 1.24.0
 ------
 * Fix Quote block's left border not being visible in Dark Mode
+* Fix a visual issue on long text in the bottom sheets (eg. image picker).
 
 1.23.0
 ------
