@@ -3,7 +3,10 @@ Future release (replace with the version)
 * [Android] Dark Mode
 1.24.0
 ------
+* New block: Latest Posts
+* [Android] Can now scroll post when in landscape orientation with the soft keyboard displayed
 * Fix Quote block's left border not being visible in Dark Mode
+* Fix crash when pasting HTML content with embeded images on paragraphs
 
 1.23.0
 ------
