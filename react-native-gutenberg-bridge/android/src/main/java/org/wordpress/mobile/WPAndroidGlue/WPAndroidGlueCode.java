@@ -379,12 +379,8 @@ public class WPAndroidGlueCode {
             builder.setBundleAssetName("index.android.bundle");
         }
         mReactInstanceManager = builder.build();
-        mReactInstanceManager.addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener() {
-            @Override
-            public void onReactContextInitialized(ReactContext context) {
-                mReactContext = context;
-                setPreferredColorScheme(isDarkMode);
-            }
+        mReactInstanceManager.addReactInstanceEventListener(context -> {
+            mReactContext = context;
         });
         Bundle initialProps = mReactRootView.getAppProperties();
         if (initialProps == null) {
@@ -410,7 +406,9 @@ public class WPAndroidGlueCode {
                                   RequestExecutor fetchExecutor,
                                   OnImageFullscreenPreviewListener onImageFullscreenPreviewListener,
                                   OnMediaEditorListener onMediaEditorListener,
-                                  OnLogGutenbergUserEventListener onLogGutenbergUserEventListener) {
+                                  OnLogGutenbergUserEventListener onLogGutenbergUserEventListener,
+                                  boolean isDarkMode) {
+
         MutableContextWrapper contextWrapper = (MutableContextWrapper) mReactRootView.getContext();
         contextWrapper.setBaseContext(viewGroup.getContext());
 
@@ -431,6 +429,10 @@ public class WPAndroidGlueCode {
 
         viewGroup.addView(mReactRootView, 0,
                 new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+        if (mReactContext != null) {
+            setPreferredColorScheme(isDarkMode);
+        }
 
         refocus();
     }
@@ -505,8 +507,11 @@ public class WPAndroidGlueCode {
     }
 
     public void setPreferredColorScheme(boolean isDarkMode) {
-        mRnReactNativeGutenbergBridgePackage.getRNReactNativeGutenbergBridgeModule()
-                .setPreferredColorScheme(isDarkMode);
+        if (mIsDarkMode != isDarkMode) {
+            mIsDarkMode = isDarkMode;
+            mRnReactNativeGutenbergBridgePackage.getRNReactNativeGutenbergBridgeModule()
+                                                .setPreferredColorScheme(isDarkMode);
+        }
     }
 
     public void setTitle(String title) {
