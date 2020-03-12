@@ -10,9 +10,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class RNReactNativeGutenbergBridgePackage implements ReactPackage {
-    private GutenbergBridgeJS2Parent mGutenbergBridgeJS2Parent;
+    private final GutenbergBridgeJS2Parent mGutenbergBridgeJS2Parent;
+    private final boolean mIsDarkMode;
+
     private RNReactNativeGutenbergBridgeModule mRNReactNativeGutenbergBridgeModule;
-    private boolean mIsDarkMode;
 
     public RNReactNativeGutenbergBridgeModule getRNReactNativeGutenbergBridgeModule() {
         return mRNReactNativeGutenbergBridgeModule;
