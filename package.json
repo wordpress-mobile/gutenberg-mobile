@@ -72,7 +72,7 @@
     "prebundle:android": "yarn patch-metro-no-file-watch",
     "prepare": "patch-package",
     "postbundle:android": "yarn un-patch-metro-no-file-watch",
-    "bundle": "yarn bundle:android && yarn bundle:ios && yarn clean:pot && yarn genstrings",
+    "bundle": "yarn bundle:android && yarn bundle:android:bytecode && yarn bundle:ios && yarn clean:pot && yarn genstrings",
     "bundle:android": "mkdir -p bundle/android && react-native bundle --platform android --dev false --entry-file index.js --assets-dest bundle/android --bundle-output bundle/android/App.js --sourcemap-output bundle/android/App.js.map",
     "bundle:android:bytecode": "./node_modules/hermes-engine/`node -e \"const platform=require('os').platform();console.log(platform === 'darwin' ? 'osx-bin' : (platform === 'linux' ? 'linux64-bin' : (platform === 'win32' ? 'win64-bin' : 'unsupported-os')));\"`/hermes -emit-binary -O -out bundle/android/App.bytecode bundle/android/App.js -output-source-map",
     "bundle:ios": "mkdir -p bundle/ios && react-native bundle --platform ios --dev false --entry-file index.js --assets-dest bundle/ios --bundle-output bundle/ios/App.js --sourcemap-output bundle/ios/App.js.map",

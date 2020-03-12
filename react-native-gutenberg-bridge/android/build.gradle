@@ -161,10 +161,6 @@ if (isJitPack) {
         args = ['bundle:android']
     }
 
-    task buildJSBytecode(type: YarnTask) {
-        args = ['bundle:android:bytecode:linux']
-    }
-
     task ensureAssetsDirectory { 
         doLast {
             mkdir assetsFolder
@@ -212,8 +208,7 @@ if (isJitPack) {
         cleanupNodeModulesFolder.dependsOn(backupHermesDebugAAR)
         backupHermesDebugAAR.dependsOn(backupHermesReleaseAAR)
         backupHermesReleaseAAR.dependsOn(copyJSBytecode)
-        copyJSBytecode.dependsOn(buildJSBytecode)
-        buildJSBytecode.dependsOn(buildJSBundle)
+        copyJSBytecode.dependsOn(buildJSBundle)
         buildJSBundle.dependsOn(yarn_install, ensureAssetsDirectory)
     }
 }
