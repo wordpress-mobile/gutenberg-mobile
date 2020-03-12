@@ -191,18 +191,6 @@ if (isJitPack) {
         }
     }
 
-    task copyJSBundle(type: Copy) {
-        def origFileName = 'App.js'
-        def origWithPath = "../../bundle/android/${origFileName}"
-        def target = 'index.android.bundle'
-        from origWithPath
-        into assetsFolder
-        rename origFileName, target
-        doLast {
-            println "Done copying the Android JS bundle to assets folder"
-        }
-    }
-
     task copyJSBytecode(type: Copy) {
         def origFileName = 'App.bytecode'
         def origWithPath = "../../bundle/android/${origFileName}"
@@ -224,8 +212,7 @@ if (isJitPack) {
         cleanupNodeModulesFolder.dependsOn(backupHermesDebugAAR)
         backupHermesDebugAAR.dependsOn(backupHermesReleaseAAR)
         backupHermesReleaseAAR.dependsOn(copyJSBytecode)
-        copyJSBytecode.dependsOn(copyJSBundle)
-        copyJSBundle.dependsOn(buildJSBytecode)
+        copyJSBytecode.dependsOn(buildJSBytecode)
         buildJSBytecode.dependsOn(buildJSBundle)
         buildJSBundle.dependsOn(yarn_install, ensureAssetsDirectory)
     }
