@@ -1,6 +1,6 @@
 {
   "name": "gutenberg-mobile",
-  "version": "1.22.1",
+  "version": "1.23.0",
   "private": true,
   "config": {
     "jsfiles": "./*.js src/*.js src/**/*.js src/**/**/*.js",
@@ -168,6 +168,7 @@
     "react-native-safe-area": "^0.5.0",
     "react-native-svg": "git+https://github.com/wordpress-mobile/react-native-svg.git#b868119a087170723551591e74e5e114f97e416f",
     "react-native-video": "git+https://github.com/wordpress-mobile/react-native-video.git#5a7b297447f5bf0def37a8eb794d7ff605b7d19a",
+    "react-native-url-polyfill": "^1.1.2",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
     "redux-multi": "^0.1.12",
