@@ -12,7 +12,7 @@ import { requireNativeComponent } from 'react-native';
 
 class OverflowView extends React.Component {
 	render() {
-		return <RNTOverflowView { ...this.props } />;
+		return <RNTOverflowView pointerEvents={ this.props.presentingOverflow ? 'box-none' : 'auto' } { ...this.props } />;
 	}
 }
 
