@@ -56,6 +56,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import org.wordpress.mobile.react_native_overflow_view.OverflowViewPackage;
 
 
 public class WPAndroidGlueCode {
@@ -338,6 +339,7 @@ public class WPAndroidGlueCode {
                 new ReactAztecPackage(),
                 new ReactVideoPackage(),
                 new ReactSliderPackage(),
+                new OverflowViewPackage(),
                 mRnReactNativeGutenbergBridgePackage);
     }
 

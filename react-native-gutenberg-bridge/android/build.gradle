@@ -121,6 +121,7 @@ repositories {
 
 dependencies {
     implementation project(':react-native-aztec')
+    implementation project(':react-native-overflow-view')
 
     implementation "org.wordpress:utils:1.22"
 
