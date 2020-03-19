@@ -24,7 +24,7 @@ export default class EditorPage {
 	unorderedListButtonName = 'Convert to unordered list';
 	orderedListButtonName = 'Convert to ordered list';
 
-	constructor( driver: wd.PromiseChainWebdriver ) {
+	constructor( driver ) {
 		this.driver = driver;
 		this.accessibilityIdKey = 'name';
 		this.accessibilityIdXPathAttrib = 'name';
