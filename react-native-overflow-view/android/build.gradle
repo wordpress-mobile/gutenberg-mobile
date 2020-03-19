@@ -1,14 +1,50 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
+def isJitPack = System.getenv('JITPACK').asBoolean()
+
+if (isJitPack) {
+    println 'Building in JitPack'
+
+    apply plugin: 'com.moowork.node'
+
+    node {
+        // Version of node to use.
+        version = '12.13.1'
+
+        // Version of npm to use.
+        npmVersion = '6.3.0'
+
+        // Version of Yarn to use.
+        yarnVersion = '1.10.1'
+
+        // Base URL for fetching node distributions (change if you have a mirror).
+        distBaseUrl = 'https://nodejs.org/dist'
+
+        // If true, it will download node using above parameters.
+        // If false, it will try to use globally installed node.
+        download = true
+
+        def tmpdir = "${System.getenv('TMPDIR')}/jsbundle/${System.getenv('VERSION')}"
+
+        // Set the work directory for unpacking node
+        workDir = file("${tmpdir}/nodejs")
+
+        // Set the work directory for NPM
+        npmWorkDir = file("${tmpdir}/npm")
+
+        // Set the work directory for Yarn
+        yarnWorkDir = file("${tmpdir}/yarn")
+
+        // Set the work directory where node_modules should be located
+        nodeModulesDir = file("${project.projectDir}/../../")
+    }
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
-
-    repositories {
-        google()
-        jcenter()
-    }
     
     defaultConfig {
         minSdkVersion 21
@@ -26,7 +62,27 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+}
 
+// import the `readReactNativeVersion()` function
+apply from: 'https://gist.githubusercontent.com/hypest/742448b9588b3a0aa580a5e80ae95bdf/raw/8eb62d40ee7a5104d2fcaeff21ce6f29bd93b054/readReactNativeVersion.gradle'
+
+repositories {
+    google()
+    jcenter()
+
+    maven { url "https://jitpack.io" }
+
+    if (rootProject.ext.buildGutenbergFromSource) {
+        // If building from source, use the local sources from node_modules
+        def nodeModulesPath = "${project.buildDir}/../../../node_modules/"
+        maven { url "${nodeModulesPath}/react-native/android" }
+    } else {
+        // If not building from source (e.g. Jitpack), use the bintray repo so a local RN setup is not needed
+        def reactNativeRepo = 'https://dl.bintray.com/wordpress-mobile/react-native-mirror/'
+        println "Will use the RN maven repo at ${reactNativeRepo}"
+        maven { url reactNativeRepo }
+    }
 }
 
 dependencies {
@@ -37,5 +93,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation 'com.facebook.react:react-native:+'
+
+    if (rootProject.ext.buildGutenbergFromSource) {
+        println "using gutenberg from source"
+        implementation 'com.facebook.react:react-native:+'
+    } else {
+        // FIXME Temporary fix to get Jitpack builds to green while I work on a solution without hardcoded values.
+        //def rnVersion = readReactNativeVersion('../package.json', 'peerDependencies')
+        def rnVersion = '0.61.5'
+        implementation "com.facebook.react:react-native:${rnVersion}"
+    }
 }
