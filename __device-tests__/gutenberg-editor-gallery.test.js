@@ -18,7 +18,7 @@ describe( 'Gutenberg Editor Gallery Block tests', () => {
 	let driver;
 	let editorPage;
 	let allPassed = true;
-	let galleryBlockName = 'Gallery';
+	const galleryBlockName = 'Gallery';
 
 	// Use reporter for setting status for saucelabs Job
 	if ( ! isLocalEnvironment() ) {

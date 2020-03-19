@@ -22,8 +22,8 @@ describe( 'Gutenberg Editor Image Block tests', () => {
 	let driver;
 	let editorPage;
 	let allPassed = true;
-	let imageBlockName = 'Image';
-	let paragraphBlockName = 'Paragraph';
+	const imageBlockName = 'Image';
+	const paragraphBlockName = 'Paragraph';
 
 
 	// Use reporter for setting status for saucelabs Job
