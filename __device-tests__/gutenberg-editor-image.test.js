@@ -25,7 +25,6 @@ describe( 'Gutenberg Editor Image Block tests', () => {
 	const imageBlockName = 'Image';
 	const paragraphBlockName = 'Paragraph';
 
-
 	// Use reporter for setting status for saucelabs Job
 	if ( ! isLocalEnvironment() ) {
 		const reporter = {
