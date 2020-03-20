@@ -101,6 +101,7 @@ public class WPAndroidGlueCode {
 
     private static OkHttpHeaderInterceptor sAddCookiesInterceptor = new OkHttpHeaderInterceptor();
     private static OkHttpClient sOkHttpClient = new OkHttpClient.Builder().addInterceptor(sAddCookiesInterceptor).build();
+    private boolean mIsDarkMode;
 
     public void onCreate(Context context) {
         SoLoader.init(context, /* native exopackage */ false);
@@ -330,7 +331,7 @@ public class WPAndroidGlueCode {
             public void logUserEvent(GutenbergUserEvent event, ReadableMap eventProperties) {
                 mOnLogGutenbergUserEventListener.onGutenbergUserEvent(event, eventProperties.toHashMap());
             }
-        });
+        }, mIsDarkMode);
 
         return Arrays.asList(
                 new MainReactPackage(getMainPackageConfig(getImagePipelineConfig(sOkHttpClient))),
@@ -355,15 +356,18 @@ public class WPAndroidGlueCode {
     @Deprecated
     public void onCreateView(Context initContext, boolean htmlModeEnabled,
                              Application application, boolean isDebug, boolean buildGutenbergFromSource,
-                             boolean isNewPost, String localeString, Bundle translations) {
+                             boolean isNewPost, String localeString, Bundle translations, int colorBackground, boolean isDarkMode) {
         onCreateView(initContext, htmlModeEnabled, application, isDebug, buildGutenbergFromSource, "post", isNewPost
-        , localeString, translations);
+        , localeString, translations, colorBackground, isDarkMode);
     }
 
     public void onCreateView(Context initContext, boolean htmlModeEnabled,
                              Application application, boolean isDebug, boolean buildGutenbergFromSource,
-                             String postType, boolean isNewPost, String localeString, Bundle translations) {
+                             String postType, boolean isNewPost, String localeString, Bundle translations,
+                             int colorBackground, boolean isDarkMode) {
+        mIsDarkMode = isDarkMode;
         mReactRootView = new ReactRootView(new MutableContextWrapper(initContext));
+        mReactRootView.setBackgroundColor(colorBackground);
 
         ReactInstanceManagerBuilder builder =
                 ReactInstanceManager.builder()
@@ -377,11 +381,8 @@ public class WPAndroidGlueCode {
             builder.setBundleAssetName("index.android.bundle");
         }
         mReactInstanceManager = builder.build();
-        mReactInstanceManager.addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener() {
-            @Override
-            public void onReactContextInitialized(ReactContext context) {
-                mReactContext = context;
-            }
+        mReactInstanceManager.addReactInstanceEventListener(context -> {
+            mReactContext = context;
         });
         Bundle initialProps = mReactRootView.getAppProperties();
         if (initialProps == null) {
@@ -407,7 +408,9 @@ public class WPAndroidGlueCode {
                                   RequestExecutor fetchExecutor,
                                   OnImageFullscreenPreviewListener onImageFullscreenPreviewListener,
                                   OnMediaEditorListener onMediaEditorListener,
-                                  OnLogGutenbergUserEventListener onLogGutenbergUserEventListener) {
+                                  OnLogGutenbergUserEventListener onLogGutenbergUserEventListener,
+                                  boolean isDarkMode) {
+
         MutableContextWrapper contextWrapper = (MutableContextWrapper) mReactRootView.getContext();
         contextWrapper.setBaseContext(viewGroup.getContext());
 
@@ -428,6 +431,10 @@ public class WPAndroidGlueCode {
 
         viewGroup.addView(mReactRootView, 0,
                 new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+        if (mReactContext != null) {
+            setPreferredColorScheme(isDarkMode);
+        }
 
         refocus();
     }
@@ -499,6 +506,14 @@ public class WPAndroidGlueCode {
     public void appendNewMediaBlock(int mediaId, String mediaUri, String mediaType) {
         mRnReactNativeGutenbergBridgePackage.getRNReactNativeGutenbergBridgeModule()
                                             .appendNewMediaBlock(mediaId, mediaUri, mediaType);
+    }
+
+    public void setPreferredColorScheme(boolean isDarkMode) {
+        if (mIsDarkMode != isDarkMode) {
+            mIsDarkMode = isDarkMode;
+            mRnReactNativeGutenbergBridgePackage.getRNReactNativeGutenbergBridgeModule()
+                                                .setPreferredColorScheme(isDarkMode);
+        }
     }
 
     public void setTitle(String title) {
