@@ -29,6 +29,20 @@ class RCTAztecView: Aztec.TextView {
         }
     }
 
+    @objc var enableAutoCorrection: Bool = true {
+        didSet {
+            if enableAutoCorrection {
+                autocorrectionType = .default
+                autocapitalizationType = .sentences
+                spellCheckingType = .default
+            } else {
+                autocorrectionType = .no
+                autocapitalizationType = .none
+                spellCheckingType = .no
+            }
+        }
+    }
+
     override var textAlignment: NSTextAlignment {
         set {
             super.textAlignment = newValue
