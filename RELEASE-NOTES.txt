@@ -1,6 +1,7 @@
 1.25.0
 ------
 * Improve icon on the "Take a Video" media option
+* Change dimmed style opacity to 1 for unselected block when navigating in nested structure
 
 1.24.0
 ------
