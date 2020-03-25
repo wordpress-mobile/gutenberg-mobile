@@ -2,6 +2,7 @@
 import UIKit
 import Gutenberg
 import Aztec
+import WebKit
 
 class GutenbergViewController: UIViewController {
 
@@ -193,6 +194,17 @@ extension GutenbergViewController: GutenbergBridgeDelegate {
     
     func gutenbergDidLogUserEvent(_ event: GutenbergUserEvent) {
         print("Gutenberg loged user event")
+    }
+
+    func gutenbergDidRequestUnsupportedBlockFallback(with content: String) {
+        let webView = WKWebView()
+        let meta = """
+<meta name="viewport" content="width=device-width, shrink-to-fit=YES">
+"""
+        webView.loadHTMLString(meta+content, baseURL: nil)
+        let controller = UIViewController()
+        controller.view = webView
+        present(controller, animated: true)
     }
 }
 
