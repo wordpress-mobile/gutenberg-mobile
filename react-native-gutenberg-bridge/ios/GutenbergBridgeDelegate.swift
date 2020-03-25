@@ -164,6 +164,9 @@ public protocol GutenbergBridgeDelegate: class {
     /// Tells the delegate that the editor needs to log a custom event
     /// - Parameter event: The event key to be logged
     func gutenbergDidLogUserEvent(_ event: GutenbergUserEvent)
+
+    /// Tells the delegate that the editor needs to render an unsupported block
+    func gutenbergDidRequestUnsupportedBlockFallback(with content: String)
 }
 
 // MARK: - Optional GutenbergBridgeDelegate methods
@@ -171,4 +174,5 @@ public protocol GutenbergBridgeDelegate: class {
 public extension GutenbergBridgeDelegate {
     func gutenbergDidLoad() { }
     func gutenbergDidLayout() { }
+    func gutenbergDidRequestUnsupportedBlockFallback(with content: String) { }
 }

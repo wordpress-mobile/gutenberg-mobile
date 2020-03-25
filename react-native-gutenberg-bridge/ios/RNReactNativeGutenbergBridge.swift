@@ -45,6 +45,13 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
     }
 
     @objc
+    func requestUnsupportedBlockFallback(_ content: String) {
+        DispatchQueue.main.async {
+            self.delegate?.gutenbergDidRequestUnsupportedBlockFallback(with: content)
+        }
+    }
+
+    @objc
     func getOtherMediaOptions(_ filter: [String]?, callback: @escaping RCTResponseSenderBlock) {
         guard let dataSource = dataSource else {
             return callback([])

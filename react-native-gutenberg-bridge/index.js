@@ -93,6 +93,17 @@ export function requestMediaPicker( source, filter, multiple, callback ) {
 	RNReactNativeGutenbergBridge.requestMediaPickFrom( source, filter, multiple, callback );
 }
 
+/**
+ * Request to render an unsuported block.
+ *
+ * A way to show unsupported blocks to the user is to render it on a web view.
+ *
+ * @param {string} htmlContent Raw html content of the block.
+ */
+export function requestUnsupportedBlockFallback( htmlContent ) {
+	RNReactNativeGutenbergBridge.requestUnsupportedBlockFallback( htmlContent );
+}
+
 export function requestMediaImport( url, callback ) {
 	return RNReactNativeGutenbergBridge.requestMediaImport( url, callback );
 }
