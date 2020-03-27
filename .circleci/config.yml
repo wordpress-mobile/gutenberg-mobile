@@ -151,12 +151,12 @@ jobs:
         path: ./reports/test-results
     - run:
         name: Prepare build cache
-        command: rm $TEST_IOS_BUILD_PATH'/GutenbergDemo.app/main.jsbundle
+        command: rm $TEST_IOS_BUILD_PATH/GutenbergDemo.app/main.jsbundle
     - save_cache:
         name: Save Build Cache
         key: ios-build-cache-{{ checksum "ios-checksums.txt" }}
         paths:
-          - $TEST_IOS_BUILD_PATH'/GutenbergDemo.app'
+          - $TEST_IOS_BUILD_PATH/GutenbergDemo.app'
 
 workflows:
   gutenberg-mobile:

@@ -114,7 +114,7 @@
     "test:e2e:bundle:android": "mkdir -p android/app/src/main/assets && react-native bundle --reset-cache --platform android --dev false --minify false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "test:e2e:build-app:android": "yarn test:e2e:bundle:android && cd android && ./gradlew clean && ./gradlew assembleDebug",
     "test:e2e:install-app:android": "cd android && ./gradlew installDebug",
-    "test:e2e:bundle:ios": "(cd ios && var=$(xcodebuild -showBuildSettings | grep TARGET_BUILD_DIR | cut -d '=' -f2)) | react-native bundle --reset-cache --platform=ios --dev=false --minify false --entry-file=index.js --bundle-output=$var/GutenbergDemo.app/main.jsbundle --assets-dest=$var/GutenbergDemo.app",
+    "test:e2e:bundle:ios": "react-native bundle --reset-cache --platform=ios --dev=false --minify false --entry-file=index.js --bundle-output=$TEST_IOS_BUILD_PATH/GutenbergDemo.app/main.jsbundle --assets-dest=$TEST_IOS_BUILD_PATH/GutenbergDemo.app",
     "test:e2e:build-app:ios": "yarn ios --configuration Release --no-packager",
     "flow": "flow",
     "prettier": "prettier-eslint --write $npm_package_config_jsfiles $npm_package_config_scssfiles",
