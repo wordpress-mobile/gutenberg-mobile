@@ -25,16 +25,16 @@
     "FBReactNativeSpec": [
       "0.62.0"
     ],
-    "RCTTypeSafety": [
-      "0.62.0"
-    ],
-    "React-RCTImage": [
-      "0.62.0"
-    ],
     "Folly": [
       "2018.10.22.00"
     ],
+    "RCTTypeSafety": [
+      "0.62.0"
+    ],
     "React-Core/CoreModulesHeaders": [
+      "0.62.0"
+    ],
+    "React-RCTImage": [
       "0.62.0"
     ],
     "ReactCommon/turbomodule/core": [
