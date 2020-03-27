@@ -18,7 +18,8 @@
   "source_files": "**/*.{m,mm,cpp,h}",
   "exclude_files": [
     "**/tests/*",
-    "**/android/*"
+    "**/android/*",
+    "**/cxx/*"
   ],
   "header_dir": "react/graphics",
   "pod_target_xcconfig": {

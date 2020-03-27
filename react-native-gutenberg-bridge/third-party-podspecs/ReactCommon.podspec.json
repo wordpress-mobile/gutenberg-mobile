@@ -23,8 +23,8 @@
   },
   "subspecs": [
     {
-      "name": "jscallinvoker",
-      "source_files": "jscallinvoker/**/*.{cpp,h}",
+      "name": "callinvoker",
+      "source_files": "callinvoker/**/*.{cpp,h}",
       "dependencies": {
         "React-cxxreact": [
           "0.62.0"
@@ -39,7 +39,7 @@
     {
       "name": "turbomodule",
       "dependencies": {
-        "ReactCommon/jscallinvoker": [
+        "ReactCommon/callinvoker": [
           "0.62.0"
         ],
         "React-Core": [
