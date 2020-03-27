@@ -14,8 +14,6 @@
     <string name="gutenberg_native_a_short_bio_with_personal_history_key_achievements_or_an_interest" tools:ignore="UnusedResources">A short bio with personal history, key achievements, or an interesting fact.</string>
     <!-- translators: sample content for "Services" page template -->
     <string name="gutenberg_native_a_short_description_of_the_services_you_offer" tools:ignore="UnusedResources">A short description of the services you offer.</string>
-    <!-- translators: title for "About" page template -->
-    <string name="gutenberg_native_about" tools:ignore="UnusedResources">About</string>
     <string name="gutenberg_native_add_a_description" tools:ignore="UnusedResources">Add a description</string>
     <string name="gutenberg_native_add_a_shortcode" tools:ignore="UnusedResources">Add a shortcode…</string>
     <string name="gutenberg_native_add_annotation" tools:ignore="UnusedResources">Add annotation</string>
@@ -41,8 +39,7 @@
     <!-- translators: sample content for "Contact" page template -->
     <string name="gutenberg_native_city_10100" tools:ignore="UnusedResources">City, 10100</string>
     <string name="gutenberg_native_clear_all_settings" tools:ignore="UnusedResources">Clear All Settings</string>
-    <!-- translators: title for "Contact" page template -->
-    <string name="gutenberg_native_contact" tools:ignore="UnusedResources">Contact</string>
+    <string name="gutenberg_native_columns_settings" tools:ignore="UnusedResources">Columns Settings</string>
     <string name="gutenberg_native_content" tools:ignore="UnusedResources">Content…</string>
     <string name="gutenberg_native_current_value_is_s" tools:ignore="UnusedResources">Current value is %s</string>
     <string name="gutenberg_native_customize" tools:ignore="UnusedResources">CUSTOMIZE</string>
@@ -55,6 +52,8 @@
     <!-- translators: accessibility text -->
     <string name="gutenberg_native_double_tap_to_edit_this_value" tools:ignore="UnusedResources">Double tap to edit this value</string>
     <string name="gutenberg_native_double_tap_to_move_the_block_down" tools:ignore="UnusedResources">Double tap to move the block down</string>
+    <string name="gutenberg_native_double_tap_to_move_the_block_to_the_left" tools:ignore="UnusedResources">Double tap to move the block to the left</string>
+    <string name="gutenberg_native_double_tap_to_move_the_block_to_the_right" tools:ignore="UnusedResources">Double tap to move the block to the right</string>
     <string name="gutenberg_native_double_tap_to_move_the_block_up" tools:ignore="UnusedResources">Double tap to move the block up</string>
     <string name="gutenberg_native_double_tap_to_redo_last_change" tools:ignore="UnusedResources">Double tap to redo last change</string>
     <string name="gutenberg_native_double_tap_to_remove_the_block" tools:ignore="UnusedResources">Double tap to remove the block</string>
@@ -108,12 +107,12 @@ translators: sample content for "Services" page template -->
     <string name="gutenberg_native_link_settings" tools:ignore="UnusedResources">Link Settings</string>
     <string name="gutenberg_native_link_text" tools:ignore="UnusedResources">Link text</string>
     <string name="gutenberg_native_link_to" tools:ignore="UnusedResources">Link To</string>
+    <!-- translators: accessibility text. %1: block moving direction (string). %2: location of block - row or order number (string). %3: current block position (number). %4: next block position (number) -->
+    <string name="gutenberg_native_move_block_2_s_from_1_s_3_s_to_1_s_4_s" tools:ignore="UnusedResources">Move block %2$s from %1$s %3$s to %1$s %4$s</string>
     <string name="gutenberg_native_move_block_down" tools:ignore="UnusedResources">Move block down</string>
-    <!-- translators: accessibility text. %1: current block position (number). %2: next block position (number) -->
-    <string name="gutenberg_native_move_block_down_from_row_1_s_to_row_2_s" tools:ignore="UnusedResources">Move block down from row %1$s to row %2$s</string>
+    <string name="gutenberg_native_move_block_left" tools:ignore="UnusedResources">Move block left</string>
+    <string name="gutenberg_native_move_block_right" tools:ignore="UnusedResources">Move block right</string>
     <string name="gutenberg_native_move_block_up" tools:ignore="UnusedResources">Move block up</string>
-    <!-- translators: accessibility text. %1: current block position (number). %2: next block position (number) -->
-    <string name="gutenberg_native_move_block_up_from_row_1_s_to_row_2_s" tools:ignore="UnusedResources">Move block up from row %1$s to row %2$s</string>
     <string name="gutenberg_native_move_image_backward" tools:ignore="UnusedResources">Move Image Backward</string>
     <string name="gutenberg_native_move_image_forward" tools:ignore="UnusedResources">Move Image Forward</string>
     <string name="gutenberg_native_my_document_setting_panel" tools:ignore="UnusedResources">My Document Setting Panel</string>
@@ -124,6 +123,7 @@ translators: sample content for "Services" page template -->
     <string name="gutenberg_native_my_pre_publish_panel" tools:ignore="UnusedResources">My pre publish panel</string>
     <string name="gutenberg_native_navigate_up" tools:ignore="UnusedResources">Navigate Up</string>
     <string name="gutenberg_native_no_application_can_handle_this_request_please_install_a_web_brows" tools:ignore="UnusedResources">No application can handle this request. Please install a Web browser.</string>
+    <string name="gutenberg_native_number_of_columns" tools:ignore="UnusedResources">Number of columns</string>
     <string name="gutenberg_native_only_show_excerpt" tools:ignore="UnusedResources">Only show excerpt</string>
     <string name="gutenberg_native_open_settings" tools:ignore="UnusedResources">Open Settings</string>
     <!-- translators: accessibility text. %s: Page break text. -->
