@@ -102,6 +102,7 @@ jobs:
         command: |
           echo 'export TEST_RN_PLATFORM=ios' >> $BASH_ENV
           echo 'export TEST_ENV=sauce' >> $BASH_ENV
+          (cd ios && var=$(xcodebuild -showBuildSettings | grep TARGET_BUILD_DIR | cut -d "=" -f2)) | echo 'export TEST_IOS_BUILD_PATH='${var// /}'' >> $BASH_ENV
     - run:
         name: Prepare build cache key
         command: find yarn.lock ios react-native-aztec/ios react-native-gutenberg-bridge/ios -type f -print0 | sort -z | xargs -0 shasum | tee ios-checksums.txt
@@ -134,7 +135,7 @@ jobs:
         command: yarn test:e2e:bundle:ios
     - run:
         name: Generate .app file for testing
-        command: WORK_DIR=$(pwd) && cd ./ios/build/gutenberg/Build/Products/Release-iphonesimulator && zip -r $WORK_DIR/ios/GutenbergDemo.app.zip GutenbergDemo.app
+        command: WORK_DIR=$(pwd) && cd $TEST_IOS_BUILD_PATH && zip -r $WORK_DIR/ios/GutenbergDemo.app.zip GutenbergDemo.app
     - run:
         name: Upload .app to sauce labs
         command: |
@@ -150,12 +151,12 @@ jobs:
         path: ./reports/test-results
     - run:
         name: Prepare build cache
-        command: rm ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app/main.jsbundle
+        command: rm $TEST_IOS_BUILD_PATH'/GutenbergDemo.app/main.jsbundle
     - save_cache:
         name: Save Build Cache
         key: ios-build-cache-{{ checksum "ios-checksums.txt" }}
         paths:
-          - ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app
+          - $TEST_IOS_BUILD_PATH'/GutenbergDemo.app'
 
 workflows:
   gutenberg-mobile:
