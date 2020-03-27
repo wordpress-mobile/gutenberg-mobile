@@ -14,8 +14,6 @@
     <string name="gutenberg_native_a_short_bio_with_personal_history_key_achievements_or_an_interest" tools:ignore="UnusedResources">A short bio with personal history, key achievements, or an interesting fact.</string>
     <!-- translators: sample content for "Services" page template -->
     <string name="gutenberg_native_a_short_description_of_the_services_you_offer" tools:ignore="UnusedResources">A short description of the services you offer.</string>
-    <!-- translators: title for "About" page template -->
-    <string name="gutenberg_native_about" tools:ignore="UnusedResources">About</string>
     <string name="gutenberg_native_add_a_description" tools:ignore="UnusedResources">Add a description</string>
     <string name="gutenberg_native_add_a_shortcode" tools:ignore="UnusedResources">Add a shortcode…</string>
     <string name="gutenberg_native_add_annotation" tools:ignore="UnusedResources">Add annotation</string>
@@ -41,8 +39,6 @@
     <!-- translators: sample content for "Contact" page template -->
     <string name="gutenberg_native_city_10100" tools:ignore="UnusedResources">City, 10100</string>
     <string name="gutenberg_native_clear_all_settings" tools:ignore="UnusedResources">Clear All Settings</string>
-    <!-- translators: title for "Contact" page template -->
-    <string name="gutenberg_native_contact" tools:ignore="UnusedResources">Contact</string>
     <string name="gutenberg_native_content" tools:ignore="UnusedResources">Content…</string>
     <string name="gutenberg_native_current_value_is_s" tools:ignore="UnusedResources">Current value is %s</string>
     <string name="gutenberg_native_customize" tools:ignore="UnusedResources">CUSTOMIZE</string>
