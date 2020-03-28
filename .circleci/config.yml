@@ -134,7 +134,7 @@ jobs:
         name: Test Set iOS Environment
         command: |
           cd ios 
-          var=$(xcodebuild -showBuildSettings | grep TARGET_BUILD_DIR | cut -d "=" -f2) && echo $var
+          var=$(xcodebuild -showBuildSettings | grep TARGET_BUILD_DIR | cut -d "=" -f2) && echo 'export TEST_IOS_BUILD_PATH='${var// /}'' >> $BASH_ENV
         no_output_timeout: "45s"
     - run:
         name: Bundle iOS
