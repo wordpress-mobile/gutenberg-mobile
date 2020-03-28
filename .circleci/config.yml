@@ -134,7 +134,7 @@ jobs:
         name: Set Environment Variable
         command: |
           cd ios 
-          var=$(xcodebuild -showBuildSettings | grep TARGET_BUILD_DIR | cut -d "=" -f2) && echo 'export TEST_IOS_BUILD_PATH='${var// /}'' >> $BASH_ENV
+          var=$(xcodebuild -workspace gutenberg.xcworkspace -scheme gutenberg -showBuildSettings | grep TARGET_BUILD_DIR | cut -d "=" -f2) && echo 'export TEST_IOS_BUILD_PATH='${var// /}'' >> $BASH_ENV
         no_output_timeout: "20s"
     - run:
         name: Bundle iOS
