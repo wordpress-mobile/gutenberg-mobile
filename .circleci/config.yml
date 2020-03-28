@@ -132,7 +132,9 @@ jobs:
         command: echo $TEST_RN_MOBILE
     - run:
         name: Test Set iOS Environment
-        command: (cd ios && var=$(xcodebuild -showBuildSettings | grep TARGET_BUILD_DIR | cut -d "=" -f2)) && echo $var
+        command: |
+          cd ios 
+          var=$(xcodebuild -showBuildSettings | grep TARGET_BUILD_DIR | cut -d "=" -f2) && echo $var
         no_output_timeout: "45s"
     - run:
         name: Bundle iOS
