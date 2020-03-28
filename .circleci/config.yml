@@ -102,6 +102,10 @@ jobs:
         command: |
           echo 'export TEST_RN_PLATFORM=ios' >> $BASH_ENV
           echo 'export TEST_ENV=sauce' >> $BASH_ENV
+          echo 'export TEST_RN_MOBILE=gbmobile' >> $BASH_ENV
+          echo $TEST_RN_PLATFORM
+          echo $TEST_RN_MOBILE
+          (cd ios && xcodebuild -showBuildSettings | grep TARGET_BUILD_DIR | cut -d "=" -f2)
     - run:
         name: Prepare build cache key
         command: find yarn.lock ios react-native-aztec/ios react-native-gutenberg-bridge/ios -type f -print0 | sort -z | xargs -0 shasum | tee ios-checksums.txt
@@ -133,6 +137,7 @@ jobs:
         name: Bundle iOS
         command: |
           (cd ios && var=$(xcodebuild -showBuildSettings | grep TARGET_BUILD_DIR | cut -d "=" -f2)) && export TEST_IOS_BUILD_PATH=${var// /}
+          echo $TEST_IOS_BUILD_PATH
           yarn test:e2e:bundle:ios
     - run:
         name: Generate .app file for testing
