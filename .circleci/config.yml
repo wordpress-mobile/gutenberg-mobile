@@ -132,14 +132,11 @@ jobs:
         command: echo $CIRCLE_BRANCH
     - run:
         name: Test Set iOS Environment
-        command: |
-          (cd ios && var=$(xcodebuild -showBuildSettings | grep TARGET_BUILD_DIR | cut -d "=" -f2)) && echo 'export TEST_IOS_BUILD_PATH='${var// /}'' >> $BASH_ENV
-          echo $TEST_IOS_BUILD_PATH
+        command: (cd ios && var=$(xcodebuild -showBuildSettings | grep TARGET_BUILD_DIR | cut -d "=" -f2)) && echo 'export TEST_IOS_BUILD_PATH='${var// /}'' >> $BASH_ENV
         no_output_timeout: "45s"
     - run:
         name: Bundle iOS
-        command: |
-          yarn test:e2e:bundle:ios
+        command: echo $TEST_IOS_BUILD_PATH
     - run:
         name: Generate .app file for testing
         command: WORK_DIR=$(pwd) && cd $TEST_IOS_BUILD_PATH && zip -r $WORK_DIR/ios/GutenbergDemo.app.zip GutenbergDemo.app
