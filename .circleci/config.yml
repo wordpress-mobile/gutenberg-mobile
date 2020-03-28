@@ -118,6 +118,9 @@ jobs:
         - dependencies-v3-{{ checksum "ios/Gemfile.lock" }}-{{ checksum "ios/Podfile.lock" }}
         - dependencies-v3-{{ checksum "ios/Gemfile.lock" }}
         - dependencies-v3-
+    - run:
+        name: Build
+        command: yarn test:e2e:build-app:ios
     - save_cache:
         name: Save Dependencies Cache
         key: dependencies-v3-{{ checksum "ios/Gemfile.lock" }}-{{ checksum "ios/Podfile.lock" }}-{{
@@ -128,17 +131,14 @@ jobs:
         - ~/.cocoapods/repos/trunk
         - ios/vendor
     - run:
-        name: Dummy
-        command: echo $TEST_RN_MOBILE
-    - run:
-        name: Test Set iOS Environment
+        name: Set Environment Variable
         command: |
           cd ios 
           var=$(xcodebuild -showBuildSettings | grep TARGET_BUILD_DIR | cut -d "=" -f2) && echo 'export TEST_IOS_BUILD_PATH='${var// /}'' >> $BASH_ENV
-        no_output_timeout: "45s"
+        no_output_timeout: "20s"
     - run:
         name: Bundle iOS
-        command: echo $TEST_IOS_BUILD_PATH
+        command: yarn test:e2e:bundle:ios
     - run:
         name: Generate .app file for testing
         command: WORK_DIR=$(pwd) && cd $TEST_IOS_BUILD_PATH && zip -r $WORK_DIR/ios/GutenbergDemo.app.zip GutenbergDemo.app
