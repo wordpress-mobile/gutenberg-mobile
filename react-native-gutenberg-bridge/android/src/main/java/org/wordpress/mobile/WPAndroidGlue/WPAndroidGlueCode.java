@@ -146,7 +146,7 @@ public class WPAndroidGlueCode {
     }
 
     public interface OnAuthHeaderRequestedListener {
-        String onAuthHeaderRequested(String url);
+        Map<String, String> onAuthHeaderRequested(String url);
     }
 
     public interface OnEditorAutosaveListener {
