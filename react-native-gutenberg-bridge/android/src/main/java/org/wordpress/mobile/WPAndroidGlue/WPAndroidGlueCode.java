@@ -347,7 +347,7 @@ public class WPAndroidGlueCode {
 
     private ImagePipelineConfig getImagePipelineConfig(OkHttpClient client) {
         return  OkHttpImagePipelineConfigFactory
-                .newBuilder(mReactRootView.getContext(), client).build();
+                .newBuilder(mReactRootView.getContext().getApplicationContext(), client).build();
     }
 
     @Deprecated
