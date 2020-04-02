@@ -85,6 +85,7 @@ jobs:
       - run:
           name: Run Device Tests
           command: yarn device-tests
+          no_output_timeout: 1200
           environment:
             JEST_JUNIT_OUTPUT: "reports/test-results/android-test-results.xml"
       - store_test_results:
@@ -144,6 +145,7 @@ jobs:
         name: Run Device Tests
         command: |
           yarn device-tests
+        no_output_timeout: 1200
         environment:
           JEST_JUNIT_OUTPUT: "reports/test-results/ios-test-results.xml"
     - store_test_results:
