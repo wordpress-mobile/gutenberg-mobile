@@ -18,6 +18,7 @@ describe( 'Gutenberg Editor Latest Post Block tests', () => {
 	let driver;
 	let editorPage;
 	let allPassed = true;
+	const latstPostBlockname = 'Latest Posts';
 
 	// Use reporter for setting status for saucelabs Job
 	if ( ! isLocalEnvironment() ) {
@@ -40,11 +41,11 @@ describe( 'Gutenberg Editor Latest Post Block tests', () => {
 	} );
 
 	it( 'should be able to add a Latests-Posts block', async () => {
-		await editorPage.addNewLatestPostsBlock();
-		const latestPostsBlock = await editorPage.getLatestPostsBlockAtPosition( 1 );
+		await editorPage.addNewBlock( latstPostBlockname );
+		const latestPostsBlock = await editorPage.getBlockAtPosition( latstPostBlockname );
 
 		expect( latestPostsBlock ).toBeTruthy();
-		await editorPage.removeLatestPostsBlockAtPosition( 1 );
+		await editorPage.removeBlockAtPosition( latstPostBlockname );
 	} );
 
 	afterAll( async () => {
