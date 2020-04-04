@@ -17,7 +17,7 @@
 		4858A387C929BA42C247FA16 /* Pods_gutenberg_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE48AF171A9B998D71F3078B /* Pods_gutenberg_tvOSTests.framework */; };
 		7EC7328F21907E3F00FED2E6 /* GutenbergViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC7328E21907E3F00FED2E6 /* GutenbergViewController.swift */; };
 		8C666FF0C9224FB88C2C0447 /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BFAFEB337654221B2F14D03 /* libRNSVG-tvOS.a */; };
-		C05E07BC5927E0FBD17C828D /* Pods_gutenbergTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D57C380A7861BFFC2565FE6E /* Pods_gutenbergTests.framework */; };
+		D4F6CEAE276D2EBEC69EF1DE /* Pods_gutenberg_gutenbergTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 697F0569D25007F79E985C8A /* Pods_gutenberg_gutenbergTests.framework */; };
 		F151983C2100DC3D000F6E97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15198392100DC3D000F6E97 /* AppDelegate.swift */; };
 		F151983D2100DC3D000F6E97 /* MediaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151983A2100DC3D000F6E97 /* MediaProvider.swift */; };
 		F1EE6F7821E7F0A500241744 /* NotoSerif-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1EE6F7421E7F0A500241744 /* NotoSerif-BoldItalic.ttf */; };
@@ -67,7 +67,9 @@
 		3ADEFEC092CF4D00BEF1019E /* libRNTAztecView.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNTAztecView.a; sourceTree = "<group>"; };
 		3D53EF8FEF024C98A7AC9A56 /* libRCTVideo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTVideo.a; sourceTree = "<group>"; };
 		549A3E45719DB5BA2F7ECC95 /* Pods-gutenberg-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gutenberg-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-gutenberg-tvOSTests/Pods-gutenberg-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		6093794C79EA57A239442920 /* Pods-gutenberg-gutenbergTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gutenberg-gutenbergTests.debug.xcconfig"; path = "Target Support Files/Pods-gutenberg-gutenbergTests/Pods-gutenberg-gutenbergTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6206F0B13B70AD60CA886558 /* Pods-gutenbergTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gutenbergTests.release.xcconfig"; path = "Target Support Files/Pods-gutenbergTests/Pods-gutenbergTests.release.xcconfig"; sourceTree = "<group>"; };
+		697F0569D25007F79E985C8A /* Pods_gutenberg_gutenbergTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gutenberg_gutenbergTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69F3DF692A7C4E5994CD3CBB /* libRNSafeArea.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSafeArea.a; sourceTree = "<group>"; };
 		7EA30CF021AC8CDA0092F894 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		7EC7328E21907E3F00FED2E6 /* GutenbergViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; name = GutenbergViewController.swift; path = gutenberg/GutenbergViewController.swift; sourceTree = "<group>"; tabWidth = 1; };
@@ -77,8 +79,8 @@
 		A6B9393B15FAEBA6A3C885F2 /* Pods-gutenberg.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gutenberg.debug.xcconfig"; path = "Target Support Files/Pods-gutenberg/Pods-gutenberg.debug.xcconfig"; sourceTree = "<group>"; };
 		A7031126C4DE90D4D7AAACD5 /* Pods-gutenberg-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gutenberg-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-gutenberg-tvOSTests/Pods-gutenberg-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CE48AF171A9B998D71F3078B /* Pods_gutenberg_tvOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gutenberg_tvOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D57C380A7861BFFC2565FE6E /* Pods_gutenbergTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gutenbergTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D742287512CBBB046F519E11 /* Pods-gutenberg-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gutenberg-tvOS.release.xcconfig"; path = "Target Support Files/Pods-gutenberg-tvOS/Pods-gutenberg-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		D777214BC37E440A84E8765F /* Pods-gutenberg-gutenbergTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gutenberg-gutenbergTests.release.xcconfig"; path = "Target Support Files/Pods-gutenberg-gutenbergTests/Pods-gutenberg-gutenbergTests.release.xcconfig"; sourceTree = "<group>"; };
 		E418A3212D0A388EEA0698C5 /* Pods_gutenberg_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gutenberg_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1289ECA2100E4320091E81D /* Aztec.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Aztec.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F15198372100DC3C000F6E97 /* gutenberg-Bridging-Header.h */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = "gutenberg-Bridging-Header.h"; sourceTree = "<group>"; tabWidth = 1; };
@@ -101,7 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C05E07BC5927E0FBD17C828D /* Pods_gutenbergTests.framework in Frameworks */,
+				D4F6CEAE276D2EBEC69EF1DE /* Pods_gutenberg_gutenbergTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,7 +185,7 @@
 				38E210A05B5C8829E0B3BE83 /* Pods_gutenberg.framework */,
 				E418A3212D0A388EEA0698C5 /* Pods_gutenberg_tvOS.framework */,
 				CE48AF171A9B998D71F3078B /* Pods_gutenberg_tvOSTests.framework */,
-				D57C380A7861BFFC2565FE6E /* Pods_gutenbergTests.framework */,
+				697F0569D25007F79E985C8A /* Pods_gutenberg_gutenbergTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -234,6 +236,8 @@
 				549A3E45719DB5BA2F7ECC95 /* Pods-gutenberg-tvOSTests.release.xcconfig */,
 				034874811302E030BA1637A1 /* Pods-gutenbergTests.debug.xcconfig */,
 				6206F0B13B70AD60CA886558 /* Pods-gutenbergTests.release.xcconfig */,
+				6093794C79EA57A239442920 /* Pods-gutenberg-gutenbergTests.debug.xcconfig */,
+				D777214BC37E440A84E8765F /* Pods-gutenberg-gutenbergTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -281,6 +285,7 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				F4D5D3195DA4AF76AF802330 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -559,7 +564,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-gutenbergTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-gutenberg-gutenbergTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -632,6 +637,82 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F4D5D3195DA4AF76AF802330 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-gutenberg-gutenbergTests/Pods-gutenberg-gutenbergTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BVLinearGradient/BVLinearGradient.framework",
+				"${BUILT_PRODUCTS_DIR}/DoubleConversion/DoubleConversion.framework",
+				"${BUILT_PRODUCTS_DIR}/FBReactNativeSpec/FBReactNativeSpec.framework",
+				"${BUILT_PRODUCTS_DIR}/Folly/folly.framework",
+				"${BUILT_PRODUCTS_DIR}/Gutenberg/Gutenberg.framework",
+				"${BUILT_PRODUCTS_DIR}/RCTTypeSafety/RCTTypeSafety.framework",
+				"${BUILT_PRODUCTS_DIR}/RNSVG/RNSVG.framework",
+				"${BUILT_PRODUCTS_DIR}/RNTAztecView/RNTAztecView.framework",
+				"${BUILT_PRODUCTS_DIR}/React-Core/React.framework",
+				"${BUILT_PRODUCTS_DIR}/React-CoreModules/CoreModules.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTAnimation/RCTAnimation.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTBlob/RCTBlob.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTImage/RCTImage.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTLinking/RCTLinking.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTNetwork/RCTNetwork.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTSettings/RCTSettings.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTText/RCTText.framework",
+				"${BUILT_PRODUCTS_DIR}/React-RCTVibration/RCTVibration.framework",
+				"${BUILT_PRODUCTS_DIR}/React-cxxreact/cxxreact.framework",
+				"${BUILT_PRODUCTS_DIR}/React-jsi/jsi.framework",
+				"${BUILT_PRODUCTS_DIR}/React-jsiexecutor/jsireact.framework",
+				"${BUILT_PRODUCTS_DIR}/React-jsinspector/jsinspector.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactCommon/ReactCommon.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactNativeDarkMode/ReactNativeDarkMode.framework",
+				"${BUILT_PRODUCTS_DIR}/WordPress-Aztec-iOS/Aztec.framework",
+				"${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework",
+				"${BUILT_PRODUCTS_DIR}/glog/glog.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-keyboard-aware-scroll-view/react_native_keyboard_aware_scroll_view.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-safe-area/react_native_safe_area.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-slider/react_native_slider.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BVLinearGradient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoubleConversion.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBReactNativeSpec.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/folly.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gutenberg.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTTypeSafety.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNSVG.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNTAztecView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreModules.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTAnimation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTBlob.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTLinking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTNetwork.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTSettings.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTText.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RCTVibration.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/cxxreact.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsi.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsireact.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/jsinspector.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactCommon.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactNativeDarkMode.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Aztec.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_keyboard_aware_scroll_view.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_safe_area.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_slider.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-gutenberg-gutenbergTests/Pods-gutenberg-gutenbergTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -701,7 +782,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 034874811302E030BA1637A1 /* Pods-gutenbergTests.debug.xcconfig */;
+			baseConfigurationReference = 6093794C79EA57A239442920 /* Pods-gutenberg-gutenbergTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -739,7 +820,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6206F0B13B70AD60CA886558 /* Pods-gutenbergTests.release.xcconfig */;
+			baseConfigurationReference = D777214BC37E440A84E8765F /* Pods-gutenberg-gutenbergTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
