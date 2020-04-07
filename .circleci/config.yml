@@ -103,6 +103,9 @@ jobs:
           echo 'export TEST_RN_PLATFORM=ios' >> $BASH_ENV
           echo 'export TEST_ENV=sauce' >> $BASH_ENV
           echo 'export TEST_RN_MOBILE=gbmobile' >> $BASH_ENV
+          cd ios 
+          var=$(xcodebuild -workspace gutenberg.xcworkspace -scheme gutenberg -sdk iphonesimulator -showBuildSettings | grep TARGET_BUILD_DIR | cut -d "=" -f2) && echo 'export TEST_IOS_BUILD_PATH='${var// /}'' >> $BASH_ENV
+        no_output_timeout: "20s"
     - run:
         name: Prepare build cache key
         command: find yarn.lock ios react-native-aztec/ios react-native-gutenberg-bridge/ios -type f -print0 | sort -z | xargs -0 shasum | tee ios-checksums.txt
@@ -130,12 +133,6 @@ jobs:
         - ~/Library/Caches/CocoaPods
         - ~/.cocoapods/repos/trunk
         - ios/vendor
-    - run:
-        name: Set Environment Variable
-        command: |
-          cd ios 
-          var=$(xcodebuild -workspace gutenberg.xcworkspace -scheme gutenberg -sdk iphonesimulator -showBuildSettings | grep TARGET_BUILD_DIR | cut -d "=" -f2) && echo 'export TEST_IOS_BUILD_PATH='${var// /}'' >> $BASH_ENV
-        no_output_timeout: "20s"
     - run:
         name: Bundle iOS
         command: yarn test:e2e:bundle:ios
