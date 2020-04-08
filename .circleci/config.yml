@@ -171,17 +171,15 @@ workflows:
           name: Test Android
           platform: android
           check-tests: true
+      - Optional UI Tests:
+          type: approval
+            filters:
+              branches:
+                ignore:
+                  - develop
       - ios-device-checks:
           name: Test iOS on Device
-          type: approval
-          filters:
-            branches:
-              ignore:
-                - develop
+          requires: [ "Optional UI Tests" ]
       - android-device-checks:
           name: Test Android on Device
-          type: approval
-          filters:
-            branches:
-              ignore:
-                - develop
+          requires: [ "Optional UI Tests" ]
