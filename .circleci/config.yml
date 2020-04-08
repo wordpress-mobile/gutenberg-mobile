@@ -173,5 +173,17 @@ workflows:
           check-tests: true
       - ios-device-checks:
           name: Test iOS on Device
+            type: approval
+            filters:
+              branches:
+                ignore:
+                  - develop
+                  - /^release.*/
       - android-device-checks:
           name: Test Android on Device
+            type: approval
+            filters:
+              branches:
+                ignore:
+                  - develop
+                  - /^release.*/
