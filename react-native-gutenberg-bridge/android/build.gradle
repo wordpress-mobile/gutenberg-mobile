@@ -220,7 +220,7 @@ if (isJitPack) {
         cleanupNodeModulesFolder.dependsOn(backupHermesDebugAAR)
         backupHermesDebugAAR.dependsOn(backupHermesReleaseAAR)
         backupHermesReleaseAAR.dependsOn(copyJSBytecode)
-        copyJSBytecode.dependsOn(buildJSBundle)
+        copyJSBytecode.dependsOn(copyJSBundle)
         copyJSBundle.dependsOn(buildJSBundle)
         buildJSBundle.dependsOn(yarn_install, ensureAssetsDirectory)
     }
