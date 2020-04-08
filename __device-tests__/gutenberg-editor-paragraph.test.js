@@ -40,7 +40,7 @@ describe( 'Gutenberg Editor tests for Paragraph Block', () => {
 		editorPage = new EditorPage( driver );
 	} );
 
-	it( 'should be able to see visual editor x', async () => {
+	it( 'should be able to see visual editor', async () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );
 	} );
 
