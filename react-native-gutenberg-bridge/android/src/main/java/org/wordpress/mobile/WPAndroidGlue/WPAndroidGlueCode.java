@@ -376,7 +376,7 @@ public class WPAndroidGlueCode {
                                     .setJavaScriptExecutorFactory(new HermesExecutorFactory())
                                     .setInitialLifecycleState(LifecycleState.BEFORE_CREATE);
         if (!buildGutenbergFromSource) {
-            builder.setBundleAssetName(useBytecode ? "index.android.bytecode" : "index.android.js");
+            builder.setBundleAssetName(useBytecode ? "index.android.bytecode" : "index.android.bundle");
         }
         mReactInstanceManager = builder.build();
         mReactInstanceManager.addReactInstanceEventListener(context -> {
