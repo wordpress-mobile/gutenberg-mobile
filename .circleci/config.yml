@@ -178,7 +178,6 @@ workflows:
               branches:
                 ignore:
                   - develop
-                  - /^release.*/
       - android-device-checks:
           name: Test Android on Device
             type: approval
@@ -186,4 +185,3 @@ workflows:
               branches:
                 ignore:
                   - develop
-                  - /^release.*/
