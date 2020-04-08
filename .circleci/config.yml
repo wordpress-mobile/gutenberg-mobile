@@ -173,10 +173,10 @@ workflows:
           check-tests: true
       - Optional UI Tests:
           type: approval
-            filters:
-              branches:
-                ignore:
-                  - develop
+          filters:
+            branches:
+              ignore:
+                - develop
       - ios-device-checks:
           name: Test iOS on Device
           requires: [ "Optional UI Tests" ]
