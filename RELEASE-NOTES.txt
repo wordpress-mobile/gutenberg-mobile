@@ -1,7 +1,7 @@
 1.26.0
 ------
-* Disable ripple effect on iOS in BottomSheet
-* Disable ripple effect for Slider in BottomSheet on iOS and Android
+* [iOS] Disable ripple effect in all BottomSheet's controls.
+* [Android] Disable ripple effect for Slider control
 
 1.25.0
 ------
