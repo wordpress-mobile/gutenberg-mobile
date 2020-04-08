@@ -352,14 +352,14 @@ public class WPAndroidGlueCode {
     }
 
     @Deprecated
-    public void onCreateView(Context initContext, boolean htmlModeEnabled,
+    public void onCreateView(Context initContext, boolean useBytecode, boolean htmlModeEnabled,
                              Application application, boolean isDebug, boolean buildGutenbergFromSource,
                              boolean isNewPost, String localeString, Bundle translations, int colorBackground, boolean isDarkMode) {
-        onCreateView(initContext, htmlModeEnabled, application, isDebug, buildGutenbergFromSource, "post", isNewPost
-        , localeString, translations, colorBackground, isDarkMode);
+        onCreateView(initContext, useBytecode, htmlModeEnabled, application, isDebug, buildGutenbergFromSource, "post",
+                isNewPost, localeString, translations, colorBackground, isDarkMode);
     }
 
-    public void onCreateView(Context initContext, boolean htmlModeEnabled,
+    public void onCreateView(Context initContext, boolean useBytecode, boolean htmlModeEnabled,
                              Application application, boolean isDebug, boolean buildGutenbergFromSource,
                              String postType, boolean isNewPost, String localeString, Bundle translations,
                              int colorBackground, boolean isDarkMode) {
@@ -376,7 +376,7 @@ public class WPAndroidGlueCode {
                                     .setJavaScriptExecutorFactory(new HermesExecutorFactory())
                                     .setInitialLifecycleState(LifecycleState.BEFORE_CREATE);
         if (!buildGutenbergFromSource) {
-            builder.setBundleAssetName("index.android.bytecode");
+            builder.setBundleAssetName(useBytecode ? "index.android.bytecode" : "index.android.js");
         }
         mReactInstanceManager = builder.build();
         mReactInstanceManager.addReactInstanceEventListener(context -> {
