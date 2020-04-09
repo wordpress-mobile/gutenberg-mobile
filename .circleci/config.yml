@@ -269,9 +269,9 @@ workflows:
           name: Test Android
           platform: android
           check-tests: true
-      - ios-device-checks:
+      - ios-device-checks-canary:
           name: Test iOS on Device - Canaries
-      - android-device-checks:
+      - android-device-checks-canary:
           name: Test Android on Device - Canaries
       - Optional UI Tests:
           type: approval
