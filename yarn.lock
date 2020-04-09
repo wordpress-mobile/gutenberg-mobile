@@ -12380,9 +12380,9 @@ react-native-sass-transformer@^1.1.1:
     css-to-react-native-transform "^1.8.1"
     semver "^5.6.0"
 
-"react-native-svg@git+https://github.com/wordpress-mobile/react-native-svg.git#9753cae87bad4d649e9af804b936c60bed368ea9":
+"react-native-svg@git+https://github.com/wordpress-mobile/react-native-svg.git#53482ee63368956b0d4fc4094307ca5b3c7b7caf":
   version "9.13.6-gb"
-  resolved "git+https://github.com/wordpress-mobile/react-native-svg.git#9753cae87bad4d649e9af804b936c60bed368ea9"
+  resolved "git+https://github.com/wordpress-mobile/react-native-svg.git#53482ee63368956b0d4fc4094307ca5b3c7b7caf"
   dependencies:
     css-select "^2.0.2"
     css-tree "^1.0.0-alpha.37"
@@ -12395,18 +12395,18 @@ react-native-url-polyfill@^1.1.2:
     buffer "^5.4.3"
     whatwg-url-without-unicode "8.0.0-1"
 
-"react-native-video@git+https://github.com/wordpress-mobile/react-native-video.git#46f4150cdd316039dd82272fe9b4ad815c60455c":
+"react-native-video@git+https://github.com/wordpress-mobile/react-native-video.git#3d12179c22f9ecddb74b37264a5f9a153f94f4b8":
   version "5.0.1"
-  resolved "git+https://github.com/wordpress-mobile/react-native-video.git#46f4150cdd316039dd82272fe9b4ad815c60455c"
+  resolved "git+https://github.com/wordpress-mobile/react-native-video.git#3d12179c22f9ecddb74b37264a5f9a153f94f4b8"
   dependencies:
     keymirror "^0.1.1"
     prop-types "^15.5.10"
     shaka-player "^2.4.4"
 
-react-native@0.62.1:
-  version "0.62.1"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.62.1.tgz#fd0324bedf4c3237c928de582c29403f1e46ea80"
-  integrity sha512-EhTmCYsLfIfyLAa6cuJBGgpTPj9LHiCS7fhCKMJZJ4p38+j4NOY4+Z40s/gbZIHr91j1DPNiomsBltQMUdd23g==
+react-native@0.62.2:
+  version "0.62.2"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.62.2.tgz#d831e11a3178705449142df19a70ac2ca16bad10"
+  integrity sha512-gADZZ3jcm2WFTjh8CCBCbl5wRSbdxqZGd+8UpNwLQFgrkp/uHorwAhLNqcd4+fHmADgPBltNL0uR1Vhv47zcOw==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@react-native-community/cli" "^4.5.1"
