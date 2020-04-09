@@ -22,7 +22,7 @@ import './globals';
 import { getTranslation } from '../i18n-cache';
 import initialHtml from './initial-html';
 import setupApiFetch from './api-fetch-setup';
-import setupTextStyles from './extend-text';
+import correctTextFontWeight from './text-font-weight-correct';
 
 const gutenbergSetup = () => {
 	const wpData = require( '@wordpress/data' );
@@ -56,7 +56,7 @@ export class RootComponent extends React.Component {
 		super( props );
 		setupLocale( props.locale, props.translations );
 		setupApiFetch();
-		setupTextStyles();
+		correctTextFontWeight();
 		require( '@wordpress/edit-post' ).initializeEditor();
 
 		const isHermes = () => global.HermesInternal !== null;

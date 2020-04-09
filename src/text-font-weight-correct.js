@@ -56,7 +56,7 @@ const getCorrectFontWeight = ( fontWeight ) => {
 	}
 };
 
-const extendTextStyle = ( args ) => {
+const correctTextFontWeight = ( args ) => {
 	const baseText = textRender.call( this, args );
 	const { style } = baseText.props;
 
@@ -70,6 +70,6 @@ const extendTextStyle = ( args ) => {
 
 export default () => {
 	if ( Platform.OS === 'android' ) {
-		Text.render = extendTextStyle;
+		Text.render = correctTextFontWeight;
 	}
 };
