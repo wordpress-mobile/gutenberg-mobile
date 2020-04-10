@@ -63,9 +63,11 @@ const correctTextFontWeight = ( args ) => {
 	const flatStyle = Array.isArray( style ) ? merge( {}, ...style ) : style;
 	const shouldCorrectFontWeight = flatStyle && flatStyle.fontWeight;
 
-	return shouldCorrectFontWeight ? cloneElement( baseText, {
-		style: [ flatStyle, getCorrectFontWeight( flatStyle.fontWeight ) ],
-	} ) : baseText;
+	return shouldCorrectFontWeight ?
+		cloneElement( baseText, {
+			style: [ flatStyle, getCorrectFontWeight( flatStyle.fontWeight ) ],
+		} ) :
+		baseText;
 };
 
 export default () => {
