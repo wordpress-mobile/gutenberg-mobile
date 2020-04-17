@@ -45,9 +45,9 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
     }
 
     @objc
-    func requestUnsupportedBlockFallback(_ content: String) {
+    func requestUnsupportedBlockFallback(_ content: String, blockId: String) {
         DispatchQueue.main.async {
-            self.delegate?.gutenbergDidRequestUnsupportedBlockFallback(with: content)
+            self.delegate?.gutenbergDidRequestUnsupportedBlockFallback(with: content, blockId: blockId)
         }
     }
 
@@ -226,14 +226,14 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
     /// - Parameters:
     ///   - name: name of the event
     ///   - body: data for the event
-    public func sendEventIfNeeded(name: String, body: Any!) {
+    func sendEventIfNeeded(_ event: EventName, body: Any? = nil) {
         if ( hasObservers ) {
-            self.sendEvent(withName: name, body: body)
+            sendEvent(withName: event.rawValue, body: body)
         }
     }
     
     @objc
-    func logUserEvent(_ event: String, properties:[AnyHashable: Any]?) {
+    func logUserEvent(_ event: String, properties: [AnyHashable: Any]?) {
         guard let logEvent = GutenbergUserEvent(event: event, properties: properties) else { return }
         self.delegate?.gutenbergDidLogUserEvent(logEvent)
     }
@@ -242,16 +242,19 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
 // MARK: - RCTBridgeModule delegate
 
 extension RNReactNativeGutenbergBridge {
+    enum EventName: String, CaseIterable {
+        case requestGetHtml
+        case setTitle
+        case toggleHTMLMode
+        case updateHtml
+        case mediaUpload
+        case setFocusOnTitle
+        case mediaAppend
+        case replaceBlock
+    }
+
     public override func supportedEvents() -> [String]! {
-        return [
-            Gutenberg.EventName.requestHTML,
-            Gutenberg.EventName.toggleHTMLMode,
-            Gutenberg.EventName.setTitle,
-            Gutenberg.EventName.updateHtml,
-            Gutenberg.EventName.mediaUpload,
-            Gutenberg.EventName.setFocusOnTitle,
-            Gutenberg.EventName.mediaAppend
-        ]
+        return EventName.allCases.compactMap { $0.rawValue }
     }
 
     public override static func requiresMainQueueSetup() -> Bool {

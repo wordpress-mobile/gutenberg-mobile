@@ -82,19 +82,27 @@ public class Gutenberg: NSObject {
     }
 
     public func requestHTML() {
-        bridgeModule.sendEvent(withName: EventName.requestHTML, body: nil)
+        sendEvent(.requestGetHtml)
     }
 
     public func toggleHTMLMode() {
-        bridgeModule.sendEvent(withName: EventName.toggleHTMLMode, body: nil)
+        sendEvent(.toggleHTMLMode)
     }
     
     public func setTitle(_ title: String) {
-        bridgeModule.sendEvent(withName: EventName.setTitle, body: ["title": title])
+        sendEvent(.setTitle, body: ["title": title])
     }
     
     public func updateHtml(_ html: String) {
-        bridgeModule.sendEvent(withName: EventName.updateHtml, body: ["html": html])
+        sendEvent(.updateHtml, body: ["html": html])
+    }
+
+    public func replaceBlock(with html: String, blockId: String) {
+        sendEvent(.replaceBlock, body: ["html": html, "clientId": blockId])
+    }
+
+    private func sendEvent(_ event: RNReactNativeGutenbergBridge.EventName, body: [String: Any]? = nil) {
+        bridgeModule.sendEvent(withName: event.rawValue, body: body)
     }
     
     public func mediaUploadUpdate(id: Int32, state: MediaUploadState, progress: Float, url: URL?, serverID: Int32?) {
@@ -105,7 +113,7 @@ public class Gutenberg: NSObject {
         if let serverID = serverID {
             data["mediaServerId"] = serverID
         }
-        bridgeModule.sendEventIfNeeded(name: EventName.mediaUpload, body: data)
+        bridgeModule.sendEventIfNeeded(.mediaUpload, body: data)
     }
 
     public func appendMedia(id: Int32, url: URL, type: MediaType) {
@@ -114,11 +122,11 @@ public class Gutenberg: NSObject {
             "mediaUrl" : url.absoluteString,
             "mediaType": type.rawValue,
         ]
-        bridgeModule.sendEventIfNeeded(name: EventName.mediaAppend, body: data)
+        bridgeModule.sendEventIfNeeded(.mediaAppend, body: data)
     }
 
     public func setFocusOnTitle() {
-        bridgeModule.sendEventIfNeeded(name: EventName.setFocusOnTitle, body: nil)
+        bridgeModule.sendEventIfNeeded(.setFocusOnTitle, body: nil)
     }
 
     private var isPackagerRunning: Bool {
@@ -141,17 +149,6 @@ extension Gutenberg: RCTBridgeDelegate {
 }
 
 extension Gutenberg {
-    
-    enum EventName {
-        static let requestHTML = "requestGetHtml"
-        static let setTitle = "setTitle"
-        static let toggleHTMLMode = "toggleHTMLMode"
-        static let updateHtml = "updateHtml"
-        static let mediaUpload = "mediaUpload"
-        static let setFocusOnTitle = "setFocusOnTitle"
-        static let mediaAppend = "mediaAppend"
-    }
-    
     public enum MediaUploadState: Int {
         case uploading = 1
         case succeeded = 2
