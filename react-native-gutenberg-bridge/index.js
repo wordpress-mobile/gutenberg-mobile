@@ -80,6 +80,24 @@ export function subscribePreferredColorScheme( callback ) {
 }
 
 /**
+ * @callback FnReplaceBlockCompletion
+ * @param {string} html the HTML to replace the block.
+ * @param {string} clientId the clientId of the block to be replaced.
+ */
+
+/**
+ * Subscribe a listener to replace a single block.
+ *
+ * @param {FnReplaceBlockCompletion} callback the completion callback.
+ * @returns An EmitterSubscription.
+ */
+export function subscribeReplaceBlock( callback ) {
+	if ( isIOS ) {
+		return gutenbergBridgeEvents.addListener( 'replaceBlock', callback );
+	}
+}
+
+/**
  * Request media picker for the given media source.
  *
  * Kinds of media source can be device library, camera, etc.
@@ -100,8 +118,8 @@ export function requestMediaPicker( source, filter, multiple, callback ) {
  *
  * @param {string} htmlContent Raw html content of the block.
  */
-export function requestUnsupportedBlockFallback( htmlContent ) {
-	RNReactNativeGutenbergBridge.requestUnsupportedBlockFallback( htmlContent );
+export function requestUnsupportedBlockFallback( htmlContent, blockClientId ) {
+	RNReactNativeGutenbergBridge.requestUnsupportedBlockFallback( htmlContent, blockClientId );
 }
 
 export function requestMediaImport( url, callback ) {
