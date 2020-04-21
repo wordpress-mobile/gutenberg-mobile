@@ -16,11 +16,9 @@ module.exports = {
 		"react",
 		"react-native",
 		"jest",
-		"flowtype"
 	],
 	extends: [
 		"plugin:@wordpress/eslint-plugin/recommended",
-		"plugin:flowtype/recommended",
 	],
 	settings: {
 		flowtype: {
