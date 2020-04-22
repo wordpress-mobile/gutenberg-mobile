@@ -89,7 +89,7 @@ export function subscribePreferredColorScheme( callback ) {
  * Subscribe a listener to replace a single block.
  *
  * @param {FnReplaceBlockCompletion} callback the completion callback.
- * @returns An EmitterSubscription.
+ * @return {EmitterSubscription} An EmitterSubscription.
  */
 export function subscribeReplaceBlock( callback ) {
 	if ( isIOS ) {
@@ -117,6 +117,7 @@ export function requestMediaPicker( source, filter, multiple, callback ) {
  * A way to show unsupported blocks to the user is to render it on a web view.
  *
  * @param {string} htmlContent Raw html content of the block.
+ * @param {string} blockClientId the clientId of the block.
  */
 export function requestUnsupportedBlockFallback( htmlContent, blockClientId ) {
 	RNReactNativeGutenbergBridge.requestUnsupportedBlockFallback( htmlContent, blockClientId );
