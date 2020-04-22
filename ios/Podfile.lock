@@ -200,6 +200,8 @@ PODS:
     - react-native-video/Video (= 5.0.1)
   - react-native-video/Video (5.0.1):
     - React
+  - react-native-webview (9.2.2):
+    - React
   - React-RCTActionSheet (0.61.5):
     - React-Core/RCTActionSheetHeaders (= 0.61.5)
   - React-RCTAnimation (0.61.5):
@@ -268,6 +270,7 @@ DEPENDENCIES:
   - react-native-safe-area (from `../node_modules/react-native-safe-area`)
   - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
   - react-native-video (from `../node_modules/react-native-video`)
+  - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -330,6 +333,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/slider"
   react-native-video:
     :path: "../node_modules/react-native-video"
+  react-native-webview:
+    :path: "../node_modules/react-native-webview"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -381,6 +386,7 @@ SPEC CHECKSUMS:
   react-native-safe-area: e8230b0017d76c00de6b01e2412dcf86b127c6a3
   react-native-slider: f81b89fa0c1f9a65742d33f889a194ca6653a985
   react-native-video: 331eaf96cb034fedcc27f4f6ada3ac3cf6c0a78a
+  react-native-webview: 881baa70f381b838964574f48153a2d453402922
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
   React-RCTBlob: d89293cc0236d9cb0933d85e430b0bbe81ad1d72
@@ -397,6 +403,6 @@ SPEC CHECKSUMS:
   WordPress-Aztec-iOS: 319620514af963ca519bd83b96a2c0ebdf3a0f03
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: 7c7e4c82bf2c9ed08e515c352b72fc2d70b4ba48
+PODFILE CHECKSUM: ff73e3c606a9fbf7641977388791ebf3a9ed8e35
 
 COCOAPODS: 1.8.4

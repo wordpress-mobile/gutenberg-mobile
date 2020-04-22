@@ -8,6 +8,7 @@ import android.util.Log;
 import androidx.core.util.Consumer;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.bridge.ReadableMap;
 import com.reactnativecommunity.slider.ReactSliderPackage;
@@ -148,6 +149,7 @@ public class MainApplication extends Application implements ReactApplication {
             protected List<ReactPackage> getPackages() {
                 return Arrays.asList(
                         new MainReactPackage(),
+            new RNCWebViewPackage(),
                         new ReactSliderPackage(),
                         new ReactVideoPackage(),
                         new SvgPackage(),
