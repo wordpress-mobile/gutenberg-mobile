@@ -1,9 +1,74 @@
+1.27.0
+------
+* Prefill caption for image blocks when available on the Media library
+* New block: Buttons. From now you’ll be able to add the individual Button block only inside the Buttons block
+* Fix bug where whitespaces at start of text blocks were being removed
+* Add support for upload options in Cover block
+* [Android] Floating toolbar, previously located above nested blocks, is now placed at the top of the screen
+* [iOS] Floating toolbar, previously located above nested blocks, is now placed at the bottom of the screen
+* Fix the icons in FloatingToolbar on RTL mode
+
+1.26.0
+------
+* [iOS] Disable ripple effect in all BottomSheet's controls.
+* [Android] Disable ripple effect for Slider control
+* New block: Columns
+* New starter page template: Blog
+* Make Starter Page Template picker buttons visible only when the screen height is enough
+* Fix a bug which caused to show URL settings modal randomly when changing the device orientation multiple times during the time Starter Page Template Preview is open
+
+1.25.0
+------
+* New block: Cover
+* [Android] Dark Mode
+* [Android] Improve icon on the "Take a Video" media option
+* Removed the dimming effect on unselected blocks
+* [iOS] Add alignment options for heading block
+* Implemented dropdown toolbar for alignment toolbar in Heading, Paragraph, Image, MediaText blocks
+* Block Editor: When editing link settings, tapping the keyboard return button now closes the settings panel as well as closing the keyboard.
+* [Android] Show an "Edit" button overlay on selected image blocks
+
+1.24.0
+------
+* New block: Latest Posts
+* Fix Quote block's left border not being visible in Dark Mode
+* Added Starter Page Templates: when you create a new page, we now show you a few templates to get started more quickly.
+* Fix crash when pasting HTML content with embeded images on paragraphs
+
+1.23.0
+------
+* New block: Group
+* Add support for upload options in Gallery block
+* Add support for size options in the Image block
+* New block: Button
+* Add scroll support inside block picker and block settings
+* [Android] Fix issue preventing correct placeholder image from displaying during image upload
+* [iOS] Fix diplay of large numbers on ordered lists
+* Fix issue where adding emojis to the post title add strong HTML elements to the title of the post
+* [iOS] Fix issue where alignment of paragraph blocks was not always being respected when splitting the paragraph or reading the post's html content.
+* We’ve introduced a new toolbar that floats above the block you’re editing, which makes navigating your blocks easier — especially complex ones.
+
+1.22.0
+------
+* Make inserter to show options on long-press to add before/after
+* Retry displaying image when connectivity restores
+* [iOS] Show an "Edit" button overlay on selected image blocks
+* [Android] Fix blank post when sharing media from another app
+* Add support for image size options in the gallery block
+* Fix issue that sometimes prevented merging paragraph blocks
+
+1.21.0
+------
+* Reduced padding around text on Rich Text based blocks.
+* [Android] Improved stability on very long posts.
+
 1.20.0
 ------
 * Fix bug where image placeholders would sometimes not be shown
 * Fix crash on undo
 * Style fixes on the navigation UI
 * [iOS] Fix focus issue
+* New block: Shortcode. You can now create and edit Shortcode blocks in the editor.
 
 1.19.0
 ------

@@ -1,0 +1,6 @@
+install:
+   - export TMPDIR=`dirname $(mktemp)`
+   - echo "Changing into the android folder of the Bridge module"
+   - pushd gutenberg/packages/react-native-bridge/android && ./gradlew --stacktrace clean -Pgroup=com.github.wordpress-mobile.gutenberg-mobile -Pversion=$VERSION install && popd
+   - pushd gutenberg/packages/react-native-aztec/android && ./gradlew --stacktrace clean -Pgroup=com.github.wordpress-mobile.gutenberg-mobile -Pversion=$VERSION install && popd
+
