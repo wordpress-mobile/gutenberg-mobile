@@ -166,7 +166,7 @@ public protocol GutenbergBridgeDelegate: class {
     func gutenbergDidLogUserEvent(_ event: GutenbergUserEvent)
 
     /// Tells the delegate that the editor needs to render an unsupported block
-    func gutenbergDidRequestUnsupportedBlockFallback(with content: String, blockId: String)
+    func gutenbergDidRequestUnsupportedBlockFallback(with content: String, id: String, name: String)
 }
 
 // MARK: - Optional GutenbergBridgeDelegate methods
@@ -174,5 +174,5 @@ public protocol GutenbergBridgeDelegate: class {
 public extension GutenbergBridgeDelegate {
     func gutenbergDidLoad() { }
     func gutenbergDidLayout() { }
-    func gutenbergDidRequestUnsupportedBlockFallback(with content: String, blockId: String) { }
+    func gutenbergDidRequestUnsupportedBlockFallback(with content: String, id: String, name: String) { }
 }

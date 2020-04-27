@@ -195,10 +195,11 @@ extension GutenbergViewController: GutenbergBridgeDelegate {
         print("Gutenberg loged user event")
     }
 
-    func gutenbergDidRequestUnsupportedBlockFallback(with content: String, blockId: String) {
+    func gutenbergDidRequestUnsupportedBlockFallback(with content: String, id: String, name: String) {
+        print("Requesting Fallback for \(name): \(id)")
         let controller = WebViewController(htmlContent: content)
         controller.onDismiss = { [weak self] in
-            self?.gutenberg.replaceBlock(with: content, blockId: blockId)
+            self?.gutenberg.replaceBlock(with: content, blockId: id)
         }
         present(controller, animated: true)
     }
