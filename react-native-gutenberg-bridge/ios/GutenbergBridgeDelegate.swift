@@ -12,6 +12,16 @@ public struct MediaInfo {
     }
 }
 
+public struct Block {
+    public let id: String
+    public let name: String
+    public let content: String
+
+    public func replacingContent(with newContent: String) -> Block {
+        Block(id: id, name: name, content: newContent)
+    }
+}
+
 public typealias MediaPickerDidPickMediaCallback = (_ media: [MediaInfo]?) -> Void
 public typealias MediaImportCallback = (_ media: MediaInfo?) -> Void
 
@@ -166,7 +176,7 @@ public protocol GutenbergBridgeDelegate: class {
     func gutenbergDidLogUserEvent(_ event: GutenbergUserEvent)
 
     /// Tells the delegate that the editor needs to render an unsupported block
-    func gutenbergDidRequestUnsupportedBlockFallback(with content: String, id: String, name: String)
+    func gutenbergDidRequestUnsupportedBlockFallback(for block: Block)
 }
 
 // MARK: - Optional GutenbergBridgeDelegate methods
@@ -174,5 +184,5 @@ public protocol GutenbergBridgeDelegate: class {
 public extension GutenbergBridgeDelegate {
     func gutenbergDidLoad() { }
     func gutenbergDidLayout() { }
-    func gutenbergDidRequestUnsupportedBlockFallback(with content: String, id: String, name: String) { }
+    func gutenbergDidRequestUnsupportedBlockFallback(for block: Block) { }
 }

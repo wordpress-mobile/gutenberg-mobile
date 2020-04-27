@@ -97,8 +97,8 @@ public class Gutenberg: NSObject {
         sendEvent(.updateHtml, body: ["html": html])
     }
 
-    public func replaceBlock(with html: String, blockId: String) {
-        sendEvent(.replaceBlock, body: ["html": html, "clientId": blockId])
+    public func replace(block: Block) {
+        sendEvent(.replaceBlock, body: ["html": block.content, "clientId": block.id])
     }
 
     private func sendEvent(_ event: RNReactNativeGutenbergBridge.EventName, body: [String: Any]? = nil) {
