@@ -227,5 +227,9 @@ else:
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:cover -->
 
+<!-- wp:verse -->
+<pre class="wp-block-verse">Come<br>Home.</pre>
+<!-- /wp:verse -->
+
 <!-- wp:latest-posts {"displayPostContent":true,"displayPostDate":true} /-->
 `;
