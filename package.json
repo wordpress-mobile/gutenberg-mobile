@@ -135,6 +135,7 @@
     "gettext-parser": "^4.0.2",
     "hpq": "^1.2.0",
     "jed": "^1.1.1",
+    "jest-emotion": "10.0.17",
     "jest-serializer-enzyme": "^1.0.0",
     "js-beautify": "^1.7.5",
     "jsc-android": "^241213.1.0",
