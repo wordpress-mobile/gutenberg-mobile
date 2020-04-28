@@ -4,7 +4,6 @@ const {
 } = require( '@carimus/metro-symlinked-deps' );
 
 const additionalWatchFolders = [
-	'@automattic/full-site-editing',
 ].map( ( dependency ) => path.dirname( require.resolve( `${ dependency }/package.json` ) ) );
 
 module.exports = applyConfigForLinkedDependencies(
