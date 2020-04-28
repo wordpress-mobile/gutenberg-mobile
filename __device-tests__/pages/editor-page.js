@@ -22,6 +22,7 @@ export default class EditorPage {
 	imageBlockName = 'Image';
 	galleryBlockName = 'Gallery';
 	latestPostsBlockName = 'Latest Posts';
+	verseBlockName = 'Verse';
 	unorderedListButtonName = 'Convert to unordered list';
 	orderedListButtonName = 'Convert to ordered list';
 
@@ -474,5 +475,21 @@ export default class EditorPage {
 
 	async removeLatestPostsBlockAtPosition( position: number ) {
 		return await this.removeBlockAtPosition( position, this.latestPostsBlockName );
+	}
+
+	// =====================
+	// Verse Block functions
+	// =====================
+
+	async addNewVerseBlock() {
+		await this.addNewBlock( this.verseBlockName );
+	}
+
+	async getVerseBlockAtPosition( position: number ) {
+		return this.getBlockAtPosition( position, this.verseBlockName );
+	}
+
+	async removeVerseBlockAtPosition( position: number ) {
+		return await this.removeBlockAtPosition( position, this.verseBlockName );
 	}
 }
