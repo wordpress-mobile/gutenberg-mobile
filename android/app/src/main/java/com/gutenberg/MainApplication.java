@@ -7,7 +7,8 @@ import android.util.Log;
 
 import androidx.core.util.Consumer;
 
-import com.facebook.react.ReactApplication;
+import com.reactnativenavigation.NavigationApplication;
+import com.reactnativenavigation.react.NavigationPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.bridge.ReadableMap;
 import com.reactnativecommunity.slider.ReactSliderPackage;
@@ -22,6 +23,7 @@ import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.RNReactNativeGutenbergBridgePackage;
 
 import com.facebook.react.ReactNativeHost;
+import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
@@ -30,7 +32,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
-public class MainApplication extends Application implements ReactApplication {
+public class MainApplication extends NavigationApplication {
 
     private static final String TAG = "MainApplication";
 
@@ -138,7 +140,7 @@ public class MainApplication extends Application implements ReactApplication {
 
         }, isDarkMode());
 
-        return new ReactNativeHost(this) {
+        return new NavigationReactNativeHost(this) {
             @Override
             public boolean getUseDeveloperSupport() {
                 return BuildConfig.DEBUG;
@@ -148,6 +150,8 @@ public class MainApplication extends Application implements ReactApplication {
             protected List<ReactPackage> getPackages() {
                 return Arrays.asList(
                         new MainReactPackage(),
+            new RNGestureHandlerPackage(),
+            new NavigationPackage(reactNativeHost),
                         new ReactSliderPackage(),
                         new ReactVideoPackage(),
                         new SvgPackage(),
@@ -183,7 +187,7 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        SoLoader.init(this, /* native exopackage */ false);
+        
     }
 
     private void createCustomDevOptions(ReactNativeHost reactNativeHost) {

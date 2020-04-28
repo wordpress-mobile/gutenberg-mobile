@@ -8,6 +8,7 @@
  * External dependencies
  */
 import { AppRegistry, I18nManager } from 'react-native';
+import 'react-native-gesture-handler';
 import React from 'react';
 
 /**
