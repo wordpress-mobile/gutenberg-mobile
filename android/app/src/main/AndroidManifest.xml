@@ -23,6 +23,9 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+
+      <activity android:name=".GutenbergWebViewActivity"/>
+
     </application>
 
 </manifest>

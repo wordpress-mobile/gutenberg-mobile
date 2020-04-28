@@ -37,6 +37,10 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
         void onMediaFileUploadFailed(int mediaId);
     }
 
+    interface ReplaceUnsupportedBlockCallback {
+        void replaceUnsupportedBlock(String content, String blockId);
+    }
+
     // Ref: https://github.com/facebook/react-native/blob/master/Libraries/polyfills/console.js#L376
     enum LogLevel {
         TRACE(0),
@@ -136,4 +140,9 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
     void requestMediaEditor(MediaUploadCallback mediaUploadCallback, String mediaUrl);
 
     void logUserEvent(GutenbergUserEvent gutenbergUserEvent, ReadableMap eventProperties);
+
+    void gutenbergDidRequestUnsupportedBlockFallback(ReplaceUnsupportedBlockCallback replaceUnsupportedBlockCallback,
+                                                     String content,
+                                                     String blockId,
+                                                     String blockName);
 }

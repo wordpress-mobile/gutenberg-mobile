@@ -40,6 +40,7 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     private static final String EVENT_NAME_TOGGLE_HTML_MODE = "toggleHTMLMode";
     private static final String EVENT_NAME_NOTIFY_MODAL_CLOSED = "notifyModalClosed";
     private static final String EVENT_NAME_PREFERRED_COLOR_SCHEME = "preferredColorScheme";
+    private static final String EVENT_NAME_MEDIA_REPLACE_BLOCK = "replaceBlock";
 
     private static final String MAP_KEY_UPDATE_HTML = "html";
     private static final String MAP_KEY_UPDATE_TITLE = "title";
@@ -63,6 +64,9 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     private static final String MEDIA_SOURCE_DEVICE_LIBRARY = "DEVICE_MEDIA_LIBRARY";
     private static final String MEDIA_SOURCE_DEVICE_CAMERA = "DEVICE_CAMERA";
     private static final String MEDIA_SOURCE_MEDIA_EDITOR = "MEDIA_EDITOR";
+
+    private static final String MAP_KEY_REPLACE_BLOCK_HTML = "html";
+    private static final String MAP_KEY_REPLACE_BLOCK_BLOCK_ID = "clientId";
 
     private boolean mIsDarkMode;
 
@@ -237,6 +241,19 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     @ReactMethod
     public void logUserEvent(String eventName, ReadableMap eventProperties) {
         mGutenbergBridgeJS2Parent.logUserEvent(GutenbergUserEvent.getEnum(eventName), eventProperties);
+    }
+
+    @ReactMethod
+    public void requestUnsupportedBlockFallback(String content, String blockId, String blockName) {
+        mGutenbergBridgeJS2Parent.gutenbergDidRequestUnsupportedBlockFallback((content1, blockId1) ->
+                replaceBlock(content1, blockId1), content, blockId, blockName);
+    }
+
+    private void replaceBlock(String content, String blockId) {
+        WritableMap writableMap = new WritableNativeMap();
+        writableMap.putString(MAP_KEY_REPLACE_BLOCK_HTML, content);
+        writableMap.putString(MAP_KEY_REPLACE_BLOCK_BLOCK_ID, blockId);
+        emitToJS(EVENT_NAME_MEDIA_REPLACE_BLOCK, writableMap);
     }
 
     private OtherMediaOptionsReceivedCallback getNewOtherMediaReceivedCallback(final Callback jsCallback) {

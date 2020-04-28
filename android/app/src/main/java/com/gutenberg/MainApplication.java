@@ -1,6 +1,7 @@
 package com.gutenberg;
 
 import android.app.Application;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -136,6 +137,13 @@ public class MainApplication extends Application implements ReactApplication {
             @Override
             public void performRequest(String path, Consumer<String> onSuccess, Consumer<Bundle> onError) {}
 
+            @Override
+            public void gutenbergDidRequestUnsupportedBlockFallback(ReplaceUnsupportedBlockCallback replaceUnsupportedBlockCallback,
+                                                                    String content,
+                                                                    String blockId,
+                                                                    String blockName) {
+                openGutenergWebView(content);
+            }
         }, isDarkMode());
 
         return new ReactNativeHost(this) {
@@ -168,6 +176,13 @@ public class MainApplication extends Application implements ReactApplication {
         int currentNightMode = configuration.uiMode & Configuration.UI_MODE_NIGHT_MASK;
 
         return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
+    }
+
+    private void openGutenergWebView(String content) {
+        Intent intent = new Intent(this, GutenbergWebViewActivity.class);
+        intent.putExtra("CONTENT_KEY", content);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     @Override

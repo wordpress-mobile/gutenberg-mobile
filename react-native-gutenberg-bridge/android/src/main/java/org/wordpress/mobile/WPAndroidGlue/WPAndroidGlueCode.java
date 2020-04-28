@@ -41,6 +41,7 @@ import org.wordpress.mobile.ReactNativeAztec.ReactAztecPackage;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.GutenbergUserEvent;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaUploadCallback;
+import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.ReplaceUnsupportedBlockCallback;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.RNMedia;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.RNReactNativeGutenbergBridgePackage;
 
@@ -78,6 +79,8 @@ public class WPAndroidGlueCode {
     private OnImageFullscreenPreviewListener mOnImageFullscreenPreviewListener;
     private OnMediaEditorListener mOnMediaEditorListener;
     private OnLogGutenbergUserEventListener mOnLogGutenbergUserEventListener;
+    private OnGutenbergDidRequestUnsupportedBlockFallbackListener mOnGutenbergDidRequestUnsupportedBlockFallbackListener;
+    private ReplaceUnsupportedBlockCallback mReplaceUnsupportedBlockCallback;
     private boolean mIsEditorMounted;
 
     private String mContentHtml = "";
@@ -160,6 +163,10 @@ public class WPAndroidGlueCode {
 
     public interface OnLogGutenbergUserEventListener {
         void onGutenbergUserEvent(GutenbergUserEvent event, Map<String, Object> properties);
+    }
+
+    public interface OnGutenbergDidRequestUnsupportedBlockFallbackListener {
+        void gutenbergDidRequestUnsupportedBlockFallback(UnsupportedBlock unsupportedBlock);
     }
 
     public void mediaSelectionCancelled() {
@@ -330,6 +337,16 @@ public class WPAndroidGlueCode {
             public void logUserEvent(GutenbergUserEvent event, ReadableMap eventProperties) {
                 mOnLogGutenbergUserEventListener.onGutenbergUserEvent(event, eventProperties.toHashMap());
             }
+
+            @Override
+            public void gutenbergDidRequestUnsupportedBlockFallback(ReplaceUnsupportedBlockCallback replaceUnsupportedBlockCallback,
+                                                                    String content,
+                                                                    String blockId,
+                                                                    String blockName) {
+                mReplaceUnsupportedBlockCallback = replaceUnsupportedBlockCallback;
+                mOnGutenbergDidRequestUnsupportedBlockFallbackListener.
+                        gutenbergDidRequestUnsupportedBlockFallback(new UnsupportedBlock(blockId, blockName, content));
+            }
         }, mIsDarkMode);
 
         return Arrays.asList(
@@ -407,6 +424,7 @@ public class WPAndroidGlueCode {
                                   OnImageFullscreenPreviewListener onImageFullscreenPreviewListener,
                                   OnMediaEditorListener onMediaEditorListener,
                                   OnLogGutenbergUserEventListener onLogGutenbergUserEventListener,
+                                  OnGutenbergDidRequestUnsupportedBlockFallbackListener onGutenbergDidRequestUnsupportedBlockFallbackListener,
                                   boolean isDarkMode) {
 
         MutableContextWrapper contextWrapper = (MutableContextWrapper) mReactRootView.getContext();
@@ -420,6 +438,7 @@ public class WPAndroidGlueCode {
         mOnImageFullscreenPreviewListener = onImageFullscreenPreviewListener;
         mOnMediaEditorListener = onMediaEditorListener;
         mOnLogGutenbergUserEventListener = onLogGutenbergUserEventListener;
+        mOnGutenbergDidRequestUnsupportedBlockFallbackListener = onGutenbergDidRequestUnsupportedBlockFallbackListener;
 
         sAddCookiesInterceptor.setOnAuthHeaderRequestedListener(onAuthHeaderRequestedListener);
 
@@ -739,6 +758,13 @@ public class WPAndroidGlueCode {
     public void clearMediaFileURL(final int mediaId) {
         if (isMediaUploadCallbackRegistered()) {
             mPendingMediaUploadCallback.onUploadMediaFileClear(mediaId);
+        }
+    }
+
+    public void replaceUnsupportedBlock(String content, String blockId) {
+        if (mReplaceUnsupportedBlockCallback != null) {
+            mReplaceUnsupportedBlockCallback.replaceUnsupportedBlock(content, blockId);
+            mReplaceUnsupportedBlockCallback = null;
         }
     }
 
