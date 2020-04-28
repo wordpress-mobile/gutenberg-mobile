@@ -92,9 +92,7 @@ export function subscribePreferredColorScheme( callback ) {
  * @return {EmitterSubscription} An EmitterSubscription.
  */
 export function subscribeReplaceBlock( callback ) {
-	if ( isIOS ) {
-		return gutenbergBridgeEvents.addListener( 'replaceBlock', callback );
-	}
+	return gutenbergBridgeEvents.addListener( 'replaceBlock', callback );
 }
 
 /**
