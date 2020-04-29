@@ -188,6 +188,7 @@
     "traverse": "^0.6.6",
     "turbo-combine-reducers": "^1.0.2",
     "underscore": "^1.9.1",
-    "use-memo-one": "^1.1.1"
+    "use-memo-one": "^1.1.1",
+    "is-promise": "^4.0.0"
   }
 }
