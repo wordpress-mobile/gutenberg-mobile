@@ -199,11 +199,11 @@ extension GutenbergViewController: GutenbergBridgeDelegate {
 
     func gutenbergDidRequestUnsupportedBlockFallback(for block: Block) {
         print("Requesting Fallback for \(block)")
-        let controller = WebViewController(htmlContent: block.content)
-        controller.onDismiss = { [weak self] in
+        let controller = try! WebViewController(block: block, userId: "0")
+        controller.onSave = { [weak self] block in
             self?.gutenberg.replace(block: block)
         }
-        present(controller, animated: true)
+        present(UINavigationController(rootViewController: controller), animated: true)
     }
 }
 
