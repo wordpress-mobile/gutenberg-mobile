@@ -16,6 +16,7 @@ class WebViewController: UIViewController {
     }
 
     override func loadView() {
+      
         view = webView
     }
 
