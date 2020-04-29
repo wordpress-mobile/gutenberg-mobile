@@ -2,7 +2,6 @@
  * External dependencies
  */
 const glob = require( 'glob' ).sync;
-const uniq = require( 'lodash/uniq' );
 
 const defaultPlatform = 'android';
 const rnPlatform = process.env.TEST_RN_PLATFORM || defaultPlatform;
