@@ -14,9 +14,10 @@
     "@babel/core": "^7.7.7",
     "@babel/runtime": "^7.7.7",
     "@carimus/metro-symlinked-deps": "^1.1.0",
-    "@wordpress/babel-preset-default": "^4.0.0",
-    "@wordpress/eslint-plugin": "^2.0.0",
-    "@wordpress/jest-preset-default": "^4.0.0",
+    "@wordpress/babel-preset-default": "file:./gutenberg/packages/babel-preset-default",
+    "@wordpress/eslint-plugin": "file:./gutenberg/packages/eslint-plugin",
+    "@wordpress/jest-preset-default": "file:./gutenberg/packages/jest-preset-default",
+    "@wordpress/prettier-config": "file:./gutenberg/packages/prettier-config",
     "appium": "1.17.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.2.2",
@@ -30,7 +31,6 @@
     "enzyme-to-json": "^3.3.5",
     "equivalent-key-map": "^0.2.0",
     "eslint": "^5.12.1",
-    "eslint-plugin-flowtype": "^3.4.2",
     "eslint-plugin-jest": "^22.4.1",
     "eslint-plugin-react-native": "^3.6.0",
     "eslint-plugin-wordpress": "git://github.com/WordPress-Coding-Standards/eslint-plugin-wordpress.git#552af1454d175e15f6d25aadc2ccde30a1922d4f",
@@ -43,9 +43,7 @@
     "node-fetch": "^2.3.0",
     "patch-package": "^6.2.0",
     "postinstall-prepare": "^1.0.1",
-    "prettier": "git+https://github.com/Automattic/calypso-prettier.git#calypso-1.9",
-    "prettier-eslint": "^8.8.2",
-    "prettier-eslint-cli": "^4.7.1",
+    "prettier": "npm:wp-prettier@1.19.1",
     "react-dom": "16.9.0",
     "react-native-sass-transformer": "^1.1.1",
     "react-test-renderer": "16.9.0",
@@ -102,6 +100,8 @@
     "test:e2e:install-app:android": "cd android && ./gradlew installDebug",
     "test:e2e:bundle:ios": "react-native bundle --reset-cache --platform=ios --dev=false --minify false --entry-file=index.js --bundle-output=./ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app/main.jsbundle --assets-dest=./ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app",
     "test:e2e:build-app:ios": "npm run ios --configuration Release --no-packager",
+    "prettier": "prettier --write $npm_package_config_jsfiles $npm_package_config_scssfiles",
+    "prettier:check": "prettier --list-different $npm_package_config_jsfiles $npm_package_config_scssfiles || { echo '\nERROR: `yarn prettier:check` found a formatting problem.\nNo files have been changed. Try running `yarn prettier` to fix any formatting issues.\n'; exit 1; }",
     "build:gutenberg": "cd gutenberg && npm install && npm run build",
     "clean": "npm run clean:build-artifacts; npm run clean:aztec; npm run cache clean; npm run clean:haste; npm run clean:jest; npm run clean:metro; npm run clean:react; npm run clean:watchman; npm run clean:node; npm run clean:pot",
     "clean:runtime": "npm run clean:haste; npm run clean:react; npm run clean:metro; npm run clean:jest; npm run clean:watchman; npm run clean:babel-cache",
@@ -117,6 +117,8 @@
     "clean:watchman": "command -v watchman >/dev/null 2>&1 && watchman watch-del-all; true",
     "clean:babel-cache": "rm -rf ../../node_modules/.cache/babel-loader/*",
     "clean:i18n-cache": "rm -rf ./i18n-cache/data/*.json && rm -f ./i18n-cache/index.native.js",
+    "lint": "eslint ./src --ext .js",
+    "lint:fix": "yarn lint --fix",
     "version": "npm run bundle && git add -A bundle"
   },
   "dependencies": {
@@ -126,6 +128,7 @@
     "@react-native-community/cli": "^3.0.4",
     "@react-native-community/slider": "git+https://github.com/wordpress-mobile/react-native-slider.git#5ad284d92b8d886e366445bf215be741ed53ddc6",
     "@wordpress/hooks": "file:./gutenberg/packages/hooks",
+    "@wordpress/scripts": "file:./gutenberg/packages/scripts",
     "classnames": "^2.2.5",
     "dom-react": "^2.2.1",
     "domutils": "^1.7.0",
@@ -174,5 +177,6 @@
     "turbo-combine-reducers": "^1.0.2",
     "underscore": "^1.9.1",
     "use-memo-one": "^1.1.1"
-  }
+  },
+  "prettier": "@wordpress/prettier-config"
 }

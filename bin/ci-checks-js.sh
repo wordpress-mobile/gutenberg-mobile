@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 function pOk() {
   echo "[$(tput setaf 2)OK$(tput sgr0)]"
 }
@@ -14,7 +16,6 @@ if [[ -z "${CHECK_CORRECTNESS}" ]] && [[ -z "${CHECK_TESTS}" ]] ; then
 fi
 
 if [ "$CHECK_CORRECTNESS" = true ] ; then
-  yarn flow || pFail
   yarn lint || pFail
   yarn prettier:check || pFail
 fi

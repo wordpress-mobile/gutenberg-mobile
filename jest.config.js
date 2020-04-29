@@ -15,13 +15,16 @@ if ( process.env.TEST_RN_PLATFORM ) {
 
 const configPath = 'gutenberg/test/native';
 
-const transpiledPackages = glob( 'gutenberg/packages/*{/src,}/index.js' ).reduce( ( mapper, modulePath ) => {
-		const moduleName = modulePath.split( '/' )[ 2 ];
-		if ( ! mapper[ `@wordpress/${ moduleName }` ] ) {
-			mapper[ `@wordpress/${ moduleName }` ] = '<rootDir>/' + modulePath.replace( /\/index\.js$/, '' );
-		}
-		return mapper;
-	}, {} );
+const transpiledPackages = glob(
+	'gutenberg/packages/*{/src,}/index.js'
+).reduce( ( mapper, modulePath ) => {
+	const moduleName = modulePath.split( '/' )[ 2 ];
+	if ( ! mapper[ `@wordpress/${ moduleName }` ] ) {
+		mapper[ `@wordpress/${ moduleName }` ] =
+			'<rootDir>/' + modulePath.replace( /\/index\.js$/, '' );
+	}
+	return mapper;
+}, {} );
 
 module.exports = {
 	verbose: true,
@@ -34,9 +37,7 @@ module.exports = {
 		'<rootDir>/' + configPath + '/enzyme.config.js',
 	],
 	testEnvironment: 'jsdom',
-	testMatch: [
-		'<rootDir>/src/**/test/*.[jt]s?(x)',
-	],
+	testMatch: [ '<rootDir>/src/**/test/*.[jt]s?(x)' ],
 	testPathIgnorePatterns: [
 		'/node_modules/',
 		'<rootDir>/gutenberg/',
@@ -55,9 +56,7 @@ module.exports = {
 		'\\.(scss)$': '<rootDir>/' + configPath + '/__mocks__/styleMock.js',
 		...transpiledPackages,
 	},
-	modulePathIgnorePatterns: [
-		'<rootDir>/gutenberg/node_modules',
-	],
+	modulePathIgnorePatterns: [ '<rootDir>/gutenberg/node_modules' ],
 	haste: {
 		defaultPlatform: rnPlatform,
 		platforms: [ 'android', 'ios', 'native' ],
