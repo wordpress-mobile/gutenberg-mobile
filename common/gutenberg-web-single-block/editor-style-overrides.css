@@ -22,6 +22,10 @@
     top: 0px;
 }
 
+.interface-interface-skeleton {
+    top: 0px;
+}
+
 /*
  Moves the whole editor to the top.
  There was an extra top margin after removing the WP Admin bar.
@@ -45,7 +49,7 @@
     display: none;
 }
 
-/* Move 'x' close button to the end */
+/* Move 'x' close button to the end on sidebar header */
 .edit-post-sidebar-header__small {
     justify-content: flex-end;
 }
