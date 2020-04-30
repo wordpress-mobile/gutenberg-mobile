@@ -1,5 +1,5 @@
 import Gutenberg
 
-class WebViewController: GutenbergWebViewController {
+class WebViewController: GutenbergWebSingleBlockViewController {
 
 }

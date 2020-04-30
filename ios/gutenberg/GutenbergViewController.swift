@@ -206,20 +206,20 @@ extension GutenbergViewController: GutenbergBridgeDelegate {
 }
 
 extension GutenbergViewController: GutenbergWebDelegate {
-    func webController(controller: GutenbergWebViewController, didPressSave block: Block) {
+    func webController(controller: GutenbergWebSingleBlockViewController, didPressSave block: Block) {
         gutenberg.replace(block: block)
         dismiss(webController: controller)
     }
 
-    func webControllerDidPressClose(controller: GutenbergWebViewController) {
+    func webControllerDidPressClose(controller: GutenbergWebSingleBlockViewController) {
         dismiss(webController: controller)
     }
 
-    func webController(controller: GutenbergWebViewController, didLog log: String) {
+    func webController(controller: GutenbergWebSingleBlockViewController, didLog log: String) {
         print("WebView: \(log)")
     }
 
-    private func dismiss(webController: GutenbergWebViewController) {
+    private func dismiss(webController: GutenbergWebSingleBlockViewController) {
         webController.cleanUp()
         dismiss(animated: true)
     }
