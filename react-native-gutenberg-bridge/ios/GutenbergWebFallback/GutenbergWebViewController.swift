@@ -1,13 +1,20 @@
 import UIKit
 import WebKit
 
+public protocol GutenbergWebDelegate: class {
+    func webController(controller: GutenbergWebViewController, didPressSave block: Block)
+    func webControllerDidPressClose(controller: GutenbergWebViewController)
+    func webController(controller: GutenbergWebViewController, didLog log: String)
+}
+
 open class GutenbergWebViewController: UIViewController {
     enum GutenbergWebError: Error {
         case wrongEditorUrl(String?)
     }
 
-    public var onSave: ((Block) -> Void)?
-    var isSelfHosted: Bool {
+    public weak var delegate: GutenbergWebDelegate?
+
+    var isWPOrg: Bool {
         return true
     }
 
@@ -46,13 +53,20 @@ open class GutenbergWebViewController: UIViewController {
         loadWebView()
     }
 
-    open func getRequest(completion: (URLRequest) -> Void) {
+    open func getRequest(for webView: WKWebView, completion: (URLRequest) -> Void) {
         let request = URLRequest(url: URL(string: "https://wordpress.org/gutenberg/")!)
         completion(request)
     }
 
+    public func cleanUp() {
+         webView.configuration.userContentController.removeAllUserScripts()
+         FallbackJavascriptInjection.JSMessage.allCases.forEach {
+             webView.configuration.userContentController.removeScriptMessageHandler(forName: $0.rawValue)
+         }
+     }
+
     private func loadWebView() {
-        getRequest { [weak self] (request) in
+        getRequest(for: webView) { [weak self] (request) in
             self?.webView.load(request)
         }
     }
@@ -62,7 +76,7 @@ open class GutenbergWebViewController: UIViewController {
     }
 
     @objc func onCloseButtonPressed() {
-        dismiss()
+        delegate?.webControllerDidPressClose(controller: self)
     }
 
     private func addNavigationBarElements() {
@@ -87,26 +101,13 @@ open class GutenbergWebViewController: UIViewController {
     }
 
     private func save(_ newContent: String) {
-        onSave?(block.replacingContent(with: newContent))
-        dismiss()
-    }
-
-    private func dismiss() {
-        cleanUpWebView()
-        presentingViewController?.dismiss(animated: true)
-    }
-
-    private func cleanUpWebView() {
-        webView.configuration.userContentController.removeAllUserScripts()
-        FallbackJavascriptInjection.JSMessage.allCases.forEach {
-            webView.configuration.userContentController.removeScriptMessageHandler(forName: $0.rawValue)
-        }
+        delegate?.webController(controller: self, didPressSave: block.replacingContent(with: newContent))
     }
 }
 
 extension GutenbergWebViewController: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        if !isSelfHosted && navigationResponse.response.url?.absoluteString.contains("/wp-admin/post-new.php") ?? false {
+        if !isWPOrg && navigationResponse.response.url?.absoluteString.contains("/wp-admin/post-new.php") ?? false {
             evaluateJavascript(jsInjection.insertBlockScript)
         }
         decisionHandler(.allow)
@@ -126,7 +127,7 @@ extension GutenbergWebViewController: WKNavigationDelegate {
         // Sometimes the editor takes longer loading and its CSS can override what
         // Injectic Editor specific CSS when everything is loaded to avoid overwritting parameters if gutenberg CSS load later.
         evaluateJavascript(jsInjection.injectEditorCssScript)
-        if isSelfHosted {
+        if isWPOrg {
             evaluateJavascript(jsInjection.insertBlockScript)
         }
     }
@@ -147,7 +148,7 @@ extension GutenbergWebViewController: WKScriptMessageHandler {
     private func handle(_ message: FallbackJavascriptInjection.JSMessage, body: String) {
         switch message {
         case .log:
-            print("---> JS: " + body)
+            delegate?.webController(controller: self, didLog: body)
         case .htmlPostContent:
             save(body)
         }

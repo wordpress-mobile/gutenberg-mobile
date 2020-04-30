@@ -1,7 +1,7 @@
 import WebKit
 
-private struct File {
-    enum FileError: Error {
+private struct SourceFile {
+    enum SourceFileError: Error {
         case sourceFileNotFound(String)
     }
 
@@ -15,20 +15,20 @@ private struct File {
     private static let bundle = Bundle(for: Gutenberg.self)
 
     func getContent() throws -> String {
-        guard let path = File.bundle.path(forResource: name, ofType: type.rawValue) else {
-            throw FileError.sourceFileNotFound("\(name).\(type)")
+        guard let path = SourceFile.bundle.path(forResource: name, ofType: type.rawValue) else {
+            throw SourceFileError.sourceFileNotFound("\(name).\(type)")
         }
         return try String(contentsOfFile: path, encoding: .utf8)
     }
 }
 
-extension File {
-    static let editorStyle = File(name: "editor-style-overrides", type: .css)
-    static let wpBarsStyle = File(name: "wp-bar-override", type: .css)
-    static let injectCss = File(name: "inject-css", type: .js)
-    static let retrieveHtml = File(name: "retrieve-html-content", type: .js)
-    static let insertBlock = File(name: "insert-block", type: .js)
-    static let localStorage  = File(name: "local-storage-overrides", type: .json)
+extension SourceFile {
+    static let editorStyle = SourceFile(name: "editor-style-overrides", type: .css)
+    static let wpBarsStyle = SourceFile(name: "wp-bar-override", type: .css)
+    static let injectCss = SourceFile(name: "inject-css", type: .js)
+    static let retrieveHtml = SourceFile(name: "retrieve-html-content", type: .js)
+    static let insertBlock = SourceFile(name: "insert-block", type: .js)
+    static let localStorage  = SourceFile(name: "local-storage-overrides", type: .json)
 }
 
 public struct FallbackJavascriptInjection {
@@ -51,13 +51,14 @@ public struct FallbackJavascriptInjection {
     /// Init an instance of GutenbergWebJavascriptInjection or throws if any of the required sources doesn't exist.
     /// This helps to cach early any possible error due to missing source files.
     /// - Parameter blockHTML: The block HTML code to be injected.
+    /// - Parameter userId: The id of the logged user.
     /// - Throws: Throws an error if any required source doesn't exist.
     public init(blockHTML: String, userId: String) throws {
-        func script(with source: File, argument: String? = nil) throws -> WKUserScript {
+        func script(with source: SourceFile, argument: String? = nil) throws -> WKUserScript {
             String(format: try source.getContent(), argument ?? []).toJsScript()
         }
 
-        func getInjectCssScript(with source: File) throws -> WKUserScript {
+        func getInjectCssScript(with source: SourceFile) throws -> WKUserScript {
             "window.injectCss(`\(try source.getContent())`)".toJsScript()
         }
 
@@ -70,8 +71,7 @@ public struct FallbackJavascriptInjection {
         injectWPBarsCssScript = try getInjectCssScript(with: .wpBarsStyle)
         injectEditorCssScript = try getInjectCssScript(with: .editorStyle)
 
-        let localStorageJsonString = try File.localStorage.getContent()
-            .removingSpacesAndNewLines()
+        let localStorageJsonString = try SourceFile.localStorage.getContent().removingSpacesAndNewLines()
         let scriptString = String(format: injectLocalStorageScriptTemplate, userId, localStorageJsonString)
         injectLocalStorageScript = scriptString.toJsScript()
     }

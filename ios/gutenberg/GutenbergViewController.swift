@@ -200,10 +200,28 @@ extension GutenbergViewController: GutenbergBridgeDelegate {
     func gutenbergDidRequestUnsupportedBlockFallback(for block: Block) {
         print("Requesting Fallback for \(block)")
         let controller = try! WebViewController(block: block, userId: "0")
-        controller.onSave = { [weak self] block in
-            self?.gutenberg.replace(block: block)
-        }
+        controller.delegate = self
         present(UINavigationController(rootViewController: controller), animated: true)
+    }
+}
+
+extension GutenbergViewController: GutenbergWebDelegate {
+    func webController(controller: GutenbergWebViewController, didPressSave block: Block) {
+        gutenberg.replace(block: block)
+        dismiss(webController: controller)
+    }
+
+    func webControllerDidPressClose(controller: GutenbergWebViewController) {
+        dismiss(webController: controller)
+    }
+
+    func webController(controller: GutenbergWebViewController, didLog log: String) {
+        print("WebView: \(log)")
+    }
+
+    private func dismiss(webController: GutenbergWebViewController) {
+        webController.cleanUp()
+        dismiss(animated: true)
     }
 }
 
