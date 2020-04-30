@@ -10,7 +10,7 @@
     "git": "https://github.com/react-native-community/react-native-async-storage",
     "tag": "v1.9.0"
   },
-  "source_files": "src/ios/**/*.{h,m}",
+  "source_files": "ios/**/*.{h,m}",
   "preserve_paths": "**/*.js",
   "platforms": {
     "ios": "9.0"
