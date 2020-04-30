@@ -2,34 +2,28 @@ import UIKit
 import WebKit
 
 public protocol GutenbergWebDelegate: class {
-    func webController(controller: GutenbergWebViewController, didPressSave block: Block)
-    func webControllerDidPressClose(controller: GutenbergWebViewController)
-    func webController(controller: GutenbergWebViewController, didLog log: String)
+    func webController(controller: GutenbergWebSingleBlockViewController, didPressSave block: Block)
+    func webControllerDidPressClose(controller: GutenbergWebSingleBlockViewController)
+    func webController(controller: GutenbergWebSingleBlockViewController, didLog log: String)
 }
 
-open class GutenbergWebViewController: UIViewController {
-    enum GutenbergWebError: Error {
-        case wrongEditorUrl(String?)
-    }
-
+open class GutenbergWebSingleBlockViewController: UIViewController {
     public weak var delegate: GutenbergWebDelegate?
 
-    var isWPOrg: Bool {
-        return true
-    }
-
+    private let isWPOrg: Bool
     private let block: Block
     private let jsInjection: FallbackJavascriptInjection
 
-    private lazy var webView: WKWebView = {
+    public lazy var webView: WKWebView = {
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = jsInjection.userContent(messageHandler: self, blockHTML: block.content)
         configuration.suppressesIncrementalRendering = true
         return WKWebView(frame: .zero, configuration: configuration)
     }()
 
-    public init(block: Block, userId: String) throws {
+    public init(block: Block, userId: String, isWPOrg: Bool = true) throws {
         self.block = block
+        self.isWPOrg = isWPOrg
         jsInjection = try FallbackJavascriptInjection(blockHTML: block.content, userId: userId)
 
         super.init(nibName: nil, bundle: nil)
@@ -43,7 +37,7 @@ open class GutenbergWebViewController: UIViewController {
         view = webView
     }
 
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         webView.navigationDelegate = self
         if #available(iOS 13.0, *) {
@@ -53,7 +47,7 @@ open class GutenbergWebViewController: UIViewController {
         loadWebView()
     }
 
-    open func getRequest(for webView: WKWebView, completion: (URLRequest) -> Void) {
+    open func getRequest(for webView: WKWebView, completion: @escaping (URLRequest) -> Void) {
         let request = URLRequest(url: URL(string: "https://wordpress.org/gutenberg/")!)
         completion(request)
     }
@@ -71,11 +65,11 @@ open class GutenbergWebViewController: UIViewController {
         }
     }
 
-    @objc func onSaveButtonPressed() {
+    @objc public func onSaveButtonPressed() {
         evaluateJavascript(jsInjection.getHtmlContentScript)
     }
 
-    @objc func onCloseButtonPressed() {
+    @objc public func onCloseButtonPressed() {
         delegate?.webControllerDidPressClose(controller: self)
     }
 
@@ -105,7 +99,7 @@ open class GutenbergWebViewController: UIViewController {
     }
 }
 
-extension GutenbergWebViewController: WKNavigationDelegate {
+extension GutenbergWebSingleBlockViewController: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         if !isWPOrg && navigationResponse.response.url?.absoluteString.contains("/wp-admin/post-new.php") ?? false {
             evaluateJavascript(jsInjection.insertBlockScript)
@@ -133,7 +127,7 @@ extension GutenbergWebViewController: WKNavigationDelegate {
     }
 }
 
-extension GutenbergWebViewController: WKScriptMessageHandler {
+extension GutenbergWebSingleBlockViewController: WKScriptMessageHandler {
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         guard
             let messageType = FallbackJavascriptInjection.JSMessage(rawValue: message.name),
