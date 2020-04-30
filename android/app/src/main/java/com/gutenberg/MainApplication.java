@@ -11,6 +11,7 @@ import com.facebook.react.ReactApplication;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.bridge.ReadableMap;
 import com.reactnativecommunity.slider.ReactSliderPackage;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.devsupport.interfaces.DevOptionHandler;
@@ -153,6 +154,7 @@ public class MainApplication extends Application implements ReactApplication {
                         new SvgPackage(),
                         new ReactAztecPackage(),
                         new LinearGradientPackage(),
+                        new AsyncStoragePackage(),
                         mRnReactNativeGutenbergBridgePackage);
             }
 
