@@ -13,6 +13,7 @@ open class GutenbergWebSingleBlockViewController: UIViewController {
     private let isWPOrg: Bool
     private let block: Block
     private let jsInjection: FallbackJavascriptInjection
+    private let coverView = UIView()
 
     public lazy var webView: WKWebView = {
         let configuration = WKWebViewConfiguration()
@@ -44,6 +45,7 @@ open class GutenbergWebSingleBlockViewController: UIViewController {
             isModalInPresentation = true
         }
         addNavigationBarElements()
+        addCoverView()
         loadWebView()
     }
 
@@ -81,6 +83,31 @@ open class GutenbergWebSingleBlockViewController: UIViewController {
         navigationItem.leftBarButtonItem = cancelButton
         let localizedTitle = NSLocalizedString("Edit %@ block", comment: "Title of Gutenberg WEB editor running on a Web View. %@ is the localized block name.")
         title = String(format: localizedTitle, block.name)
+    }
+
+    func addCoverView() {
+        webView.addSubview(coverView)
+        if #available(iOS 13.0, *) {
+            coverView.backgroundColor = UIColor.systemBackground
+        } else {
+            coverView.backgroundColor = .white
+        }
+        coverView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            coverView.leadingAnchor.constraint(equalTo: webView.leadingAnchor),
+            coverView.trailingAnchor.constraint(equalTo: webView.trailingAnchor),
+            coverView.topAnchor.constraint(equalTo: webView.topAnchor),
+            coverView.bottomAnchor.constraint(equalTo: webView.bottomAnchor),
+        ])
+    }
+
+    func removeCoverViewAnimated() {
+        UIView.animate(withDuration: 1, animations: {
+            self.coverView.alpha = 0
+        }) { _ in
+            self.coverView.removeFromSuperview()
+            self.coverView.alpha = 1
+        }
     }
 
     private func evaluateJavascript(_ script: WKUserScript) {
@@ -124,6 +151,7 @@ extension GutenbergWebSingleBlockViewController: WKNavigationDelegate {
         if isWPOrg {
             evaluateJavascript(jsInjection.insertBlockScript)
         }
+        removeCoverViewAnimated()
     }
 }
 
