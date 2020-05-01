@@ -19,5 +19,13 @@
 
             }
         }
+    },
+    "core/nux": {
+        "preferences": {
+            "areTipsEnabled": false,
+            "dismissedTips": {
+
+            }
+        }
     }
 }

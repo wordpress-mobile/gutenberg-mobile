@@ -8,12 +8,18 @@
     display: none;
 }
 
+/* Remove default block appender at the end of the post (WP v5.0~v5.1) */
+.editor-default-block-appender {
+    display: none;
+}
+
 /*
  Hiddes the top bar header by setting its height to 0
  We can't remove it since the block toolbar is a child of it.
  */
 .edit-post-header {
     height: 0px;
+    padding: 0px;
     overflow: hidden;
 }
 
