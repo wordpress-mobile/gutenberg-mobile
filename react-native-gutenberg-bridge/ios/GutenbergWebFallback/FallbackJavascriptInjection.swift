@@ -29,6 +29,7 @@ extension SourceFile {
     static let retrieveHtml = SourceFile(name: "retrieve-html-content", type: .js)
     static let insertBlock = SourceFile(name: "insert-block", type: .js)
     static let localStorage  = SourceFile(name: "local-storage-overrides", type: .json)
+    static let preventAutosaves = SourceFile(name: "prevent-autosaves", type: .js)
 }
 
 public struct FallbackJavascriptInjection {
@@ -64,6 +65,7 @@ public struct FallbackJavascriptInjection {
 
         userContentScripts = [
             try script(with: .retrieveHtml),
+            try script(with: .preventAutosaves),
         ]
 
         insertBlockScript = try script(with: .insertBlock, argument: blockHTML)
