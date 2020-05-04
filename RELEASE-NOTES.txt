@@ -1,3 +1,7 @@
+1.28.0
+------
+* New tooltip for the starter page template picker
+
 1.27.0
 ------
 * Prefill caption for image blocks when available on the Media library
