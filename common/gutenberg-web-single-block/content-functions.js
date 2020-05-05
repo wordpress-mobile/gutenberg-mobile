@@ -11,11 +11,11 @@ window.getHTMLPostContent = () => {
 };
 
 window.insertBlock = ( blockHTML ) => {
-    // Setup the editor with the inserted block
-    const post = window.wp.data.select( 'core/editor' ).getCurrentPost();
-    window.wp.data.dispatch( 'core/editor' ).setupEditor( post, { content: blockHTML } );
+	// Setup the editor with the inserted block
+	const post = window.wp.data.select( 'core/editor' ).getCurrentPost();
+	window.wp.data.dispatch( 'core/editor' ).setupEditor( post, { content: blockHTML } );
 
-    // Select the first block
-    const clientId = window.blockEditorSelect.getBlocks()[ 0 ].clientId;
-    window.blockEditorDispatch.selectBlock( clientId );
-}
+	// Select the first block
+	const clientId = window.blockEditorSelect.getBlocks()[ 0 ].clientId;
+	window.blockEditorDispatch.selectBlock( clientId );
+};
