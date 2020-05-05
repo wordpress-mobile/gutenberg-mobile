@@ -141,12 +141,12 @@ extension GutenbergWebSingleBlockViewController: WKNavigationDelegate {
         evaluateJavascript(jsInjection.injectEditorCssScript)
         evaluateJavascript(jsInjection.injectWPBarsCssScript)
         evaluateJavascript(jsInjection.injectLocalStorageScript)
-
     }
 
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // Sometimes the editor takes longer loading and its CSS can override what
         // Injectic Editor specific CSS when everything is loaded to avoid overwritting parameters if gutenberg CSS load later.
+        evaluateJavascript(jsInjection.preventAutosavesScript)
         evaluateJavascript(jsInjection.injectEditorCssScript)
         if isWPOrg {
             evaluateJavascript(jsInjection.insertBlockScript)
