@@ -61,21 +61,25 @@ class AztecView extends React.Component {
       return;
     }
 
-    if (!this.props.onEnter) {
+    if (!this.props.onKeyDown) {
       return;
     }
 
-    const { onEnter } = this.props;
-    onEnter(event);
+    const { onKeyDown } = this.props;
+    
+    let newEvent = { ...event, keyCode: 13 }
+    onKeyDown(newEvent);
   }
 
   _onBackspace = (event) => {
-    if (!this.props.onBackspace) {
+    if (!this.props.onKeyDown) {
       return;
     }
 
-    const { onBackspace } = this.props;
-    onBackspace(event);
+    const { onKeyDown } = this.props;
+
+    let newEvent = { ...event, keyCode: 8, preventDefault: () => {} }
+    onKeyDown(newEvent);
   }
 
   _onHTMLContentWithCursor = (event) => {
@@ -165,14 +169,14 @@ class AztecView extends React.Component {
           onContentSizeChange = { this._onContentSizeChange }
           onHTMLContentWithCursor = { this._onHTMLContentWithCursor }
           onSelectionChange = { this._onSelectionChange }
-          onEnter = { this.props.onEnter && this._onEnter }
+          onEnter = { this.props.onKeyDown && this._onEnter }
+          onBackspace = { this.props.onKeyDown && this._onBackspace }
           deleteEnter = { this.props.deleteEnter }
           // IMPORTANT: the onFocus events are thrown away as these are handled by onPress() in the upper level.
           // It's necessary to do this otherwise onFocus may be set by `{...otherProps}` and thus the onPress + onFocus
           // combination generate an infinite loop as described in https://github.com/wordpress-mobile/gutenberg-mobile/issues/302
           onFocus = { this._onAztecFocus } 
-          onBlur = { this._onBlur }
-		      onBackspace = { this._onBackspace }
+          onBlur = { this._onBlur }		      
         />
       </TouchableWithoutFeedback>
     );
