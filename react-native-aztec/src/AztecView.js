@@ -26,11 +26,13 @@ class AztecView extends React.Component {
     onContentSizeChange: PropTypes.func,
     onEnter: PropTypes.func,
     onBackspace: PropTypes.func,
+    onKeyDown: PropTypes.func,
     onScroll: PropTypes.func,
     onSelectionChange: PropTypes.func,
     onHTMLContentWithCursor: PropTypes.func,
     onCaretVerticalPositionChange: PropTypes.func,
-	blockType: PropTypes.object,	
+    blockType: PropTypes.object,
+    triggerKeyCodes: PropTypes.array,    	
     ...TextViewPropTypes, // include the default view properties
   }
 

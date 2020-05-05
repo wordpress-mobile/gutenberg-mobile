@@ -15,6 +15,7 @@ class RCTAztecView: Aztec.TextView {
     @objc var onSelectionChange: RCTBubblingEventBlock? = nil
     @objc var minWidth: CGFloat = 0
     @objc var maxWidth: CGFloat = 0
+    @objc var triggerKeyCodes: NSArray?
 
     @objc var activeFormats: NSSet? = nil {
         didSet {
@@ -305,7 +306,7 @@ class RCTAztecView: Aztec.TextView {
     // MARK: - Edits
 
     open override func insertText(_ text: String) {
-        guard !interceptEnter(text) else {
+        guard !interceptEnter(text), !interceptTriggersKeyCodes(text) else {
             return
         }
 
@@ -348,7 +349,7 @@ class RCTAztecView: Aztec.TextView {
         }
 
         var eventData = packCaretDataForRN()
-        eventData["keyCode"] = 13
+        eventData = add(keyTrigger: "\r", to: eventData)
         onKeyDown(eventData)
         return true
     }
@@ -367,9 +368,33 @@ class RCTAztecView: Aztec.TextView {
         }
         var caretData = packCaretDataForRN(overrideRange: range)
         onSelectionChange?(caretData)
-        caretData["keyCode"] = 8
+        caretData = add(keyCode: 8, to: caretData)
         onKeyDown(caretData)
         return true
+    }
+
+    private func interceptTriggersKeyCodes(_ text: String) -> Bool {
+        guard let keyCodes = triggerKeyCodes,
+            keyCodes.count > 0,
+            let onKeyDown = onKeyDown,
+            text.count == 1
+        else {
+            return false
+        }
+        for value in keyCodes {
+            guard let keyString = value as? String,
+                let keyCode = keyString.first?.asciiValue,
+                text.contains(keyString)
+            else {
+                continue
+            }
+
+            var eventData = [AnyHashable:Any]()
+            eventData = add(keyCode: keyCode, to: eventData)
+            onKeyDown(eventData)
+            return true
+        }
+        return false;
     }
 
     private func isNewLineBeforeSelectionAndNotEndOfContent() -> Bool {
@@ -429,6 +454,19 @@ class RCTAztecView: Aztec.TextView {
             }
         }
 
+        return result
+    }
+
+    func add(keyTrigger: String, to pack:[AnyHashable: Any]) -> [AnyHashable: Any] {
+        guard let keyCode = keyTrigger.first?.asciiValue else {
+            return pack
+        }
+        return add(keyCode: keyCode, to: pack)
+    }
+
+    func add(keyCode: UInt8, to pack:[AnyHashable: Any]) -> [AnyHashable: Any] {
+        var result = pack
+        result["keyCode"] = keyCode
         return result
     }
 
