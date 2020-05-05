@@ -26,7 +26,7 @@ extension SourceFile {
     static let editorStyle = SourceFile(name: "editor-style-overrides", type: .css)
     static let wpBarsStyle = SourceFile(name: "wp-bar-override", type: .css)
     static let injectCss = SourceFile(name: "inject-css", type: .js)
-    static let retrieveHtml = SourceFile(name: "retrieve-html-content", type: .js)
+    static let retrieveHtml = SourceFile(name: "content-functions", type: .js)
     static let insertBlock = SourceFile(name: "insert-block", type: .js)
     static let localStorage  = SourceFile(name: "local-storage-overrides", type: .json)
     static let preventAutosaves = SourceFile(name: "prevent-autosaves", type: .js)
