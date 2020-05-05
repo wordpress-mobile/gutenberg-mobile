@@ -6,6 +6,7 @@ import UIKit
 class RCTAztecView: Aztec.TextView {
     @objc var onBackspace: RCTBubblingEventBlock? = nil
     @objc var onChange: RCTBubblingEventBlock? = nil
+    @objc var onKeyDown: RCTBubblingEventBlock? = nil
     @objc var onEnter: RCTBubblingEventBlock? = nil
     @objc var onFocus: RCTBubblingEventBlock? = nil
     @objc var onBlur: RCTBubblingEventBlock? = nil
@@ -342,12 +343,13 @@ class RCTAztecView: Aztec.TextView {
         }
 
         guard text == "\n",
-            let onEnter = onEnter else {
+            let onKeyDown = onKeyDown else {
                 return false
         }
 
-        let caretData = packCaretDataForRN()
-        onEnter(caretData)
+        var eventData = packCaretDataForRN()
+        eventData["keyCode"] = 13
+        onKeyDown(eventData)
         return true
     }
 
@@ -356,16 +358,17 @@ class RCTAztecView: Aztec.TextView {
             || (selectedRange.location == 0 && selectedRange.length == 0)
             || text.count == 1 // send backspace event when cleaning all characters
             || selectedRange == NSRange(location: 0, length: textStorage.length), // send backspace event when deleting all the text
-            let onBackspace = onBackspace else {
+            let onKeyDown = onKeyDown else {
                 return false
         }
         var range = selectedRange
         if text.count == 1 {
             range = NSRange(location: 0, length: textStorage.length)
         }
-        let caretData = packCaretDataForRN(overrideRange: range)
+        var caretData = packCaretDataForRN(overrideRange: range)
         onSelectionChange?(caretData)
-        onBackspace(caretData)
+        caretData["keyCode"] = 8
+        onKeyDown(caretData)
         return true
     }
 

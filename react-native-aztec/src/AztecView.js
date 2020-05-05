@@ -82,6 +82,16 @@ class AztecView extends React.Component {
     onKeyDown(newEvent);
   }
 
+  _onKeyDown = ( event ) => {
+    if (!this.props.onKeyDown) {
+      return;
+    }
+
+    const { onKeyDown } = this.props;
+    let newEvent = { ...event, keyCode: event.nativeEvent.keyCode, preventDefault: () => {} }
+    onKeyDown(newEvent);
+  }
+
   _onHTMLContentWithCursor = (event) => {
     if (!this.props.onHTMLContentWithCursor) {
       return;
@@ -171,6 +181,7 @@ class AztecView extends React.Component {
           onSelectionChange = { this._onSelectionChange }
           onEnter = { this.props.onKeyDown && this._onEnter }
           onBackspace = { this.props.onKeyDown && this._onBackspace }
+          onKeyDown = { this.props.onKeyDown && this._onKeyDown }
           deleteEnter = { this.props.deleteEnter }
           // IMPORTANT: the onFocus events are thrown away as these are handled by onPress() in the upper level.
           // It's necessary to do this otherwise onFocus may be set by `{...otherProps}` and thus the onPress + onFocus
