@@ -18,7 +18,6 @@ import android.text.InputType;
 import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
@@ -31,6 +30,7 @@ import com.facebook.react.views.textinput.ContentSizeWatcher;
 import com.facebook.react.views.textinput.ReactTextInputLocalData;
 import com.facebook.react.views.textinput.ScrollWatcher;
 
+import org.wordpress.aztec.AlignmentRendering;
 import org.wordpress.aztec.AztecText;
 import org.wordpress.aztec.AztecTextFormat;
 import org.wordpress.aztec.ITextFormat;
@@ -95,7 +95,7 @@ public class ReactAztecText extends AztecText {
     };
 
     public ReactAztecText(ThemedReactContext reactContext) {
-        super(reactContext);
+        super(reactContext, AlignmentRendering.VIEW_LEVEL);
 
         setGutenbergMode(true);
 
@@ -139,7 +139,6 @@ public class ReactAztecText extends AztecText {
                 ReactAztecText.this.propagateSelectionChanges(selStart, selEnd);
             }
         });
-        this.setImeOptions(getImeOptions() | EditorInfo.IME_FLAG_NO_EXTRACT_UI);
         this.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
     }
 
@@ -186,6 +185,11 @@ public class ReactAztecText extends AztecText {
     @Override
     public boolean shouldSkipTidying() {
         return isPreTag();
+    }
+
+    @Override
+    public boolean shouldIgnoreWhitespace() {
+        return false;
     }
 
     // VisibleForTesting from {@link TextInputEventsTestCase}.
