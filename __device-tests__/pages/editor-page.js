@@ -384,20 +384,4 @@ export default class EditorPage {
 		const textViewElement = await this.getTextViewForHeadingBlock( block, true );
 		return await typeString( this.driver, textViewElement, text, clear );
 	}
-
-	// =====================
-	// Verse Block functions
-	// =====================
-
-	async addNewVerseBlock() {
-		await this.addNewBlock( this.verseBlockName );
-	}
-
-	async getVerseBlockAtPosition( position: number ) {
-		return this.getBlockAtPosition( position, this.verseBlockName );
-	}
-
-	async removeVerseBlockAtPosition( position: number ) {
-		return await this.removeBlockAtPosition( position, this.verseBlockName );
-	}
 }

@@ -18,6 +18,7 @@ describe( 'Gutenberg Editor Verse Block Tests', () => {
 	let driver;
 	let editorPage;
 	let allPassed = true;
+	const verseBlockName = 'Verse';
 
 	// Use reporter for setting status for saucelabs Job
 	if ( ! isLocalEnvironment() ) {
@@ -40,11 +41,11 @@ describe( 'Gutenberg Editor Verse Block Tests', () => {
 	} );
 
 	it( 'should be able to add a verse block', async () => {
-		await editorPage.addNewVerseBlock();
-		const verseBlock = await editorPage.getVerseBlockAtPosition( 1 );
+		await editorPage.addNewBlock( verseBlockName );
+		const verseBlock = await editorPage.getBlockAtPosition( verseBlockName );
 
 		expect( verseBlock ).toBeTruthy();
-		await editorPage.removeVerseBlockAtPosition( 1 );
+		await editorPage.removeBlockAtPosition( verseBlockName );
 	} );
 
 	afterAll( async () => {
