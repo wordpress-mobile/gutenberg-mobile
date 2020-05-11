@@ -2,7 +2,7 @@
 ------
 * [**] Add support for changing overlay color settings in Cover block
 * Add enter/exit animation in FloatingToolbar
-
+* Remove `Clear all settings` button from Image block settings
 
 1.28.0
 ------
