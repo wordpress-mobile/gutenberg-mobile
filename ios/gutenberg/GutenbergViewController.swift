@@ -194,6 +194,14 @@ extension GutenbergViewController: GutenbergBridgeDelegate {
     func gutenbergDidLogUserEvent(_ event: GutenbergUserEvent) {
         print("Gutenberg loged user event")
     }
+
+    func gutenbergDidRequestGetStarterPageTemplatesTooltipShown() -> Bool {
+        return false;
+    }
+
+    func gutenbergDidRequestSetStarterPageTemplatesTooltipShown(_ tooltipShown: Bool) {
+        print("Gutenberg requested setting tooltip flag")
+    }
 }
 
 extension GutenbergViewController: GutenbergBridgeDataSource {
