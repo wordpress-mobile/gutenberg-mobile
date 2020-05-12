@@ -1,8 +1,5 @@
 1.28.0
 ------
-* New tooltip for the starter page template picker
-* New block: Pullquote
-* Add support for changing background and text color in Buttons block
 * [***] New block: Pullquote
 * [**] Add support for changing background and text color in Buttons block
 * [*] Fix the icons and buttons in Gallery, Paragraph, List and MediaText block on RTL mode
