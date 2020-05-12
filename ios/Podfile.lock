@@ -237,8 +237,6 @@ PODS:
     - ReactCommon/jscallinvoker (= 0.61.5)
   - ReactNativeDarkMode (0.0.10):
     - React
-  - RNCAsyncStorage (1.9.0):
-    - React
   - RNSVG (9.13.6-gb):
     - React
   - RNTAztecView (1.27.1):
@@ -282,7 +280,6 @@ DEPENDENCIES:
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - ReactNativeDarkMode (from `../node_modules/react-native-dark-mode`)
-  - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNTAztecView (from `../RNTAztecView.podspec`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -355,8 +352,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   ReactNativeDarkMode:
     :path: "../node_modules/react-native-dark-mode"
-  RNCAsyncStorage:
-    :path: "../node_modules/@react-native-community/async-storage"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   RNTAztecView:
@@ -397,9 +392,8 @@ SPEC CHECKSUMS:
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   ReactNativeDarkMode: f61376360c5d983907e5c316e8e1c853a8c2f348
-  RNCAsyncStorage: 453cd7c335ec9ba3b877e27d02238956b76f3268
   RNSVG: 68a534a5db06dcbdaebfd5079349191598caef7b
-  RNTAztecView: dc2364760fad53f52defde7c01be765e77b9ba19
+  RNTAztecView: 4c248fd117fe7101b1cbd0fbfcbd3923c7dc3c23
   WordPress-Aztec-iOS: fb6ea6409a5228292568f665eb22ea0a0aa7ad7e
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
