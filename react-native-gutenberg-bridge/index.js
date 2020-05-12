@@ -136,4 +136,12 @@ export function logUserEvent( event, properties ) {
 	return RNReactNativeGutenbergBridge.logUserEvent( event, properties );
 }
 
+export function getStarterPageTemplatesTooltipShown( callback ) {
+	return RNReactNativeGutenbergBridge.getStarterPageTemplatesTooltipShown( callback );
+}
+
+export function setStarterPageTemplatesTooltipShown( tooltipShown ) {
+	return RNReactNativeGutenbergBridge.setStarterPageTemplatesTooltipShown( tooltipShown );
+}
+
 export default RNReactNativeGutenbergBridge;
