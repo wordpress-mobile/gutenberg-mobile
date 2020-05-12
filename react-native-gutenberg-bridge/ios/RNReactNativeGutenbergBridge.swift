@@ -233,12 +233,12 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
     
     @objc
     func getStarterPageTemplatesTooltipShown(_ callback: @escaping RCTResponseSenderBlock) {
-        callback([self.delegate?.gutenbergDidRequestGerStarterPageTemplatesTooltipShown() ?? false])
+        callback([self.delegate?.gutenbergDidRequestGetStarterPageTemplatesTooltipShown() ?? false])
     }
     
     @objc
-    func getStarterPageTemplatesTooltipShown(_ tooltipShown: Bool) {
-        self.delegate?.gutenbergDidRequestGetStarterPageTemplatesTooltipShown(tooltipShown)
+    func setStarterPageTemplatesTooltipShown(_ tooltipShown: Bool) {
+        self.delegate?.gutenbergDidRequestSetStarterPageTemplatesTooltipShown(tooltipShown)
     }
     
 }
