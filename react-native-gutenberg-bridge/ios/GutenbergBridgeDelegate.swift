@@ -164,6 +164,10 @@ public protocol GutenbergBridgeDelegate: class {
     /// Tells the delegate that the editor needs to log a custom event
     /// - Parameter event: The event key to be logged
     func gutenbergDidLogUserEvent(_ event: GutenbergUserEvent)
+    
+    func gutenbergDidRequestGetStarterPageTemplatesTooltipShown() -> Bool
+    
+    func gutenbergDidRequestSetStarterPageTemplatesTooltipShown(_ tooltipShown: Bool)
 }
 
 // MARK: - Optional GutenbergBridgeDelegate methods
