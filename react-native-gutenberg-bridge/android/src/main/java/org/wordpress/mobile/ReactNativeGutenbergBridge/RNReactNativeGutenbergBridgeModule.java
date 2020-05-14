@@ -245,8 +245,8 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
 
     @ReactMethod
     public void requestUnsupportedBlockFallback(String content, String blockId, String blockName) {
-        mGutenbergBridgeJS2Parent.gutenbergDidRequestUnsupportedBlockFallback((content1, blockId1) ->
-                replaceBlock(content1, blockId1), content, blockId, blockName);
+        mGutenbergBridgeJS2Parent.gutenbergDidRequestUnsupportedBlockFallback((savedContent, savedBlockId) ->
+                replaceBlock(savedContent, savedBlockId), content, blockId, blockName);
     }
 
     private void replaceBlock(String content, String blockId) {
