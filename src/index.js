@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import { isEmpty } from 'lodash';
-
-/**
  * WordPress dependencies
  */
 import { addAction, addFilter } from '@wordpress/hooks';
@@ -21,11 +16,18 @@ addAction( 'native.pre-render', 'gutenberg-mobile', ( props ) => {
 	);
 } );
 
-addFilter( 'native.block_editor_props_default', 'gutenberg-mobile', ( coreNativeProps ) => {
-	return {
-		...coreNativeProps,
-		initialTitle: 'Welcome to gutenberg for WP Apps!'
-	};
-} );
+addFilter(
+	'native.block_editor_props',
+	'gutenberg-mobile',
+	( editorProps ) => {
+		if ( __DEV__ ) {
+			return {
+				...editorProps,
+				initialTitle: 'Welcome to gutenberg for WP Apps!',
+			};
+		}
+		return editorProps;
+	}
+);
 
 require( '@wordpress/react-native-editor' );
