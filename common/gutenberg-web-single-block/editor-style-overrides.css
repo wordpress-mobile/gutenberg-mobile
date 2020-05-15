@@ -3,6 +3,10 @@
     display: none;
 }
 
+.edit-post-visual-editor__post-title-wrapper {
+    display: none;
+}
+
 /* Remove default block appender at the end of the post */
 .block-list-appender {
     display: none;
