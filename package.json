@@ -56,6 +56,7 @@
     "postinstall": "npm install --prefix gutenberg",
     "start": "react-native start --config ./metro.config.js",
     "start:reset": "npm run clean:runtime && npm run start -- --reset-cache",
+    "core": "npm run --prefix gutenberg/packages/react-native-editor",
     "bundle": "npm run bundle:android && npm run bundle:ios && npm run genstrings",
     "bundle:android": "mkdir -p bundle/android && react-native bundle --platform android --dev false --entry-file ./index.js --assets-dest ./bundle/android --bundle-output ./bundle/android/App.js --sourcemap-output ./bundle/android/App.js.map",
     "bundle:ios": "mkdir -p bundle/ios && react-native bundle --platform ios --dev false --entry-file ./index.js --assets-dest ./bundle/ios --bundle-output ./bundle/ios/App.js --sourcemap-output ./bundle/ios/App.js.map",
