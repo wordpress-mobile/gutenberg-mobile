@@ -2568,9 +2568,9 @@
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
 
 "@types/q@^1.5.1":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
-  integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.3.tgz#69047ef831f0e5849a3855a25e019850413dc922"
+  integrity sha512-I3wR8FNrk9ny4zJzSB1FBpPHw8kv+eVapS3Hkw+QAF7WCIF7foiEj0GcWFR5mwzw/HUMrLBD+rO/OKJcLf/v+w==
 
 "@types/react-native@^0.57.60":
   version "0.57.65"
@@ -2589,9 +2589,9 @@
     csstype "^2.2.0"
 
 "@types/request@^2.48.4":
-  version "2.48.4"
-  resolved "https://registry.yarnpkg.com/@types/request/-/request-2.48.4.tgz#df3d43d7b9ed3550feaa1286c6eabf0738e6cf7e"
-  integrity sha512-W1t1MTKYR8PxICH+A4HgEIPuAC3sbljoEVfyZbeFJJDbr30guDspJri2XOaM2E+Un7ZjrihaDi7cf6fPa2tbgw==
+  version "2.48.5"
+  resolved "https://registry.yarnpkg.com/@types/request/-/request-2.48.5.tgz#019b8536b402069f6d11bee1b2c03e7f232937a0"
+  integrity sha512-/LO7xRVnL3DxJ1WkPGDQrp4VTV1reX9RkC85mJ+Qzykj2Bdw+mG15aAfDahc76HtknjzE16SX/Yddn6MxVbmGQ==
   dependencies:
     "@types/caseless" "*"
     "@types/node" "*"
@@ -2918,10 +2918,10 @@
     "@babel/plugin-transform-runtime" "^7.9.0"
     "@babel/preset-env" "^7.9.0"
     "@babel/runtime" "^7.9.2"
-    "@wordpress/babel-plugin-import-jsx-pragma" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-babel-preset-default-4.12.1-1a84af4d-d6bb-429f-ab01-d78d5494b4a0-1589540067789/node_modules/@wordpress/babel-plugin-import-jsx-pragma"
-    "@wordpress/browserslist-config" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-babel-preset-default-4.12.1-1a84af4d-d6bb-429f-ab01-d78d5494b4a0-1589540067789/node_modules/@wordpress/browserslist-config"
-    "@wordpress/element" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-babel-preset-default-4.12.1-1a84af4d-d6bb-429f-ab01-d78d5494b4a0-1589540067789/node_modules/@wordpress/element"
-    "@wordpress/warning" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-babel-preset-default-4.12.1-1a84af4d-d6bb-429f-ab01-d78d5494b4a0-1589540067789/node_modules/@wordpress/warning"
+    "@wordpress/babel-plugin-import-jsx-pragma" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-babel-preset-default-4.12.1-292eb8d4-a69d-4223-aaa4-3eb8f10e02be-1589559026661/node_modules/@wordpress/babel-plugin-import-jsx-pragma"
+    "@wordpress/browserslist-config" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-babel-preset-default-4.12.1-292eb8d4-a69d-4223-aaa4-3eb8f10e02be-1589559026661/node_modules/@wordpress/browserslist-config"
+    "@wordpress/element" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-babel-preset-default-4.12.1-292eb8d4-a69d-4223-aaa4-3eb8f10e02be-1589559026661/node_modules/@wordpress/element"
+    "@wordpress/warning" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-babel-preset-default-4.12.1-292eb8d4-a69d-4223-aaa4-3eb8f10e02be-1589559026661/node_modules/@wordpress/warning"
     core-js "^3.6.4"
 
 "@wordpress/browserslist-config@file:gutenberg/packages/browserslist-config":
@@ -2931,8 +2931,8 @@
   version "3.14.0"
   dependencies:
     "@babel/runtime" "^7.9.2"
-    "@wordpress/element" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-compose-3.14.0-a53c6fb1-b4ba-41e0-b735-fdfa02ed78d4-1589540067472/node_modules/@wordpress/element"
-    "@wordpress/is-shallow-equal" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-compose-3.14.0-a53c6fb1-b4ba-41e0-b735-fdfa02ed78d4-1589540067472/node_modules/@wordpress/is-shallow-equal"
+    "@wordpress/element" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-compose-3.14.0-67e44132-2dbf-44dc-a114-355ea02290a4-1589559026548/node_modules/@wordpress/element"
+    "@wordpress/is-shallow-equal" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-compose-3.14.0-67e44132-2dbf-44dc-a114-355ea02290a4-1589559026548/node_modules/@wordpress/is-shallow-equal"
     lodash "^4.17.15"
     mousetrap "^1.6.2"
     react-resize-aware "^3.0.0"
@@ -2941,12 +2941,12 @@
   version "4.17.0"
   dependencies:
     "@babel/runtime" "^7.9.2"
-    "@wordpress/compose" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-data-4.17.0-f1135f31-0d38-4b98-ae31-12857a1542d4-1589540067434/node_modules/@wordpress/compose"
-    "@wordpress/deprecated" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-data-4.17.0-f1135f31-0d38-4b98-ae31-12857a1542d4-1589540067434/node_modules/@wordpress/deprecated"
-    "@wordpress/element" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-data-4.17.0-f1135f31-0d38-4b98-ae31-12857a1542d4-1589540067434/node_modules/@wordpress/element"
-    "@wordpress/is-shallow-equal" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-data-4.17.0-f1135f31-0d38-4b98-ae31-12857a1542d4-1589540067434/node_modules/@wordpress/is-shallow-equal"
-    "@wordpress/priority-queue" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-data-4.17.0-f1135f31-0d38-4b98-ae31-12857a1542d4-1589540067434/node_modules/@wordpress/priority-queue"
-    "@wordpress/redux-routine" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-data-4.17.0-f1135f31-0d38-4b98-ae31-12857a1542d4-1589540067434/node_modules/@wordpress/redux-routine"
+    "@wordpress/compose" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-data-4.17.0-cab178b8-f693-47bf-9ac0-573e05a16888-1589559026536/node_modules/@wordpress/compose"
+    "@wordpress/deprecated" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-data-4.17.0-cab178b8-f693-47bf-9ac0-573e05a16888-1589559026536/node_modules/@wordpress/deprecated"
+    "@wordpress/element" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-data-4.17.0-cab178b8-f693-47bf-9ac0-573e05a16888-1589559026536/node_modules/@wordpress/element"
+    "@wordpress/is-shallow-equal" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-data-4.17.0-cab178b8-f693-47bf-9ac0-573e05a16888-1589559026536/node_modules/@wordpress/is-shallow-equal"
+    "@wordpress/priority-queue" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-data-4.17.0-cab178b8-f693-47bf-9ac0-573e05a16888-1589559026536/node_modules/@wordpress/priority-queue"
+    "@wordpress/redux-routine" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-data-4.17.0-cab178b8-f693-47bf-9ac0-573e05a16888-1589559026536/node_modules/@wordpress/redux-routine"
     equivalent-key-map "^0.2.2"
     is-promise "^4.0.0"
     lodash "^4.17.15"
@@ -2966,13 +2966,13 @@
   version "2.8.0"
   dependencies:
     "@babel/runtime" "^7.9.2"
-    "@wordpress/hooks" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-deprecated-2.8.0-79ca76b0-c013-4857-8ce2-287543aa01ee-1589540067476/node_modules/@wordpress/hooks"
+    "@wordpress/hooks" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-deprecated-2.8.0-8868fb49-8728-4279-b7ac-d784cfafcea4-1589559026550/node_modules/@wordpress/hooks"
 
 "@wordpress/element@file:gutenberg/packages/element":
   version "2.13.1"
   dependencies:
     "@babel/runtime" "^7.9.2"
-    "@wordpress/escape-html" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-element-2.13.1-ebd06b8b-9006-4810-b3f0-6342f62bd49b-1589540067482/node_modules/@wordpress/escape-html"
+    "@wordpress/escape-html" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-element-2.13.1-d49f555d-3455-4526-912d-34f2010e6cec-1589559026551/node_modules/@wordpress/escape-html"
     lodash "^4.17.15"
     react "^16.9.0"
     react-dom "^16.9.0"
@@ -2985,7 +2985,7 @@
 "@wordpress/eslint-plugin@file:./gutenberg/packages/eslint-plugin", "@wordpress/eslint-plugin@file:gutenberg/packages/eslint-plugin":
   version "5.1.0"
   dependencies:
-    "@wordpress/prettier-config" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-eslint-plugin-5.1.0-9ccecf42-b447-4ba2-8275-98673b1a131e-1589540067790/node_modules/@wordpress/prettier-config"
+    "@wordpress/prettier-config" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-eslint-plugin-5.1.0-d95ed422-ace2-4f63-911b-bdb9b52c8dfc-1589559026664/node_modules/@wordpress/prettier-config"
     babel-eslint "^10.1.0"
     eslint-config-prettier "^6.10.1"
     eslint-plugin-jest "^23.8.2"
@@ -3019,7 +3019,7 @@
   version "6.0.0"
   dependencies:
     "@jest/reporters" "^25.3.0"
-    "@wordpress/jest-console" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-jest-preset-default-6.0.0-8695df1d-8260-41be-a20b-364e2d693500-1589540067801/node_modules/@wordpress/jest-console"
+    "@wordpress/jest-console" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-jest-preset-default-6.0.0-186db880-6fd8-4869-98b2-f6b2565adbaa-1589559026666/node_modules/@wordpress/jest-console"
     babel-jest "^25.3.0"
     enzyme "^3.11.0"
     enzyme-adapter-react-16 "^1.15.2"
@@ -3048,12 +3048,12 @@
   version "9.0.0"
   dependencies:
     "@svgr/webpack" "^5.2.0"
-    "@wordpress/babel-preset-default" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-scripts-9.0.0-759a286b-9347-4d11-87af-2ccc57af9818-1589540067565/node_modules/@wordpress/babel-preset-default"
-    "@wordpress/dependency-extraction-webpack-plugin" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-scripts-9.0.0-759a286b-9347-4d11-87af-2ccc57af9818-1589540067565/node_modules/@wordpress/dependency-extraction-webpack-plugin"
-    "@wordpress/eslint-plugin" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-scripts-9.0.0-759a286b-9347-4d11-87af-2ccc57af9818-1589540067565/node_modules/@wordpress/eslint-plugin"
-    "@wordpress/jest-preset-default" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-scripts-9.0.0-759a286b-9347-4d11-87af-2ccc57af9818-1589540067565/node_modules/@wordpress/jest-preset-default"
-    "@wordpress/npm-package-json-lint-config" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-scripts-9.0.0-759a286b-9347-4d11-87af-2ccc57af9818-1589540067565/node_modules/@wordpress/npm-package-json-lint-config"
-    "@wordpress/prettier-config" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-scripts-9.0.0-759a286b-9347-4d11-87af-2ccc57af9818-1589540067565/node_modules/@wordpress/prettier-config"
+    "@wordpress/babel-preset-default" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-scripts-9.0.0-26abf998-7aa9-4f7d-8d0a-0591a6a4eeee-1589559026635/node_modules/@wordpress/babel-preset-default"
+    "@wordpress/dependency-extraction-webpack-plugin" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-scripts-9.0.0-26abf998-7aa9-4f7d-8d0a-0591a6a4eeee-1589559026635/node_modules/@wordpress/dependency-extraction-webpack-plugin"
+    "@wordpress/eslint-plugin" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-scripts-9.0.0-26abf998-7aa9-4f7d-8d0a-0591a6a4eeee-1589559026635/node_modules/@wordpress/eslint-plugin"
+    "@wordpress/jest-preset-default" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-scripts-9.0.0-26abf998-7aa9-4f7d-8d0a-0591a6a4eeee-1589559026635/node_modules/@wordpress/jest-preset-default"
+    "@wordpress/npm-package-json-lint-config" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-scripts-9.0.0-26abf998-7aa9-4f7d-8d0a-0591a6a4eeee-1589559026635/node_modules/@wordpress/npm-package-json-lint-config"
+    "@wordpress/prettier-config" "file:../../../Library/Caches/Yarn/v6/npm-@wordpress-scripts-9.0.0-26abf998-7aa9-4f7d-8d0a-0591a6a4eeee-1589559026635/node_modules/@wordpress/prettier-config"
     babel-jest "^25.3.0"
     babel-loader "^8.1.0"
     chalk "^4.0.0"
