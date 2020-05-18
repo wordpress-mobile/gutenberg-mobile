@@ -85,6 +85,8 @@ target 'gutenberg' do
   #pod 'WordPress-Aztec-iOS', :git => 'https://github.com/wordpress-mobile/WordPress-Aztec-iOS.git', :commit => '29dff741f4b19435d75f21179e27766337de8e9d'
   pod 'Gutenberg', :path => '../Gutenberg.podspec'
 
+  pod 'react-native-get-random-values', :path => '../node_modules/react-native-get-random-values'
+
   target 'gutenbergTests' do
     inherit! :complete
     # Pods for testing
