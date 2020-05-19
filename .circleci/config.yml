@@ -72,9 +72,7 @@ jobs:
     - image: circleci/android:api-29-node
     steps:
       - checkout
-      - run:
-          name: Checkout Gutenberg
-          command: git submodule update --init --recursive
+      - checkout-submodules
       - npm-install
       - add-jest-reporter-dir
       - run:
@@ -84,15 +82,15 @@ jobs:
             echo 'export TEST_ENV=sauce' >> $BASH_ENV
       - run:
           name: Bundle Android and Generate debug .apk file for testing
-          command: npm run test:e2e:build-app:android
+          command: npm run core test:e2e:build-app:android
       - run:
           name: Upload apk to sauce labs
           command: |
             source bin/sauce-pre-upload.sh
-            curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.apk?overwrite=true --data-binary @./android/app/build/outputs/apk/debug/app-debug.apk
+            curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.apk?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk
       - run:
           name: Run Device Tests
-          command: npm run device-tests
+          command: npm run core device-tests
           environment:
             JEST_JUNIT_OUTPUT: "reports/test-results/android-test-results.xml"
       - store_test_results:
@@ -200,8 +198,8 @@ workflows:
       #     check-tests: true
       - ios-device-checks:
           name: Test iOS on Device
-      # - android-device-checks:
-      #     name: Test Android on Device
+      - android-device-checks:
+          name: Test Android on Device
 
   ui-tests-full-scheduled:
     jobs:
