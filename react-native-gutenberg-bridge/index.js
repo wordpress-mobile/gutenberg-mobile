@@ -136,4 +136,6 @@ export function logUserEvent( event, properties ) {
 	return RNReactNativeGutenbergBridge.logUserEvent( event, properties );
 }
 
+export { requestLinkToExistingContent } from './existing-content';
+
 export default RNReactNativeGutenbergBridge;
