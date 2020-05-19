@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+echo "pwd:" $(pwd)
 
 function pOk() {
   echo "[$(tput setaf 2)OK$(tput sgr0)]"
