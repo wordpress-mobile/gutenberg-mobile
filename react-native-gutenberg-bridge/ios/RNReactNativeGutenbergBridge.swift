@@ -15,6 +15,19 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
     }
     
     @objc
+    func requestLinkToExistingContent(_ selectedLink: String, callback: @escaping RCTResponseSenderBlock) {
+        DispatchQueue.main.async {
+            self.delegate?.gutenbergDidRequestLinkToExistingContent(selectedLink: selectedLink, with: { contentLink in
+                guard let contentLink = contentLink else {
+                    callback(nil)
+                    return
+                }
+                callback([contentLink.encodeForJS()])
+            })
+        }
+    }
+    
+    @objc
     func requestMediaPickFrom(_ source: String, filter: [String]?, allowMultipleSelection: Bool, callback: @escaping RCTResponseSenderBlock) {
         let mediaSource = getMediaSource(withId: source)
         let mediaFilter = getMediaTypes(from: filter)
@@ -288,6 +301,10 @@ extension RNReactNativeGutenbergBridge {
         static let type = "type"
         static let caption = "caption"
     }
+    enum ContentLinkKey {
+        static let url = "url"
+        static let title = "title"
+    }
 }
 
 extension MediaInfo {
@@ -298,6 +315,15 @@ extension MediaInfo {
             RNReactNativeGutenbergBridge.MediaKey.url: url as Any,
             RNReactNativeGutenbergBridge.MediaKey.type: type as Any,
             RNReactNativeGutenbergBridge.MediaKey.caption: caption as Any
+        ]
+    }
+}
+
+extension ContentLink {
+    func encodeForJS() -> [String: String] {
+        return [
+            RNReactNativeGutenbergBridge.ContentLinkKey.url: url,
+            RNReactNativeGutenbergBridge.ContentLinkKey.title: title
         ]
     }
 }

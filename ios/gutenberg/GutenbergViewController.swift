@@ -45,6 +45,10 @@ class GutenbergViewController: UIViewController {
 }
 
 extension GutenbergViewController: GutenbergBridgeDelegate {
+    func gutenbergDidRequestLinkToExistingContent(selectedLink: String, with callback: @escaping LinkToExistingContentCallback) {
+        callback(ContentLink(url: "https://example.com/", title: "Example Link"))
+    }
+
     func gutenbergDidRequestFetch(path: String, completion: @escaping (Result<Any, NSError>) -> Void) {
         completion(Result.success([:]))
     }

@@ -12,8 +12,19 @@ public struct MediaInfo {
     }
 }
 
+public struct ContentLink {
+    public let url: String
+    public let title: String
+    
+    public init(url: String, title: String) {
+        self.url = url
+        self.title = title
+    }
+}
+
 public typealias MediaPickerDidPickMediaCallback = (_ media: [MediaInfo]?) -> Void
 public typealias MediaImportCallback = (_ media: MediaInfo?) -> Void
+public typealias LinkToExistingContentCallback = (_ contentLink: ContentLink?) -> Void
 
 /// Declare internal Media Sources.
 /// Label and Type are not relevant since they are delcared on the JS side.
@@ -111,6 +122,13 @@ public protocol GutenbergBridgeDelegate: class {
     //
     func gutenbergDidRequestImport(from url: URL, with callback: @escaping MediaImportCallback)
 
+    /// Tells the delegate that a request was made from gutenberg for a link to existing content
+    ///
+    /// - Parameters:
+    ///     - selectedLink: A url used to indicate a currently selected link in the post list
+    ///     - callback: A callback block to be called with the url and title of the linked content, or nil if the action was cancelled by the user
+    func gutenbergDidRequestLinkToExistingContent(selectedLink: String, with callback: @escaping LinkToExistingContentCallback)
+    
     /// Tells the delegate that an image block requested to reconnect with media uploads coordinator.
     ///
     func gutenbergDidRequestMediaUploadSync()
