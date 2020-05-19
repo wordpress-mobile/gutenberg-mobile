@@ -13,7 +13,6 @@
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@babel/runtime": "^7.7.7",
-    "@carimus/metro-symlinked-deps": "^1.1.0",
     "@react-native-community/cli": "^3.0.4",
     "@wordpress/babel-preset-default": "file:./gutenberg/packages/babel-preset-default",
     "@wordpress/eslint-plugin": "file:./gutenberg/packages/eslint-plugin",
@@ -40,6 +39,7 @@
     "jest-junit": "^6.3.0",
     "metro-react-native-babel-preset": "^0.57.0",
     "node-fetch": "^2.3.0",
+    "node-sass": "^4.12.0",
     "patch-package": "^6.2.0",
     "postinstall-prepare": "^1.0.1",
     "prettier": "npm:wp-prettier@1.19.1",
@@ -108,8 +108,6 @@
     "version": "npm run bundle && git add -A bundle"
   },
   "dependencies": {
-    "@wordpress/hooks": "file:./gutenberg/packages/hooks",
-    "@wordpress/react-native-editor": "file:./gutenberg/packages/react-native-editor",
     "email-validator": "2.0.4"
   },
   "prettier": "@wordpress/prettier-config"
