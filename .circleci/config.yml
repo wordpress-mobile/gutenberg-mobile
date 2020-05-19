@@ -42,9 +42,6 @@ jobs:
       check-correctness:
         type: boolean
         default: false
-      is-canary:
-        type: string
-        default: ""
     docker:
       - image: circleci/node:10
     steps:
@@ -71,6 +68,9 @@ jobs:
         description: Post to Slack when tests fail. SLACK_WEBHOOK ENV variable must be set.
         type: boolean
         default: false
+      is-canary:
+        type: string
+        default: ""
     docker:
     - image: circleci/android:api-29-node
     steps:
@@ -115,6 +115,9 @@ jobs:
         description: Post to Slack when tests fail. SLACK_WEBHOOK ENV variable must be set.
         type: boolean
         default: false
+      is-canary:
+        type: string
+        default: ""
     macos:
       xcode: "11.2.1"
     steps:
