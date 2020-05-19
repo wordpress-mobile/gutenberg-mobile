@@ -13,6 +13,5 @@ module.exports = applyConfigForLinkedDependencies(
 		projectRoot: path.resolve( __dirname ),
 		blacklistDirectories: [ 'gutenberg/node_modules' ],
 		additionalWatchFolders,
-		resolveNodeModulesAtRoot: true,
 	}
 );
