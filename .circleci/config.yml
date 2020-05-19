@@ -188,14 +188,14 @@ workflows:
       - checks:
           name: Check Correctness
           check-correctness: true
-      # - checks:
-      #     name: Test iOS
-      #     platform: ios
-      #     check-tests: true
-      # - checks:
-      #     name: Test Android
-      #     platform: android
-      #     check-tests: true
+      - checks:
+          name: Test iOS
+          platform: ios
+          check-tests: true
+      - checks:
+          name: Test Android
+          platform: android
+          check-tests: true
       - ios-device-checks:
           name: Test iOS on Device
       - android-device-checks:
