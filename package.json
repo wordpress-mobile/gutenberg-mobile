@@ -30,8 +30,10 @@
     "enzyme-adapter-react-16": "^1.11.2",
     "enzyme-to-json": "^3.3.5",
     "equivalent-key-map": "^0.2.0",
+    "eslint": "^6.8.0",
     "eslint-plugin-eslint-comments": "3.1.2",
     "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-react-native": "^3.6.0",
     "flow-bin": "0.92.0",
     "husky": "^3.0.2",
     "identity-obj-proxy": "^3.0.0",
@@ -41,7 +43,6 @@
     "node-fetch": "^2.3.0",
     "patch-package": "^6.2.0",
     "postinstall-prepare": "^1.0.1",
-    "prettier": "npm:wp-prettier@1.19.1",
     "react-dom": "16.9.0",
     "react-native-sass-transformer": "^1.1.1",
     "react-test-renderer": "16.9.0",
@@ -85,8 +86,6 @@
     "test:e2e:bundle:android": "mkdir -p gutenberg/packages/react-native-editor/android/app/src/main/assets && react-native bundle --reset-cache --platform android --dev false --minify false --entry-file index.js --bundle-output gutenberg/packages/react-native-editor/android/app/src/main/assets/index.android.bundle --assets-dest gutenberg/packages/react-native-editor/android/app/src/main/res",
     "test:e2e:build-app:android": "npm run test:e2e:bundle:android && cd gutenberg/packages/react-native-editor/android && ./gradlew clean && ./gradlew assembleDebug",
     "test:e2e:bundle:ios": "mkdir -p gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app && react-native bundle --reset-cache --platform=ios --dev=false --minify false --entry-file=index.js --bundle-output=./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app/main.jsbundle --assets-dest=./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app",
-    "prettier": "prettier-eslint --write $npm_package_config_jsfiles $npm_package_config_scssfiles",
-    "prettier:check": "prettier-eslint --list-different $npm_package_config_jsfiles $npm_package_config_scssfiles || { echo '\nERROR: `yarn prettier:check` found a formatting problem.\nNo files have been changed. Try running `yarn prettier` to fix any formatting issues.\n'; exit 1; }",
     "build:gutenberg": "cd gutenberg && npm ci && npm run build",
     "clean": "yarn clean:build-artifacts; yarn clean:aztec; yarn cache clean; yarn clean:haste; yarn clean:jest; yarn clean:metro; yarn clean:react; yarn clean:watchman; yarn clean:node; yarn clean:pot",
     "clean:runtime": "yarn clean:haste; yarn clean:react; yarn clean:metro; yarn clean:jest; yarn clean:watchman; yarn clean:babel-cache",
@@ -108,6 +107,5 @@
   },
   "dependencies": {
     "email-validator": "2.0.4"
-  },
-  "prettier": "@wordpress/prettier-config"
+  }
 }

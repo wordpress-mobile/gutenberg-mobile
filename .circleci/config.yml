@@ -185,9 +185,9 @@ jobs:
 workflows:
   gutenberg-mobile:
     jobs:
-      # - checks:
-      #     name: Check Correctness
-      #     check-correctness: true
+      - checks:
+          name: Check Correctness
+          check-correctness: true
       # - checks:
       #     name: Test iOS
       #     platform: ios
