@@ -90,7 +90,7 @@ jobs:
             curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.apk?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk
       - run:
           name: Run Device Tests
-          command: npm run core device-tests
+          command: npm run device-tests
           environment:
             JEST_JUNIT_OUTPUT: "reports/test-results/android-test-results.xml"
       - store_test_results:
@@ -160,7 +160,7 @@ jobs:
     - run:
         name: Run Device Tests
         command: |
-          npm run core device-tests
+          npm run device-tests
         environment:
           JEST_JUNIT_OUTPUT: "reports/test-results/ios-test-results.xml"
     - store_test_results:
