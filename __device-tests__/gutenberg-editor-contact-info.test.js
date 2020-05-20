@@ -10,11 +10,11 @@ import {
 
 jest.setTimeout( 1000000 );
 
-describe( 'Gutenberg Editor Gallery Block tests', () => {
+describe( 'Gutenberg Editor Contact Info Block tests', () => {
 	let driver;
 	let editorPage;
 	let allPassed = true;
-	const galleryBlockName = 'Gallery';
+	const contactInfoBlockName = 'Contact Info';
 
 	// Use reporter for setting status for saucelabs Job
 	if ( ! isLocalEnvironment() ) {
@@ -37,14 +37,14 @@ describe( 'Gutenberg Editor Gallery Block tests', () => {
 		await expect( editorPage.getBlockList() ).resolves.toBe( true );
 	} );
 
-	it( 'should be able to add a gallery block', async () => {
-		await editorPage.addNewBlock( galleryBlockName );
-		const galleryBlock = await editorPage.getBlockAtPosition(
-			galleryBlockName
+	it( 'should be able to add a contact info block', async () => {
+		await editorPage.addNewBlock( contactInfoBlockName );
+		const contactInfoBlock = await editorPage.getBlockAtPosition(
+			contactInfoBlock
 		);
 
-		expect( galleryBlock ).toBeTruthy();
-		await editorPage.removeBlockAtPosition( galleryBlockName );
+		expect( contactInfoBlock ).toBeTruthy();
+		await editorPage.removeBlockAtPosition( contactInfoBlock );
 	} );
 
 	afterAll( async () => {
