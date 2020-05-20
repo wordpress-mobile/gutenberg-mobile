@@ -82,7 +82,7 @@ jobs:
             echo 'export TEST_ENV=sauce' >> $BASH_ENV
       - run:
           name: Bundle Android and Generate debug .apk file for testing
-          command: test:e2e:bundle:android && npm run test:e2e:build-app:android
+          command: npm run test:e2e:bundle:android && npm run test:e2e:build-app:android
       - run:
           name: Upload apk to sauce labs
           command: |
