@@ -135,13 +135,6 @@ android {
         }
     }
 
-    packagingOptions {
-        pickFirst "lib/armeabi-v7a/libc++_shared.so"
-        pickFirst "lib/arm64-v8a/libc++_shared.so"
-        pickFirst "lib/x86/libc++_shared.so"
-        pickFirst "lib/x86_64/libc++_shared.so"
-    }
-
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
@@ -172,7 +165,7 @@ dependencies {
     implementation project(':react-native-aztec')
     implementation project(':react-native-gutenberg-bridge')
     implementation "org.wordpress:utils:$wordpressUtilsVersion"
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation "com.facebook.react:react-native:+"  // From node_modules
 }
 
