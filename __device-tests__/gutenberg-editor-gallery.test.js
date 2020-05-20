@@ -1,12 +1,8 @@
 /**
- * @format
- * */
-
-/**
  * Internal dependencies
  */
-import EditorPage from './pages/editor-page';
-import { setupDriver, isLocalEnvironment, stopDriver } from './helpers/utils';
+import EditorPage from './gutenberg/packages/react-native-editor/__device-tests__/pages/editor-page';
+import { setupDriver, isLocalEnvironment, stopDriver } from '.gutenberg/packages/react-native-editor/__device-tests__/helpers/utils';
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000;
 

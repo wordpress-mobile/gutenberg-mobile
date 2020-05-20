@@ -13,7 +13,6 @@
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@babel/runtime": "^7.7.7",
-    "@carimus/metro-symlinked-deps": "^1.1.0",
     "@react-native-community/cli": "^3.0.4",
     "@wordpress/babel-preset-default": "file:./gutenberg/packages/babel-preset-default",
     "@wordpress/eslint-plugin": "file:./gutenberg/packages/eslint-plugin",
@@ -31,8 +30,10 @@
     "enzyme-adapter-react-16": "^1.11.2",
     "enzyme-to-json": "^3.3.5",
     "equivalent-key-map": "^0.2.0",
+    "eslint": "^6.8.0",
     "eslint-plugin-eslint-comments": "3.1.2",
     "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-react-native": "^3.6.0",
     "flow-bin": "0.92.0",
     "husky": "^3.0.2",
     "identity-obj-proxy": "^3.0.0",
@@ -53,7 +54,6 @@
     "wd": "^1.11.1"
   },
   "scripts": {
-    "prepare": "patch-package",
     "postinstall": "npm install --prefix gutenberg",
     "start": "react-native start --config ./metro.config.js",
     "start:reset": "npm run clean:runtime && npm run start -- --reset-cache",
@@ -84,16 +84,9 @@
     "test:e2e:android": "TEST_RN_PLATFORM=android yarn device-tests",
     "test:e2e:android:debug": "TEST_RN_PLATFORM=android yarn device-tests:debug",
     "test:e2e:ios": "TEST_RN_PLATFORM=ios yarn device-tests",
-    "test:e2e:android:local": "yarn test:e2e:build-app:android && yarn test:e2e:install-app:android && TEST_RN_PLATFORM=android yarn device-tests:local",
-    "test:e2e:android:local:debug": "yarn test:e2e:build-app:android && yarn test:e2e:install-app:android && yarn test:e2e:android:debug",
-    "test:e2e:ios:local": "yarn test:e2e:build-app:ios && TEST_RN_PLATFORM=ios yarn device-tests:local",
-    "test:e2e:bundle:android": "mkdir -p android/app/src/main/assets && react-native bundle --reset-cache --platform android --dev false --minify false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
-    "test:e2e:build-app:android": "yarn test:e2e:bundle:android && cd android && ./gradlew clean && ./gradlew assembleDebug",
-    "test:e2e:install-app:android": "cd android && ./gradlew installDebug",
-    "test:e2e:bundle:ios": "react-native bundle --reset-cache --platform=ios --dev=false --minify false --entry-file=index.js --bundle-output=./ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app/main.jsbundle --assets-dest=./ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app",
-    "test:e2e:build-app:ios": "yarn ios --configuration Release --no-packager",
-    "prettier": "prettier-eslint --write $npm_package_config_jsfiles $npm_package_config_scssfiles",
-    "prettier:check": "prettier-eslint --list-different $npm_package_config_jsfiles $npm_package_config_scssfiles || { echo '\nERROR: `yarn prettier:check` found a formatting problem.\nNo files have been changed. Try running `yarn prettier` to fix any formatting issues.\n'; exit 1; }",
+    "test:e2e:bundle:android": "mkdir -p gutenberg/packages/react-native-editor/android/app/src/main/assets && react-native bundle --reset-cache --platform android --dev false --minify false --entry-file index.js --bundle-output gutenberg/packages/react-native-editor/android/app/src/main/assets/index.android.bundle --assets-dest gutenberg/packages/react-native-editor/android/app/src/main/res",
+    "test:e2e:build-app:android": "npm run test:e2e:bundle:android && cd gutenberg/packages/react-native-editor/android && ./gradlew clean && ./gradlew assembleDebug",
+    "test:e2e:bundle:ios": "mkdir -p gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app && react-native bundle --reset-cache --platform=ios --dev=false --minify false --entry-file=index.js --bundle-output=./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app/main.jsbundle --assets-dest=./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app",
     "build:gutenberg": "cd gutenberg && npm ci && npm run build",
     "clean": "yarn clean:build-artifacts; yarn clean:aztec; yarn cache clean; yarn clean:haste; yarn clean:jest; yarn clean:metro; yarn clean:react; yarn clean:watchman; yarn clean:node; yarn clean:pot",
     "clean:runtime": "yarn clean:haste; yarn clean:react; yarn clean:metro; yarn clean:jest; yarn clean:watchman; yarn clean:babel-cache",
@@ -114,9 +107,6 @@
     "version": "npm run bundle && git add -A bundle"
   },
   "dependencies": {
-    "@wordpress/hooks": "file:./gutenberg/packages/hooks",
-    "@wordpress/react-native-editor": "file:./gutenberg/packages/react-native-editor",
     "email-validator": "2.0.4"
-  },
-  "prettier": "@wordpress/prettier-config"
+  }
 }

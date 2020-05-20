@@ -1,17 +1,9 @@
 const path = require( 'path' );
-const {
-	applyConfigForLinkedDependencies,
-} = require( '@carimus/metro-symlinked-deps' );
 
-const additionalWatchFolders = [].map( ( dependency ) =>
-	path.dirname( require.resolve( `${ dependency }/package.json` ) )
-);
+let gutenbergMetroConfigCopy = { ...require( './gutenberg/packages/react-native-editor/metro.config.js' ) };
 
-module.exports = applyConfigForLinkedDependencies(
-	require( './gutenberg/packages/react-native-editor/metro.config.js' ),
-	{
-		projectRoot: path.resolve( __dirname ),
-		blacklistDirectories: [ 'gutenberg/node_modules' ],
-		additionalWatchFolders,
-	}
-);
+gutenbergMetroConfigCopy.resolver.extraNodeModules = new Proxy({}, {
+	get: (target, name) => path.join(process.cwd(), `gutenberg/node_modules/${name}`),
+})
+
+module.exports = gutenbergMetroConfigCopy;

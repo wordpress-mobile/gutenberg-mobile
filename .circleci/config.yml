@@ -4,25 +4,25 @@ orbs:
   slack: circleci/slack@3.4.2
 
 commands:
-  yarn-install:
+  npm-install:
     steps:
       - restore_cache:
-          name: Restore Yarn Cache
+          name: Restore NPM Cache
           keys:
-            - yarn-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
+            - npm-i18n-v5-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
       - run:
-          name: Yarn Install
-          command: yarn install --frozen-lockfile --prefer-offline --network-concurrency 1
+          name: NPM Install
+          command: npm ci
       - save_cache:
-          name: Save Yarn Cache
-          key: yarn-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
+          name: Save NPM Cache
+          key: npm-i18n-v5-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
             - i18n-cache/data
-  checkout-gutenberg:
+  checkout-submodules:
     steps:
       - run:
-          name: Checkout Gutenberg
+          name: Checkout Submodules
           command: git submodule update --init --recursive
   add-jest-reporter-dir:
       steps:
@@ -46,8 +46,8 @@ jobs:
       - image: circleci/node:10
     steps:
       - checkout
-      - checkout-gutenberg
-      - yarn-install
+      - checkout-submodules
+      - npm-install
       - add-jest-reporter-dir
       - run:
           name: Set Environment Variables
@@ -72,10 +72,8 @@ jobs:
     - image: circleci/android:api-29-node
     steps:
       - checkout
-      - run:
-          name: Checkout Gutenberg
-          command: git submodule update --init --recursive
-      - yarn-install
+      - checkout-submodules
+      - npm-install
       - add-jest-reporter-dir
       - run:
           name: Set Environment Variables
@@ -84,15 +82,15 @@ jobs:
             echo 'export TEST_ENV=sauce' >> $BASH_ENV
       - run:
           name: Bundle Android and Generate debug .apk file for testing
-          command: yarn test:e2e:build-app:android
+          command: npm run test:e2e:build-app:android
       - run:
           name: Upload apk to sauce labs
           command: |
             source bin/sauce-pre-upload.sh
-            curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.apk?overwrite=true --data-binary @./android/app/build/outputs/apk/debug/app-debug.apk
+            curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.apk?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk
       - run:
           name: Run Device Tests
-          command: yarn device-tests
+          command: npm run core device-tests
           environment:
             JEST_JUNIT_OUTPUT: "reports/test-results/android-test-results.xml"
       - store_test_results:
@@ -115,8 +113,8 @@ jobs:
       xcode: "11.2.1"
     steps:
     - checkout
-    - checkout-gutenberg
-    - yarn-install
+    - checkout-submodules
+    - npm-install
     - add-jest-reporter-dir
     - run:
         name: Set Environment Variables
@@ -125,7 +123,7 @@ jobs:
           echo 'export TEST_ENV=sauce' >> $BASH_ENV
     - run:
         name: Prepare build cache key
-        command: find yarn.lock ios react-native-aztec/ios react-native-gutenberg-bridge/ios -type f -print0 | sort -z | xargs -0 shasum | tee ios-checksums.txt
+        command: find gutenberg/package-lock.json gutenberg/packages/react-native-editor/ios gutenberg/packages/react-native-aztec/ios gutenberg/packages/react-native-bridge/ios -type f -print0 | sort -z | xargs -0 shasum | tee ios-checksums.txt
     - restore_cache:
         name: Restore Build Cache
         keys:
@@ -133,50 +131,48 @@ jobs:
     - restore_cache:
         name: Restore Dependencies Cache
         keys:
-        - dependencies-v3-{{ checksum "ios/Gemfile.lock" }}-{{ checksum "ios/Podfile.lock" }}-{{
-          checksum "yarn.lock" }}
-        - dependencies-v3-{{ checksum "ios/Gemfile.lock" }}-{{ checksum "ios/Podfile.lock" }}
-        - dependencies-v3-{{ checksum "ios/Gemfile.lock" }}
-        - dependencies-v3-
+        - dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}-{{ checksum "gutenberg/package-lock.json" }}
+        - dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}
+        - dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}
+        - dependencies-v4-
     - run:
         name: Build (if needed)
-        command: test -e ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app || SKIP_BUNDLING=true yarn test:e2e:build-app:ios
+        command: test -e ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app || SKIP_BUNDLING=true npm run core test:e2e:build-app:ios
     - save_cache:
         name: Save Dependencies Cache
-        key: dependencies-v3-{{ checksum "ios/Gemfile.lock" }}-{{ checksum "ios/Podfile.lock" }}-{{
-          checksum "yarn.lock" }}
+        key: dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}-{{ checksum "gutenberg/package-lock.json" }}
         paths:
-        - ios/Pods
+        - gutenberg/packages/react-native-editor/ios/Pods
         - ~/Library/Caches/CocoaPods
         - ~/.cocoapods/repos/trunk
-        - ios/vendor
+        - gutenberg/packages/react-native-editor/ios/vendor
     - run:
         name: Bundle iOS
-        command: yarn test:e2e:bundle:ios
+        command: npm run test:e2e:bundle:ios
     - run:
         name: Generate .app file for testing
-        command: WORK_DIR=$(pwd) && cd ./ios/build/gutenberg/Build/Products/Release-iphonesimulator && zip -r $WORK_DIR/ios/GutenbergDemo.app.zip GutenbergDemo.app
+        command: WORK_DIR=$(pwd) && cd ./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator && zip -r $WORK_DIR/gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip GutenbergDemo.app
     - run:
         name: Upload .app to sauce labs
         command: |
           source bin/sauce-pre-upload.sh
-          curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.app.zip?overwrite=true --data-binary @./ios/GutenbergDemo.app.zip
+          curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.app.zip?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
     - run:
         name: Run Device Tests
         command: |
-          yarn device-tests
+          npm run core device-tests
         environment:
           JEST_JUNIT_OUTPUT: "reports/test-results/ios-test-results.xml"
     - store_test_results:
         path: ./reports/test-results
     - run:
         name: Prepare build cache
-        command: rm ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app/main.jsbundle
+        command: rm gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app/main.jsbundle
     - save_cache:
         name: Save Build Cache
         key: ios-build-cache-{{ checksum "ios-checksums.txt" }}
         paths:
-          - ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app
+          - gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app
     - when:
           condition: << parameters.post-to-slack >>
           steps:

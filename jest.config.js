@@ -31,11 +31,8 @@ module.exports = {
 	rootDir: '.',
 	// Automatically clear mock calls and instances between every test
 	clearMocks: true,
-	preset: 'react-native',
-	setupFiles: [
-		'<rootDir>/' + configPath + '/setup.js',
-		'<rootDir>/' + configPath + '/enzyme.config.js',
-	],
+	preset: './gutenberg/node_modules/react-native/jest-preset.js',
+	setupFiles: [ '<rootDir>/' + configPath + '/setup.js' ],
 	testEnvironment: 'jsdom',
 	testMatch: [ '<rootDir>/src/**/test/*.[jt]s?(x)' ],
 	testPathIgnorePatterns: [
@@ -48,15 +45,15 @@ module.exports = {
 	// Add the `Libraries/Utilities` subfolder to the module directories, otherwise haste/jest doesn't find Platform.js on Travis,
 	// and add it first so https://github.com/facebook/react-native/blob/v0.60.0/Libraries/react-native/react-native-implementation.js#L324-L326 doesn't pick up the Platform npm module.
 	moduleDirectories: [
-		'<rootDir>/node_modules/react-native/Libraries/Utilities',
-		'<rootDir>/node_modules',
+		'./gutenberg/node_modules/react-native/Libraries/Utilities',
+		'./gutenberg/node_modules',
+		'./node_modules',
 	],
 	moduleNameMapper: {
 		// Mock the CSS modules. See https://facebook.github.io/jest/docs/en/webpack.html#handling-static-assets
 		'\\.(scss)$': '<rootDir>/' + configPath + '/__mocks__/styleMock.js',
 		...transpiledPackages,
 	},
-	modulePathIgnorePatterns: [ '<rootDir>/gutenberg/node_modules' ],
 	haste: {
 		defaultPlatform: rnPlatform,
 		platforms: [ 'android', 'ios', 'native' ],
@@ -69,6 +66,5 @@ module.exports = {
 		// https://github.com/facebook/react-native/blob/master/jest-preset.json#L20
 		'node_modules/(?!(simple-html-tokenizer|@react-native-community|(jest-)?react-native|react-clone-referenced-element))',
 	],
-	snapshotSerializers: [ 'enzyme-to-json/serializer', 'jest-emotion' ],
 	reporters: [ 'default', 'jest-junit' ],
 };
