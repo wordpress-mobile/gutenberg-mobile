@@ -2,9 +2,13 @@
  * Internal dependencies
  */
 import EditorPage from './gutenberg/packages/react-native-editor/__device-tests__/pages/editor-page';
-import { setupDriver, isLocalEnvironment, stopDriver } from '.gutenberg/packages/react-native-editor/__device-tests__/helpers/utils';
+import {
+	setupDriver,
+	isLocalEnvironment,
+	stopDriver,
+} from '.gutenberg/packages/react-native-editor/__device-tests__/helpers/utils';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000;
+jest.setTimeout( 1000000 );
 
 describe( 'Gutenberg Editor Gallery Block tests', () => {
 	let driver;
@@ -20,6 +24,7 @@ describe( 'Gutenberg Editor Gallery Block tests', () => {
 			},
 		};
 
+		// eslint-disable-next-line jest/no-jasmine-globals
 		jasmine.getEnv().addReporter( reporter );
 	}
 
@@ -34,7 +39,9 @@ describe( 'Gutenberg Editor Gallery Block tests', () => {
 
 	it( 'should be able to add a gallery block', async () => {
 		await editorPage.addNewBlock( galleryBlockName );
-		const galleryBlock = await editorPage.getBlockAtPosition( galleryBlockName );
+		const galleryBlock = await editorPage.getBlockAtPosition(
+			galleryBlockName
+		);
 
 		expect( galleryBlock ).toBeTruthy();
 		await editorPage.removeBlockAtPosition( galleryBlockName );

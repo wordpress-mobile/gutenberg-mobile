@@ -1,3 +1,3 @@
-module.exports = { 
-    reactNativePath: "./gutenberg/node_modules/react-native" 
-}
+module.exports = {
+	reactNativePath: './gutenberg/node_modules/react-native',
+};
