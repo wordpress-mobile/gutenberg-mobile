@@ -3,6 +3,7 @@
 * [**] Add support for changing overlay color settings in Cover block
 * Add enter/exit animation in FloatingToolbar
 * [***] New block: Verse
+* [*] Fix merging of text blocks when text had active formatting (bold, italic, strike, link)
 
 1.28.0
 ------
@@ -19,6 +20,7 @@
 
 1.27.0
 ------
+* Block Editor: Add dialog for mentioning other users in your post
 * Prefill caption for image blocks when available on the Media library
 * New block: Buttons. From now you’ll be able to add the individual Button block only inside the Buttons block
 * Fix bug where whitespaces at start of text blocks were being removed

@@ -230,7 +230,19 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
         guard let logEvent = GutenbergUserEvent(event: event, properties: properties) else { return }
         self.delegate?.gutenbergDidLogUserEvent(logEvent)
     }
-    
+
+    @objc
+    func addMention(_ resolver: @escaping RCTPromiseResolveBlock, rejecter: @escaping RCTPromiseRejectBlock) {
+        self.delegate?.gutenbergDidRequestMention(callback: { (result) in
+            switch result {
+            case .success(let mention):
+                resolver([mention])
+            case .failure(let error):
+                rejecter(error.domain, "\(error.code)", error)
+            }
+        })        
+    }
+
     @objc
     func requestStarterPageTemplatesTooltipShown(_ callback: @escaping RCTResponseSenderBlock) {
         callback([self.delegate?.gutenbergDidRequestStarterPageTemplatesTooltipShown() ?? false])
@@ -240,7 +252,7 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
     func setStarterPageTemplatesTooltipShown(_ tooltipShown: Bool) {
         self.delegate?.gutenbergDidRequestSetStarterPageTemplatesTooltipShown(tooltipShown)
     }
-    
+
 }
 
 // MARK: - RCTBridgeModule delegate

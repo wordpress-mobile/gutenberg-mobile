@@ -253,6 +253,11 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     }
 
     @ReactMethod
+    public void addMention(Promise promise) {
+        mGutenbergBridgeJS2Parent.onAddMention(promise::resolve);
+    }
+
+    @ReactMethod
     public void setStarterPageTemplatesTooltipShown(boolean tooltipShown) {
         mGutenbergBridgeJS2Parent.setStarterPageTemplatesTooltipShown(tooltipShown);
     }
