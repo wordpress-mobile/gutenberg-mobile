@@ -40,9 +40,6 @@
 		},
 		"customGradient": {
 			"type": "string"
-		},
-		"contentPosition": {
-			"type": "string"
 		}
 	}
 }

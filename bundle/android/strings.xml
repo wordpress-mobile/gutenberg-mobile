@@ -36,6 +36,7 @@
     <string name="gutenberg_native_choose_from_device" tools:ignore="UnusedResources">Choose from device</string>
     <!-- translators: sample content for "Contact" page template -->
     <string name="gutenberg_native_city_10100" tools:ignore="UnusedResources">City, 10100</string>
+    <string name="gutenberg_native_clear_all_settings" tools:ignore="UnusedResources">Clear All Settings</string>
     <string name="gutenberg_native_columns_settings" tools:ignore="UnusedResources">Columns Settings</string>
     <string name="gutenberg_native_content" tools:ignore="UnusedResources">Content…</string>
     <!-- translators: %s: current cell value. -->
@@ -187,7 +188,6 @@ translators: sample content for "Services" page template -->
     <string name="gutenberg_native_this_is_sample_content_included_with_the_template_to_illustrate_i" tools:ignore="UnusedResources">This is sample content, included with the template to illustrate its features. Remove or replace it with your own words and media.</string>
     <string name="gutenberg_native_title" tools:ignore="UnusedResources">Title:</string>
     <string name="gutenberg_native_translate" tools:ignore="UnusedResources">Translate</string>
-    <string name="gutenberg_native_try_a_starter_layout" tools:ignore="UnusedResources">Try a starter layout</string>
     <string name="gutenberg_native_ungroup" tools:ignore="UnusedResources">Ungroup</string>
     <!-- translators: sample content for "Contact" page template -->
     <string name="gutenberg_native_usa" tools:ignore="UnusedResources">USA</string>
