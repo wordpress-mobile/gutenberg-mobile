@@ -165,7 +165,7 @@ public protocol GutenbergBridgeDelegate: class {
     /// - Parameter event: The event key to be logged
     func gutenbergDidLogUserEvent(_ event: GutenbergUserEvent)
     
-    func gutenbergDidRequestGetStarterPageTemplatesTooltipShown() -> Bool
+    func gutenbergDidRequestStarterPageTemplatesTooltipShown() -> Bool
     
     func gutenbergDidRequestSetStarterPageTemplatesTooltipShown(_ tooltipShown: Bool)
 }

@@ -38,7 +38,7 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
     }
 
     interface StarterPageTemplatesTooltipShownCallback {
-        void onGetStarterPageTemplatesTooltipShownReceived(boolean tooltipShown);
+        void onRequestStarterPageTemplatesTooltipShown(boolean tooltipShown);
     }
 
     // Ref: https://github.com/facebook/react-native/blob/master/Libraries/polyfills/console.js#L376
@@ -143,5 +143,5 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
     
     void setStarterPageTemplatesTooltipShown(boolean tooltipShown);
 
-    void getStarterPageTemplatesTooltipShown(StarterPageTemplatesTooltipShownCallback starterPageTemplatesTooltipShownCallback);
+    void requestStarterPageTemplatesTooltipShown(StarterPageTemplatesTooltipShownCallback starterPageTemplatesTooltipShownCallback);
 }

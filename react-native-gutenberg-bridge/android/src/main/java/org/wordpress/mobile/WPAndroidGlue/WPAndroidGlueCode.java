@@ -165,7 +165,7 @@ public class WPAndroidGlueCode {
 
     public interface OnStarterPageTemplatesTooltipShownEventListener {
         void onSetStarterPageTemplatesTooltipShown(boolean tooltipShown);
-        boolean onGetStarterPageTemplatesTooltipShown();
+        boolean onRequestStarterPageTemplatesTooltipShown();
     }
 
     public void mediaSelectionCancelled() {
@@ -343,9 +343,9 @@ public class WPAndroidGlueCode {
             }
 
             @Override
-            public void getStarterPageTemplatesTooltipShown(StarterPageTemplatesTooltipShownCallback starterPageTemplatesTooltipShownCallback) {
-                boolean tooltipShown = mOnStarterPageTemplatesTooltipShownListener.onGetStarterPageTemplatesTooltipShown();
-                starterPageTemplatesTooltipShownCallback.onGetStarterPageTemplatesTooltipShownReceived(tooltipShown);
+            public void requestStarterPageTemplatesTooltipShown(StarterPageTemplatesTooltipShownCallback starterPageTemplatesTooltipShownCallback) {
+                boolean tooltipShown = mOnStarterPageTemplatesTooltipShownListener.onRequestStarterPageTemplatesTooltipShown();
+                starterPageTemplatesTooltipShownCallback.onRequestStarterPageTemplatesTooltipShown(tooltipShown);
             }
         }, mIsDarkMode);
 

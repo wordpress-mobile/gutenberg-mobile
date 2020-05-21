@@ -258,14 +258,14 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     }
 
     @ReactMethod
-    public void getStarterPageTemplatesTooltipShown(final Callback jsCallback) {
-        StarterPageTemplatesTooltipShownCallback starterPageTemplatesTooltipShownCallback = getStarterPageTemplatesTooltipShownCallback(jsCallback);
-        mGutenbergBridgeJS2Parent.getStarterPageTemplatesTooltipShown(starterPageTemplatesTooltipShownCallback);
+    public void requestStarterPageTemplatesTooltipShown(final Callback jsCallback) {
+        StarterPageTemplatesTooltipShownCallback starterPageTemplatesTooltipShownCallback = requestStarterPageTemplatesTooltipShownCallback(jsCallback);
+        mGutenbergBridgeJS2Parent.requestStarterPageTemplatesTooltipShown(starterPageTemplatesTooltipShownCallback);
     }
 
-    private StarterPageTemplatesTooltipShownCallback getStarterPageTemplatesTooltipShownCallback(final Callback jsCallback) {
+    private StarterPageTemplatesTooltipShownCallback requestStarterPageTemplatesTooltipShownCallback(final Callback jsCallback) {
         return new StarterPageTemplatesTooltipShownCallback() {
-            @Override public void onGetStarterPageTemplatesTooltipShownReceived(boolean tooltipShown) {
+            @Override public void onRequestStarterPageTemplatesTooltipShown(boolean tooltipShown) {
                 jsCallback.invoke(tooltipShown);
             }
         };

@@ -120,7 +120,7 @@ public class MainApplication extends Application implements ReactApplication {
             }
 
             @Override
-            public void getStarterPageTemplatesTooltipShown(StarterPageTemplatesTooltipShownCallback starterPageTemplatesTooltipShownCallback) {
+            public void requestStarterPageTemplatesTooltipShown(StarterPageTemplatesTooltipShownCallback starterPageTemplatesTooltipShownCallback) {
             }
 
             @Override
