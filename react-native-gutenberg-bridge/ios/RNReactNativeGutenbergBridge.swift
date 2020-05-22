@@ -242,6 +242,11 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
             }
         })        
     }
+    
+    @objc
+    func requestLinks(_ query: String, callback: @escaping RCTResponseSenderBlock) {
+        self.delegate?.gutenbergDidRequestLinks(query: query, callback: callback)
+    }
 }
 
 // MARK: - RCTBridgeModule delegate

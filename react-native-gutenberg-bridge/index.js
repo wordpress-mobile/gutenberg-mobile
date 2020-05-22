@@ -140,4 +140,8 @@ export function addMention() {
 	return RNReactNativeGutenbergBridge.addMention();
 }
 
+export function requestLinks( query, callback ) {
+	return RNReactNativeGutenbergBridge.requestLinks( query, callback );
+}
+
 export default RNReactNativeGutenbergBridge;

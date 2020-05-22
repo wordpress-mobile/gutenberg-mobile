@@ -168,6 +168,11 @@ public protocol GutenbergBridgeDelegate: class {
     /// Tells the delegate that the editor requested a mention
     /// - Parameter callback: Completion handler to be called with an user mention or an error
     func gutenbergDidRequestMention(callback: @escaping (Swift.Result<String, NSError>) -> Void)
+    
+    /// Tells the delegate that the editor requested posts
+    /// -   Parameter query: The query to search for post titles
+    /// -   Parameter callback: The callback which is invoked with the results of the query
+    func gutenbergDidRequestLinks(query: String, callback: @escaping RCTResponseSenderBlock)
 }
 
 // MARK: - Optional GutenbergBridgeDelegate methods
