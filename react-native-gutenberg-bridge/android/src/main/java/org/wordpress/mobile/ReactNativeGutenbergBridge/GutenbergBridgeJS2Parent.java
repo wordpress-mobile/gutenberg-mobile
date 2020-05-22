@@ -1,5 +1,7 @@
 package org.wordpress.mobile.ReactNativeGutenbergBridge;
 
+import androidx.core.util.Consumer;
+
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
@@ -145,4 +147,6 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
                                                      String content,
                                                      String blockId,
                                                      String blockName);
+
+    void onAddMention(Consumer<String> onSuccess);
 }

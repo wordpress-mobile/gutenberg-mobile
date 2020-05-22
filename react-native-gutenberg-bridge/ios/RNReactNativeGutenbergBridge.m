@@ -20,5 +20,6 @@ RCT_EXTERN_METHOD(requestImageFullscreenPreview:(NSString *)currentImageUrlStrin
 RCT_EXTERN_METHOD(requestMediaEditor:(NSString *)mediaUrl callback:(RCTResponseSenderBlock)callback)
 RCT_EXTERN_METHOD(logUserEvent:(NSString *)event properties:(NSDictionary *)properties)
 RCT_EXTERN_METHOD(requestUnsupportedBlockFallback:(NSString *)content blockId:(NSString *)blockId blockName:(NSString *)blockName)
+RCT_EXTERN_METHOD(addMention:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)rejecter)
 
 @end

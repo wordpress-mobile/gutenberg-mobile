@@ -144,6 +144,12 @@ public class MainApplication extends Application implements ReactApplication {
                                                                     String blockName) {
                 openGutenergWebView(content);
             }
+
+            @Override
+            public void onAddMention(Consumer<String> onSuccess) {
+                onSuccess.accept("matt");
+            }
+
         }, isDarkMode());
 
         return new ReactNativeHost(this) {
