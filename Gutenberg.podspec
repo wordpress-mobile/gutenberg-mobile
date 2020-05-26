@@ -1,3 +1,5 @@
+package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
+
 Pod::Spec.new do |s|
   s.name             = 'Gutenberg'
   s.version          = package['version']
@@ -11,4 +13,5 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.preserve_paths = 'bundle/ios/*'
   s.swift_version = '5.0'
+
 end
