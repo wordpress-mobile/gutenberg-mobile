@@ -8,10 +8,11 @@ Pod::Spec.new do |s|
   s.license      = package['license']
   s.authors          = 'Automattic'
   s.platform     = :ios, '11.0'
-  s.source       = { :git => 'https://github.com/wordpress-mobile/gutenberg-mobile.git' }
+  s.source       = { :git => 'https://github.com/wordpress-mobile/gutenberg-mobile.git', :submodules => true }
   s.source_files = 'gutenberg/packages/react-native-bridge/ios/*.{h,m,swift}'
   s.requires_arc = true
   s.preserve_paths = 'bundle/ios/*'
   s.swift_version = '5.0'
 
+  s.dependency 'RNTAztecView'
 end
