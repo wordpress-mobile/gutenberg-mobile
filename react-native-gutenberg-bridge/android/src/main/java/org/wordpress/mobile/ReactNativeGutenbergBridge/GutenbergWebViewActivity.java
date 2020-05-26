@@ -82,6 +82,7 @@ public class GutenbergWebViewActivity extends AppCompatActivity {
             if (actionBar != null) {
                 actionBar.setDisplayShowTitleEnabled(true);
                 actionBar.setDisplayHomeAsUpEnabled(true);
+                actionBar.setHomeAsUpIndicator(R.drawable.ic_close_24px);
                 actionBar.setSubtitle("");
                 actionBar.setTitle(getToolbarTitle());
             }
@@ -132,6 +133,7 @@ public class GutenbergWebViewActivity extends AppCompatActivity {
     protected void saveContent(String content) {
         String blockId = getIntent().getExtras().getString(ARG_BLOCK_ID);
         AppLog.i(AppLog.T.EDITOR, String.format(Locale.US, "Save block id %s, with content %s", blockId, content));
+        ((GutenbergBridgeInterface)getApplication()).saveContent(content, blockId);
         finish();
     }
 
@@ -163,8 +165,9 @@ public class GutenbergWebViewActivity extends AppCompatActivity {
 
             @Override
             public void onPageCommitVisible(WebView view, String url) {
-                String contentFunctions = getFileContentFromAssets("gutenberg-web-single-block/content-functions.js");
-                evaluateJavaScript(contentFunctions);
+
+                String injectCssScript = getFileContentFromAssets("gutenberg-web-single-block/inject-css.js");
+                evaluateJavaScript(injectCssScript);
 
                 long userId = getIntent().getExtras().getLong(ARG_USER_ID, 0);
                 if (userId != 0) {
@@ -192,8 +195,8 @@ public class GutenbergWebViewActivity extends AppCompatActivity {
                     return;
                 }
 
-                String injectCssScript = getFileContentFromAssets("gutenberg-web-single-block/inject-css.js");
-                evaluateJavaScript(injectCssScript);
+                String contentFunctions = getFileContentFromAssets("gutenberg-web-single-block/content-functions.js");
+                evaluateJavaScript(contentFunctions);
 
                 String editorStyle = getFileContentFromAssets("gutenberg-web-single-block/editor-style-overrides.css");
                 editorStyle = removeWhiteSpace(removeNewLines(editorStyle));

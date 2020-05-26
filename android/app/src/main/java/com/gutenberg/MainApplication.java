@@ -20,6 +20,7 @@ import com.facebook.react.devsupport.interfaces.DevSupportManager;
 import com.horcrux.svg.SvgPackage;
 
 import org.wordpress.mobile.ReactNativeAztec.ReactAztecPackage;
+import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeInterface;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergWebViewActivity;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.RNReactNativeGutenbergBridgePackage;
@@ -33,7 +34,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
-public class MainApplication extends Application implements ReactApplication {
+public class MainApplication extends Application implements ReactApplication, GutenbergBridgeInterface {
 
     private static final String TAG = "MainApplication";
 
@@ -233,5 +234,12 @@ public class MainApplication extends Application implements ReactApplication {
                 mRnReactNativeGutenbergBridgePackage.getRNReactNativeGutenbergBridgeModule().toggleEditorMode();
             }
         });
+    }
+
+    @Override
+    public void saveContent(String content, String blockId) {
+        if (mReplaceUnsupportedBlockCallback != null) {
+            mReplaceUnsupportedBlockCallback.replaceUnsupportedBlock(content, blockId);
+        }
     }
 }
