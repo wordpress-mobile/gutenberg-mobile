@@ -163,7 +163,6 @@ dependencies {
     implementation project(':react-native-aztec')
     implementation project(':react-native-gutenberg-bridge')
     implementation "org.wordpress:utils:$wordpressUtilsVersion"
-    implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation "com.facebook.react:react-native:+"  // From node_modules
 }
