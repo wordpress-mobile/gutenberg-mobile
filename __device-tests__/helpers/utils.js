@@ -37,13 +37,11 @@ const localIOSAppPath = process.env.IOS_APP_PATH || defaultIOSAppPath;
 const localAppiumPort = serverConfigs.local.port; // Port to spawn appium process for local runs
 let appiumProcess: ?childProcess.ChildProcess;
 
-const backspace = '\u0008';
-
 // Used to map unicode and special values to keycodes on Android
 // Docs for keycode values: https://developer.android.com/reference/android/view/KeyEvent.html
 const strToKeycode = {
 	'\n': 66,
-	[ backspace ]: 67,
+	'\u0008': 67,
 };
 
 const timer = ( ms: number ) => new Promise < {} > ( ( res ) => setTimeout( res, ms ) );
@@ -375,7 +373,6 @@ const toggleOrientation = async ( driver: wd.PromiseChainWebdriver ) => {
 };
 
 module.exports = {
-	backspace,
 	timer,
 	setupDriver,
 	isLocalEnvironment,

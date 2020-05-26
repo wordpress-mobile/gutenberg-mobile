@@ -7,11 +7,10 @@
  */
 import EditorPage from './pages/editor-page';
 import {
-	backspace,
-	isAndroid,
-	isLocalEnvironment,
 	setupDriver,
+	isLocalEnvironment,
 	stopDriver,
+	isAndroid,
 } from './helpers/utils';
 import testData from './helpers/test-data';
 
@@ -64,9 +63,8 @@ describe( 'Gutenberg Editor tests for List block @canary', () => {
 		await editorPage.verifyHtmlContent( testData.listHtml );
 	} );
 
-	// This test depends on being run immediately after 'should be able to add a new List block'
 	it( 'should update format to ordered list, using toolbar button', async () => {
-		let listBlockElement = await editorPage.getBlockAtPosition( listBlockName );
+		const listBlockElement = await editorPage.getBlockAtPosition( listBlockName );
 
 		// Click List block to force EditText focus
 		await listBlockElement.click();
@@ -76,41 +74,6 @@ describe( 'Gutenberg Editor tests for List block @canary', () => {
 
 		// switch to html and verify html
 		await editorPage.verifyHtmlContent( testData.listHtmlOrdered );
-
-		// Remove list block to return editor to empty state
-		listBlockElement = await editorPage.getBlockAtPosition( listBlockName );
-		await listBlockElement.click();
-		await editorPage.removeBlockAtPosition( listBlockName );
-	} );
-
-	// Prevent regression of https://github.com/wordpress-mobile/gutenberg-mobile/issues/871
-	// Commented out because it started failing. This is being tracked by https://github.com/wordpress-mobile/gutenberg-mobile/issues/2315.
-	it.skip( 'should handle spaces in a list', async () => {
-		await editorPage.addNewBlock( listBlockName );
-		let listBlockElement = await editorPage.getBlockAtPosition( listBlockName );
-		// Click List block on Android to force EditText focus
-		if ( isAndroid() ) {
-			await listBlockElement.click();
-		}
-
-		// Send the list item text
-		await editorPage.sendTextToListBlock( listBlockElement, '  a' );
-
-		// send an Enter
-		await editorPage.sendTextToListBlock( listBlockElement, '\n' );
-
-		// send a backspace
-		await editorPage.sendTextToListBlock( listBlockElement, backspace );
-
-		// switch to html and verify html
-		await editorPage.verifyHtmlContent( `<!-- wp:list -->
-<ul><li>  a</li></ul>
-<!-- /wp:list -->` );
-
-		// Remove list block to reset editor to clean state
-		listBlockElement = await editorPage.getBlockAtPosition( listBlockName );
-		await listBlockElement.click();
-		await editorPage.removeBlockAtPosition( listBlockName );
 	} );
 
 	afterAll( async () => {
