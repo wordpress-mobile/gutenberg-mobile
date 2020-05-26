@@ -37,7 +37,7 @@ public class GutenbergWebViewActivity extends AppCompatActivity {
     private static final String INJECT_GET_HTML_POST_CONTENT_SCRIPT = "window.getHTMLPostContent();";
     private static final String JAVA_SCRIPT_INTERFACE_NAME = "wpwebkit";
 
-    private WebView mWebView;
+    protected WebView mWebView;
 
     @SuppressLint("SetJavaScriptEnabled")
     protected void onCreate(@Nullable Bundle savedInstanceState) {
