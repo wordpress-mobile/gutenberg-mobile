@@ -9,6 +9,7 @@ import android.util.Log;
 import androidx.core.util.Consumer;
 
 import com.facebook.react.ReactApplication;
+import org.linusu.RNGetRandomValuesPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.bridge.ReadableMap;
 import com.reactnativecommunity.slider.ReactSliderPackage;
@@ -20,6 +21,7 @@ import com.horcrux.svg.SvgPackage;
 
 import org.wordpress.mobile.ReactNativeAztec.ReactAztecPackage;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
+import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergWebViewActivity;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.RNReactNativeGutenbergBridgePackage;
 
 import com.facebook.react.ReactNativeHost;
@@ -37,6 +39,7 @@ public class MainApplication extends Application implements ReactApplication {
 
     private ReactNativeHost mReactNativeHost;
     private RNReactNativeGutenbergBridgePackage mRnReactNativeGutenbergBridgePackage;
+    private GutenbergBridgeJS2Parent.ReplaceUnsupportedBlockCallback mReplaceUnsupportedBlockCallback;
 
     private ReactNativeHost createReactNativeHost() {
         mRnReactNativeGutenbergBridgePackage = new RNReactNativeGutenbergBridgePackage(new GutenbergBridgeJS2Parent() {
@@ -150,7 +153,8 @@ public class MainApplication extends Application implements ReactApplication {
                                                                     String content,
                                                                     String blockId,
                                                                     String blockName) {
-                openGutenergWebView(content);
+                mReplaceUnsupportedBlockCallback = replaceUnsupportedBlockCallback;
+                openGutenbergWebView(content, blockId, blockName);
             }
 
             @Override
@@ -170,6 +174,7 @@ public class MainApplication extends Application implements ReactApplication {
             protected List<ReactPackage> getPackages() {
                 return Arrays.asList(
                         new MainReactPackage(),
+            new RNGetRandomValuesPackage(),
                         new ReactSliderPackage(),
                         new ReactVideoPackage(),
                         new SvgPackage(),
@@ -192,9 +197,13 @@ public class MainApplication extends Application implements ReactApplication {
         return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
     }
 
-    private void openGutenergWebView(String content) {
+    private void openGutenbergWebView(String content,
+                                      String blockId,
+                                      String blockName) {
         Intent intent = new Intent(this, GutenbergWebViewActivity.class);
-        intent.putExtra("CONTENT_KEY", content);
+        intent.putExtra(GutenbergWebViewActivity.ARG_BLOCK_CONTENT, content);
+        intent.putExtra(GutenbergWebViewActivity.ARG_BLOCK_ID, blockId);
+        intent.putExtra(GutenbergWebViewActivity.ARG_BLOCK_NAME, blockName);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

@@ -9,7 +9,7 @@
  */
 import { AppRegistry, I18nManager } from 'react-native';
 import React from 'react';
-
+import 'react-native-get-random-values';
 /**
  * WordPress dependencies
  */

@@ -3,12 +3,12 @@
     display: none;
 }
 
-.edit-post-visual-editor__post-title-wrapper {
+/* Remove default block appender at the end of the post */
+.block-list-appender {
     display: none;
 }
 
-/* Remove default block appender at the end of the post */
-.block-list-appender {
+.edit-post-visual-editor__post-title-wrapper {
     display: none;
 }
 
@@ -19,7 +19,7 @@
 
 /*
  Hiddes the top bar header by setting its height to 0
- We can't remove it since the block toolbar is a child of it.
+ We can\'t remove it since the block toolbar is a child of it.
  */
 .edit-post-header {
     height: 0px;
@@ -49,27 +49,27 @@
     display: none;
 }
 
-/* Remove tabs from sidebar panel, leaving the 'x' button */
+/* Remove tabs from sidebar panel, leaving the \'x\' button */
 .edit-post-sidebar__panel-tabs {
     display: none;
 }
 
-/* Remove '(no-title)' string from sidebar header */
+/* Remove \'(no-title)\' string from sidebar header */
 .edit-post-sidebar-header__title {
     display: none;
 }
 
-/* Move 'x' close button to the end on sidebar header */
+/* Move \'x\' close button to the end on sidebar header */
 .edit-post-sidebar-header__small {
     justify-content: flex-end;
 }
 
-/* Remove all buttons from the component menu group inside '...' button in block toolbar */
+/* Remove all buttons from the component menu group inside \'...\' button in block toolbar */
 .components-menu-group > div > button:not(:first-child) {
     display: none;
 }
 
-/* Remove 'delete block' button inside '...' button in block toolbar */
+/* Remove \'delete block\' button inside \'...\' button in block toolbar */
 .components-dropdown-menu__menu > div:not(:first-child) {
     display: none;
 }

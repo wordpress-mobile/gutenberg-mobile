@@ -155,6 +155,7 @@ repositories {
 
 
 dependencies {
+    implementation project(':react-native-get-random-values')
     implementation project(':react-native-linear-gradient')
     implementation project(':@react-native-community_slider')
     implementation project(':react-native-video')
@@ -162,6 +163,7 @@ dependencies {
     implementation project(':react-native-aztec')
     implementation project(':react-native-gutenberg-bridge')
     implementation "org.wordpress:utils:$wordpressUtilsVersion"
+    implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation "com.facebook.react:react-native:+"  // From node_modules
 }

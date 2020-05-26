@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="WordPressEditor.WebPreview.ActionBar" parent="Theme.MaterialComponents.DayNight">
+        <item name="android:textColorSecondary">?attr/colorOnSurface</item>
+    </style>
+
+</resources>
