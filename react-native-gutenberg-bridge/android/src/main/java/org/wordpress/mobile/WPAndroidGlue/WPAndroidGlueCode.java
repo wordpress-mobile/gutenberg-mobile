@@ -82,6 +82,7 @@ public class WPAndroidGlueCode {
     private OnLogGutenbergUserEventListener mOnLogGutenbergUserEventListener;
     private OnGutenbergDidRequestUnsupportedBlockFallbackListener mOnGutenbergDidRequestUnsupportedBlockFallbackListener;
     private ReplaceUnsupportedBlockCallback mReplaceUnsupportedBlockCallback;
+    private OnStarterPageTemplatesTooltipShownEventListener mOnStarterPageTemplatesTooltipShownListener;
     private boolean mIsEditorMounted;
 
     private String mContentHtml = "";
@@ -171,6 +172,11 @@ public class WPAndroidGlueCode {
 
     public interface OnGutenbergDidRequestUnsupportedBlockFallbackListener {
         void gutenbergDidRequestUnsupportedBlockFallback(UnsupportedBlock unsupportedBlock);
+    }
+    
+    public interface OnStarterPageTemplatesTooltipShownEventListener {
+        void onSetStarterPageTemplatesTooltipShown(boolean tooltipShown);
+        boolean onRequestStarterPageTemplatesTooltipShown();
     }
 
     public void mediaSelectionCancelled() {
@@ -356,6 +362,17 @@ public class WPAndroidGlueCode {
             public void onAddMention(Consumer<String> onSuccess) {
                 mAddMentionUtil.getMention(onSuccess);
             }
+
+            @Override
+            public void setStarterPageTemplatesTooltipShown(boolean showTooltip) {
+                mOnStarterPageTemplatesTooltipShownListener.onSetStarterPageTemplatesTooltipShown(showTooltip);
+            }
+
+            @Override
+            public void requestStarterPageTemplatesTooltipShown(StarterPageTemplatesTooltipShownCallback starterPageTemplatesTooltipShownCallback) {
+                boolean tooltipShown = mOnStarterPageTemplatesTooltipShownListener.onRequestStarterPageTemplatesTooltipShown();
+                starterPageTemplatesTooltipShownCallback.onRequestStarterPageTemplatesTooltipShown(tooltipShown);
+            }
         }, mIsDarkMode);
 
         return Arrays.asList(
@@ -467,6 +484,7 @@ public class WPAndroidGlueCode {
                                   OnLogGutenbergUserEventListener onLogGutenbergUserEventListener,
                                   OnGutenbergDidRequestUnsupportedBlockFallbackListener onGutenbergDidRequestUnsupportedBlockFallbackListener,
                                   AddMentionUtil addMentionUtil,
+                                  OnStarterPageTemplatesTooltipShownEventListener onStarterPageTemplatesTooltipListener,
                                   boolean isDarkMode) {
 
         MutableContextWrapper contextWrapper = (MutableContextWrapper) mReactRootView.getContext();
@@ -482,6 +500,7 @@ public class WPAndroidGlueCode {
         mOnLogGutenbergUserEventListener = onLogGutenbergUserEventListener;
         mOnGutenbergDidRequestUnsupportedBlockFallbackListener = onGutenbergDidRequestUnsupportedBlockFallbackListener;
         mAddMentionUtil = addMentionUtil;
+        mOnStarterPageTemplatesTooltipShownListener = onStarterPageTemplatesTooltipListener;
 
         sAddCookiesInterceptor.setOnAuthHeaderRequestedListener(onAuthHeaderRequestedListener);
 

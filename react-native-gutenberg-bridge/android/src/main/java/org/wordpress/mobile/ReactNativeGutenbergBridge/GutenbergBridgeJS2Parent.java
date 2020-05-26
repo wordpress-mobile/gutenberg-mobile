@@ -43,6 +43,10 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
         void replaceUnsupportedBlock(String content, String blockId);
     }
 
+    interface StarterPageTemplatesTooltipShownCallback {
+        void onRequestStarterPageTemplatesTooltipShown(boolean tooltipShown);
+    }
+
     // Ref: https://github.com/facebook/react-native/blob/master/Libraries/polyfills/console.js#L376
     enum LogLevel {
         TRACE(0),
@@ -149,4 +153,8 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
                                                      String blockName);
 
     void onAddMention(Consumer<String> onSuccess);
+    
+    void setStarterPageTemplatesTooltipShown(boolean tooltipShown);
+
+    void requestStarterPageTemplatesTooltipShown(StarterPageTemplatesTooltipShownCallback starterPageTemplatesTooltipShownCallback);
 }
