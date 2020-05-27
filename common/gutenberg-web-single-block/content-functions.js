@@ -8,12 +8,12 @@ window.getHTMLPostContent = () => {
 	const blocks = window.blockEditorSelect.getBlocks();
 	const HTML = window.wp.blocks.serialize( blocks );
 	// Check if platform is iOS
-	if (window.webkit) {
-        window.webkit.messageHandlers.htmlPostContent.postMessage( HTML );
-    // Otherwise it\'s Android
-    } else {
-        window.wpwebkit.postMessage( HTML );
-    }
+	if ( window.webkit ) {
+		window.webkit.messageHandlers.htmlPostContent.postMessage( HTML );
+		// Otherwise it\'s Android
+	} else {
+		window.wpwebkit.postMessage( HTML );
+	}
 };
 
 window.insertBlock = ( blockHTML ) => {
