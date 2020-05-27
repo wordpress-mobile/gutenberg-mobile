@@ -12027,10 +12027,9 @@ react-native-animatable@^1.2.4:
     events "3.0.0"
     toolkit.ts "0.0.2"
 
-react-native-get-random-values@1.4.0:
+"react-native-get-random-values@git+https://github.com/wordpress-mobile/react-native-get-random-values.git#f03f2c16414aff4ea76064dcd00a9e3c6efc838d":
   version "1.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-get-random-values/-/react-native-get-random-values-1.4.0.tgz#1234d4dde6b56b2fab0eaa7dc1719e2f8c32c336"
-  integrity sha512-NnmEZcC5zfz+QEytFPM/fw818Hodw/BNbv7jGxU4pla4K2K9DCzG83IReMJqQ2wo552AYKguqrBG2SSn/U6rbA==
+  resolved "git+https://github.com/wordpress-mobile/react-native-get-random-values.git#f03f2c16414aff4ea76064dcd00a9e3c6efc838d"
   dependencies:
     fast-base64-decode "^1.0.0"
 
