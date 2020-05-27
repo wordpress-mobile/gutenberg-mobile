@@ -181,6 +181,38 @@ if (buildGutenbergMobileJSBundle) {
     def bundleName = 'index.android.bundle'
     def jsRootDir = '../..'
 
+    // FIXME also check that submodule is properly up to date???
+    task abortIfGutenbergMobileSubmoduleNotClean(type: Exec) {
+        workingDir "../../"
+        commandLine "git", "status", "--porcelain"
+        standardOutput = new ByteArrayOutputStream()
+
+        // Storing this because we cannot access `standardOutput` in the doLast block
+        def output = { standardOutput.toString() }
+        doLast {
+            if (!output().isEmpty()) {
+                def message = "Attempting to build Gutenberg JS Bundle without a clean submodule. \
+Either clean the `libs/gutenberg-mobile` submodule (you probably want to do this) or \
+build Gutenberg from source by setting wp.BUILD_GUTENBERG_FROM_SOURCE to true."
+                throw new GradleException(message)
+            }
+        }
+    }
+
+    task removeGutenbergMobileSubmoduleChanges {
+        doLast {
+            println "Removing any changes in gutenberg-mobile project"
+            exec {
+                workingDir "../../"
+                commandLine "git", "checkout", "."
+            }
+            exec {
+                workingDir "../../"
+                commandLine "git", "clean", "-f"
+            }
+        }
+    }
+
     task bundleUpToDateCheck {
         description("Checks if the inputs to the javascript bundle and the bundle itself are unchanged. \
 If they are changed, the isBundleUpToDate flag is switched to false. That flag is used by other tasks.")
@@ -298,11 +330,13 @@ If they are changed, the isBundleUpToDate flag is switched to false. That flag i
         delete nodeFolder, npmFolder, yarnFolder
     }
 
-    preBuild.dependsOn(cleanupNodeModulesFolder)
+    preBuild.dependsOn(removeGutenbergMobileSubmoduleChanges)
+    removeGutenbergMobileSubmoduleChanges.dependsOn(cleanupNodeModulesFolder)
     cleanupNodeModulesFolder.dependsOn(backupHermesDebugAAR)
     backupHermesDebugAAR.dependsOn(backupHermesReleaseAAR)
     backupHermesReleaseAAR.dependsOn(copyJSBundle)
     copyJSBundle.dependsOn(buildJSBundle)
     buildJSBundle.dependsOn(yarn_install)
     nodeSetup.dependsOn(resetExtractedRNTools)
+    resetExtractedRNTools.dependsOn(abortIfGutenbergMobileSubmoduleNotClean)
 }
