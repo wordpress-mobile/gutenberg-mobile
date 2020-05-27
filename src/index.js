@@ -7,9 +7,9 @@
 /**
  * External dependencies
  */
+import 'react-native-get-random-values'; // This library works as a polyfill for the global crypto.getRandomValues which is needed by `uuid` version 7.0.0
 import { AppRegistry, I18nManager } from 'react-native';
 import React from 'react';
-import 'react-native-get-random-values';
 /**
  * WordPress dependencies
  */
