@@ -102,17 +102,43 @@ const setupDriver = async () => {
 
 			// Set the iOS runtime to one of the available simulator runtimes
 			try {
-				const allRuntimes = childProcess.execSync( 'xcrun simctl list runtimes --json' ).toString();
-				const iOSRuntimes = JSON.parse( allRuntimes ).runtimes.filter( ( runtime ) =>
-					runtime.name.startsWith( 'iOS' )
-				);
-				const chosenRuntimeVersion = iOSRuntimes[ 0 ].version; // assume first in list should be used
+				const allDevicesJSON = childProcess.execSync( 'xcrun simctl list devices --json' ).toString();
+				const allDevices = JSON.parse( allDevicesJSON ).devices;
+				const allKeys = Object.keys( allDevices );
+				const sortedKeys = allKeys
+					.filter( ( key ) => key.startsWith( 'com.apple.CoreSimulator.SimRuntime.iOS' ) )
+					// only consider runtimes that have the desired device
+					.filter( ( key ) => allDevices[ key ].some( ( device ) => device.name === desiredCaps.deviceName ) )
+					.sort( ( runtimeA, runtimeB ) => {
+						// format is com.apple.CoreSimulator.SimRuntime.iOS-13-5
+						const runtimeAComponents = runtimeA.split( '-' ).reverse();
+						const runtimeBComponents = runtimeB.split( '-' ).reverse();
+						const majorVersionA = runtimeAComponents[ 1 ];
+						const majorVersionB = runtimeBComponents[ 1 ];
+						if ( majorVersionA > majorVersionB ) {
+							return -1;
+						} else if ( majorVersionA < majorVersionB ) {
+							return 1;
+						}
+						// major versions are equal, so sort minor versions
+						const minorVersionA = runtimeAComponents[ 0 ];
+						const minorVersionB = runtimeBComponents[ 0 ];
+						if ( minorVersionA > minorVersionB ) {
+							return -1;
+						} else if ( minorVersionA < minorVersionB ) {
+							return 1;
+						}
+						return 0;
+					} );
+				const chosenKey = sortedKeys[ 0 ];	// corresponds to latest runtime
+				const [ minorVersion, majorVersion ] = chosenKey.split( '-' ).reverse();
+				const chosenRuntimeVersion = `${ majorVersion }.${ minorVersion }`;
 				desiredCaps.platformVersion = chosenRuntimeVersion;
 				// eslint-disable-next-line no-console
 				console.log( 'Using iOS simulator runtime version:', chosenRuntimeVersion );
 			} catch ( error ) {
 				// eslint-disable-next-line no-console
-				console.error( 'No compatible iOS simulator runtime found' );
+				console.error( 'No compatible iOS simulator runtime found', error );
 			}
 		}
 	}
