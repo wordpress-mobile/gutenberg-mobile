@@ -37,7 +37,6 @@ import com.horcrux.svg.SvgPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.reactnativecommunity.slider.ReactSliderPackage;
 
-import org.linusu.RNGetRandomValuesPackage;
 import org.wordpress.android.util.AppLog;
 import org.wordpress.mobile.ReactNativeAztec.ReactAztecPackage;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
@@ -385,7 +384,6 @@ public class WPAndroidGlueCode {
                 new ReactAztecPackage(mExceptionLogger, mBreadcrumbLogger),
                 new ReactVideoPackage(),
                 new ReactSliderPackage(),
-                new RNGetRandomValuesPackage(),
                 mRnReactNativeGutenbergBridgePackage);
     }
 

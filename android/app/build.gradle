@@ -155,7 +155,6 @@ repositories {
 
 
 dependencies {
-    implementation project(':react-native-get-random-values')
     implementation project(':react-native-linear-gradient')
     implementation project(':@react-native-community_slider')
     implementation project(':react-native-video')

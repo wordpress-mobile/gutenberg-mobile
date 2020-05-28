@@ -48,8 +48,6 @@ public class GutenbergWebViewActivity extends AppCompatActivity {
 
         mWebView = findViewById(R.id.gutenberg_web_view);
 
-        WebView.setWebContentsDebuggingEnabled(true);
-
         // Set settings
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
