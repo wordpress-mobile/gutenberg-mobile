@@ -99,6 +99,21 @@ const setupDriver = async () => {
 		if ( isLocalEnvironment() ) {
 			desiredCaps = _.clone( iosLocal );
 			desiredCaps.app = path.resolve( localIOSAppPath );
+
+			// Set the iOS runtime to one of the available simulator runtimes
+			try {
+			  const allRuntimes = childProcess
+			    .execSync( 'xcrun simctl list runtimes --json' )
+			    .toString()
+			  const iOSRuntimes = JSON.parse(allRuntimes)
+			    .runtimes
+			    .filter( runtime => runtime.name.startsWith('iOS') )
+			  const chosenRuntimeVersion = iOSRuntimes[0].version // assume first in list should be used
+			  desiredCaps.platformVersion = chosenRuntimeVersion
+			  console.log( 'Using iOS simulator runtime version:', chosenRuntimeVersion )
+			} catch ( error ) {
+			  console.error( 'No compatible iOS simulator runtime found' )
+			}
 		}
 	}
 

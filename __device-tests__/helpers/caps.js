@@ -17,7 +17,7 @@ const ios = {
 
 exports.iosLocal = {
 	...ios,
-	platformVersion: '13.4',
+	platformVersion: undefined,	// will be set later based on installed sim runtimes
 	deviceName: 'iPhone 11',
 };
 
