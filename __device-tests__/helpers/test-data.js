@@ -102,4 +102,4 @@ exports.imageShorteHtml = `<!-- wp:image {"id":1,"sizeslug":"large"} -->
 exports.unsupportedBlockHtml = `<!-- wp:audio -->
 <figure class="wp-block-audio"><audio controls src="https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav"></audio></figure>
 <!-- /wp:audio -->
-`
+`;
