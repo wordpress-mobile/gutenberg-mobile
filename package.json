@@ -91,7 +91,7 @@
     "test:e2e:start-test-runner:ios:local": "TEST_RN_PLATFORM=ios IOS_APP_PATH='./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app' npm run device-tests:local",
     "test:e2e:start-test-runner:ios:debug": "TEST_RN_PLATFORM=ios IOS_APP_PATH='./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app' npm run device-tests:debug",
     "test:e2e:ios:local": "npm run test:e2e:bundle:ios && npm run test:e2e:build-app:ios && npm run test:e2e:start-test-runner:ios:local",
-    "build:gutenberg": "cd gutenberg && npm ci && npm run build",
+    "build:gutenberg": "cd gutenberg && npm run build",
     "clean": "npm run core clean; npm run clean:gutenberg; npm run clean:pot",
     "clean:gutenberg": "cd gutenberg && npm run clean:packages",
     "clean:pot": "rm -f gutenberg*.pot",
