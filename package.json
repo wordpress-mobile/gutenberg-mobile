@@ -35,6 +35,7 @@
     "eslint-plugin-import": "2.18.2",
     "eslint-plugin-react-native": "^3.6.0",
     "flow-bin": "0.92.0",
+    "gettext-parser": "^4.0.3",
     "husky": "^3.0.2",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
