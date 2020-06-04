@@ -242,6 +242,17 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
             }
         })        
     }
+
+    @objc
+    func requestStarterPageTemplatesTooltipShown(_ callback: @escaping RCTResponseSenderBlock) {
+        callback([self.delegate?.gutenbergDidRequestStarterPageTemplatesTooltipShown() ?? false])
+    }
+    
+    @objc
+    func setStarterPageTemplatesTooltipShown(_ tooltipShown: Bool) {
+        self.delegate?.gutenbergDidRequestSetStarterPageTemplatesTooltipShown(tooltipShown)
+    }
+
 }
 
 // MARK: - RCTBridgeModule delegate
@@ -255,7 +266,8 @@ extension RNReactNativeGutenbergBridge {
             Gutenberg.EventName.updateHtml,
             Gutenberg.EventName.mediaUpload,
             Gutenberg.EventName.setFocusOnTitle,
-            Gutenberg.EventName.mediaAppend
+            Gutenberg.EventName.mediaAppend,
+            Gutenberg.EventName.updateTheme
         ]
     }
 
