@@ -70,7 +70,7 @@ jobs:
         default: false
     docker:
     - image: circleci/android:api-29-node
-    resource_class: medium+
+    resource_class: large
     steps:
       - checkout
       - checkout-submodules
