@@ -159,7 +159,7 @@ public class Gutenberg: NSObject {
             themeUpdates["gradients"] = gradients
         }
 
-        bridgeModule.sendEventIfNeeded(name: EventName.updateTheme, body:themeUpdates)
+        bridgeModule.sendEventIfNeeded(.updateTheme, body:themeUpdates)
     }
 }
 
