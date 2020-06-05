@@ -235,7 +235,7 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
     - ReactCommon/jscallinvoker (= 0.61.5)
-  - ReactNativeDarkMode (0.0.10):
+  - ReactNativeDarkMode (0.2.2):
     - React
   - RNSVG (9.13.6-gb):
     - React
@@ -391,7 +391,7 @@ SPEC CHECKSUMS:
   React-RCTText: 9ccc88273e9a3aacff5094d2175a605efa854dbe
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
-  ReactNativeDarkMode: f61376360c5d983907e5c316e8e1c853a8c2f348
+  ReactNativeDarkMode: 0178ffca3b10f6a7c9f49d6f9810232b328fa949
   RNSVG: 68a534a5db06dcbdaebfd5079349191598caef7b
   RNTAztecView: e0d085385d64a0fb8ed72908c011e724f4ac6ec5
   WordPress-Aztec-iOS: d01bf0c5e150ae6a046f06ba63b7cc2762061c0b
