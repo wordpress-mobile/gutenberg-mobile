@@ -46,6 +46,7 @@ import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.RNMedia;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.RNReactNativeGutenbergBridgePackage;
 
+import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -96,6 +97,7 @@ public class WPAndroidGlueCode {
     private WeakReference<View> mLastFocusedView = null;
     private RequestExecutor mRequestExecutor;
     private AddMentionUtil mAddMentionUtil;
+    private @Nullable Bundle mEditorTheme = null;
 
     private static final String PROP_NAME_INITIAL_DATA = "initialData";
     private static final String PROP_NAME_INITIAL_TITLE = "initialTitle";
@@ -105,6 +107,8 @@ public class WPAndroidGlueCode {
     private static final String PROP_NAME_TRANSLATIONS = "translations";
     public static final String PROP_NAME_CAPABILITIES = "capabilities";
     public static final String PROP_NAME_CAPABILITIES_MENTIONS = "mentions";
+    private static final String PROP_NAME_COLORS = "colors";
+    private static final String PROP_NAME_GRADIENTS = "gradients";
 
     private static OkHttpHeaderInterceptor sAddCookiesInterceptor = new OkHttpHeaderInterceptor();
     private static OkHttpClient sOkHttpClient = new OkHttpClient.Builder().addInterceptor(sAddCookiesInterceptor).build();
@@ -280,6 +284,7 @@ public class WPAndroidGlueCode {
                     // use mMediaUrlToAddAfterMounting
                     dispatchOneMediaToAddAtATimeIfAvailable();
                 }
+                refreshEditorTheme();
             }
 
             @Override
@@ -392,7 +397,7 @@ public class WPAndroidGlueCode {
     }
 
     private ImagePipelineConfig getImagePipelineConfig(OkHttpClient client) {
-        return  OkHttpImagePipelineConfigFactory
+        return OkHttpImagePipelineConfigFactory
                 .newBuilder(mReactRootView.getContext(), client).build();
     }
 
@@ -409,7 +414,8 @@ public class WPAndroidGlueCode {
                              boolean isDarkMode,
                              Consumer<Exception> exceptionLogger,
                              Consumer<String> breadcrumbLogger,
-                             @Nullable Boolean isSiteUsingWpComRestApi) {
+                             @Nullable Boolean isSiteUsingWpComRestApi,
+                             @Nullable Bundle editorTheme) {
         mIsDarkMode = isDarkMode;
         mExceptionLogger = exceptionLogger;
         mBreadcrumbLogger = breadcrumbLogger;
@@ -448,12 +454,23 @@ public class WPAndroidGlueCode {
         }
         initialProps.putBundle(PROP_NAME_CAPABILITIES, capabilities);
 
+        Serializable colors = editorTheme != null ? editorTheme.getSerializable(PROP_NAME_COLORS) : null;
+        if (colors != null) {
+            initialProps.putSerializable(PROP_NAME_COLORS, colors);
+        }
+
+        Serializable gradients = editorTheme != null ? editorTheme.getSerializable(PROP_NAME_GRADIENTS) : null;
+        if (gradients != null) {
+            initialProps.putSerializable(PROP_NAME_GRADIENTS, gradients);
+        }
+
         // The string here (e.g. "MyReactNativeApp") has to match
         // the string in AppRegistry.registerComponent() in index.js
         mReactRootView.setAppProperties(initialProps);
     }
 
-    public void attachToContainer(ViewGroup viewGroup, OnMediaLibraryButtonListener onMediaLibraryButtonListener,
+    public void attachToContainer(ViewGroup viewGroup,
+                                  OnMediaLibraryButtonListener onMediaLibraryButtonListener,
                                   OnReattachQueryListener onReattachQueryListener,
                                   OnEditorMountListener onEditorMountListener,
                                   OnEditorAutosaveListener onEditorAutosaveListener,
@@ -576,6 +593,25 @@ public class WPAndroidGlueCode {
             mIsDarkMode = isDarkMode;
             mRnReactNativeGutenbergBridgePackage.getRNReactNativeGutenbergBridgeModule()
                                                 .setPreferredColorScheme(isDarkMode);
+        }
+    }
+
+    public void updateTheme(@Nullable Bundle editorTheme) {
+        if (mIsEditorMounted) {
+            mRnReactNativeGutenbergBridgePackage.getRNReactNativeGutenbergBridgeModule()
+                                                .updateTheme(editorTheme);
+        } else {
+            // Editor hasn't mounted yet. Save theme and load once editor loads
+            AppLog.d(AppLog.T.EDITOR, "Editor theme not applied reason: Editor not mounted");
+            mEditorTheme = editorTheme;
+        }
+    }
+
+    private void refreshEditorTheme() {
+        if (mEditorTheme != null) {
+            mRnReactNativeGutenbergBridgePackage.getRNReactNativeGutenbergBridgeModule()
+                                                .updateTheme(mEditorTheme);
+            mEditorTheme = null;
         }
     }
 

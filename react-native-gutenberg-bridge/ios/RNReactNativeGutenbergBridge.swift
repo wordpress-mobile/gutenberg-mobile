@@ -274,6 +274,7 @@ extension RNReactNativeGutenbergBridge {
         case mediaUpload
         case setFocusOnTitle
         case mediaAppend
+        case updateTheme
         case replaceBlock
     }
 
