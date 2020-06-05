@@ -127,6 +127,19 @@ class AztecView extends React.Component {
     onBlur(event);
   }
 
+  _onChange = ( event ) => {
+    // iOS uses the the onKeyDown prop directly from native, but Android includes the information needed for onKeyDown
+    // in the event passed to onChange.
+    if ( Platform.OS === 'android') {
+      this._onKeyDown(event);
+    }
+
+    const { onChange } = this.props;
+    if ( onChange ) {
+    	onChange( event );
+    }
+  }
+
   _onSelectionChange = (event) => {
     if ( this.props.onSelectionChange ) {
       const { selectionStart, selectionEnd, text } = event.nativeEvent;
@@ -180,6 +193,7 @@ class AztecView extends React.Component {
           {...otherProps}
           onContentSizeChange = { this._onContentSizeChange }
           onHTMLContentWithCursor = { this._onHTMLContentWithCursor }
+          onChange = { this._onChange }
           onSelectionChange = { this._onSelectionChange }
           onEnter = { this.props.onKeyDown && this._onEnter }
           onBackspace = { this.props.onKeyDown && this._onBackspace }
