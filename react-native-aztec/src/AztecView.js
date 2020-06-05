@@ -32,7 +32,7 @@ class AztecView extends React.Component {
     onHTMLContentWithCursor: PropTypes.func,
     onCaretVerticalPositionChange: PropTypes.func,
     blockType: PropTypes.object,
-    triggerKeyCodes: PropTypes.array,    	
+    triggerKeyCodes: PropTypes.array,
     ...TextViewPropTypes, // include the default view properties
   }
 
@@ -68,7 +68,7 @@ class AztecView extends React.Component {
     }
 
     const { onKeyDown } = this.props;
-    
+
     let newEvent = { ...event, keyCode: 13 }
     onKeyDown(newEvent);
   }
@@ -98,7 +98,7 @@ class AztecView extends React.Component {
     if (!this.props.onHTMLContentWithCursor) {
       return;
     }
-    
+
     const text = event.nativeEvent.text;
     const selectionStart = event.nativeEvent.selectionStart;
     const selectionEnd = event.nativeEvent.selectionEnd;
@@ -114,7 +114,7 @@ class AztecView extends React.Component {
     const { onFocus } = this.props;
     onFocus(event);
   }
-  
+
   _onBlur = (event) => {
     this.selectionEndCaretY = null;
     TextInputState.blurTextInput(ReactNative.findNodeHandle(this));
@@ -134,7 +134,7 @@ class AztecView extends React.Component {
       onSelectionChange( selectionStart, selectionEnd, text, event );
     }
 
-    if ( this.props.onCaretVerticalPositionChange && 
+    if ( this.props.onCaretVerticalPositionChange &&
       this.selectionEndCaretY != event.nativeEvent.selectionEndCaretY ) {
         const caretY = event.nativeEvent.selectionEndCaretY;
         this.props.onCaretVerticalPositionChange( event.target, caretY, this.selectionEndCaretY );
@@ -188,8 +188,8 @@ class AztecView extends React.Component {
           // IMPORTANT: the onFocus events are thrown away as these are handled by onPress() in the upper level.
           // It's necessary to do this otherwise onFocus may be set by `{...otherProps}` and thus the onPress + onFocus
           // combination generate an infinite loop as described in https://github.com/wordpress-mobile/gutenberg-mobile/issues/302
-          onFocus = { this._onAztecFocus } 
-          onBlur = { this._onBlur }		      
+          onFocus = { this._onAztecFocus }
+          onBlur = { this._onBlur }
         />
       </TouchableWithoutFeedback>
     );
