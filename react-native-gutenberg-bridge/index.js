@@ -75,6 +75,10 @@ export function subscribeAndroidModalClosed( callback ) {
 	return isAndroid ? gutenbergBridgeEvents.addListener( 'notifyModalClosed', callback ) : undefined;
 }
 
+export function subscribeUpdateTheme( callback ) {
+	return gutenbergBridgeEvents.addListener( 'updateTheme', callback );
+}
+
 export function subscribePreferredColorScheme( callback ) {
 	return gutenbergBridgeEvents.addListener( 'preferredColorScheme', callback );
 }
@@ -138,6 +142,14 @@ export function logUserEvent( event, properties ) {
 
 export function addMention() {
 	return RNReactNativeGutenbergBridge.addMention();
+}
+
+export function requestStarterPageTemplatesTooltipShown( callback ) {
+	return RNReactNativeGutenbergBridge.requestStarterPageTemplatesTooltipShown( callback );
+}
+
+export function setStarterPageTemplatesTooltipShown( tooltipShown ) {
+	return RNReactNativeGutenbergBridge.setStarterPageTemplatesTooltipShown( tooltipShown );
 }
 
 export default RNReactNativeGutenbergBridge;

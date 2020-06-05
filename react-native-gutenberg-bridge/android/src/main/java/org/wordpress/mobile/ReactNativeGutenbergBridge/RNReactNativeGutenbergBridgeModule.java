@@ -1,5 +1,7 @@
 package org.wordpress.mobile.ReactNativeGutenbergBridge;
 
+import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.Arguments;
@@ -19,9 +21,11 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.GutenbergUserEvent;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.MediaType;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.OtherMediaOptionsReceivedCallback;
+import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.StarterPageTemplatesTooltipShownCallback;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent.RNMedia;
 import org.wordpress.mobile.WPAndroidGlue.MediaOption;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +44,7 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     private static final String EVENT_NAME_TOGGLE_HTML_MODE = "toggleHTMLMode";
     private static final String EVENT_NAME_NOTIFY_MODAL_CLOSED = "notifyModalClosed";
     private static final String EVENT_NAME_PREFERRED_COLOR_SCHEME = "preferredColorScheme";
+    private static final String EVENT_NAME_UPDATE_THEME = "updateTheme";
 
     private static final String MAP_KEY_UPDATE_HTML = "html";
     private static final String MAP_KEY_UPDATE_TITLE = "title";
@@ -49,6 +54,8 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     private static final String MAP_KEY_MEDIA_FILE_UPLOAD_MEDIA_TYPE = "mediaType";
     private static final String MAP_KEY_MEDIA_FILE_UPLOAD_MEDIA_PROGRESS = "progress";
     private static final String MAP_KEY_MEDIA_FILE_UPLOAD_MEDIA_SERVER_ID = "mediaServerId";
+    private static final String MAP_KEY_THEME_UPDATE_COLORS = "colors";
+    private static final String MAP_KEY_THEME_UPDATE_GRADIENTS = "gradients";
 
     private static final String MAP_KEY_IS_PREFERRED_COLOR_SCHEME_DARK = "isPreferredColorSchemeDark";
 
@@ -124,6 +131,24 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
         WritableMap writableMap = new WritableNativeMap();
         writableMap.putBoolean(MAP_KEY_IS_PREFERRED_COLOR_SCHEME_DARK, isDarkMode);
         emitToJS(EVENT_NAME_PREFERRED_COLOR_SCHEME, writableMap);
+    }
+
+    public void updateTheme(@Nullable Bundle editorTheme) {
+        if (editorTheme == null) return;
+
+        WritableMap writableMap = new WritableNativeMap();
+        Serializable colors = editorTheme.getSerializable(MAP_KEY_THEME_UPDATE_COLORS);
+        Serializable gradients = editorTheme.getSerializable(MAP_KEY_THEME_UPDATE_GRADIENTS);
+
+        if (colors != null) {
+            writableMap.putArray(MAP_KEY_THEME_UPDATE_COLORS, Arguments.fromList((ArrayList)colors));
+        }
+
+        if (gradients != null) {
+            writableMap.putArray(MAP_KEY_THEME_UPDATE_GRADIENTS, Arguments.fromList((ArrayList)gradients));
+        }
+
+        emitToJS(EVENT_NAME_UPDATE_THEME, writableMap);
     }
 
     @ReactMethod
@@ -254,6 +279,25 @@ public class RNReactNativeGutenbergBridgeModule extends ReactContextBaseJavaModu
     @ReactMethod
     public void addMention(Promise promise) {
         mGutenbergBridgeJS2Parent.onAddMention(promise::resolve);
+    }
+
+    @ReactMethod
+    public void setStarterPageTemplatesTooltipShown(boolean tooltipShown) {
+        mGutenbergBridgeJS2Parent.setStarterPageTemplatesTooltipShown(tooltipShown);
+    }
+
+    @ReactMethod
+    public void requestStarterPageTemplatesTooltipShown(final Callback jsCallback) {
+        StarterPageTemplatesTooltipShownCallback starterPageTemplatesTooltipShownCallback = requestStarterPageTemplatesTooltipShownCallback(jsCallback);
+        mGutenbergBridgeJS2Parent.requestStarterPageTemplatesTooltipShown(starterPageTemplatesTooltipShownCallback);
+    }
+
+    private StarterPageTemplatesTooltipShownCallback requestStarterPageTemplatesTooltipShownCallback(final Callback jsCallback) {
+        return new StarterPageTemplatesTooltipShownCallback() {
+            @Override public void onRequestStarterPageTemplatesTooltipShown(boolean tooltipShown) {
+                jsCallback.invoke(tooltipShown);
+            }
+        };
     }
 
     private GutenbergBridgeJS2Parent.MediaUploadCallback getNewUploadMediaCallback(final Boolean allowMultipleSelection, final Callback jsCallback) {

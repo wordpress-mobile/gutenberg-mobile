@@ -199,6 +199,14 @@ extension GutenbergViewController: GutenbergBridgeDelegate {
     func gutenbergDidRequestMention(callback: @escaping (Result<String, NSError>) -> Void) {
         callback(.success("matt"))
     }
+
+    func gutenbergDidRequestStarterPageTemplatesTooltipShown() -> Bool {
+        return false;
+    }
+
+    func gutenbergDidRequestSetStarterPageTemplatesTooltipShown(_ tooltipShown: Bool) {
+        print("Gutenberg requested setting tooltip flag")
+    }
 }
 
 extension GutenbergViewController: GutenbergBridgeDataSource {
@@ -224,6 +232,10 @@ extension GutenbergViewController: GutenbergBridgeDataSource {
 
     func aztecAttachmentDelegate() -> TextViewAttachmentDelegate {
         return ExampleAttachmentDelegate()
+    }
+
+    func gutenbergEditorTheme() -> GutenbergEditorTheme? {
+        return nil
     }
 }
 
