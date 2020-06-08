@@ -260,7 +260,11 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
     func setStarterPageTemplatesTooltipShown(_ tooltipShown: Bool) {
         self.delegate?.gutenbergDidRequestSetStarterPageTemplatesTooltipShown(tooltipShown)
     }
-
+    
+    @objc
+    func displayNotice(_ title: String, message: String? = nil) {
+        self.delegate?.gutenbergDidRequestDisplayNotice(title: title, message: message)
+    }
 }
 
 // MARK: - RCTBridgeModule delegate

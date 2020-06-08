@@ -187,6 +187,12 @@ public protocol GutenbergBridgeDelegate: class {
     /// Tells the delegate that the editor requested to set the tooltip's visibility
     /// - Parameter tooltipShown: Tooltip's visibility value    
     func gutenbergDidRequestSetStarterPageTemplatesTooltipShown(_ tooltipShown: Bool)
+    
+    /// Tells the delegate that the editor requested to display notice
+    /// - Parameters:
+    ///   - title: title of the notice
+    ///   - message: message of the notice
+    func gutenbergDidRequestDisplayNotice(title: String, message: String?)
 }
 
 // MARK: - Optional GutenbergBridgeDelegate methods

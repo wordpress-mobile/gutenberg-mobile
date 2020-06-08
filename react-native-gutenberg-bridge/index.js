@@ -181,4 +181,8 @@ export function setStarterPageTemplatesTooltipShown( tooltipShown ) {
 	return RNReactNativeGutenbergBridge.setStarterPageTemplatesTooltipShown( tooltipShown );
 }
 
+export function displayNotice( title, message ) {
+	return RNReactNativeGutenbergBridge.displayNotice( title, message );
+}
+
 export default RNReactNativeGutenbergBridge;
