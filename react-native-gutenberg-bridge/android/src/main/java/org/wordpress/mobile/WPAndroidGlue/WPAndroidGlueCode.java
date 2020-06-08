@@ -36,6 +36,11 @@ import com.facebook.soloader.SoLoader;
 import com.horcrux.svg.SvgPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.reactnativecommunity.slider.ReactSliderPackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.swmansion.rnscreens.RNScreensPackage;
+import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
+import org.reactnative.maskedview.RNCMaskedViewPackage;
 
 import org.wordpress.android.util.AppLog;
 import org.wordpress.mobile.ReactNativeAztec.ReactAztecPackage;
@@ -389,6 +394,10 @@ public class WPAndroidGlueCode {
                 new ReactAztecPackage(mExceptionLogger, mBreadcrumbLogger),
                 new ReactVideoPackage(),
                 new ReactSliderPackage(),
+                new RNGestureHandlerPackage(),
+                new RNScreensPackage(),
+                new SafeAreaContextPackage(),
+                new RNCMaskedViewPackage(),
                 mRnReactNativeGutenbergBridgePackage);
     }
 
@@ -419,7 +428,7 @@ public class WPAndroidGlueCode {
         mIsDarkMode = isDarkMode;
         mExceptionLogger = exceptionLogger;
         mBreadcrumbLogger = breadcrumbLogger;
-        mReactRootView = new ReactRootView(new MutableContextWrapper(initContext));
+        mReactRootView = new RNGestureHandlerEnabledRootView(new MutableContextWrapper(initContext));
         mReactRootView.setBackgroundColor(colorBackground);
 
         ReactInstanceManagerBuilder builder =

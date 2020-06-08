@@ -18,6 +18,7 @@ import com.facebook.react.devsupport.interfaces.DevOptionHandler;
 import com.facebook.react.devsupport.interfaces.DevSupportManager;
 import com.horcrux.svg.SvgPackage;
 
+import org.reactnative.maskedview.RNCMaskedViewPackage;
 import org.wordpress.mobile.ReactNativeAztec.ReactAztecPackage;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeInterface;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
@@ -28,6 +29,10 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.swmansion.reanimated.ReanimatedPackage;
+import com.swmansion.rnscreens.RNScreensPackage;
+import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -180,6 +185,11 @@ public class MainApplication extends Application implements ReactApplication, Gu
                         // passing null because we do not need log handlers in the demo app
                         new ReactAztecPackage(null, null),
                         new LinearGradientPackage(),
+                        new RNCMaskedViewPackage(),
+                        new RNGestureHandlerPackage(),
+                        new ReanimatedPackage(),
+                        new SafeAreaContextPackage(),
+                        new RNScreensPackage(),
                         mRnReactNativeGutenbergBridgePackage);
             }
 
