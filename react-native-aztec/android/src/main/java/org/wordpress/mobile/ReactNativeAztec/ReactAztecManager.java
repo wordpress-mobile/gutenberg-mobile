@@ -338,6 +338,14 @@ public class ReactAztecManager extends BaseViewManager<ReactAztecText, LayoutSha
         }
     }
 
+    @ReactProp(name = ViewProps.LINE_HEIGHT, defaultInt = ViewDefaults.LINE_HEIGHT)
+    public void setLineHeight(ReactAztecText view, int lineHeight) {
+        // setLineHeight is not available on API 21 (the current app minimum) so,
+        // go with setLineSpacing instead, by using this formula:
+        // (font-size) * (line-height multiplier) = (line-height value)
+        view.setLineSpacing(0, 1.0f * lineHeight / PixelUtil.toSPFromPixel(view.getTextSize()));
+    }
+
     /**
      * This code was taken from the method parseNumericFontWeight of the class ReactTextShadowNode
      * TODO: Factor into a common place they can both use
