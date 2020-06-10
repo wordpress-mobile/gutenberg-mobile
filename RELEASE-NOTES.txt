@@ -1,3 +1,7 @@
+1.31.0
+------
+* [**] More spacious basic typographic rhythm
+
 1.30.0
 ------
 * [**] Adds editor support for theme defined colors and theme defined gradients on cover and button blocks.
