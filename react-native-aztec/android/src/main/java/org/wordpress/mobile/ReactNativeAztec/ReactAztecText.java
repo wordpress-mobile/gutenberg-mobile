@@ -36,7 +36,6 @@ import org.wordpress.aztec.AztecText;
 import org.wordpress.aztec.AztecTextFormat;
 import org.wordpress.aztec.ITextFormat;
 import org.wordpress.aztec.plugins.IAztecPlugin;
-import org.wordpress.aztec.plugins.IToolbarButton;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -159,9 +158,6 @@ public class ReactAztecText extends AztecText {
 
     void addPlugin(IAztecPlugin plugin) {
         super.getPlugins().add(plugin);
-        if (plugin instanceof IToolbarButton && getToolbar() != null ) {
-            getToolbar().addButton((IToolbarButton)plugin);
-        }
     }
 
     @Override
