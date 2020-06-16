@@ -35,6 +35,8 @@ group = 'com.github.wordpress-mobile.gutenberg-mobile'
 // fallback flag value for when lib is compiled individually (e.g. via jitpack)
 project.ext.buildGutenbergFromSource = false
 
+project.ext.buildAztecFromSource = rootProject.hasProperty('wp.USE_AZTEC_SOURCE')
+
 // The sample build uses multiple directories to
 // keep boilerplate and common code separate from
 // the main sample code.
@@ -90,10 +92,19 @@ repositories {
 }
 
 dependencies {
-    api "com.github.wordpress-mobile.WordPress-Aztec-Android:aztec:$aztecVersion"
-    api "com.github.wordpress-mobile.WordPress-Aztec-Android:wordpress-shortcodes:$aztecVersion"
-    api "com.github.wordpress-mobile.WordPress-Aztec-Android:wordpress-comments:$aztecVersion"
-    api "com.github.wordpress-mobile.WordPress-Aztec-Android:glide-loader:$aztecVersion"
+    if (project.ext.has("buildAztecFromSource") && project.ext.buildAztecFromSource) {
+        println "Using Aztec from source"
+        implementation project(':aztec')
+        implementation project(':wordpress-shortcodes')
+        implementation project(':wordpress-comments')
+        implementation project(':glide-loader')
+    } else {
+        api "com.github.wordpress-mobile.WordPress-Aztec-Android:aztec:$aztecVersion"
+        api "com.github.wordpress-mobile.WordPress-Aztec-Android:wordpress-shortcodes:$aztecVersion"
+        api "com.github.wordpress-mobile.WordPress-Aztec-Android:wordpress-comments:$aztecVersion"
+        api "com.github.wordpress-mobile.WordPress-Aztec-Android:glide-loader:$aztecVersion"
+    }
+
     api "org.wordpress:utils:$wordpressUtilsVersion"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
