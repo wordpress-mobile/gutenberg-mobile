@@ -95,9 +95,6 @@ dependencies {
     if (project.ext.has("buildAztecFromSource") && project.ext.buildAztecFromSource) {
         println "Using Aztec from source"
         implementation project(':aztec')
-        implementation project(':wordpress-shortcodes')
-        implementation project(':wordpress-comments')
-        implementation project(':glide-loader')
     } else {
         api "com.github.wordpress-mobile.WordPress-Aztec-Android:aztec:$aztecVersion"
         api "com.github.wordpress-mobile.WordPress-Aztec-Android:wordpress-shortcodes:$aztecVersion"

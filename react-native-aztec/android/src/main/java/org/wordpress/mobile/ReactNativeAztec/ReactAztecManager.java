@@ -45,15 +45,7 @@ import com.facebook.react.views.textinput.ReactTextInputManager;
 import com.facebook.react.views.textinput.ScrollWatcher;
 
 import org.wordpress.aztec.formatting.LinkFormatter;
-import org.wordpress.aztec.glideloader.GlideImageLoader;
-import org.wordpress.aztec.glideloader.GlideVideoThumbnailLoader;
 import org.wordpress.aztec.plugins.CssUnderlinePlugin;
-import org.wordpress.aztec.plugins.shortcodes.AudioShortcodePlugin;
-import org.wordpress.aztec.plugins.shortcodes.CaptionShortcodePlugin;
-import org.wordpress.aztec.plugins.shortcodes.VideoShortcodePlugin;
-import org.wordpress.aztec.plugins.wpcomments.HiddenGutenbergPlugin;
-import org.wordpress.aztec.plugins.wpcomments.WordPressCommentsPlugin;
-import org.wordpress.aztec.plugins.wpcomments.toolbar.MoreToolbarButton;
 
 import java.util.Map;
 import java.util.ArrayList;
@@ -459,14 +451,6 @@ public class ReactAztecManager extends BaseViewManager<ReactAztecText, LayoutSha
     @ReactProp(name = "disableGutenbergMode", defaultBoolean = false)
     public void disableGBMode(final ReactAztecText view, boolean disable) {
         if (disable) {
-            view.addPlugin(new WordPressCommentsPlugin(view));
-            view.addPlugin(new MoreToolbarButton(view));
-            view.addPlugin(new CaptionShortcodePlugin(view));
-            view.addPlugin(new VideoShortcodePlugin());
-            view.addPlugin(new AudioShortcodePlugin());
-            view.addPlugin(new HiddenGutenbergPlugin(view));
-            view.setImageGetter(new GlideImageLoader(view.getContext()));
-            view.setVideoThumbnailGetter(new GlideVideoThumbnailLoader(view.getContext()));
             // we need to restart the editor now
             String content = view.toHtml(view.getText(), false);
             view.fromHtml(content, false);

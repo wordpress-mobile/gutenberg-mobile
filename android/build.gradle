@@ -11,7 +11,6 @@ buildscript {
 
         if (properties['wp.USE_AZTEC_SOURCE']) {
             tagSoupVersion = '1.2.1'
-            glideVersion = '4.10.0'
             jSoupVersion = '1.11.3'
             jUnitVersion = '4.12'
             robolectricVersion = '4.3.1'
