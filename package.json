@@ -1,6 +1,6 @@
 {
   "name": "gutenberg-mobile",
-  "version": "1.30.0",
+  "version": "1.31.0",
   "private": true,
   "config": {
     "jsfiles": "./*.js src/*.js src/**/*.js src/**/**/*.js",
@@ -38,6 +38,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
     "jest-junit": "^6.3.0",
+    "json": "^9.0.6",
     "metro-react-native-babel-preset": "^0.57.0",
     "node-fetch": "^2.3.0",
     "patch-package": "^6.2.0",
