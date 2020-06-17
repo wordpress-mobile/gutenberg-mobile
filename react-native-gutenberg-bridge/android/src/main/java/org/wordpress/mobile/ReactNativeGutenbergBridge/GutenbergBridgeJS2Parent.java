@@ -4,7 +4,6 @@ import androidx.core.util.Consumer;
 
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.WritableMap;
 
 import org.wordpress.mobile.WPAndroidGlue.MediaOption;
 import org.wordpress.mobile.WPAndroidGlue.RequestExecutor;
@@ -15,13 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface GutenbergBridgeJS2Parent extends RequestExecutor {
-    interface RNMedia {
-        String getUrl();
-        int getId();
-        String getType();
-        String getCaption();
-        WritableMap toMap();
-    }
 
     void responseHtml(String title, String html, boolean changed);
 
@@ -37,6 +29,10 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
         void onMediaFileUploadProgress(int mediaId, float progress);
         void onMediaFileUploadSucceeded(int mediaId, String mediaUrl, int serverId);
         void onMediaFileUploadFailed(int mediaId);
+    }
+
+    interface ReplaceUnsupportedBlockCallback {
+        void replaceUnsupportedBlock(String content, String blockId);
     }
 
     interface StarterPageTemplatesTooltipShownCallback {
@@ -142,6 +138,11 @@ public interface GutenbergBridgeJS2Parent extends RequestExecutor {
     void requestMediaEditor(MediaUploadCallback mediaUploadCallback, String mediaUrl);
 
     void logUserEvent(GutenbergUserEvent gutenbergUserEvent, ReadableMap eventProperties);
+
+    void gutenbergDidRequestUnsupportedBlockFallback(ReplaceUnsupportedBlockCallback replaceUnsupportedBlockCallback,
+                                                     String content,
+                                                     String blockId,
+                                                     String blockName);
 
     void onAddMention(Consumer<String> onSuccess);
     
