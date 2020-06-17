@@ -76,6 +76,7 @@ public class ReactAztecManager extends BaseViewManager<ReactAztecText, LayoutSha
     private static final String TAG = "ReactAztecText";
 
     private static final String BLOCK_TYPE_TAG_KEY = "tag";
+    private static final String LINK_TEXT_COLOR_KEY = "linkTextColor";
 
     @Nullable private final Consumer<Exception> exceptionLogger;
     @Nullable private final Consumer<String> breadcrumbLogger;
@@ -202,6 +203,11 @@ public class ReactAztecManager extends BaseViewManager<ReactAztecText, LayoutSha
 
     @ReactProp(name = "text")
     public void setText(ReactAztecText view, ReadableMap inputMap) {
+        if (inputMap.hasKey(LINK_TEXT_COLOR_KEY)) {
+            int color = Color.parseColor(inputMap.getString(LINK_TEXT_COLOR_KEY));
+            setLinkTextColor(view, color);
+        }
+
         if (!inputMap.hasKey("eventCount")) {
             setTextfromJS(view, inputMap.getString("text"), inputMap.getMap("selection"));
         } else {
@@ -386,7 +392,6 @@ public class ReactAztecManager extends BaseViewManager<ReactAztecText, LayoutSha
         }
     }
 
-    @ReactProp(name = "linkTextColor", customType = "Color")
     public void setLinkTextColor(ReactAztecText view, @Nullable Integer color) {
         view.setLinkFormatter(new LinkFormatter(view,
                 new LinkFormatter.LinkStyle(
