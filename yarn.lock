@@ -12534,6 +12534,11 @@ realpath-native@^1.1.0:
   dependencies:
     util.promisify "^1.0.0"
 
+reanimated-bottom-sheet@^1.0.0-alpha.20:
+  version "1.0.0-alpha.20"
+  resolved "https://registry.yarnpkg.com/reanimated-bottom-sheet/-/reanimated-bottom-sheet-1.0.0-alpha.20.tgz#fc586b594a8e8c3e2a49821cfaaccd8c03f80660"
+  integrity sha512-bcXVkmJLL6SOoIPWU2dIJnT7+78a5tDi9eaE6ESsEewZ10lpfJhjfCCFrngPZKPhatQ6mjCJSYEAL+fwbXCiJw==
+
 recast@^0.11.17:
   version "0.11.23"
   resolved "https://registry.yarnpkg.com/recast/-/recast-0.11.23.tgz#451fd3004ab1e4df9b4e4b66376b2a21912462d3"

@@ -188,6 +188,7 @@
     "react-native-url-polyfill": "^1.1.2",
     "react-native-video": "git+https://github.com/wordpress-mobile/react-native-video.git#1b964b107863351ed744fc104d7952bbec3e2d4f",
     "react-redux": "^5.0.7",
+    "reanimated-bottom-sheet": "^1.0.0-alpha.20",
     "redux": "^3.7.2",
     "redux-multi": "^0.1.12",
     "redux-optimist": "^1.0.0",
