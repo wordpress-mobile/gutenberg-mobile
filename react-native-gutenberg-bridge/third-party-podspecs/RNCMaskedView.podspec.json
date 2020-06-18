@@ -9,8 +9,7 @@
     "ios": "9.0"
   },
   "source": {
-    "git": "https://github.com/react-native-community/react-native-masked-view.git",
-    "tag": "v0.1.10"
+    "git": "https://github.com/react-native-community/react-native-masked-view.git"
   },
   "source_files": "ios/**/*.{h,m}",
   "dependencies": {
