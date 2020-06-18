@@ -55,7 +55,8 @@
     "wd": "^1.11.1"
   },
   "scripts": {
-    "postinstall": "npm install --prefix gutenberg",
+    "postinstall": "npm install --prefix gutenberg && npm run patch-react-native",
+    "patch-react-native": "patch -p1 -i patches/react-native+0.61.5.patch",
     "start": "react-native start --config ./metro.config.js",
     "start:reset": "npm run core clean:runtime && npm run start -- --reset-cache",
     "core": "cd gutenberg && npm run native",
