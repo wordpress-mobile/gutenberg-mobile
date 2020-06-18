@@ -13,6 +13,7 @@ class GutenbergViewController: UIViewController {
         return mediaUploadCoordinator
     }()
     fileprivate var longPressGesture: UILongPressGestureRecognizer!
+    fileprivate var contentInfo: ContentInfo?
     
     override func loadView() {
         view = gutenberg.rootView
@@ -24,6 +25,8 @@ class GutenbergViewController: UIViewController {
         gutenberg.delegate = self
         navigationController?.navigationBar.isTranslucent = false
         registerLongPressGestureRecognizer()
+
+        _ = try! FallbackJavascriptInjection(blockHTML: "Hello", userId: "1")
     }
 
     @objc func moreButtonPressed(sender: UIBarButtonItem) {
@@ -60,13 +63,16 @@ extension GutenbergViewController: GutenbergBridgeDelegate {
 
     func gutenbergDidMount(unsupportedBlockNames: [String]) {
         print("gutenbergDidMount(unsupportedBlockNames: \(unsupportedBlockNames))")
+        gutenberg.requestHTML()
     }
 
-    func gutenbergDidProvideHTML(title: String, html: String, changed: Bool) {
+    func gutenbergDidProvideHTML(title: String, html: String, changed: Bool, contentInfo: ContentInfo?) {
         print("didProvideHTML:")
         print("↳ Content changed: \(changed)")
         print("↳ Title: \(title)")
         print("↳ HTML: \(html)")
+        print("↳ Content Info: \(contentInfo)")
+        self.contentInfo = contentInfo
     }
 
     func gutenbergDidRequestMedia(from source: Gutenberg.MediaSource, filter: [Gutenberg.MediaType], allowMultipleSelection: Bool, with callback: @escaping MediaPickerDidPickMediaCallback) {
@@ -196,6 +202,13 @@ extension GutenbergViewController: GutenbergBridgeDelegate {
         print("Gutenberg loged user event")
     }
 
+    func gutenbergDidRequestUnsupportedBlockFallback(for block: Block) {
+        print("Requesting Fallback for \(block)")
+        let controller = try! WebViewController(block: block, userId: "0")
+        controller.delegate = self
+        present(UINavigationController(rootViewController: controller), animated: true)
+    }
+
     func gutenbergDidRequestMention(callback: @escaping (Result<String, NSError>) -> Void) {
         callback(.success("matt"))
     }
@@ -206,6 +219,26 @@ extension GutenbergViewController: GutenbergBridgeDelegate {
 
     func gutenbergDidRequestSetStarterPageTemplatesTooltipShown(_ tooltipShown: Bool) {
         print("Gutenberg requested setting tooltip flag")
+    }
+}
+
+extension GutenbergViewController: GutenbergWebDelegate {
+    func webController(controller: GutenbergWebSingleBlockViewController, didPressSave block: Block) {
+        gutenberg.replace(block: block)
+        dismiss(webController: controller)
+    }
+
+    func webControllerDidPressClose(controller: GutenbergWebSingleBlockViewController) {
+        dismiss(webController: controller)
+    }
+
+    func webController(controller: GutenbergWebSingleBlockViewController, didLog log: String) {
+        print("WebView: \(log)")
+    }
+
+    private func dismiss(webController: GutenbergWebSingleBlockViewController) {
+        webController.cleanUp()
+        dismiss(animated: true)
     }
 }
 
@@ -232,6 +265,10 @@ extension GutenbergViewController: GutenbergBridgeDataSource {
 
     func aztecAttachmentDelegate() -> TextViewAttachmentDelegate {
         return ExampleAttachmentDelegate()
+    }
+
+    func gutenbergEditorTheme() -> GutenbergEditorTheme? {
+        return nil
     }
 }
 
@@ -265,7 +302,9 @@ extension GutenbergViewController {
     func showMoreSheet() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-
+        if let contentInfo = contentInfo {
+            alert.title = "Content Structure\nBlocks: \(contentInfo.blockCount), Words: \(contentInfo.wordCount), Characters: \(contentInfo.characterCount)"
+        }
         let cancelAction = UIAlertAction(title: "Keep Editing", style: .cancel)
         alert.addAction(toggleHTMLModeAction)
         alert.addAction(updateHtmlAction)
