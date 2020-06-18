@@ -23,7 +23,9 @@ import org.wordpress.mobile.ReactNativeAztec.ReactAztecPackage;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeInterface;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergBridgeJS2Parent;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.GutenbergWebViewActivity;
+import org.wordpress.mobile.ReactNativeGutenbergBridge.RNMedia;
 import org.wordpress.mobile.ReactNativeGutenbergBridge.RNReactNativeGutenbergBridgePackage;
+import org.wordpress.mobile.WPAndroidGlue.Media;
 
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -49,35 +51,35 @@ public class MainApplication extends Application implements ReactApplication, Gu
     private ReactNativeHost createReactNativeHost() {
         mRnReactNativeGutenbergBridgePackage = new RNReactNativeGutenbergBridgePackage(new GutenbergBridgeJS2Parent() {
             @Override
-            public void responseHtml(String title, String html, boolean changed) {
+            public void responseHtml(String title, String html, boolean changed, ReadableMap contentInfo) {
             }
 
             @Override
-            public void requestMediaImport(String url, MediaUploadCallback mediaUploadCallback) {
+            public void requestMediaImport(String url, MediaSelectedCallback mediaSelectedCallback) {
             }
 
             @Override
-            public void requestMediaPickerFromDeviceCamera(MediaUploadCallback mediaUploadCallback, MediaType mediaType) {
+            public void requestMediaPickerFromDeviceCamera(MediaSelectedCallback mediaSelectedCallback, MediaType mediaType) {
             }
 
             @Override
-            public void requestMediaPickFromDeviceLibrary(MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection, MediaType mediaType) {
+            public void requestMediaPickFromDeviceLibrary(MediaSelectedCallback mediaSelectedCallback, Boolean allowMultipleSelection, MediaType mediaType) {
             }
 
             @Override
-            public void requestMediaPickFromMediaLibrary(MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection, MediaType mediaType) {
+            public void requestMediaPickFromMediaLibrary(MediaSelectedCallback mediaSelectedCallback, Boolean allowMultipleSelection, MediaType mediaType) {
                 List<RNMedia> rnMediaList = new ArrayList<>();
                 if (mediaType == MediaType.IMAGE) {
                     rnMediaList.add(new Media(1, "https://cldup.com/cXyG__fTLN.jpg", "image", "Mountain" ));
                 } else if (mediaType == MediaType.VIDEO) {
                     rnMediaList.add(new Media(2, "https://i.cloudup.com/YtZFJbuQCE.mov", "video", "Cloudup" ));
                 }
-                mediaUploadCallback.onUploadMediaFileSelected(rnMediaList);
+                mediaSelectedCallback.onMediaFileSelected(rnMediaList);
             }
 
 
             @Override
-            public void mediaUploadSync(MediaUploadCallback mediaUploadCallback) {
+            public void mediaUploadSync(MediaSelectedCallback mediaSelectedCallback) {
             }
 
             @Override
@@ -106,7 +108,7 @@ public class MainApplication extends Application implements ReactApplication, Gu
             }
 
             @Override
-            public void requestMediaPickFrom(String mediaSource, MediaUploadCallback mediaUploadCallback, Boolean allowMultipleSelection) {
+            public void requestMediaPickFrom(String mediaSource, MediaSelectedCallback mediaSelectedCallback, Boolean allowMultipleSelection) {
 
             }
 
@@ -116,7 +118,7 @@ public class MainApplication extends Application implements ReactApplication, Gu
             }
 
             @Override
-            public void requestMediaEditor(MediaUploadCallback mediaUploadCallback, String mediaUrl) {
+            public void requestMediaEditor(MediaSelectedCallback mediaSelectedCallback, String mediaUrl) {
 
             }
 
