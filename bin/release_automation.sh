@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Check that Github CLI is installed
+command -v gh >/dev/null || { echo "Error: The Github CLI must be installed."; exit 1; }
+
 # Execute script commands from project's root directory
 SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$SCRIPT_PATH/.."
