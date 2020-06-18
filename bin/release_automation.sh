@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Execute script commands from project's root directory
+SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd "$SCRIPT_PATH/.."
+
 CURRENT_VERSION_NUMBER=$(./node_modules/.bin/json -f package.json version)
 echo "Current Version Number:$CURRENT_VERSION_NUMBER"
 
