@@ -7,6 +7,22 @@ command -v gh >/dev/null || { echo "Error: The Github CLI must be installed."; e
 SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$SCRIPT_PATH/.."
 
+# Check current branch is develop, master, or release/* branch
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [[ ! "$CURRENT_BRANCH" =~ "^develop$|^master$|^release/.*" ]]; then
+    echo "Releases should generally only be based on 'develop', 'master', or an earlier release branch."
+    echo "You are currently on the '$CURRENT_BRANCH' branch."
+    read -p "Are you sure you want to create a release branch from the '$CURRENT_BRANCH' branch? (y/n) " -n 1
+    echo ""
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        printf "Aborting release...\n"
+        exit 1
+    fi
+fi
+
+# Confirm branch is clean
+[ -z "$(git status --porcelain)" ] || { git status; printf "\nUncommitted changes found. Aborting release script...\n"; exit 1; }
+
 # Ask for new version number
 CURRENT_VERSION_NUMBER=$(./node_modules/.bin/json -f package.json version)
 echo "Current Version Number:$CURRENT_VERSION_NUMBER"
