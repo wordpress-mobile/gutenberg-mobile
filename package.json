@@ -42,8 +42,6 @@
     "jest-junit": "^6.3.0",
     "metro-react-native-babel-preset": "^0.57.0",
     "node-fetch": "^2.3.0",
-    "patch-package": "^6.2.0",
-    "postinstall-prepare": "^1.0.1",
     "prettier": "npm:wp-prettier@1.19.1",
     "react-dom": "16.9.0",
     "react-native-sass-transformer": "^1.1.1",
