@@ -1,15 +1,16 @@
-package = JSON.parse(File.read(File.join(__dir__, 'gutenberg', 'package.json')))
+gutenbergPackage = JSON.parse(File.read(File.join(__dir__, 'gutenberg', 'package.json')))
+gutenbergMobilePackage = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 # Use the same RN version that the JS tools use
-react_native_version = package['devDependencies']['react-native']
+react_native_version = gutenbergPackage['devDependencies']['react-native']
 # Extract the tagged version if package.json points to a tag
 react_native_version = react_native_version.split("#v").last if react_native_version.include? "#v"
 
 Pod::Spec.new do |s|
   s.name             = 'Gutenberg'
-  s.version          = package['version']
+  s.version          = gutenbergMobilePackage['version']
   s.summary          = 'Printing since 1440'
   s.homepage     = 'https://github.com/wordpress-mobile/gutenberg-mobile'
-  s.license      = package['license']
+  s.license      = gutenbergMobilePackage['license']
   s.authors          = 'Automattic'
   s.platform     = :ios, '11.0'
   s.source       = { :git => 'https://github.com/wordpress-mobile/gutenberg-mobile.git', :submodules => true }
