@@ -1,16 +1,31 @@
+struct GutenbergEvent {
+    let name: String
+    let body: Any?
+}
+
 @objc (RNReactNativeGutenbergBridge)
 public class RNReactNativeGutenbergBridge: RCTEventEmitter {
     weak var delegate: GutenbergBridgeDelegate?
     weak var dataSource: GutenbergBridgeDataSource?
     private var isJSLoading = true
     private var hasObservers = false
+    private var queuedEvents = [GutenbergEvent]()
 
+    public override init() {
+        super.init()
+        NotificationCenter.default.addObserver(forName: .RCTContentDidAppear, object: nil, queue: nil) { (_) in
+            DispatchQueue.main.async {
+                self.connectionEstablished()
+            }
+        }
+    }
     // MARK: - Messaging methods
 
     @objc
-    func provideToNative_Html(_ html: String, title: String, changed: Bool) {
+    func provideToNative_Html(_ html: String, title: String, changed: Bool, contentInfo: [String:Int]) {
         DispatchQueue.main.async {
-            self.delegate?.gutenbergDidProvideHTML(title: title, html: html, changed: changed)
+            let info = ContentInfo.decode(from: contentInfo)            
+            self.delegate?.gutenbergDidProvideHTML(title: title, html: html, changed: changed, contentInfo: info)
         }
     }
     
@@ -87,7 +102,9 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
     @objc
     func mediaUploadSync() {
         DispatchQueue.main.async {
-            self.delegate?.gutenbergDidRequestMediaUploadSync()
+            if self.hasObservers {
+                self.delegate?.gutenbergDidRequestMediaUploadSync()
+            }
         }
     }
 
@@ -188,18 +205,28 @@ public class RNReactNativeGutenbergBridge: RCTEventEmitter {
         }
     }
 
+    public func connectionEstablished() {
+        guard !hasObservers else { return } // We have an established connection no need to continue.
+        hasObservers = true
+        while (self.queuedEvents.count > 0) {
+            let event = self.queuedEvents.removeFirst()
+            super.sendEvent(withName: event.name, body: event.body) // execute this on super as we want to avoid logic in self.
+        }
+    }
+
+    public override func sendEvent(withName name: String, body: Any?) {
+        DispatchQueue.main.async {
+            if self.hasObservers && self.queuedEvents.count == 0 {
+                super.sendEvent(withName: name, body: body)
+            } else {
+                let event = GutenbergEvent(name: name, body: body)
+                self.queuedEvents.append(event)
+            }
+        }
+    }
+
     private func shouldLog(with level: Int) -> Bool {
         return level >= RCTGetLogThreshold().rawValue
-    }
-
-    override public func startObserving() {
-        super.startObserving()
-        hasObservers = true
-    }
-
-    override public func stopObserving() {
-        super.stopObserving()
-        hasObservers = false
     }
 
     @objc
