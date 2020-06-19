@@ -368,7 +368,8 @@ class RCTAztecView: Aztec.TextView {
         }
         var caretData = packCaretDataForRN(overrideRange: range)
         onSelectionChange?(caretData)
-        caretData = add(keyCode: 8, to: caretData)
+        let backSpaceKeyCode:UInt8 = 8
+        caretData = add(keyCode: backSpaceKeyCode, to: caretData)
         onKeyDown(caretData)
         return true
     }
