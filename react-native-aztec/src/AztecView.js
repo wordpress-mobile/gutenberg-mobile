@@ -4,7 +4,7 @@ import ReactNative, {requireNativeComponent, TextViewPropTypes, UIManager, Color
 import TextInputState from 'react-native/Libraries/Components/TextInput/TextInputState';
 
 const AztecManager = UIManager.getViewManagerConfig('RCTAztecView');
-
+const BACKSPACE = 8;
 class AztecView extends React.Component {
   selectionEndCaretY: number;
 
@@ -80,7 +80,7 @@ class AztecView extends React.Component {
 
     const { onKeyDown } = this.props;
 
-    let newEvent = { ...event, keyCode: 8, preventDefault: () => {} }
+    let newEvent = { ...event, keyCode: BACKSPACE, preventDefault: () => {} }
     onKeyDown(newEvent);
   }
 
