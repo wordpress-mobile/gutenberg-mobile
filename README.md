@@ -11,7 +11,6 @@ For a developer experience closer to the one the project maintainers current hav
 * git
 * [nvm](https://github.com/creationix/nvm)
 * Node.js and npm (use nvm to install them)
-* yarn (`npm install -g yarn`)
 * [AndroidStudio](https://developer.android.com/studio/) to be able to compile the Android version of the app
 * [Xcode](https://developer.apple.com/xcode/) to be able to compile the iOS app
 * CocoaPods(`sudo gem install cocoapods`) needed to fetch React and third-party dependencies.
@@ -37,13 +36,13 @@ Before running the demo app, you need to download and install the project depend
 
 ```
 nvm install --latest-npm
-yarn install
+npm run install
 ```
 
 ## Run
 
 ```
-yarn start
+npm run start
 ```
 
 Runs the packager (Metro) in development mode. The packager stays running to serve the app bundle to the clients that request it.
@@ -51,7 +50,7 @@ Runs the packager (Metro) in development mode. The packager stays running to ser
 With the packager running, open another terminal window and use the following command to compile and run the Android app:
 
 ```
-yarn android
+npm run core android
 ```
 
 The app should now open in a connected device or a running emulator and fetch the JavaScript code from the running packager.
@@ -59,7 +58,7 @@ The app should now open in a connected device or a running emulator and fetch th
 To compile and run the iOS variant of the app using the _default_ simulator device, use:
 
 ```
-yarn ios
+npm run core ios
 ```
 
 which will attempt to open your app in the iOS Simulator if you're on a Mac and have it installed.
@@ -69,20 +68,20 @@ which will attempt to open your app in the iOS Simulator if you're on a Mac and 
 To compile and run the app using a different device simulator, use:
 
 ```
-yarn ios --simulator="DEVICE_NAME"
+npm run core ios --simulator="DEVICE_NAME"
 ```
 
 For example, if you'd like to run in an iPhone Xs Max, try:
 
 ```
-yarn ios --simulator="iPhone Xs Max"
+npm run core ios --simulator="iPhone Xs Max"
 ```
 
 To see a list of all of your available iOS devices, use `xcrun simctl list devices`.
 
 ### Troubleshooting
 
-Some times, and especially when tweaking anything in the `package.json`, Babel configuration (`.babelrc`) or the Jest configuration (`jest.config.js`), your changes might seem to not take effect as expected. On those times, you might need to clean various caches before starting the packager. To do that, run the script: `yarn start:reset`. Other times, you might want to reinstall the NPM packages from scratch and the `yarn clean:install` script can be handy.
+Some times, and especially when tweaking anything in the `package.json`, Babel configuration (`.babelrc`) or the Jest configuration (`jest.config.js`), your changes might seem to not take effect as expected. On those times, you might need to clean various caches before starting the packager. To do that, run the script: `npm run start:reset`. Other times, you might want to reinstall the NPM packages from scratch and the `npm run clean:install` script can be handy.
 
 ## Developing with Visual Studio Code
 
@@ -99,7 +98,7 @@ One of the extensions we are using is the [React Native Tools](https://marketpla
 Use the following command to run the test suite:
 
 ```
-yarn test
+npm run test
 ```
 
 It will run the [jest](https://github.com/facebook/jest) test runner on your tests. The tests are running on the desktop against Node.js.
@@ -107,7 +106,7 @@ It will run the [jest](https://github.com/facebook/jest) test runner on your tes
 To run the tests with debugger support, start it with the following CLI command:
 
 ```
-yarn test:debug
+npm run test:debug
 ```
 
 Then, open `chrome://inspect` in Chrome to attach the debugger (look into the "Remote Target" section). While testing/developing, feel free to sprinkle `debugger` statements anywhere in the code that you'd like the debugger to break.
@@ -120,21 +119,21 @@ This project is set up to use [jest](https://facebook.github.io/jest/) for tests
 
 This repository uses Appium to run UI tests. The tests live in `__device-tests__` and are written using Appium to run tests against simulators and real devices. To run these you'll need to check off a few things: 
 
-* When running the tests, you'll need to ensure the Metro bundler (`yarn start`) is not running. 
+* When running the tests, you'll need to ensure the Metro bundler (`npm run start`) is not running. 
 * [Appium CLI](https://github.com/appium/appium/blob/master/docs/en/about-appium/getting-started.md) installed and available globally. We also recommend using [appium-doctor](https://github.com/appium/appium-doctor) to ensure all of Appium's dependencies are good to go. You don't have to worry about starting the server yourself, the tests handle starting the server on port 4723, just be sure that the port is free or feel free to change the port number in the test file. 
 * For iOS a simulator should automatically launch but for Android you'll need to have an emulator *with at least platform version 8.0* fired up and running.
 
 Then, to run the UI tests on iOS: 
 
-`yarn test:e2e:ios:local`
+`npm run test:e2e:ios:local`
 
 and for Android:
 
-`yarn test:e2e:android:local`
+`npm run test:e2e:android:local`
 
-To run a single test instead of the entire suite, use `yarn device-tests:local`. Here's an example that runs only `gutenberg-editor-paragraph.test`:
+To run a single test instead of the entire suite, use `npm run device-tests:local`. Here's an example that runs only `gutenberg-editor-paragraph.test`:
 
-`TEST_RN_PLATFORM=ios yarn device-tests:local gutenberg-editor-paragraph.test`
+`TEST_RN_PLATFORM=ios npm run device-tests:local gutenberg-editor-paragraph.test`
 
 Note: You might experience problems that seem to be related to the tests starting the Appium server, e.g. errors that say `Connection Refused`, `Connection Reset` or `The requested environment is not available`. For now, you can manually start the Appium server via [appium desktop](https://github.com/appium/appium-desktop) or the CLI, then change the port number in the tests while (optionally) commenting out related code in the `beforeAll` and `afterAll` block. 
 
@@ -145,23 +144,10 @@ For a more detailed outline of the UI tests and how to get started writing one, 
 The project includes a linter (`eslint`) to perform codestyle and static analysis of the code. The configuration used is the same as [the one in the Gutenberg project](https://github.com/WordPress/gutenberg/blob/master/eslint/config.js). To perform the check, run:
 
 ```
-yarn lint
+npm run lint
 ```
 
-To have the linter also _fix_ the violations run: `yarn lint:fix`.
-
-In parallel to `eslint`, the project uses `Prettier` for codestyling. Run:
-
-```
-yarn prettier
-```
-to enforce the style. This will modify the source files to make them conform to the rules.
-
-`Flow` is used as a static type checker for JavaScript code. Flow checks JavaScript code for errors through static type annotations. These types allow you to tell Flow how you want your code to work, and Flow will make sure it does work that way. To perform the check run:
-
-```
-yarn flow
-```
+To have the linter also _fix_ the violations run: `npm run lint:fix`.
 
 You might want to use Visual Studio Code as an editor. The project includes the configuration needed to use the above codestyle and linting tools automatically.
 
