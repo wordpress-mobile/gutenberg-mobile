@@ -36,7 +36,7 @@ Before running the demo app, you need to download and install the project depend
 
 ```
 nvm install --latest-npm
-npm run install
+npm install
 ```
 
 ## Run
