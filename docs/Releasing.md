@@ -57,7 +57,7 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o Make sure we use a released version of Aztec iOS and Aztec Android: <code>grep WordPress-Aztec-iOS RNTAztecView.podspec</code> and <code>grep aztecVersion react-native-aztec/android/build.gradle</code>(should be part of a <code>./release-check.sh</code> script). Also insure that the line for testing non-official versions of Aztec on iOS is commented out (this command should find a match: <code>grep "^s*#pod 'WordPress-Aztec-iOS'" ios/Podfile</code>)</p>
+<p>o Make sure we use a released version of Aztec iOS and Aztec Android: <code>grep WordPress-Aztec-iOS RNTAztecView.podspec</code> and <code>grep aztecVersion gutenberg/packages/react-native-aztec/android/build.gradle</code>(should be part of a <code>./release-check.sh</code> script). Also insure that the line for testing non-official versions of Aztec on iOS is commented out (this command should find a match: <code>grep "^s*#pod 'WordPress-Aztec-iOS'" ios/Podfile</code>)</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
