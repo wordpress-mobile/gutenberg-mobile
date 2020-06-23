@@ -120,10 +120,11 @@ jobs:
     - image: circleci/android:api-29-node
     steps:
       - checkout
+      - checkout-submodules
       - npm-install
       - run:
           name: Run Android native unit tests
-          command: cd android && ./gradlew testDebug
+          command: cd gutenberg/packages/react-native-editor/android && ./gradlew testDebug
   ios-device-checks:
     parameters:
       post-to-slack:
