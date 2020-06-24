@@ -29,17 +29,17 @@ echo "Current Version Number:$CURRENT_VERSION_NUMBER"
 read -p "Enter the new version number: " VERSION_NUMBER
 
 # Insure javascript dependencies are up-to-date
-yarn install || { echo "Error: 'yarn install' failed"; echo 1; }
+npm install || { echo "Error: 'yarn install' failed"; echo 1; }
 
 # Create Git branch
 RELEASE_BRANCH="release/$VERSION_NUMBER"
 git switch -c "$RELEASE_BRANCH" || { echo "Error: could not create '$RELEASE_BRANCH' branch."; exit 1; }
 
 # Set version number in package.json
-yarn json -I -f package.json -e "this.version='$VERSION_NUMBER'" || { echo "Error: could not update version in package.json"; exit 1; }
+npm run json -I -f package.json -e "this.version='$VERSION_NUMBER'" || { echo "Error: could not update version in package.json"; exit 1; }
 
 # Update the bundles
-yarn bundle || { echo "Error: 'yarn bundle' failed"; exit 1; }
+npm run bundle || { echo "Error: 'yarn bundle' failed"; exit 1; }
 
 # Make sure podfile is updated
 pod install --project-directory=./ios/ || { echo "Error: pod install failed"; exit 1; }
