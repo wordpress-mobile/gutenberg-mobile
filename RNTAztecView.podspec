@@ -9,9 +9,9 @@ Pod::Spec.new do |s|
   s.license          = package['license']
   s.homepage         = 'https://github.com/wordpress-mobile/gutenberg-mobile'
   s.authors          = 'Automattic'
-  s.source           = { :git => 'https://github.com/wordpress-mobile/gutenberg-mobile.git' }
-  s.source_files     = 'react-native-aztec/ios/RNTAztecView/*.{h,m,swift}'
-  s.public_header_files = 'react-native-aztec/ios/RNTAztecView/*.h'
+  s.source           = { :git => 'https://github.com/wordpress-mobile/gutenberg-mobile.git', :submodules => true }
+  s.source_files     = 'gutenberg/packages/react-native-aztec/ios/RNTAztecView/*.{h,m,swift}'
+  s.public_header_files = 'gutenberg/packages/react-native-aztec/ios/RNTAztecView/*.h'
   s.requires_arc     = true
   s.platforms        = { :ios => "11.0" }
   s.swift_version    = '5.0'
