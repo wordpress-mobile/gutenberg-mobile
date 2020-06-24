@@ -12,15 +12,16 @@ command -v pod > /dev/null || ( echo Cocoapods is required to generate podspecs;
 command -v jq > /dev/null || ( echo jq is required to generate podspecs; exit 1 )
 
 WD=$(pwd)
-DEST="${WD}/react-native-gutenberg-bridge/third-party-podspecs"
+DEST="${WD}/third-party-podspecs"
+NODE_MODULES_DIR="gutenberg/node_modules"
 
 # Generate the external (non-RN podspecs)
-EXTERNAL_PODSPECS=$(find "node_modules/react-native/third-party-podspecs" \
-                         "node_modules/react-native-svg" \
-                         "node_modules/react-native-keyboard-aware-scroll-view" \
-                         "node_modules/react-native-safe-area" \
-                         "node_modules/react-native-video" \
-                         "node_modules/react-native-dark-mode" -type f -name "*.podspec" -print)
+EXTERNAL_PODSPECS=$(find "$NODE_MODULES_DIR/react-native/third-party-podspecs" \
+                         "$NODE_MODULES_DIR/react-native-svg" \
+                         "$NODE_MODULES_DIR/react-native-keyboard-aware-scroll-view" \
+                         "$NODE_MODULES_DIR/react-native-safe-area" \
+                         "$NODE_MODULES_DIR/react-native-dark-mode" \
+                         "$NODE_MODULES_DIR/react-native-get-random-values" -type f -name "*.podspec" -print)
 
 for podspec in $EXTERNAL_PODSPECS
 do
@@ -32,7 +33,7 @@ done
 
 # Generate the React Native podspecs
 # Change to the React Native directory to get relative paths for the RN podspecs
-cd "node_modules/react-native"
+cd "$NODE_MODULES_DIR/react-native"
 
 RN_PODSPECS=$(find * -type f -name "*.podspec" -not -path "third-party-podspecs/*" -not -path "*Fabric*" -print)
 TMP_DEST=$(mktemp -d)
