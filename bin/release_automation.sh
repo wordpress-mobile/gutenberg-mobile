@@ -42,7 +42,7 @@ npm run json -I -f package.json -e "this.version='$VERSION_NUMBER'" || { echo "E
 npm run bundle || { echo "Error: 'yarn bundle' failed"; exit 1; }
 
 # Make sure podfile is updated
-pod install --project-directory=./ios/ || { echo "Error: pod install failed"; exit 1; }
+npm run core preios || { echo "Error: pod install failed"; exit 1; }
 
 # Generate updated podspecs
 ./bin/generate-podspecs.sh || { echo "Error: generate-podspecs script failed"; exit 1; }
