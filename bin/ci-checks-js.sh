@@ -14,23 +14,15 @@ if [[ -z "${CHECK_CORRECTNESS}" ]] && [[ -z "${CHECK_TESTS}" ]] ; then
 fi
 
 if [ "$CHECK_CORRECTNESS" = true ] ; then
-  yarn flow || pFail
-  yarn lint || pFail
-  yarn prettier:check || pFail
-fi
-
-if [ "$GUTENBERG_AS_PARENT" = true ] ; then
-  TEST_SCRIPT_NAME='test:inside-gb'
-else
-  TEST_SCRIPT_NAME='test'
+  npm run lint || pFail
 fi
 
 if [ "$CHECK_TESTS" = true ] ; then
   # we'll run the tests twich (once for each platform) if the platform env var is not set
   if [[ -z "${TEST_RN_PLATFORM}" ]] ; then
-    TEST_RN_PLATFORM=android yarn ${TEST_SCRIPT_NAME} --maxWorkers=4 || pFail
-    TEST_RN_PLATFORM=ios yarn ${TEST_SCRIPT_NAME} --maxWorkers=4 || pFail
+    TEST_RN_PLATFORM=android npm run test --maxWorkers=4 || pFail
+    TEST_RN_PLATFORM=ios npm run test --maxWorkers=4 || pFail
   else
-    yarn ${TEST_SCRIPT_NAME} --maxWorkers=4 || pFail
+    npm run test --maxWorkers=4 || pFail
   fi
 fi
