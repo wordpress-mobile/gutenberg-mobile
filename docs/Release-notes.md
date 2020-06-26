@@ -33,4 +33,4 @@ For example:
 Release notes also go through editorial before they are shared with the users. So, while adding release notes, we should 
 try to err on the side of more details so that they changes can be better summarized. 
 
-Release notes are currently translated into different languages before the are seeing by users. 
+Release notes are currently translated into different languages before the are seen by users. 
