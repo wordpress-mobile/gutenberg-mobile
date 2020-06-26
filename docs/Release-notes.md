@@ -1,6 +1,6 @@
 # Adding release notes
-Release notes are important because they let the users know what has changes since the last time they updates the software. 
-With every new release of Gutenberg Mobile the Gutenberg Mobile release notes also  get rolled in to WordPress-iOS and WordPress-Android apps.
+Release notes are important because they let the users know what has changed since the last time they updates the software. 
+With every new release of Gutenberg Mobile the release notes `RELEASE-NOTES.txt` also get rolled in to WordPress-iOS and WordPress-Android release notes.
 
 ## Importance to users
 In order to keep the release notes as concise as possible we want to make sure that we highlight the most significant changes
@@ -31,6 +31,6 @@ For example:
     
 ## Additional info
 Release notes also go through editorial before they are shared with the users. So, while adding release notes, we should 
-try to err on the side of more details so that they changes can be better summarized. 
+try to err on the side of more details so that the changes can be better summarized. 
 
-Release notes are currently translated into different languages before they are seen by users. 
+Also note that the release notes are currently translated into different languages before they are seen by users.
