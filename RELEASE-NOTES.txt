@@ -2,6 +2,7 @@
 ------
 * [***] Adds Copy, Cut, Paste, and Duplicate functionality to blocks
 * [***] Add support for mentions.
+* [*] [iOS] Improved editor loading experience with Ghost Effect.
 
 1.31.0
 ------
