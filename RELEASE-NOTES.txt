@@ -2,6 +2,7 @@
 ------
 * [***] Adds Copy, Cut, Paste, and Duplicate functionality to blocks
 * [***] Add support for mentions.
+* [***] Add support for editing blocks which are not yet fully supported on the mobile editor.
 
 1.31.0
 ------
