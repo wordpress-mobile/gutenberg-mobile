@@ -5,7 +5,7 @@ The `bundle` directory contains the production version of the project's Javascri
 You can rebuild those files at any time by running
 
 ```
-yarn bundle
+npm run bundle
 ```
 
 This is useful in case you want to use an unreleased version of the bundle in the apps. For instance, on a PR that's a work in progress, you might want to include to a specific gutenberg-mobile branch in the apps with an updated bundle so reviewers can see the latest changes before approving them (and releasing a new version).
@@ -41,7 +41,11 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o Update the package.json file with the new version number, run: <code>yarn version</code> and enter the new version name when you get asked: <code>X.XX.X</code> (Changes will be committed automatically).</p>
+<p>o Update the package.json file with the new version number in <code>package.json</code> and <code>gutenberg/packages/react-native-editor/package.json</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>o Update the bundle files by running <code>npm run bundle</code></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -57,7 +61,7 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o Make sure we use a released version of Aztec iOS and Aztec Android: <code>grep WordPress-Aztec-iOS RNTAztecView.podspec</code> and <code>grep aztecVersion react-native-aztec/android/build.gradle</code>(should be part of a <code>./release-check.sh</code> script). Also insure that the line for testing non-official versions of Aztec on iOS is commented out (this command should find a match: <code>grep "^s*#pod 'WordPress-Aztec-iOS'" ios/Podfile</code>)</p>
+<p>o Make sure we use a released version of Aztec iOS and Aztec Android: <code>grep WordPress-Aztec-iOS RNTAztecView.podspec</code> and <code>grep aztecVersion gutenberg/packages/react-native-aztec/android/build.gradle</code>(should be part of a <code>./release-check.sh</code> script). Also insure that the line for testing non-official versions of Aztec on iOS is commented out (this command should find a match: <code>grep "^s*#pod 'WordPress-Aztec-iOS'" ios/Podfile</code>)</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
