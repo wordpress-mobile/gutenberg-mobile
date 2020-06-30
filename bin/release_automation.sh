@@ -55,17 +55,14 @@ cd ..
 # Commit package version update changes
 git commit -a -m "Update gb mobile version to: $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
 
+# Make sure podfile is updated
+npm run core preios
+
 # Update the bundles
 npm run bundle || { echo "Error: 'yarn bundle' failed"; exit 1; }
 
 # Commit bundle changes
 git commit -a -m "Update bundle for: $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
-
-# Make sure podfile is updated
-npm run core preios || { echo "Error: pod install failed"; exit 1; }
-
-# Commit changes
-git commit -a -m "Update pod files for $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
 
 # Read PR template
 PR_TEMPLATE_PATH='.github/PULL_REQUEST_TEMPLATE/release_pull_request.md'
