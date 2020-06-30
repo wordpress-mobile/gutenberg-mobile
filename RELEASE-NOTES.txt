@@ -1,3 +1,8 @@
+1.32.0
+------
+* [***] Adds Copy, Cut, Paste, and Duplicate functionality to blocks
+* [***] Add support for mentions.
+
 1.31.0
 ------
 * [**] Add support for customizing gradient type and angle in Buttons and Cover blocks.
