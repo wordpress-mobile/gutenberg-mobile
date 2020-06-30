@@ -59,7 +59,7 @@ git commit -a -m "Update gb mobile version to: $VERSION_NUMBER" || { echo "Error
 npm run core preios
 
 # Update the bundles
-npm run bundle || { echo "Error: 'yarn bundle' failed"; exit 1; }
+npm run bundle || { printf "\nError: 'npm bundle' failed.\nIf there is an error stating something like \"Command 'bundle' unrecognized.\" above, perhaps try running 'rm -rf node_modules gutenberg/node_modules && npm install'.\n"; exit 1; }
 
 # Commit bundle changes
 git commit -a -m "Update bundle for: $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
