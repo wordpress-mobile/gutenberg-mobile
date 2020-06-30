@@ -64,9 +64,6 @@ git commit -a -m "Update bundle for: $VERSION_NUMBER" || { echo "Error: failed t
 # Make sure podfile is updated
 npm run core preios || { echo "Error: pod install failed"; exit 1; }
 
-# Generate updated podspecs
-./bin/generate-podspecs.sh || { echo "Error: generate-podspecs script failed"; exit 1; }
-
 # Commit changes
 git commit -a -m "Update pod files for $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
 
