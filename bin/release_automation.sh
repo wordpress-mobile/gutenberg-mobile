@@ -47,8 +47,19 @@ npx json -I -f package.json -e "this.version='$VERSION_NUMBER'" || { echo "Error
 # Set version number in react-native-editor package.json
 npx json -I -f gutenberg/packages/react-native-editor/package.json -e "this.version='$VERSION_NUMBER'" || { echo "Error: could not update version in react-native-editor package.json"; exit 1; }
 
+# Commit react-native-editor package changes
+cd gutenberg
+git commit -a -m "Update react-native-editor version to: $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
+cd ..
+
+# Commit package version update changes
+git commit -a -m "Update gb mobile version to: $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
+
 # Update the bundles
 npm run bundle || { echo "Error: 'yarn bundle' failed"; exit 1; }
+
+# Commit bundle changes
+git commit -a -m "Update bundle for: $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
 
 # Make sure podfile is updated
 npm run core preios || { echo "Error: pod install failed"; exit 1; }
@@ -57,7 +68,7 @@ npm run core preios || { echo "Error: pod install failed"; exit 1; }
 ./bin/generate-podspecs.sh || { echo "Error: generate-podspecs script failed"; exit 1; }
 
 # Commit changes
-git commit -a -m "Prepare Release $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
+git commit -a -m "Update pod files for $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
 
 # Read PR template
 PR_TEMPLATE_PATH='.github/PULL_REQUEST_TEMPLATE/release_pull_request.md'
