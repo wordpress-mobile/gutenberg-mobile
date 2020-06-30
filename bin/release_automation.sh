@@ -1,20 +1,5 @@
 #!/bin/bash
 
-# Check for testing flag
-if [ "$1" == "--testing" ]; then
-    echo "Release script running in testing mode. Not performing for proper branch state or creating a PR."
-    TESTING="true"
-else
-    # Verify before running full release script
-    read -p "This will execute the full release script, including creating a PR on Github. Would you like to proceed? (y/n) " -n 1
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        printf "\n\nProceeding with full release script...\n"
-    else
-        printf "\n\nAborting relese script...\nTry running this script with the '--testing' flag if you are testing this script.\n"
-        exit 1
-    fi
-fi
-
 # Check that Github CLI is installed
 command -v gh >/dev/null || { echo "Error: The Github CLI must be installed."; exit 1; }
 
@@ -22,23 +7,21 @@ command -v gh >/dev/null || { echo "Error: The Github CLI must be installed."; e
 SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$SCRIPT_PATH/.."
 
-if [[ "$TESTING" != "true" ]]; then
-    # Check current branch is develop, master, or release/* branch
-    CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-    if [[ ! "$CURRENT_BRANCH" =~ "^develop$|^main$|^release/.*" ]]; then
-        echo "Releases should generally only be based on 'develop', 'main', or an earlier release branch."
-        echo "You are currently on the '$CURRENT_BRANCH' branch."
-        read -p "Are you sure you want to create a release branch from the '$CURRENT_BRANCH' branch? (y/n) " -n 1
-        echo ""
-        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-            printf "Aborting release...\n"
-            exit 1
-        fi
+# Check current branch is develop, master, or release/* branch
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [[ ! "$CURRENT_BRANCH" =~ "^develop$|^main$|^release/.*" ]]; then
+    echo "Releases should generally only be based on 'develop', 'main', or an earlier release branch."
+    echo "You are currently on the '$CURRENT_BRANCH' branch."
+    read -p "Are you sure you want to create a release branch from the '$CURRENT_BRANCH' branch? (y/n) " -n 1
+    echo ""
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        printf "Aborting release...\n"
+        exit 1
     fi
-
-    # Confirm branch is clean
-    [ -z "$(git status --porcelain)" ] || { git status; printf "\nUncommitted changes found. Aborting release script...\n"; exit 1; }
 fi
+
+# Confirm branch is clean
+[ -z "$(git status --porcelain)" ] || { git status; printf "\nUncommitted changes found. Aborting release script...\n"; exit 1; }
 
 
 # Ask for new version number
@@ -82,8 +65,12 @@ npm run bundle || { printf "\nError: 'npm bundle' failed.\nIf there is an error 
 # Commit bundle changes
 git commit -a -m "Update bundle for: $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
 
-if [[ "$TESTING" == "true" ]]; then
-    printf "\n\nAborting before PR creation because script is being run in 'testing mode'\n"
+# Verify before publishing a PR
+read -p "This script will now create a PR on Github. Would you like to proceed? (y/n) " -n 1
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    printf "\n\nProceeding to create a PR...\n"
+else
+    printf "\n\nFinishing release script without creating a PR\n"
     exit 1
 fi
 
