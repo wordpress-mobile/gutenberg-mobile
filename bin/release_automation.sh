@@ -35,8 +35,17 @@ npm install || { echo "Error: 'yarn install' failed"; echo 1; }
 RELEASE_BRANCH="release/$VERSION_NUMBER"
 git switch -c "$RELEASE_BRANCH" || { echo "Error: could not create '$RELEASE_BRANCH' branch."; exit 1; }
 
+# Create Git branch in Gutenberg
+GB_RELEASE_BRANCH="rnmobile/release_$VERSION_NUMBER"
+cd gutenberg
+git switch -c "$GB_RELEASE_BRANCH" || { echo "Error: could not create '$GB_RELEASE_BRANCH' branch."; exit 1; }
+cd ..
+
 # Set version number in package.json
-npm run json -I -f package.json -e "this.version='$VERSION_NUMBER'" || { echo "Error: could not update version in package.json"; exit 1; }
+npx json -I -f package.json -e "this.version='$VERSION_NUMBER'" || { echo "Error: could not update version in package.json"; exit 1; }
+
+# Set version number in react-native-editor package.json
+npx json -I -f gutenberg/packages/react-native-editor/package.json -e "this.version='$VERSION_NUMBER'" || { echo "Error: could not update version in react-native-editor package.json"; exit 1; }
 
 # Update the bundles
 npm run bundle || { echo "Error: 'yarn bundle' failed"; exit 1; }
