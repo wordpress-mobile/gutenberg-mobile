@@ -1,0 +1,21 @@
+{
+    "name": "react-native-blur",
+    "version": "3.3.0",
+    "summary": "Component implementation for UIVisualEffectView's blur and vibrancy effect.",
+    "description": "Component implementation for UIVisualEffectView's blur and vibrancy effect.",
+    "license": "MIT",
+    "authors": "react-native-community",
+    "homepage": "https://github.com/react-native-community/react-native-blur",
+    "source": {
+        "git": "https://github.com/react-native-community/react-native-blur",
+        "tag": "v3.3.0"
+    },
+    "source_files": "ios/*.{h,m}",
+    "preserve_paths": "**/*.js",
+    "platforms": {
+        "ios": "8.0"
+    },
+    "dependencies": {
+        "React": []
+    }
+}
