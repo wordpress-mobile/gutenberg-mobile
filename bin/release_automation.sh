@@ -83,4 +83,4 @@ PR_TEMPLATE=$(cat "$PR_TEMPLATE_PATH")
 PR_BODY=${PR_TEMPLATE//v1.XX.Y/$VERSION_NUMBER}
 
 # Create PR in GitHub
-gh pr create -t "Release $VERSION_NUMBER" -b "$PR_BODY" -B master -l "release-process" -d || { echo "Error: Failed to create PR"; exit 1; }
+gh pr create -t "Release $VERSION_NUMBER" -b "$PR_BODY" -B main -l "release-process" -d || { echo "Error: Failed to create PR"; exit 1; }
