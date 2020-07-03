@@ -10,6 +10,7 @@
 * [***] Add support for mentions.
 * [***] Users can now individually edit unsupported blocks found in posts or pages.
 * [*] [iOS] Improved editor loading experience with Ghost Effect.
+* [*] Accessibility, update the title VoiceOver label to be more clear when you are editing the post or page title.
 
 1.31.1
 ------
