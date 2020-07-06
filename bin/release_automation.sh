@@ -30,7 +30,7 @@ echo "Current Version Number:$CURRENT_VERSION_NUMBER"
 read -p "Enter the new version number: " VERSION_NUMBER
 
 # Insure javascript dependencies are up-to-date
-npm install || { echo "Error: 'npm install' failed"; echo 1; }
+npm ci || { echo "Error: 'npm ci' failed"; echo 1; }
 
 # Create Git branch
 RELEASE_BRANCH="release/$VERSION_NUMBER"
