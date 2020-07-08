@@ -4,6 +4,12 @@
 * [***] Add support for mentions.
 * [*] [iOS] Improved editor loading experience with Ghost Effect.
 
+1.31.1
+------
+* Fix for pullquote stylying in dark mode.
+* Fix for button style.
+* Fix missing translations.
+
 1.31.0
 ------
 * [**] Add support for customizing gradient type and angle in Buttons and Cover blocks.
