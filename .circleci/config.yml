@@ -139,7 +139,7 @@ jobs:
     steps:
     - run:
         name: Install watchman
-        command: brew install watchman
+        command: brew unlink python@2 && brew install watchman
     - checkout
     - checkout-submodules
     - npm-install
