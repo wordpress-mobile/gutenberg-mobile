@@ -65,7 +65,7 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o Open a PR based on the release branch in Gutenberg-Mobile and target master. Example PR: https://github.com/wordpress-mobile/gutenberg-mobile/pull/1627. There should not be any conflicts with this PR.</p>
+<p>o Open a PR based on the release branch in Gutenberg-Mobile and target main. Example PR: https://github.com/wordpress-mobile/gutenberg-mobile/pull/1627. There should not be any conflicts with this PR.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -129,7 +129,7 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o Merge the Gutenberg-Mobile PR to master. WARNING: Don’t merge the Gutenberg PR to master at this point.</p>
+<p>o Merge the Gutenberg-Mobile PR to main. WARNING: Don’t merge the Gutenberg PR to master at this point.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -137,7 +137,7 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o Create a new GitHub release pointing to the tag: https://github.com/wordpress-mobile/gutenberg-mobile/releases/new?tag=X.XX.X&target=master&title=X.XX.X. Include a list of changes in the release's description</p>
+<p>o Create a new GitHub release pointing to the tag: https://github.com/wordpress-mobile/gutenberg-mobile/releases/new?tag=X.XX.X&target=main&title=X.XX.X. Include a list of changes in the release's description</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -145,7 +145,7 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o In WPAndroid, update the submodule to point to the merge commit on master.</p>
+<p>o In WPAndroid, update the submodule to point to the merge commit on GB-Mobile main.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -157,7 +157,7 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o Open a PR from Gutenberg-Mobile master to bring all the <code>gutenberg/after_X.XX.X</code> changes to <code>develop</code> and point to the Gutenberg side PR (if any changes happened specifically for the release). Merge the PR (or PR domino if Gutenberg changes are there)</p>
+<p>o Open a PR from Gutenberg-Mobile main to bring all the <code>gutenberg/after_X.XX.X</code> changes to <code>develop</code> and point to the Gutenberg side PR (if any changes happened specifically for the release). Merge the PR (or PR domino if Gutenberg changes are there)</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3} -->
