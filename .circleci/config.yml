@@ -172,8 +172,8 @@ jobs:
         - ~/.cocoapods/repos/trunk
         - gutenberg/packages/react-native-editor/ios/vendor
     - run:
-        name: Bundle iOS
-        command: npm run test:e2e:bundle:ios
+        name: Bundle iOS 25 times
+        command: for i in $(seq 1 25); do npm run clean && npm run test:e2e:bundle:ios zsh -i -c exit; done
     - run:
         name: Generate .app file for testing
         command: WORK_DIR=$(pwd) && cd ./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator && zip -r $WORK_DIR/gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip GutenbergDemo.app
