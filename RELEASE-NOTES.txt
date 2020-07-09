@@ -2,7 +2,7 @@
 ------
 * [***] Adds Copy, Cut, Paste, and Duplicate functionality to blocks
 * [***] Add support for mentions.
-* [***] The block editor now gives users the ability to individually edit unsupported blocks found in posts or pages. 
+* [***] Users can now individually edit unsupported blocks found in posts or pages. Not available on Jetpack connected self-hosted sites.
 * [*] [iOS] Improved editor loading experience with Ghost Effect.
 
 1.31.1
