@@ -2,7 +2,14 @@
 ------
 * [***] Adds Copy, Cut, Paste, and Duplicate functionality to blocks
 * [***] Add support for mentions.
+* [***] Users can now individually edit unsupported blocks found in posts or pages.
 * [*] [iOS] Improved editor loading experience with Ghost Effect.
+
+1.31.1
+------
+* Fix for pullquote stylying in dark mode.
+* Fix for button style.
+* Fix missing translations.
 
 1.31.0
 ------
