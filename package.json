@@ -1,6 +1,6 @@
 {
   "name": "gutenberg-mobile",
-  "version": "1.31.1",
+  "version": "1.32.0",
   "private": true,
   "config": {
     "jsfiles": "./*.js src/*.js src/**/*.js src/**/**/*.js",
@@ -61,7 +61,8 @@
     "prern-bundle": "patch-package --patch-dir gutenberg/packages/react-native-editor/metro-patch",
     "rn-bundle": "react-native bundle",
     "postrn-bundle": "patch-package --reverse --patch-dir gutenberg/packages/react-native-editor/metro-patch",
-    "bundle": "npm run clean; npm run bundle:android && npm run bundle:ios && npm run genstrings",
+    "bundle": "npm run clean; npm run bundle:js && npm run genstrings",
+    "bundle:js": "npm run bundle:android && npm run bundle:ios",
     "bundle:android": "mkdir -p bundle/android && npm run rn-bundle -- --platform android --dev false --entry-file ./index.js --assets-dest ./bundle/android --bundle-output ./bundle/android/App.js --sourcemap-output ./bundle/android/App.js.map",
     "bundle:ios": "mkdir -p bundle/ios && npm run rn-bundle -- --platform ios --dev false --entry-file ./index.js --assets-dest ./bundle/ios --bundle-output ./bundle/ios/App.js --sourcemap-output ./bundle/ios/App.js.map",
     "install:wpcli": "(test -x bin/wp-cli.phar || curl -Ls https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o bin/wp-cli.phar && chmod +x bin/wp-cli.phar) && bin/wp-cli.phar --info",
