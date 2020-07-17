@@ -137,9 +137,6 @@ jobs:
     macos:
       xcode: "11.2.1"
     steps:
-    - run:
-        name: Install watchman
-        command: brew unlink python@2 && brew install watchman
     - checkout
     - checkout-submodules
     - npm-install
