@@ -48,6 +48,9 @@ npx json -I -f package.json -e "this.version='$VERSION_NUMBER'" || { echo "Error
 # Set version number in react-native-editor package.json
 npx json -I -f gutenberg/packages/react-native-editor/package.json -e "this.version='$VERSION_NUMBER'" || { echo "Error: could not update version in react-native-editor package.json"; exit 1; }
 
+# Make sure podfile is updated
+npm run core preios
+
 # Commit react-native-editor package changes
 cd gutenberg
 git commit -a -m "Update react-native-editor version to: $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
@@ -55,9 +58,6 @@ cd ..
 
 # Commit package version update changes
 git commit -a -m "Update gb mobile version to: $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
-
-# Make sure podfile is updated
-npm run core preios
 
 # Update the bundles
 npm run bundle || { printf "\nError: 'npm bundle' failed.\nIf there is an error stating something like \"Command 'bundle' unrecognized.\" above, perhaps try running 'rm -rf node_modules gutenberg/node_modules && npm install'.\n"; exit 1; }
