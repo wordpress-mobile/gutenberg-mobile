@@ -65,6 +65,16 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
+<p>o Check that the version number in <code>Gutenberg.podspec</code> matches the one in <code>gutenberg/packages/react-native-bridge/Gutenberg.podspec</code>.
+</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>o Check the version in<code>RNTAztecView.podspec</code> matches <code>gutenberg/packages/react-native-aztec/RNTAztecView.podspec</code> and they refer to the same Aztec version.
+</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
 <p>o Open a PR based on the release branch in Gutenberg-Mobile and target main. Example PR: https://github.com/wordpress-mobile/gutenberg-mobile/pull/1627. There should not be any conflicts with this PR.</p>
 <!-- /wp:paragraph -->
 
