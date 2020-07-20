@@ -21,8 +21,7 @@ if [[ ! "$CURRENT_BRANCH" =~ "^develop$|^main$|^release/.*" ]]; then
 fi
 
 # Confirm branch is clean
-[ -z "$(git status --porcelain)" ] || { git status; printf "\nUncommitted changes found. Aborting release script...\n"; exit 1; }
-
+[[ -z "$(git status --porcelain)" ]] || { git status; printf "\nUncommitted changes found. Aborting release script...\n"; exit 1; }
 
 # Ask for new version number
 CURRENT_VERSION_NUMBER=$(./node_modules/.bin/json -f package.json version)
@@ -42,28 +41,41 @@ cd gutenberg
 git switch -c "$GB_RELEASE_BRANCH" || { echo "Error: could not create '$GB_RELEASE_BRANCH' branch."; exit 1; }
 cd ..
 
-# Set version number in package.json
-npx json -I -f package.json -e "this.version='$VERSION_NUMBER'" || { echo "Error: could not update version in package.json"; exit 1; }
+# Set version numbers
+for file in 'package.json' 'package-lock.json' 'gutenberg/packages/react-native-editor/package.json'; do
+    npx json -I -f "$file" -e "this.version='$VERSION_NUMBER'" || { echo "Error: could not update version in ${file}"; exit 1; }
+done
 
-# Set version number in react-native-editor package.json
-npx json -I -f gutenberg/packages/react-native-editor/package.json -e "this.version='$VERSION_NUMBER'" || { echo "Error: could not update version in react-native-editor package.json"; exit 1; }
-
-# Commit react-native-editor package changes
+# Commit react-native-editor version update
 cd gutenberg
-git commit -a -m "Update react-native-editor version to: $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
+git add 'packages/react-native-editor/package.json'
+git commit -m "Release script: Update react-native-editor version to $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
 cd ..
 
-# Commit package version update changes
-git commit -a -m "Update gb mobile version to: $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
+# Commit gutenberg-mobile version updates
+git add 'package.json' 'package-lock.json'
+git commit -m "Release script: Update gb mobile version to $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
+
 
 # Make sure podfile is updated
-npm run core preios
+PRE_IOS_COMMAND="npm run core preios"
+eval "$PRE_IOS_COMMAND"
+
+# If preios results in changes, commit them
+cd gutenberg
+if [[ ! -z "$(git status --porcelain)" ]]; then
+  git commit -a -m "Release script: Update with changes from '$PRE_IOS_COMMAND'" || { echo "Error: failed to commit changes from '$PRE_IOS_COMMAND'"; exit 1; }
+else
+  echo "There were no changes from '$PRE_IOS_COMMAND' to be committed."
+fi
+cd ..
+
 
 # Update the bundles
 npm run bundle || { printf "\nError: 'npm bundle' failed.\nIf there is an error stating something like \"Command 'bundle' unrecognized.\" above, perhaps try running 'rm -rf node_modules gutenberg/node_modules && npm install'.\n"; exit 1; }
 
 # Commit bundle changes
-git commit -a -m "Update bundle for: $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
+git commit -a -m "Release script: Update bundle for: $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
 
 # Verify before publishing a PR
 read -p "This script will now create a PR on Github. Would you like to proceed? (y/n) " -n 1
