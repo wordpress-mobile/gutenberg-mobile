@@ -217,14 +217,14 @@ jobs:
       - run:
           name: First try
           command: |
-            echo "first run succeeds"
-            exit 0
+            echo "first run failed"
+            exit 1
       - run:
           name: Second try
           when: on_fail
           command: |
-            echo "second run does not run"
-            exit 1
+            echo "second run succeeded"
+            exit 0
 
 workflows:
   gutenberg-mobile:
