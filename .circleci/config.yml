@@ -210,41 +210,58 @@ jobs:
                 include_job_number_field: false
                 include_project_field: false
                 failure_message: ':red_circle: Scheduled tests failed on iOS device!'
+  test-job:
+    docker:
+        - image: circleci/android:api-29-node
+    steps:
+      - run:
+          name: First try
+          command: |
+            echo "first run succeeds"
+            exit 0
+      - run:
+          name: Second try
+          when: on_fail
+          command: |
+            echo "second run does not run"
+            exit 1
 
 workflows:
   gutenberg-mobile:
     jobs:
-      - checks:
-          name: Check Correctness
-          check-correctness: true
-      - checks:
-          name: Test iOS
-          platform: ios
-          check-tests: true
-      - checks:
-          name: Test Android
-          platform: android
-          check-tests: true
-      - ios-device-checks:
-          name: Test iOS on Device - Canaries
-          is-canary: "-canary"
-      - android-device-checks:
-          name: Test Android on Device - Canaries
-          is-canary: "-canary"
-      - Optional UI Tests:
-          type: approval
-          filters:
-            branches:
-              ignore:
-                - develop
-      - ios-device-checks:
-          name: Test iOS on Device - Full
-          requires: [ "Optional UI Tests" ]
-      - android-device-checks:
-          name: Test Android on Device - Full
-          requires: [ "Optional UI Tests" ]
-      - android-native-unit-tests:
-          name: Android Native Unit Tests
+      - test-job:
+          name: Running retrying test job
+#      - checks:
+#          name: Check Correctness
+#          check-correctness: true
+#      - checks:
+#          name: Test iOS
+#          platform: ios
+#          check-tests: true
+#      - checks:
+#          name: Test Android
+#          platform: android
+#          check-tests: true
+#      - ios-device-checks:
+#          name: Test iOS on Device - Canaries
+#          is-canary: "-canary"
+#      - android-device-checks:
+#          name: Test Android on Device - Canaries
+#          is-canary: "-canary"
+#      - Optional UI Tests:
+#          type: approval
+#          filters:
+#            branches:
+#              ignore:
+#                - develop
+#      - ios-device-checks:
+#          name: Test iOS on Device - Full
+#          requires: [ "Optional UI Tests" ]
+#      - android-device-checks:
+#          name: Test Android on Device - Full
+#          requires: [ "Optional UI Tests" ]
+#      - android-native-unit-tests:
+#          name: Android Native Unit Tests
 
   ui-tests-full-scheduled:
     jobs:
