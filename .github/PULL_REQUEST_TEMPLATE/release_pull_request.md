@@ -28,11 +28,12 @@ Release for Gutenberg Mobile v1.XX.Y
 
 ## Release Submission Checklist
 
-- [ ] Release number was bumped
-- [ ] Aztec dependencies are pointing to a stable release
-  - iOS: 'grep WordPressAztec-iOS RNTAztecView.podspec'
-  - Android: 'grep aztecVersion react-native-aztec/android/build.gradle'
-- [ ] Gutenberg 'Podfile' and 'Podfile.lock' inside './ios/' are updated to the release number
-- [ ] Bundle package of the release is updated 
-- [ ] Check if `RELEASE-NOTES.txt` is updated with all the changes that made it to the release
+- [ ] Release number was bumped in `package.json` and `gutenberg/packages/react-native-editor/package.json`.
+- [ ] Aztec dependencies are pointing to a stable release.
+  - iOS: 'grep WordPressAztec-iOS RNTAztecView.podspec'.
+  - iOS: Aztec dependencies match in `RNTAztecView.podspec` and `gutenberg/packages/react-native-aztec/RNTAztecView.podspec`.
+  - Android: 'grep aztecVersion react-native-aztec/android/build.gradle'.
+- [ ] Gutenberg 'Podfile' and 'Podfile.lock' inside 'gutenberg/package/react-native-editor/ios/' are updated to the release number.
+- [ ] Bundle package of the release is updated.
+- [ ] Check if `RELEASE-NOTES.txt` and `gutenberg/packages/react-native-editor/RELEASE-NOTES.txt` are updated with all the changes that made it to the release.
 
