@@ -24,6 +24,8 @@
     <string name="gutenberg_native_add_image_or_video" tools:ignore="UnusedResources">ADD IMAGE OR VIDEO</string>
     <string name="gutenberg_native_add_link_text" tools:ignore="UnusedResources">Add link text</string>
     <string name="gutenberg_native_add_paragraph_block" tools:ignore="UnusedResources">Add paragraph block</string>
+    <string name="gutenberg_native_add_the_author_of_this_post" tools:ignore="UnusedResources">Add the author of this post.</string>
+    <string name="gutenberg_native_add_the_title_of_your_post" tools:ignore="UnusedResources">Add the title of your post.</string>
     <string name="gutenberg_native_add_to_beginning" tools:ignore="UnusedResources">Add To Beginning</string>
     <string name="gutenberg_native_add_to_end" tools:ignore="UnusedResources">Add To End</string>
     <string name="gutenberg_native_add_url" tools:ignore="UnusedResources">Add URL</string>
@@ -57,6 +59,11 @@
     <string name="gutenberg_native_convert_to_blocks" tools:ignore="UnusedResources">Convert to blocks</string>
     <string name="gutenberg_native_coordinated_universal_time" tools:ignore="UnusedResources">Coordinated Universal Time</string>
     <string name="gutenberg_native_copied_block" tools:ignore="UnusedResources">Copied block</string>
+    <!-- Translators: %d: Number of blocks being copied. -->
+    <string-array name="gutenberg_native_copied_d_block_to_clipboard" tools:ignore="UnusedResources">
+        <item>Copied %d block to clipboard.</item>
+        <item>Copied %d blocks to clipboard.</item>
+    </string-array>
     <string name="gutenberg_native_copy_block" tools:ignore="UnusedResources">Copy block</string>
     <!-- translators: %s: current cell value. -->
     <string name="gutenberg_native_current_value_is_s" tools:ignore="UnusedResources">Current value is %s</string>
@@ -66,6 +73,7 @@
     <string name="gutenberg_native_delete_site_logo" tools:ignore="UnusedResources">Delete Site Logo</string>
     <string name="gutenberg_native_description" tools:ignore="UnusedResources">description</string>
     <string name="gutenberg_native_dismiss" tools:ignore="UnusedResources">Dismiss</string>
+    <string name="gutenberg_native_display_a_post_s_tags" tools:ignore="UnusedResources">Display a post\'s tags.</string>
     <!-- translators: sample content for "About" page template -->
     <string name="gutenberg_native_don_t_cry_because_it_s_over_smile_because_it_happened" tools:ignore="UnusedResources">Don’t cry because it’s over, smile because it happened.</string>
     <string name="gutenberg_native_double_tap_to_add_a_block" tools:ignore="UnusedResources">Double tap to add a block</string>
@@ -150,6 +158,11 @@ translators: sample content for "Services" page template -->
     <string name="gutenberg_native_move_block_up_from_row_1_s_to_row_2_s" tools:ignore="UnusedResources">Move block up from row %1$s to row %2$s</string>
     <string name="gutenberg_native_move_image_backward" tools:ignore="UnusedResources">Move Image Backward</string>
     <string name="gutenberg_native_move_image_forward" tools:ignore="UnusedResources">Move Image Forward</string>
+    <!-- Translators: %d: Number of blocks being cut. -->
+    <string-array name="gutenberg_native_moved_d_block_to_clipboard" tools:ignore="UnusedResources">
+        <item>Moved %d block to clipboard.</item>
+        <item>Moved %d blocks to clipboard.</item>
+    </string-array>
     <string name="gutenberg_native_my_document_setting_panel" tools:ignore="UnusedResources">My Document Setting Panel</string>
     <!-- translators: sample content for "Portfolio" page template -->
     <string name="gutenberg_native_my_portfolio_showcases_various_projects_created_throughout_my_car" tools:ignore="UnusedResources">My portfolio showcases various projects created throughout my career. See my contact information below and get in touch.</string>
@@ -169,12 +182,13 @@ translators: sample content for "Services" page template -->
     <string name="gutenberg_native_open_the_block_list_view" tools:ignore="UnusedResources">Open the block list view.</string>
     <!-- translators: accessibility text. %s: Page break text. -->
     <string name="gutenberg_native_page_break_block_s" tools:ignore="UnusedResources">Page break block. %s</string>
-    <string name="gutenberg_native_paste_block" tools:ignore="UnusedResources">Paste block</string>
+    <string name="gutenberg_native_paste_block_after" tools:ignore="UnusedResources">Paste block after</string>
     <string name="gutenberg_native_paste_url" tools:ignore="UnusedResources">Paste URL</string>
     <!-- translators: title for "Portfolio" page template -->
     <string name="gutenberg_native_portfolio" tools:ignore="UnusedResources">Portfolio</string>
     <!-- translators: sample content for "Team" page template -->
     <string name="gutenberg_native_position_or_job_title" tools:ignore="UnusedResources">Position or Job Title</string>
+    <string name="gutenberg_native_post_comments_block_no_post_found" tools:ignore="UnusedResources">Post comments block: no post found.</string>
     <!-- translators: accessibility text. empty post title. -->
     <string name="gutenberg_native_post_title_empty" tools:ignore="UnusedResources">Post title. Empty</string>
     <!-- translators: accessibility text. %s: text content of the post title. -->
@@ -240,6 +254,8 @@ translators: sample content for "Services" page template -->
     <string name="gutenberg_native_upload_an_image_or_pick_one_from_your_media_library_to_be_your_si" tools:ignore="UnusedResources">Upload an image, or pick one from your media library, to be your site logo</string>
     <!-- translators: sample content for "Contact" page template -->
     <string name="gutenberg_native_usa" tools:ignore="UnusedResources">USA</string>
+    <!-- translators: accessibility text. Empty video caption. -->
+    <string name="gutenberg_native_video_caption_empty" tools:ignore="UnusedResources">Video caption. Empty</string>
     <!-- translators: accessibility text. %s: video caption. -->
     <string name="gutenberg_native_video_caption_s" tools:ignore="UnusedResources">Video caption. %s</string>
     <!-- translators: sample content for "About" page template -->
