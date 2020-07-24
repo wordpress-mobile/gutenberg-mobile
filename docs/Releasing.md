@@ -37,30 +37,6 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o In the <code>gutenberg-mobile</code> submodule, branch <code>develop</code> to the release branch (eg. <code>git checkout develop; git pull origin develop; git checkout -b release/X.XX.X</code>).</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>o Update the package.json file with the new version number in <code>package.json</code> and <code>gutenberg/packages/react-native-editor/package.json</code></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>o Update the bundle files by running <code>npm run bundle</code></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>o Push the release branch, <code>git push origin release/X.XX.X</code>.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>o Create the gutenberg submodule branch: <code>cd gutenberg; git checkout -b rnmobile/release-X.XX.X</code>.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>o Push the gutenberg submodule branch: <code>git push origin rnmobile/release-X.XX.X</code>.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
 <p>o Make sure we use a released version of Aztec iOS and Aztec Android: <code>grep WordPress-Aztec-iOS RNTAztecView.podspec</code> and <code>grep aztecVersion gutenberg/packages/react-native-aztec/android/build.gradle</code>(should be part of a <code>./release-check.sh</code> script). Also insure that the line for testing non-official versions of Aztec on iOS is commented out (this command should find a match: <code>grep "^s*#pod 'WordPress-Aztec-iOS'" ios/Podfile</code>)</p>
 <!-- /wp:paragraph -->
 
@@ -75,11 +51,11 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o Open a PR based on the release branch in Gutenberg-Mobile and target main. Example PR: https://github.com/wordpress-mobile/gutenberg-mobile/pull/1627. There should not be any conflicts with this PR.</p>
+<p>o From gutenberg-mobile's <code>develop</code> branch (making sure the gutenberg submodule is updated and clean), run the release script: <code>./bin/release_automation.sh</code>. This will take care of creating the branches in gutenberg-mobile and gutenberg as well as creating the gutenberg-mobile release PR.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o Create a new branch in the main WP apps (WordPress-iOS, WordPress-Android) named <code>gutenberg/integrate_release_X.XX.X</code>.</p>
+<p>o Create a new branch in the main WP apps (WordPress-iOS, WordPress-Android) based on their <code>develop</code> branches. Name the new branch <code>gutenberg/integrate_release_X.XX.X</code>.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -87,7 +63,7 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o Create a PR in WPAndroid and WPiOS. Example on <a href="https://github.com/wordpress-mobile/WordPress-Android/pull/10863">WPAndroid</a>, <a href="https://github.com/wordpress-mobile/WordPress-iOS/pull/13010">WPiOS</a>. To write the PR description: pull the differences between previous and current releases. Update the RELEASE-NOTES.txt files in each PR (get info from the gutenberg-mobile RELEASE-NOTES.txt).</p>
+<p>o Create a PR in WPAndroid and WPiOS with a description along these lines: "This PR incorporates the X.XX.X release of gutenberg-mobile. For details about the changes included in this PR and testing instructions please see the related gutenberg-mobile PR: [gb-mobile PR link]."</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -95,7 +71,7 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o On Android update the git submodule reference for <code>libs/gutenberg-mobile</code> (<code>cd libs/gutenberg-mobile &amp;&amp; git checkout release/X.XX.X &amp;&amp; git pull origin release/X.XX.X &amp;&amp; cd .. &amp;&amp; git add gutenberg-mobile</code>) and run <code>python tools/merge_strings_xml.py</code> to update the main strings.xml file.</p>
+<p>o On Android: (1) update the git submodule reference for <code>libs/gutenberg-mobile</code> (<code>cd libs/gutenberg-mobile &amp;&amp; git checkout release/X.XX.X &amp;&amp; git pull origin release/X.XX.X &amp;&amp; cd .. &amp;&amp; git add gutenberg-mobile</code>); and (2) run <code>python tools/merge_strings_xml.py</code> to update the main <code>strings.xml</code> file.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
