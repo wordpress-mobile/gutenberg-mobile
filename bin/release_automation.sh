@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source release_prechecks.sh
+
 # Check that Github CLI is installed
 command -v gh >/dev/null || { echo "Error: The Github CLI must be installed."; exit 1; }
 
@@ -30,6 +32,19 @@ read -p "Enter the new version number: " VERSION_NUMBER
 
 # Insure javascript dependencies are up-to-date
 npm ci || { echo "Error: 'npm ci' failed"; echo 1; }
+
+
+# If there are any open PRs with a milestone matching the release version number, notify the user and ask them if they want to proceed
+number_milestone_prs=$(check_if_version_has_pending_prs_for_milestone "$VERSION_NUMBER")
+if [[ ! -z "$number_milestone_prs" ]] && [[ "0" != "$number_milestone_prs" ]]; then
+    echo "There are currently $number_milestone_prs PRs with a milestone matching $VERSION_NUMBER."
+    read -p "Do you want to proceed with cutting the release? (y/n) " -n 1
+    echo ""
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        printf "Exiting release script...\n"
+        exit 1
+    fi
+fi
 
 # Create Git branch
 RELEASE_BRANCH="release/$VERSION_NUMBER"
