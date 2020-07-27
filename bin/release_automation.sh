@@ -1,15 +1,30 @@
 #!/bin/bash
 
-source release_prechecks.sh
-
-# Check that Github CLI is installed
-command -v gh >/dev/null || { echo "Error: The Github CLI must be installed."; exit 1; }
+# Before creating the release, this script performs the following checks:
+# - AztecAndroid and WordPress-Aztec-iOS are set to release versions
+# - Release is being created off of either develop, main, or release/*
+# - Release is being created off of a clean branch
+# - Whether there are any open PRs targeting the milestone for the release
 
 # Execute script commands from project's root directory
 SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$SCRIPT_PATH/.."
 
-# Check current branch is develop, master, or release/* branch
+source bin/release_prechecks.sh
+
+# Check that Github CLI is installed
+command -v gh >/dev/null || { echo "Error: The Github CLI must be installed."; exit 1; }
+
+# Check that Aztec versions are set to release versions
+aztec_version_problems="$(check_android_and_ios_aztec_versions)"
+if [[ ! -z "$aztec_version_problems" ]]; then
+    printf "\nThere appear to be problems with the Aztec versions:\n$aztec_version_problems\n"
+    confirm_to_proceed "Do you want to proceed with the release despite the ^above^ problem(s) with the Aztec version?"
+else
+    echo "Confirmed that Aztec Libraries are set to release versions. Proceeding..."
+fi
+
+## Check current branch is develop, main, or release/* branch
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 if [[ ! "$CURRENT_BRANCH" =~ "^develop$|^main$|^release/.*" ]]; then
     echo "Releases should generally only be based on 'develop', 'main', or an earlier release branch."
