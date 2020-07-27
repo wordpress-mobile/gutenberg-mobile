@@ -3,6 +3,7 @@
 * [***] Media editing support in Media & Text block.
 * [***] New block: Social Icons
 * [*] Cover block placeholder is updated to allow users start the block with a background color
+* [*] Accessibility, update the title VoiceOver label to be more clear when you are editing the post or page title.
 
 1.32.0
 ------
@@ -10,7 +11,6 @@
 * [***] Add support for mentions.
 * [***] Users can now individually edit unsupported blocks found in posts or pages.
 * [*] [iOS] Improved editor loading experience with Ghost Effect.
-* [*] Accessibility, update the title VoiceOver label to be more clear when you are editing the post or page title.
 
 1.31.1
 ------
