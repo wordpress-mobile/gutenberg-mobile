@@ -8,6 +8,7 @@ cd "$SCRIPT_PATH/.."
 # Confirm to Proceed Prompt
 #####
 
+# Accepts a single argument: a yes/no question (ending with a ? most likely) to ask the user
 function confirm_to_proceed() {
     read -p "$1 (y/n) " -n 1
     echo ""

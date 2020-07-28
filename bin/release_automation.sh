@@ -29,12 +29,7 @@ CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 if [[ ! "$CURRENT_BRANCH" =~ "^develop$|^main$|^release/.*" ]]; then
     echo "Releases should generally only be based on 'develop', 'main', or an earlier release branch."
     echo "You are currently on the '$CURRENT_BRANCH' branch."
-    read -p "Are you sure you want to create a release branch from the '$CURRENT_BRANCH' branch? (y/n) " -n 1
-    echo ""
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        printf "Aborting release...\n"
-        exit 1
-    fi
+    confirm_to_proceed "Are you sure you want to create a release branch from the '$CURRENT_BRANCH' branch?"
 fi
 
 # Confirm branch is clean
@@ -53,12 +48,7 @@ npm ci || { echo "Error: 'npm ci' failed"; echo 1; }
 number_milestone_prs=$(check_if_version_has_pending_prs_for_milestone "$VERSION_NUMBER")
 if [[ ! -z "$number_milestone_prs" ]] && [[ "0" != "$number_milestone_prs" ]]; then
     echo "There are currently $number_milestone_prs PRs with a milestone matching $VERSION_NUMBER."
-    read -p "Do you want to proceed with cutting the release? (y/n) " -n 1
-    echo ""
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        printf "Exiting release script...\n"
-        exit 1
-    fi
+    confirm_to_proceed "Do you want to proceed with cutting the release?"
 fi
 
 # Create Git branch
