@@ -1,3 +1,10 @@
+1.33.0
+------
+* [***] Media editing support in Media & Text block.
+* [***] New block: Social Icons
+* [*] Cover block placeholder is updated to allow users start the block with a background color
+* [*] Accessibility, update the title VoiceOver label to be more clear when you are editing the post or page title.
+
 1.32.0
 ------
 * [***] Adds Copy, Cut, Paste, and Duplicate functionality to blocks
