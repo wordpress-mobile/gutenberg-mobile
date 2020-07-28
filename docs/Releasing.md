@@ -102,6 +102,10 @@ cut a new release.
 <p>o If there were changes in Gutenberg repo, make sure to cherry-pick the changes that landed in the master branch back to the release branch.</p>
 <!-- /wp:paragraph -->
 
+<!-- wp:paragraph -->
+<p>o Add the new change to the "Extra PRs that Landed After the Release Was Cut" section of the gb-mobile PR description.</p>
+<!-- /wp:paragraph -->
+
 <!-- wp:heading {"level":3} -->
 <h3>Last Day</h3>
 <!-- /wp:heading -->
