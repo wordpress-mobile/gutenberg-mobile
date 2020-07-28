@@ -16,8 +16,8 @@ No extra PRs yet. 🎉
 ## Changes
 <!-- To determine the changes you can check the RELEASE-NOTES.txt and gutenberg/packages/react-native-editor/CHANGELOG.md files and cross check with the list of commits that are part of the PR -->
 
- - Change 1
- - Change 2
+ - Change 1: link-to-pr-describing-change-1
+ - Change 2: link-to-pr-describing-change-2
 
 ## Test plan
 
