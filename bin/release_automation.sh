@@ -39,6 +39,10 @@ fi
 CURRENT_VERSION_NUMBER=$(./node_modules/.bin/json -f package.json version)
 echo "Current Version Number:$CURRENT_VERSION_NUMBER"
 read -p "Enter the new version number: " VERSION_NUMBER
+if [[ -z "$VERSION_NUMBER" ]]; then
+    echo "Version number cannot be empty."
+    exit 1
+fi
 
 # Insure javascript dependencies are up-to-date
 npm ci || { echo "Error: 'npm ci' failed"; echo 1; }
