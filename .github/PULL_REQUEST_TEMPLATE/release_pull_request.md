@@ -11,14 +11,13 @@ Release for Gutenberg Mobile v1.XX.Y
 
 ## Extra PRs that Landed After the Release Was Cut
 
-- [ ]  PR 1
-- [ ]  PR 2
+No extra PRs yet. 🎉
 
 ## Changes
-<!-- To determine the changes you can check the RELEASE-NOTES.txt file and cross check with the list of commits that are part of the PR -->
+<!-- To determine the changes you can check the RELEASE-NOTES.txt and gutenberg/packages/react-native-editor/CHANGELOG.md files and cross check with the list of commits that are part of the PR -->
 
- - Change 1
- - Change 2
+ - Change 1: link-to-pr-describing-change-1
+ - Change 2: link-to-pr-describing-change-2
 
 ## Test plan
 
@@ -34,6 +33,6 @@ Release for Gutenberg Mobile v1.XX.Y
   - iOS: Aztec dependencies match in `RNTAztecView.podspec` and `gutenberg/packages/react-native-aztec/RNTAztecView.podspec`.
   - Android: 'grep aztecVersion react-native-aztec/android/build.gradle'.
 - [ ] Gutenberg 'Podfile' and 'Podfile.lock' inside 'gutenberg/package/react-native-editor/ios/' are updated to the release number.
+- [ ] Check if `RELEASE-NOTES.txt` and `gutenberg/packages/react-native-editor/CHANGELOG.md` are updated with all the changes that made it to the release.
 - [ ] Bundle package of the release is updated.
-- [ ] Check if `RELEASE-NOTES.txt` and `gutenberg/packages/react-native-editor/RELEASE-NOTES.txt` are updated with all the changes that made it to the release.
 
