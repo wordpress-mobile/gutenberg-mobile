@@ -111,18 +111,40 @@ else
     exit 1
 fi
 
-# Push gutenberg branch
+#####
+# Gutenberg PR
+#####
+
+# Get Checklist from Gutenberg PR template
 cd gutenberg
-git push origin "$GB_RELEASE_BRANCH" || { echo "Error: there was a problem pushing the gutenberg $GB_RELEASE_BRANCH branch"; exit 1; }
+GUTENBERG_PR_TEMPLATE_PATH=".github/PULL_REQUEST_TEMPLATE.md"
+test -f "$GUTENBERG_PR_TEMPLATE_PATH" || { echo "Error: Could not find PR template at $PR_TEMPLATE_PATH"; exit 1; }
+# Get the checklist from the gutenberg PR template by removing everything before the '## Checklist:' line
+CHECKLIST_FROM_GUTENBERG_PR_TEMPLATE=$(cat "$GUTENBERG_PR_TEMPLATE_PATH" | sed -e/'## Checklist:'/\{ -e:1 -en\;b1 -e\} -ed)
+
+# Construct body for Gutenberg release PR
+GUTENBERG_PR_BEGINNING="## Description
+Release $VERSION_NUMBER of the react-native-editor and Gutenberg-Mobile. For more information about this release and testing instructions, please see the related Gutenberg-Mobile PR: <!-- LINK TO GUTENBERG-MOBILE-PR -->"
+GUTENBERG_PR_BODY="$GUTENBERG_PR_BEGINNING
+
+$CHECKLIST_FROM_GUTENBERG_PR_TEMPLATE"
+
+# Create Draft Gutenberg Release PR in GitHub
+gh pr create -t "Mobile Release v$VERSION_NUMBER" -b "$GUTENBERG_PR_BODY" -B master -l 'Mobile App Android/iOS' -d || { echo "Error: Failed to create Gutenberg PR"; exit 1; }
 cd ..
 
-# Read PR template
+
+#####
+# Gutenberg-Mobile PR
+#####
+
+# Read GB-Mobile PR template
 PR_TEMPLATE_PATH='.github/PULL_REQUEST_TEMPLATE/release_pull_request.md'
 test -f "$PR_TEMPLATE_PATH" || { echo "Error: Could not find PR template at $PR_TEMPLATE_PATH"; exit 1; }
 PR_TEMPLATE=$(cat "$PR_TEMPLATE_PATH")
 
-# Replace version number in PR template
+# Replace version number in GB-Mobile PR template
 PR_BODY=${PR_TEMPLATE//v1.XX.Y/$VERSION_NUMBER}
 
-# Create PR in GitHub
-gh pr create -t "Release $VERSION_NUMBER" -b "$PR_BODY" -B main -l "release-process" -d || { echo "Error: Failed to create PR"; exit 1; }
+# Create Draft GB-Mobile Release PR in GitHub
+gh pr create -t "Release $VERSION_NUMBER" -b "$PR_BODY" -B main -l "release-process" -d || { echo "Error: Failed to create Gutenberg-Mobile PR"; exit 1; }
