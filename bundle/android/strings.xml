@@ -91,6 +91,7 @@ translators: 'About' as in a website's about page. -->
     <string name="gutenberg_native_add_text_that_respects_your_spacing_and_tabs_and_also_allows_styl" tools:ignore="UnusedResources">Add text that respects your spacing and tabs, and also allows styling.</string>
     <string name="gutenberg_native_add_the_author_of_this_post" tools:ignore="UnusedResources">Add the author of this post.</string>
     <string name="gutenberg_native_add_the_title_of_your_post" tools:ignore="UnusedResources">Add the title of your post.</string>
+    <string name="gutenberg_native_add_this_link" tools:ignore="UnusedResources">Add this link</string>
     <string name="gutenberg_native_add_title" tools:ignore="UnusedResources">Add title</string>
     <string name="gutenberg_native_add_to_beginning" tools:ignore="UnusedResources">Add To Beginning</string>
     <string name="gutenberg_native_add_to_end" tools:ignore="UnusedResources">Add To End</string>
@@ -137,6 +138,7 @@ translators: 'About' as in a website's about page. -->
     <string name="gutenberg_native_annotations_sidebar" tools:ignore="UnusedResources">Annotations Sidebar</string>
     <string name="gutenberg_native_another_user_is_currently_working_on_this_post_which_means_you_ca" tools:ignore="UnusedResources">Another user is currently working on this post, which means you cannot make changes, unless you take over.</string>
     <string name="gutenberg_native_another_user_now_has_editing_control_of_this_post_don_t_worry_you" tools:ignore="UnusedResources">Another user now has editing control of this post. Don’t worry, your changes up to this moment have been saved.</string>
+    <string name="gutenberg_native_applies_the_setting" tools:ignore="UnusedResources">Applies the setting</string>
     <string name="gutenberg_native_apply" tools:ignore="UnusedResources">Apply</string>
     <!-- translators: %s: post format -->
     <string name="gutenberg_native_apply_the_1_s_format" tools:ignore="UnusedResources">Apply the \"%1$s\" format.</string>
@@ -1057,7 +1059,7 @@ translators: sample content for "Services" page template -->
     <string name="gutenberg_native_parent_term" tools:ignore="UnusedResources">Parent Term</string>
     <string name="gutenberg_native_password_protected" tools:ignore="UnusedResources">Password Protected</string>
     <string name="gutenberg_native_paste_a_link_to_the_content_you_want_to_display_on_your_site" tools:ignore="UnusedResources">Paste a link to the content you want to display on your site.</string>
-    <string name="gutenberg_native_paste_block_after" tools:ignore="UnusedResources">Paste block after</string>
+    <string name="gutenberg_native_paste_block" tools:ignore="UnusedResources">Paste block</string>
     <string name="gutenberg_native_paste_url" tools:ignore="UnusedResources">Paste URL</string>
     <string name="gutenberg_native_paste_url_or_type_to_search" tools:ignore="UnusedResources">Paste URL or type to search</string>
     <!-- translators: %s: block pattern title. -->
@@ -1244,6 +1246,7 @@ translators: sample content for "Services" page template -->
     <string name="gutenberg_native_scheduling" tools:ignore="UnusedResources">Scheduling…</string>
     <string name="gutenberg_native_scheduling_failed" tools:ignore="UnusedResources">Scheduling failed.</string>
     <string name="gutenberg_native_search_for_a_block" tools:ignore="UnusedResources">Search for a block</string>
+    <string name="gutenberg_native_search_or_type_url" tools:ignore="UnusedResources">Search or type URL</string>
     <string name="gutenberg_native_search_results" tools:ignore="UnusedResources">Search Results</string>
     <!-- translators: %s: search term. -->
     <string name="gutenberg_native_search_results_for_s" tools:ignore="UnusedResources">Search results for \"%s\"</string>
