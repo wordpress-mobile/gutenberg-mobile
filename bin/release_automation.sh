@@ -11,6 +11,7 @@ SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$SCRIPT_PATH/.."
 
 source bin/release_prechecks.sh
+source bin/release_utils.sh
 
 # Check that Github CLI is installed
 command -v gh >/dev/null || { echo "Error: The Github CLI must be installed."; exit 1; }
@@ -129,6 +130,11 @@ PR_TEMPLATE=$(cat "$PR_TEMPLATE_PATH")
 # Replace version number in GB-Mobile PR template
 PR_BODY=${PR_TEMPLATE//v1.XX.Y/$VERSION_NUMBER}
 
+# Insure PR is created on proper remote
+# see https://github.com/cli/cli/issues/800
+BASE_REMOTE=$(get_remote_name 'wordpress-mobile/gutenberg-mobile')
+git push -u "$BASE_REMOTE" HEAD || { echo "Unable to push to remote $BASE_REMOTE"; exit 1; }
+
 # Create Draft GB-Mobile Release PR in GitHub
 GB_MOBILE_PR_URL=$(gh pr create -t "Release $VERSION_NUMBER" -b "$PR_BODY" -B main -l "release-process" -d)
 if [[ $? != 0 ]]; then
@@ -156,6 +162,11 @@ For more information about this release and testing instructions, please see the
 GUTENBERG_PR_BODY="$GUTENBERG_PR_BEGINNING
 
 $CHECKLIST_FROM_GUTENBERG_PR_TEMPLATE"
+
+# Insure PR is created on proper remote
+# see https://github.com/cli/cli/issues/800
+GB_BASE_REMOTE=$(get_remote_name 'WordPress/gutenberg')
+git push -u "$GB_BASE_REMOTE" HEAD || { echo "Unable to push to remote: $GB_BASE_REMOTE"; exit 1; }
 
 # Create Draft Gutenberg Release PR in GitHub
 GUTENBERG_PR_URL=$(gh pr create -t "Mobile Release v$VERSION_NUMBER" -b "$GUTENBERG_PR_BODY" -B master -l 'Mobile App Android/iOS' -d)
