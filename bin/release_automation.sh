@@ -111,28 +111,6 @@ else
     exit 1
 fi
 
-#####
-# Gutenberg PR
-#####
-
-# Get Checklist from Gutenberg PR template
-cd gutenberg
-GUTENBERG_PR_TEMPLATE_PATH=".github/PULL_REQUEST_TEMPLATE.md"
-test -f "$GUTENBERG_PR_TEMPLATE_PATH" || { echo "Error: Could not find PR template at $PR_TEMPLATE_PATH"; exit 1; }
-# Get the checklist from the gutenberg PR template by removing everything before the '## Checklist:' line
-CHECKLIST_FROM_GUTENBERG_PR_TEMPLATE=$(cat "$GUTENBERG_PR_TEMPLATE_PATH" | sed -e/'## Checklist:'/\{ -e:1 -en\;b1 -e\} -ed)
-
-# Construct body for Gutenberg release PR
-GUTENBERG_PR_BEGINNING="## Description
-Release $VERSION_NUMBER of the react-native-editor and Gutenberg-Mobile. For more information about this release and testing instructions, please see the related Gutenberg-Mobile PR: <!-- LINK TO GUTENBERG-MOBILE-PR -->"
-GUTENBERG_PR_BODY="$GUTENBERG_PR_BEGINNING
-
-$CHECKLIST_FROM_GUTENBERG_PR_TEMPLATE"
-
-# Create Draft Gutenberg Release PR in GitHub
-gh pr create -t "Mobile Release v$VERSION_NUMBER" -b "$GUTENBERG_PR_BODY" -B master -l 'Mobile App Android/iOS' -d || { echo "Error: Failed to create Gutenberg PR"; exit 1; }
-cd ..
-
 
 #####
 # Gutenberg-Mobile PR
@@ -147,4 +125,43 @@ PR_TEMPLATE=$(cat "$PR_TEMPLATE_PATH")
 PR_BODY=${PR_TEMPLATE//v1.XX.Y/$VERSION_NUMBER}
 
 # Create Draft GB-Mobile Release PR in GitHub
-gh pr create -t "Release $VERSION_NUMBER" -b "$PR_BODY" -B main -l "release-process" -d || { echo "Error: Failed to create Gutenberg-Mobile PR"; exit 1; }
+GB_MOBILE_PR_URL=$(gh pr create -t "Release $VERSION_NUMBER" -b "$PR_BODY" -B main -l "release-process" -d)
+if [[ $? != 0 ]]; then
+    echo "Error: Failed to create Gutenberg-Mobile PR"
+    exit 1
+fi
+
+
+#####
+# Gutenberg PR
+#####
+
+# Get Checklist from Gutenberg PR template
+cd gutenberg
+GUTENBERG_PR_TEMPLATE_PATH=".github/PULL_REQUEST_TEMPLATE.md"
+test -f "$GUTENBERG_PR_TEMPLATE_PATH" || { echo "Error: Could not find PR template at $PR_TEMPLATE_PATH"; exit 1; }
+# Get the checklist from the gutenberg PR template by removing everything before the '## Checklist:' line
+CHECKLIST_FROM_GUTENBERG_PR_TEMPLATE=$(cat "$GUTENBERG_PR_TEMPLATE_PATH" | sed -e/'## Checklist:'/\{ -e:1 -en\;b1 -e\} -ed)
+
+# Construct body for Gutenberg release PR
+GUTENBERG_PR_BEGINNING="## Description
+Release $VERSION_NUMBER of the react-native-editor and Gutenberg-Mobile.
+
+For more information about this release and testing instructions, please see the related Gutenberg-Mobile PR: $GB_MOBILE_PR_URL"
+GUTENBERG_PR_BODY="$GUTENBERG_PR_BEGINNING
+
+$CHECKLIST_FROM_GUTENBERG_PR_TEMPLATE"
+
+# Create Draft Gutenberg Release PR in GitHub
+GUTENBERG_PR_URL=$(gh pr create -t "Mobile Release v$VERSION_NUMBER" -b "$GUTENBERG_PR_BODY" -B master -l 'Mobile App Android/iOS' -d)
+if [[ $? != 0 ]]; then
+    echo "Error: Failed to create Gutenberg PR"
+    exit 1
+fi
+cd ..
+
+echo "PRs Created"
+echo "==========="
+printf "Gutenberg-Mobile $GB_MOBILE_PR_URL
+Gutenberg $GUTENBERG_PR_URL\n" | column -t
+
