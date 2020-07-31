@@ -98,17 +98,23 @@ cd ..
 # Update the bundles
 npm run bundle || { printf "\nError: 'npm bundle' failed.\nIf there is an error stating something like \"Command 'bundle' unrecognized.\" above, perhaps try running 'rm -rf node_modules gutenberg/node_modules && npm install'.\n"; exit 1; }
 
-# Commit bundle changes
+# Commit bundle changes along with any update to the gutenberg submodule (if necessary)
 git commit -a -m "Release script: Update bundle for: $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
 
 # Verify before publishing a PR
-read -p "This script will now create a PR on Github. Would you like to proceed? (y/n) " -n 1
+echo "This script will now push the gutenberg $GB_RELEASE_BRANCH branch and create a gutenberg-mobile PR for the $RELEASE_BRANCH branch."
+read -p "Would you like to proceed? (y/n) " -n 1
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     printf "\n\nProceeding to create a PR...\n"
 else
     printf "\n\nFinishing release script without creating a PR\n"
     exit 1
 fi
+
+# Push gutenberg branch
+cd gutenberg
+git push origin "$GB_RELEASE_BRANCH" || { echo "Error: there was a problem pushing the gutenberg $GB_RELEASE_BRANCH branch"; exit 1; }
+cd ..
 
 # Read PR template
 PR_TEMPLATE_PATH='.github/PULL_REQUEST_TEMPLATE/release_pull_request.md'
