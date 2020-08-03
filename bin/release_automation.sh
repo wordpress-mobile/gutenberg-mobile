@@ -169,7 +169,7 @@ GB_BASE_REMOTE=$(get_remote_name 'WordPress/gutenberg')
 git push -u "$GB_BASE_REMOTE" HEAD || { echo "Unable to push to remote: $GB_BASE_REMOTE"; exit 1; }
 
 # Create Draft Gutenberg Release PR in GitHub
-GUTENBERG_PR_URL=$(gh pr create -t "Mobile Release v$VERSION_NUMBER" -b "$GUTENBERG_PR_BODY" -B master -l 'Mobile App Android/iOS' -d)
+GUTENBERG_PR_URL=$(gh pr create --title "Mobile Release v$VERSION_NUMBER" --body "$GUTENBERG_PR_BODY" --base master --label 'Mobile App Android/iOS' --draft)
 if [[ $? != 0 ]]; then
     echo "Error: Failed to create Gutenberg PR"
     exit 1
