@@ -11,6 +11,7 @@ SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$SCRIPT_PATH/.."
 
 source bin/release_prechecks.sh
+source bin/release_utils.sh
 
 # Check that Github CLI is installed
 command -v gh >/dev/null || { echo "Error: The Github CLI must be installed."; exit 1; }
@@ -101,8 +102,13 @@ npm run bundle || { printf "\nError: 'npm bundle' failed.\nIf there is an error 
 # Commit bundle changes along with any update to the gutenberg submodule (if necessary)
 git commit -a -m "Release script: Update bundle for: $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
 
-# Verify before publishing a PR
-echo "This script will now push the gutenberg $GB_RELEASE_BRANCH branch and create a gutenberg-mobile PR for the $RELEASE_BRANCH branch."
+
+#####
+# Create PRs
+#####
+
+# Verify before creating PRs
+echo "This script will now create a Gutenberg-Mobile PR for the $RELEASE_BRANCH branch and a Gutenberg PR for the $GB_RELEASE_BRANCH branch."
 read -p "Would you like to proceed? (y/n) " -n 1
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     printf "\n\nProceeding to create a PR...\n"
@@ -111,18 +117,66 @@ else
     exit 1
 fi
 
-# Push gutenberg branch
-cd gutenberg
-git push origin "$GB_RELEASE_BRANCH" || { echo "Error: there was a problem pushing the gutenberg $GB_RELEASE_BRANCH branch"; exit 1; }
-cd ..
 
-# Read PR template
+#####
+# Gutenberg-Mobile PR
+#####
+
+# Read GB-Mobile PR template
 PR_TEMPLATE_PATH='.github/PULL_REQUEST_TEMPLATE/release_pull_request.md'
 test -f "$PR_TEMPLATE_PATH" || { echo "Error: Could not find PR template at $PR_TEMPLATE_PATH"; exit 1; }
 PR_TEMPLATE=$(cat "$PR_TEMPLATE_PATH")
 
-# Replace version number in PR template
+# Replace version number in GB-Mobile PR template
 PR_BODY=${PR_TEMPLATE//v1.XX.Y/$VERSION_NUMBER}
 
-# Create PR in GitHub
-gh pr create -t "Release $VERSION_NUMBER" -b "$PR_BODY" -B main -l "release-process" -d || { echo "Error: Failed to create PR"; exit 1; }
+# Insure PR is created on proper remote
+# see https://github.com/cli/cli/issues/800
+BASE_REMOTE=$(get_remote_name 'wordpress-mobile/gutenberg-mobile')
+git push -u "$BASE_REMOTE" HEAD || { echo "Unable to push to remote $BASE_REMOTE"; exit 1; }
+
+# Create Draft GB-Mobile Release PR in GitHub
+GB_MOBILE_PR_URL=$(gh pr create --title "Release $VERSION_NUMBER" --body "$PR_BODY" --base main --label "release-process" --draft)
+if [[ $? != 0 ]]; then
+    echo "Error: Failed to create Gutenberg-Mobile PR"
+    exit 1
+fi
+
+
+#####
+# Gutenberg PR
+#####
+
+# Get Checklist from Gutenberg PR template
+cd gutenberg
+GUTENBERG_PR_TEMPLATE_PATH=".github/PULL_REQUEST_TEMPLATE.md"
+test -f "$GUTENBERG_PR_TEMPLATE_PATH" || { echo "Error: Could not find PR template at $GUTENBERG_PR_TEMPLATE_PATH"; exit 1; }
+# Get the checklist from the gutenberg PR template by removing everything before the '## Checklist:' line
+CHECKLIST_FROM_GUTENBERG_PR_TEMPLATE=$(cat "$GUTENBERG_PR_TEMPLATE_PATH" | sed -e/'## Checklist:'/\{ -e:1 -en\;b1 -e\} -ed)
+
+# Construct body for Gutenberg release PR
+GUTENBERG_PR_BEGINNING="## Description
+Release $VERSION_NUMBER of the react-native-editor and Gutenberg-Mobile.
+
+For more information about this release and testing instructions, please see the related Gutenberg-Mobile PR: $GB_MOBILE_PR_URL"
+GUTENBERG_PR_BODY="$GUTENBERG_PR_BEGINNING
+
+$CHECKLIST_FROM_GUTENBERG_PR_TEMPLATE"
+
+# Insure PR is created on proper remote
+# see https://github.com/cli/cli/issues/800
+GB_BASE_REMOTE=$(get_remote_name 'WordPress/gutenberg')
+git push -u "$GB_BASE_REMOTE" HEAD || { echo "Unable to push to remote: $GB_BASE_REMOTE"; exit 1; }
+
+# Create Draft Gutenberg Release PR in GitHub
+GUTENBERG_PR_URL=$(gh pr create --title "Mobile Release v$VERSION_NUMBER" --body "$GUTENBERG_PR_BODY" --base master --label 'Mobile App Android/iOS' --draft)
+if [[ $? != 0 ]]; then
+    echo "Error: Failed to create Gutenberg PR"
+    exit 1
+fi
+cd ..
+
+echo "PRs Created"
+echo "==========="
+printf "Gutenberg-Mobile $GB_MOBILE_PR_URL
+Gutenberg $GUTENBERG_PR_URL\n" | column -t
