@@ -82,7 +82,7 @@
     "test": "cross-env NODE_ENV=test jest --verbose --config ./jest.config.js",
     "test:debug": "cross-env NODE_ENV=test node --inspect-brk node_modules/.bin/jest --runInBand --verbose --config jest.config.js",
     "device-tests": "cross-env NODE_ENV=test jest --no-cache --maxWorkers=3 --reporters=default --reporters=jest-junit --verbose --config jest_ui.config.js",
-    "device-tests-canary": "cross-env NODE_ENV=test jest --no-cache --maxWorkers=2 --testNamePattern=@canary --reporters=default --reporters=jest-junit --verbose --config jest_ui.config.js",
+    "device-tests-canary": "cross-env NODE_ENV=test jest --no-cache --maxWorkers=2 --reporters=default --reporters=jest-junit --verbose --config jest_ui.config.js",
     "device-tests:local": "cross-env NODE_ENV=test jest --runInBand --reporters=default --reporters=jest-junit --detectOpenHandles --verbose --config jest_ui.config.js",
     "device-tests:debug": "cross-env NODE_ENV=test node $NODE_DEBUG_OPTION --inspect-brk node_modules/jest/bin/jest --runInBand --reporters=default --reporters=jest-junit --detectOpenHandles --verbose --config jest_ui.config.js",
     "test:e2e:bundle:android": "mkdir -p gutenberg/packages/react-native-editor/android/app/src/main/assets && npm run rn-bundle -- --reset-cache --platform android --dev false --minify false --entry-file index.js --bundle-output gutenberg/packages/react-native-editor/android/app/src/main/assets/index.android.bundle --assets-dest gutenberg/packages/react-native-editor/android/app/src/main/res",
