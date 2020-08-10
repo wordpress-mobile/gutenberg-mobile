@@ -22,17 +22,15 @@ No extra PRs yet. 🎉
 ## Test plan
 
 - Use the main WP apps to test the changes above. 
-- Check WPAndroid and WPiOS PRs if there are specific tests to run.
 - Smoke test the main WP apps for [general writing flow](https://github.com/wordpress-mobile/test-cases/tree/master/test-cases/gutenberg/writing-flow).
 
 ## Release Submission Checklist
 
+- [ ] Approve and run optional Android and iOS UI tests
 - [ ] Release number was bumped in `package.json` and `gutenberg/packages/react-native-editor/package.json`.
 - [ ] Aztec dependencies are pointing to a stable release.
-  - iOS: 'grep WordPressAztec-iOS RNTAztecView.podspec'.
   - iOS: Aztec dependencies match in `RNTAztecView.podspec` and `gutenberg/packages/react-native-aztec/RNTAztecView.podspec`.
-  - Android: 'grep aztecVersion react-native-aztec/android/build.gradle'.
-- [ ] Gutenberg 'Podfile' and 'Podfile.lock' inside 'gutenberg/package/react-native-editor/ios/' are updated to the release number.
+- [ ] Gutenberg 'Podfile.lock' inside 'gutenberg/package/react-native-editor/ios/' is updated to the release number.
 - [ ] Check if `RELEASE-NOTES.txt` and `gutenberg/packages/react-native-editor/CHANGELOG.md` are updated with all the changes that made it to the release.
 - [ ] Bundle package of the release is updated.
 
