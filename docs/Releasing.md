@@ -37,12 +37,7 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o Check that the version number in <code>Gutenberg.podspec</code> matches the one in <code>gutenberg/packages/react-native-bridge/Gutenberg.podspec</code>.
-</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>o Check the version in<code>RNTAztecView.podspec</code> matches <code>gutenberg/packages/react-native-aztec/RNTAztecView.podspec</code> and they refer to the same Aztec version.
+<p>o Check that <code>RNTAztecView.podspec</code> and <code>gutenberg/packages/react-native-aztec/RNTAztecView.podspec</code> refer to the same Aztec version.
 </p>
 <!-- /wp:paragraph -->
 
@@ -99,7 +94,7 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o If there were changes in Gutenberg repo, make sure to cherry-pick the changes that landed in the master branch back to the release branch.</p>
+<p>o If there were changes in Gutenberg repo, make sure to cherry-pick the changes that landed in the master branch back to the release branch and don't forget to run <code>npm run bundle</code> in gutenberg-mobile again if necessary.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -123,7 +118,7 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o Create a new GitHub release pointing to the tag: https://github.com/wordpress-mobile/gutenberg-mobile/releases/new?tag=X.XX.X&target=main&title=X.XX.X. Include a list of changes in the release's description</p>
+<p>o Create a new GitHub release pointing to the tag: https://github.com/wordpress-mobile/gutenberg-mobile/releases/new?tag=vX.XX.X&target=main&title=Release%20X.XX.X. Include a list of changes in the release's description</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
