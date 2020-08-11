@@ -27,7 +27,6 @@ No extra PRs yet. 🎉
 ## Release Submission Checklist
 
 - [ ] Approve and run optional Android and iOS UI tests
-- [ ] Release number was bumped in `package.json` and `gutenberg/packages/react-native-editor/package.json`.
 - [ ] Aztec dependencies are pointing to a stable release.
   - iOS: Aztec dependencies match in `RNTAztecView.podspec` and `gutenberg/packages/react-native-aztec/RNTAztecView.podspec`.
 - [ ] Gutenberg 'Podfile.lock' inside 'gutenberg/package/react-native-editor/ios/' is updated to the release number.
