@@ -37,7 +37,7 @@ fi
 [[ -z "$(git status --porcelain)" ]] || { git status; printf "\nUncommitted changes found. Aborting release script...\n"; exit 1; }
 
 # Ask for new version number
-CURRENT_VERSION_NUMBER=$(./node_modules/.bin/json -f package.json version)
+CURRENT_VERSION_NUMBER=$(jq '.version' package.json --raw-output)
 echo "Current Version Number:$CURRENT_VERSION_NUMBER"
 read -p "Enter the new version number: " VERSION_NUMBER
 if [[ -z "$VERSION_NUMBER" ]]; then
@@ -68,7 +68,9 @@ cd ..
 
 # Set version numbers
 for file in 'package.json' 'package-lock.json' 'gutenberg/packages/react-native-editor/package.json'; do
-    npx json -I -f "$file" -e "this.version='$VERSION_NUMBER'" || { echo "Error: could not update version in ${file}"; exit 1; }
+    TEMP_FILE=$(mktemp)
+    jq ".version = \"$VERSION_NUMBER\"" "$file" > "$TEMP_FILE" || { echo "Error: could not update version in ${file}"; exit 1; }
+    mv "$TEMP_FILE" "$file"
 done
 
 # Commit react-native-editor version update
@@ -97,7 +99,7 @@ cd ..
 
 
 # Update the bundles
-npm run bundle || { printf "\nError: 'npm bundle' failed.\nIf there is an error stating something like \"Command 'bundle' unrecognized.\" above, perhaps try running 'rm -rf node_modules gutenberg/node_modules && npm install'.\n"; exit 1; }
+npm run bundle || { printf "\nError: 'npm bundle' failed.\nIf there is an error stating something like \"Command 'bundle' unrecognized.\" above, perhaps try running 'rm -rf node_modules gutenberg/node_modules && npm ci'.\n"; exit 1; }
 
 # Commit bundle changes along with any update to the gutenberg submodule (if necessary)
 git commit -a -m "Release script: Update bundle for: $VERSION_NUMBER" || { echo "Error: failed to commit changes"; exit 1; }
