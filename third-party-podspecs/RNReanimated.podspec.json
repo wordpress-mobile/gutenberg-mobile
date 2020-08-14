@@ -1,0 +1,24 @@
+{
+  "name": "RNReanimated",
+  "version": "1.9.0",
+  "summary": "More powerful alternative to Animated library for React Native.",
+  "authors": {
+    "email": "krzys.magiera@gmail.com",
+    "name": "Krzysztof Magiera"
+  },
+  "homepage": "https://github.com/software-mansion/react-native-reanimated",
+  "license": "MIT",
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source": {
+    "git": "https://github.com/software-mansion/react-native-reanimated.git",
+    "tag": "1.9.0"
+  },
+  "source_files": "ios/**/*.{h,m}",
+  "dependencies": {
+    "React": [
+    ]
+  },
+  "requires_arc": true
+}
