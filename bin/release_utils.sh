@@ -9,6 +9,7 @@ function get_remote_name() {
 
 
 # Utils adapted from https://github.com/Homebrew/install/blob/master/install.sh
+# string formatters
 if [[ -t 1 ]]; then
     tty_escape() { printf "\033[%sm" "$1"; }
 else
@@ -22,6 +23,8 @@ tty_bold="$(tty_mkbold 39)"
 tty_reset="$(tty_escape 0)"
 
 
+# Takes multiple arguments and prints them joined with single spaces in-between
+# while escaping any spaces in arguments themselves
 shell_join() {
     local arg
     printf "%s" "$1"
@@ -32,19 +35,27 @@ shell_join() {
     done
 }
 
+# Takes multiple arguments, joins them and prints them in a colored format
 ohai() {
   printf "${tty_blue}==> %s${tty_reset}\n" "$(shell_join "$@")"
 }
 
+# Takes a single argument and prints it in a colored format
 warn() {
-  printf "${tty_red}Warning${tty_reset}: %s\n" "$1"
+  printf "${tty_underline}${tty_red}Warning${tty_reset}: %s\n" "$1"
 }
 
+# Takes a single argument, prints it in a colored format and aborts the script
 abort() {
     printf "\n${tty_red}%s${tty_reset}\n" "$1"
     exit 1
 }
 
+# Takes multiple arguments consisting a command and executes it. If the command
+# is not successful aborts the script, printing the failed command and its
+# arguments in a colored format.
+#
+# Returns the executed command's result if it's successful.
 execute() {
     if ! "$@"; then
         abort "$(printf "Failed during: %s" "$(shell_join "$@")")"
