@@ -174,3 +174,104 @@ echo "PRs Created"
 echo "==========="
 printf "Gutenberg-Mobile $GB_MOBILE_PR_URL
 Gutenberg $GUTENBERG_PR_URL\n" | column -t
+
+confirm_to_proceed "Do you want to proceed with creating main apps (WPiOS and WPAndroid) PRs?"
+ohai "Proceeding to create main apps PRs..."
+
+GB_MOBILE_PR_REF=$(git rev-parse HEAD)
+
+#####
+# WPAndroid PR
+#####
+
+TEMP_WP_ANDROID_DIRECTORY=$(mktemp -d)
+ohai "Clone WordPress-Android into '$TEMP_WP_ANDROID_DIRECTORY'"
+execute "git" "clone" "--depth=1" "git@github.com:wordpress-mobile/WordPress-Android.git" "$TEMP_WP_ANDROID_DIRECTORY"
+
+cd "$TEMP_WP_ANDROID_DIRECTORY"
+
+execute "git" "submodule" "update" "--init" "--recursive" "--depth=1" "--recommend-shallow"
+
+ohai "Create release branch in WordPress-Android"
+execute "git" "switch" "-c" "gutenberg/integrate_release_$VERSION_NUMBER" 
+
+ohai "Update gutenberg-mobile ref"
+cd libs/gutenberg-mobile
+execute "git" "fetch" "--recurse-submodules=no" "origin" "$GB_MOBILE_PR_REF"
+execute "git" "checkout" "$GB_MOBILE_PR_REF"
+cd ../..
+
+execute "git" "add" "libs/gutenberg-mobile"
+execute "git" "commit" "-m" "Release script: Update gutenberg-mobile ref"
+
+ohai "Update strings"
+execute "python" "tools/merge_strings_xml.py"
+execute "git" "add" "WordPress/src/main/res/values/strings.xml"
+execute "git" "commit" "-m" "Release script: Update strings"
+
+# Insure PR is created on proper remote
+# see https://github.com/cli/cli/issues/800
+WP_ANDROID_BASE_REMOTE=$(get_remote_name 'wordpress-mobile/WordPress-android')
+execute "git" "push" "-u" "$WP_ANDROID_BASE_REMOTE" "HEAD"
+
+WP_ANDROID_PR_BODY="## Description
+This PR incorporates the $VERSION_NUMBER release of gutenberg-mobile.  
+For more information about this release and testing instructions, please see the related Gutenberg-Mobile PR: $GB_MOBILE_PR_URL
+
+Release Submission Checklist
+
+- [ ] I have considered if this change warrants user-facing release notes and have added them to `RELEASE-NOTES.txt` if necessary."
+
+# Create Draft WPAndroid Release PR in GitHub
+ohai "Create Draft WPAndroid Release PR in GitHub"
+WP_ANDROID_PR_URL=$(execute "gh" "pr" "create" "--title" "Integrate gutenberg-mobile release $VERSION_NUMBER" "--body" "$WP_ANDROID_PR_BODY" "--base" "develop" "--label" "gutenberg-mobile" "--draft")
+
+ohai "WPAndroid PR Created: $WP_ANDROID_PR_URL"
+
+
+#####
+# WPiOS PR
+#####
+
+TEMP_WP_IOS_DIRECTORY=$(mktemp -d)
+ohai "Clone WordPress-iOS into '$TEMP_WP_IOS_DIRECTORY'"
+execute "git" "clone" "--depth=1" "git@github.com:wordpress-mobile/WordPress-iOS.git" "$TEMP_WP_IOS_DIRECTORY"
+
+cd "$TEMP_WP_IOS_DIRECTORY"
+
+ohai "Create release branch in WordPress-iOS"
+execute "git" "switch" "-c" "gutenberg/integrate_release_$VERSION_NUMBER" 
+
+ohai "Update gutenberg-mobile ref"
+test -f "Podfile" || abort "Error: Could not find Podfile"
+sed -i'.orig' -E "s/gutenberg :commit => '(.*)'/gutenberg :commit => '$GB_MOBILE_PR_REF'/" Podfile || abort "Error: Failed updating gutenberg ref in Podfile"
+execute "rake" "dependencies"
+
+
+execute "git" "add" "Podfile" "Podfile.lock"
+execute "git" "commit" "-m" "Release script: Update gutenberg-mobile ref"
+
+# Insure PR is created on proper remote
+# see https://github.com/cli/cli/issues/800
+WP_IOS_BASE_REMOTE=$(get_remote_name 'wordpress-mobile/WordPress-iOS')
+execute "git" "push" "-u" "$WP_IOS_BASE_REMOTE" "HEAD"
+
+WP_IOS_PR_BODY="## Description
+This PR incorporates the $VERSION_NUMBER release of gutenberg-mobile.  
+For more information about this release and testing instructions, please see the related Gutenberg-Mobile PR: $GB_MOBILE_PR_URL
+
+Release Submission Checklist
+
+- [ ] I have considered if this change warrants user-facing release notes and have added them to `RELEASE-NOTES.txt` if necessary."
+
+# Create Draft WPiOS Release PR in GitHub
+ohai "Create Draft WPiOS Release PR in GitHub"
+WP_IOS_PR_URL=$(execute "gh" "pr" "create" "--title" "Integrate gutenberg-mobile release $VERSION_NUMBER" "--body" "$WP_IOS_PR_BODY" "--base" "develop" "--label" "Gutenberg integration" "--draft")
+
+ohai "WPiOS PR Created: $WP_IOS_PR_URL"
+
+echo "Main apps PRs created"
+echo "==========="
+printf "WPAndroid $WP_ANDROID_PR_URL
+WPiOS $WP_IOS_PR_URL\n" | column -t
+
