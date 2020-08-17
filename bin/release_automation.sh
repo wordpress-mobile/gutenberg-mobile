@@ -139,7 +139,7 @@ BASE_REMOTE=$(get_remote_name 'wordpress-mobile/gutenberg-mobile')
 execute "git" "push" "-u" "$BASE_REMOTE" "HEAD"
 
 # Create Draft GB-Mobile Release PR in GitHub
-GB_MOBILE_PR_URL=$("gh" "pr" "create" "--title" "Release $VERSION_NUMBER" "--body" "$PR_BODY" "--base" "main" "--label" "release-process" "--draft")
+GB_MOBILE_PR_URL=$(execute "gh" "pr" "create" "--title" "Release $VERSION_NUMBER" "--body" "$PR_BODY" "--base" "main" "--label" "release-process" "--draft")
 
 #####
 # Gutenberg PR
@@ -167,7 +167,7 @@ GB_BASE_REMOTE=$(get_remote_name 'WordPress/gutenberg')
 execute "git" "push" "-u" "$GB_BASE_REMOTE" "HEAD"
 
 # Create Draft Gutenberg Release PR in GitHub
-GUTENBERG_PR_URL=$("gh" "pr" "create" "--title" "Mobile Release v$VERSION_NUMBER" "--body" "$GUTENBERG_PR_BODY" "--base" "master" "--label" "Mobile App Android/iOS" "--draft")
+GUTENBERG_PR_URL=$(execute "gh" "pr" "create" "--title" "Mobile Release v$VERSION_NUMBER" "--body" "$GUTENBERG_PR_BODY" "--base" "master" "--label" "Mobile App Android/iOS" "--draft")
 cd ..
 
 echo "PRs Created"
