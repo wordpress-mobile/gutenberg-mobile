@@ -16,6 +16,9 @@ source bin/release_utils.sh
 # Check that Github CLI is installed
 command -v gh >/dev/null || abort "Error: The Github CLI must be installed."
 
+# Check that jq is installed
+command -v jq >/dev/null || abort "Error: jq must be installed."
+
 # Check that Aztec versions are set to release versions
 aztec_version_problems="$(check_android_and_ios_aztec_versions)"
 if [[ ! -z "$aztec_version_problems" ]]; then
