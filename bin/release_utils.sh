@@ -37,7 +37,7 @@ ohai() {
 }
 
 warn() {
-  printf "${tty_red}Warning${tty_reset}: %s\n"
+  printf "${tty_red}Warning${tty_reset}: %s\n" "$1"
 }
 
 abort() {
