@@ -223,13 +223,14 @@ For more information about this release and testing instructions, please see the
 
 Release Submission Checklist
 
-- [ ] I have considered if this change warrants user-facing release notes and have added them to `RELEASE-NOTES.txt` if necessary."
+- [ ] I have considered if this change warrants user-facing release notes and have added them to \`RELEASE-NOTES.txt\` if necessary."
 
 # Create Draft WPAndroid Release PR in GitHub
 ohai "Create Draft WPAndroid Release PR in GitHub"
 WP_ANDROID_PR_URL=$(execute "gh" "pr" "create" "--title" "Integrate gutenberg-mobile release $VERSION_NUMBER" "--body" "$WP_ANDROID_PR_BODY" "--base" "develop" "--label" "gutenberg-mobile" "--draft")
 
 ohai "WPAndroid PR Created: $WP_ANDROID_PR_URL"
+echo ""
 
 
 #####
@@ -265,13 +266,14 @@ For more information about this release and testing instructions, please see the
 
 Release Submission Checklist
 
-- [ ] I have considered if this change warrants user-facing release notes and have added them to `RELEASE-NOTES.txt` if necessary."
+- [ ] I have considered if this change warrants user-facing release notes and have added them to \`RELEASE-NOTES.txt\` if necessary."
 
 # Create Draft WPiOS Release PR in GitHub
 ohai "Create Draft WPiOS Release PR in GitHub"
 WP_IOS_PR_URL=$(execute "gh" "pr" "create" "--title" "Integrate gutenberg-mobile release $VERSION_NUMBER" "--body" "$WP_IOS_PR_BODY" "--base" "develop" "--label" "Gutenberg integration" "--draft")
 
 ohai "WPiOS PR Created: $WP_IOS_PR_URL"
+echo ""
 
 echo "Main apps PRs created"
 echo "==========="
