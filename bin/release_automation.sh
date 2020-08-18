@@ -214,7 +214,7 @@ execute "git" "commit" "-m" "Release script: Update strings"
 
 # Insure PR is created on proper remote
 # see https://github.com/cli/cli/issues/800
-WP_ANDROID_BASE_REMOTE=$(get_remote_name 'wordpress-mobile/WordPress-android')
+WP_ANDROID_BASE_REMOTE=$(get_remote_name 'wordpress-mobile/WordPress-Android')
 execute "git" "push" "-u" "$WP_ANDROID_BASE_REMOTE" "HEAD"
 
 WP_ANDROID_PR_BODY="## Description
