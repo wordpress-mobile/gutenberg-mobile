@@ -32,11 +32,4 @@ addFilter( 'native.block_editor_props', 'gutenberg-mobile', ( editorProps ) => {
 	return editorProps;
 } );
 
-addFilter('native.supported_api_fetch_path_patterns', 'gutenberg-mobile', (defaultPatterns) => {
-	return [
-		...defaultPatterns,
-		/wpcom\/v2\/gutenberg\/.*/i
-	]
-})
-
 require( '@wordpress/react-native-editor' );
