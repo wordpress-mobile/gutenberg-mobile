@@ -2,10 +2,18 @@
 ------
 * Creating undo levels less frequently.
 
+1.34.1
+------
+* Including 1.33.2 hotfix to 1.34.0 release
+
 1.34.0
 ------
 * Media editing support in Cover block.
 * Fixed a bug on the Heading block, where a heading with a link and string formatting showed a white shadow in dark mode.
+
+1.33.2
+------
+* Fix for editing the Classic Block in the Unsupported block editor
 
 1.33.1
 ------
