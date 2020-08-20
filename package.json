@@ -39,14 +39,11 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
     "jest-junit": "^6.3.0",
-    "json": "^9.0.6",
     "metro-react-native-babel-preset": "^0.57.0",
     "node-fetch": "^2.3.0",
     "patch-package": "^6.2.2",
     "prettier": "npm:wp-prettier@1.19.1",
-    "react-dom": "16.9.0",
     "react-native-sass-transformer": "^1.1.1",
-    "react-test-renderer": "16.9.0",
     "regenerator-runtime": "^0.12.1",
     "remote-redux-devtools": "^0.5.12",
     "rungen": "^0.3.2",
@@ -105,6 +102,7 @@
     "version": "npm run bundle && git add -A bundle"
   },
   "dependencies": {
-    "email-validator": "2.0.4"
+    "email-validator": "2.0.4",
+    "eslint-plugin-jsdoc": "^30.2.4"
   }
 }
