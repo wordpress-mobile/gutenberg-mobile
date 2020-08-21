@@ -1,0 +1,23 @@
+{
+  "name": "react-native-slider",
+  "version": "3.0.2",
+  "summary": "A <Slider /> component for react-native",
+  "description": "A <Slider /> component for react-native",
+  "license": "MIT",
+  "authors": "react-native-community",
+  "homepage": "https://github.com/wordpress-mobile/react-native-slider",
+  "source": {
+    "git": "https://github.com/wordpress-mobile/react-native-slider",
+    "commit": "d263ff16cdd9fb7352b354342522ff030f220f42"
+  },
+  "source_files": "src/ios/**/*.{h,m}",
+  "preserve_paths": "**/*.js",
+  "platforms": {
+    "ios": "8.0"
+  },
+  "dependencies": {
+    "React": [
+
+    ]
+  }
+}

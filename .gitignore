@@ -102,6 +102,8 @@ buck-out/
 
 # e2e output log
 appium-out.log
+ios-screen-recordings/
+android-screen-recordings/
 
 bin/wp-cli.phar
 

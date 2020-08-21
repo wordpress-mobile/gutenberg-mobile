@@ -1,6 +1,50 @@
+1.35.0
+------
+* Creating undo levels less frequently.
+
+1.34.0
+------
+* Media editing support in Cover block.
+* Fixed a bug on the Heading block, where a heading with a link and string formatting showed a white shadow in dark mode.
+
+1.33.1
+------
+* Fixed a bug in the @-mentions feature where dismissing the @-mentions UI removed the @ character from the post.
+
+1.33.0
+------
+* [***] Media editing support in Media & Text block.
+* [***] New block: Social Icons
+* [*] Cover block placeholder is updated to allow users start the block with a background color
+* [*] Accessibility, update the title VoiceOver label to be more clear when you are editing the post or page title.
+
+1.32.0
+------
+* [***] Adds Copy, Cut, Paste, and Duplicate functionality to blocks
+* [***] Add support for mentions.
+* [***] Users can now individually edit unsupported blocks found in posts or pages.
+* [*] [iOS] Improved editor loading experience with Ghost Effect.
+
+1.31.1
+------
+* Fix for pullquote stylying in dark mode.
+* Fix for button style.
+* Fix missing translations.
+
+1.31.0
+------
+* [**] Add support for customizing gradient type and angle in Buttons and Cover blocks.
+* [*] Show content information (block, word and characters counts).
+* [*] [Android] Fix handling of upload completion while re-opening the editor
+
 1.30.0
 ------
 * [**] Adds editor support for theme defined colors and theme defined gradients on cover and button blocks.
+* [*] Support for breaking out of captions/citation authors by pressing enter on the following blocks: image, video, gallery, quote, and pullquote.
+
+1.29.1
+------
+* Revert Creating undo levels less frequently
 
 1.29.0
 ------
