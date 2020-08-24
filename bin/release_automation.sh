@@ -202,6 +202,7 @@ ohai "Update gutenberg-mobile ref"
 cd libs/gutenberg-mobile
 execute "git" "fetch" "--recurse-submodules=no" "origin" "$GB_MOBILE_PR_REF"
 execute "git" "checkout" "$GB_MOBILE_PR_REF"
+execute "git" "submodule" "update"
 cd ../..
 
 execute "git" "add" "libs/gutenberg-mobile"
