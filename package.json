@@ -24,7 +24,6 @@
     "babel-jest": "^24.9.0",
     "babel-plugin-react-native-classname-to-style": "^1.2.1",
     "babel-plugin-react-native-platform-specific-extensions": "^1.1.1",
-    "cosmiconfig": "^7.0.0",
     "cross-env": "^5.1.4",
     "empty": "^0.10.1",
     "enzyme": "^3.9.0",
