@@ -3,6 +3,7 @@
  */
 import { JETPACK_DATA_PATH } from '../jetpack/extensions/shared/get-jetpack-data';
 
+// When adding new blocks to this list please also update ../gutenberg/packages/react-naive-bridge/common/supportedBlocks.json
 const supportedJetpackBlocks = {
 	'contact-info': {
 		available: true,
