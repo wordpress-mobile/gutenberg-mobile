@@ -19,6 +19,7 @@ Pod::Spec.new do |s|
   s.preserve_paths = 'bundle/ios/*'
   s.swift_version = '5.0'
   s.resources = 'gutenberg/packages/react-native-bridge/common/**/*.{js,css,json}'
+  s.resources = 'src/block-support/supported-blocks.json'
 
   s.dependency 'React', react_native_version
   s.dependency 'React-CoreModules', react_native_version
