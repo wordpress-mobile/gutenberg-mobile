@@ -8,6 +8,7 @@ import { addAction, addFilter } from '@wordpress/hooks';
  */
 import correctTextFontWeight from './text-font-weight-correct';
 import setupJetpackEditor from './jetpack-editor-setup';
+import { uiStrings } from './ui-strings';
 
 addAction( 'native.pre-render', 'gutenberg-mobile', ( props ) => {
 	correctTextFontWeight();
@@ -24,8 +25,11 @@ addFilter( 'native.block_editor_props', 'gutenberg-mobile', ( editorProps ) => {
 			initialTitle = 'Welcome to gutenberg for WP Apps!';
 		}
 
+		console.log("---> Strings: ", uiStrings);
+
 		return {
 			...editorProps,
+			uiStrings: uiStrings( editorProps ),
 			initialTitle,
 		};
 	}

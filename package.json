@@ -103,6 +103,8 @@
     "version": "npm run bundle && git add -A bundle"
   },
   "dependencies": {
-    "email-validator": "2.0.4"
+    "email-validator": "2.0.4",
+    "eslint-plugin-jsdoc": "^30.2.4",
+    "@wordpress/components": "file:./gutenberg/packages/components"
   }
 }
