@@ -8,8 +8,6 @@ if ( storage ) {
 	};
 	const newStorage = JSON.stringify(parsed);
 	localStorage.setItem(storageKey, newStorage);
-
-	window.webkit.messageHandlers.log.postMessage( newStorage );
 }
 // We need to return a string or null, otherwise executing this script will error.
 // eslint-disable-next-line no-unused-expressions
