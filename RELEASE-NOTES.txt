@@ -1,3 +1,8 @@
+1.36.0
+------
+* [**] [Android] New block: Pullquote
+* [**] Block settings now immediately reflect changes from menu sliders.
+
 1.35.0
 ------
 * [***] Fixed empty text fields on RTL layout. Now they are selectable and placeholders are visible.
