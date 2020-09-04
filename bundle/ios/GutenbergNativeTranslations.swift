@@ -29,6 +29,7 @@ private func dummy() {
     _ = NSLocalizedString("ADD VIDEO", comment: "")
     _ = NSLocalizedString("Alt Text", comment: "")
     _ = NSLocalizedString("An unknown error occurred. Please try again.", comment: "")
+    _ = NSLocalizedString("Angle", comment: "")
     _ = NSLocalizedString("Annotations Sidebar", comment: "")
     _ = NSLocalizedString("Block copied", comment: "translators: displayed right after the block is copied.")
     _ = NSLocalizedString("Block cut", comment: "translators: displayed right after the block is cut.")
