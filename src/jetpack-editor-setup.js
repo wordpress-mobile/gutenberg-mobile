@@ -7,6 +7,9 @@ const supportedJetpackBlocks = {
 	'contact-info': {
 		available: true,
 	},
+	'story': {
+		available: true,
+	},
 };
 
 const setJetpackData = ( {
