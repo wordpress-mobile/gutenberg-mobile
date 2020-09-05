@@ -3,6 +3,11 @@ if ( window.wp.data !== undefined ) {
 	if ( nuxStore ) {
 		nuxStore.setWpcomNuxStatus( { isNuxEnabled: false } );
 	}
+
+    var elements = document.getElementsByClassName("components-modal__screen-overlay");
+    if (elements) {
+        elements[0].style.visibility = "hidden";
+    }
 }
 
 // We need to return a string or null, otherwise executing this script will error.
