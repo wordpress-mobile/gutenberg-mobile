@@ -1,7 +1,7 @@
 if ( window.wp.data !== undefined ) {
 	const nuxStore = window.wp.data.dispatch( 'automattic/nux' );
 	if ( nuxStore ) {
-		nuxStore.setWpcomNuxStatus( { isNuxEnabled: false } );
+		nuxStore.setWpcomNuxStatus( { isNuxEnabled: true } );
 	}
 
     var elements = document.getElementsByClassName("components-modal__screen-overlay");

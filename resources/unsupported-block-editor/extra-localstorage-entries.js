@@ -4,7 +4,7 @@ const storage = localStorage.getItem( storageKey );
 if ( storage ) {
 	const parsed = JSON.parse( storage );
 	parsed[ 'automattic/nux' ] = {
-		isNuxEnabled: false,
+		isNuxEnabled: true,
 	};
 	const newStorage = JSON.stringify( parsed );
 	localStorage.setItem( storageKey, newStorage );
