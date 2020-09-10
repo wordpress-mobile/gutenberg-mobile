@@ -1,3 +1,7 @@
+1.37.0
+------
+* [**] Increase tap-target of primary action on unsupported blocks.
+
 1.36.0
 ------
 * [**] [Android] New block: Pullquote
