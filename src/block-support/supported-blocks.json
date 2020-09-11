@@ -25,12 +25,13 @@
 		"core/cover",
 		"core/social-link",
 		"core/social-links",
+		"core/pullquote",
 		"jetpack/contact-info",
 		"jetpack/email",
 		"jetpack/phone",
 		"jetpack/address"
 	],
 	"devOnly": [ "core/code" ],
-	"iOSOnly": [ "core/pullquote" ],
+	"iOSOnly": [],
 	"androidOnly": []
 }
