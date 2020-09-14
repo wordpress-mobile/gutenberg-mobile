@@ -6,6 +6,8 @@
 # - Release is being created off of a clean branch
 # - Whether there are any open PRs targeting the milestone for the release
 
+set -e
+
 # Execute script commands from project's root directory
 SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$SCRIPT_PATH/.."
