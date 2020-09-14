@@ -1,3 +1,8 @@
+## 1.37.0
+
+* [***] Full-width and wide alignment support for Group, Cover and Image block
+* [**] Add support for rounded style in Image block
+
 1.36.0
 ------
 * [**] [Android] New block: Pullquote
