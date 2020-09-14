@@ -6,6 +6,8 @@
 # - Release is being created off of a clean branch
 # - Whether there are any open PRs targeting the milestone for the release
 
+set -e
+
 # Execute script commands from project's root directory
 SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$SCRIPT_PATH/.."
@@ -37,7 +39,7 @@ if [[ ! "$CURRENT_BRANCH" =~ "^develop$|^trunk$|^release/.*" ]]; then
 fi
 
 # Confirm branch is clean
-[[ -z "$(git status --porcelain)" ]] || { git status; abort "Uncommitted changes found. Aborting release script..."; }
+# [[ -z "$(git status --porcelain)" ]] || { git status; abort "Uncommitted changes found. Aborting release script..."; }
 
 # Ask for new version number
 CURRENT_VERSION_NUMBER=$(jq '.version' package.json --raw-output)
@@ -202,6 +204,7 @@ ohai "Update gutenberg-mobile ref"
 cd libs/gutenberg-mobile
 execute "git" "fetch" "--recurse-submodules=no" "origin" "$GB_MOBILE_PR_REF"
 execute "git" "checkout" "$GB_MOBILE_PR_REF"
+execute "git" "submodule" "update"
 cd ../..
 
 execute "git" "add" "libs/gutenberg-mobile"
@@ -209,12 +212,19 @@ execute "git" "commit" "-m" "Release script: Update gutenberg-mobile ref"
 
 ohai "Update strings"
 execute "python" "tools/merge_strings_xml.py"
-execute "git" "add" "WordPress/src/main/res/values/strings.xml"
-execute "git" "commit" "-m" "Release script: Update strings"
+# If merge_strings_xml.py results in changes, commit them
+if [[ ! -z "$(git status --porcelain)" ]]; then
+    ohai "Commit changes from 'python tools/merge_strings_xml.py'"
+    execute "git" "add" "WordPress/src/main/res/values/strings.xml"
+    execute "git" "commit" "-m" "Release script: Update strings"
+else
+    ohai "There were no changes from 'python tools/merge_strings_xml.py' to be committed."
+fi
+
 
 # Insure PR is created on proper remote
 # see https://github.com/cli/cli/issues/800
-WP_ANDROID_BASE_REMOTE=$(get_remote_name 'wordpress-mobile/WordPress-android')
+WP_ANDROID_BASE_REMOTE=$(get_remote_name 'wordpress-mobile/WordPress-Android')
 execute "git" "push" "-u" "$WP_ANDROID_BASE_REMOTE" "HEAD"
 
 WP_ANDROID_PR_BODY="## Description
@@ -223,13 +233,14 @@ For more information about this release and testing instructions, please see the
 
 Release Submission Checklist
 
-- [ ] I have considered if this change warrants user-facing release notes and have added them to `RELEASE-NOTES.txt` if necessary."
+- [ ] I have considered if this change warrants user-facing release notes and have added them to \`RELEASE-NOTES.txt\` if necessary."
 
 # Create Draft WPAndroid Release PR in GitHub
 ohai "Create Draft WPAndroid Release PR in GitHub"
 WP_ANDROID_PR_URL=$(execute "gh" "pr" "create" "--title" "Integrate gutenberg-mobile release $VERSION_NUMBER" "--body" "$WP_ANDROID_PR_BODY" "--base" "develop" "--label" "gutenberg-mobile" "--draft")
 
 ohai "WPAndroid PR Created: $WP_ANDROID_PR_URL"
+echo ""
 
 
 #####
@@ -265,13 +276,14 @@ For more information about this release and testing instructions, please see the
 
 Release Submission Checklist
 
-- [ ] I have considered if this change warrants user-facing release notes and have added them to `RELEASE-NOTES.txt` if necessary."
+- [ ] I have considered if this change warrants user-facing release notes and have added them to \`RELEASE-NOTES.txt\` if necessary."
 
 # Create Draft WPiOS Release PR in GitHub
 ohai "Create Draft WPiOS Release PR in GitHub"
 WP_IOS_PR_URL=$(execute "gh" "pr" "create" "--title" "Integrate gutenberg-mobile release $VERSION_NUMBER" "--body" "$WP_IOS_PR_BODY" "--base" "develop" "--label" "Gutenberg integration" "--draft")
 
 ohai "WPiOS PR Created: $WP_IOS_PR_URL"
+echo ""
 
 echo "Main apps PRs created"
 echo "==========="
