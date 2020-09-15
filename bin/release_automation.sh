@@ -258,7 +258,7 @@ execute "git" "switch" "-c" "gutenberg/integrate_release_$VERSION_NUMBER"
 
 ohai "Update gutenberg-mobile ref"
 test -f "Podfile" || abort "Error: Could not find Podfile"
-sed -i'.orig' -E "s/gutenberg :commit => '(.*)'/gutenberg :commit => '$GB_MOBILE_PR_REF'/" Podfile || abort "Error: Failed updating gutenberg ref in Podfile"
+sed -i'.orig' -E "s/gutenberg :(commit|tag) => '(.*)'/gutenberg :commit => '$GB_MOBILE_PR_REF'/" Podfile || abort "Error: Failed updating gutenberg ref in Podfile"
 execute "rake" "dependencies"
 
 
