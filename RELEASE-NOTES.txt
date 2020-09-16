@@ -1,6 +1,7 @@
 1.38.0
 ------
 * [**] Increase tap-target of primary action on unsupported blocks.
+* [**] Add support Reusable blocks (only preview mode).
 
 1.37.1
 ------
