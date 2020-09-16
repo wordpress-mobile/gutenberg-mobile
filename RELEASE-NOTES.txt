@@ -2,6 +2,7 @@
 ------
 * [**] Increase tap-target of primary action on unsupported blocks.
 * [**] Add support Reusable blocks (only preview mode).
+* [**] Add Support to Insert Existing Reusable Blocks from the Editor.
 
 1.37.1
 ------
