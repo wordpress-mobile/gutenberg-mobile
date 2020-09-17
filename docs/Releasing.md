@@ -118,15 +118,15 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o Create a new GitHub release pointing to the tag: https://github.com/wordpress-mobile/gutenberg-mobile/releases/new?tag=vX.XX.X&target=main&title=Release%20X.XX.X. Include a list of changes in the release's description</p>
+<p>o Create a new GitHub release pointing to the tag: https://github.com/wordpress-mobile/gutenberg-mobile/releases/new?tag=vX.XX.X&target=trunk&title=Release%20X.XX.X. Include a list of changes in the release's description</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o In WPiOS update the reference to point to the <em>tag</em>. For iOS do not forget to remove ‘develop’ branch reference near 3rd party pod specs if any.</p>
+<p>o In WPiOS update the reference to point to the <em>tag</em>. For iOS do not forget to remove <code>develop</code> branch reference near 3rd party pod specs if any.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o In WPAndroid, update the submodule to point to the merge commit on GB-Mobile main.</p>
+<p>o In WPAndroid, update the submodule to point to the merge commit on GB-Mobile <code>trunk</code>.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -138,7 +138,7 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o Open a PR from Gutenberg-Mobile main to bring all the <code>gutenberg/after_X.XX.X</code> changes to <code>develop</code> and point to the Gutenberg side PR (if any changes happened specifically for the release). Merge the PR (or PR domino if Gutenberg changes are there)</p>
+<p>o Open a PR from Gutenberg-Mobile <code>trunk</code> to bring all the <code>release/X.XX.X</code> changes to <code>develop</code> and point to the Gutenberg side PR (if any changes happened specifically for the release). Merge the PR (or PR domino if Gutenberg changes are there)</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3} -->
@@ -146,7 +146,7 @@ cut a new release.
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>o Update the <code>gutenberg/after_X.XX.X</code> branches and open a PR against <code>develop</code>. If the branches are empty we’ll just delete them. The PR can actually get created as soon as something gets merged to the after-ooo branches.&nbsp; Merge the <code>gutenberg/after_X.XX.X</code> PR(s) only AFTER the main apps have cut their release branches.</p>
+<p>o Update the <code>gutenberg/after_X.XX.X</code> branches and open a PR against <code>develop</code>. If the branches are empty we’ll just delete them. The PR can actually get created as soon as something gets merged to the after_X.XX.X branches.&nbsp; Merge the <code>gutenberg/after_X.XX.X</code> PR(s) only AFTER the main apps have cut their release branches.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3} -->
