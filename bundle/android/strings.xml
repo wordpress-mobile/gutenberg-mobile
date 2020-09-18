@@ -104,6 +104,7 @@ translators: sample content for "Team" page template -->
     <string name="gutenberg_native_get_in_touch" tools:ignore="UnusedResources">Get in Touch</string>
     <string name="gutenberg_native_go_back" tools:ignore="UnusedResources">Go back</string>
     <string name="gutenberg_native_gradient_type" tools:ignore="UnusedResources">Gradient Type</string>
+    <string name="gutenberg_native_help_button" tools:ignore="UnusedResources">Help button</string>
     <string name="gutenberg_native_help_icon" tools:ignore="UnusedResources">Help icon</string>
     <string name="gutenberg_native_here_is_the_panel_content" tools:ignore="UnusedResources">Here is the panel content!</string>
     <string name="gutenberg_native_hide_keyboard" tools:ignore="UnusedResources">Hide keyboard</string>

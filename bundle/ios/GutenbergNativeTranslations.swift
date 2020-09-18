@@ -81,6 +81,7 @@ private func dummy() {
     _ = NSLocalizedString("Get in Touch", comment: "translators: sample content for \"About\" page template\ntranslators: sample content for \"Contact\" page template\ntranslators: sample content for \"Portfolio\" page template\ntranslators: sample content for \"Services\" page template\ntranslators: sample content for \"Team\" page template")
     _ = NSLocalizedString("Go back", comment: "")
     _ = NSLocalizedString("Gradient Type", comment: "")
+    _ = NSLocalizedString("Help button", comment: "")
     _ = NSLocalizedString("Help icon", comment: "")
     _ = NSLocalizedString("Here is the panel content!", comment: "")
     _ = NSLocalizedString("Hide keyboard", comment: "")
