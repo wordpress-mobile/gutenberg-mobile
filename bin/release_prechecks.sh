@@ -5,28 +5,13 @@ SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$SCRIPT_PATH/.."
 
 #####
-# Confirm to Proceed Prompt
-#####
-
-# Accepts a single argument: a yes/no question (ending with a ? most likely) to ask the user
-function confirm_to_proceed() {
-    read -p "$1 (y/n) " -n 1
-    echo ""
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        printf "Aborting release...\n"
-        exit 1
-    fi
-}
-
-#####
 # PR Milestone check
 #####
 
 function check_num_milestone_prs() {
-   MILESTONE_NAME="$1"
-   curl -s -H "Accept: application/vnd.github.v3+json" \
-        "https://api.github.com/repos/wordpress-mobile/gutenberg-mobile/milestones" \
-      | npx json -c "this.title === '$MILESTONE_NAME'" -a open_issues
+    MILESTONE_NAME="$1"
+    curl -s "https://api.github.com/repos/wordpress-mobile/gutenberg-mobile/milestones" \
+      | jq ".[] | select(.title == \"$MILESTONE_NAME\") | .open_issues"
 }
 
 function check_if_version_has_pending_prs_for_milestone() {
