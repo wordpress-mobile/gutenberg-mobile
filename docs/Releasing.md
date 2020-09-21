@@ -42,7 +42,7 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o From gutenberg-mobile's <code>develop</code> branch (making sure the gutenberg submodule is updated and clean), run the release script: <code>./bin/release_automation.sh</code>. This will take care of creating the branches in gutenberg-mobile and gutenberg as well as creating the gutenberg-mobile release PR.</p>
+<p>o From gutenberg-mobile's <code>develop</code> branch (making sure the gutenberg submodule is updated and clean), run the release script: <code>./bin/release_automation.sh</code>. This will take care of creating the branches in gutenberg-mobile and gutenberg, creating the gutenberg-mobile release PR as well as WPAndroid and WPiOS integration PRs.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3} -->
