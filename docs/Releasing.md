@@ -45,30 +45,6 @@ cut a new release.
 <p>o From gutenberg-mobile's <code>develop</code> branch (making sure the gutenberg submodule is updated and clean), run the release script: <code>./bin/release_automation.sh</code>. This will take care of creating the branches in gutenberg-mobile and gutenberg as well as creating the gutenberg-mobile release PR.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p>o Create a new branch in the main WP apps (WordPress-iOS, WordPress-Android) based on their <code>develop</code> branches. Name the new branch <code>gutenberg/integrate_release_X.XX.X</code>.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>o Use the commit hash of the head of the release branch in Gutenberg-Mobile as the reference for the main apps.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>o Create a PR in WPAndroid and WPiOS with a description along these lines: "This PR incorporates the X.XX.X release of gutenberg-mobile. For details about the changes included in this PR and testing instructions please see the related gutenberg-mobile PR: [gb-mobile PR link]."</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>o In iOS update the file <code>Podfile</code> to point to the new hash in GB-Mobile and if needed also update the reference to Aztec to the new release. Then run <code>rake dependencies</code>, commit and push.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>o On Android: (1) update the git submodule reference for <code>libs/gutenberg-mobile</code> (<code>cd libs/gutenberg-mobile &amp;&amp; git checkout release/X.XX.X &amp;&amp; git pull origin release/X.XX.X &amp;&amp; cd .. &amp;&amp; git add gutenberg-mobile</code>); and (2) run <code>python tools/merge_strings_xml.py</code> to update the main <code>strings.xml</code> file.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>o Create new branches <code>gutenberg/after_X.XX.X</code> in WPAndroid and WPiOS and keep them up to date with the release branches. These are to be doubles for develop on the main apps for mobile gutenberg dev’s WP app PR’s that didn’t or shouldn’t make it into the X.XX.X editor release.</p>
-<!-- /wp:paragraph -->
-
 <!-- wp:heading {"level":3} -->
 <h3>New Aztec Release</h3>
 <!-- /wp:heading -->
