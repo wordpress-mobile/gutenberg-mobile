@@ -197,6 +197,14 @@ cd "$TEMP_WP_ANDROID_DIRECTORY"
 
 execute "git" "submodule" "update" "--init" "--recursive" "--depth=1" "--recommend-shallow"
 
+ohai "Create after_x.xx.x branch in WordPress-Android"
+execute "git" "switch" "-c" "gutenberg/after_$VERSION_NUMBER" 
+
+# Insure PR is created on proper remote
+# see https://github.com/cli/cli/issues/800
+WP_ANDROID_BASE_REMOTE=$(get_remote_name 'wordpress-mobile/WordPress-Android')
+execute "git" "push" "-u" "$WP_ANDROID_BASE_REMOTE" "HEAD"
+
 ohai "Create release branch in WordPress-Android"
 execute "git" "switch" "-c" "gutenberg/integrate_release_$VERSION_NUMBER" 
 
@@ -221,10 +229,7 @@ else
     ohai "There were no changes from 'python tools/merge_strings_xml.py' to be committed."
 fi
 
-
-# Insure PR is created on proper remote
-# see https://github.com/cli/cli/issues/800
-WP_ANDROID_BASE_REMOTE=$(get_remote_name 'wordpress-mobile/WordPress-Android')
+ohai "Push integration branch"
 execute "git" "push" "-u" "$WP_ANDROID_BASE_REMOTE" "HEAD"
 
 WP_ANDROID_PR_BODY="## Description
@@ -253,6 +258,14 @@ execute "git" "clone" "--depth=1" "git@github.com:wordpress-mobile/WordPress-iOS
 
 cd "$TEMP_WP_IOS_DIRECTORY"
 
+ohai "Create after_x.xx.x branch in WordPress-iOS"
+execute "git" "switch" "-c" "gutenberg/after_$VERSION_NUMBER" 
+
+# Insure PR is created on proper remote
+# see https://github.com/cli/cli/issues/800
+WP_IOS_BASE_REMOTE=$(get_remote_name 'wordpress-mobile/WordPress-iOS')
+execute "git" "push" "-u" "$WP_IOS_BASE_REMOTE" "HEAD"
+
 ohai "Create release branch in WordPress-iOS"
 execute "git" "switch" "-c" "gutenberg/integrate_release_$VERSION_NUMBER" 
 
@@ -265,9 +278,7 @@ execute "rake" "dependencies"
 execute "git" "add" "Podfile" "Podfile.lock"
 execute "git" "commit" "-m" "Release script: Update gutenberg-mobile ref"
 
-# Insure PR is created on proper remote
-# see https://github.com/cli/cli/issues/800
-WP_IOS_BASE_REMOTE=$(get_remote_name 'wordpress-mobile/WordPress-iOS')
+ohai "Push integration branch"
 execute "git" "push" "-u" "$WP_IOS_BASE_REMOTE" "HEAD"
 
 WP_IOS_PR_BODY="## Description
