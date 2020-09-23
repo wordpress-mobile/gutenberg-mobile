@@ -162,7 +162,7 @@ jobs:
         - dependencies-v4-
     - run:
         name: Build (if needed)
-        command: test -e ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app || SKIP_BUNDLING=true npm run core test:e2e:build-app:ios
+        command: test -e ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app || SKIP_BUNDLING=true npm run core test:e2e:build-app:ios
     - save_cache:
         name: Save Dependencies Cache
         key: dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}-{{ checksum "gutenberg/package-lock.json" }}
@@ -176,12 +176,12 @@ jobs:
         command: npm run test:e2e:bundle:ios
     - run:
         name: Generate .app file for testing
-        command: WORK_DIR=$(pwd) && cd ./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator && zip -r $WORK_DIR/gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip GutenbergDemo.app
+        command: WORK_DIR=$(pwd) && cd ./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator && zip -r $WORK_DIR/gutenberg/packages/react-native-editor/ios/gutenberg.app.zip gutenberg.app
     - run:
         name: Upload .app to sauce labs
         command: |
           source bin/sauce-pre-upload.sh
-          curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.app.zip?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
+          curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.app.zip?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/ios/gutenberg.app.zip
     - run:
         name: Run Device Tests
         command: |
@@ -193,12 +193,12 @@ jobs:
         path: ./reports/test-results
     - run:
         name: Prepare build cache
-        command: rm gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app/main.jsbundle
+        command: rm gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app/main.jsbundle
     - save_cache:
         name: Save Build Cache
         key: ios-build-cache-{{ checksum "ios-checksums.txt" }}
         paths:
-          - gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app
+          - gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app
     - when:
           condition: << parameters.post-to-slack >>
           steps:
