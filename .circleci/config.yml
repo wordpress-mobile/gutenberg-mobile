@@ -42,6 +42,9 @@ jobs:
       check-correctness:
         type: boolean
         default: false
+      check-diff:
+        type: boolean
+        default: false
     docker:
       - image: circleci/node:10
     steps:
