@@ -18,7 +18,7 @@ if [ "$CHECK_CORRECTNESS" = true ] ; then
 fi
 
 if [ "$CHECK_DIFF" = true ] ; then
-  diff = git diff
+  diff=$(git diff)
   if [[ $? != 0 ]]; then
     pFail
   elif [[ $diff ]]; then
