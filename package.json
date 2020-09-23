@@ -103,6 +103,7 @@
     "version": "npm run bundle && git add -A bundle"
   },
   "dependencies": {
+    "@babel/plugin-proposal-async-generator-functions": "^7.10.5",
     "email-validator": "2.0.4"
   }
 }
