@@ -54,6 +54,7 @@ jobs:
           command: |
             echo 'export CHECK_CORRECTNESS=<<parameters.check-correctness>>' >> $BASH_ENV
             echo 'export CHECK_TESTS=<<parameters.check-tests>>' >> $BASH_ENV
+            echo 'export CHECK_DIFF=<<parameters.check-diff>>' >> $BASH_ENV
             echo 'export TEST_RN_PLATFORM=<<parameters.platform>>' >> $BASH_ENV
       - run:
           name: Run Checks
@@ -214,6 +215,9 @@ workflows:
       - checks:
           name: Check Correctness
           check-correctness: true
+      - checks:
+          name: Check Podfile-lock Diff
+          check-diff: true
       - checks:
           name: Test iOS
           platform: ios
