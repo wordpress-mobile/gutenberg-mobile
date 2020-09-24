@@ -59,7 +59,7 @@ jobs:
       - unless:
           condition: <<parameters.check-correctness>>
           steps:
-            - npm--install
+            - npm-install
       - add-jest-reporter-dir
       - run:
           name: Set Environment Variables
