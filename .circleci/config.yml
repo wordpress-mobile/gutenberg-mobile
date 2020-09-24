@@ -53,13 +53,13 @@ jobs:
       - checkout
       - checkout-submodules
       - when:
-        condition: <<parameters.check-correctness>>
-        steps:
-          - npm-install-full
+          condition: <<parameters.check-correctness>>
+          steps:
+            - npm-install-full
       - unless:
-        condition: <<parameters.check-correctness>>
-        steps:
-          - npm--install
+          condition: <<parameters.check-correctness>>
+          steps:
+            - npm--install
       - add-jest-reporter-dir
       - run:
           name: Set Environment Variables
