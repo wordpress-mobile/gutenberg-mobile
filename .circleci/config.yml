@@ -58,7 +58,7 @@ jobs:
           - npm-install-full
       - unless:
         condition: <<parameters.check-correctness>>
-         - steps:
+        steps:
           - npm--install
       - add-jest-reporter-dir
       - run:
