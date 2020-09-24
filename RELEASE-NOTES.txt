@@ -2,6 +2,20 @@
 ------
 * [**] Increase tap-target of primary action on unsupported blocks.
 
+1.37.1
+------
+* [**] [iOS] remove the overlay from the Unsupported Block Editor web view, if Login with WordPress.com is requested. (bug never releases) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2641]
+
+1.37.0
+------
+* [***] Full-width and wide alignment support for Group, Cover and Image block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2559]
+* [**] Add support for rounded style in Image block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2591]
+* [***] Fixed a case where adding a paragraph block made toolbar jump [https://github.com/WordPress/gutenberg/pull/24573]
+
+1.36.1
+------
+* [**] [iOS] Fixed Dark Mode transition for editor menus.
+
 1.36.0
 ------
 * [**] [Android] New block: Pullquote
