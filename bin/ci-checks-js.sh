@@ -1,5 +1,5 @@
 function pOk() {
-  echo "[$(tput setaf 2)OK$(tput sgr0)]"
+  echo "[OK]"
 }
 
 function pFail() {
@@ -7,7 +7,7 @@ function pFail() {
   then
     echo "Message: $1"
   fi
-  echo "[$(tput setaf 1)KO$(tput sgr0)]"
+  echo "[KO]"
   exit 1
 }
 
