@@ -178,7 +178,6 @@ translators: sample content for "Services" page template -->
     <!-- translators: sample content for "Portfolio" page template -->
     <string name="gutenberg_native_project_name" tools:ignore="UnusedResources">Project Name</string>
     <string name="gutenberg_native_remove_annotations" tools:ignore="UnusedResources">Remove annotations</string>
-    <string name="gutenberg_native_remove_block" tools:ignore="UnusedResources">Remove block</string>
     <string name="gutenberg_native_replace_current_block" tools:ignore="UnusedResources">Replace Current Block</string>
     <string name="gutenberg_native_replace_image_or_video" tools:ignore="UnusedResources">Replace image or video</string>
     <string name="gutenberg_native_replace_video" tools:ignore="UnusedResources">Replace video</string>
