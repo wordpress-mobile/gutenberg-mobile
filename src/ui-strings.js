@@ -40,7 +40,7 @@ export const uiStrings = () => {
 		unsupportedBlockEditor.supported === false &&
 		unsupportedBlockEditor.switchable;
 	const unsupportedBlocksButton = shouldOverwriteButtonTitle
-		? __( 'Open Jetpack Seccurity settings' )
+		? __( 'Open Jetpack Security settings' )
 		: undefined;
 
 	return {
