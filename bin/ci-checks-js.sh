@@ -3,6 +3,10 @@ function pOk() {
 }
 
 function pFail() {
+  if [ -n "$1" ]
+  then
+    echo "Message: $1"
+  fi
   echo "[$(tput setaf 1)KO$(tput sgr0)]"
   exit 1
 }
@@ -12,7 +16,7 @@ function checkDiff() {
   if [[ $? != 0 ]]; then
     pFail
   elif [[ $diff ]]; then
-    pFail
+    pFail "package-lock.json has changed. Please run npm install and commit the diff"
   else
     pOk
   fi
