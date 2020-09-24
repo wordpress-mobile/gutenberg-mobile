@@ -9,16 +9,21 @@ commands:
       - restore_cache:
           name: Restore NPM Cache
           keys:
-            - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
+            - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
       - run:
           name: NPM Install
           command: npm ci --prefer-offline
       - save_cache:
           name: Save NPM Cache
-          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
+          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/.npm
             - i18n-cache/data
+  npm-install-full:
+    steps:
+      - run:
+          name: NPM Install Full
+          command: npm install
   checkout-submodules:
     steps:
       - run:
@@ -42,22 +47,25 @@ jobs:
       check-correctness:
         type: boolean
         default: false
-      check-diff:
-        type: boolean
-        default: false
     docker:
       - image: circleci/node:10
     steps:
       - checkout
       - checkout-submodules
-      - npm-install
+      - when:
+        condition: <<parameters.check-correctness>>
+        steps:
+          - npm-install-full
+      - unless:
+        condition: <<parameters.check-correctness>>
+         - steps:
+          - npm--install
       - add-jest-reporter-dir
       - run:
           name: Set Environment Variables
           command: |
             echo 'export CHECK_CORRECTNESS=<<parameters.check-correctness>>' >> $BASH_ENV
             echo 'export CHECK_TESTS=<<parameters.check-tests>>' >> $BASH_ENV
-            echo 'export CHECK_DIFF=<<parameters.check-diff>>' >> $BASH_ENV
             echo 'export TEST_RN_PLATFORM=<<parameters.platform>>' >> $BASH_ENV
       - run:
           name: Run Checks
@@ -218,9 +226,6 @@ workflows:
       - checks:
           name: Check Correctness
           check-correctness: true
-      - checks:
-          name: Check Podfile-lock Diff
-          check-diff: true
       - checks:
           name: Test iOS
           platform: ios

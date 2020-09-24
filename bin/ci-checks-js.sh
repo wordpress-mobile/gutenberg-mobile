@@ -7,17 +7,7 @@ function pFail() {
   exit 1
 }
 
-# if both env variables are missing then force them to `true`. Otherwise will respect the combination passed externally
-if [[ -z "${CHECK_CORRECTNESS}" ]] && [[ -z "${CHECK_TESTS}" ]] ; then
-  CHECK_CORRECTNESS=true
-  CHECK_TESTS=true
-fi
-
-if [ "$CHECK_CORRECTNESS" = true ] ; then
-  npm run lint || pFail
-fi
-
-if [ "$CHECK_DIFF" = true ] ; then
+function checkDiff() {
   diff=$(git diff)
   if [[ $? != 0 ]]; then
     pFail
@@ -26,7 +16,19 @@ if [ "$CHECK_DIFF" = true ] ; then
   else
     pOk
   fi
+}
+
+# if both env variables are missing then force them to `true`. Otherwise will respect the combination passed externally
+if [[ -z "${CHECK_CORRECTNESS}" ]] && [[ -z "${CHECK_TESTS}" ]] ; then
+  CHECK_CORRECTNESS=true
+  CHECK_TESTS=true
 fi
+
+if [ "$CHECK_CORRECTNESS" = true ] ; then
+  checkDiff
+  npm run lint || pFail
+fi
+
 
 if [ "$CHECK_TESTS" = true ] ; then
   # we'll run the tests twich (once for each platform) if the platform env var is not set
