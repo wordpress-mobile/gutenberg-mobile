@@ -11,7 +11,8 @@ export const uiStrings = () => {
 		supported:
 			getSettings( 'capabilities' ).unsupportedBlockEditor === true,
 		switchable:
-			getSettings( 'capabilities' ).canEnableUnsupportedBlockEditor === true,
+			getSettings( 'capabilities' ).canEnableUnsupportedBlockEditor ===
+			true,
 	};
 
 	let unsupportedBlocksExplanation;
