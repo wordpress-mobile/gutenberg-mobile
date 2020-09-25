@@ -33,7 +33,6 @@ if [ "$CHECK_CORRECTNESS" = true ] ; then
   npm run lint || pFail
 fi
 
-
 if [ "$CHECK_TESTS" = true ] ; then
   # we'll run the tests twich (once for each platform) if the platform env var is not set
   if [[ -z "${TEST_RN_PLATFORM}" ]] ; then
