@@ -34,6 +34,7 @@
     <string name="gutenberg_native_an_unknown_error_occurred_please_try_again" tools:ignore="UnusedResources">An unknown error occurred. Please try again.</string>
     <string name="gutenberg_native_angle" tools:ignore="UnusedResources">Angle</string>
     <string name="gutenberg_native_annotations_sidebar" tools:ignore="UnusedResources">Annotations Sidebar</string>
+    <string name="gutenberg_native_black" tools:ignore="UnusedResources">Black</string>
     <!-- translators: displayed right after the block is copied. -->
     <string name="gutenberg_native_block_copied" tools:ignore="UnusedResources">Block copied</string>
     <!-- translators: displayed right after the block is cut. -->
@@ -47,6 +48,8 @@
     <string name="gutenberg_native_block_settings" tools:ignore="UnusedResources">Block settings</string>
     <!-- translators: title for "Blog" page template -->
     <string name="gutenberg_native_blog" tools:ignore="UnusedResources">Blog</string>
+    <string name="gutenberg_native_blush_bordeaux" tools:ignore="UnusedResources">Blush bordeaux</string>
+    <string name="gutenberg_native_blush_light_purple" tools:ignore="UnusedResources">Blush light purple</string>
     <string name="gutenberg_native_choose_from_device" tools:ignore="UnusedResources">Choose from device</string>
     <string name="gutenberg_native_choose_image" tools:ignore="UnusedResources">Choose image</string>
     <string name="gutenberg_native_choose_image_or_video" tools:ignore="UnusedResources">Choose image or video</string>
@@ -54,6 +57,7 @@
     <!-- translators: sample content for "Contact" page template -->
     <string name="gutenberg_native_city_10100" tools:ignore="UnusedResources">City, 10100</string>
     <string name="gutenberg_native_content" tools:ignore="UnusedResources">Content…</string>
+    <string name="gutenberg_native_cool_to_warm_spectrum" tools:ignore="UnusedResources">Cool to warm spectrum</string>
     <string name="gutenberg_native_copied_block" tools:ignore="UnusedResources">Copied block</string>
     <string name="gutenberg_native_copy_block" tools:ignore="UnusedResources">Copy block</string>
     <!-- translators: %s: current cell value. -->
@@ -61,6 +65,7 @@
     <string name="gutenberg_native_customize" tools:ignore="UnusedResources">CUSTOMIZE</string>
     <string name="gutenberg_native_customize_gradient" tools:ignore="UnusedResources">Customize Gradient</string>
     <string name="gutenberg_native_cut_block" tools:ignore="UnusedResources">Cut block</string>
+    <string name="gutenberg_native_cyan_bluish_gray" tools:ignore="UnusedResources">Cyan bluish gray</string>
     <string name="gutenberg_native_dismiss" tools:ignore="UnusedResources">Dismiss</string>
     <!-- translators: sample content for "About" page template -->
     <string name="gutenberg_native_don_t_cry_because_it_s_over_smile_because_it_happened" tools:ignore="UnusedResources">Don’t cry because it’s over, smile because it happened.</string>
@@ -92,6 +97,7 @@
     <string name="gutenberg_native_duplicate_block" tools:ignore="UnusedResources">Duplicate block</string>
     <string name="gutenberg_native_edit_block_in_web_browser" tools:ignore="UnusedResources">Edit block in web browser</string>
     <string name="gutenberg_native_edit_video" tools:ignore="UnusedResources">Edit video</string>
+    <string name="gutenberg_native_electric_grass" tools:ignore="UnusedResources">Electric grass</string>
     <!-- translators: sample content for "Team" page template -->
     <string name="gutenberg_native_email_me_a_href_mailto_mail_example_com_mail_example_com_a" tools:ignore="UnusedResources">Email me: &lt;a href=\"mailto:mail@example.com\"&gt;mail@example.com&lt;/a&gt;</string>
     <string name="gutenberg_native_excerpt_length_words" tools:ignore="UnusedResources">Excerpt length (words)</string>
@@ -127,7 +133,15 @@ translators: sample content for "Services" page template -->
     <string name="gutenberg_native_let_s_build_something_together_7019bfe3" tools:ignore="UnusedResources">Let\'s build something together!</string>
     <!-- translators: sample content for "Contact" page template -->
     <string name="gutenberg_native_let_s_talk_don_t_hesitate_to_reach_out_with_the_contact_informati" tools:ignore="UnusedResources">Let\'s talk 👋 Don\'t hesitate to reach out with the contact information below, or send a message using the form.</string>
+    <string name="gutenberg_native_light_green_cyan" tools:ignore="UnusedResources">Light green cyan</string>
+    <string name="gutenberg_native_light_green_cyan_to_vivid_green_cyan" tools:ignore="UnusedResources">Light green cyan to vivid green cyan</string>
     <string name="gutenberg_native_link_to" tools:ignore="UnusedResources">Link To</string>
+    <string name="gutenberg_native_luminous_dusk" tools:ignore="UnusedResources">Luminous dusk</string>
+    <string name="gutenberg_native_luminous_vivid_amber" tools:ignore="UnusedResources">Luminous vivid amber</string>
+    <string name="gutenberg_native_luminous_vivid_amber_to_luminous_vivid_orange" tools:ignore="UnusedResources">Luminous vivid amber to luminous vivid orange</string>
+    <string name="gutenberg_native_luminous_vivid_orange" tools:ignore="UnusedResources">Luminous vivid orange</string>
+    <string name="gutenberg_native_luminous_vivid_orange_to_vivid_red" tools:ignore="UnusedResources">Luminous vivid orange to vivid red</string>
+    <string name="gutenberg_native_midnight" tools:ignore="UnusedResources">Midnight</string>
     <string name="gutenberg_native_move_block_down" tools:ignore="UnusedResources">Move block down</string>
     <!-- translators: accessibility text. %1: current block position (number). %2: next block position (number) -->
     <string name="gutenberg_native_move_block_down_from_row_1_s_to_row_2_s" tools:ignore="UnusedResources">Move block down from row %1$s to row %2$s</string>
@@ -163,6 +177,9 @@ translators: sample content for "Services" page template -->
     <string name="gutenberg_native_page_title_empty" tools:ignore="UnusedResources">Page title. Empty</string>
     <!-- translators: accessibility text. %s: text content of the page title. -->
     <string name="gutenberg_native_page_title_s" tools:ignore="UnusedResources">Page title. %s</string>
+    <string name="gutenberg_native_pale_cyan_blue" tools:ignore="UnusedResources">Pale cyan blue</string>
+    <string name="gutenberg_native_pale_ocean" tools:ignore="UnusedResources">Pale ocean</string>
+    <string name="gutenberg_native_pale_pink" tools:ignore="UnusedResources">Pale pink</string>
     <string name="gutenberg_native_paste_block_after" tools:ignore="UnusedResources">Paste block after</string>
     <string name="gutenberg_native_paste_url" tools:ignore="UnusedResources">Paste URL</string>
     <!-- translators: title for "Portfolio" page template -->
@@ -178,7 +195,6 @@ translators: sample content for "Services" page template -->
     <!-- translators: sample content for "Portfolio" page template -->
     <string name="gutenberg_native_project_name" tools:ignore="UnusedResources">Project Name</string>
     <string name="gutenberg_native_remove_annotations" tools:ignore="UnusedResources">Remove annotations</string>
-    <string name="gutenberg_native_remove_block" tools:ignore="UnusedResources">Remove block</string>
     <string name="gutenberg_native_replace_current_block" tools:ignore="UnusedResources">Replace Current Block</string>
     <string name="gutenberg_native_replace_image_or_video" tools:ignore="UnusedResources">Replace image or video</string>
     <string name="gutenberg_native_replace_video" tools:ignore="UnusedResources">Replace video</string>
@@ -230,12 +246,18 @@ translators: sample content for "Services" page template -->
     <string name="gutenberg_native_updates_the_title" tools:ignore="UnusedResources">Updates the title.</string>
     <!-- translators: sample content for "Contact" page template -->
     <string name="gutenberg_native_usa" tools:ignore="UnusedResources">USA</string>
+    <string name="gutenberg_native_very_light_gray_to_cyan_bluish_gray" tools:ignore="UnusedResources">Very light gray to cyan bluish gray</string>
     <!-- translators: accessibility text. Empty video caption. -->
     <string name="gutenberg_native_video_caption_empty" tools:ignore="UnusedResources">Video caption. Empty</string>
     <!-- translators: accessibility text. %s: video caption. -->
     <string name="gutenberg_native_video_caption_s" tools:ignore="UnusedResources">Video caption. %s</string>
     <!-- translators: sample content for "About" page template -->
     <string name="gutenberg_native_visitors_will_want_to_know_who_is_on_the_other_side_of_the_page_u" tools:ignore="UnusedResources">Visitors will want to know who is on the other side of the page. Use this space to write about yourself, your site, your business, or anything you want. Use the testimonials below to quote others, talking about the same thing – in their own words.</string>
+    <string name="gutenberg_native_vivid_cyan_blue" tools:ignore="UnusedResources">Vivid cyan blue</string>
+    <string name="gutenberg_native_vivid_cyan_blue_to_vivid_purple" tools:ignore="UnusedResources">Vivid cyan blue to vivid purple</string>
+    <string name="gutenberg_native_vivid_green_cyan" tools:ignore="UnusedResources">Vivid green cyan</string>
+    <string name="gutenberg_native_vivid_purple" tools:ignore="UnusedResources">Vivid purple</string>
+    <string name="gutenberg_native_vivid_red" tools:ignore="UnusedResources">Vivid red</string>
     <!-- translators: sample content for "About" page template -->
     <string name="gutenberg_native_walt_disney" tools:ignore="UnusedResources">Walt Disney</string>
     <!-- translators: sample content for "Team" page template -->
@@ -251,5 +273,6 @@ translators: sample content for "Services" page template -->
     <string name="gutenberg_native_welcome_to_our_new_blog" tools:ignore="UnusedResources">Welcome to our new blog</string>
     <!-- translators: sample content for "About" page template -->
     <string name="gutenberg_native_what_people_say" tools:ignore="UnusedResources">What People Say</string>
+    <string name="gutenberg_native_white" tools:ignore="UnusedResources">White</string>
     <string name="gutenberg_native_wordpress_media_library" tools:ignore="UnusedResources">WordPress Media Library</string>
 </resources>
