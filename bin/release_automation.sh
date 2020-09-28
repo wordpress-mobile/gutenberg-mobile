@@ -50,9 +50,11 @@ if [[ -z "$VERSION_NUMBER" ]]; then
 fi
 
 # Ensure javascript dependencies are up-to-date
-ohai "Run 'npm ci' to ensure javascript dependencies are up-to-date"
-execute "npm" "ci"
-
+read -p "Run 'npm ci' to ensure javascript dependencies are up-to-date? (y/n) " -n 1
+echo ""
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    execute "npm" "ci"
+fi
 
 # If there are any open PRs with a milestone matching the release version number, notify the user and ask them if they want to proceed
 number_milestone_prs=$(check_if_version_has_pending_prs_for_milestone "$VERSION_NUMBER")
