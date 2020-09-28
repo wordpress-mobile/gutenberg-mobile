@@ -39,7 +39,7 @@ if [[ ! "$CURRENT_BRANCH" =~ "^develop$|^trunk$|^release/.*" ]]; then
 fi
 
 # Confirm branch is clean
-[[ -z "$(git status --porcelain)" ]] || { git status; abort "Uncommitted changes found. Aborting release script..."; }
+#[[ -z "$(git status --porcelain)" ]] || { git status; abort "Uncommitted changes found. Aborting release script..."; }
 
 # Ask for new version number
 CURRENT_VERSION_NUMBER=$(jq '.version' package.json --raw-output)
@@ -142,11 +142,11 @@ PR_BODY=${PR_TEMPLATE//v1.XX.Y/$VERSION_NUMBER}
 
 # Insure PR is created on proper remote
 # see https://github.com/cli/cli/issues/800
-BASE_REMOTE=$(get_remote_name 'wordpress-mobile/gutenberg-mobile')
+BASE_REMOTE=$(get_remote_name 'cameronvoell/gutenberg-mobile')
 execute "git" "push" "-u" "$BASE_REMOTE" "HEAD"
 
 # Create Draft GB-Mobile Release PR in GitHub
-GB_MOBILE_PR_URL=$(execute "gh" "pr" "create" "--title" "Release $VERSION_NUMBER" "--body" "$PR_BODY" "--base" "trunk" "--label" "release-process" "--draft")
+GB_MOBILE_PR_URL=$(execute "gh" "pr" "create" "--title" "Release $VERSION_NUMBER" "--body" "$PR_BODY" "--base" "develop" "--repo" "cameronvoell/gutenberg-mobile" "--label" "release-process" "--draft")
 
 #####
 # Gutenberg PR
@@ -170,11 +170,11 @@ $CHECKLIST_FROM_GUTENBERG_PR_TEMPLATE"
 
 # Insure PR is created on proper remote
 # see https://github.com/cli/cli/issues/800
-GB_BASE_REMOTE=$(get_remote_name 'WordPress/gutenberg')
+GB_BASE_REMOTE=$(get_remote_name 'cameronvoell/gutenberg')
 execute "git" "push" "-u" "$GB_BASE_REMOTE" "HEAD"
 
 # Create Draft Gutenberg Release PR in GitHub
-GUTENBERG_PR_URL=$(execute "gh" "pr" "create" "--title" "Mobile Release v$VERSION_NUMBER" "--body" "$GUTENBERG_PR_BODY" "--base" "master" "--label" "Mobile App Android/iOS" "--draft")
+GUTENBERG_PR_URL=$(execute "gh" "pr" "create" "--title" "Mobile Release v$VERSION_NUMBER" "--body" "$GUTENBERG_PR_BODY" "--base" "master" "--repo" "cameronvoell/gutenberg" "--label" "Mobile App Android/iOS" "--draft")
 cd ..
 
 echo "PRs Created"
@@ -193,7 +193,7 @@ GB_MOBILE_PR_REF=$(git rev-parse HEAD)
 
 TEMP_WP_ANDROID_DIRECTORY=$(mktemp -d)
 ohai "Clone WordPress-Android into '$TEMP_WP_ANDROID_DIRECTORY'"
-execute "git" "clone" "--depth=1" "git@github.com:wordpress-mobile/WordPress-Android.git" "$TEMP_WP_ANDROID_DIRECTORY"
+execute "git" "clone" "--depth=1" "git@github.com:cameronvoell/WordPress-Android.git" "$TEMP_WP_ANDROID_DIRECTORY"
 
 cd "$TEMP_WP_ANDROID_DIRECTORY"
 
@@ -204,7 +204,7 @@ execute "git" "switch" "-c" "gutenberg/after_$VERSION_NUMBER"
 
 # Insure PR is created on proper remote
 # see https://github.com/cli/cli/issues/800
-WP_ANDROID_BASE_REMOTE=$(get_remote_name 'wordpress-mobile/WordPress-Android')
+WP_ANDROID_BASE_REMOTE=$(get_remote_name 'cameronvoell/WordPress-Android')
 execute "git" "push" "-u" "$WP_ANDROID_BASE_REMOTE" "HEAD"
 
 ohai "Create release branch in WordPress-Android"
@@ -244,7 +244,7 @@ Release Submission Checklist
 
 # Create Draft WPAndroid Release PR in GitHub
 ohai "Create Draft WPAndroid Release PR in GitHub"
-WP_ANDROID_PR_URL=$(execute "gh" "pr" "create" "--title" "Integrate gutenberg-mobile release $VERSION_NUMBER" "--body" "$WP_ANDROID_PR_BODY" "--base" "develop" "--label" "gutenberg-mobile" "--draft")
+WP_ANDROID_PR_URL=$(execute "gh" "pr" "create" "--title" "Integrate gutenberg-mobile release $VERSION_NUMBER" "--body" "$WP_ANDROID_PR_BODY" "--base" "develop" "--repo" "cameronvoell/WordPress-Android" "--label" "gutenberg-mobile" "--draft")
 
 ohai "WPAndroid PR Created: $WP_ANDROID_PR_URL"
 echo ""
@@ -256,7 +256,7 @@ echo ""
 
 TEMP_WP_IOS_DIRECTORY=$(mktemp -d)
 ohai "Clone WordPress-iOS into '$TEMP_WP_IOS_DIRECTORY'"
-execute "git" "clone" "--depth=1" "git@github.com:wordpress-mobile/WordPress-iOS.git" "$TEMP_WP_IOS_DIRECTORY"
+execute "git" "clone" "--depth=1" "git@github.com:cameronvoell/WordPress-iOS.git" "$TEMP_WP_IOS_DIRECTORY"
 
 cd "$TEMP_WP_IOS_DIRECTORY"
 
@@ -265,7 +265,7 @@ execute "git" "switch" "-c" "gutenberg/after_$VERSION_NUMBER"
 
 # Insure PR is created on proper remote
 # see https://github.com/cli/cli/issues/800
-WP_IOS_BASE_REMOTE=$(get_remote_name 'wordpress-mobile/WordPress-iOS')
+WP_IOS_BASE_REMOTE=$(get_remote_name 'cameronvoell/WordPress-iOS')
 execute "git" "push" "-u" "$WP_IOS_BASE_REMOTE" "HEAD"
 
 ohai "Create release branch in WordPress-iOS"
@@ -293,7 +293,7 @@ Release Submission Checklist
 
 # Create Draft WPiOS Release PR in GitHub
 ohai "Create Draft WPiOS Release PR in GitHub"
-WP_IOS_PR_URL=$(execute "gh" "pr" "create" "--title" "Integrate gutenberg-mobile release $VERSION_NUMBER" "--body" "$WP_IOS_PR_BODY" "--base" "develop" "--label" "Gutenberg integration" "--draft")
+WP_IOS_PR_URL=$(execute "gh" "pr" "create" "--title" "Integrate gutenberg-mobile release $VERSION_NUMBER" "--body" "$WP_IOS_PR_BODY" "--base" "develop" "--repo" "cameronvoell/WordPress-iOS" "--label" "Gutenberg integration" "--draft")
 
 ohai "WPiOS PR Created: $WP_IOS_PR_URL"
 echo ""
