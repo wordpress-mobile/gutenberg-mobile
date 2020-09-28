@@ -146,7 +146,7 @@ BASE_REMOTE=$(get_remote_name 'wordpress-mobile/gutenberg-mobile')
 execute "git" "push" "-u" "$BASE_REMOTE" "HEAD"
 
 # Create Draft GB-Mobile Release PR in GitHub
-GB_MOBILE_PR_URL=$(execute "gh" "pr" "create" "--title" "Release $VERSION_NUMBER" "--body" "$PR_BODY" "--base" "main" "--label" "release-process" "--draft")
+GB_MOBILE_PR_URL=$(execute "gh" "pr" "create" "--title" "Release $VERSION_NUMBER" "--body" "$PR_BODY" "--base" "trunk" "--label" "release-process" "--draft")
 
 #####
 # Gutenberg PR
