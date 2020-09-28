@@ -1,6 +1,8 @@
 [submodule "gutenberg"]
 	path = gutenberg
 	url = ../../cameronvoell/gutenberg.git
-[submodule "react-native-aztec"]
-	path = react-native-aztec-old-submodule
-	url = ../react-native-aztec.git
+	shallow = true
+[submodule "jetpack"]
+	path = jetpack
+	url = ../../Automattic/jetpack.git
+	shallow = true

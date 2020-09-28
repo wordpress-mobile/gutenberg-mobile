@@ -1,25 +1,28 @@
 version: 2.1
 
+orbs:
+  slack: circleci/slack@3.4.2
+
 commands:
-  yarn-install:
+  npm-install:
     steps:
       - restore_cache:
-          name: Restore Yarn Cache
+          name: Restore NPM Cache
           keys:
-            - yarn-i18n-v4-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
+            - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
       - run:
-          name: Yarn Install
-          command: yarn install --frozen-lockfile --prefer-offline
+          name: NPM Install
+          command: npm ci --prefer-offline
       - save_cache:
-          name: Save Yarn Cache
-          key: yarn-i18n-v4-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
+          name: Save NPM Cache
+          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
           paths:
-            - node_modules
+            - ~/.npm
             - i18n-cache/data
-  checkout-gutenberg:
+  checkout-submodules:
     steps:
       - run:
-          name: Checkout Gutenberg
+          name: Checkout Submodules
           command: git submodule update --init --recursive
   add-jest-reporter-dir:
       steps:
@@ -40,11 +43,11 @@ jobs:
         type: boolean
         default: false
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:10
     steps:
       - checkout
-      - checkout-gutenberg
-      - yarn-install
+      - checkout-submodules
+      - npm-install
       - add-jest-reporter-dir
       - run:
           name: Set Environment Variables
@@ -60,14 +63,23 @@ jobs:
       - store_test_results:
           path: ./reports/test-results
   android-device-checks:
+    parameters:
+      post-to-slack:
+        description: Post to Slack when tests fail. SLACK_WEBHOOK ENV variable must be set.
+        type: boolean
+        default: false
+      is-canary:
+        type: string
+        default: ""
     docker:
     - image: circleci/android:api-29-node
+    environment:
+      JAVA_OPTS: '-Xms512m -Xmx2g'
+      GRADLE_OPTS: '-Xmx3g -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError"'
     steps:
       - checkout
-      - run:
-          name: Checkout Gutenberg
-          command: git submodule update --init --recursive
-      - yarn-install
+      - checkout-submodules
+      - npm-install
       - add-jest-reporter-dir
       - run:
           name: Set Environment Variables
@@ -76,26 +88,58 @@ jobs:
             echo 'export TEST_ENV=sauce' >> $BASH_ENV
       - run:
           name: Bundle Android and Generate debug .apk file for testing
-          command: yarn test:e2e:build-app:android
+          command: npm run test:e2e:bundle:android && npm run test:e2e:build-app:android
       - run:
           name: Upload apk to sauce labs
           command: |
             source bin/sauce-pre-upload.sh
-            curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.apk?overwrite=true --data-binary @./android/app/build/outputs/apk/debug/app-debug.apk
+            curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.apk?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk
       - run:
           name: Run Device Tests
-          command: yarn device-tests
+          command: npm run device-tests<<parameters.is-canary>>
+          no_output_timeout: 1200
           environment:
             JEST_JUNIT_OUTPUT: "reports/test-results/android-test-results.xml"
       - store_test_results:
           path: ./reports/test-results
+      - when:
+          condition: << parameters.post-to-slack >>
+          steps:
+            - slack/status:
+                fail_only: true
+                include_job_number_field: false
+                include_project_field: false
+                failure_message: ':red_circle: Scheduled tests failed on Android device!'
+  android-native-unit-tests:
+    parameters:
+      post-to-slack:
+        description: Post to Slack when tests fail. SLACK_WEBHOOK ENV variable must be set.
+        type: boolean
+        default: false
+    docker:
+    - image: circleci/android:api-29-node
+    steps:
+      - checkout
+      - checkout-submodules
+      - npm-install
+      - run:
+          name: Run Android native unit tests
+          command: cd gutenberg/packages/react-native-editor/android && ./gradlew testDebug
   ios-device-checks:
+    parameters:
+      post-to-slack:
+        description: Post to Slack when tests fail. SLACK_WEBHOOK ENV variable must be set.
+        type: boolean
+        default: false
+      is-canary:
+        type: string
+        default: ""
     macos:
-      xcode: "10.2.0"
+      xcode: "11.2.1"
     steps:
     - checkout
-    - checkout-gutenberg
-    - yarn-install
+    - checkout-submodules
+    - npm-install
     - add-jest-reporter-dir
     - run:
         name: Set Environment Variables
@@ -104,7 +148,7 @@ jobs:
           echo 'export TEST_ENV=sauce' >> $BASH_ENV
     - run:
         name: Prepare build cache key
-        command: find yarn.lock ios react-native-aztec/ios react-native-gutenberg-bridge/ios -type f -print0 | sort -z | xargs -0 shasum | tee ios-checksums.txt
+        command: find gutenberg/package-lock.json gutenberg/packages/react-native-editor/ios gutenberg/packages/react-native-aztec/ios gutenberg/packages/react-native-bridge/ios -type f -print0 | sort -z | xargs -0 shasum | tee ios-checksums.txt
     - restore_cache:
         name: Restore Build Cache
         keys:
@@ -112,50 +156,57 @@ jobs:
     - restore_cache:
         name: Restore Dependencies Cache
         keys:
-        - dependencies-v2-{{ checksum "react-native-aztec/ios/Cartfile.resolved" }}-{{
-          checksum "yarn.lock" }}
-        - dependencies-v2-{{ checksum "react-native-aztec/ios/Cartfile.resolved" }}
-        - dependencies-v2-
-    - run:
-        name: Yarn preios (if needed)
-        command: test -e ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app || yarn preios
-    - save_cache:
-        name: Save Dependencies Cache
-        key: dependencies-v2-{{ checksum "react-native-aztec/ios/Cartfile.resolved" }}-{{
-          checksum "yarn.lock" }}
-        paths:
-        - react-native-aztec/ios/Carthage
-        - ~/.rncache
+        - dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}-{{ checksum "gutenberg/package-lock.json" }}
+        - dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}
+        - dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}
+        - dependencies-v4-
     - run:
         name: Build (if needed)
-        command: test -e ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app || yarn react-native run-ios --configuration Release --no-packager
+        command: test -e gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app || SKIP_BUNDLING=true npm run core test:e2e:build-app:ios
+    - save_cache:
+        name: Save Dependencies Cache
+        key: dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}-{{ checksum "gutenberg/package-lock.json" }}
+        paths:
+        - gutenberg/packages/react-native-editor/ios/Pods
+        - ~/Library/Caches/CocoaPods
+        - ~/.cocoapods/repos/trunk
+        - gutenberg/packages/react-native-editor/ios/vendor
     - run:
         name: Bundle iOS
-        command: yarn test:e2e:bundle:ios
+        command: npm run test:e2e:bundle:ios
     - run:
         name: Generate .app file for testing
-        command: WORK_DIR=$(pwd) && cd ./ios/build/gutenberg/Build/Products/Release-iphonesimulator && zip -r $WORK_DIR/ios/Gutenberg.app.zip gutenberg.app
+        command: WORK_DIR=$(pwd) && cd ./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator && zip -r $WORK_DIR/gutenberg/packages/react-native-editor/ios/gutenberg.app.zip gutenberg.app
     - run:
         name: Upload .app to sauce labs
         command: |
           source bin/sauce-pre-upload.sh
-          curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.app.zip?overwrite=true --data-binary @./ios/Gutenberg.app.zip
+          curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.app.zip?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/ios/gutenberg.app.zip
     - run:
         name: Run Device Tests
         command: |
-          yarn device-tests
+          npm run device-tests<<parameters.is-canary>>
+        no_output_timeout: 1200
         environment:
           JEST_JUNIT_OUTPUT: "reports/test-results/ios-test-results.xml"
     - store_test_results:
         path: ./reports/test-results
     - run:
         name: Prepare build cache
-        command: rm ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app/main.jsbundle
+        command: rm gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app/main.jsbundle
     - save_cache:
         name: Save Build Cache
         key: ios-build-cache-{{ checksum "ios-checksums.txt" }}
         paths:
-          - ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app
+          - gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app
+    - when:
+          condition: << parameters.post-to-slack >>
+          steps:
+            - slack/status:
+                fail_only: true
+                include_job_number_field: false
+                include_project_field: false
+                failure_message: ':red_circle: Scheduled tests failed on iOS device!'
 
 workflows:
   gutenberg-mobile:
@@ -172,6 +223,37 @@ workflows:
           platform: android
           check-tests: true
       - ios-device-checks:
-          name: Test iOS on Device
+          name: Test iOS on Device - Canaries
+          is-canary: "-canary"
       - android-device-checks:
-          name: Test Android on Device
+          name: Test Android on Device - Canaries
+          is-canary: "-canary"
+      - Optional UI Tests:
+          type: approval
+          filters:
+            branches:
+              ignore:
+                - develop
+      - ios-device-checks:
+          name: Test iOS on Device - Full
+          requires: [ "Optional UI Tests" ]
+      - android-device-checks:
+          name: Test Android on Device - Full
+          requires: [ "Optional UI Tests" ]
+      - android-native-unit-tests:
+          name: Android Native Unit Tests
+
+  ui-tests-full-scheduled:
+    jobs:
+      - ios-device-checks:
+          name: Test iOS on Device - Scheduled
+          post-to-slack: true
+      - android-device-checks:
+          name: Test Android on Device - Scheduled
+          post-to-slack: true
+    triggers:
+      - schedule:
+          cron: '1 1,13 * * *'
+          filters:
+            branches:
+              only: develop
