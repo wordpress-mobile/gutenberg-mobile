@@ -188,7 +188,6 @@ describe.skip( 'Gutenberg Editor Contact Info Block tests', () => {
 	} );
 
 	afterAll( async () => {
-		jest.resetModules();
 		if ( ! isLocalEnvironment() ) {
 			driver.sauceJobStatus( allPassed );
 		}
