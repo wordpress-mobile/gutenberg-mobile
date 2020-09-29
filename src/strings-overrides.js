@@ -10,9 +10,6 @@ addFilter( 'native.missing_block_detail', 'native/missing_block', ( defaultValue
 	const isUnsupportedBlockEditorSupported = getSettings( 'capabilities' ).unsupportedBlockEditor === true;
 	const canEnableUnsupportedBlockEditor = getSettings( 'capabilities' ).canEnableUnsupportedBlockEditor === true;
 
-	console.log('---> isUnsupportedBlockEditorSupported: ', isUnsupportedBlockEditorSupported);
-	console.log('---> canEnableUnsupportedBlockEditor: ', canEnableUnsupportedBlockEditor);
-
 	const unsupportedBlocksExplanation = __(
 		'You can edit this block using the web version of the editor.'
 	);
