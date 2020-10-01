@@ -7,7 +7,7 @@ const supportedJetpackBlocks = {
 	'contact-info': {
 		available: true,
 	},
-	'story': {
+	story: {
 		available: true,
 	},
 };
