@@ -1,6 +1,6 @@
 {
   "name": "gutenberg-mobile",
-  "version": "1.36.0",
+  "version": "1.37.1",
   "private": true,
   "config": {
     "jsfiles": "./*.js src/*.js src/**/*.js src/**/**/*.js",
@@ -89,10 +89,10 @@
     "test:e2e:start-test-runner:android:local": "TEST_RN_PLATFORM=android ANDROID_APP_PATH='./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk' npm run device-tests:local",
     "test:e2e:start-test-runner:android:debug": "TEST_RN_PLATFORM=android ANDROID_APP_PATH='./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk' npm run device-tests:debug",
     "test:e2e:android:local": "npm run test:e2e:bundle:android && npm run test:e2e:build-app:android && npm run test:e2e:install-app:android && npm run test:e2e:start-test-runner:android:local",
-    "test:e2e:bundle:ios": "mkdir -p gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app && npm run rn-bundle -- --reset-cache --platform=ios --dev=false --minify false --entry-file=index.js --bundle-output=./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app/main.jsbundle --assets-dest=./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app",
+    "test:e2e:bundle:ios": "mkdir -p gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app && npm run rn-bundle -- --reset-cache --platform=ios --dev=false --minify false --entry-file=index.js --bundle-output=./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app/main.jsbundle --assets-dest=./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app",
     "test:e2e:build-app:ios": "SKIP_BUNDLING=true npm run core test:e2e:build-app:ios",
-    "test:e2e:start-test-runner:ios:local": "TEST_RN_PLATFORM=ios IOS_APP_PATH='./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app' npm run device-tests:local",
-    "test:e2e:start-test-runner:ios:debug": "TEST_RN_PLATFORM=ios IOS_APP_PATH='./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/GutenbergDemo.app' npm run device-tests:debug",
+    "test:e2e:start-test-runner:ios:local": "TEST_RN_PLATFORM=ios IOS_APP_PATH='./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app' npm run device-tests:local",
+    "test:e2e:start-test-runner:ios:debug": "TEST_RN_PLATFORM=ios IOS_APP_PATH='./gutenberg/packages/react-native-editor/ios/build/gutenberg/Build/Products/Release-iphonesimulator/gutenberg.app' npm run device-tests:debug",
     "test:e2e:ios:local": "npm run test:e2e:bundle:ios && npm run test:e2e:build-app:ios && npm run test:e2e:start-test-runner:ios:local",
     "build:gutenberg": "cd gutenberg && npm run build",
     "clean": "npm run core clean; npm run clean:gutenberg; npm run clean:pot",

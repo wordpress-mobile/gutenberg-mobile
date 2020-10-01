@@ -35,7 +35,9 @@ git submodule update
 Before running the demo app, you need to download and install the project dependencies. This is done via the following command:
 
 ```
+cd gutenberg
 nvm install --latest-npm
+cd ..
 npm install
 ```
 
