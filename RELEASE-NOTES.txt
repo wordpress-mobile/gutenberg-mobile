@@ -1,6 +1,7 @@
 1.38.0
 ------
 * [**] Increase tap-target of primary action on unsupported blocks.
+* [***] On Jetpack connected sites, Unsupported Block Editor can be enabled via enabling Jetpack SSO setting directly from within the missing block alert. [PR](https://github.com/wordpress-mobile/gutenberg-mobile/pull/2610)
 
 1.37.1
 ------
