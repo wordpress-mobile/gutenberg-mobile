@@ -95,91 +95,91 @@ describe.skip( 'Gutenberg Editor Contact Info Block tests', () => {
 		expect( contactInfoBlock ).toBeTruthy();
 	} );
 
-	it( 'should show keyboard when selecting email', async () => {
-		const emailBlock = await editorPage.getBlockAtPosition(
-			'Email Address'
-		);
-		emailBlock.click();
+	// it( 'should show keyboard when selecting email', async () => {
+	// 	const emailBlock = await editorPage.getBlockAtPosition(
+	// 		'Email Address'
+	// 	);
+	// 	emailBlock.click();
 
-		const keyboardShown = await driver.isKeyboardShown();
-		expect( keyboardShown ).toEqual( true );
+	// 	const keyboardShown = await driver.isKeyboardShown();
+	// 	expect( keyboardShown ).toEqual( true );
 
-		await editorPage.dismissKeyboard();
+	// 	await editorPage.dismissKeyboard();
 
-		const contactInfoBlock = await editorPage.getBlockAtPosition(
-			contactInfoBlockName
-		);
-		await clickBeginningOfElement( driver, contactInfoBlock );
-	} );
+	// 	const contactInfoBlock = await editorPage.getBlockAtPosition(
+	// 		contactInfoBlockName
+	// 	);
+	// 	await clickBeginningOfElement( driver, contactInfoBlock );
+	// } );
 
-	it( 'should show keyboard when selecting phone', async () => {
-		const phoneBlock = await editorPage.getBlockAtPosition(
-			'Phone Number',
-			2
-		);
-		phoneBlock.click();
+	// it( 'should show keyboard when selecting phone', async () => {
+	// 	const phoneBlock = await editorPage.getBlockAtPosition(
+	// 		'Phone Number',
+	// 		2
+	// 	);
+	// 	phoneBlock.click();
 
-		const keyboardShown = await driver.isKeyboardShown();
-		expect( keyboardShown ).toEqual( true );
+	// 	const keyboardShown = await driver.isKeyboardShown();
+	// 	expect( keyboardShown ).toEqual( true );
 
-		await editorPage.dismissKeyboard();
+	// 	await editorPage.dismissKeyboard();
 
-		const contactInfoBlock = await editorPage.getBlockAtPosition(
-			contactInfoBlockName
-		);
-		await clickBeginningOfElement( driver, contactInfoBlock );
-	} );
+	// 	const contactInfoBlock = await editorPage.getBlockAtPosition(
+	// 		contactInfoBlockName
+	// 	);
+	// 	await clickBeginningOfElement( driver, contactInfoBlock );
+	// } );
 
-	it( 'should show keyboard when selecting address', async () => {
-		const addressBlock = await editorPage.getBlockAtPosition(
-			'Address',
-			3
-		);
-		addressBlock.click();
+	// it( 'should show keyboard when selecting address', async () => {
+	// 	const addressBlock = await editorPage.getBlockAtPosition(
+	// 		'Address',
+	// 		3
+	// 	);
+	// 	addressBlock.click();
 
-		const keyboardShown = await driver.isKeyboardShown();
-		expect( keyboardShown ).toEqual( true );
+	// 	const keyboardShown = await driver.isKeyboardShown();
+	// 	expect( keyboardShown ).toEqual( true );
 
-		await editorPage.dismissKeyboard();
+	// 	await editorPage.dismissKeyboard();
 
-		const contactInfoBlock = await editorPage.getBlockAtPosition(
-			contactInfoBlockName
-		);
-		await clickBeginningOfElement( driver, contactInfoBlock );
-	} );
+	// 	const contactInfoBlock = await editorPage.getBlockAtPosition(
+	// 		contactInfoBlockName
+	// 	);
+	// 	await clickBeginningOfElement( driver, contactInfoBlock );
+	// } );
 
-	it( 'should have settings toggle on address block', async () => {
-		const addressBlock = await editorPage.getBlockAtPosition(
-			'Address',
-			3
-		);
-		addressBlock.click();
+	// it( 'should have settings toggle on address block', async () => {
+	// 	const addressBlock = await editorPage.getBlockAtPosition(
+	// 		'Address',
+	// 		3
+	// 	);
+	// 	addressBlock.click();
 
-		await toggleSettings( driver, editorPage, addressBlock );
+	// 	await toggleSettings( driver, editorPage, addressBlock );
 
-		const addressSettingsLabel = findElement(
-			driver,
-			editorPage,
-			'Address Settings',
-			'Label'
-		);
-		expect( addressSettingsLabel ).toBeTruthy();
+	// 	const addressSettingsLabel = findElement(
+	// 		driver,
+	// 		editorPage,
+	// 		'Address Settings',
+	// 		'Label'
+	// 	);
+	// 	expect( addressSettingsLabel ).toBeTruthy();
 
-		const addressSettingsLinkToggle = findElement(
-			driver,
-			editorPage,
-			'Link address to Google Maps',
-			'Toggle'
-		);
-		expect( addressSettingsLinkToggle ).toBeTruthy();
+	// 	const addressSettingsLinkToggle = findElement(
+	// 		driver,
+	// 		editorPage,
+	// 		'Link address to Google Maps',
+	// 		'Toggle'
+	// 	);
+	// 	expect( addressSettingsLinkToggle ).toBeTruthy();
 
-		await dismissActionSheet();
-		await editorPage.dismissKeyboard();
-		const contactInfoBlock = await editorPage.getBlockAtPosition(
-			contactInfoBlockName
-		);
-		await clickBeginningOfElement( driver, contactInfoBlock );
-	} );
+	// 	await dismissActionSheet();
+	// 	await editorPage.dismissKeyboard();
+	// 	const contactInfoBlock = await editorPage.getBlockAtPosition(
+	// 		contactInfoBlockName
+	// 	);
+	// 	await clickBeginningOfElement( driver, contactInfoBlock );
+	// } );
 
 	it( 'should only have phone, address, email, separator, heading and spacer options as child blocks', async () => {
 		const unavailableBlocks = [
