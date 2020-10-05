@@ -44,6 +44,7 @@ private func dummy() {
     _ = NSLocalizedString("Choose from device", comment: "")
     _ = NSLocalizedString("Choose image", comment: "")
     _ = NSLocalizedString("Choose image or video", comment: "")
+    _ = NSLocalizedString("Choose images", comment: "")
     _ = NSLocalizedString("Choose video", comment: "")
     _ = NSLocalizedString("City, 10100", comment: "translators: sample content for \"Contact\" page template")
     _ = NSLocalizedString("Content…", comment: "")

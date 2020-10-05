@@ -53,6 +53,7 @@
     <string name="gutenberg_native_choose_from_device" tools:ignore="UnusedResources">Choose from device</string>
     <string name="gutenberg_native_choose_image" tools:ignore="UnusedResources">Choose image</string>
     <string name="gutenberg_native_choose_image_or_video" tools:ignore="UnusedResources">Choose image or video</string>
+    <string name="gutenberg_native_choose_images" tools:ignore="UnusedResources">Choose images</string>
     <string name="gutenberg_native_choose_video" tools:ignore="UnusedResources">Choose video</string>
     <!-- translators: sample content for "Contact" page template -->
     <string name="gutenberg_native_city_10100" tools:ignore="UnusedResources">City, 10100</string>
