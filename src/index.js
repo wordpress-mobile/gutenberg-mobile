@@ -8,6 +8,7 @@ import { addAction, addFilter } from '@wordpress/hooks';
  */
 import correctTextFontWeight from './text-font-weight-correct';
 import setupJetpackEditor from './jetpack-editor-setup';
+import initialHtml from './initial-html';
 
 addAction( 'native.pre-render', 'gutenberg-mobile', ( props ) => {
 	require( './strings-overrides' );
@@ -28,6 +29,7 @@ addFilter( 'native.block_editor_props', 'gutenberg-mobile', ( editorProps ) => {
 		return {
 			...editorProps,
 			initialTitle,
+			initialData: initialHtml,
 		};
 	}
 	return editorProps;
