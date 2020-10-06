@@ -6,6 +6,8 @@
 # - Release is being created off of a clean branch
 # - Whether there are any open PRs targeting the milestone for the release
 
+set -e
+
 # Execute script commands from project's root directory
 SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$SCRIPT_PATH/.."
@@ -48,9 +50,11 @@ if [[ -z "$VERSION_NUMBER" ]]; then
 fi
 
 # Ensure javascript dependencies are up-to-date
-ohai "Run 'npm ci' to ensure javascript dependencies are up-to-date"
-execute "npm" "ci"
-
+read -p "Run 'npm ci' to ensure javascript dependencies are up-to-date? (y/n) " -n 1
+echo ""
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    execute "npm" "ci"
+fi
 
 # If there are any open PRs with a milestone matching the release version number, notify the user and ask them if they want to proceed
 number_milestone_prs=$(check_if_version_has_pending_prs_for_milestone "$VERSION_NUMBER")
@@ -195,6 +199,14 @@ cd "$TEMP_WP_ANDROID_DIRECTORY"
 
 execute "git" "submodule" "update" "--init" "--recursive" "--depth=1" "--recommend-shallow"
 
+ohai "Create after_x.xx.x branch in WordPress-Android"
+execute "git" "switch" "-c" "gutenberg/after_$VERSION_NUMBER" 
+
+# Insure PR is created on proper remote
+# see https://github.com/cli/cli/issues/800
+WP_ANDROID_BASE_REMOTE=$(get_remote_name 'wordpress-mobile/WordPress-Android')
+execute "git" "push" "-u" "$WP_ANDROID_BASE_REMOTE" "HEAD"
+
 ohai "Create release branch in WordPress-Android"
 execute "git" "switch" "-c" "gutenberg/integrate_release_$VERSION_NUMBER" 
 
@@ -202,6 +214,7 @@ ohai "Update gutenberg-mobile ref"
 cd libs/gutenberg-mobile
 execute "git" "fetch" "--recurse-submodules=no" "origin" "$GB_MOBILE_PR_REF"
 execute "git" "checkout" "$GB_MOBILE_PR_REF"
+execute "git" "submodule" "update"
 cd ../..
 
 execute "git" "add" "libs/gutenberg-mobile"
@@ -209,12 +222,16 @@ execute "git" "commit" "-m" "Release script: Update gutenberg-mobile ref"
 
 ohai "Update strings"
 execute "python" "tools/merge_strings_xml.py"
-execute "git" "add" "WordPress/src/main/res/values/strings.xml"
-execute "git" "commit" "-m" "Release script: Update strings"
+# If merge_strings_xml.py results in changes, commit them
+if [[ ! -z "$(git status --porcelain)" ]]; then
+    ohai "Commit changes from 'python tools/merge_strings_xml.py'"
+    execute "git" "add" "WordPress/src/main/res/values/strings.xml"
+    execute "git" "commit" "-m" "Release script: Update strings"
+else
+    ohai "There were no changes from 'python tools/merge_strings_xml.py' to be committed."
+fi
 
-# Insure PR is created on proper remote
-# see https://github.com/cli/cli/issues/800
-WP_ANDROID_BASE_REMOTE=$(get_remote_name 'wordpress-mobile/WordPress-android')
+ohai "Push integration branch"
 execute "git" "push" "-u" "$WP_ANDROID_BASE_REMOTE" "HEAD"
 
 WP_ANDROID_PR_BODY="## Description
@@ -223,13 +240,14 @@ For more information about this release and testing instructions, please see the
 
 Release Submission Checklist
 
-- [ ] I have considered if this change warrants user-facing release notes and have added them to `RELEASE-NOTES.txt` if necessary."
+- [ ] I have considered if this change warrants user-facing release notes and have added them to \`RELEASE-NOTES.txt\` if necessary."
 
 # Create Draft WPAndroid Release PR in GitHub
 ohai "Create Draft WPAndroid Release PR in GitHub"
 WP_ANDROID_PR_URL=$(execute "gh" "pr" "create" "--title" "Integrate gutenberg-mobile release $VERSION_NUMBER" "--body" "$WP_ANDROID_PR_BODY" "--base" "develop" "--label" "gutenberg-mobile" "--draft")
 
 ohai "WPAndroid PR Created: $WP_ANDROID_PR_URL"
+echo ""
 
 
 #####
@@ -242,21 +260,27 @@ execute "git" "clone" "--depth=1" "git@github.com:wordpress-mobile/WordPress-iOS
 
 cd "$TEMP_WP_IOS_DIRECTORY"
 
+ohai "Create after_x.xx.x branch in WordPress-iOS"
+execute "git" "switch" "-c" "gutenberg/after_$VERSION_NUMBER" 
+
+# Insure PR is created on proper remote
+# see https://github.com/cli/cli/issues/800
+WP_IOS_BASE_REMOTE=$(get_remote_name 'wordpress-mobile/WordPress-iOS')
+execute "git" "push" "-u" "$WP_IOS_BASE_REMOTE" "HEAD"
+
 ohai "Create release branch in WordPress-iOS"
 execute "git" "switch" "-c" "gutenberg/integrate_release_$VERSION_NUMBER" 
 
 ohai "Update gutenberg-mobile ref"
 test -f "Podfile" || abort "Error: Could not find Podfile"
-sed -i'.orig' -E "s/gutenberg :commit => '(.*)'/gutenberg :commit => '$GB_MOBILE_PR_REF'/" Podfile || abort "Error: Failed updating gutenberg ref in Podfile"
+sed -i'.orig' -E "s/gutenberg :(commit|tag) => '(.*)'/gutenberg :commit => '$GB_MOBILE_PR_REF'/" Podfile || abort "Error: Failed updating gutenberg ref in Podfile"
 execute "rake" "dependencies"
 
 
 execute "git" "add" "Podfile" "Podfile.lock"
 execute "git" "commit" "-m" "Release script: Update gutenberg-mobile ref"
 
-# Insure PR is created on proper remote
-# see https://github.com/cli/cli/issues/800
-WP_IOS_BASE_REMOTE=$(get_remote_name 'wordpress-mobile/WordPress-iOS')
+ohai "Push integration branch"
 execute "git" "push" "-u" "$WP_IOS_BASE_REMOTE" "HEAD"
 
 WP_IOS_PR_BODY="## Description
@@ -265,13 +289,14 @@ For more information about this release and testing instructions, please see the
 
 Release Submission Checklist
 
-- [ ] I have considered if this change warrants user-facing release notes and have added them to `RELEASE-NOTES.txt` if necessary."
+- [ ] I have considered if this change warrants user-facing release notes and have added them to \`RELEASE-NOTES.txt\` if necessary."
 
 # Create Draft WPiOS Release PR in GitHub
 ohai "Create Draft WPiOS Release PR in GitHub"
 WP_IOS_PR_URL=$(execute "gh" "pr" "create" "--title" "Integrate gutenberg-mobile release $VERSION_NUMBER" "--body" "$WP_IOS_PR_BODY" "--base" "develop" "--label" "Gutenberg integration" "--draft")
 
 ohai "WPiOS PR Created: $WP_IOS_PR_URL"
+echo ""
 
 echo "Main apps PRs created"
 echo "==========="
