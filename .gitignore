@@ -38,6 +38,7 @@ android/app/src/main/assets/
 gen/
 build/
 build.log
+bundle/android/raw/*
 
 # Local configuration file (sdk path, etc)
 local.properties
