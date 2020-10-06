@@ -4,7 +4,7 @@
 import { addAction, addFilter } from '@wordpress/hooks';
 import {
 	setupGutenberg,
-	initialHtml as initialHtmlGutenberg,
+	initialHtmlGutenberg,
 } from '@wordpress/react-native-editor';
 
 /**
