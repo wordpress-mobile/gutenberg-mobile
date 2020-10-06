@@ -2,6 +2,10 @@
  * WordPress dependencies
  */
 import { addAction, addFilter } from '@wordpress/hooks';
+import {
+	setupGutenberg,
+	initialHtml as initialHtmlGutenberg,
+} from '@wordpress/react-native-editor';
 
 /**
  * Internal dependencies
@@ -29,10 +33,10 @@ addFilter( 'native.block_editor_props', 'gutenberg-mobile', ( editorProps ) => {
 		return {
 			...editorProps,
 			initialTitle,
-			initialData: initialHtml,
+			initialData: initialHtml + initialHtmlGutenberg,
 		};
 	}
 	return editorProps;
 } );
 
-require( '@wordpress/react-native-editor' );
+setupGutenberg();
