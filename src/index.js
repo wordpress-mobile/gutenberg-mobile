@@ -3,7 +3,7 @@
  */
 import { addAction, addFilter } from '@wordpress/hooks';
 import {
-	setupGutenberg,
+	doGutenbergNativeSetup,
 	initialHtmlGutenberg,
 } from '@wordpress/react-native-editor';
 
@@ -39,4 +39,4 @@ addFilter( 'native.block_editor_props', 'gutenberg-mobile', ( editorProps ) => {
 	return editorProps;
 } );
 
-setupGutenberg();
+doGutenbergNativeSetup();
