@@ -39,6 +39,8 @@ gen/
 build/
 build.log
 bundle/android/raw/*
+bundle/android/App.js
+bundle/android/App.js.map
 bundle/ios/assets/*
 
 # Local configuration file (sdk path, etc)
