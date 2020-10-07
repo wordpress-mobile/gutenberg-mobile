@@ -39,6 +39,7 @@ gen/
 build/
 build.log
 bundle/android/raw/*
+bundle/ios/assets/*
 
 # Local configuration file (sdk path, etc)
 local.properties
