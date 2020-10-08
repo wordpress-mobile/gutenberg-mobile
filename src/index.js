@@ -10,6 +10,7 @@ import correctTextFontWeight from './text-font-weight-correct';
 import setupJetpackEditor from './jetpack-editor-setup';
 
 addAction( 'native.pre-render', 'gutenberg-mobile', ( props ) => {
+	require( './strings-overrides' );
 	correctTextFontWeight();
 	setupJetpackEditor(
 		props.jetpackState || { blogId: 1, isJetpackActive: true }

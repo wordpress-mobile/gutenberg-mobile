@@ -33,7 +33,7 @@ cut a new release.
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>o Visit all opened PR's in gutenberg-mobile repo that are assigned to milestone X.XX.X and leave proper message with options to merge them or to bump them to the next version.</p>
+<p>o Visit all opened PR's in gutenberg-mobile repo that are assigned to milestone X.XX.X and leave a message with options to (i) merge the PR as soon as possible, (ii) bump the PR to the next milestone, or (iii) remove the milestone from the PR.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -42,31 +42,7 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o From gutenberg-mobile's <code>develop</code> branch (making sure the gutenberg submodule is updated and clean), run the release script: <code>./bin/release_automation.sh</code>. This will take care of creating the branches in gutenberg-mobile and gutenberg as well as creating the gutenberg-mobile release PR.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>o Create a new branch in the main WP apps (WordPress-iOS, WordPress-Android) based on their <code>develop</code> branches. Name the new branch <code>gutenberg/integrate_release_X.XX.X</code>.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>o Use the commit hash of the head of the release branch in Gutenberg-Mobile as the reference for the main apps.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>o Create a PR in WPAndroid and WPiOS with a description along these lines: "This PR incorporates the X.XX.X release of gutenberg-mobile. For details about the changes included in this PR and testing instructions please see the related gutenberg-mobile PR: [gb-mobile PR link]."</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>o In iOS update the file <code>Podfile</code> to point to the new hash in GB-Mobile and if needed also update the reference to Aztec to the new release. Then run <code>rake dependencies</code>, commit and push.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>o On Android: (1) update the git submodule reference for <code>libs/gutenberg-mobile</code> (<code>cd libs/gutenberg-mobile &amp;&amp; git checkout release/X.XX.X &amp;&amp; git pull origin release/X.XX.X &amp;&amp; cd .. &amp;&amp; git add gutenberg-mobile</code>); and (2) run <code>python tools/merge_strings_xml.py</code> to update the main <code>strings.xml</code> file.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>o Create new branches <code>gutenberg/after_X.XX.X</code> in WPAndroid and WPiOS and keep them up to date with the release branches. These are to be doubles for develop on the main apps for mobile gutenberg dev’s WP app PR’s that didn’t or shouldn’t make it into the X.XX.X editor release.</p>
+<p>o From gutenberg-mobile's <code>develop</code> branch (making sure the gutenberg submodule is updated and clean), run the release script: <code>./bin/release_automation.sh</code>. This will take care of creating the branches in gutenberg-mobile and gutenberg, creating the gutenberg-mobile release PR as well as WPAndroid and WPiOS integration PRs.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3} -->
@@ -118,15 +94,15 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o Create a new GitHub release pointing to the tag: https://github.com/wordpress-mobile/gutenberg-mobile/releases/new?tag=vX.XX.X&target=main&title=Release%20X.XX.X. Include a list of changes in the release's description</p>
+<p>o Create a new GitHub release pointing to the tag: https://github.com/wordpress-mobile/gutenberg-mobile/releases/new?tag=vX.XX.X&target=trunk&title=Release%20X.XX.X. Include a list of changes in the release's description</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o In WPiOS update the reference to point to the <em>tag</em>. For iOS do not forget to remove ‘develop’ branch reference near 3rd party pod specs if any.</p>
+<p>o In WPiOS update the reference to point to the <em>tag</em>. For iOS do not forget to remove <code>develop</code> branch reference near 3rd party pod specs if any.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o In WPAndroid, update the submodule to point to the merge commit on GB-Mobile main.</p>
+<p>o In WPAndroid, update the submodule to point to the merge commit on GB-Mobile <code>trunk</code>.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -138,7 +114,7 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o Open a PR from Gutenberg-Mobile main to bring all the <code>gutenberg/after_X.XX.X</code> changes to <code>develop</code> and point to the Gutenberg side PR (if any changes happened specifically for the release). Merge the PR (or PR domino if Gutenberg changes are there)</p>
+<p>o Open a PR from Gutenberg-Mobile <code>trunk</code> to bring all the <code>release/X.XX.X</code> changes to <code>develop</code> and point to the Gutenberg side PR (if any changes happened specifically for the release). Merge the PR (or PR domino if Gutenberg changes are there)</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3} -->
@@ -146,7 +122,7 @@ cut a new release.
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>o Update the <code>gutenberg/after_X.XX.X</code> branches and open a PR against <code>develop</code>. If the branches are empty we’ll just delete them. The PR can actually get created as soon as something gets merged to the after-ooo branches.&nbsp; Merge the <code>gutenberg/after_X.XX.X</code> PR(s) only AFTER the main apps have cut their release branches.</p>
+<p>o Update the <code>gutenberg/after_X.XX.X</code> branches and open a PR against <code>develop</code>. If the branches are empty we’ll just delete them. The PR can actually get created as soon as something gets merged to the after_X.XX.X branches.&nbsp; Merge the <code>gutenberg/after_X.XX.X</code> PR(s) only AFTER the main apps have cut their release branches.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3} -->
