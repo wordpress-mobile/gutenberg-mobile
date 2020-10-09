@@ -3,7 +3,7 @@ describe( 'Test Jetpack blocks', () => {
 		const mockRegisterBlockCollection = jest.fn();
 		jest.mock( '@wordpress/blocks', () => {
 			return {
-				getCategories: () => [],
+				getCategories: () => [ { slug: 'media'} ],
 				setCategories: jest.fn(),
 				registerBlockCollection: mockRegisterBlockCollection,
 			};
