@@ -33,7 +33,7 @@ cut a new release.
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>o Visit all opened PR's in gutenberg-mobile repo that are assigned to milestone X.XX.X and leave proper message with options to merge them or to bump them to the next version.</p>
+<p>o Visit all opened PR's in gutenberg-mobile repo that are assigned to milestone X.XX.X and leave a message with options to (i) merge the PR as soon as possible, (ii) bump the PR to the next milestone, or (iii) remove the milestone from the PR.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
