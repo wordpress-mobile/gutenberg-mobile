@@ -1,6 +1,7 @@
 import Foundation
 
 private func dummy() {
+    _ = NSLocalizedString("'%s' is not fully-supported", comment: "translators: Missing block alert title. %s: The localized block name")
     _ = NSLocalizedString("(555)555-1234", comment: "translators: sample content for \"Contact\" page template")
     _ = NSLocalizedString("%1$s. Current value is %2$s", comment: "translators: accessibility text. Inform about current value. %1$s: Control label %2$s: Current value.")
     _ = NSLocalizedString("%s block options", comment: "translators: %s: block title e.g: \"Paragraph\".")
@@ -56,6 +57,7 @@ private func dummy() {
     _ = NSLocalizedString("Customize Gradient", comment: "")
     _ = NSLocalizedString("Cut block", comment: "")
     _ = NSLocalizedString("Cyan bluish gray", comment: "")
+    _ = NSLocalizedString("Dismiss", comment: "")
     _ = NSLocalizedString("Don’t cry because it’s over, smile because it happened.", comment: "translators: sample content for \"About\" page template")
     _ = NSLocalizedString("Double tap to add a block", comment: "")
     _ = NSLocalizedString("Double tap to change the value using slider", comment: "translators: accessibility text (hint for focusing a slider)")
@@ -77,6 +79,7 @@ private func dummy() {
     _ = NSLocalizedString("Double tap to undo last change", comment: "")
     _ = NSLocalizedString("Dr. Seuss", comment: "translators: sample content for \"About\" page template")
     _ = NSLocalizedString("Duplicate block", comment: "")
+    _ = NSLocalizedString("Edit using web editor", comment: "")
     _ = NSLocalizedString("Edit video", comment: "")
     _ = NSLocalizedString("Electric grass", comment: "")
     _ = NSLocalizedString("Email me: <a href=\"mailto:mail@example.com\">mail@example.com</a>", comment: "translators: sample content for \"Team\" page template")
@@ -85,6 +88,8 @@ private func dummy() {
     _ = NSLocalizedString("Gallery caption. %s", comment: "translators: accessibility text. %s: gallery caption.")
     _ = NSLocalizedString("Get in Touch", comment: "translators: sample content for \"About\" page template\ntranslators: sample content for \"Contact\" page template\ntranslators: sample content for \"Portfolio\" page template\ntranslators: sample content for \"Services\" page template\ntranslators: sample content for \"Team\" page template")
     _ = NSLocalizedString("Gradient Type", comment: "")
+    _ = NSLocalizedString("Help button", comment: "")
+    _ = NSLocalizedString("Help icon", comment: "")
     _ = NSLocalizedString("Here is the panel content!", comment: "")
     _ = NSLocalizedString("Hide keyboard", comment: "")
     _ = NSLocalizedString("Image caption. %s", comment: "translators: accessibility text. %s: image caption.")
@@ -166,6 +171,7 @@ private func dummy() {
     _ = NSLocalizedString("Take a Photo", comment: "")
     _ = NSLocalizedString("Take a Photo or Video", comment: "")
     _ = NSLocalizedString("Take a Video", comment: "")
+    _ = NSLocalizedString("Tap here to show help", comment: "")
     _ = NSLocalizedString("Tap to hide the keyboard", comment: "")
     _ = NSLocalizedString("Team", comment: "translators: title for \"Team\" page template")
     _ = NSLocalizedString("Template Preview", comment: "")
@@ -190,6 +196,7 @@ private func dummy() {
     _ = NSLocalizedString("Want to work with us?", comment: "translators: sample content for \"Team\" page template")
     _ = NSLocalizedString("Warning Message", comment: "")
     _ = NSLocalizedString("We are a small team of talented professionals with a wide range of skills and experience. We love what we do, and we do it with passion. We look forward to working with you.", comment: "translators: sample content for \"Team\" page template")
+    _ = NSLocalizedString("We are working hard to add more blocks with each release.", comment: "")
     _ = NSLocalizedString("We offer a range of services to help you achieve the results you're after. Not sure what you need, or what it costs? We can explain what services are right for you and tell you more about our fees. Get in touch below.", comment: "translators: sample content for \"Services\" page template")
     _ = NSLocalizedString("Welcome to our new blog", comment: "translators: sample content for \"Blog\" page template")
     _ = NSLocalizedString("What People Say", comment: "translators: sample content for \"About\" page template")
