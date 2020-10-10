@@ -24,16 +24,20 @@ addAction( 'native.pre-render', 'gutenberg-mobile', ( props ) => {
 
 addFilter( 'native.block_editor_props', 'gutenberg-mobile', ( editorProps ) => {
 	if ( __DEV__ ) {
-		let { initialTitle } = editorProps;
+		let { initialTitle, initialData } = editorProps;
 
 		if ( initialTitle === undefined ) {
 			initialTitle = 'Welcome to gutenberg for WP Apps!';
 		}
 
+		if ( initialData === undefined ) {
+			initialData = initialHtml + initialHtmlGutenberg;
+		}
+
 		return {
 			...editorProps,
 			initialTitle,
-			initialData: initialHtml + initialHtmlGutenberg,
+			initialData,
 		};
 	}
 	return editorProps;
