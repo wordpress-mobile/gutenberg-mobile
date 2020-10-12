@@ -1,3 +1,7 @@
+## 1.38.1
+------
+* [***] Unsupported Block Editor: Fixed issue when cannot view or interact with the classic block on Jetpack sites [https://github.com/wordpress-mobile/gutenberg-mobile/issues/2695]
+
 1.38.0
 ------
 * [**] Increase tap-target of primary action on unsupported blocks. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2608]
