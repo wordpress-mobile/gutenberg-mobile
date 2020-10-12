@@ -1,6 +1,6 @@
 1.39.0
 ------
-* [***] Unsupported block bottom sheet is triggered when device is rotated [https://github.com/wordpress-mobile/WordPress-Android/issues/13052]
+* [***] Fix unsupported block bottom sheet is triggered when device is rotated [https://github.com/wordpress-mobile/WordPress-Android/issues/13052]
 
 1.38.0
 ------
