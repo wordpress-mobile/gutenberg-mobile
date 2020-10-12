@@ -1,3 +1,7 @@
+1.39.0
+------
+* [***] Unsupported block bottom sheet is triggered when device is rotated [https://github.com/wordpress-mobile/WordPress-Android/issues/13052]
+
 1.38.0
 ------
 * [**] Increase tap-target of primary action on unsupported blocks. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2608]
