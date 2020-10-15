@@ -52,7 +52,7 @@
     "wd": "^1.11.1"
   },
   "scripts": {
-    "postinstall": "npm ci --prefix gutenberg",
+    "postinstall": "npm ci --prefix gutenberg && npm ci --prefix jetpack",
     "start": "react-native start --config ./metro.config.js",
     "start:reset": "npm run core clean:runtime && npm run start -- --reset-cache",
     "core": "cd gutenberg && npm run native",
