@@ -13,9 +13,6 @@ commands:
       - run:
           name: NPM Install
           command: npm ci --prefer-offline
-      - run:
-          name: NPM Install jetpack
-          command: cd jetpack && npm install
       - save_cache:
           name: Save NPM Cache
           key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
@@ -31,9 +28,6 @@ commands:
       - run:
           name: NPM Install Full
           command: npm install
-      - run:
-          name: NPM Install jetpack
-          command: cd jetpack && npm install
       - save_cache:
           name: Save NPM Cache
           key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
