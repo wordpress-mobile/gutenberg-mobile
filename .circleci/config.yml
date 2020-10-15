@@ -58,7 +58,7 @@ jobs:
         type: boolean
         default: false
     docker:
-      - image: circleci/node:10
+      - image: circleci/node:12.18.0
     steps:
       - checkout
       - checkout-submodules
