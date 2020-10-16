@@ -12,9 +12,8 @@ describe( 'Test Jetpack blocks', () => {
 			'../../jetpack/extensions/blocks/contact-info/editor.js',
 			() => jest.fn()
 		);
-		jest.mock(
-			'../../jetpack/extensions/blocks/story/editor.js',
-			() => jest.fn()
+		jest.mock( '../../jetpack/extensions/blocks/story/editor.js', () =>
+			jest.fn()
 		);
 
 		const setupJetpackEditor = require( '../jetpack-editor-setup' ).default;
