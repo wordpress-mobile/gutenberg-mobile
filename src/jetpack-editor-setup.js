@@ -6,7 +6,7 @@ import { JETPACK_DATA_PATH } from '../jetpack/extensions/shared/get-jetpack-data
 // When adding new blocks to this list please also consider updating ./block-support/supported-blocks.json
 const supportedJetpackBlocks = {
 	'contact-info': {
-		available: true,
+		available: false, // CHANGE THIS BACK WHEN LIFTING DEV FLAG
 	},
 	story: {
 		available: true,
@@ -40,9 +40,9 @@ export default ( jetpackState ) => {
 
 	const jetpackData = setJetpackData( jetpackState );
 
-	if ( __DEV__ ) {
+	// if ( __DEV__ ) {
 		require( '../jetpack/extensions/editor' );
-	}
+	// }
 
 	return jetpackData;
 };
