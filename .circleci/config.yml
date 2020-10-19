@@ -157,7 +157,7 @@ jobs:
         type: string
         default: ""
     macos:
-      xcode: "11.2.1"
+      xcode: "12.0.0"
     steps:
     - checkout
     - checkout-submodules
