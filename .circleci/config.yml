@@ -292,4 +292,6 @@ workflows:
           cron: '1 2,14 * * *'
           filters:
             branches:
-              only: develop
+              only:
+                - develop
+                - add/ci-on-gb-master
