@@ -18,7 +18,7 @@
     "@wordpress/eslint-plugin": "file:./gutenberg/packages/eslint-plugin",
     "@wordpress/jest-preset-default": "file:./gutenberg/packages/jest-preset-default",
     "@wordpress/prettier-config": "file:./gutenberg/packages/prettier-config",
-    "appium": "1.17.0",
+    "appium": "^1.18.3",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^24.9.0",
