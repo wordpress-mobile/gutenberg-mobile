@@ -120,13 +120,20 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 cd ..
 
+# Commit updates to gutenberg submodule
+ohai "Commit updates to gutenberg submodule"
+execute "git" "add" "gutenberg"
+execute "git" "commit" "-m" "Release script: Update gutenberg ref"
+
 # Update the bundles
 ohai "Update the bundles"
 npm run bundle || abort "Error: 'npm bundle' failed.\nIf there is an error stating something like \"Command 'bundle' unrecognized.\" above, perhaps try running 'rm -rf node_modules gutenberg/node_modules && npm ci'."
 
-# Commit bundle changes along with any update to the gutenberg submodule (if necessary)
-ohai "Commit bundle changes along with any update to the gutenberg submodule (if necessary)"
-execute "git" "commit" "-a" "-m" "Release script: Update bundle for: $VERSION_NUMBER"
+
+# Commit bundle changes
+ohai "Commit bundle changes"
+execute "git" "add" "bundle/"
+execute "git" "commit" "-m" "Release script: Update bundle for: $VERSION_NUMBER"
 
 
 #####
