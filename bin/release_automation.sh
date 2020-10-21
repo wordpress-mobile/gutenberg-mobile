@@ -205,13 +205,21 @@ Release Submission Checklist
 
 WP_APPS_INTEGRATION_BRANCH="gutenberg/integrate_release_$VERSION_NUMBER"
 
+WP_APPS_TARGET_BRANCH="develop"
+
+read -p "Do you want to target 'develop' branches for main apps (WPiOS and WPAndroid) PRs? (y/n) " -n 1
+echo ""
+if [[ $REPLY =~ ^[Nn]$ ]]; then
+    read -p "Enter the branch name you want to target. Make sure a branch with this name already exists in both WPiOS and WPAndroid repositories: " WP_APPS_TARGET_BRANCH
+fi
+
 #####
 # WPAndroid PR
 #####
 
 TEMP_WP_ANDROID_DIRECTORY=$(mktemp -d)
 ohai "Clone WordPress-Android into '$TEMP_WP_ANDROID_DIRECTORY'"
-execute "git" "clone" "--depth=1" "git@github.com:wordpress-mobile/WordPress-Android.git" "$TEMP_WP_ANDROID_DIRECTORY"
+execute "git" "clone" "-b" "$WP_APPS_TARGET_BRANCH" "--depth=1" "git@github.com:wordpress-mobile/WordPress-Android.git" "$TEMP_WP_ANDROID_DIRECTORY"
 
 cd "$TEMP_WP_ANDROID_DIRECTORY"
 
@@ -254,7 +262,7 @@ WP_ANDROID_PR_URL=$(execute "gh" "pr" "create" \
  "--title" "$WP_APPS_PR_TITLE" \
  "--body" "$WP_APPS_PR_BODY" \
  "--head" "wordpress-mobile:$WP_APPS_INTEGRATION_BRANCH" \
- "--base" "develop" \
+ "--base" "$WP_APPS_TARGET_BRANCH" \
  "--label" "gutenberg-mobile" \
  "--draft")
 
@@ -268,7 +276,7 @@ echo ""
 
 TEMP_WP_IOS_DIRECTORY=$(mktemp -d)
 ohai "Clone WordPress-iOS into '$TEMP_WP_IOS_DIRECTORY'"
-execute "git" "clone" "--depth=1" "git@github.com:wordpress-mobile/WordPress-iOS.git" "$TEMP_WP_IOS_DIRECTORY"
+execute "git" "clone" "-b" "$WP_APPS_TARGET_BRANCH" "--depth=1" "git@github.com:wordpress-mobile/WordPress-iOS.git" "$TEMP_WP_IOS_DIRECTORY"
 
 cd "$TEMP_WP_IOS_DIRECTORY"
 
@@ -297,7 +305,7 @@ WP_IOS_PR_URL=$(execute "gh" "pr" "create" \
  "--title" "$WP_APPS_PR_TITLE" \
  "--body" "$WP_APPS_PR_BODY" \
  "--head" "wordpress-mobile:$WP_APPS_INTEGRATION_BRANCH" \
- "--base" "develop" \
+ "--base" "$WP_APPS_TARGET_BRANCH" \
  "--label" "Gutenberg integration" \
  "--draft")
 
