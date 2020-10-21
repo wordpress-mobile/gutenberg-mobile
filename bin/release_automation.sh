@@ -110,6 +110,15 @@ else
 fi
 cd ..
 
+# Ask if a cherry-pick is needed before bundling (for example if this is a hotfix release)
+cd gutenberg
+read -p "Do you want to cherry-pick a commit from gutenberg's master branch? (y/n) " -n 1
+echo ""
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    read -p "Enter the commit hash to cherry-pick: " GUTENBERG_COMMIT_HASH_TO_CHERRY_PICK
+    execute "git" "cherry-pick" "$GUTENBERG_COMMIT_HASH_TO_CHERRY_PICK"
+fi
+cd ..
 
 # Update the bundles
 ohai "Update the bundles"
