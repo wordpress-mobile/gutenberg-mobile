@@ -187,6 +187,14 @@ ohai "Proceeding to create main apps PRs..."
 
 GB_MOBILE_PR_REF=$(git rev-parse HEAD)
 
+WP_APPS_PR_BODY="## Description
+This PR incorporates the $VERSION_NUMBER release of gutenberg-mobile.  
+For more information about this release and testing instructions, please see the related Gutenberg-Mobile PR: $GB_MOBILE_PR_URL
+
+Release Submission Checklist
+
+- [ ] I have considered if this change warrants user-facing release notes and have added them to \`RELEASE-NOTES.txt\` if necessary."
+
 #####
 # WPAndroid PR
 #####
@@ -234,17 +242,9 @@ fi
 ohai "Push integration branch"
 execute "git" "push" "-u" "$WP_ANDROID_BASE_REMOTE" "HEAD"
 
-WP_ANDROID_PR_BODY="## Description
-This PR incorporates the $VERSION_NUMBER release of gutenberg-mobile.  
-For more information about this release and testing instructions, please see the related Gutenberg-Mobile PR: $GB_MOBILE_PR_URL
-
-Release Submission Checklist
-
-- [ ] I have considered if this change warrants user-facing release notes and have added them to \`RELEASE-NOTES.txt\` if necessary."
-
 # Create Draft WPAndroid Release PR in GitHub
 ohai "Create Draft WPAndroid Release PR in GitHub"
-WP_ANDROID_PR_URL=$(execute "gh" "pr" "create" "--title" "Integrate gutenberg-mobile release $VERSION_NUMBER" "--body" "$WP_ANDROID_PR_BODY" "--base" "develop" "--label" "gutenberg-mobile" "--draft")
+WP_ANDROID_PR_URL=$(execute "gh" "pr" "create" "--title" "Integrate gutenberg-mobile release $VERSION_NUMBER" "--body" "$WP_APPS_PR_BODY" "--base" "develop" "--label" "gutenberg-mobile" "--draft")
 
 ohai "WPAndroid PR Created: $WP_ANDROID_PR_URL"
 echo ""
@@ -283,17 +283,9 @@ execute "git" "commit" "-m" "Release script: Update gutenberg-mobile ref"
 ohai "Push integration branch"
 execute "git" "push" "-u" "$WP_IOS_BASE_REMOTE" "HEAD"
 
-WP_IOS_PR_BODY="## Description
-This PR incorporates the $VERSION_NUMBER release of gutenberg-mobile.  
-For more information about this release and testing instructions, please see the related Gutenberg-Mobile PR: $GB_MOBILE_PR_URL
-
-Release Submission Checklist
-
-- [ ] I have considered if this change warrants user-facing release notes and have added them to \`RELEASE-NOTES.txt\` if necessary."
-
 # Create Draft WPiOS Release PR in GitHub
 ohai "Create Draft WPiOS Release PR in GitHub"
-WP_IOS_PR_URL=$(execute "gh" "pr" "create" "--title" "Integrate gutenberg-mobile release $VERSION_NUMBER" "--body" "$WP_IOS_PR_BODY" "--base" "develop" "--label" "Gutenberg integration" "--draft")
+WP_IOS_PR_URL=$(execute "gh" "pr" "create" "--title" "Integrate gutenberg-mobile release $VERSION_NUMBER" "--body" "$WP_APPS_PR_BODY" "--base" "develop" "--label" "Gutenberg integration" "--draft")
 
 ohai "WPiOS PR Created: $WP_IOS_PR_URL"
 echo ""
