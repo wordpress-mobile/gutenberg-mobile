@@ -281,11 +281,11 @@ workflows:
     jobs:
       - ios-device-checks:
           name: Test iOS on Device targetting gutenberg master - Scheduled
-          post-to-slack: true
+          post-to-slack: false
           target-gutenberg-master: true
       - android-device-checks:
           name: Test Android on Device targetting gutenberg master - Scheduled
-          post-to-slack: true
+          post-to-slack: false
           target-gutenberg-master: true
     triggers:
       - schedule:
