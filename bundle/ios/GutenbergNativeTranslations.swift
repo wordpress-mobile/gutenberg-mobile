@@ -139,6 +139,8 @@ private func dummy() {
     _ = NSLocalizedString("Reset Block", comment: "")
     _ = NSLocalizedString("Sally Smith", comment: "translators: sample content for \"Team\" page template")
     _ = NSLocalizedString("Samuel the Dog", comment: "translators: sample content for \"Team\" page template")
+    _ = NSLocalizedString("Scrollable block menu closed.", comment: "")
+    _ = NSLocalizedString("Scrollable block menu opened. Select a block.", comment: "")
     _ = NSLocalizedString("Search or type URL", comment: "")
     _ = NSLocalizedString("Select a color", comment: "")
     _ = NSLocalizedString("Select a layout", comment: "")

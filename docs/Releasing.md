@@ -113,8 +113,24 @@ cut a new release.
 <p>o Once everything is merged, ping our friends in #platform9 and let them know we’ve merged our release so everything is right from our side to cut the main app releases.</p>
 <!-- /wp:paragraph -->
 
+<!-- wp:heading {"level":3} -->
+<h3>Bringing release changes back to development branches</h3>
+<!-- /wp:heading -->
+
 <!-- wp:paragraph -->
-<p>o Open a PR from Gutenberg-Mobile <code>trunk</code> to bring all the <code>release/X.XX.X</code> changes to <code>develop</code> and point to the Gutenberg side PR (if any changes happened specifically for the release). Merge the PR (or PR domino if Gutenberg changes are there)</p>
+<p>o If there are any conflicts in the Gutenberg PR, merge <code>master</code> into it and resolve them.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>o Check if you can open a PR from <code>trunk</code> to <code>develop</code> in Gutenberg Mobile without any conflicts: https://github.com/wordpress-mobile/gutenberg-mobile/compare/develop...trunk. If there are any conflicts, create a branch from <code>trunk</code> with a name like <code>merge_release_x.xx.x_to_develop</code>, merge <code>develop</code> into it, resolve any conflicts.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>o Open a PR from Gutenberg Mobile <code>trunk</code> (or <code>merge_release_x.xx.x_to_develop</code> branch) to <code>develop</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>o Merge the Gutenberg PR to <code>master</code> and Gutenberg Mobile PR to <code>develop</code>.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3} -->
