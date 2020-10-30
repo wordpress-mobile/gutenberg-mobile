@@ -17,6 +17,9 @@ import initialHtml from './initial-html';
 addAction( 'native.pre-render', 'gutenberg-mobile', ( props ) => {
 	require( './strings-overrides' );
 	correctTextFontWeight();
+} );
+
+addAction( 'native.render', 'gutenberg-mobile', ( props ) => {
 	setupJetpackEditor(
 		props.jetpackState || { blogId: 1, isJetpackActive: true }
 	);
