@@ -94,7 +94,7 @@ jobs:
         type: string
         default: ""
     docker:
-    - image: circleci/android:api-29-node
+    - image: circleci/android:api-29-node@sha256:71d61d6c21b29948d57120f476a83cc322a280979bce355c5a0ad771293ca380
     environment:
       JAVA_OPTS: '-Xms512m -Xmx2g'
       GRADLE_OPTS: '-Xmx3g -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError"'
@@ -139,7 +139,7 @@ jobs:
         type: boolean
         default: false
     docker:
-    - image: circleci/android:api-29-node
+    - image: circleci/android:api-29-node@sha256:71d61d6c21b29948d57120f476a83cc322a280979bce355c5a0ad771293ca380
     steps:
       - checkout
       - checkout-submodules
