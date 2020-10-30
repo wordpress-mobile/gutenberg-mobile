@@ -2,6 +2,10 @@
  * Internal dependencies
  */
 import { JETPACK_DATA_PATH } from '../jetpack/extensions/shared/get-jetpack-data';
+/**
+ * WordPress dependencies
+ */
+import { useDispatch, useSelect } from '@wordpress/data';
 
 // When adding new blocks to this list please also consider updating ./block-support/supported-blocks.json
 const supportedJetpackBlocks = {
@@ -39,6 +43,17 @@ export default ( jetpackState ) => {
 	}
 
 	const jetpackData = setJetpackData( jetpackState );
+
+	const mediaFilesCollectionBlock = useSelect( ( select ) => {
+		return select( 'core/block-editor' ).getSettings( 'capabilities' ).mediaFilesCollectionBlock;
+	}, [] );
+
+
+	if ( mediaFilesCollectionBlock !== true ) {
+		useDispatch( 'core/edit-post' ).hideBlockTypes( [ 'jetpack/story' ] );
+	} else {
+		useDispatch( 'core/edit-post' ).showBlockTypes( [ 'jetpack/story' ] );
+	}
 
 	if ( __DEV__ ) {
 		require( '../jetpack/extensions/editor' );
