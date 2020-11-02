@@ -1,6 +1,3 @@
-/**
- * WordPress dependencies
- */
 describe( 'Test Jetpack blocks', () => {
 	it( 'should setup the editor for jetpack without failing', () => {
 		const mockRegisterBlockCollection = jest.fn();
