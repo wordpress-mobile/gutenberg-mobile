@@ -46,7 +46,9 @@ export default ( jetpackState ) => {
 
 	// eslint-disable-next-line @wordpress/react-no-unsafe-timeout
 	setTimeout( () => {
-		const mediaFilesCollectionBlock = select( 'core/block-editor' ).getSettings( 'capabilities' ).mediaFilesCollectionBlock;
+		const mediaFilesCollectionBlock = select(
+			'core/block-editor'
+		).getSettings( 'capabilities' ).mediaFilesCollectionBlock;
 
 		if ( mediaFilesCollectionBlock !== true ) {
 			dispatch( 'core/edit-post' ).hideBlockTypes( [ 'jetpack/story' ] );
@@ -54,7 +56,7 @@ export default ( jetpackState ) => {
 			dispatch( 'core/edit-post' ).showBlockTypes( [ 'jetpack/story' ] );
 		}
 	} );
-	
+
 	if ( __DEV__ ) {
 		require( '../jetpack/extensions/editor' );
 	}
