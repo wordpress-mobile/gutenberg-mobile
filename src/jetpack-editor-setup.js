@@ -45,9 +45,9 @@ export default ( jetpackState ) => {
 	const jetpackData = setJetpackData( jetpackState );
 
 	const mediaFilesCollectionBlock = useSelect( ( select ) => {
-		return select( 'core/block-editor' ).getSettings( 'capabilities' ).mediaFilesCollectionBlock;
+		return select( 'core/block-editor' ).getSettings( 'capabilities' )
+			.mediaFilesCollectionBlock;
 	}, [] );
-
 
 	if ( mediaFilesCollectionBlock !== true ) {
 		useDispatch( 'core/edit-post' ).hideBlockTypes( [ 'jetpack/story' ] );
