@@ -97,7 +97,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - "bundle/android"
+            - "gutenberg/packages/react-native-editor/android/app/src/main"
   android-device-checks:
     parameters:
       post-to-slack:
@@ -118,7 +118,7 @@ jobs:
       - npm-install
       - add-jest-reporter-dir
       - attach_workspace:
-          at: "bundle/android"
+          at: "gutenberg/packages/react-native-editor/android/app/src/main"
       - run:
           name: Set Environment Variables
           command: |
