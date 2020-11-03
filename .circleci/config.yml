@@ -93,7 +93,7 @@ jobs:
       - run: node -v
       - run: npm install -g yarn
       - npm-install
-      - run: npm run bundle:android
+      - run: npm run test:e2e:bundle:android
       - persist_to_workspace:
           root: .
           paths:
