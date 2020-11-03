@@ -112,6 +112,7 @@ jobs:
           docker run --rm -it \
           --volume $(pwd):/home/circleci/project \
           --workdir /home/circleci/project \
+          --user $(id -u):$(id -g) \
           --env JAVA_OPTS='-Xms512m -Xmx2g' \
           --env GRADLE_OPTS='-Xmx3g -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError"' \
           circleci/android@sha256:71d61d6c21b29948d57120f476a83cc322a280979bce355c5a0ad771293ca380 \
