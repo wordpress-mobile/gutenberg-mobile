@@ -115,6 +115,7 @@ jobs:
     steps:
       - checkout
       - checkout-submodules
+      - npm-install
       - add-jest-reporter-dir
       - attach_workspace:
           at: "bundle/android"
