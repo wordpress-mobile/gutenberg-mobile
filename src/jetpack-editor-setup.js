@@ -50,7 +50,7 @@ export default ( jetpackState ) => {
 	// the actual settings to be loaded by using setTimeout without a delay parameter. This ensures the
 	// settings are loaded onto the store and we can use the core/block-editor selector by the time we do
 	// the actual check.
-	
+
 	// eslint-disable-next-line @wordpress/react-no-unsafe-timeout
 	setTimeout( () => {
 		const mediaFilesCollectionBlock = select(
