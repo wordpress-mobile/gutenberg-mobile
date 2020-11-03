@@ -5,7 +5,7 @@ import { JETPACK_DATA_PATH } from '../jetpack/extensions/shared/get-jetpack-data
 /**
  * WordPress dependencies
  */
-import { useDispatch, useSelect } from '@wordpress/data';
+import { dispatch, select } from '@wordpress/data';
 
 // When adding new blocks to this list please also consider updating ./block-support/supported-blocks.json
 const supportedJetpackBlocks = {
@@ -44,16 +44,25 @@ export default ( jetpackState ) => {
 
 	const jetpackData = setJetpackData( jetpackState );
 
-	const mediaFilesCollectionBlock = useSelect( ( select ) => {
-		return select( 'core/block-editor' ).getSettings( 'capabilities' ).mediaFilesCollectionBlock;
-	}, [] );
+	// Note on the use of setTimeout() here:
+	// We observed the settings may not be ready exactly when the native.render hooks get run but rather
+	// right after that execution cycle (because state hasn't changed yet). Hence, we're only checking for
+	// the actual settings to be loaded by using setTimeout without a delay parameter. This ensures the
+	// settings are loaded onto the store and we can use the core/block-editor selector by the time we do
+	// the actual check.
 
+	// eslint-disable-next-line @wordpress/react-no-unsafe-timeout
+	setTimeout( () => {
+		const mediaFilesCollectionBlock = select(
+			'core/block-editor'
+		).getSettings( 'capabilities' ).mediaFilesCollectionBlock;
 
-	if ( mediaFilesCollectionBlock !== true ) {
-		useDispatch( 'core/edit-post' ).hideBlockTypes( [ 'jetpack/story' ] );
-	} else {
-		useDispatch( 'core/edit-post' ).showBlockTypes( [ 'jetpack/story' ] );
-	}
+		if ( mediaFilesCollectionBlock !== true ) {
+			dispatch( 'core/edit-post' ).hideBlockTypes( [ 'jetpack/story' ] );
+		} else {
+			dispatch( 'core/edit-post' ).showBlockTypes( [ 'jetpack/story' ] );
+		}
+	} );
 
 	if ( __DEV__ ) {
 		require( '../jetpack/extensions/editor' );
