@@ -101,9 +101,7 @@ jobs:
     steps:
       - checkout
       - checkout-submodules
-      - run:
-          name: Set Node Version
-          command: cd gutenberg && nvm install --latest-npm && cd ..
+      - run: node -v
       - npm-install
       - add-jest-reporter-dir
       - run:
