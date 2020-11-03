@@ -14,7 +14,7 @@ import correctTextFontWeight from './text-font-weight-correct';
 import setupJetpackEditor from './jetpack-editor-setup';
 import initialHtml from './initial-html';
 
-addAction( 'native.pre-render', 'gutenberg-mobile', ( props ) => {
+addAction( 'native.pre-render', 'gutenberg-mobile', () => {
 	require( './strings-overrides' );
 	correctTextFontWeight();
 } );
