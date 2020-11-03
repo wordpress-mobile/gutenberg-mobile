@@ -117,9 +117,6 @@ jobs:
           circleci/android@sha256:71d61d6c21b29948d57120f476a83cc322a280979bce355c5a0ad771293ca380 \
           npm run core test:e2e:build-app:android
       - run:
-          name: Generate debug .apk file for testing
-          command: npm run core test:e2e:build-app:android
-      - run:
           name: Upload apk to sauce labs
           command: |
             source bin/sauce-pre-upload.sh
