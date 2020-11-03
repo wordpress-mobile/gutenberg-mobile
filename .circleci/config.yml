@@ -233,37 +233,37 @@ jobs:
 workflows:
   gutenberg-mobile:
     jobs:
-      - checks:
-          name: Check Correctness
-          check-correctness: true
-      - checks:
-          name: Test iOS
-          platform: ios
-          check-tests: true
-      - checks:
-          name: Test Android
-          platform: android
-          check-tests: true
-      - ios-device-checks:
-          name: Test iOS on Device - Canaries
-          is-canary: "-canary"
+      # - checks:
+      #     name: Check Correctness
+      #     check-correctness: true
+      # - checks:
+      #     name: Test iOS
+      #     platform: ios
+      #     check-tests: true
+      # - checks:
+      #     name: Test Android
+      #     platform: android
+      #     check-tests: true
+      # - ios-device-checks:
+      #     name: Test iOS on Device - Canaries
+      #     is-canary: "-canary"
       - android-device-checks:
           name: Test Android on Device - Canaries
           is-canary: "-canary"
-      - Optional UI Tests:
-          type: approval
-          filters:
-            branches:
-              ignore:
-                - develop
-      - ios-device-checks:
-          name: Test iOS on Device - Full
-          requires: [ "Optional UI Tests" ]
-      - android-device-checks:
-          name: Test Android on Device - Full
-          requires: [ "Optional UI Tests" ]
-      - android-native-unit-tests:
-          name: Android Native Unit Tests
+      # - Optional UI Tests:
+      #     type: approval
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - develop
+      # - ios-device-checks:
+      #     name: Test iOS on Device - Full
+      #     requires: [ "Optional UI Tests" ]
+      # - android-device-checks:
+      #     name: Test Android on Device - Full
+      #     requires: [ "Optional UI Tests" ]
+      # - android-native-unit-tests:
+      #     name: Android Native Unit Tests
 
   ui-tests-full-scheduled:
     jobs:
