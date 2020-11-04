@@ -108,14 +108,16 @@ jobs:
           command: |
             echo 'export TEST_RN_PLATFORM=android' >> $BASH_ENV
             echo 'export TEST_ENV=sauce' >> $BASH_ENV
-      - run: |
-          docker run --rm -it \
-          --volume $(pwd):/home/circleci/project \
-          --workdir /home/circleci/project \
-          --env JAVA_OPTS='-Xms512m -Xmx2g' \
-          --env GRADLE_OPTS='-Xmx3g -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError"' \
-          circleci/android@sha256:71d61d6c21b29948d57120f476a83cc322a280979bce355c5a0ad771293ca380 \
-          /bin/bash -c "sudo chown -R circleci:circleci . && npm run core test:e2e:build-app:android"
+      - run:
+          name: Build apk
+          command: |
+            docker run --rm -it \
+            --volume $(pwd):/home/circleci/project \
+            --workdir /home/circleci/project \
+            --env JAVA_OPTS='-Xms512m -Xmx2g' \
+            --env GRADLE_OPTS='-Xmx3g -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError"' \
+            circleci/android@sha256:71d61d6c21b29948d57120f476a83cc322a280979bce355c5a0ad771293ca380 \
+            /bin/bash -c "sudo chown -R circleci:circleci . && npm run core test:e2e:build-app:android"
       - run:
           name: Upload apk to sauce labs
           command: |
