@@ -94,7 +94,7 @@ jobs:
         type: string
         default: ""
     machine:
-      image: ubuntu-1604:202007-01
+      image: ubuntu-2004:202010-01
     steps:
       - checkout
       - checkout-submodules
