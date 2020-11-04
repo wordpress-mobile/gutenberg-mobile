@@ -117,7 +117,7 @@ jobs:
           command: |
             source bin/sauce-pre-upload.sh
             curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.apk?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk
-      - add-jest-reporter-dir
+      - run: mkdir /home/circleci/test-results
       - run:
           name: Run Device Tests
           command: npm run device-tests<<parameters.is-canary>>
@@ -125,9 +125,9 @@ jobs:
           environment:
             TEST_RN_PLATFORM: android
             TEST_ENV: sauce
-            JEST_JUNIT_OUTPUT: "reports/test-results/android-test-results.xml"
+            JEST_JUNIT_OUTPUT: "/home/circleci/test-results/android-test-results.xml"
       - store_test_results:
-          path: ./reports/test-results
+          path: /home/circleci/test-results
       - when:
           condition: << parameters.post-to-slack >>
           steps:
