@@ -1,3 +1,7 @@
+1.41.0
+------
+* [**] Fixed a text issue on Android where words entered using swipes would be deleted when enter is pressed. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2777]
+
 1.39.0
 ------
 * [***] Full-width and wide alignment support for Video, Latest-posts, Gallery, Media & text, and Pullquote block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2605]
