@@ -103,11 +103,6 @@ jobs:
       - npm-install
       - run: npm run test:e2e:bundle:android
       - run:
-          name: Set Environment Variables
-          command: |
-            echo 'export TEST_RN_PLATFORM=android' >> $BASH_ENV
-            echo 'export TEST_ENV=sauce' >> $BASH_ENV
-      - run:
           name: Build apk
           command: |
             docker run --rm -it \
@@ -128,6 +123,8 @@ jobs:
           command: npm run device-tests<<parameters.is-canary>>
           no_output_timeout: 1200
           environment:
+            TEST_RN_PLATFORM: android
+            TEST_ENV: sauce
             JEST_JUNIT_OUTPUT: "reports/test-results/android-test-results.xml"
       - store_test_results:
           path: ./reports/test-results
