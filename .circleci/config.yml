@@ -94,7 +94,7 @@ jobs:
         type: string
         default: ""
     machine:
-      image: ubuntu-2004:202010-01
+      image: ubuntu-2004:202010-01 # Latest supported ubuntu image from https://circleci.com/docs/2.0/configuration-reference/#available-machine-images
     steps:
       - checkout
       - checkout-submodules
