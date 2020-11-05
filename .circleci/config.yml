@@ -45,6 +45,12 @@ commands:
             name: Create reports directory
             command: mkdir reports && mkdir reports/test-results
 
+parameters:
+  android-docker-image:
+    type: string
+    # Hash points to previous version with node 12. When everything works with node 14 it can be removed
+    default: "circleci/android:api-29-node@sha256:71d61d6c21b29948d57120f476a83cc322a280979bce355c5a0ad771293ca380" 
+
 jobs:
   checks:
     parameters:
@@ -110,7 +116,7 @@ jobs:
             --workdir /home/circleci/project \
             --env JAVA_OPTS='-Xms512m -Xmx2g' \
             --env GRADLE_OPTS='-Xmx3g -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError"' \
-            circleci/android:api-29-node \
+            << pipeline.parameters.android-docker-image >> \
             /bin/bash -c "sudo chown -R circleci:circleci . && npm run core test:e2e:build-app:android"
       - run:
           name: Upload apk to sauce labs
@@ -143,7 +149,7 @@ jobs:
         type: boolean
         default: false
     docker:
-    - image: circleci/android:api-29-node@sha256:71d61d6c21b29948d57120f476a83cc322a280979bce355c5a0ad771293ca380
+    - image: << pipeline.parameters.android-docker-image >>
     steps:
       - checkout
       - checkout-submodules
