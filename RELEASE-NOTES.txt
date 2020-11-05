@@ -1,3 +1,63 @@
+1.39.0
+------
+* [***] Full-width and wide alignment support for Video, Latest-posts, Gallery, Media & text, and Pullquote block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2605]
+
+1.38.1
+------
+* [***] Fix unsupported block bottom sheet is triggered when device is rotated. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2710]
+* [***] Unsupported Block Editor: Fixed issue when cannot view or interact with the classic block on Jetpack site. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2709]
+
+1.38.0
+------
+* [**] Increase tap-target of primary action on unsupported blocks. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2608]
+* [***] On Jetpack connected sites, Unsupported Block Editor can be enabled via enabling Jetpack SSO setting directly from within the missing block alert. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2610]
+* [***] Add support for selecting user's post when configuring the link [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2484]
+* [**] [Android] Fix for a crash that can occur when long pressing selected images [https://github.com/wordpress-mobile/AztecEditor-Android/pull/924]
+* [***] [Android] Added expected double tap for focus behavior for text fields in accessibility mode [https://github.com/WordPress/gutenberg/pull/25384]
+
+1.37.1
+------
+* [**] [iOS] remove the overlay from the Unsupported Block Editor web view, if Login with WordPress.com is requested. (bug never releases) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2641]
+
+1.37.0
+------
+* [***] Full-width and wide alignment support for Group, Cover and Image block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2559]
+* [**] Add support for rounded style in Image block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2591]
+* [***] Fixed a case where adding a paragraph block made toolbar jump [https://github.com/WordPress/gutenberg/pull/24573]
+
+1.36.1
+------
+* [**] [iOS] Fixed Dark Mode transition for editor menus.
+
+1.36.0
+------
+* [**] [Android] New block: Pullquote
+* [**] Block settings now immediately reflect changes from menu sliders.
+
+1.35.0
+------
+* [***] Fixed empty text fields on RTL layout. Now they are selectable and placeholders are visible.
+* [**] Add settings to allow changing column widths
+* [**] Media editing support in Gallery block.
+* [*] Improved logic for creating undo levels.
+
+1.34.1
+------
+* Including 1.33.2 hotfix to 1.34.0 release
+
+1.34.0
+------
+* Media editing support in Cover block.
+* Fixed a bug on the Heading block, where a heading with a link and string formatting showed a white shadow in dark mode.
+
+1.33.2
+------
+* Fix for editing the Classic Block in the Unsupported block editor
+
+1.33.1
+------
+* Fixed a bug in the @-mentions feature where dismissing the @-mentions UI removed the @ character from the post.
+
 1.33.0
 ------
 * [***] Media editing support in Media & Text block.
