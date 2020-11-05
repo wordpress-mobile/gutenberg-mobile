@@ -42,7 +42,11 @@ cut a new release.
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>o From gutenberg-mobile's <code>develop</code> branch (making sure the gutenberg submodule is updated and clean), run the release script: <code>./bin/release_automation.sh</code>. This will take care of creating the branches in gutenberg-mobile and gutenberg, creating the gutenberg-mobile release PR as well as WPAndroid and WPiOS integration PRs.</p>
+<p>o Clone release scripts from <code>https://github.com/wordpress-mobile/release-toolkit-gutenberg-mobile</code> or pull the latest version if you already have it.
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>o Run the release script in release-toolkit-gutenberg-mobile: <code>./release_automation.sh</code>. This will take care of creating the gutenberg and gutenberg-mobile release PRs as well as WPAndroid and WPiOS integration PRs.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3} -->
