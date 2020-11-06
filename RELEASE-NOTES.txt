@@ -1,3 +1,7 @@
+1.41.0
+------
+* [***] Faster editor start and overall operation on Android. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2780]
+
 1.39.0
 ------
 * [***] Full-width and wide alignment support for Video, Latest-posts, Gallery, Media & text, and Pullquote block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2605]
