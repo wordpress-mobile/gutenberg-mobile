@@ -49,7 +49,8 @@
     "remote-redux-devtools": "^0.5.12",
     "rungen": "^0.3.2",
     "sprintf-js": "^1.1.1",
-    "wd": "^1.11.1"
+    "wd": "^1.11.1",
+    "yarn": "^1.22.10"
   },
   "scripts": {
     "postinstall": "npm ci --prefix gutenberg &&  cd jetpack && yarn install --frozen-lockfile --ignore-engines",
