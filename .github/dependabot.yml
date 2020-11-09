@@ -9,3 +9,8 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+    automerged_updates:
+      - match:
+          dependency_name: "gutenberg"
+      - match:
+          dependency_name: "jetpack"
