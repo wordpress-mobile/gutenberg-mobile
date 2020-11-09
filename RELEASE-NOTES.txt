@@ -1,5 +1,10 @@
 1.41.0
 ------
+
+* [*] [Android] Enable multiple upload support for Image block
+
+1.40.0
+------
 * [***] Faster editor start and overall operation on Android. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2780]
 
 1.39.0
