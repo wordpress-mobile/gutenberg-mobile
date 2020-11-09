@@ -274,6 +274,18 @@ workflows:
           requires: [ "Optional UI Tests" ]
       - android-native-unit-tests:
           name: Android Native Unit Tests
+      - ios-device-checks:
+          name: Test iOS on Device - Submodule Update
+          post-to-slack: true
+          filters:
+            branches:
+              only: /^dependabot/submodules/.*/
+      - android-device-checks:
+          name: Test Android on Device - Submodule Update
+          post-to-slack: true
+          filters:
+            branches:
+              only: /^dependabot/submodules/.*/
 
   ui-tests-full-scheduled:
     jobs:
