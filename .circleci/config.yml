@@ -276,13 +276,13 @@ workflows:
       - android-native-unit-tests:
           name: Android Native Unit Tests
       - ios-device-checks:
-          name: Test iOS on Device - Full
+          name: Test iOS on Device - Full (Submodule Update)
           post-to-slack: true
           filters:
             branches:
               only: /^dependabot/submodules/.*/
       - android-device-checks:
-          name: Test Android on Device - Full
+          name: Test Android on Device - Full (Submodule Update)
           post-to-slack: true
           filters:
             branches:
