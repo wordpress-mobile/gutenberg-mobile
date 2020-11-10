@@ -15,6 +15,7 @@ For a developer experience closer to the one the project maintainers current hav
 * [AndroidStudio](https://developer.android.com/studio/) to be able to compile the Android version of the app
 * [Xcode](https://developer.apple.com/xcode/) to be able to compile the iOS app
 * CocoaPods(`sudo gem install cocoapods`) needed to fetch React and third-party dependencies.
+* [Carthage](https://github.com/Carthage/Carthage#installing-carthage) for appium to be able run iOS UI tests
 
 Note that the OS platform used by the maintainers is macOS but the tools and setup should be usable in other platforms too.
 
