@@ -10,7 +10,7 @@ import { dispatch, select } from '@wordpress/data';
 // When adding new blocks to this list please also consider updating ./block-support/supported-blocks.json
 const supportedJetpackBlocks = {
 	'contact-info': {
-		available: true,
+		available: __DEV__,
 	},
 	story: {
 		available: true,
@@ -64,9 +64,7 @@ export default ( jetpackState ) => {
 		}
 	} );
 
-	if ( __DEV__ ) {
-		require( '../jetpack/extensions/editor' );
-	}
+	require( '../jetpack/extensions/editor' );
 
 	return jetpackData;
 };
