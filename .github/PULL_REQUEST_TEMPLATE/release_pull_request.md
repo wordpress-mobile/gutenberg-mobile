@@ -29,7 +29,6 @@ No extra PRs yet. 🎉
 - [ ] Approve and run optional Android and iOS UI tests
 - [ ] Aztec dependencies are pointing to a stable release.
   - iOS: Aztec dependencies match in `RNTAztecView.podspec` and `gutenberg/packages/react-native-aztec/RNTAztecView.podspec`.
-- [ ] Gutenberg 'Podfile.lock' inside 'gutenberg/package/react-native-editor/ios/' is updated to the release number.
 - [ ] Check if `RELEASE-NOTES.txt` and `gutenberg/packages/react-native-editor/CHANGELOG.md` are updated with all the changes that made it to the release.
 - [ ] Bundle package of the release is updated.
 

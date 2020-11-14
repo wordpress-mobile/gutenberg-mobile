@@ -45,6 +45,12 @@ commands:
             name: Create reports directory
             command: mkdir reports && mkdir reports/test-results
 
+parameters:
+  android-docker-image:
+    type: string
+    # Hash points to previous version with node 12. When everything works with node 14 it can be removed
+    default: "circleci/android:api-29-node@sha256:71d61d6c21b29948d57120f476a83cc322a280979bce355c5a0ad771293ca380" 
+
 jobs:
   checks:
     parameters:
@@ -93,37 +99,41 @@ jobs:
       is-canary:
         type: string
         default: ""
-    docker:
-    - image: circleci/android:api-29-node
-    environment:
-      JAVA_OPTS: '-Xms512m -Xmx2g'
-      GRADLE_OPTS: '-Xmx3g -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError"'
+    machine:
+      image: ubuntu-2004:202010-01 # Latest supported ubuntu image from https://circleci.com/docs/2.0/configuration-reference/#available-machine-images
     steps:
       - checkout
       - checkout-submodules
+      - run: node -v
+      - run: npm install -g yarn
       - npm-install
-      - add-jest-reporter-dir
+      - run: npm run test:e2e:bundle:android
       - run:
-          name: Set Environment Variables
+          name: Build apk
           command: |
-            echo 'export TEST_RN_PLATFORM=android' >> $BASH_ENV
-            echo 'export TEST_ENV=sauce' >> $BASH_ENV
-      - run:
-          name: Bundle Android and Generate debug .apk file for testing
-          command: npm run test:e2e:bundle:android && npm run test:e2e:build-app:android
+            docker run --rm -it \
+            --volume $(pwd):/home/circleci/project \
+            --workdir /home/circleci/project \
+            --env JAVA_OPTS='-Xms512m -Xmx2g' \
+            --env GRADLE_OPTS='-Xmx3g -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError"' \
+            << pipeline.parameters.android-docker-image >> \
+            /bin/bash -c "sudo chown -R circleci:circleci . && npm run core test:e2e:build-app:android"
       - run:
           name: Upload apk to sauce labs
           command: |
             source bin/sauce-pre-upload.sh
             curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.apk?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk
+      - run: mkdir /home/circleci/test-results
       - run:
           name: Run Device Tests
           command: npm run device-tests<<parameters.is-canary>>
           no_output_timeout: 1200
           environment:
-            JEST_JUNIT_OUTPUT: "reports/test-results/android-test-results.xml"
+            TEST_RN_PLATFORM: android
+            TEST_ENV: sauce
+            JEST_JUNIT_OUTPUT: "/home/circleci/test-results/android-test-results.xml"
       - store_test_results:
-          path: ./reports/test-results
+          path: /home/circleci/test-results
       - when:
           condition: << parameters.post-to-slack >>
           steps:
@@ -139,7 +149,7 @@ jobs:
         type: boolean
         default: false
     docker:
-    - image: circleci/android:api-29-node
+    - image: << pipeline.parameters.android-docker-image >>
     steps:
       - checkout
       - checkout-submodules
@@ -157,7 +167,7 @@ jobs:
         type: string
         default: ""
     macos:
-      xcode: "11.2.1"
+      xcode: "12.0.0"
     steps:
     - checkout
     - checkout-submodules
@@ -184,7 +194,7 @@ jobs:
         - dependencies-v4-
     - run:
         name: Build (if needed)
-        command: test -e gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app || SKIP_BUNDLING=true npm run core test:e2e:build-app:ios
+        command: test -e gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app || npm run core test:e2e:build-app:ios
     - save_cache:
         name: Save Dependencies Cache
         key: dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}-{{ checksum "gutenberg/package-lock.json" }}
@@ -256,6 +266,7 @@ workflows:
             branches:
               ignore:
                 - develop
+                - /^dependabot/submodules/.*/
       - ios-device-checks:
           name: Test iOS on Device - Full
           requires: [ "Optional UI Tests" ]
@@ -264,6 +275,18 @@ workflows:
           requires: [ "Optional UI Tests" ]
       - android-native-unit-tests:
           name: Android Native Unit Tests
+      - ios-device-checks:
+          name: Test iOS on Device - Full (Submodule Update)
+          post-to-slack: true
+          filters:
+            branches:
+              only: /^dependabot/submodules/.*/
+      - android-device-checks:
+          name: Test Android on Device - Full (Submodule Update)
+          post-to-slack: true
+          filters:
+            branches:
+              only: /^dependabot/submodules/.*/
 
   ui-tests-full-scheduled:
     jobs:

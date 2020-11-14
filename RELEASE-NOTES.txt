@@ -1,7 +1,24 @@
+Unreleased
+------
+* [**] Button block - Add link picker to the block settings
+
+1.41.0
+------
+
+* [*] [Android] Enable multiple upload support for Image block
+
+1.40.0
+------
+* [***] Faster editor start and overall operation on Android. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2780]
+
 1.39.0
 ------
-* [***] Fix unsupported block bottom sheet is triggered when device is rotated [https://github.com/wordpress-mobile/WordPress-Android/issues/13052]
-* [***] Unsupported Block Editor: Fixed issue when cannot view or interact with the classic block on Jetpack sites [https://github.com/wordpress-mobile/gutenberg-mobile/issues/2695]
+* [***] Full-width and wide alignment support for Video, Latest-posts, Gallery, Media & text, and Pullquote block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2605]
+
+1.38.1
+------
+* [***] Fix unsupported block bottom sheet is triggered when device is rotated. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2710]
+* [***] Unsupported Block Editor: Fixed issue when cannot view or interact with the classic block on Jetpack site. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2709]
 
 1.38.0
 ------
