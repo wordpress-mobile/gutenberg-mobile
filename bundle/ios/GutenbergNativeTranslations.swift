@@ -78,6 +78,8 @@ private func dummy() {
     _ = NSLocalizedString("Email me: <a href=\"mailto:mail@example.com\">mail@example.com</a>", comment: "translators: sample content for \"Team\" page template")
     _ = NSLocalizedString("Excerpt length (words)", comment: "")
     _ = NSLocalizedString("Failed to insert media.\nPlease tap for options.", comment: "")
+    _ = NSLocalizedString("Failed to save files.\nPlease tap for options.", comment: "")
+    _ = NSLocalizedString("Failed to upload files.\nPlease tap for options.", comment: "")
     _ = NSLocalizedString("Gallery caption. %s", comment: "translators: accessibility text. %s: gallery caption.")
     _ = NSLocalizedString("Get in Touch", comment: "translators: sample content for \"About\" page template\ntranslators: sample content for \"Contact\" page template\ntranslators: sample content for \"Portfolio\" page template\ntranslators: sample content for \"Services\" page template\ntranslators: sample content for \"Team\" page template")
     _ = NSLocalizedString("Gradient Type", comment: "")
