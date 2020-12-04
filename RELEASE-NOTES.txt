@@ -1,5 +1,6 @@
 Unreleased
 ------
+* [***] New Block: File [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2835]
 
 1.42.0
 ------
