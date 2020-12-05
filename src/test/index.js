@@ -3,7 +3,7 @@ describe( 'Test Jetpack blocks', () => {
 		const mockRegisterBlockCollection = jest.fn();
 		jest.mock( '@wordpress/blocks', () => {
 			return {
-				getCategories: () => [],
+				getCategories: () => [ { slug: 'media' } ],
 				setCategories: jest.fn(),
 				registerBlockCollection: mockRegisterBlockCollection,
 			};
@@ -11,6 +11,9 @@ describe( 'Test Jetpack blocks', () => {
 		jest.mock(
 			'../../jetpack/extensions/blocks/contact-info/editor.js',
 			() => jest.fn()
+		);
+		jest.mock( '../../jetpack/extensions/blocks/story/editor.js', () =>
+			jest.fn()
 		);
 
 		const setupJetpackEditor = require( '../jetpack-editor-setup' ).default;
