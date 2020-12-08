@@ -1,6 +1,7 @@
 Unreleased
 ------
 * [***] New Block: File [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2835]
+* [**] Fix issue where a blocks would disappear when deleting all of the text inside without requiring the extra backspace to remove the block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2877]
 
 1.42.0
 ------
