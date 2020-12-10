@@ -26,6 +26,7 @@
 		"core/social-link",
 		"core/social-links",
 		"core/pullquote",
+		"core/file",
 		"jetpack/contact-info",
 		"jetpack/email",
 		"jetpack/phone",
