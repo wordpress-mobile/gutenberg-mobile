@@ -1,3 +1,55 @@
+Unreleased
+------
+* [***] New Block: File [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2835]
+
+1.42.0
+------
+* [**] Button block - Add link picker to the block settings [https://github.com/WordPress/gutenberg/pull/26206]
+* [**] Fix gradient picker causing crash in some themes (like Spearhead) [https://github.com/WordPress/gutenberg/pull/27307]
+* [***] Adding support for selecting different unit of value in Cover and Columns blocks [https://github.com/WordPress/gutenberg/pull/26161]
+* [*] Fix theme colors syncing with the editor [https://github.com/WordPress/gutenberg/pull/26821]
+
+1.41.0
+------
+
+* [***] Faster editor start and overall operation on Android. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2780]
+* [*] [Android] Enable multiple upload support for Image block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2530]
+
+1.40.0
+------
+
+
+1.39.0
+------
+* [***] Full-width and wide alignment support for Video, Latest-posts, Gallery, Media & text, and Pullquote block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2605]
+
+1.38.1
+------
+* [***] Fix unsupported block bottom sheet is triggered when device is rotated. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2710]
+* [***] Unsupported Block Editor: Fixed issue when cannot view or interact with the classic block on Jetpack site. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2709]
+
+1.38.0
+------
+* [**] Increase tap-target of primary action on unsupported blocks. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2608]
+* [***] On Jetpack connected sites, Unsupported Block Editor can be enabled via enabling Jetpack SSO setting directly from within the missing block alert. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2610]
+* [***] Add support for selecting user's post when configuring the link [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2484]
+* [**] [Android] Fix for a crash that can occur when long pressing selected images [https://github.com/wordpress-mobile/AztecEditor-Android/pull/924]
+* [***] [Android] Added expected double tap for focus behavior for text fields in accessibility mode [https://github.com/WordPress/gutenberg/pull/25384]
+
+1.37.1
+------
+* [**] [iOS] remove the overlay from the Unsupported Block Editor web view, if Login with WordPress.com is requested. (bug never releases) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2641]
+
+1.37.0
+------
+* [***] Full-width and wide alignment support for Group, Cover and Image block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2559]
+* [**] Add support for rounded style in Image block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2591]
+* [***] Fixed a case where adding a paragraph block made toolbar jump [https://github.com/WordPress/gutenberg/pull/24573]
+
+1.36.1
+------
+* [**] [iOS] Fixed Dark Mode transition for editor menus.
+
 1.36.0
 ------
 * [**] [Android] New block: Pullquote
