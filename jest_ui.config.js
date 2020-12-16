@@ -1,12 +1,10 @@
-const main = require( './jest.config.js' );
+const gutenbergJestUIConfig = require( './gutenberg/packages/react-native-editor/jest_ui.config.js' );
 
 module.exports = {
-	...main,
-	timers: 'real',
-	setupFiles: [],
-	testMatch: [
-		'<rootDir>/__device-tests__/**/*.test.[jt]s?(x)',
-		'<rootDir>/gutenberg/packages/react-native-editor/__device-tests__/**/*.test.[jt]s?(x)',
+	...gutenbergJestUIConfig,
+	setupFilesAfterEnv: [
+		'./gutenberg/packages/react-native-editor/jest_ui_setup_after_env.js',
 	],
-	testPathIgnorePatterns: [ '/node_modules/', '<rootDir>/jetpack/' ],
+	testEnvironment:
+		'./gutenberg/packages/react-native-editor/jest_ui_test_environment.js',
 };
