@@ -85,10 +85,7 @@ jobs:
             echo 'export TEST_RN_PLATFORM=<<parameters.platform>>' >> $BASH_ENV
       - run:
           name: Run Checks
-          node -v
-          command: |
-            echo 'node -v' >> $BASH_ENV
-            bin/ci-checks-js.sh
+          command: bin/ci-checks-js.sh
           environment:
             JEST_JUNIT_OUTPUT: "reports/test-results/android-test-results.xml"
       - store_test_results:
