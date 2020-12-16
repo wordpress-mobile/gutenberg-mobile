@@ -16,6 +16,7 @@ function checkDiff() {
   if [[ $? != 0 ]]; then
     pFail
   elif [[ $diff ]]; then
+    echo "$diff"
     pFail "package-lock.json has changed. Please run npm install and commit the diff"
   else
     pOk
