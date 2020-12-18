@@ -1,6 +1,7 @@
 Unreleased
 ------
 * [***] New Block: File [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2835]
+* [*] Fix button link setting, rel link will not be overwritten if modified by the user.
 
 1.42.0
 ------
