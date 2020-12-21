@@ -1,6 +1,9 @@
 Unreleased
 ------
+* [***] Full-width and wide alignment support for Columns
 * [***] New Block: File [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2835]
+* [**] Image block - Add link picker to the block settings and enhance link settings with auto-hide options [https://github.com/WordPress/gutenberg/pull/27292]
+* [*] Fix button link setting, rel link will not be overwritten if modified by the user.
 
 1.42.0
 ------
