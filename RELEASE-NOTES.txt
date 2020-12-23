@@ -1,5 +1,14 @@
 Unreleased
 ------
+
+1.43.0
+------
+* [***] New Block: File [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2835]
+* [**] Fix issue where a blocks would disappear when deleting all of the text inside without requiring the extra backspace to remove the block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2877]
+
+1.42.2
+------
+* [**] Fix issue where removing blocks some blocks would crash the editor.
 * [***] Full-width and wide alignment support for Columns
 * [***] New Block: File [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2835]
 * [**] Image block - Add link picker to the block settings and enhance link settings with auto-hide options [https://github.com/WordPress/gutenberg/pull/27292]
