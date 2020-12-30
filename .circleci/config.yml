@@ -267,10 +267,75 @@ jobs:
       - checkout
       - checkout-submodules
       - npm-install
+      # I'd expect this to work, but it fails with:
+      #
+      # ./gradlew: No such file or directory
+      #
+      # https://app.circleci.com/pipelines/github/wordpress-mobile/gutenberg-mobile/9718/workflows/a4652147-ed0d-4fdb-b910-f045c06b89dd/jobs/51517
+      # - run:
+      #     name: cd to the React Native Android Bridge folder
+      #     command: cd gutenberg/packages/react-native-editor/android
+      # - android/publish-to-bintray
       - run:
-          name: cd to the React Native Android Bridge folder
-          command: cd gutenberg/packages/react-native-editor/android
-      - android/publish-to-bintray
+          name: Upload Android bridge to Bintray
+          command: |
+            cd gutenberg/packages/react-native-editor/android
+            # Use a different versioning style for builds from PRs to allow
+            # developers to iterate faster.
+            #
+            # All those dev builds will be deleted once the PR is merged by
+            # https://github.com/Automattic/bintray-garbage-collector/
+            #
+            # If $PREFIX is not set, that is, if we're not on a PR but a merge
+            # commit on develop or trunk, the version will be the value from
+            # the source code.
+            branch=$CIRCLE_BRANCH
+            if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
+              PR_NUMBER=$(basename $CIRCLE_PULL_REQUEST)
+              # Making the assumption that $CIRCLE_SHA1 will always be
+              # available.
+              PREFIX="$PR_NUMBER-$CIRCLE_SHA1"
+            elif [[ "$branch" != "trunk" && "$branch" != "develop" ]]; then
+              # This happens on the first push of a new branch, when there
+              # isn't a PR open for it yet.
+              echo "Running on a feature branch with no open PR: skipping Bintray upload"
+              exit 0
+            fi
+
+            # Because we have Gradle's configure-on-demand option set to true,
+            # simply calling `bintrayUpload` won't generate the AAR and POM;
+            # we need to explicitly do it here.
+            #
+            # See
+            # https://github.com/wordpress-mobile/circleci-orbs/blob/82f9821130890756e85277486ca0dde6cae25431/src/android/orb.yml#L19),
+            #
+            # - `assembleRelease` builds the AAR
+            # - `generatePomFileForUtilsPublicationPublication` builds the POM
+            # - `bintrayUpload` uploads both, using the version value set via
+            #   `-PbintrayVersion`
+            #
+            # Worth noting that the Bintray plugin mentions the necessity for
+            # some workarounds to generate the POM under certain circumstances,
+            # although none of them apply to our current usage.
+            #
+            # See:
+            # https://github.com/bintray/gradle-bintray-plugin/tree/67718c3a65b64dbfe7534a82a178da2c57153a5d#maven-publications
+            #
+            # See also the description and comments in this PR:
+            # https://github.com/wordpress-mobile/WordPress-Utils-Android/pull/39
+            #
+            # Calling `assembleRelease` in the same `./gradlew` invocation as
+            # the other tasks results in the AAR not being found, so we'll call
+            # that alone first.
+            #
+            # See:
+            # https://app.circleci.com/pipelines/github/wordpress-mobile/WordPress-Utils-Android/165/workflows/b0cb954f-315d-4c54-99a7-c36d11eec5c8/jobs/342
+            ./gradlew --stacktrace assembleRelease
+
+            ./gradlew --stacktrace \
+              generatePomFileForUtilsPublicationPublication \
+              bintrayUpload \
+              -PbintrayVersion=$PREFIX
 
 workflows:
   bintray-publish-test:
