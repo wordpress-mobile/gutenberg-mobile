@@ -26,5 +26,10 @@ module.exports = {
 				'moduleDirectory': ['node_modules', 'gutenberg', 'gutenberg/node_modules']
 			}
 		},
+	},
+	rules: {
+		// do not throw an error if imported dependencies are 
+		// declared in `package.json` or `gutenberg/package.json`
+		"import/no-extraneous-dependencies": ["error", {"packageDir": ['.', './gutenberg/']}] 
 	}
 };
