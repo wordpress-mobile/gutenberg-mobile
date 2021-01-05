@@ -19,5 +19,12 @@ module.exports = {
 	],
 	extends: [
 		"plugin:@wordpress/eslint-plugin/recommended",
-	]
+	],
+	settings: {
+		'import/resolver': {
+			'node': {
+				'moduleDirectory': ['node_modules', 'gutenberg', 'gutenberg/node_modules']
+			}
+		},
+	}
 };
