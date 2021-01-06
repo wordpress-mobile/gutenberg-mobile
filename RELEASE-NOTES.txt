@@ -1,6 +1,7 @@
 Unreleased
 ------
 * [***] Add support for cross-posting between sites [#2602]
+* [*] Fix adds image styles for hotlinked images [https://github.com/WordPress/gutenberg/pull/28006]
 
 
 1.43.0
