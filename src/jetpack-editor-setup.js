@@ -10,7 +10,7 @@ import { dispatch, select } from '@wordpress/data';
 // When adding new blocks to this list please also consider updating ./block-support/supported-blocks.json
 const supportedJetpackBlocks = {
 	'contact-info': {
-		available: __DEV__,
+		available: true,
 	},
 	story: {
 		available: true,
@@ -57,10 +57,19 @@ export default ( jetpackState ) => {
 			'core/block-editor'
 		).getSettings( 'capabilities' ).mediaFilesCollectionBlock;
 
+		console.log( 'MediaFilesCollectionBlock: ', mediaFilesCollectionBlock );
 		if ( mediaFilesCollectionBlock !== true ) {
-			dispatch( 'core/edit-post' ).hideBlockTypes( [ 'jetpack/story' ] );
+			console.log( '***HIDING' );
+			dispatch( 'core/edit-post' ).hideBlockTypes( [
+				'jetpack/story',
+				'jetpack/contact-info',
+			] );
 		} else {
-			dispatch( 'core/edit-post' ).showBlockTypes( [ 'jetpack/story' ] );
+			console.log( '***SHowing' );
+			dispatch( 'core/edit-post' ).showBlockTypes( [
+				'jetpack/story',
+				'jetpack/contact-info',
+			] );
 		}
 	} );
 
