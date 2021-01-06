@@ -23,7 +23,7 @@ module.exports = {
 	settings: {
 		'import/resolver': {
 			'node': {
-				'moduleDirectory': ['node_modules', 'gutenberg', 'gutenberg/node_modules']
+				'moduleDirectory': ['node_modules', 'gutenberg/node_modules']
 			}
 		},
 	},
