@@ -31,6 +31,7 @@ fi
 
 if [ "$CHECK_CORRECTNESS" = true ] ; then
   checkDiff
+  npm run build --prefix gutenberg || pFail # Need to build gutenberg packages before linting so that eslint-plugin-import can resolve those.
   npm run lint || pFail
 fi
 
