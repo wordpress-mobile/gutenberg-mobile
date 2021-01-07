@@ -79,7 +79,7 @@ jobs:
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
             echo "Loading nvm"
             export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            source "$NVM_DIR/nvm.sh"
             echo "Current folder"
             pwd
             echo "NVM version"
