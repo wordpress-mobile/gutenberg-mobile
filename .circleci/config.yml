@@ -53,7 +53,7 @@ parameters:
   linux-machine-image:
     type: string
     # Latest supported ubuntu image from https://circleci.com/docs/2.0/configuration-reference/#available-machine-images
-    default: "ubuntu-2004:202010-01 " 
+    default: "ubuntu-2004:202010-01" 
 
 jobs:
   checks:
