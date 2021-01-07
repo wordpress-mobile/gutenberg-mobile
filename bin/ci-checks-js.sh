@@ -31,7 +31,13 @@ fi
 
 if [ "$CHECK_CORRECTNESS" = true ] ; then
   checkDiff
-  npm run build --prefix gutenberg || pFail # Need to build gutenberg packages before linting so that eslint-plugin-import can resolve those.
+
+  # Need to build gutenberg packages before linting so that eslint-plugin-import can resolve those.
+  # See https://github.com/WordPress/gutenberg/pull/22088 for more information.
+  cd gutenberg
+  NODE_OPTIONS=--max_old_space_size=4096 npm run build:packages || pFail
+  cd ..
+
   npm run lint || pFail
 fi
 
