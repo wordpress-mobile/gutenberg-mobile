@@ -74,9 +74,7 @@ jobs:
       - checkout-submodules
       - run:
           name: Switch node & npm versions
-          command: |
-            cd gutenberg
-            nvm install --latest-npm
+          command: cd gutenberg && nvm install --latest-npm
       - when:
           condition: <<parameters.check-correctness>>
           steps:
