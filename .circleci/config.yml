@@ -73,18 +73,12 @@ jobs:
       - checkout
       - checkout-submodules
       - run:
+          name: Install newer nvm
+          command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+      - run:
           name: Install newer node using nvm
           command: |
             cd gutenberg
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
-            echo "Loading nvm"
-            export NVM_DIR="$HOME/.nvm"
-            source "$NVM_DIR/nvm.sh"
-            echo "Current folder"
-            pwd
-            echo "NVM version"
-            nvm --version
-            echo "Running nvm install"
             nvm install --latest-npm
       - when:
           condition: <<parameters.check-correctness>>
