@@ -1,8 +1,3 @@
-/**
- * External dependencies
- */
-const { map } = require( 'lodash' );
-
 module.exports = {
 	parser: "babel-eslint",
 	env: {
