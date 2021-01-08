@@ -6,6 +6,7 @@ describe( 'Test Jetpack blocks', () => {
 				getCategories: () => [ { slug: 'media' } ],
 				setCategories: jest.fn(),
 				registerBlockCollection: mockRegisterBlockCollection,
+				withBlockContentContext: jest.fn(),
 			};
 		} );
 		jest.mock(
