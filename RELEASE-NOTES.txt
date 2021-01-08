@@ -1,6 +1,14 @@
 Unreleased
 ------
 
+1.44.0
+------
+* [***] Add support for cross-posting between sites [#2602]
+* [***] Full-width and wide alignment support for Columns
+* [**] Image block - Add link picker to the block settings and enhance link settings with auto-hide options [https://github.com/WordPress/gutenberg/pull/27292]
+* [*] Fix button link setting, rel link will not be overwritten if modified by the user.
+
+
 1.43.0
 ------
 * [***] New Block: File [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2835]
