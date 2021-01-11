@@ -280,6 +280,15 @@ jobs:
           name: Upload Android bridge to Bintray
           command: |
             cd gutenberg/packages/react-native-editor/android
+
+            # Configure memory for Gradle task, it needs more than the default
+            #
+            # See discussion at:
+            # https://github.com/wordpress-mobile/gutenberg-mobile/issues/2972
+            echo "org.gradle.jvmargs=-Xmx1536m -XX:+HeapDumpOnOutOfMemoryError" >> gradle.properties
+
+            cat gradle.properties
+
             # Use a different versioning style for builds from PRs to allow
             # developers to iterate faster.
             #
