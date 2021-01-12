@@ -342,7 +342,7 @@ jobs:
             ./gradlew --stacktrace --debug assembleRelease
 
             ./gradlew --stacktrace \
-              generatePomFileForUtilsPublicationPublication \
+              generatePomFileForGutenbergMobilePublicationPublication \
               bintrayUpload \
               -PbintrayVersion=$PREFIX
 
