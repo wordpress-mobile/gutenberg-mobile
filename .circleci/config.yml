@@ -263,7 +263,7 @@ jobs:
       - npm-install
       - run:
           name: Run React Native task
-          command: cd gutenberg/packages/react-native-editor/android && ./gradlew bundleReleaseJsAndAssets
+          command: cd gutenberg/packages/react-native-bridge/android && ./gradlew bundleReleaseJsAndAssets
 
   android-bintray-publish:
     # parameters:
