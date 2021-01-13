@@ -278,6 +278,9 @@ jobs:
       # - android/publish-to-bintray
       - run:
           name: Upload Android bridge to Bintray
+          environment:
+            JAVA_OPTS: -Xms512m -Xmx2g
+            GRADLE_OPTS: -Xmx3g -Dorg.gradle.workers.max=1 -Dorg.gradle.daemon=false -Dkotlin.compiler.execution.strategy=in-process -Dorg.gradle.jvmargs="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError"
           command: |
             cd gutenberg/packages/react-native-editor/android
 
@@ -288,8 +291,6 @@ jobs:
             #
             # These values come from:
             # https://stackoverflow.com/a/56027775/809944
-            export JAVA_OPTS='-Xms512m -Xmx2g'
-            export GRADLE_OPTS='-Xmx3g -Dorg.gradle.workers.max=1 -Dorg.gradle.daemon=false -Dkotlin.compiler.execution.strategy=in-process -Dorg.gradle.jvmargs="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError"'
 
             cat gradle.properties
             echo $GRADLE_OPTS
