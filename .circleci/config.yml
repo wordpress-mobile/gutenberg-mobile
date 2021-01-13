@@ -346,7 +346,17 @@ jobs:
             #
             # See:
             # https://app.circleci.com/pipelines/github/wordpress-mobile/WordPress-Utils-Android/165/workflows/b0cb954f-315d-4c54-99a7-c36d11eec5c8/jobs/342
-            ./gradlew --stacktrace assembleRelease
+
+            # Splitting the taks into two to try avoiding running out of memory
+            #
+            # See:
+            # - Splitting task suggestion: https://stackoverflow.com/a/59855456/809944
+            # - Example of failed build because of memory:
+            #   https://app.circleci.com/pipelines/github/wordpress-mobile/gutenberg-mobile/9916/workflows/0a4259b3-612c-4d70-84e2-655ca41275ab/jobs/52504
+            # - Discussion regarding Gradle, React Native, and CircleCI memory:
+            #   https://stackoverflow.com/a/56027775/809944
+            ./gradlew --stacktrace bundleReleaseJsAndAssets
+            ./gradlew --stacktrace assembleRelease -x bundleReleaseJsAndAssets
 
             ./gradlew --stacktrace \
               generatePomFileForGutenbergMobilePublicationPublication \
