@@ -339,7 +339,7 @@ jobs:
             #
             # See:
             # https://app.circleci.com/pipelines/github/wordpress-mobile/WordPress-Utils-Android/165/workflows/b0cb954f-315d-4c54-99a7-c36d11eec5c8/jobs/342
-            ./gradlew --stacktrace --debug assembleRelease
+            ./gradlew --stacktrace assembleRelease
 
             ./gradlew --stacktrace \
               generatePomFileForGutenbergMobilePublicationPublication \
