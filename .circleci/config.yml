@@ -285,9 +285,10 @@ jobs:
             #
             # See discussion at:
             # https://github.com/wordpress-mobile/gutenberg-mobile/issues/2972
-            echo "org.gradle.jvmargs=-Xmx1536m -XX:+HeapDumpOnOutOfMemoryError" >> gradle.properties
+            export GRADLE_OPTS='-Xmx3g -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError"'
 
             cat gradle.properties
+            echo $GRADLE_OPTS
 
             # Use a different versioning style for builds from PRs to allow
             # developers to iterate faster.
