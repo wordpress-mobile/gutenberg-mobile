@@ -254,6 +254,17 @@ jobs:
                 include_project_field: false
                 failure_message: ':red_circle: Scheduled tests failed on iOS device!'
 
+  android-bintray-replica:
+    docker:
+    - image: << pipeline.parameters.android-docker-image >>
+    steps:
+      - checkout
+      - checkout-submodules
+      - npm-install
+      - run:
+          name: Run React Native task
+          command: cd gutenberg/packages/react-native-editor/android && ./gradlew bundleReleaseJsAndAssets
+
   android-bintray-publish:
     # parameters:
     #   post-to-slack:
@@ -367,7 +378,8 @@ jobs:
 workflows:
   bintray-publish-test:
     jobs:
-      - android-bintray-publish
+      - android-bintray-replica
+      # - android-bintray-publish
   gutenberg-mobile:
     jobs:
       - checks:
