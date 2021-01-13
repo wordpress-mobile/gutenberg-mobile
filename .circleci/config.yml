@@ -285,7 +285,10 @@ jobs:
             #
             # See discussion at:
             # https://github.com/wordpress-mobile/gutenberg-mobile/issues/2972
-            export GRADLE_OPTS='-Xmx3g -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError"'
+            #
+            # These values come from:
+            # https://stackoverflow.com/a/56027775/809944
+            export GRADLE_OPTS='-Xmx3g -Dorg.gradle.workers.max=1 -Dorg.gradle.daemon=false -Dkotlin.compiler.execution.strategy=in-process -Dorg.gradle.jvmargs="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError"'
 
             cat gradle.properties
             echo $GRADLE_OPTS
