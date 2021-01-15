@@ -48,7 +48,7 @@ npm install
 ## Run
 
 ```
-npm run start
+npm run start:reset
 ```
 
 Runs the packager (Metro) in development mode. The packager stays running to serve the app bundle to the clients that request it.
