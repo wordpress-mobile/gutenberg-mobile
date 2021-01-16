@@ -10,11 +10,12 @@ describe( 'Test Jetpack blocks', () => {
 			};
 		} );
 		jest.mock(
-			'../../jetpack/extensions/blocks/contact-info/editor.js',
+			'../../jetpack/projects/plugins/jetpack/extensions/blocks/contact-info/editor.js',
 			() => jest.fn()
 		);
-		jest.mock( '../../jetpack/extensions/blocks/story/editor.js', () =>
-			jest.fn()
+		jest.mock(
+			'../../jetpack/projects/plugins/jetpack/extensions/blocks/story/editor.js',
+			() => jest.fn()
 		);
 
 		const setupJetpackEditor = require( '../jetpack-editor-setup' ).default;
