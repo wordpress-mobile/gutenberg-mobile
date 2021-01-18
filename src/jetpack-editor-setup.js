@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { JETPACK_DATA_PATH } from '../jetpack/extensions/shared/get-jetpack-data';
+import { JETPACK_DATA_PATH } from '../jetpack/projects/plugins/jetpack/extensions/shared/get-jetpack-data';
 /**
  * WordPress dependencies
  */
@@ -64,7 +64,7 @@ export default ( jetpackState ) => {
 		}
 	} );
 
-	require( '../jetpack/extensions/editor' );
+	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );
 
 	return jetpackData;
 };
