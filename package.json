@@ -1,6 +1,6 @@
 {
   "name": "gutenberg-mobile",
-  "version": "1.43.0",
+  "version": "1.44.1",
   "private": true,
   "config": {
     "jsfiles": "./*.js src/*.js src/**/*.js src/**/**/*.js",
@@ -51,7 +51,7 @@
     "yarn": "^1.22.10"
   },
   "scripts": {
-    "postinstall": "npm ci --prefix gutenberg &&  cd jetpack && yarn install --frozen-lockfile --ignore-engines",
+    "postinstall": "npm ci --prefix gutenberg && cd jetpack/projects/plugins/jetpack && yarn install --frozen-lockfile --ignore-engines",
     "start": "react-native start --config ./metro.config.js",
     "start:reset": "npm run core clean:runtime && npm run start -- --reset-cache",
     "core": "cd gutenberg && npm run native",
@@ -81,7 +81,7 @@
     "test": "cross-env NODE_ENV=test jest --verbose --config ./jest.config.js",
     "test:debug": "cross-env NODE_ENV=test node --inspect-brk node_modules/.bin/jest --runInBand --verbose --config jest.config.js",
     "device-tests": "cross-env NODE_ENV=test jest --no-cache --maxWorkers=3 --verbose --config jest_ui.config.js",
-    "device-tests-canary": "cross-env NODE_ENV=test jest --no-cache --maxWorkers=2 --testNamePattern=@canary --verbose --config jest_ui.config.js",
+    "device-tests-canary": "cross-env NODE_ENV=test jest --no-cache --maxWorkers=2 --testPathPattern=@canary --verbose --config jest_ui.config.js",
     "device-tests:local": "IOS_APP_PATH='./gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app' ANDROID_APP_PATH='./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk' cross-env NODE_ENV=test jest --runInBand --detectOpenHandles --verbose --config jest_ui.config.js",
     "device-tests:debug": "IOS_APP_PATH='./gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app' ANDROID_APP_PATH='./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk' cross-env NODE_ENV=test node $NODE_DEBUG_OPTION --inspect-brk node_modules/jest/bin/jest --runInBand --detectOpenHandles --verbose --config jest_ui.config.js",
     "test:e2e:bundle:android": "npm run test:e2e:bundle:android:text && npm run test:e2e:bundle:android:bytecode",
