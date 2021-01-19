@@ -16,6 +16,7 @@ function checkDiff() {
   if [[ $? != 0 ]]; then
     pFail
   elif [[ $diff ]]; then
+    echo "$diff"
     pFail "package-lock.json has changed. Please run npm install and commit the diff"
   else
     pOk
@@ -30,6 +31,13 @@ fi
 
 if [ "$CHECK_CORRECTNESS" = true ] ; then
   checkDiff
+
+  # Need to build gutenberg packages before linting so that eslint-plugin-import can resolve those.
+  # See https://github.com/WordPress/gutenberg/pull/22088 for more information.
+  cd gutenberg
+  npm run build:packages || pFail
+  cd ..
+
   npm run lint || pFail
 fi
 
