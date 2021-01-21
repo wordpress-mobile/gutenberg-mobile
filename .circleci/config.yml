@@ -49,11 +49,11 @@ parameters:
   android-docker-image:
     type: string
     # Hash points to previous version with node 12. When everything works with node 14 it can be removed
-    default: "circleci/android:api-29-node@sha256:71d61d6c21b29948d57120f476a83cc322a280979bce355c5a0ad771293ca380" 
+    default: "circleci/android:api-29-node@sha256:71d61d6c21b29948d57120f476a83cc322a280979bce355c5a0ad771293ca380"
   linux-machine-image:
     type: string
     # Latest supported ubuntu image from https://circleci.com/docs/2.0/configuration-reference/#available-machine-images
-    default: "ubuntu-2004:202010-01" 
+    default: "ubuntu-2004:202010-01"
 
 jobs:
   checks:
@@ -253,66 +253,161 @@ jobs:
                 include_job_number_field: false
                 include_project_field: false
                 failure_message: ':red_circle: Scheduled tests failed on iOS device!'
+  android-build-react-native-bridge:
+    # Running on a Ubuntu machine to have more memory compared to the Docker +
+    # Node image that CircleCI offers (circleci/node)
+    #
+    # See: https://github.com/wordpress-mobile/gutenberg-mobile/pull/3038#issuecomment-765334675
+    machine:
+      image: << pipeline.parameters.linux-machine-image >>
+    steps:
+      - checkout
+      - checkout-submodules
+      - npm-install
+      - run:
+          name: Build JS Bundle
+          command: |
+            npm run bundle:android
+          # This command may take a long time, so prevent CircleCI from killing
+          # the build if it doesn't receive output for more than its default
+          # ten minutes.
+          no_output_timeout: 30m
+      # Move the generated bundle to the location where we'll need it for the
+      # Gradle build, then put it in the CI cache. We'll get it from there in
+      # the publishing job, which runs on a Docker container optimized for
+      # Android work.
+      - run:
+          name: Ensure assets folder exists
+          command: mkdir -p gutenberg/packages/react-native-bridge/android/build/assets
+      - run:
+          name: Move bundle to assets folder
+          command: mv bundle/android/App.js gutenberg/packages/react-native-bridge/android/build/assets/index.android.bundle
+      - run:
+          name: Get cache id
+          command: |
+            echo $CIRCLE_SHA1 > cache_id
+            cat cache_id
+      - save_cache:
+          name: Cache React Native Android Bridge JS Bundle
+          key: android-js-bundle-{{ checksum "cache_id" }}
+          paths:
+            - gutenberg/packages/react-native-bridge/android/build/assets/index.android.bundle
+  android-publish-react-native-bridge:
+    docker:
+    - image: << pipeline.parameters.android-docker-image >>
+    steps:
+      - checkout
+      - checkout-submodules
+      # Get the JS bundle from the CI cache.
+      # See `android-build-react-native-bridge` for details
+      - run:
+          name: Get cache id
+          command: |
+            echo $CIRCLE_SHA1 > cache_id
+            cat cache_id
+      - restore_cache:
+          name: Restore React Native Android Bridge JS Bundle from cache
+          key: android-js-bundle-{{ checksum "cache_id" }}
+      - run:
+          name: Build React Native Bridge & Upload to Bintray
+          command: |
+            cd gutenberg/packages/react-native-bridge/android
+
+            # Use a different versioning style for builds from PRs to allow
+            # developers to iterate faster.
+            #
+            # All those dev builds will be deleted once the PR is merged by
+            # https://github.com/Automattic/bintray-garbage-collector/
+            #
+            # If $PREFIX is not set, that is, if we're not on a PR but a merge
+            # commit on develop or trunk, the version will be the value from
+            # the source code.
+            branch=$CIRCLE_BRANCH
+            if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
+              PR_NUMBER=$(basename $CIRCLE_PULL_REQUEST)
+              # Making the assumption that $CIRCLE_SHA1 will always be
+              # available.
+              PREFIX="$PR_NUMBER-$CIRCLE_SHA1"
+            elif [[ "$branch" != "trunk" && "$branch" != "develop" ]]; then
+              # This happens on the first push of a new branch, when there
+              # isn't a PR open for it yet.
+              echo "Running on a feature branch with no open PR: skipping Bintray upload"
+              exit 0
+            fi
+
+            ./gradlew bintrayUpload -PbintrayVersion=$PREFIX
 
 workflows:
   gutenberg-mobile:
     jobs:
-      - checks:
-          name: Check Correctness
-          check-correctness: true
-      - checks:
-          name: Test iOS
-          platform: ios
-          check-tests: true
-      - checks:
-          name: Test Android
-          platform: android
-          check-tests: true
-      - ios-device-checks:
-          name: Test iOS on Device - Canaries
-          is-canary: "-canary"
-      - android-device-checks:
-          name: Test Android on Device - Canaries
-          is-canary: "-canary"
-      - Optional UI Tests:
-          type: approval
-          filters:
-            branches:
-              ignore:
-                - develop
-                - /^dependabot/submodules/.*/
-      - ios-device-checks:
-          name: Test iOS on Device - Full
-          requires: [ "Optional UI Tests" ]
-      - android-device-checks:
-          name: Test Android on Device - Full
-          requires: [ "Optional UI Tests" ]
-      - android-native-unit-tests:
-          name: Android Native Unit Tests
-      - ios-device-checks:
-          name: Test iOS on Device - Full (Submodule Update)
-          post-to-slack: true
-          filters:
-            branches:
-              only: /^dependabot/submodules/.*/
-      - android-device-checks:
-          name: Test Android on Device - Full (Submodule Update)
-          post-to-slack: true
-          filters:
-            branches:
-              only: /^dependabot/submodules/.*/
+      # - checks:
+      #     name: Check Correctness
+      #     check-correctness: true
+      # - checks:
+      #     name: Test iOS
+      #     platform: ios
+      #     check-tests: true
+      # - checks:
+      #     name: Test Android
+      #     platform: android
+      #     check-tests: true
+      # - ios-device-checks:
+      #     name: Test iOS on Device - Canaries
+      #     is-canary: "-canary"
+      # - android-device-checks:
+      #     name: Test Android on Device - Canaries
+      #     is-canary: "-canary"
+      # - Optional UI Tests:
+      #     type: approval
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - develop
+      #           - /^dependabot/submodules/.*/
+      # - ios-device-checks:
+      #     name: Test iOS on Device - Full
+      #     requires: [ "Optional UI Tests" ]
+      # - android-device-checks:
+      #     name: Test Android on Device - Full
+      #     requires: [ "Optional UI Tests" ]
+      # - android-native-unit-tests:
+      #     name: Android Native Unit Tests
+      # - ios-device-checks:
+      #     name: Test iOS on Device - Full (Submodule Update)
+      #     post-to-slack: true
+      #     filters:
+      #       branches:
+      #         only: /^dependabot/submodules/.*/
+      # - android-device-checks:
+      #     name: Test Android on Device - Full (Submodule Update)
+      #     post-to-slack: true
+      #     filters:
+      #       branches:
+      #         only: /^dependabot/submodules/.*/
+      # # Publishing to Bintray is time consuming; let's do it manually for now
+      # # while we figure out a way to add intelligence in the pipeline to only
+      # # trigger it when there are changes that require it.
+      # - Unblock Android React Native Bride Publishing to Bintray:
+      #     type: approval
+      #     requires: [ "Android Native Unit Tests" ]
+      - android-build-react-native-bridge:
+          name: Build Android RN Bridge JS Bundle
+          # requires: [ "Unblock Android React Native Bride Publishing to Bintray" ]
+      # - android-publish-react-native-bridge:
+          # name: Publish Android RN Bridge JS Bundle to Bintray
+          # requires: [ "Build Android RN Bridge JS Bundle" ]
 
-  ui-tests-full-scheduled:
-    jobs:
-      - ios-device-checks:
-          name: Test iOS on Device - Scheduled
-          post-to-slack: true
-      - android-device-checks:
-          name: Test Android on Device - Scheduled
-          post-to-slack: true
-    triggers:
-      - schedule:
-          cron: '1 1,13 * * *'
-          filters:
-            branches:
-              only: develop
+  # ui-tests-full-scheduled:
+  #   jobs:
+  #     - ios-device-checks:
+  #         name: Test iOS on Device - Scheduled
+  #         post-to-slack: true
+  #     - android-device-checks:
+  #         name: Test Android on Device - Scheduled
+  #         post-to-slack: true
+  #   triggers:
+  #     - schedule:
+  #         cron: '1 1,13 * * *'
+  #         filters:
+  #           branches:
+  #             only: develop
