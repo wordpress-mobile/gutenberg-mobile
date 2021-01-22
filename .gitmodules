@@ -1,6 +1,7 @@
 [submodule "gutenberg"]
 	path = gutenberg
 	url = https://github.com/bjtitus/gutenberg.git
+  branch = stories/mediaFiles-type
 	shallow = true
 [submodule "jetpack"]
 	path = jetpack
