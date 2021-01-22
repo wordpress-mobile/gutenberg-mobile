@@ -50,6 +50,10 @@ parameters:
     type: string
     # Hash points to previous version with node 12. When everything works with node 14 it can be removed
     default: "circleci/android:api-29-node@sha256:71d61d6c21b29948d57120f476a83cc322a280979bce355c5a0ad771293ca380" 
+  linux-machine-image:
+    type: string
+    # Latest supported ubuntu image from https://circleci.com/docs/2.0/configuration-reference/#available-machine-images
+    default: "ubuntu-2004:202010-01" 
 
 jobs:
   checks:
@@ -63,11 +67,19 @@ jobs:
       check-correctness:
         type: boolean
         default: false
-    docker:
-      - image: circleci/node:14
+    machine:
+      image: << pipeline.parameters.linux-machine-image >>
     steps:
       - checkout
       - checkout-submodules
+      - run:
+          name: Install newer nvm
+          command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+      - run:
+          name: Install newer node using nvm
+          command: |
+            cd gutenberg
+            nvm install --latest-npm
       - when:
           condition: <<parameters.check-correctness>>
           steps:
@@ -100,7 +112,7 @@ jobs:
         type: string
         default: ""
     machine:
-      image: ubuntu-2004:202010-01 # Latest supported ubuntu image from https://circleci.com/docs/2.0/configuration-reference/#available-machine-images
+      image: << pipeline.parameters.linux-machine-image >>
     steps:
       - checkout
       - checkout-submodules
