@@ -1,5 +1,6 @@
 Unreleased
 ------
+* [**] Add width selection to the button block.
 
 1.47.0
 ------
