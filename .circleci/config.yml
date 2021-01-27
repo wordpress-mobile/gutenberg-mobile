@@ -44,6 +44,13 @@ commands:
         - run:
             name: Create reports directory
             command: mkdir reports && mkdir reports/test-results
+  get-cache-id-for-react-native-bridge:
+    steps:
+      - run:
+          name: Get cache id
+          command: |
+            echo $CIRCLE_SHA1 > cache_id
+            cat cache_id
 
 parameters:
   android-docker-image:
@@ -282,11 +289,7 @@ jobs:
       - run:
           name: Move bundle to assets folder
           command: mv bundle/android/App.js gutenberg/packages/react-native-bridge/android/build/assets/index.android.bundle
-      - run:
-          name: Get cache id
-          command: |
-            echo $CIRCLE_SHA1 > cache_id
-            cat cache_id
+      - get-cache-id-for-react-native-bridge
       - save_cache:
           name: Cache React Native Android Bridge JS Bundle
           key: android-js-bundle-{{ checksum "cache_id" }}
@@ -300,11 +303,7 @@ jobs:
       - checkout-submodules
       # Get the JS bundle from the CI cache.
       # See `android-build-react-native-bridge` for details
-      - run:
-          name: Get cache id
-          command: |
-            echo $CIRCLE_SHA1 > cache_id
-            cat cache_id
+      - get-cache-id-for-react-native-bridge
       - restore_cache:
           name: Restore React Native Android Bridge JS Bundle from cache
           key: android-js-bundle-{{ checksum "cache_id" }}
@@ -340,74 +339,74 @@ jobs:
 workflows:
   gutenberg-mobile:
     jobs:
-      # - checks:
-      #     name: Check Correctness
-      #     check-correctness: true
-      # - checks:
-      #     name: Test iOS
-      #     platform: ios
-      #     check-tests: true
-      # - checks:
-      #     name: Test Android
-      #     platform: android
-      #     check-tests: true
-      # - ios-device-checks:
-      #     name: Test iOS on Device - Canaries
-      #     is-canary: "-canary"
-      # - android-device-checks:
-      #     name: Test Android on Device - Canaries
-      #     is-canary: "-canary"
-      # - Optional UI Tests:
-      #     type: approval
-      #     filters:
-      #       branches:
-      #         ignore:
-      #           - develop
-      #           - /^dependabot/submodules/.*/
-      # - ios-device-checks:
-      #     name: Test iOS on Device - Full
-      #     requires: [ "Optional UI Tests" ]
-      # - android-device-checks:
-      #     name: Test Android on Device - Full
-      #     requires: [ "Optional UI Tests" ]
-      # - android-native-unit-tests:
-      #     name: Android Native Unit Tests
-      # - ios-device-checks:
-      #     name: Test iOS on Device - Full (Submodule Update)
-      #     post-to-slack: true
-      #     filters:
-      #       branches:
-      #         only: /^dependabot/submodules/.*/
-      # - android-device-checks:
-      #     name: Test Android on Device - Full (Submodule Update)
-      #     post-to-slack: true
-      #     filters:
-      #       branches:
-      #         only: /^dependabot/submodules/.*/
-      # # Publishing to Bintray is time consuming; let's do it manually for now
-      # # while we figure out a way to add intelligence in the pipeline to only
-      # # trigger it when there are changes that require it.
-      # - Unblock Android React Native Bride Publishing to Bintray:
-      #     type: approval
-      #     requires: [ "Android Native Unit Tests" ]
+      - checks:
+          name: Check Correctness
+          check-correctness: true
+      - checks:
+          name: Test iOS
+          platform: ios
+          check-tests: true
+      - checks:
+          name: Test Android
+          platform: android
+          check-tests: true
+      - ios-device-checks:
+          name: Test iOS on Device - Canaries
+          is-canary: "-canary"
+      - android-device-checks:
+          name: Test Android on Device - Canaries
+          is-canary: "-canary"
+      - Optional UI Tests:
+          type: approval
+          filters:
+            branches:
+              ignore:
+                - develop
+                - /^dependabot/submodules/.*/
+      - ios-device-checks:
+          name: Test iOS on Device - Full
+          requires: [ "Optional UI Tests" ]
+      - android-device-checks:
+          name: Test Android on Device - Full
+          requires: [ "Optional UI Tests" ]
+      - android-native-unit-tests:
+          name: Android Native Unit Tests
+      - ios-device-checks:
+          name: Test iOS on Device - Full (Submodule Update)
+          post-to-slack: true
+          filters:
+            branches:
+              only: /^dependabot/submodules/.*/
+      - android-device-checks:
+          name: Test Android on Device - Full (Submodule Update)
+          post-to-slack: true
+          filters:
+            branches:
+              only: /^dependabot/submodules/.*/
+      # Publishing to Bintray is time consuming; let's do it manually for now
+      # while we figure out a way to add intelligence in the pipeline to only
+      # trigger it when there are changes that require it.
+      - Unblock Android React Native Bride Publishing to Bintray:
+          type: approval
+          requires: [ "Android Native Unit Tests" ]
       - android-build-react-native-bridge:
           name: Build Android RN Bridge JS Bundle
-          # requires: [ "Unblock Android React Native Bride Publishing to Bintray" ]
-      # - android-publish-react-native-bridge:
-          # name: Publish Android RN Bridge JS Bundle to Bintray
-          # requires: [ "Build Android RN Bridge JS Bundle" ]
+          requires: [ "Unblock Android React Native Bride Publishing to Bintray" ]
+      - android-publish-react-native-bridge:
+          name: Publish Android RN Bridge JS Bundle to Bintray
+          requires: [ "Build Android RN Bridge JS Bundle" ]
 
-  # ui-tests-full-scheduled:
-  #   jobs:
-  #     - ios-device-checks:
-  #         name: Test iOS on Device - Scheduled
-  #         post-to-slack: true
-  #     - android-device-checks:
-  #         name: Test Android on Device - Scheduled
-  #         post-to-slack: true
-  #   triggers:
-  #     - schedule:
-  #         cron: '1 1,13 * * *'
-  #         filters:
-  #           branches:
-  #             only: develop
+  ui-tests-full-scheduled:
+    jobs:
+      - ios-device-checks:
+          name: Test iOS on Device - Scheduled
+          post-to-slack: true
+      - android-device-checks:
+          name: Test Android on Device - Scheduled
+          post-to-slack: true
+    triggers:
+      - schedule:
+          cron: '1 1,13 * * *'
+          filters:
+            branches:
+              only: develop
