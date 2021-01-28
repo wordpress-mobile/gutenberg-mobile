@@ -56,24 +56,3 @@ addFilter(
 			: defaultValue;
 	}
 );
-
-addFilter(
-	'native.reusable_block_action_button',
-	'native/reusable_block',
-	( defaultValue ) => {
-		const { getSettings } = select( 'core/block-editor' );
-		const isUnsupportedBlockEditorSupported =
-			getSettings( 'capabilities' ).unsupportedBlockEditor === true;
-		const canEnableUnsupportedBlockEditor =
-			getSettings( 'capabilities' ).canEnableUnsupportedBlockEditor ===
-			true;
-
-		const shouldOverwriteButtonTitle =
-			isUnsupportedBlockEditorSupported === false &&
-			canEnableUnsupportedBlockEditor;
-
-		return shouldOverwriteButtonTitle
-			? __( 'Open Jetpack Security settings' )
-			: defaultValue;
-	}
-);
