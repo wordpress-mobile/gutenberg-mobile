@@ -1,7 +1,7 @@
 Unreleased
 ------
 * [**] Add proper handling for single use blocks such as the more block [#3042]
-* [**] Make inserter long-press options "add to beginning" and "add to end" always available. [#]
+* [**] Make inserter long-press options "add to beginning" and "add to end" always available. [#3074]
 
 1.45.0
 ------
