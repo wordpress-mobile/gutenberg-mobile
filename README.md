@@ -87,7 +87,7 @@ To see a list of all of your available iOS devices, use `xcrun simctl list devic
 
 ### Troubleshooting
 
-If the app doesn't run on your first attempt, it may help to double-check the set up of your development environment against the latest requirements in [React Native's documentation](https://reactnative.dev/docs/environment-setup). With Android Studio, for example, you will need to configure the ANDROID_HOME environment variable and ensure that your version of JDK matches the latest requirements.
+If the Android emulator doesn't start correctly, or compiling fails with `Could not initialize class org.codehaus.groovy.runtime.InvokerHelper` or similar, it may help to double check the set up of your development environment against the latest requirements in [React Native's documentation](https://reactnative.dev/docs/environment-setup). With Android Studio, for example, you will need to configure the `ANDROID_HOME` environment variable and ensure that your version of JDK matches the latest requirements.
 
 Some times, and especially when tweaking anything in the `package.json`, Babel configuration (`.babelrc`) or the Jest configuration (`jest.config.js`), your changes might seem to not take effect as expected. On those times, you might need to clean various caches before starting the packager. To do that, run the script: `npm run start:reset`. Other times, you might want to reinstall the NPM packages from scratch and the `npm run clean:install` script can be handy.
 
