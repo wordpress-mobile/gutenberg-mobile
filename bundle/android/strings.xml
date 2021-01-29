@@ -40,6 +40,7 @@
     <!-- translators: displayed right after the block is removed. -->
     <string name="gutenberg_native_block_removed" tools:ignore="UnusedResources">Block removed</string>
     <string name="gutenberg_native_block_settings" tools:ignore="UnusedResources">Block settings</string>
+    <string name="gutenberg_native_change_block_position" tools:ignore="UnusedResources">Change block position</string>
     <string name="gutenberg_native_choose_a_file" tools:ignore="UnusedResources">CHOOSE A FILE</string>
     <string name="gutenberg_native_choose_audio" tools:ignore="UnusedResources">Choose audio</string>
     <string name="gutenberg_native_choose_file" tools:ignore="UnusedResources">Choose file</string>
@@ -114,7 +115,6 @@
     <string name="gutenberg_native_move_block_left" tools:ignore="UnusedResources">Move block left</string>
     <!-- translators: accessibility text. %1: current block position (number). %2: next block position (number) -->
     <string name="gutenberg_native_move_block_left_from_position_1_s_to_position_2_s" tools:ignore="UnusedResources">Move block left from position %1$s to position %2$s</string>
-    <string name="gutenberg_native_move_block_position" tools:ignore="UnusedResources">Move block position</string>
     <string name="gutenberg_native_move_block_right" tools:ignore="UnusedResources">Move block right</string>
     <!-- translators: accessibility text. %1: current block position (number). %2: next block position (number) -->
     <string name="gutenberg_native_move_block_right_from_position_1_s_to_position_2_s" tools:ignore="UnusedResources">Move block right from position %1$s to position %2$s</string>
