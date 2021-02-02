@@ -44,13 +44,6 @@ commands:
         - run:
             name: Create reports directory
             command: mkdir reports && mkdir reports/test-results
-  get-cache-id-for-react-native-bridge:
-    steps:
-      - run:
-          name: Get cache id
-          command: |
-            echo $CIRCLE_SHA1 > cache_id
-            cat cache_id
 
 parameters:
   android-docker-image:
@@ -260,7 +253,7 @@ jobs:
                 include_job_number_field: false
                 include_project_field: false
                 failure_message: ':red_circle: Scheduled tests failed on iOS device!'
-  android-build-react-native-bridge:
+  android-publish-react-native-bridge:
     # Running on a Ubuntu machine to have more memory compared to the Docker +
     # Node image that CircleCI offers (circleci/node)
     #
@@ -270,43 +263,9 @@ jobs:
     steps:
       - checkout
       - checkout-submodules
-      - npm-install
       - run:
-          name: Build JS Bundle
-          command: |
-            npm run bundle:android
-          # This command may take a long time, so prevent CircleCI from killing
-          # the build if it doesn't receive output for more than its default
-          # ten minutes.
-          no_output_timeout: 30m
-      # Move the generated bundle to the location where we'll need it for the
-      # Gradle build, then put it in the CI cache. We'll get it from there in
-      # the publishing job, which runs on a Docker container optimized for
-      # Android work.
-      - run:
-          name: Ensure assets folder exists
-          command: mkdir -p gutenberg/packages/react-native-bridge/android/build/assets
-      - run:
-          name: Move bundle to assets folder
-          command: mv bundle/android/App.js gutenberg/packages/react-native-bridge/android/build/assets/index.android.bundle
-      - get-cache-id-for-react-native-bridge
-      - save_cache:
-          name: Cache React Native Android Bridge JS Bundle
-          key: android-js-bundle-{{ checksum "cache_id" }}
-          paths:
-            - gutenberg/packages/react-native-bridge/android/build/assets/index.android.bundle
-  android-publish-react-native-bridge:
-    docker:
-    - image: << pipeline.parameters.android-docker-image >>
-    steps:
-      - checkout
-      - checkout-submodules
-      # Get the JS bundle from the CI cache.
-      # See `android-build-react-native-bridge` for details
-      - get-cache-id-for-react-native-bridge
-      - restore_cache:
-          name: Restore React Native Android Bridge JS Bundle from cache
-          key: android-js-bundle-{{ checksum "cache_id" }}
+          name: Setup Android Tooling
+          command: .circleci/setup-android-on-ubuntu.sh
       - run:
           name: Build React Native Bridge & Upload to Bintray
           command: |
@@ -330,11 +289,18 @@ jobs:
             elif [[ "$branch" != "trunk" && "$branch" != "develop" ]]; then
               # This happens on the first push of a new branch, when there
               # isn't a PR open for it yet.
-              echo "[IGNORED] Running on a feature branch with no open PR: skipping Bintray upload"
+              echo "Running on a feature branch with no open PR: skipping Bintray upload"
               exit 0
             fi
 
             ./gradlew bintrayUpload -PbintrayVersion=$PREFIX
+          # This command may take a long time, so prevent CircleCI from killing
+          # the build if it doesn't receive output for more than its default
+          # ten minutes.
+          no_output_timeout: 30m
+          environment:
+            # This comes from the setup-android-on-ubuntu.sh script
+            ANDROID_SDK_ROOT: /usr/lib/android-sdk
 
 workflows:
   gutenberg-mobile:
@@ -389,12 +355,9 @@ workflows:
       - Unblock Android React Native Bride Publishing to Bintray:
           type: approval
           requires: [ "Android Native Unit Tests" ]
-      - android-build-react-native-bridge:
-          name: Build Android RN Bridge JS Bundle
-          requires: [ "Unblock Android React Native Bride Publishing to Bintray" ]
       - android-publish-react-native-bridge:
           name: Publish Android RN Bridge JS Bundle to Bintray
-          requires: [ "Build Android RN Bridge JS Bundle" ]
+          requires: [ "Unblock Android React Native Bride Publishing to Bintray" ]
 
   ui-tests-full-scheduled:
     jobs:
