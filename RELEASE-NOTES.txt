@@ -1,5 +1,8 @@
 Unreleased
 ------
+
+1.46.0
+------
 * [***] New Block: Audio [#2854, #3070]
 * [**] Add support for setting heading anchors [#2947]
 * [**] Disable Unsupported Block Editor for Reusable blocks [#3067]
