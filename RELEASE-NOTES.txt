@@ -1,5 +1,11 @@
 Unreleased
 ------
+* [***] New Block: Audio
+* [**] Add proper handling for single use blocks such as the more block [#3042]
+
+1.45.0
+------
+* No User facing changes *
 
 1.44.1
 ------
