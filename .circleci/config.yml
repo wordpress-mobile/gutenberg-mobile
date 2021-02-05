@@ -305,59 +305,59 @@ jobs:
 workflows:
   gutenberg-mobile:
     jobs:
-      - checks:
-          name: Check Correctness
-          check-correctness: true
-      - checks:
-          name: Test iOS
-          platform: ios
-          check-tests: true
-      - checks:
-          name: Test Android
-          platform: android
-          check-tests: true
-      - ios-device-checks:
-          name: Test iOS on Device - Canaries
-          is-canary: "-canary"
-      - android-device-checks:
-          name: Test Android on Device - Canaries
-          is-canary: "-canary"
-      - Optional UI Tests:
-          type: approval
-          filters:
-            branches:
-              ignore:
-                - develop
-                - /^dependabot/submodules/.*/
-      - ios-device-checks:
-          name: Test iOS on Device - Full
-          requires: [ "Optional UI Tests" ]
-      - android-device-checks:
-          name: Test Android on Device - Full
-          requires: [ "Optional UI Tests" ]
-      - android-native-unit-tests:
-          name: Android Native Unit Tests
-      - ios-device-checks:
-          name: Test iOS on Device - Full (Submodule Update)
-          post-to-slack: true
-          filters:
-            branches:
-              only: /^dependabot/submodules/.*/
-      - android-device-checks:
-          name: Test Android on Device - Full (Submodule Update)
-          post-to-slack: true
-          filters:
-            branches:
-              only: /^dependabot/submodules/.*/
-      # Publishing to Bintray is time consuming; let's do it manually for now
-      # while we figure out a way to add intelligence in the pipeline to only
-      # trigger it when there are changes that require it.
-      - Unblock Android React Native Bride Publishing to Bintray:
-          type: approval
-          requires: [ "Android Native Unit Tests" ]
+      # - checks:
+      #     name: Check Correctness
+      #     check-correctness: true
+      # - checks:
+      #     name: Test iOS
+      #     platform: ios
+      #     check-tests: true
+      # - checks:
+      #     name: Test Android
+      #     platform: android
+      #     check-tests: true
+      # - ios-device-checks:
+      #     name: Test iOS on Device - Canaries
+      #     is-canary: "-canary"
+      # - android-device-checks:
+      #     name: Test Android on Device - Canaries
+      #     is-canary: "-canary"
+      # - Optional UI Tests:
+      #     type: approval
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - develop
+      #           - /^dependabot/submodules/.*/
+      # - ios-device-checks:
+      #     name: Test iOS on Device - Full
+      #     requires: [ "Optional UI Tests" ]
+      # - android-device-checks:
+      #     name: Test Android on Device - Full
+      #     requires: [ "Optional UI Tests" ]
+      # - android-native-unit-tests:
+      #     name: Android Native Unit Tests
+      # - ios-device-checks:
+      #     name: Test iOS on Device - Full (Submodule Update)
+      #     post-to-slack: true
+      #     filters:
+      #       branches:
+      #         only: /^dependabot/submodules/.*/
+      # - android-device-checks:
+      #     name: Test Android on Device - Full (Submodule Update)
+      #     post-to-slack: true
+      #     filters:
+      #       branches:
+      #         only: /^dependabot/submodules/.*/
+      # # Publishing to Bintray is time consuming; let's do it manually for now
+      # # while we figure out a way to add intelligence in the pipeline to only
+      # # trigger it when there are changes that require it.
+      # - Unblock Android React Native Bride Publishing to Bintray:
+      #     type: approval
+      #     requires: [ "Android Native Unit Tests" ]
       - android-publish-react-native-bridge:
           name: Publish Android RN Bridge JS Bundle to Bintray
-          requires: [ "Unblock Android React Native Bride Publishing to Bintray" ]
+          # requires: [ "Unblock Android React Native Bride Publishing to Bintray" ]
 
   ui-tests-full-scheduled:
     jobs:
