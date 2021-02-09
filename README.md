@@ -12,10 +12,12 @@ For a developer experience closer to the one the project maintainers current hav
 * [nvm](https://github.com/creationix/nvm)
 * Node.js and npm (use nvm to install them)
 * [Yarn](https://yarnpkg.com/)
-* [AndroidStudio](https://developer.android.com/studio/) to be able to compile the Android version of the app
+* [Android Studio](https://developer.android.com/studio/) to be able to compile the Android version of the app
 * [Xcode](https://developer.apple.com/xcode/) to be able to compile the iOS app
 * CocoaPods(`sudo gem install cocoapods`) needed to fetch React and third-party dependencies.
 * [Carthage](https://github.com/Carthage/Carthage#installing-carthage) for appium to be able run iOS UI tests
+
+Depending on your setup, there may be a few configurations needed in Android Studio and Xcode. Please refer to [React Native's documentation](https://reactnative.dev/docs/environment-setup) for the latest requirements for each development environment.
 
 Note that the OS platform used by the maintainers is macOS but the tools and setup should be usable in other platforms too.
 
@@ -46,7 +48,7 @@ npm install
 ## Run
 
 ```
-npm run start
+npm run start:reset
 ```
 
 Runs the packager (Metro) in development mode. The packager stays running to serve the app bundle to the clients that request it.
@@ -84,6 +86,8 @@ npm run core ios --simulator="iPhone Xs Max"
 To see a list of all of your available iOS devices, use `xcrun simctl list devices`.
 
 ### Troubleshooting
+
+If the Android emulator doesn't start correctly, or compiling fails with `Could not initialize class org.codehaus.groovy.runtime.InvokerHelper` or similar, it may help to double check the set up of your development environment against the latest requirements in [React Native's documentation](https://reactnative.dev/docs/environment-setup). With Android Studio, for example, you will need to configure the `ANDROID_HOME` environment variable and ensure that your version of JDK matches the latest requirements.
 
 Some times, and especially when tweaking anything in the `package.json`, Babel configuration (`.babelrc`) or the Jest configuration (`jest.config.js`), your changes might seem to not take effect as expected. On those times, you might need to clean various caches before starting the packager. To do that, run the script: `npm run start:reset`. Other times, you might want to reinstall the NPM packages from scratch and the `npm run clean:install` script can be handy.
 
