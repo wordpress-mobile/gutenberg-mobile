@@ -21,7 +21,8 @@ addAction( 'native.pre-render', 'gutenberg-mobile', () => {
 
 addAction( 'native.render', 'gutenberg-mobile', ( props ) => {
 	setupJetpackEditor(
-		props.jetpackState || { blogId: 1, isJetpackActive: true }
+		props.jetpackState || { blogId: 1, isJetpackActive: true },
+		props.capabilities
 	);
 } );
 
