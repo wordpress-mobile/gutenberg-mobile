@@ -3,7 +3,7 @@ Unreleased
 
 1.46.1
 ------
-* [**] Make inserter long-press options "add to beginning" and "add to end" always available. [#28610]
+* [**] Make inserter long-press options "add to beginning" and "add to end" always available. [#3074]
 * [*] Fix crash when Column block width attribute was empty. [https://github.com/WordPress/gutenberg/pull/29015]
 
 1.46.0
