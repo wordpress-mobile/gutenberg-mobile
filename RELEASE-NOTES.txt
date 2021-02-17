@@ -1,6 +1,11 @@
 Unreleased
 ------
 
+1.47.0
+------
+* [*] Fixed block mover title wording for better clarity from 'Move block position' to 'Change block position'. [#3049]
+* [**] Add support for setting Cover block focal point. [#3028]
+
 1.46.1
 ------
 * [**] Make inserter long-press options "add to beginning" and "add to end" always available. [#3074]

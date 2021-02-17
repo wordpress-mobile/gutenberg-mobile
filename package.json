@@ -1,6 +1,6 @@
 {
 	"name": "gutenberg-mobile",
-	"version": "1.46.1",
+	"version": "1.47.0",
 	"private": true,
 	"config": {
 		"jsfiles": "./*.js src/*.js src/**/*.js src/**/**/*.js",
@@ -16,12 +16,13 @@
 		"@react-native-community/cli": "^3.0.4",
 		"@wordpress/babel-preset-default": "file:gutenberg/packages/babel-preset-default",
 		"@wordpress/eslint-plugin": "file:gutenberg/packages/eslint-plugin",
-		"appium": "^1.18.3",
+		"appium": "^1.20.2",
 		"babel-core": "^7.0.0-bridge.0",
 		"babel-eslint": "^8.2.2",
 		"babel-jest": "^24.9.0",
 		"babel-plugin-react-native-classname-to-style": "^1.2.1",
 		"babel-plugin-react-native-platform-specific-extensions": "^1.1.1",
+		"babel-plugin-transform-remove-console": "6.9.4",
 		"cross-env": "^5.1.4",
 		"empty": "^0.10.1",
 		"enzyme": "^3.9.0",
