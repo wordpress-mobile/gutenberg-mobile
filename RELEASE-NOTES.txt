@@ -1,5 +1,6 @@
 Unreleased
 ------
+* [*] Fixed block mover title wording for better clarity from 'Move block position' to 'Change block position'.
 
 1.46.1
 ------
