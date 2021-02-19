@@ -39,14 +39,14 @@
 		"wordads"
 	],
 	"beta": [
-		"amazon"
-	],
-	"experimental": [
+		"amazon",
 		"anchor-fm",
-		"seo",
-		"premium-content",
 		"conversation",
 		"dialogue"
+	],
+	"experimental": [
+		"seo",
+		"premium-content"
 	],
 	"no-post-editor": [
 		"business-hours",
