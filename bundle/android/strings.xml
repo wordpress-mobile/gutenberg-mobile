@@ -150,6 +150,8 @@
     <string name="gutenberg_native_page_title_s" tools:ignore="UnusedResources">Page title. %s</string>
     <string name="gutenberg_native_paste_block_after" tools:ignore="UnusedResources">Paste block after</string>
     <string name="gutenberg_native_paste_url" tools:ignore="UnusedResources">Paste URL</string>
+    <string name="gutenberg_native_plugin_sidebar_more_menu_title" tools:ignore="UnusedResources">Plugin sidebar more menu title</string>
+    <string name="gutenberg_native_plugin_sidebar_title" tools:ignore="UnusedResources">Plugin sidebar title</string>
     <!-- translators: accessibility text. empty post title. -->
     <string name="gutenberg_native_post_title_empty" tools:ignore="UnusedResources">Post title. Empty</string>
     <!-- translators: accessibility text. %s: text content of the post title. -->
@@ -183,7 +185,6 @@
     <string name="gutenberg_native_show_post_content" tools:ignore="UnusedResources">Show post content</string>
     <!-- translators: Checkbox toggle label -->
     <string name="gutenberg_native_show_section" tools:ignore="UnusedResources">Show section</string>
-    <string name="gutenberg_native_sidebar_title_plugin" tools:ignore="UnusedResources">Sidebar title plugin</string>
     <string name="gutenberg_native_start_writing" tools:ignore="UnusedResources">Start writing…</string>
     <string name="gutenberg_native_success_message" tools:ignore="UnusedResources">Success Message</string>
     <string name="gutenberg_native_take_a_photo" tools:ignore="UnusedResources">Take a Photo</string>
