@@ -1,8 +1,7 @@
-[submodule "gutenberg"]
-	path = gutenberg
-	url = ../../WordPress/gutenberg.git
-	shallow = true
 [submodule "jetpack"]
 	path = jetpack
 	url = ../../Automattic/jetpack.git
 	shallow = true
+[submodule "gutenberg"]
+	path = gutenberg
+	url = git@github.com:oguzkocer/gutenberg.git
