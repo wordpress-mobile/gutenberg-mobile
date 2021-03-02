@@ -1,15 +1,70 @@
 Unreleased
 ------
-* [**] Button block - Add link picker to the block settings
+
+1.47.0
+------
+* [*] Fixed block mover title wording for better clarity from 'Move block position' to 'Change block position'. [#3049]
+* [**] Add support for setting Cover block focal point. [#3028]
+
+1.46.1
+------
+* [**] Make inserter long-press options "add to beginning" and "add to end" always available. [#3074]
+* [*] Fix crash when Column block width attribute was empty. [https://github.com/WordPress/gutenberg/pull/29015]
+
+1.46.0
+------
+* [***] New Block: Audio [#2854, #3070]
+* [**] Add support for setting heading anchors [#2947]
+* [**] Disable Unsupported Block Editor for Reusable blocks [#3067]
+* [**] Add proper handling for single use blocks such as the more block [#3042]
+
+1.45.0
+------
+* No User facing changes *
+
+1.44.1
+------
+* [**] Fix crash in mobile paragraph blocks with custom font size [#28121]
+* [**] Add move to top bottom when long pressing block movers  [#27554]
+
+1.44.0
+------
+* [***] Add support for cross-posting between sites [#2602]
+* [***] Full-width and wide alignment support for Columns
+* [**] Image block - Add link picker to the block settings and enhance link settings with auto-hide options [https://github.com/WordPress/gutenberg/pull/27292]
+* [*] Fix button link setting, rel link will not be overwritten if modified by the user.
+
+
+1.43.0
+------
+* [***] New Block: File [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2835]
+* [**] Fix issue where a blocks would disappear when deleting all of the text inside without requiring the extra backspace to remove the block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2877]
+
+1.42.2
+------
+* [**] Fix issue where removing blocks some blocks would crash the editor.
+* [***] Full-width and wide alignment support for Columns
+* [***] New Block: File [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2835]
+* [**] Image block - Add link picker to the block settings and enhance link settings with auto-hide options [https://github.com/WordPress/gutenberg/pull/27292]
+* [*] Fix button link setting, rel link will not be overwritten if modified by the user.
+* [*] Fix minor bug affecting link picker search results [https://github.com/WordPress/gutenberg/pull/27867]
+
+1.42.0
+------
+* [**] Button block - Add link picker to the block settings [https://github.com/WordPress/gutenberg/pull/26206]
+* [**] Fix gradient picker causing crash in some themes (like Spearhead) [https://github.com/WordPress/gutenberg/pull/27307]
+* [***] Adding support for selecting different unit of value in Cover and Columns blocks [https://github.com/WordPress/gutenberg/pull/26161]
+* [*] Fix theme colors syncing with the editor [https://github.com/WordPress/gutenberg/pull/26821]
 
 1.41.0
 ------
 
-* [*] [Android] Enable multiple upload support for Image block
+* [***] Faster editor start and overall operation on Android. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2780]
+* [*] [Android] Enable multiple upload support for Image block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2530]
 
 1.40.0
 ------
-* [***] Faster editor start and overall operation on Android. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2780]
+
 
 1.39.0
 ------
