@@ -321,8 +321,9 @@ jobs:
             elif [[ "$branch" != "trunk" && "$branch" != "develop" ]]; then
               # This happens on the first push of a new branch, when there
               # isn't a PR open for it yet.
-              echo "Running on a feature branch with no open PR: skipping Bintray upload"
-              exit 0
+              echo "IGNORED WHILE DEVELOPING THE FEATURE - Running on a feature branch with no open PR: skipping Bintray upload"
+              # exit 0
+              PREFIX="mokagio-ci-test-$CIRCLE_SHA1"
             fi
 
             ./publish-aztec-and-bridge.sh $PREFIX
