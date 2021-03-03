@@ -272,16 +272,6 @@ jobs:
           # the build if it doesn't receive output for more than its default
           # ten minutes.
           no_output_timeout: 30m
-      # Move the generated bundle to the location where we'll need it for the
-      # Gradle build, then put it in the CI cache. We'll get it from there in
-      # the publishing job, which runs on a Docker container optimized for
-      # Android work.
-      - run:
-          name: Ensure assets folder exists
-          command: mkdir -p gutenberg/packages/react-native-bridge/android/build/assets
-      - run:
-          name: Move bundle to assets folder
-          command: mv bundle/android/App.js gutenberg/packages/react-native-bridge/android/build/assets/index.android.bundle
       - run:
           name: Get cache id
           command: |
@@ -291,7 +281,7 @@ jobs:
           name: Cache React Native Android Bridge JS Bundle
           key: android-js-bundle-{{ checksum "cache_id" }}
           paths:
-            - gutenberg/packages/react-native-bridge/android/build/assets/index.android.bundle
+            - bundle/android/App.js
   android-publish-react-native-bridge:
     docker:
     - image: << pipeline.parameters.android-docker-image >>
@@ -335,7 +325,7 @@ jobs:
               exit 0
             fi
 
-            ./gradlew bintrayUpload -PbintrayVersion=$PREFIX
+            ./publish-aztec-and-bridge.sh $PREFIX
 
 workflows:
   gutenberg-mobile:
