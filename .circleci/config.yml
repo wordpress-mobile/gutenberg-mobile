@@ -384,9 +384,9 @@ workflows:
       - android-build-react-native-bridge:
           name: Build Android RN Bridge JS Bundle
           # requires: [ "Unblock Android React Native Bride Publishing to Bintray" ]
-      # - android-publish-react-native-bridge:
-          # name: Publish Android RN Bridge JS Bundle to Bintray
-          # requires: [ "Build Android RN Bridge JS Bundle" ]
+      - android-publish-react-native-bridge:
+          name: Publish Android RN Bridge JS Bundle to Bintray
+          requires: [ "Build Android RN Bridge JS Bundle" ]
 
   # ui-tests-full-scheduled:
   #   jobs:
