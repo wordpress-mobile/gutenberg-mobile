@@ -282,6 +282,7 @@ jobs:
           key: android-js-bundle-{{ checksum "cache_id" }}
           paths:
             - bundle/android/App.js
+            - node_modules/
   android-publish-react-native-bridge:
     docker:
     - image: << pipeline.parameters.android-docker-image >>
