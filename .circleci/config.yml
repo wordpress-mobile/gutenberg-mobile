@@ -273,6 +273,15 @@ jobs:
           # ten minutes.
           no_output_timeout: 30m
       - run:
+          name: npm Install for Gutenberg
+          command: |
+            cd gutenberg
+            npm install
+          # This command may take a long time, so prevent CircleCI from killing
+          # the build if it doesn't receive output for more than its default
+          # ten minutes.
+          no_output_timeout: 30m
+      - run:
           name: Get cache id
           command: |
             echo $CIRCLE_SHA1 > cache_id
@@ -282,7 +291,7 @@ jobs:
           key: android-js-bundle-{{ checksum "cache_id" }}
           paths:
             - bundle/android/App.js
-            - node_modules/
+            - gutenberg/node_modules/
   android-publish-react-native-bridge:
     docker:
     - image: << pipeline.parameters.android-docker-image >>
