@@ -60,6 +60,9 @@ build_tools_version="29.0.2"
 platform_version="28"
 yes | sudo $sdkmanager_bin --install "build-tools;$build_tools_version"
 yes | sudo $sdkmanager_bin --install "platforms;android-$platform_version"
+# Apparently, we also need platform version 29?
+# See https://app.circleci.com/pipelines/github/wordpress-mobile/gutenberg-mobile/10739/workflows/a96e43eb-6d64-490e-87ab-ef1f1df2eb1d/jobs/56631
+yes | sudo $sdkmanager_bin --install "platforms;android-29"
 
 # Accept the licenses
 yes | sudo $sdkmanager_bin --licenses
