@@ -2,6 +2,7 @@
 	path = gutenberg
 	url = ../../jhnstn/gutenberg.git
 	shallow = true
+  branch = try/inserter-block-search
 [submodule "jetpack"]
 	path = jetpack
 	url = ../../Automattic/jetpack.git
