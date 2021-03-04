@@ -56,8 +56,8 @@ sudo mv ./cmdline-tools $cmdline_tools_location
 sdkmanager_bin=$cmdline_tools_location/bin/sdkmanager
 
 # We need a specific version of the Android platform and build tools.
-build_tools_version="28.0.3"
-platform_version="29"
+build_tools_version="29.0.2"
+platform_version="28"
 yes | sudo $sdkmanager_bin --install "build-tools;$build_tools_version"
 yes | sudo $sdkmanager_bin --install "platforms;android-$platform_version"
 
