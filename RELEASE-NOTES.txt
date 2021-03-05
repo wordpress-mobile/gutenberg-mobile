@@ -1,6 +1,10 @@
 Unreleased
 ------
 
+1.49.0
+------
+* [**] Buttons block: added width setting. [https://github.com/WordPress/gutenberg/pull/28543]
+
 1.47.0
 ------
 * [*] Fixed block mover title wording for better clarity from 'Move block position' to 'Change block position'. [#3049]
