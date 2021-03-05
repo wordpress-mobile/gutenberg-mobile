@@ -1,7 +1,7 @@
 Unreleased
 ------
 
-1.49.0
+1.48.0
 ------
 * [**] Buttons block: added width setting. [https://github.com/WordPress/gutenberg/pull/28543]
 
