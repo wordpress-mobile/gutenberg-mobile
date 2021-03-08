@@ -37,7 +37,7 @@ const setJetpackData = ( {
 	return jetpackEditorInitialState;
 };
 
-export default ( jetpackState ) => {
+export default ( jetpackState, capabilities ) => {
 	if ( ! jetpackState.isJetpackActive ) {
 		return;
 	}
@@ -52,22 +52,8 @@ export default ( jetpackState ) => {
 		}
 	};
 
-	// Note on the use of setTimeout() here:
-	// We observed the settings may not be ready exactly when the native.render hooks get run but rather
-	// right after that execution cycle (because state hasn't changed yet). Hence, we're only checking for
-	// the actual settings to be loaded by using setTimeout without a delay parameter. This ensures the
-	// settings are loaded onto the store and we can use the core/block-editor selector by the time we do
-	// the actual check.
-
-	// eslint-disable-next-line @wordpress/react-no-unsafe-timeout
-	setTimeout( () => {
-		const capabilities = select( 'core/block-editor' ).getSettings(
-			'capabilities'
-		);
-
-		toggleBlock( capabilities.mediaFilesCollectionBlock, 'jetpack/story' );
-		toggleBlock( capabilities.contactInfoBlock, 'jetpack/contact-info' );
-	} );
+	toggleBlock( capabilities.mediaFilesCollectionBlock, 'jetpack/story' );
+	toggleBlock( capabilities.contactInfoBlock, 'jetpack/contact-info' );
 
 	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );
 
