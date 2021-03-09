@@ -270,8 +270,7 @@ jobs:
       - npm-install
       - run:
           name: Build JS Bundle
-          command: |
-            npm run bundle:android
+          command: npm run bundle:android
           # This command may take a long time, so prevent CircleCI from killing
           # the build if it doesn't receive output for more than its default
           # ten minutes.
@@ -330,9 +329,8 @@ jobs:
             elif [[ "$branch" != "trunk" && "$branch" != "develop" ]]; then
               # This happens on the first push of a new branch, when there
               # isn't a PR open for it yet.
-              echo "IGNORED WHILE DEVELOPING THE FEATURE - Running on a feature branch with no open PR: skipping Bintray upload"
-              # exit 0
-              VERSION="mokagio-ci-test-$CIRCLE_SHA1"
+              echo "Running on a feature branch with no open PR: skipping Bintray upload"
+              exit 0
             fi
 
             ./publish-aztec-and-bridge.sh $VERSION
