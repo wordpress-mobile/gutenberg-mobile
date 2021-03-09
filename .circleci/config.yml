@@ -253,7 +253,7 @@ jobs:
                 include_job_number_field: false
                 include_project_field: false
                 failure_message: ':red_circle: Scheduled tests failed on iOS device!'
-  android-build-react-native-bridge:
+  build-android-js-bundle:
     # This job builds the JS bundle that the Android react-navite-bridge
     # bridges and saves it in the CI cache to make it available to other jobs,
     # in particular the one building the AAR for binary distribution.
@@ -298,7 +298,7 @@ jobs:
       - checkout
       - checkout-submodules
       # Get the JS bundle from the CI cache.
-      # See `android-build-react-native-bridge` for details
+      # See `build-android-js-bundle` for details
       - run:
           name: Get cache id
           command: |
@@ -384,12 +384,12 @@ workflows:
           filters:
             branches:
               only: /^dependabot/submodules/.*/
-      - android-build-react-native-bridge:
-          name: Build Android RN Bridge JS Bundle
+      - build-android-js-bundle:
+          name: Build JS Bundle for Android RN Bridge
           requires: [ "Test Android" ]
       - android-publish-react-native-bridge:
-          name: Publish Android RN Bridge JS Bundle to Bintray
-          requires: [ "Build Android RN Bridge JS Bundle" ]
+          name: Publish Android RN Bridge to Bintray
+          requires: [ "Build JS Bundle for Android RN Bridge" ]
 
   ui-tests-full-scheduled:
     jobs:
