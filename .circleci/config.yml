@@ -254,6 +254,10 @@ jobs:
                 include_project_field: false
                 failure_message: ':red_circle: Scheduled tests failed on iOS device!'
   android-build-react-native-bridge:
+    # This job builds the JS bundle that the Android react-navite-bridge
+    # bridges and saves it in the CI cache to make it available to other jobs,
+    # in particular the one building the AAR for binary distribution.
+    #
     # Running on a Ubuntu machine to have more memory compared to the Docker +
     # Node image that CircleCI offers (circleci/node)
     #
@@ -281,9 +285,13 @@ jobs:
           name: Cache React Native Android Bridge JS Bundle
           key: android-js-bundle-{{ checksum "cache_id" }}
           paths:
+            # The build process for the react-navite-bridge requires the App.js
+            # bundle and also access to the node_modules folder.
             - bundle/android/App.js
             - gutenberg/node_modules/
   android-publish-react-native-bridge:
+    # This job gets the JS bundle from the cache and uses it to assemble the
+    # react-native-bridge Android AAR to upload for binary distribution.
     docker:
     - image: << pipeline.parameters.android-docker-image >>
     steps:
