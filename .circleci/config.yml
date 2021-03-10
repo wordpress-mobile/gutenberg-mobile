@@ -300,7 +300,11 @@ jobs:
               echo "Running on a feature branch with no open PR: skipping Bintray upload"
               # It would be good if there was a way to mark this job as skipped
               # from here, but I couldn't find one.
-              exit 0
+              #
+              # DEBUG
+              #
+              # exit 0
+              VERSION="mokagio-ci-test-$CIRCLE_SHA1-$(date "+%Y%m%d-%H%M%S")"
             else
               VERSION="$CIRCLE_SHA1"
             fi
