@@ -265,8 +265,11 @@ jobs:
     machine:
       image: << pipeline.parameters.linux-machine-image >>
     steps:
+      - checkout
+      - checkout-submodules
       - run:
-          name: Compute whether to run
+          name: Build React Native Bridge & Upload to Bintray
+          no_output_timeout: 30m
           command: |
             # We publish from PRs as well as the main branches to help
             # developers to iterate faster.
@@ -280,53 +283,37 @@ jobs:
             #
             # If we're on a different branch that has no open PR, we should
             # not build and exit early instead.
+            #
+            # Because of that requirement and CircleCI lack of support for
+            # sharing computed values between steps of a job or exit early from
+            # a job without failing it, we're left with running all of the
+            # commands into the same step.
             branch=$CIRCLE_BRANCH
             if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
               PR_NUMBER=$(basename $CIRCLE_PULL_REQUEST)
               # Making the assumption that $CIRCLE_SHA1 will always be
               # available.
-              export VERSION="$PR_NUMBER-$CIRCLE_SHA1"
+              VERSION="$PR_NUMBER-$CIRCLE_SHA1"
             elif [[ "$branch" != "trunk" && "$branch" != "develop" ]]; then
               # This happens on the first push of a new branch, when there
               # isn't a PR open for it yet.
               echo "Running on a feature branch with no open PR: skipping Bintray upload"
               # It would be good if there was a way to mark this job as skipped
               # from here, but I couldn't find one.
-              #
-              # DEBUG
-              #
-              # exit 0
-              export VERSION="mokagio-ci-test-$CIRCLE_SHA1-$(date "+%Y%m%d-%H%M%S")"
+              exit 0
             else
-              export VERSION="$CIRCLE_SHA1"
+              VERSION="$CIRCLE_SHA1"
             fi
 
-            echo $VERSION
-      - run:
-          name: Debug – echo $VERSION
-          command: |
-            echo '~~~'
-            echo $VERSION
-            echo '~~~'
-      - checkout
-      - checkout-submodules
-      - npm-install
-      - run:
-          name: Build JS Bundle
-          command: npm run bundle:android
-          # This command may take a long time, so prevent CircleCI from killing
-          # the build if it doesn't receive output for more than its default
-          # ten minutes.
-          no_output_timeout: 30m
-      - run:
-          name: Setup Android Tooling
-          command: .circleci/setup-android-on-ubuntu.sh
-      - run:
-          name: Build React Native Bridge & Upload to Bintray
-          environment:
-             # This comes from the setup-android-on-ubuntu.sh script
-             ANDROID_SDK_ROOT: /usr/lib/android-sdk
-          command: |
+            .circleci/setup-android-on-ubuntu.sh
+            # This value is set in the setup script, but I'm not sure whether
+            # it's available after executing it
+            export ANDROID_SDK_ROOT=/usr/lib/android-sdk
+
+            npm ci
+
+            npm run bundle:android
+
             cd gutenberg/packages/react-native-bridge/android
 
             ./publish-aztec-and-bridge.sh $VERSION
