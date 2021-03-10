@@ -300,9 +300,14 @@ jobs:
             else
               export VERSION="$CIRCLE_SHA1"
             fi
+
+            echo $VERSION
       - run:
           name: Debug – echo $VERSION
-          command: echo $VERSION
+          command: |
+            echo '~~~'
+            echo $VERSION
+            echo '~~~'
       - checkout
       - checkout-submodules
       - npm-install
