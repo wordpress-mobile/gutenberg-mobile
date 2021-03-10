@@ -318,8 +318,7 @@ jobs:
             # https://github.com/Automattic/bintray-garbage-collector/
             #
             # If $VERSION is not set, that is, if we're not on a PR but a merge
-            # commit on develop or trunk, the version will be the value from
-            # the source code.
+            # commit on develop or trunk, the version will be the commit SHA1.
             branch=$CIRCLE_BRANCH
             if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
               PR_NUMBER=$(basename $CIRCLE_PULL_REQUEST)
@@ -331,6 +330,8 @@ jobs:
               # isn't a PR open for it yet.
               echo "Running on a feature branch with no open PR: skipping Bintray upload"
               exit 0
+            else
+              VERSION="$CIRCLE_SHA1"
             fi
 
             ./publish-aztec-and-bridge.sh $VERSION
