@@ -3,6 +3,10 @@ Unreleased
 
 1.47.0
 ------
+* [**] Add `replaceBlock` method to iOS bridge delegate with a string to match the clientID and the contents to replace. [#3246] 
+
+1.47.0
+------
 * [*] Fixed block mover title wording for better clarity from 'Move block position' to 'Change block position'. [#3049]
 * [**] Add support for setting Cover block focal point. [#3028]
 
