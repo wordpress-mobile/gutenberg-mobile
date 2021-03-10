@@ -309,8 +309,6 @@ jobs:
       - run:
           name: Build React Native Bridge & Upload to Bintray
           command: |
-            cd gutenberg/packages/react-native-bridge/android
-
             # Use a different versioning style for builds from PRs to allow
             # developers to iterate faster.
             #
@@ -333,6 +331,8 @@ jobs:
             else
               VERSION="$CIRCLE_SHA1"
             fi
+
+            cd gutenberg/packages/react-native-bridge/android
 
             ./publish-aztec-and-bridge.sh $VERSION
 
