@@ -5,6 +5,14 @@ Unreleased
 ------
 * [**] Buttons block: added width setting. [https://github.com/WordPress/gutenberg/pull/28543]
 
+1.47.2
+------
+* [**] Add `replaceBlock` method to iOS bridge delegate with a string to match the clientID and the contents to replace. [#3246] 
+
+1.47.1
+------
+* [**] Reduce the number of items per page when fetching reusable blocks to prevent a crash. [#3227]
+
 1.47.0
 ------
 * [*] Fixed block mover title wording for better clarity from 'Move block position' to 'Change block position'. [#3049]
