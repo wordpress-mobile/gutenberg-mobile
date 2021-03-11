@@ -1,7 +1,7 @@
 Unreleased
 ------
 
-1.47.0
+1.47.2
 ------
 * [**] Add `replaceBlock` method to iOS bridge delegate with a string to match the clientID and the contents to replace. [#3246] 
 
