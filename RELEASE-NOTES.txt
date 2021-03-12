@@ -1,5 +1,6 @@
 Unreleased
 ------
+* [***] a11y: Screenreader improvements for the UnitControl component [https://github.com/WordPress/gutenberg/pull/29741]
 
 1.48.0
 ------
