@@ -1,5 +1,6 @@
 Unreleased
 ------
+* [*] Remove the cancel button from settings options (Android only) [https://github.com/WordPress/gutenberg/pull/29599]
 
 1.48.0
 ------
