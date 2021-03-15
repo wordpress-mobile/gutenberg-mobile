@@ -9,6 +9,7 @@
     <string name="gutenberg_native_add_block_after" tools:ignore="UnusedResources">Add Block After</string>
     <string name="gutenberg_native_add_block_before" tools:ignore="UnusedResources">Add Block Before</string>
     <string name="gutenberg_native_add_block_here" tools:ignore="UnusedResources">ADD BLOCK HERE</string>
+    <string name="gutenberg_native_add_button_text" tools:ignore="UnusedResources">Add button text</string>
     <string name="gutenberg_native_add_image" tools:ignore="UnusedResources">ADD IMAGE</string>
     <string name="gutenberg_native_add_image_or_video" tools:ignore="UnusedResources">ADD IMAGE OR VIDEO</string>
     <string name="gutenberg_native_add_paragraph_block" tools:ignore="UnusedResources">Add paragraph block</string>
@@ -40,7 +41,12 @@
     <!-- translators: displayed right after the block is removed. -->
     <string name="gutenberg_native_block_removed" tools:ignore="UnusedResources">Block removed</string>
     <string name="gutenberg_native_block_settings" tools:ignore="UnusedResources">Block settings</string>
+    <string name="gutenberg_native_buttongroup" tools:ignore="UnusedResources">ButtonGroup</string>
     <string name="gutenberg_native_change_block_position" tools:ignore="UnusedResources">Change block position</string>
+    <!-- translators: Changes discarded notice message. %s: The reusable block name -->
+    <string name="gutenberg_native_changes_made_to_s_discarded" tools:ignore="UnusedResources">Changes made to %s discarded</string>
+    <!-- translators: Changes saved notice message. %s: The reusable block name -->
+    <string name="gutenberg_native_changes_made_to_s_saved" tools:ignore="UnusedResources">Changes made to %s saved</string>
     <string name="gutenberg_native_choose_a_file" tools:ignore="UnusedResources">CHOOSE A FILE</string>
     <string name="gutenberg_native_choose_audio" tools:ignore="UnusedResources">Choose audio</string>
     <string name="gutenberg_native_choose_file" tools:ignore="UnusedResources">Choose file</string>
@@ -58,6 +64,7 @@
     <string name="gutenberg_native_customize" tools:ignore="UnusedResources">CUSTOMIZE</string>
     <string name="gutenberg_native_customize_gradient" tools:ignore="UnusedResources">Customize Gradient</string>
     <string name="gutenberg_native_cut_block" tools:ignore="UnusedResources">Cut block</string>
+    <string name="gutenberg_native_discard" tools:ignore="UnusedResources">Discard</string>
     <string name="gutenberg_native_dismiss" tools:ignore="UnusedResources">Dismiss</string>
     <string name="gutenberg_native_double_tap_to_add_a_block" tools:ignore="UnusedResources">Double tap to add a block</string>
     <!-- translators: accessibility text (hint for focusing a slider) -->
@@ -110,7 +117,6 @@
     <string name="gutenberg_native_image_link_url" tools:ignore="UnusedResources">Image Link URL</string>
     <string name="gutenberg_native_link_settings" tools:ignore="UnusedResources">Link Settings</string>
     <string name="gutenberg_native_link_to" tools:ignore="UnusedResources">Link To</string>
-    <string name="gutenberg_native_lock_icon" tools:ignore="UnusedResources">Lock icon</string>
     <string name="gutenberg_native_move_block_down" tools:ignore="UnusedResources">Move block down</string>
     <!-- translators: accessibility text. %1: current block position (number). %2: next block position (number) -->
     <string name="gutenberg_native_move_block_down_from_row_1_s_to_row_2_s" tools:ignore="UnusedResources">Move block down from row %1$s to row %2$s</string>
@@ -150,6 +156,8 @@
     <string name="gutenberg_native_page_title_s" tools:ignore="UnusedResources">Page title. %s</string>
     <string name="gutenberg_native_paste_block_after" tools:ignore="UnusedResources">Paste block after</string>
     <string name="gutenberg_native_paste_url" tools:ignore="UnusedResources">Paste URL</string>
+    <string name="gutenberg_native_plugin_sidebar_more_menu_title" tools:ignore="UnusedResources">Plugin sidebar more menu title</string>
+    <string name="gutenberg_native_plugin_sidebar_title" tools:ignore="UnusedResources">Plugin sidebar title</string>
     <!-- translators: accessibility text. empty post title. -->
     <string name="gutenberg_native_post_title_empty" tools:ignore="UnusedResources">Post title. Empty</string>
     <!-- translators: accessibility text. %s: text content of the post title. -->
@@ -164,14 +172,15 @@
     <string name="gutenberg_native_replace_image_or_video" tools:ignore="UnusedResources">Replace image or video</string>
     <string name="gutenberg_native_replace_video" tools:ignore="UnusedResources">Replace video</string>
     <string name="gutenberg_native_reset_block" tools:ignore="UnusedResources">Reset Block</string>
-    <string name="gutenberg_native_reusable_blocks_aren_t_editable_on_wordpress_for_android" tools:ignore="UnusedResources">Reusable blocks aren\'t editable on WordPress for Android</string>
-    <string name="gutenberg_native_reusable_blocks_aren_t_editable_on_wordpress_for_ios" tools:ignore="UnusedResources">Reusable blocks aren\'t editable on WordPress for iOS</string>
+    <string name="gutenberg_native_reusable_block_settings" tools:ignore="UnusedResources">Reusable block settings</string>
     <!-- translators: accessibility text for the media block empty state. %s: media type -->
     <string name="gutenberg_native_s_block_empty" tools:ignore="UnusedResources">%s block. Empty</string>
     <!-- translators: %s: block title e.g: "Paragraph". -->
     <string name="gutenberg_native_s_block_options" tools:ignore="UnusedResources">%s block options</string>
     <!-- translators: accessibility text for blocks with invalid content. %d: localized block title -->
     <string name="gutenberg_native_s_block_this_block_has_invalid_content" tools:ignore="UnusedResources">%s block. This block has invalid content</string>
+    <!-- translators: Convert to regular blocks notice message. %s: The reusable block name -->
+    <string name="gutenberg_native_s_converted_to_regular_blocks" tools:ignore="UnusedResources">\'\'%s\' converted to regular blocks</string>
     <!-- translators: Missing block alert title. %s: The localized block name -->
     <string name="gutenberg_native_s_is_not_fully_supported" tools:ignore="UnusedResources">\'%s\' is not fully–supported</string>
     <string name="gutenberg_native_scrollable_block_menu_closed" tools:ignore="UnusedResources">Scrollable block menu closed.</string>
@@ -183,7 +192,6 @@
     <string name="gutenberg_native_show_post_content" tools:ignore="UnusedResources">Show post content</string>
     <!-- translators: Checkbox toggle label -->
     <string name="gutenberg_native_show_section" tools:ignore="UnusedResources">Show section</string>
-    <string name="gutenberg_native_sidebar_title_plugin" tools:ignore="UnusedResources">Sidebar title plugin</string>
     <string name="gutenberg_native_start_writing" tools:ignore="UnusedResources">Start writing…</string>
     <string name="gutenberg_native_success_message" tools:ignore="UnusedResources">Success Message</string>
     <string name="gutenberg_native_take_a_photo" tools:ignore="UnusedResources">Take a Photo</string>
@@ -194,8 +202,11 @@
     <string name="gutenberg_native_title" tools:ignore="UnusedResources">Title:</string>
     <string name="gutenberg_native_translate" tools:ignore="UnusedResources">Translate</string>
     <string name="gutenberg_native_ungroup" tools:ignore="UnusedResources">Ungroup</string>
+    <!-- translators: Unsaved changes alert title. -->
+    <string name="gutenberg_native_unsaved_changes" tools:ignore="UnusedResources">Unsaved changes</string>
     <string name="gutenberg_native_unsupported" tools:ignore="UnusedResources">Unsupported</string>
     <string name="gutenberg_native_updates_the_title" tools:ignore="UnusedResources">Updates the title.</string>
+    <string name="gutenberg_native_updates_to_block_name_are_applied_when_changes_to_the_block_are_s" tools:ignore="UnusedResources">Updates to block name are applied when changes to the block are saved</string>
     <string name="gutenberg_native_uploading" tools:ignore="UnusedResources">Uploading…</string>
     <!-- translators: accessibility text. Empty video caption. -->
     <string name="gutenberg_native_video_caption_empty" tools:ignore="UnusedResources">Video caption. Empty</string>
@@ -204,4 +215,6 @@
     <string name="gutenberg_native_warning_message" tools:ignore="UnusedResources">Warning Message</string>
     <string name="gutenberg_native_we_are_working_hard_to_add_more_blocks_with_each_release" tools:ignore="UnusedResources">We are working hard to add more blocks with each release.</string>
     <string name="gutenberg_native_wordpress_media_library" tools:ignore="UnusedResources">WordPress Media Library</string>
+    <!-- translators: Unsaved changes alert message. %s: The reusable block name -->
+    <string name="gutenberg_native_would_you_like_to_save_or_discard_the_changes_in_s" tools:ignore="UnusedResources">Would you like to save or discard the changes in %s?</string>
 </resources>
