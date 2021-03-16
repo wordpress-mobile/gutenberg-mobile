@@ -319,7 +319,9 @@ jobs:
               # Making the assumption that $CIRCLE_SHA1 will always be
               # available.
               VERSION="$PR_NUMBER-$CIRCLE_SHA1"
-            elif [[ "$branch" != "develop" ]]; then
+            elif [[ "$branch" == "develop" ]]; then
+              VERSION="develop-$CIRCLE_SHA1"
+            else
               # This happens on the first push of a new branch, when there
               # isn't a PR open for it yet.
               echo "Running on a feature branch with no open PR: skipping Bintray upload"
@@ -330,8 +332,6 @@ jobs:
               #
               # exit 0
               VERSION="mokagio-ci-test-$CIRCLE_SHA1-$(date "+%Y%m%d-%H%M%S")"
-            else
-              VERSION="$CIRCLE_SHA1"
             fi
 
             .circleci/setup-android-on-ubuntu.sh
