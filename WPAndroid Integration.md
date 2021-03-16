@@ -56,7 +56,7 @@ There are a few different ways to do this:
 2. Merge a PR to `develop` which will be published as `<develop>-<commit full SHA1>`
 3. Create a new tag which will be published as `<tag name>`
 
-**How it works:**
+#### How it works:
 
 CI will run the following commands:
 
@@ -75,7 +75,7 @@ We shouldn't commit a manually deployed version to WPAndroid's `develop` because
 - Run `npm run bundle:android` so the JS bundle is created
 - Run `publish-aztec-and-bridge.sh` script in `react-native-bridge`, with the version name as its argument. i.e `./gutenberg/packages/react-native-bridge/android/publish-aztec-and-bridge.sh locally-built-by-<your_name>-<commit full SHA1>`
 
-**How it works:**
+#### How it works:
 
 Besides checking a few things, `publish-aztec-and-bridge.sh` script will clean the project, copy the bundled JS file into its assets, publish `react-native-aztec` and use that version to build and publish `react-native-bridge`.
 
