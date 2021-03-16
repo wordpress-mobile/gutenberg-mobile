@@ -283,7 +283,8 @@ jobs:
               # This happens on the first push of a new branch, when there
               # isn't a PR open for it yet.
               echo "Build initiated from a feature branch with no pull request: aborting"
-              circleci-agent step halt
+              # circleci-agent step halt
+              echo "DEBUG – Not aborting in this instance"
             else
               echo "Build initiated on develop: proceeding..."
             fi
