@@ -25,10 +25,16 @@ It'll also expect the metro server to be running to fetch the JS bundle.
 
 ### Work with local gutenberg-mobile checkout
 
+From your gutenberg-mobile checkout:
+
 - Make sure you run `npm install` or `npm ci`
+- Run metro server with `npm run start:reset`
+
+From your WordPress-Android checkout:
+
 - Copy [local-builds.gradle-example](https://github.com/wordpress-mobile/WordPress-Android/blob/develop/local-builds.gradle-example) renaming it to `local-builds.gradle`
 - Update `localGutenbergMobilePath`to your local `gutenberg-mobile`checkout
-- Run metro server with `npm run start:reset`
+- Run the project
 
 #### How it works:
 
@@ -67,7 +73,7 @@ We shouldn't commit a manually deployed version to WPAndroid's `develop` because
 
 - Make sure you run `npm install` or `npm ci` first
 - Run `npm run bundle:android` so the JS bundle is created
-- Run `publish-aztec-and-bridge.sh` script in `react-native-bridge`, giving it a version name such as `locally-built-by-<your_name>-<commit full SHA1>`
+- Run `publish-aztec-and-bridge.sh` script in `react-native-bridge`, with the version name as its argument. i.e `./gutenberg/packages/react-native-bridge/android/publish-aztec-and-bridge.sh locally-built-by-<your_name>-<commit full SHA1>`
 
 **How it works:**
 
@@ -98,7 +104,7 @@ Assuming that there is no open WPAndroid PR yet:
 
 ### How to share a WIP WPAndroid APK
 
-1. Open a `gutenberg-mobile` PR which will [publish a new version](#deploy-a-new-version-of-react-native-bridge-from-ci) or [manually publish a new version](#manually-deploy-a-new-version-of-react-native-bridge)
+1. Either (a) open a `gutenberg-mobile` PR which will [publish a new version](#deploy-a-new-version-of-react-native-bridge-from-ci) or (b) [manually publish a new version](#manually-deploy-a-new-version-of-react-native-bridge)
 2. Open a WPAndroid PR [updating the binary version](#update-wpandroids-binary-version)
 3. Peril will publish a comment to the WPAndroid PR with a link to the APK
 
@@ -110,4 +116,4 @@ Alternatively, once the `react-native-bridge` version is published, we can local
 ### How to checkout gutenberg-mobile to deployed binary version
 
 Whenever the CI publishes `react-native-bridge`, it will either include the full commit hash or the tag in its name.
-So, we can checkout simply checkout the commit has or the tag.
+So, we can checkout simply checkout the commit hash or the tag.
