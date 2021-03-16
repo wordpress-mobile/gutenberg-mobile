@@ -1,8 +1,14 @@
 ### Summary
 
-WPAndroid by default integrates `react-native-bridge` as a binary dependency that's fetched from a remote maven repo. The CI in this repo will deploy a new version each time a commit is pushed to `develop` or an open PR, as well as each time a tag is created. This is the only required dependency. Whenever a new version is deployed, we can simply update `ext.gutenbergMobileVersion` in [build.gradle](https://github.com/wordpress-mobile/WordPress-Android/blob/develop/build.gradle).
+WPAndroid by default integrates `react-native-bridge` as a binary dependency that's fetched from a remote maven repo.
+The CI in this repo will deploy a new version each time a commit is pushed to `develop` or an open PR, as well as each time a tag is created.
+This is the only required dependency.
+Whenever a new version is deployed, we can simply update `ext.gutenbergMobileVersion` in [build.gradle](https://github.com/wordpress-mobile/WordPress-Android/blob/develop/build.gradle).
 
-During development, we can use composite builds and dependency substitution to point WPAndroid to our local checkout of `gutenberg-mobile`. To do this, we need to copy the [local-builds.gradle-example file](https://github.com/wordpress-mobile/WordPress-Android/blob/develop/local-builds.gradle-example) in WPAndroid renaming it to `local-builds.gradle` and change the `localGutenbergMobilePath` value. Building the project as such will make WPAndroid build the source code for `react-native-bridge`, `react-native-aztec` and other sublibraries from the locally checked out folder. It'll also expect the metro server to be running to fetch the JS bundle.
+During development, we can use composite builds and dependency substitution to point WPAndroid to our local checkout of `gutenberg-mobile`.
+To do this, we need to copy the [local-builds.gradle-example file](https://github.com/wordpress-mobile/WordPress-Android/blob/develop/local-builds.gradle-example) in WPAndroid renaming it to `local-builds.gradle` and change the `localGutenbergMobilePath` value.
+Building the project as such will make WPAndroid build the source code for `react-native-bridge`, `react-native-aztec` and other sublibraries from the locally checked out folder.
+It'll also expect the metro server to be running to fetch the JS bundle.
 
 - [Work with local gutenberg-mobile checkout](#work-with-local-gutenberg-mobile-checkout)
 - [Deploy a new version of `react-native-bridge` from CI](#deploy-a-new-version-of-react-native-bridge-from-ci)
@@ -93,10 +99,12 @@ Assuming that there is no open WPAndroid PR yet:
 2. Open a WPAndroid PR [updating the binary version](#update-wpandroids-binary-version)
 3. Peril will publish a comment to the WPAndroid PR with a link to the APK
 
-Alternatively, once the `react-native-bridge` version is published, we can locally create the APK. **Note that there is no way to use composite build to create a WPAndroid APK that can be shared. This is because composite build only works with the local metro server.**
+Alternatively, once the `react-native-bridge` version is published, we can locally create the APK.
+**Note that there is no way to use composite build to create a WPAndroid APK that can be shared. This is because composite build only works with the local metro server.**
 
 ---
 
 ### How to checkout gutenberg-mobile to deployed binary version
 
-Whenever the CI publishes `react-native-bridge`, it will either include the full commit hash or the tag in its name. So, we can checkout simply checkout the commit has or the tag.
+Whenever the CI publishes `react-native-bridge`, it will either include the full commit hash or the tag in its name.
+So, we can checkout simply checkout the commit has or the tag.
