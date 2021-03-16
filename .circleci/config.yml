@@ -265,6 +265,28 @@ jobs:
     machine:
       image: << pipeline.parameters.linux-machine-image >>
     steps:
+      - run:
+          name: Evaluate whether to run
+          command: |
+            # This is a partial duplication of the logic to compute the version
+            # to use for the AAR from below. It's useful to have it here
+            # because there are conditions under which we shouldn't run the job
+            # that can't be captured in a CircleCI filter. Exiting here saves a
+            # non-trivial amount of CI time because of how heavy the repo is
+            # and how time consuming running `npm ci` is.
+            #
+            # TODO: handle tags!
+            branch=$CIRCLE_BRANCH
+            if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
+              echo "Build initiated from a branch with a pull request: proceeding..."
+            elif [[ "$branch" != "develop" ]]; then
+              # This happens on the first push of a new branch, when there
+              # isn't a PR open for it yet.
+              echo "Build initiated from a feature branch with no pull request: aborting"
+              circleci-agent step halt
+            else
+              echo "Build initiated on develop: proceeding..."
+            fi
       - checkout
       - checkout-submodules
       - run:
