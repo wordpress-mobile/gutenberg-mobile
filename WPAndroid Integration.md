@@ -1,3 +1,5 @@
+# WordPress Android Integration Guide
+
 ### Summary
 
 WPAndroid by default integrates `react-native-bridge` as a binary dependency that's fetched from a remote maven repo.
@@ -25,10 +27,10 @@ It'll also expect the metro server to be running to fetch the JS bundle.
 
 - Make sure you run `npm install` or `npm ci`
 - Copy [local-builds.gradle-example](https://github.com/wordpress-mobile/WordPress-Android/blob/develop/local-builds.gradle-example) renaming it to `local-builds.gradle`
-- Update `localGutenbergMobilePath`
+- Update `localGutenbergMobilePath`to your local `gutenberg-mobile`checkout
 - Run metro server with `npm run start:reset`
 
-**How it works:**
+#### How it works:
 
 When [settings.gradle](https://github.com/wordpress-mobile/WordPress-Android/blob/develop/settings.gradle) finds `localGutenbergMobilePath` in `local-builds.gradle`, it'll substitute the below binary dependency with the local folder:
 
@@ -36,7 +38,7 @@ When [settings.gradle](https://github.com/wordpress-mobile/WordPress-Android/blo
 implementation "$rootProject.gradle.ext.gutenbergMobileBinaryPath:$rootProject.ext.gutenbergMobileVersion"
 ```
 
-`react-native-bridge` project is setup to include all the other projects, so no other action is necessary.
+`react-native-bridge` is setup to include all the other projects, so no other action is necessary.
 
 ---
 
@@ -45,14 +47,14 @@ implementation "$rootProject.gradle.ext.gutenbergMobileBinaryPath:$rootProject.e
 There are a few different ways to do this:
 
 1. Open a new PR or push a new commit to an open PR which will be published as `<PR number>-<commit full SHA1>`
-2. Merge a PR to `develop` which will be published as `<PR number>-<commit full SHA1>`
+2. Merge a PR to `develop` which will be published as `<develop>-<commit full SHA1>`
 3. Create a new tag which will be published as `<tag name>`
 
 **How it works:**
 
 CI will run the following commands:
 
-- `npm install`
+- `npm ci`
 - `npm run bundle:android`
 - `gutenberg/packages/react-native-bridge/android/publish-aztec-and-bridge.sh <version>`
 
@@ -60,7 +62,8 @@ CI will run the following commands:
 
 ### Manually deploy a new version of `react-native-bridge`
 
-_**IMPORTANT:** This should only be used for testing and a version deployed as such shouldn't be merged to WPAndroid's `develop`. This is because we'd bypass the guarantees CI would otherwise give us._
+_**IMPORTANT:** This should only be used for testing.
+We shouldn't commit a manually deployed version to WPAndroid's `develop` because the process bypasses the guarantees CI would otherwise give us._
 
 - Make sure you run `npm install` or `npm ci` first
 - Run `npm run bundle:android` so the JS bundle is created
@@ -93,7 +96,7 @@ Assuming that there is no open WPAndroid PR yet:
 
 ---
 
-### How to share WIP WPAndroid APK
+### How to share a WIP WPAndroid APK
 
 1. Open a `gutenberg-mobile` PR which will [publish a new version](#deploy-a-new-version-of-react-native-bridge-from-ci) or [manually publish a new version](#manually-deploy-a-new-version-of-react-native-bridge)
 2. Open a WPAndroid PR [updating the binary version](#update-wpandroids-binary-version)
