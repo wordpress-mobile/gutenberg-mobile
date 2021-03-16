@@ -1,6 +1,8 @@
 Unreleased
 ------
 
+* [**] Block editor: Fixed a bug which affecting non-English locales where user-facing labels were not showing up in the correct language.
+
 1.48.0
 ------
 * [**] Buttons block: added width setting. [https://github.com/WordPress/gutenberg/pull/28543]
