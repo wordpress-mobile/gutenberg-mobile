@@ -276,6 +276,11 @@ jobs:
             # and how time consuming running `npm ci` is.
             #
             # TODO: handle tags!
+            echo "tag $CIRCLE_TAG"
+            echo "branch $CIRCLE_BRANCH"
+            echo "pr $CIRCLE_PULL_REQUEST"
+            circleci-agent step halt
+
             branch=$CIRCLE_BRANCH
             if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
               echo "Build initiated from a branch with a pull request: proceeding..."
@@ -396,6 +401,13 @@ workflows:
       #         only: /^dependabot/submodules/.*/
       - android-build-and-publish-react-native-bridge:
           name: Build Android RN Bridge & Publish to Bintray
+          filters:
+            branches:
+              # Don't run on trunk, otherwise, run on every other branch
+              ignore: trunk
+            tags:
+              # Run for every tag
+              only: /.*/
 
   ui-tests-full-scheduled:
     jobs:
