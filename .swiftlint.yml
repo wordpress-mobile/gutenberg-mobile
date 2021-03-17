@@ -1,0 +1,2 @@
+excluded: # To avoid running the localization_comment rule
+  - bundle
