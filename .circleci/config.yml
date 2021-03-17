@@ -291,23 +291,23 @@ jobs:
               echo "Build initiated from a tag: proceeding..."
             fi
 
-            if [[ -z "${CIRCLE_TAG+x}" ]]; then
-              fi [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
-                PR_NUMBER=$(basename $CIRCLE_PULL_REQUEST)
-                # $CIRCLE_SHA1 should always be available.
-                VERSION="$PR_NUMBER-$CIRCLE_SHA1"
-              elif [[ $CIRCLE_BRANCH == "develop" ]]; then
-                VERSION="$CIRCLE_BRANCH-$CIRCLE_SHA1"
-              else
-                # This happens on the first push of a new branch, when there
-                # isn't a PR open for it yet.
-                echo "Running on a feature branch with no open PR: this should never happen."
-                # exit 1
-                VERSION="mokagio-ci-test-$CIRCLE_SHA1-$(date "+%Y%m%d-%H%M%S")"
-              fi
-            else
-              VERSION=$CIRCLE_TAG
-            fi
+            # if [[ -z "${CIRCLE_TAG+x}" ]]; then
+            #   fi [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
+            #     PR_NUMBER=$(basename $CIRCLE_PULL_REQUEST)
+            #     # $CIRCLE_SHA1 should always be available.
+            #     VERSION="$PR_NUMBER-$CIRCLE_SHA1"
+            #   elif [[ $CIRCLE_BRANCH == "develop" ]]; then
+            #     VERSION="$CIRCLE_BRANCH-$CIRCLE_SHA1"
+            #   else
+            #     # This happens on the first push of a new branch, when there
+            #     # isn't a PR open for it yet.
+            #     echo "Running on a feature branch with no open PR: this should never happen."
+            #     # exit 1
+            #     VERSION="mokagio-ci-test-$CIRCLE_SHA1-$(date "+%Y%m%d-%H%M%S")"
+            #   fi
+            # else
+            #   VERSION=$CIRCLE_TAG
+            # fi
 
             echo "version $VERSION"
             circleci-agent step halt
