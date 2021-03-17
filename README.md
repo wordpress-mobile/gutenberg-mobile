@@ -97,7 +97,7 @@ Although you're not required to use Visual Studio Code for developing gutenberg-
 
 When you first open the project in Visual Studio, you will be prompted to install some recommended extensions. This will help with some things like type checking and debugging.
 
-![Prompt to install recommended extensions](images/recommended-extensions.png)
+![Prompt to install recommended extensions](https://github.com/WordPress/gutenberg/blob/7532a485b400f86638145b71f94f6f717e5add25/packages/react-native-editor/images/recommended-extensions.png)
 
 One of the extensions we are using is the [React Native Tools](https://marketplace.visualstudio.com/items?itemName=vsmobile.vscode-react-native). This allows you to run the packager from VSCode or launch the application on iOS or Android. It also adds some debug configurations so you can set breakpoints and debug the application directly from VSCode. Take a look at the [extension documentation](https://marketplace.visualstudio.com/items?itemName=vsmobile.vscode-react-native) for more details.
 
