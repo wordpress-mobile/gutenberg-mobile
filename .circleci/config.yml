@@ -274,20 +274,14 @@ jobs:
             # that can't be captured in a CircleCI filter. Exiting here saves a
             # non-trivial amount of CI time because of how heavy the repo is
             # and how time consuming running `npm ci` is.
-            #
-            # TODO: handle tags!
-            echo "tag $CIRCLE_TAG"
-            echo "branch $CIRCLE_BRANCH"
-            echo "pr $CIRCLE_PULL_REQUEST"
-            circleci-agent step halt
-
-            branch=$CIRCLE_BRANCH
-            if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
+            if [[ -z ${CIRCLE_TAG+x} ]]; then
+              echo "Build initiated from a tag: proceeding..."
+            elif [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
               echo "Build initiated from a branch with a pull request: proceeding..."
-            elif [[ "$branch" != "develop" ]]; then
+            elif [[ $CIRCLE_BRANCH != "develop" ]]; then
               # This happens on the first push of a new branch, when there
               # isn't a PR open for it yet.
-              echo "Build initiated from a feature branch with no pull request: aborting"
+              echo "Build initiated from a feature branch with no pull request: aborting."
               # circleci-agent step halt
               echo "DEBUG – Not aborting in this instance"
             else
@@ -317,14 +311,14 @@ jobs:
             # a job without failing it, we're left with running all of the
             # commands into the same step.
             #
-            # TODO: Handle tags!
-            branch=$CIRCLE_BRANCH
-            if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
+            if [[ -z "${CIRCLE_TAG+x}" ]]; then
+              VERSION=$CIRCLE_TAG
+            elif [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
               PR_NUMBER=$(basename $CIRCLE_PULL_REQUEST)
               # Making the assumption that $CIRCLE_SHA1 will always be
               # available.
               VERSION="$PR_NUMBER-$CIRCLE_SHA1"
-            elif [[ "$branch" == "develop" ]]; then
+            elif [[ $CIRCLE_BRANCH == "develop" ]]; then
               VERSION="develop-$CIRCLE_SHA1"
             else
               # This happens on the first push of a new branch, when there
