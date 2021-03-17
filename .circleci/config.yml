@@ -253,85 +253,102 @@ jobs:
                 include_job_number_field: false
                 include_project_field: false
                 failure_message: ':red_circle: Scheduled tests failed on iOS device!'
-  build-android-js-bundle:
-    # This job builds the JS bundle that the Android react-navite-bridge
-    # bridges and saves it in the CI cache to make it available to other jobs,
-    # in particular the one building the AAR for binary distribution.
+  android-build-and-publish-react-native-bridge:
+    # This job builds the JS bunle required by the Android version of the
+    # react-native-bridge package, builds the AAR for that package, and uploads
+    # it to Bintray.
     #
     # Running on a Ubuntu machine to have more memory compared to the Docker +
-    # Node image that CircleCI offers (circleci/node)
+    # Node or Docker + Android images that CircleCI offers (circleci/node)
+    #
+    # Also running all in one job so that we can bail out early under cetrain
+    # conditions and save CI cycles.
     #
     # See: https://github.com/wordpress-mobile/gutenberg-mobile/pull/3038#issuecomment-765334675
     machine:
       image: << pipeline.parameters.linux-machine-image >>
     steps:
+      - run:
+          name: Evaluate whether to run
+          command: |
+            # This is a partial duplication of the logic to compute the version
+            # to use for the AAR from below. It's useful to have it here
+            # because there are conditions under which we shouldn't run the job
+            # that can't be captured in a CircleCI filter.
+            #
+            # Exiting here saves a non-trivial amount of CI time because of how
+            # heavy the repo is to checkout (it takes at least 1 minute) and
+            # how time consuming running `npm ci` is.
+            if [[ -z ${CIRCLE_TAG+x} ]]; then
+              if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
+                echo "Build initiated from a branch with a pull request: proceeding..."
+              elif [[ $CIRCLE_BRANCH == "develop" ]]; then
+                echo "Build initiated on $CIRCLE_BRANCH: proceeding..."
+              else
+                # We end up here on the first push of a new branch, when there
+                # isn't a PR open for it yet.
+                echo "Build initiated from a feature branch with no pull request: aborting."
+                circleci-agent step halt
+              fi
+            else
+              echo "Build initiated from a tag: proceeding..."
+            fi
       - checkout
       - checkout-submodules
+      - run:
+          # Setting up Android before fetching the Node dependencies because
+          # this step is faster, so if it fails we'll learn about it sooner and
+          # avoid wasting cycles.
+          name: Setup Android Tooling
+          command: .circleci/setup-android-on-ubuntu.sh
       - npm-install
       - run:
-          name: Build JS Bundle
+          name: Build JavaScript Bundle
           command: npm run bundle:android
-          # This command may take a long time, so prevent CircleCI from killing
-          # the build if it doesn't receive output for more than its default
-          # ten minutes.
-          no_output_timeout: 30m
-      - run:
-          name: Get cache id
-          command: |
-            echo $CIRCLE_SHA1 > cache_id
-            cat cache_id
-      - save_cache:
-          name: Cache React Native Android Bridge JS Bundle
-          key: android-js-bundle-{{ checksum "cache_id" }}
-          paths:
-            # The build process for the react-navite-bridge requires the App.js
-            # bundle and also access to the node_modules folder.
-            - bundle/android/App.js
-            - gutenberg/node_modules/
-  android-publish-react-native-bridge:
-    # This job gets the JS bundle from the cache and uses it to assemble the
-    # react-native-bridge Android AAR to upload for binary distribution.
-    docker:
-    - image: << pipeline.parameters.android-docker-image >>
-    steps:
-      - checkout
-      - checkout-submodules
-      # Get the JS bundle from the CI cache.
-      # See `build-android-js-bundle` for details
-      - run:
-          name: Get cache id
-          command: |
-            echo $CIRCLE_SHA1 > cache_id
-            cat cache_id
-      - restore_cache:
-          name: Restore React Native Android Bridge JS Bundle from cache
-          key: android-js-bundle-{{ checksum "cache_id" }}
+          # The job can take a long time, so let's bump the no_output_timeout
+          # to more than the default 10m
+          no_output_timeout: 20m
       - run:
           name: Build React Native Bridge & Upload to Bintray
+          environment:
+            # This value is set in the setup script, but I'm not sure whether
+            # it's available after executing it
+            ANDROID_SDK_ROOT: /usr/lib/android-sdk
           command: |
-            cd gutenberg/packages/react-native-bridge/android
-
-            # Use a different versioning style for builds from PRs to allow
+            # We publish from PRs as well as the main branch and tags to help
             # developers to iterate faster.
             #
-            # All those dev builds will be deleted once the PR is merged by
+            # The builds from a PR have a different version so that they can be
+            # deleted by
             # https://github.com/Automattic/bintray-garbage-collector/
+            # once their PR is merged.
             #
-            # If $VERSION is not set, that is, if we're not on a PR but a merge
-            # commit on develop or trunk, the version will be the value from
-            # the source code.
-            branch=$CIRCLE_BRANCH
-            if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
-              PR_NUMBER=$(basename $CIRCLE_PULL_REQUEST)
-              # Making the assumption that $CIRCLE_SHA1 will always be
-              # available.
-              VERSION="$PR_NUMBER-$CIRCLE_SHA1"
-            elif [[ "$branch" != "trunk" && "$branch" != "develop" ]]; then
-              # This happens on the first push of a new branch, when there
-              # isn't a PR open for it yet.
-              echo "Running on a feature branch with no open PR: skipping Bintray upload"
-              exit 0
+            # If we're not on a PR but a merge commit on the develop branch the
+            # version will be the "develop-" followed by the commit SHA1.
+            #
+            # On a tag, the version should be the tag value.
+            #
+            # If we're on a different branch that has no open PR, we should
+            # not build and exit early instead.
+            if [[ -z "${CIRCLE_TAG+x}" ]]; then
+              if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
+                PR_NUMBER=$(basename $CIRCLE_PULL_REQUEST)
+                # CIRCLE_SHA1 should always be available.
+                VERSION="$PR_NUMBER-$CIRCLE_SHA1"
+              elif [[ $CIRCLE_BRANCH == "develop" ]]; then
+                VERSION="$CIRCLE_BRANCH-$CIRCLE_SHA1"
+              else
+                # This happens on the first push of a new branch, when there
+                # isn't a PR open for it yet.
+                echo "Running on a feature branch with no open PR."
+                echo "The checks previous to this step should not have let this happen."
+                exit 1
+              fi
+            else
+              VERSION=$CIRCLE_TAG
             fi
+
+            cd gutenberg/packages/react-native-bridge/android
 
             ./publish-aztec-and-bridge.sh $VERSION
 
@@ -382,12 +399,15 @@ workflows:
           filters:
             branches:
               only: /^dependabot/submodules/.*/
-      - build-android-js-bundle:
-          name: Build JS Bundle for Android RN Bridge
-          requires: [ "Test Android" ]
-      - android-publish-react-native-bridge:
-          name: Publish Android RN Bridge to Bintray
-          requires: [ "Build JS Bundle for Android RN Bridge" ]
+      - android-build-and-publish-react-native-bridge:
+          name: Build Android RN Bridge & Publish to Bintray
+          filters:
+            branches:
+              # Don't run on trunk, otherwise, run on every other branch
+              ignore: trunk
+            tags:
+              # Run for every tag
+              only: /.*/
 
   ui-tests-full-scheduled:
     jobs:
