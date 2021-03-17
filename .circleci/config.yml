@@ -275,39 +275,44 @@ jobs:
             # non-trivial amount of CI time because of how heavy the repo is
             # and how time consuming running `npm ci` is.
             if [[ -z ${CIRCLE_TAG+x} ]]; then
-              echo "Build initiated from a tag: proceeding..."
-            elif [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
-              echo "Build initiated from a branch with a pull request: proceeding..."
-            elif [[ $CIRCLE_BRANCH != "develop" ]]; then
-              # This happens on the first push of a new branch, when there
-              # isn't a PR open for it yet.
-              echo "Build initiated from a feature branch with no pull request: aborting."
-              # circleci-agent step halt
-              echo "DEBUG – Not aborting in this instance"
+              # if we're here, there's no $CIRCLE_TAG
+              if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
+                echo "Build initiated from a branch with a pull request: proceeding..."
+              elif [[ $CIRCLE_BRANCH != "develop" ]]; then
+                # This happens on the first push of a new branch, when there
+                # isn't a PR open for it yet.
+                echo "Build initiated from a feature branch with no pull request: aborting."
+                # circleci-agent step halt
+                echo "DEBUG – Not aborting in this instance"
+              else
+                echo "Build initiated on develop: proceeding..."
+              fi
             else
-              echo "Build initiated on develop: proceeding..."
+              echo "Build initiated from a tag: proceeding..."
             fi
 
             if [[ -z "${CIRCLE_TAG+x}" ]]; then
-              VERSION=$CIRCLE_TAG
-            elif [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
-              PR_NUMBER=$(basename $CIRCLE_PULL_REQUEST)
-              # Making the assumption that $CIRCLE_SHA1 will always be
-              # available.
-              VERSION="$PR_NUMBER-$CIRCLE_SHA1"
-            elif [[ $CIRCLE_BRANCH == "develop" ]]; then
-              VERSION="develop-$CIRCLE_SHA1"
+              fi [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
+                PR_NUMBER=$(basename $CIRCLE_PULL_REQUEST)
+                # Making the assumption that $CIRCLE_SHA1 will always be
+                # available.
+                VERSION="$PR_NUMBER-$CIRCLE_SHA1"
+              elif [[ $CIRCLE_BRANCH == "develop" ]]; then
+                VERSION="develop-$CIRCLE_SHA1"
+              else
+                # This happens on the first push of a new branch, when there
+                # isn't a PR open for it yet.
+                echo "Running on a feature branch with no open PR: skipping Bintray upload"
+                # It would be good if there was a way to mark this job as skipped
+                # from here, but I couldn't find one.
+                #
+                # DEBUG
+                #
+                # exit 0
+                VERSION="mokagio-ci-test-$CIRCLE_SHA1-$(date "+%Y%m%d-%H%M%S")"
+              fi
             else
-              # This happens on the first push of a new branch, when there
-              # isn't a PR open for it yet.
-              echo "Running on a feature branch with no open PR: skipping Bintray upload"
-              # It would be good if there was a way to mark this job as skipped
-              # from here, but I couldn't find one.
-              #
-              # DEBUG
-              #
-              # exit 0
-              VERSION="mokagio-ci-test-$CIRCLE_SHA1-$(date "+%Y%m%d-%H%M%S")"
+              VERSION=$CIRCLE_TAG
             fi
 
             echo "version $VERSION"
