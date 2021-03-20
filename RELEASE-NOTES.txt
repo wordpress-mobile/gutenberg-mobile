@@ -1,5 +1,24 @@
 Unreleased
 ------
+* [***] a11y: Screenreader improvements for the UnitControl component [https://github.com/WordPress/gutenberg/pull/29741]
+* [*] Remove the cancel button from settings options (Android only) [https://github.com/WordPress/gutenberg/pull/29599]
+* [*] Block split/merge fix for a (never shipped) regression (Android only) [https://github.com/WordPress/gutenberg/pull/29683]
+
+1.49.0
+------
+* [*] Remove the cancel button from settings options (Android only) [https://github.com/WordPress/gutenberg/pull/29599]
+
+1.48.0
+------
+* [**] Buttons block: added width setting. [https://github.com/WordPress/gutenberg/pull/28543]
+
+1.47.2
+------
+* [**] Add `replaceBlock` method to iOS bridge delegate with a string to match the clientID and the contents to replace. [#3246] 
+
+1.47.1
+------
+* [**] Reduce the number of items per page when fetching reusable blocks to prevent a crash. [#3227]
 
 1.47.0
 ------
