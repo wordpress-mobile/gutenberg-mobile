@@ -121,7 +121,7 @@ Then, open `chrome://inspect` in Chrome to attach the debugger (look into the "R
 
 ## Writing and Running Unit Tests
 
-This project is set up to use [jest](https://facebook.github.io/jest/) for tests. You can configure whatever testing strategy you like, but jest works out of the box. Create test files in directories called `__tests__` or with the `.test.js` extension to have the files loaded by jest. See an example test [here](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/src/index.test.js). The [jest documentation](https://facebook.github.io/jest/docs/en/getting-started.html) is also a wonderful resource, as is the [React Native testing tutorial](https://facebook.github.io/jest/docs/en/tutorial-react-native.html).
+This project is set up to use [jest](https://facebook.github.io/jest/) for tests. You can configure whatever testing strategy you like, but jest works out of the box. Create test files in directories called `__tests__` or with the `.test.js` extension to have the files loaded by jest. See an example test [here](https://github.com/WordPress/gutenberg/blob/HEAD/packages/react-native-editor/src/test/api-fetch-setup.test.js). The [jest documentation](https://facebook.github.io/jest/docs/en/getting-started.html) is also a wonderful resource, as is the [React Native testing tutorial](https://facebook.github.io/jest/docs/en/tutorial-react-native.html).
 
 ## UI Tests
 
@@ -145,7 +145,7 @@ To run a single test instead of the entire suite, use `npm run device-tests:loca
 
 Note: You might experience problems that seem to be related to the tests starting the Appium server, e.g. errors that say `Connection Refused`, `Connection Reset` or `The requested environment is not available`. For now, you can manually start the Appium server via [appium desktop](https://github.com/appium/appium-desktop) or the CLI, then change the port number in the tests while (optionally) commenting out related code in the `beforeAll` and `afterAll` block. 
 
-For a more detailed outline of the UI tests and how to get started writing one, please visit the [UI Test documentation](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/__device-tests__/README.md) and our [contributing guide](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/__device-tests__/CONTRIBUTING.md).
+For a more detailed outline of the UI tests and how to get started writing one, please visit the [UI Test documentation](https://github.com/WordPress/gutenberg/blob/HEAD/packages/react-native-editor/__device-tests__/README.md) and our [contributing guide](https://github.com/WordPress/gutenberg/blob/HEAD/packages/react-native-editor/__device-tests__/CONTRIBUTING.md).
 
 ## Static analysis and code style
 
