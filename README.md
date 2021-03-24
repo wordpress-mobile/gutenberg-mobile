@@ -149,7 +149,7 @@ For a more detailed outline of the UI tests and how to get started writing one, 
 
 ## Static analysis and code style
 
-The project includes a linter (`eslint`) to perform codestyle and static analysis of the code. The configuration used is the same as [the one in the Gutenberg project](https://github.com/WordPress/gutenberg/blob/master/eslint/config.js). To perform the check, run:
+The project includes a linter (`eslint`) to perform codestyle and static analysis of the code. The configuration used is the same as [the one in the Gutenberg project](https://github.com/WordPress/gutenberg/blob/HEAD/packages/eslint-plugin/README.md). To perform the check, run:
 
 ```
 npm run lint
