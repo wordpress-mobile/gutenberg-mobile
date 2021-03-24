@@ -40,7 +40,7 @@ Before running the demo app, you need to download and install the project depend
 
 ```
 cd gutenberg
-nvm install --latest-npm
+nvm install
 cd ..
 npm install
 ```
