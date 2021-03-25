@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { JETPACK_DATA_PATH } from '../jetpack/extensions/shared/get-jetpack-data';
+import { JETPACK_DATA_PATH } from '../jetpack/projects/plugins/jetpack/extensions/shared/get-jetpack-data';
 /**
  * WordPress dependencies
  */
@@ -44,6 +44,14 @@ export default ( jetpackState ) => {
 
 	const jetpackData = setJetpackData( jetpackState );
 
+	const toggleBlock = ( capability, blockName ) => {
+		if ( capability !== true ) {
+			dispatch( 'core/edit-post' ).hideBlockTypes( [ blockName ] );
+		} else {
+			dispatch( 'core/edit-post' ).showBlockTypes( [ blockName ] );
+		}
+	};
+
 	// Note on the use of setTimeout() here:
 	// We observed the settings may not be ready exactly when the native.render hooks get run but rather
 	// right after that execution cycle (because state hasn't changed yet). Hence, we're only checking for
@@ -53,18 +61,15 @@ export default ( jetpackState ) => {
 
 	// eslint-disable-next-line @wordpress/react-no-unsafe-timeout
 	setTimeout( () => {
-		const mediaFilesCollectionBlock = select(
-			'core/block-editor'
-		).getSettings( 'capabilities' ).mediaFilesCollectionBlock;
+		const capabilities = select( 'core/block-editor' ).getSettings(
+			'capabilities'
+		);
 
-		if ( mediaFilesCollectionBlock !== true ) {
-			dispatch( 'core/edit-post' ).hideBlockTypes( [ 'jetpack/story' ] );
-		} else {
-			dispatch( 'core/edit-post' ).showBlockTypes( [ 'jetpack/story' ] );
-		}
+		toggleBlock( capabilities.mediaFilesCollectionBlock, 'jetpack/story' );
+		toggleBlock( capabilities.contactInfoBlock, 'jetpack/contact-info' );
 	} );
 
-	require( '../jetpack/extensions/editor' );
+	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );
 
 	return jetpackData;
 };
