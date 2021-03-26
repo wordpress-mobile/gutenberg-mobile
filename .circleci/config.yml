@@ -79,7 +79,7 @@ jobs:
           name: Install newer node using nvm
           command: |
             cd gutenberg
-            nvm install --latest-npm
+            nvm install
       - when:
           condition: <<parameters.check-correctness>>
           steps:
