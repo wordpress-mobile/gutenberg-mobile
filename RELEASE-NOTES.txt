@@ -3,6 +3,7 @@ Unreleased
 * [***] a11y: Screenreader improvements for the UnitControl component [https://github.com/WordPress/gutenberg/pull/29741]
 * [*] Remove the cancel button from settings options (Android only) [https://github.com/WordPress/gutenberg/pull/29599]
 * [*] Block split/merge fix for a (never shipped) regression (Android only) [https://github.com/WordPress/gutenberg/pull/29683]
+* [**] Adding transform block feature [https://github.com/WordPress/gutenberg/pull/28453]
 
 1.49.0
 ------
