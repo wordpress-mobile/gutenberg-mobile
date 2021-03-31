@@ -11,8 +11,8 @@ import {
  * Internal dependencies
  */
 import correctTextFontWeight from './text-font-weight-correct';
-import setupJetpackEditor from './jetpack-editor-setup';
 import initialHtml from './initial-html';
+import setupJetpackEditor from './jetpack-editor-setup';
 
 addAction( 'native.pre-render', 'gutenberg-mobile', () => {
 	require( './strings-overrides' );
