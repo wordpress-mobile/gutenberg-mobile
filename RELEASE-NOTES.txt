@@ -1,5 +1,6 @@
 Unreleased
 ------
+* a11y: Fix for screenreader improvements in 1.50.0 [https://github.com/WordPress/gutenberg/issues/30625]
 
 1.50.0
 ------
