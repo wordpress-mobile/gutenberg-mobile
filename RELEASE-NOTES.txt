@@ -1,6 +1,7 @@
 Unreleased
 ------
 * a11y: Fix for screenreader improvements in 1.50.0 [https://github.com/WordPress/gutenberg/issues/30625]
+* Quote block: Fix an issue with quote block captions where newlines were adding an extra line [https://github.com/WordPress/gutenberg/issues/30548]
 
 * Fixed react-native-bridge path issue causing crash in Unsupported Block Editor. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3353]
 1.50.0
