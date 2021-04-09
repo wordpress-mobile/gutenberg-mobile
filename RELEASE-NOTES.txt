@@ -2,7 +2,7 @@ Unreleased
 ------
 * a11y: Fix for screenreader improvements in 1.50.0 [https://github.com/WordPress/gutenberg/issues/30625]
 
-* Fixed react-native-bridge symlink issue causing crash in Unsupported Block Editor. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3351]
+* Fixed react-native-bridge path issue causing crash in Unsupported Block Editor. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3351]
 1.50.0
 ------
 * [***] a11y: Screenreader improvements for the UnitControl component [https://github.com/WordPress/gutenberg/pull/29741]
