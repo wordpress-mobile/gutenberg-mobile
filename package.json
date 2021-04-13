@@ -50,7 +50,8 @@
 		"sprintf-js": "^1.1.1",
 		"typescript": "4.1.3",
 		"wd": "^1.11.1",
-		"yarn": "^1.22.10"
+		"yarn": "^1.22.10",
+		"block-experiments": "Automattic/block-experiments#add-mobile-app-support"
 	},
 	"scripts": {
 		"postinstall": "npm ci --prefix gutenberg && cd jetpack/projects/plugins/jetpack && yarn install --frozen-lockfile --ignore-engines",
