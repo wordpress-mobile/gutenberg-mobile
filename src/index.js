@@ -25,7 +25,7 @@ addAction( 'native.render', 'gutenberg-mobile', ( props ) => {
 	);
 
 	if ( __DEV__ ) {
-		// I am not sure this is the right way to do this. 
+		// I am not sure this is the right way to do this.
 		// But if I do an import instead we end up with an error.
 		require( './block-experiments-setup' );
 	}
