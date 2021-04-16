@@ -1,5 +1,6 @@
 Unreleased
 ------
+* [***] New Block: Search Block [#3210]
 
 1.50.0
 ------
