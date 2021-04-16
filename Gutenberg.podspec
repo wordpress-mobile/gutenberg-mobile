@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.homepage     = 'https://github.com/wordpress-mobile/gutenberg-mobile'
   s.license      = gutenbergMobilePackage['license']
   s.authors          = 'Automattic'
-  s.platform     = :ios, '11.0'
+  s.platform     = :ios, '13.0'
   s.source       = { :git => 'https://github.com/wordpress-mobile/gutenberg-mobile.git', :submodules => true }
   s.source_files = 'gutenberg/packages/react-native-bridge/ios/**/*.{h,m,swift}'
   s.requires_arc = true
