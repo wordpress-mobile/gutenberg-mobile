@@ -10,7 +10,7 @@ import { dispatch, select } from '@wordpress/data';
 // When adding new blocks to this list please also consider updating ./block-support/supported-blocks.json
 const supportedJetpackBlocks = {
 	'contact-info': {
-		available: __DEV__,
+		available: true,
 	},
 	story: {
 		available: true,
