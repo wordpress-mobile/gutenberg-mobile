@@ -3,13 +3,19 @@ Unreleased
 * a11y: Bug fix: Allow stepper cell to be selected by screenreader [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3362]
 * Image block: Add a "featured" banner. (Android only) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/30806]
 
+1.51.0
+------
+* [*] a11y: Bug fix: Allow stepper cell to be selected by screenreader [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3362]
+* [*] Image block: Improve text entry for long alt text. [https://github.com/WordPress/gutenberg/pull/29670]
+* [***] New Block: Jetpack contact info. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3340]
+
 1.50.1
 ------
 * a11y: Fix for screenreader improvements in 1.50.0 [https://github.com/WordPress/gutenberg/issues/30625]
 * a11y: Fix an issue with range-cells where screenreader read decimals with too much precision [https://github.com/wordpress-mobile/gutenberg-mobile/issues/3358]
 * Quote block: Fix an issue with quote block captions where newlines were adding an extra line [https://github.com/WordPress/gutenberg/issues/30548]
-
 * Fixed react-native-bridge path issue causing crash in Unsupported Block Editor. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3353]
+
 1.50.0
 ------
 * [***] a11y: Screenreader improvements for the UnitControl component [https://github.com/WordPress/gutenberg/pull/29741]
