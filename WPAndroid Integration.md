@@ -12,8 +12,6 @@ To do this, we need to copy the [local-builds.gradle-example file](https://githu
 Building the project as such will make WPAndroid build the source code for `react-native-bridge`, `react-native-aztec` and other sublibraries from the locally checked out folder.
 It'll also expect the metro server to be running to fetch the JS bundle.
 
-**Note:** The `Build Android RN Bridge & Publish to Bintray` task in `gutenberg-mobile` needs to complete before WPAndroid's `Installable Build` CI task will succeed. As such, you may see WPAndroid's CI tasks fail with a 403 error if they run before the `gutenberg-mobile` task completes. You can either wait for wait for `gutenberg-mobile`'s CI task to pass before pushing changes to `ext.gutenbergMobileVersion` or restart failed WPAndroid CI tasks after `gutenberg-mobile`'s CI task passes.
-
 - [Work with local gutenberg-mobile checkout](#work-with-local-gutenberg-mobile-checkout)
 - [Deploy a new version of `react-native-bridge` from CI](#deploy-a-new-version-of-react-native-bridge-from-ci)
 - [Manually deploy a new version of `react-native-bridge`](#manually-deploy-a-new-version-of-react-native-bridge)
@@ -89,6 +87,8 @@ Besides checking a few things, `publish-aztec-and-bridge.sh` script will clean t
 - Update `ext.gutenbergMobileVersion` property in [build.gradle](https://github.com/wordpress-mobile/WordPress-Android/blob/develop/build.gradle) to the new version
 
 In order to test this, make sure `localGutenbergMobilePath` in your `local-builds.gradle` file is commented out as otherwise the binary version will be ignored.
+
+**Note:** The `Build Android RN Bridge & Publish to Bintray` task in `gutenberg-mobile` needs to complete before WPAndroid's `Installable Build` CI task will succeed. As such, you may see WPAndroid's CI tasks fail with a 403 error if they run before the `gutenberg-mobile` task completes. You can either wait for wait for `gutenberg-mobile`'s CI task to pass before pushing changes to `ext.gutenbergMobileVersion` or restart failed WPAndroid CI tasks after `gutenberg-mobile`'s CI task passes.
 
 ---
 
