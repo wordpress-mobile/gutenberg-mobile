@@ -12,6 +12,8 @@ To do this, we need to copy the [local-builds.gradle-example file](https://githu
 Building the project as such will make WPAndroid build the source code for `react-native-bridge`, `react-native-aztec` and other sublibraries from the locally checked out folder.
 It'll also expect the metro server to be running to fetch the JS bundle.
 
+**Note:** The `ci/circleci: Build Android RN Bridge & Publish to Bintray` task in `gutenberg-mobile` needs to complete before WPAndroid's `Installable Build` CI task will succeed. As such, you may see WPAndroid's CI tasks fail with a 403 error if they run before the `gutenberg-mobile` task completes. Before deploying any changes to `ext.gutenbergMobileVersion`, either wait for the tests to pass in `gutenberg-mobile` first or restart the WPAndroid CI tasks after they pass.
+
 - [Work with local gutenberg-mobile checkout](#work-with-local-gutenberg-mobile-checkout)
 - [Deploy a new version of `react-native-bridge` from CI](#deploy-a-new-version-of-react-native-bridge-from-ci)
 - [Manually deploy a new version of `react-native-bridge`](#manually-deploy-a-new-version-of-react-native-bridge)
