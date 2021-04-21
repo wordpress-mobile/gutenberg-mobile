@@ -4,7 +4,6 @@ Unreleased
 * Image block: Add a "featured" banner. (Android only) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3371]
 * [**] The media upload options of the File and Audio block automatically opens when the respective block is inserted. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3399]
 
-
 1.51.0
 ------
 * [*] a11y: Bug fix: Allow stepper cell to be selected by screenreader [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3362]
