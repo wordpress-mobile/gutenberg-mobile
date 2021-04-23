@@ -98,7 +98,6 @@ jobs:
       - run:
           name: Run Checks
           command: bin/ci-checks-js.sh
-          no_output_timeout: 15m
           environment:
             JEST_JUNIT_OUTPUT: "reports/test-results/android-test-results.xml"
       - store_test_results:
