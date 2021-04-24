@@ -256,7 +256,7 @@ jobs:
   android-build-and-publish-react-native-bridge:
     # This job builds the JS bunle required by the Android version of the
     # react-native-bridge package, builds the AAR for that package, and uploads
-    # it to Bintray.
+    # it to S3.
     #
     # Running on a Ubuntu machine to have more memory compared to the Docker +
     # Node or Docker + Android images that CircleCI offers (circleci/node)
@@ -309,7 +309,7 @@ jobs:
           # to more than the default 10m
           no_output_timeout: 20m
       - run:
-          name: Build React Native Bridge & Upload to Bintray
+          name: Build React Native Bridge & Upload to S3
           environment:
             # This value is set in the setup script, but I'm not sure whether
             # it's available after executing it
@@ -317,11 +317,6 @@ jobs:
           command: |
             # We publish from PRs as well as the main branch and tags to help
             # developers to iterate faster.
-            #
-            # The builds from a PR have a different version so that they can be
-            # deleted by
-            # https://github.com/Automattic/bintray-garbage-collector/
-            # once their PR is merged.
             #
             # If we're not on a PR but a merge commit on the develop branch the
             # version will be the "develop-" followed by the commit SHA1.
@@ -400,7 +395,7 @@ workflows:
             branches:
               only: /^dependabot/submodules/.*/
       - android-build-and-publish-react-native-bridge:
-          name: Build Android RN Bridge & Publish to Bintray
+          name: Build Android RN Bridge & Publish to S3
           filters:
             branches:
               # Don't run on trunk, otherwise, run on every other branch
