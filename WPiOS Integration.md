@@ -5,7 +5,7 @@
 You need to set `LOCAL_GUTENBERG` environment variable to the local `gutenberg-mobile` folder relative to the `WPiOS` folder.  
 By default `LOCAL_GUTENBERG` is set to `../gutenberg-mobile`.
 
-1. First `cd` into WPiOS project folder and run `rake dependencies`
+1. First `cd` into your cloned [WPiOS](https://github.com/wordpress-mobile/WordPress-iOS) project folder and run `rake dependencies`
 2. (a) If `gutenberg-mobile` is at `../gutenberg-mobile` you can directly run:
 ```sh
 LOCAL_GUTENBERG=true bundle exec pod install
