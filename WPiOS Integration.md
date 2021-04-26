@@ -46,6 +46,6 @@ Assuming that there is no open WPiOS PR:
 14. Merge the `gutenberg-mobile` PR (make sure the bundles are up-to-date before merging)
 15. Tag the merge commit bumping the latest tag's minor version and adding an `-alphaQ` to the end like: `v1.50.0 -> v1.51.0-alpha1`
 16. If there's already an alpha, the alpha version could be increased like: `v1.51.0-alpha1` -> `v1.51.0-alpha2`
-17. Open the `Podfile` again and update the gutenberg reference to use the new alpha tag: `gutenberg :tag => 'vX.YY.Z'`
+17. Open the `Podfile` again and update the gutenberg reference to use the new alpha tag: `gutenberg :tag => 'v1.51.0-alpha2'`
 18. Run `bundle exec pod install`
 19. Commit and push the changes to `Podfile` and `Podfile.lock` 
