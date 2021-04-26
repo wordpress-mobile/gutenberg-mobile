@@ -34,7 +34,7 @@ Assuming that there is no open WPiOS PR:
 
 **Additionally to share a WPiOS installable build (IPA)**
 
-8. Stop the metro server and create bundles running `npm run bundle`
+8. Within `gutenberg-mobile`, stop the metro server and create bundles running `npm run bundle`
 9. Commit and push the bundle changes to `gutenberg-mobile`
 10. Update the commit hash in the Podfile again and run `bundle exec pod install` again
 11. Commit and push the changes to `Podfile` and `Podfile.lock`
