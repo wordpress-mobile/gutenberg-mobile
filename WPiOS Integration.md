@@ -26,7 +26,7 @@ Assuming that there is no open WPiOS PR:
 
 1. Open `Podfile` in WPiOS project
 2. Find the line where gutenberg reference is set like: `gutenberg :tag => 'vX.YY.Z'`
-3. Find latest commit hash of the gutenberg-mobile PR
+3. Find latest commit hash of the `gutenberg-mobile` PR
 4. Replace the gutenberg reference with the commit hash: `gutenberg :commit => '123456789'`
 5. Run `bundle exec pod install` inside WPiOS
 6. Start the metro server in `gutenberg-mobile` with `npm run start:reset`
