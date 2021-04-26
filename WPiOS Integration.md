@@ -29,7 +29,7 @@ Assuming that there is no open WPiOS PR:
 3. Find latest commit hash of the `gutenberg-mobile` PR
 4. Replace the gutenberg reference with the commit hash: `gutenberg :commit => '123456789'`
 5. Run `bundle exec pod install` inside WPiOS
-6. Start the metro server in `gutenberg-mobile` with `npm run start:reset`
+6. Switch to the relevant branch in `gutenberg-mobile`and start the metro server with `npm run start:reset`
 7. Launch the WPiOS workspace (`.xcworkspace`) in Xcode and run the app
 
 **Additionally to share a WPiOS installable build (IPA)**
