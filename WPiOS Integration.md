@@ -2,10 +2,12 @@
 
 ## How to work with local gutenberg-mobile checkout
 
-You need to set `LOCAL_GUTENBERG` environment variable to the local `gutenberg-mobile` folder relative to the `WPiOS` folder.  
+The `LOCAL_GUTENBERG` environment variable is useful when you want to iterate on the native iOS code (Swift, Objective-C) in `gutenberg-mobile` while testing it inside [WPiOS](https://github.com/wordpress-mobile/WordPress-iOS) app. This also includes the case when you update a dependency in `gutenberg-mobile` that has native code in it. This flag plays no role in which WPiOS run scheme will be selected or whether Metro will be used or not, but it will affect which JS bundle WPiOS will use. In case the flag is enabled, it will be the one in locally available checkout of the `gutenberg-mobile` repo. That's why, when using this flag, it would be better to run the Metro server or recreate JS bundles in local `gutenberg-mobile` checkout so that the native and JS code are in sync. 
+
+To use it, you need to set `LOCAL_GUTENBERG` environment variable to the local `gutenberg-mobile` folder relative to the `WPiOS` folder.  
 By default `LOCAL_GUTENBERG` is set to `../gutenberg-mobile`.
 
-1. First `cd` into your cloned [WPiOS](https://github.com/wordpress-mobile/WordPress-iOS) project folder and run `rake dependencies`
+1. First `cd` into your cloned WPiOS project folder and run `rake dependencies`
 2. (a) If `gutenberg-mobile` is at `../gutenberg-mobile` you can directly run:
 ```sh
 LOCAL_GUTENBERG=true bundle exec pod install
