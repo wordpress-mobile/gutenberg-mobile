@@ -43,7 +43,7 @@ Assuming that there is no open WPiOS PR:
 10. Update the commit hash in the WPiOS Podfile again and run `bundle exec pod install` again
 11. Commit and push the changes to `Podfile` and `Podfile.lock`
 12. Open a WPiOS PR
-13. Manually trigger the CI job in that PR which creates the installable build
+13. Manually trigger the installable build CI job by clicking the link in the PR comments
 
 **Additionally to release a alpha version of gutenberg-mobile and update WPiOS PR to use it**
 
