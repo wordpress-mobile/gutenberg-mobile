@@ -1,6 +1,10 @@
 Unreleased
 ------
 
+1.51.1
+------
+* [*] Updates relative block-support asset path [https://github.com/WordPress/gutenberg/pull/31184]
+
 1.51.0
 ------
 * [*] a11y: Bug fix: Allow stepper cell to be selected by screenreader [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3362]
