@@ -88,6 +88,8 @@ Besides checking a few things, `publish-aztec-and-bridge.sh` script will clean t
 
 In order to test this, make sure `localGutenbergMobilePath` in your `local-builds.gradle` file is commented out as otherwise the binary version will be ignored.
 
+**Note:** The `Build Android RN Bridge & Publish to Bintray` task in `gutenberg-mobile` needs to complete before WPAndroid's `Installable Build` CI task will succeed. As such, you may see WPAndroid's CI tasks fail with a 403 error if they run before the `gutenberg-mobile` task completes. You can either wait for wait for `gutenberg-mobile`'s CI task to pass before pushing changes to `ext.gutenbergMobileVersion` or restart failed WPAndroid CI tasks after `gutenberg-mobile`'s CI task passes.
+
 ---
 
 ## How to
