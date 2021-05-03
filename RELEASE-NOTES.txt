@@ -1,6 +1,8 @@
 Unreleased
 ------
 
+-   [*] Image block: Add a "featured" banner and ability to set or remove an image as featured. (iOS only)
+
 1.52.0
 ------
 * [***] New Block: Search Block [#3210]
