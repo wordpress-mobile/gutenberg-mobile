@@ -12,10 +12,12 @@ For a developer experience closer to the one the project maintainers current hav
 * [nvm](https://github.com/creationix/nvm)
 * Node.js and npm (use nvm to install them)
 * [Yarn](https://yarnpkg.com/)
-* [AndroidStudio](https://developer.android.com/studio/) to be able to compile the Android version of the app
+* [Android Studio](https://developer.android.com/studio/) to be able to compile the Android version of the app
 * [Xcode](https://developer.apple.com/xcode/) to be able to compile the iOS app
 * CocoaPods(`sudo gem install cocoapods`) needed to fetch React and third-party dependencies.
 * [Carthage](https://github.com/Carthage/Carthage#installing-carthage) for appium to be able run iOS UI tests
+
+Depending on your setup, there may be a few configurations needed in Android Studio and Xcode. Please refer to [React Native's documentation](https://reactnative.dev/docs/environment-setup) for the latest requirements for each development environment.
 
 Note that the OS platform used by the maintainers is macOS but the tools and setup should be usable in other platforms too.
 
@@ -38,7 +40,7 @@ Before running the demo app, you need to download and install the project depend
 
 ```
 cd gutenberg
-nvm install --latest-npm
+nvm install
 cd ..
 npm install
 ```
@@ -46,7 +48,7 @@ npm install
 ## Run
 
 ```
-npm run start
+npm run start:reset
 ```
 
 Runs the packager (Metro) in development mode. The packager stays running to serve the app bundle to the clients that request it.
@@ -85,6 +87,8 @@ To see a list of all of your available iOS devices, use `xcrun simctl list devic
 
 ### Troubleshooting
 
+If the Android emulator doesn't start correctly, or compiling fails with `Could not initialize class org.codehaus.groovy.runtime.InvokerHelper` or similar, it may help to double check the set up of your development environment against the latest requirements in [React Native's documentation](https://reactnative.dev/docs/environment-setup). With Android Studio, for example, you will need to configure the `ANDROID_HOME` environment variable and ensure that your version of JDK matches the latest requirements.
+
 Some times, and especially when tweaking anything in the `package.json`, Babel configuration (`.babelrc`) or the Jest configuration (`jest.config.js`), your changes might seem to not take effect as expected. On those times, you might need to clean various caches before starting the packager. To do that, run the script: `npm run start:reset`. Other times, you might want to reinstall the NPM packages from scratch and the `npm run clean:install` script can be handy.
 
 ## Developing with Visual Studio Code
@@ -93,7 +97,7 @@ Although you're not required to use Visual Studio Code for developing gutenberg-
 
 When you first open the project in Visual Studio, you will be prompted to install some recommended extensions. This will help with some things like type checking and debugging.
 
-![Prompt to install recommended extensions](images/recommended-extensions.png)
+![Prompt to install recommended extensions](https://github.com/WordPress/gutenberg/blob/7532a485b400f86638145b71f94f6f717e5add25/packages/react-native-editor/images/recommended-extensions.png)
 
 One of the extensions we are using is the [React Native Tools](https://marketplace.visualstudio.com/items?itemName=vsmobile.vscode-react-native). This allows you to run the packager from VSCode or launch the application on iOS or Android. It also adds some debug configurations so you can set breakpoints and debug the application directly from VSCode. Take a look at the [extension documentation](https://marketplace.visualstudio.com/items?itemName=vsmobile.vscode-react-native) for more details.
 
@@ -117,7 +121,7 @@ Then, open `chrome://inspect` in Chrome to attach the debugger (look into the "R
 
 ## Writing and Running Unit Tests
 
-This project is set up to use [jest](https://facebook.github.io/jest/) for tests. You can configure whatever testing strategy you like, but jest works out of the box. Create test files in directories called `__tests__` or with the `.test.js` extension to have the files loaded by jest. See an example test [here](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/src/index.test.js). The [jest documentation](https://facebook.github.io/jest/docs/en/getting-started.html) is also a wonderful resource, as is the [React Native testing tutorial](https://facebook.github.io/jest/docs/en/tutorial-react-native.html).
+This project is set up to use [jest](https://facebook.github.io/jest/) for tests. You can configure whatever testing strategy you like, but jest works out of the box. Create test files in directories called `__tests__` or with the `.test.js` extension to have the files loaded by jest. See an example test [here](https://github.com/WordPress/gutenberg/blob/HEAD/packages/react-native-editor/src/test/api-fetch-setup.test.js). The [jest documentation](https://facebook.github.io/jest/docs/en/getting-started.html) is also a wonderful resource, as is the [React Native testing tutorial](https://facebook.github.io/jest/docs/en/tutorial-react-native.html).
 
 ## UI Tests
 
@@ -141,11 +145,11 @@ To run a single test instead of the entire suite, use `npm run device-tests:loca
 
 Note: You might experience problems that seem to be related to the tests starting the Appium server, e.g. errors that say `Connection Refused`, `Connection Reset` or `The requested environment is not available`. For now, you can manually start the Appium server via [appium desktop](https://github.com/appium/appium-desktop) or the CLI, then change the port number in the tests while (optionally) commenting out related code in the `beforeAll` and `afterAll` block. 
 
-For a more detailed outline of the UI tests and how to get started writing one, please visit the [UI Test documentation](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/__device-tests__/README.md) and our [contributing guide](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/__device-tests__/CONTRIBUTING.md).
+For a more detailed outline of the UI tests and how to get started writing one, please visit the [UI Test documentation](https://github.com/WordPress/gutenberg/blob/HEAD/packages/react-native-editor/__device-tests__/README.md) and our [contributing guide](https://github.com/WordPress/gutenberg/blob/HEAD/packages/react-native-editor/__device-tests__/CONTRIBUTING.md).
 
 ## Static analysis and code style
 
-The project includes a linter (`eslint`) to perform codestyle and static analysis of the code. The configuration used is the same as [the one in the Gutenberg project](https://github.com/WordPress/gutenberg/blob/master/eslint/config.js). To perform the check, run:
+The project includes a linter (`eslint`) to perform codestyle and static analysis of the code. The configuration used is the same as [the one in the Gutenberg project](https://github.com/WordPress/gutenberg/blob/HEAD/packages/eslint-plugin/README.md). To perform the check, run:
 
 ```
 npm run lint
