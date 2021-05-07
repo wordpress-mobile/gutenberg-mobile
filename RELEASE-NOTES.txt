@@ -10,6 +10,7 @@ Unreleased
 * [***] New Block: Search Block [#3210]
 * [**] The media upload options of the Image, Video and Gallery block automatically opens when the respective block is inserted. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2700]
 * Image block: Add a "featured" banner. (Android only) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3371]
+* [*] Fixed a bug where the Search block was stealing focus from the Image block upon updating image asset [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3442]
 * [**] The media upload options of the File and Audio block automatically opens when the respective block is inserted. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3399]
 * [*] Remove visual feedback from non-interactive bottom-sheet cell sections [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3404]
 
