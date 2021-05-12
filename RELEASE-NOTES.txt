@@ -1,5 +1,6 @@
 Unreleased
 ------
+* [*] Bug fix: mentions and xposts can no longer be added to post titles
 
 1.52.1
 ------
