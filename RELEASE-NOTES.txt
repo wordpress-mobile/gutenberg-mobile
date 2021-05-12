@@ -3,6 +3,7 @@ Unreleased
 
 1.52.1
 ------
+* [**] Added transform block capability [#3321]
 * [*] Fixes for the generated localized strings files.
 
 1.52.0
