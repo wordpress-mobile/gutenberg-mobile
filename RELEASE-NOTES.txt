@@ -1,5 +1,6 @@
 Unreleased
 ------
+* [*] Image block: "Set as featured" button within image block settings. (Android only). [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3116]
 
 1.52.1
 ------
