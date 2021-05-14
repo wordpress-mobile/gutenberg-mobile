@@ -1,6 +1,10 @@
 Unreleased
 ------
 * [***] New Block: Reusable block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3490]
+
+
+1.52.2
+------
 * [*] Disabled featured image banner on iOS. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3474] 
 
 1.52.1
