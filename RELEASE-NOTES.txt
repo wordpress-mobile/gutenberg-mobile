@@ -2,6 +2,11 @@ Unreleased
 ------
 * [*] Image block: "Set as featured" button within image block settings. (Android only). [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3116]
 
+
+1.52.2
+------
+* [*] Disabled featured image banner on iOS. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3474] 
+
 1.52.1
 ------
 * [*] Fixes for the generated localized strings files.
