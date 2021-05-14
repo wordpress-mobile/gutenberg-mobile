@@ -1,6 +1,13 @@
 Unreleased
 ------
 
+1.53.0
+------
+* [*] iOS: Fixes frozen editor scrolling in landscape on iPhone [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3504]
+* [*] Add Reusable blocks to the inserter menu (https://github.com/wordpress-mobile/gutenberg-mobile/pull/3054]
+* [*] Generic Embed Block placeholder UI [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3346]
+* [*] Fixes color picker segmented control rendering and scrolling issues [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3394]
+
 1.52.2
 ------
 * [*] Disabled featured image banner on iOS. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3474] 
@@ -11,9 +18,11 @@ Unreleased
 
 1.52.0
 ------
+* [**] Added transform block capability [#3321]
 * [***] New Block: Search Block [#3210]
 * [**] The media upload options of the Image, Video and Gallery block automatically opens when the respective block is inserted. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2700]
 * Image block: Add a "featured" banner. (Android only) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3371]
+* [*] Fixed a bug where the Search block was stealing focus from the Image block upon updating image asset [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3442]
 * [**] The media upload options of the File and Audio block automatically opens when the respective block is inserted. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3399]
 * [*] Remove visual feedback from non-interactive bottom-sheet cell sections [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3404]
 
