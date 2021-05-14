@@ -1,6 +1,24 @@
 Unreleased
 ------
 
+1.53.0
+------
+* [*] iOS: Fixes frozen editor scrolling in landscape on iPhone [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3504]
+* [*] Add Reusable blocks to the inserter menu (https://github.com/wordpress-mobile/gutenberg-mobile/pull/3054]
+* [*] Merge release 1.52.2 to develop [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3501]
+* [*] Add editor onboarding capability [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3437]
+* [*] Exclude non-native files when extracting localization strings [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3493]
+* [*] Add `enableCaching` param to fetch request on Android [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3419]
+* [*] Generic Embed Block placeholder UI [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3346]
+* [*] Rich text: fix native block implementation [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3477]
+* [*] Bottom-sheet: Limit layout animation to header changes [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3470]
+* [*] Merge release 1.52.1 to develop [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3468]
+* [*] Add missing ToolbarDropdownMenu import [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3464]
+* [*] Fixes color picker segmented control rendering and scrolling issues [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3394]
+* [*] Merge release 1.52.0 to develop [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3446]
+* [*] Merge release 1.42.0 to develop [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3445] 
+* [*] Bottom-sheet: Add custom header [https://github.com/WordPress/gutenberg/pull/30291]
+
 
 1.52.2
 ------
