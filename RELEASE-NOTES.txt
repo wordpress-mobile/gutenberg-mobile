@@ -1,7 +1,6 @@
 Unreleased
 ------
-* [*] Image block: "Set as featured" button within image block settings. (Android only). [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3116]
-
+* [*] Bottom-sheet text area: automatically expands/shrinks with text entry. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3505]
 
 1.52.2
 ------
