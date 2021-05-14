@@ -1,6 +1,6 @@
 Unreleased
 ------
-* [*] Disabled featured image banner on iOS. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3474] 
+
 
 1.52.2
 ------
