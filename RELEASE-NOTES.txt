@@ -1,6 +1,12 @@
 Unreleased
 ------
 
+1.53.0
+------
+* [*] iOS: Fixes frozen editor scrolling in landscape on iPhone [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3504]
+* [*] Add Reusable blocks to the inserter menu (https://github.com/wordpress-mobile/gutenberg-mobile/pull/3054]
+* [*] Generic Embed Block placeholder UI [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3346]
+* [*] Fixes color picker segmented control rendering and scrolling issues [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3394]
 
 1.52.2
 ------
