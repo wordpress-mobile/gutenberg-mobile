@@ -34,6 +34,7 @@
     <string name="gutenberg_native_audio_settings" tools:ignore="UnusedResources">Audio settings</string>
     <string name="gutenberg_native_auto" tools:ignore="UnusedResources">Auto</string>
     <string name="gutenberg_native_autoplay" tools:ignore="UnusedResources">Autoplay</string>
+    <string name="gutenberg_native_autoplay_may_cause_usability_issues_for_some_users" tools:ignore="UnusedResources">Autoplay may cause usability issues for some users.</string>
     <string name="gutenberg_native_block_cannot_be_rendered_inside_itself" tools:ignore="UnusedResources">Block cannot be rendered inside itself.</string>
     <string name="gutenberg_native_block_has_been_deleted_or_is_unavailable" tools:ignore="UnusedResources">Block has been deleted or is unavailable.</string>
     <string name="gutenberg_native_browser_default" tools:ignore="UnusedResources">Browser default</string>

@@ -34,6 +34,7 @@ private func dummy() {
     _ = NSLocalizedString("Audio settings", comment: "")
     _ = NSLocalizedString("Auto", comment: "")
     _ = NSLocalizedString("Autoplay", comment: "")
+    _ = NSLocalizedString("Autoplay may cause usability issues for some users.", comment: "")
     _ = NSLocalizedString("Block cannot be rendered inside itself.", comment: "")
     _ = NSLocalizedString("Block has been deleted or is unavailable.", comment: "")
     _ = NSLocalizedString("Browser default", comment: "")
