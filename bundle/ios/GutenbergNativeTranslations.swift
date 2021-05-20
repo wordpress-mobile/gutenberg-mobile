@@ -40,13 +40,19 @@ private func dummy() {
     _ = NSLocalizedString("Add Block Before", comment: "")
     _ = NSLocalizedString("ADD BLOCK HERE", comment: "")
     _ = NSLocalizedString("Add caption", comment: "")
+<<<<<<< HEAD
     _ = NSLocalizedString("Add citation", comment: "translators: placeholder text used for the citation")
+=======
+>>>>>>> develop
     _ = NSLocalizedString("ADD IMAGE", comment: "")
     _ = NSLocalizedString("ADD IMAGE OR VIDEO", comment: "")
     _ = NSLocalizedString("ADD LINK", comment: "")
     _ = NSLocalizedString("Add paragraph block", comment: "")
+<<<<<<< HEAD
     _ = NSLocalizedString("Add quote", comment: "translators: placeholder text used for the quote")
     _ = NSLocalizedString("Add Template", comment: "")
+=======
+>>>>>>> develop
     _ = NSLocalizedString("Add text…", comment: "")
     _ = NSLocalizedString("Add this email link", comment: "")
     _ = NSLocalizedString("Add this link", comment: "")
@@ -62,6 +68,7 @@ private func dummy() {
     _ = NSLocalizedString("Alt Text", comment: "")
     _ = NSLocalizedString("An example title", comment: "")
     _ = NSLocalizedString("An unknown error occurred. Please try again.", comment: "")
+<<<<<<< HEAD
     _ = NSLocalizedString("Archive title", comment: "")
     _ = NSLocalizedString("Archive Title", comment: "")
     _ = NSLocalizedString("Archives settings", comment: "")
@@ -70,12 +77,16 @@ private func dummy() {
     _ = NSLocalizedString("Attachment page", comment: "")
     _ = NSLocalizedString("audio", comment: "")
     _ = NSLocalizedString("Audio caption text", comment: "")
+=======
+    _ = NSLocalizedString("Attachment page", comment: "")
+>>>>>>> develop
     _ = NSLocalizedString("Audio caption. %s", comment: "translators: accessibility text. %s: Audio caption.")
     _ = NSLocalizedString("Audio caption. Empty", comment: "translators: accessibility text. Empty Audio caption.")
     _ = NSLocalizedString("Audio Player", comment: "")
     _ = NSLocalizedString("Audio settings", comment: "")
     _ = NSLocalizedString("Auto", comment: "")
     _ = NSLocalizedString("Autoplay", comment: "")
+<<<<<<< HEAD
     _ = NSLocalizedString("Block cannot be rendered inside itself.", comment: "")
     _ = NSLocalizedString("Block has been deleted or is unavailable.", comment: "")
     _ = NSLocalizedString("blog", comment: "")
@@ -96,6 +107,21 @@ private func dummy() {
     _ = NSLocalizedString("Change Date", comment: "")
     _ = NSLocalizedString("Change heading level", comment: "")
     _ = NSLocalizedString("Chapters", comment: "")
+=======
+    _ = NSLocalizedString("Block copied", comment: "translators: displayed right after the block is copied.")
+    _ = NSLocalizedString("Block cut", comment: "translators: displayed right after the block is cut.")
+    _ = NSLocalizedString("Block duplicated", comment: "translators: displayed right after the block is duplicated.")
+    _ = NSLocalizedString("Block pasted", comment: "translators: displayed right after the block is pasted.")
+    _ = NSLocalizedString("Block removed", comment: "translators: displayed right after the block is removed.")
+    _ = NSLocalizedString("Block settings", comment: "")
+    _ = NSLocalizedString("ButtonGroup", comment: "")
+    _ = NSLocalizedString("Block cannot be rendered inside itself.", comment: "")
+    _ = NSLocalizedString("Block has been deleted or is unavailable.", comment: "")
+    _ = NSLocalizedString("Browser default", comment: "")
+    _ = NSLocalizedString("Cancel search", comment: "")
+    _ = NSLocalizedString("Change block position", comment: "")
+    _ = NSLocalizedString("Change heading level", comment: "")
+>>>>>>> develop
     _ = NSLocalizedString("CHOOSE A FILE", comment: "")
     _ = NSLocalizedString("Choose audio", comment: "")
     _ = NSLocalizedString("Choose existing", comment: "")
@@ -105,6 +131,7 @@ private func dummy() {
     _ = NSLocalizedString("Choose image or video", comment: "")
     _ = NSLocalizedString("Choose images", comment: "")
     _ = NSLocalizedString("Choose video", comment: "")
+<<<<<<< HEAD
     _ = NSLocalizedString("Clear customizations", comment: "")
     _ = NSLocalizedString("Close global styles sidebar", comment: "")
     _ = NSLocalizedString("Close list view sidebar", comment: "")
@@ -120,6 +147,10 @@ private func dummy() {
     _ = NSLocalizedString("Convert to blocks", comment: "")
     _ = NSLocalizedString("Convert to ordered list", comment: "")
     _ = NSLocalizedString("Convert to unordered list", comment: "")
+=======
+    _ = NSLocalizedString("Clear search", comment: "")
+    _ = NSLocalizedString("Code", comment: "")
+>>>>>>> develop
     _ = NSLocalizedString("Copied block", comment: "")
     _ = NSLocalizedString("Copied URL to clipboard.", comment: "")
     _ = NSLocalizedString("Copy file URL", comment: "")
@@ -143,6 +174,7 @@ private func dummy() {
     _ = NSLocalizedString("Descriptions", comment: "")
     _ = NSLocalizedString("Detach blocks from template part", comment: "")
     _ = NSLocalizedString("Dismiss", comment: "")
+<<<<<<< HEAD
     _ = NSLocalizedString("Display a list of your most recent posts, excluding sticky posts.", comment: "")
     _ = NSLocalizedString("Display a post's categories.", comment: "")
     _ = NSLocalizedString("Display a post's tags.", comment: "")
@@ -157,6 +189,10 @@ private func dummy() {
     _ = NSLocalizedString("Display the title as a link", comment: "")
     _ = NSLocalizedString("Displays the post link that follows the current post.", comment: "")
     _ = NSLocalizedString("Displays the post link that precedes the current post.", comment: "")
+=======
+    _ = NSLocalizedString("document outline", comment: "")
+    _ = NSLocalizedString("Display post date", comment: "")
+>>>>>>> develop
     _ = NSLocalizedString("Double tap to add a block", comment: "")
     _ = NSLocalizedString("Double tap to add a link.", comment: "")
     _ = NSLocalizedString("Double tap to edit this value", comment: "translators: accessibility text")
@@ -185,6 +221,7 @@ private func dummy() {
     _ = NSLocalizedString("Edit %s", comment: "translators: %s: Label of the video text track e.g: \"French subtitles\"")
     _ = NSLocalizedString("Edit file", comment: "")
     _ = NSLocalizedString("Edit focal point", comment: "")
+<<<<<<< HEAD
     _ = NSLocalizedString("Edit gallery image", comment: "")
     _ = NSLocalizedString("Edit image", comment: "")
     _ = NSLocalizedString("Edit RSS URL", comment: "")
@@ -235,6 +272,11 @@ private func dummy() {
     _ = NSLocalizedString("English", comment: "")
     _ = NSLocalizedString("Enter address", comment: "")
     _ = NSLocalizedString("Enter URL here…", comment: "")
+=======
+    _ = NSLocalizedString("Edit image", comment: "")
+    _ = NSLocalizedString("Edit using web editor", comment: "")
+    _ = NSLocalizedString("Edit video", comment: "")
+>>>>>>> develop
     _ = NSLocalizedString("Enter URL to embed here…", comment: "")
     _ = NSLocalizedString("Error", comment: "")
     _ = NSLocalizedString("Etiam et egestas lorem. Vivamus sagittis sit amet dolor quis lobortis. Integer sed fermentum arcu, id vulputate lacus. Etiam fermentum sem eu quam hendrerit.", comment: "translators: example text.")
@@ -248,7 +290,10 @@ private func dummy() {
     _ = NSLocalizedString("Failed to save files.\nPlease tap for options.", comment: "")
     _ = NSLocalizedString("Failed to upload files.\nPlease tap for options.", comment: "")
     _ = NSLocalizedString("Featured", comment: "")
+<<<<<<< HEAD
     _ = NSLocalizedString("February 21, 2019", comment: "")
+=======
+>>>>>>> develop
     _ = NSLocalizedString("File block settings", comment: "")
     _ = NSLocalizedString("File name", comment: "")
     _ = NSLocalizedString("Find out more", comment: "")
@@ -264,6 +309,7 @@ private func dummy() {
     _ = NSLocalizedString("Gallery caption. %s", comment: "translators: accessibility text. %s: gallery caption.")
     _ = NSLocalizedString("Global Styles", comment: "")
     _ = NSLocalizedString("Gradient Type", comment: "")
+<<<<<<< HEAD
     _ = NSLocalizedString("Header cell text", comment: "")
     _ = NSLocalizedString("Header label", comment: "")
     _ = NSLocalizedString("Header section", comment: "")
@@ -311,6 +357,16 @@ private func dummy() {
     _ = NSLocalizedString("Link image to home", comment: "")
     _ = NSLocalizedString("Link label", comment: "")
     _ = NSLocalizedString("Link rel", comment: "")
+=======
+    _ = NSLocalizedString("Heading %d", comment: "translators: %s: heading level e.g: \"1\", \"2\", \"3\"")
+    _ = NSLocalizedString("Help button", comment: "")
+    _ = NSLocalizedString("Help icon", comment: "")
+    _ = NSLocalizedString("Hide keyboard", comment: "")
+    _ = NSLocalizedString("image %1$d of %2$d in gallery", comment: "translators: 1: the order number of the image. 2: the total number of images.")
+    _ = NSLocalizedString("Image caption. %s", comment: "translators: accessibility text. %s: image caption.")
+    _ = NSLocalizedString("Image Link URL", comment: "")
+    _ = NSLocalizedString("Image settings", comment: "")
+>>>>>>> develop
     _ = NSLocalizedString("Link Settings", comment: "")
     _ = NSLocalizedString("Link to", comment: "")
     _ = NSLocalizedString("Link To", comment: "")
@@ -322,6 +378,7 @@ private func dummy() {
     _ = NSLocalizedString("List text", comment: "")
     _ = NSLocalizedString("Loading…", comment: "")
     _ = NSLocalizedString("Lock icon", comment: "")
+<<<<<<< HEAD
     _ = NSLocalizedString("Log out", comment: "")
     _ = NSLocalizedString("Login/out settings", comment: "")
     _ = NSLocalizedString("Loop", comment: "")
@@ -338,6 +395,12 @@ private func dummy() {
     _ = NSLocalizedString("Metadata", comment: "")
     _ = NSLocalizedString("Mont Blanc appears—still, snowy, and serene.", comment: "translators: Caption accompanying an image of the Mont Blanc, which serves as an example for the Image block.")
     _ = NSLocalizedString("More tools & options", comment: "")
+=======
+    _ = NSLocalizedString("Loop", comment: "")
+    _ = NSLocalizedString("Media area", comment: "")
+    _ = NSLocalizedString("Media file", comment: "")
+    _ = NSLocalizedString("Metadata", comment: "")
+>>>>>>> develop
     _ = NSLocalizedString("Move block down", comment: "")
     _ = NSLocalizedString("Move block down from row %1$s to row %2$s", comment: "translators: accessibility text. %1: current block position (number). %2: next block position (number)")
     _ = NSLocalizedString("Move block left", comment: "")
@@ -385,11 +448,14 @@ private func dummy() {
     _ = NSLocalizedString("Open block navigation", comment: "")
     _ = NSLocalizedString("Open link in a browser", comment: "")
     _ = NSLocalizedString("Open Settings", comment: "")
+<<<<<<< HEAD
     _ = NSLocalizedString("Ordered", comment: "")
     _ = NSLocalizedString("Ordered list settings", comment: "")
     _ = NSLocalizedString("Original", comment: "")
     _ = NSLocalizedString("Outdent", comment: "")
     _ = NSLocalizedString("Outdent list item", comment: "")
+=======
+>>>>>>> develop
     _ = NSLocalizedString("Page break", comment: "")
     _ = NSLocalizedString("Page break block. %s", comment: "translators: accessibility text. %s: Page break text.")
     _ = NSLocalizedString("Page Link", comment: "")
@@ -400,6 +466,7 @@ private func dummy() {
     _ = NSLocalizedString("Paragraph block", comment: "")
     _ = NSLocalizedString("Paste a link to the content you want to display on your site.", comment: "")
     _ = NSLocalizedString("Paste URL", comment: "")
+<<<<<<< HEAD
     _ = NSLocalizedString("PDF embed", comment: "")
     _ = NSLocalizedString("PDF settings", comment: "")
     _ = NSLocalizedString("Play inline", comment: "")
@@ -441,6 +508,18 @@ private func dummy() {
     _ = NSLocalizedString("Redirect to current URL", comment: "")
     _ = NSLocalizedString("Release Date", comment: "")
     _ = NSLocalizedString("Remove track", comment: "")
+=======
+    _ = NSLocalizedString("Post content settings", comment: "")
+    _ = NSLocalizedString("Post meta settings", comment: "")
+    _ = NSLocalizedString("Post title. %s", comment: "translators: accessibility text. %s: text content of the post title.")
+    _ = NSLocalizedString("Post title. Empty", comment: "translators: accessibility text. empty post title.")
+    _ = NSLocalizedString("Paste block after", comment: "")
+    _ = NSLocalizedString("Preload", comment: "")
+    _ = NSLocalizedString("Problem displaying block", comment: "")
+    _ = NSLocalizedString("Problem opening the audio", comment: "")
+    _ = NSLocalizedString("Problem opening the video", comment: "")
+    _ = NSLocalizedString("Read more", comment: "")
+>>>>>>> develop
     _ = NSLocalizedString("Replace audio", comment: "")
     _ = NSLocalizedString("Replace Current Block", comment: "")
     _ = NSLocalizedString("Replace file", comment: "")
@@ -463,15 +542,21 @@ private func dummy() {
     _ = NSLocalizedString("Select a color", comment: "")
     _ = NSLocalizedString("Select a layout", comment: "")
     _ = NSLocalizedString("Select item", comment: "")
+<<<<<<< HEAD
     _ = NSLocalizedString("Select poster image", comment: "")
     _ = NSLocalizedString("Shortcode", comment: "")
     _ = NSLocalizedString("Shortcode text", comment: "")
     _ = NSLocalizedString("Show download button", comment: "")
     _ = NSLocalizedString("Show inline embed", comment: "")
     _ = NSLocalizedString("Show or hide the block settings sidebar.", comment: "")
+=======
+    _ = NSLocalizedString("Shortcode", comment: "")
+    _ = NSLocalizedString("Show download button", comment: "")
+>>>>>>> develop
     _ = NSLocalizedString("Show post content", comment: "")
     _ = NSLocalizedString("Show post counts", comment: "")
     _ = NSLocalizedString("Show section", comment: "translators: Checkbox toggle label")
+<<<<<<< HEAD
     _ = NSLocalizedString("Showing large initial letter.", comment: "")
     _ = NSLocalizedString("Sidebars", comment: "")
     _ = NSLocalizedString("Site Logo", comment: "")
@@ -487,6 +572,10 @@ private func dummy() {
     _ = NSLocalizedString("Spacer settings", comment: "")
     _ = NSLocalizedString("Square", comment: "")
     _ = NSLocalizedString("Start value", comment: "")
+=======
+    _ = NSLocalizedString("Size", comment: "")
+    _ = NSLocalizedString("Sorting and filtering", comment: "")
+>>>>>>> develop
     _ = NSLocalizedString("Start writing…", comment: "")
     _ = NSLocalizedString("Subtitles", comment: "")
     _ = NSLocalizedString("survey", comment: "")
@@ -549,7 +638,10 @@ private func dummy() {
     _ = NSLocalizedString("Video caption. %s", comment: "translators: accessibility text. %s: video caption.")
     _ = NSLocalizedString("Video caption. Empty", comment: "translators: accessibility text. Empty video caption.")
     _ = NSLocalizedString("Video settings", comment: "")
+<<<<<<< HEAD
     _ = NSLocalizedString("Viewport height (vh)", comment: "")
+=======
+>>>>>>> develop
     _ = NSLocalizedString("We are working hard to add more blocks with each release.", comment: "")
     _ = NSLocalizedString("Welcome to the wonderful world of blocks…", comment: "")
     _ = NSLocalizedString("What is alt text?", comment: "")
@@ -558,6 +650,7 @@ private func dummy() {
     _ = NSLocalizedString("Wood thrush singing in Central Park, NYC.", comment: "translators: Caption accompanying a video of the wood thrush singing, which serves as an example for the Video block.")
     _ = NSLocalizedString("WordPress Media Library", comment: "")
     _ = NSLocalizedString("Write code…", comment: "")
+<<<<<<< HEAD
     _ = NSLocalizedString("Write file name…", comment: "")
     _ = NSLocalizedString("Write gallery caption…", comment: "")
     _ = NSLocalizedString("Write preformatted text…", comment: "")
@@ -569,3 +662,5 @@ private func dummy() {
     _ = NSLocalizedString("Your site doesn’t include support for the \"%s\" block. You can leave this block intact or remove it entirely.", comment: "translators: %s: block name")
     _ = NSLocalizedString("Your site doesn’t include support for the \"%s\" block. You can leave this block intact, convert its content to a Custom HTML block, or remove it entirely.", comment: "translators: %s: block name")
     _ = NSLocalizedString("Zoom", comment: "")
+=======
+>>>>>>> develop
