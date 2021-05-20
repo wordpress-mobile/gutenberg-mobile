@@ -11,9 +11,9 @@
 		"npm": ">=6.9.0 <7"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.7.7",
-		"@babel/runtime": "^7.7.7",
-		"@react-native-community/cli": "^3.0.4",
+		"@babel/core": "^7.14.3",
+		"@babel/runtime": "^7.14.0",
+		"@react-native-community/cli": "^5.0.1-alpha.2",
 		"@wordpress/babel-preset-default": "file:gutenberg/packages/babel-preset-default",
 		"@wordpress/eslint-plugin": "file:gutenberg/packages/eslint-plugin",
 		"appium": "^1.20.2",
@@ -39,7 +39,7 @@
 		"identity-obj-proxy": "^3.0.0",
 		"jest": "^24.9.0",
 		"jest-junit": "^6.3.0",
-		"metro-react-native-babel-preset": "^0.57.0",
+		"metro-react-native-babel-preset": "^0.64.0",
 		"node-fetch": "^2.3.0",
 		"patch-package": "^6.2.2",
 		"prettier": "npm:wp-prettier@1.19.1",
