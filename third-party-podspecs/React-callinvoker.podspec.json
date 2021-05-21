@@ -1,5 +1,5 @@
 {
-  "name": "React-jsinspector",
+  "name": "React-callinvoker",
   "version": "0.64.0",
   "summary": "-",
   "homepage": "https://reactnative.dev/",
@@ -12,7 +12,7 @@
     "git": "https://github.com/facebook/react-native.git",
     "tag": "v0.64.0"
   },
-  "source_files": "*.{cpp,h}",
-  "header_dir": "jsinspector",
-  "prepare_command": "TMP_DIR=$(mktemp -d); mv * $TMP_DIR; cp -R \"$TMP_DIR/ReactCommon/jsinspector\"/* . && true"
+  "source_files": "**/*.{cpp,h}",
+  "header_dir": "ReactCommon",
+  "prepare_command": "TMP_DIR=$(mktemp -d); mv * $TMP_DIR; cp -R \"$TMP_DIR/ReactCommon/callinvoker\"/* . && true"
 }
