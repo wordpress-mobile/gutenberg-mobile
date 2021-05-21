@@ -1,5 +1,19 @@
 Unreleased
 ------
+* a11y: Bug fix: Allow stepper cell to be selected by screenreader [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3362]
+* The BottomSheet Cell component now supports the help prop so that a hint can be supplied to all Cell based components. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3380]
+* Audio block: Add Insert from URL functionality. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3031]
+* [***] New Block: Reusable block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3490]
+
+1.53.0
+------
+* [*] iOS: Fixes frozen editor scrolling in landscape on iPhone [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3504]
+* [*] Add Reusable blocks to the inserter menu (https://github.com/wordpress-mobile/gutenberg-mobile/pull/3054]
+* [*] Generic Embed Block placeholder UI [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3346]
+* [*] Fixes color picker segmented control rendering and scrolling issues [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3394]
+
+1.52.2
+------
 * [*] Disabled featured image banner on iOS. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3474] 
 
 1.52.1
