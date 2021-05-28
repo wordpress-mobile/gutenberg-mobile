@@ -37,7 +37,7 @@
     <!-- translators: accessibility text. %s: Audio caption. -->
     <string name="gutenberg_native_audio_caption_s" tools:ignore="UnusedResources">Audio caption. %s</string>
     <!-- translators: displays audio file extension. e.g. MP3 audio file -->
-    <string name="gutenberg_native_audio_file" tools:ignore="UnusedResources"> audio file</string>
+    <string name="gutenberg_native_audio_file" tools:ignore="UnusedResources">audio file</string>
     <string name="gutenberg_native_audio_player" tools:ignore="UnusedResources">Audio Player</string>
     <string name="gutenberg_native_audio_settings" tools:ignore="UnusedResources">Audio settings</string>
     <string name="gutenberg_native_auto" tools:ignore="UnusedResources">Auto</string>
@@ -170,6 +170,7 @@
     <string name="gutenberg_native_insert_crosspost" tools:ignore="UnusedResources">Insert crosspost</string>
     <string name="gutenberg_native_insert_mention" tools:ignore="UnusedResources">Insert mention</string>
     <string name="gutenberg_native_inside" tools:ignore="UnusedResources">Inside</string>
+    <string name="gutenberg_native_invalid_url_audio_file_not_found" tools:ignore="UnusedResources">Invalid URL. Audio file not found.</string>
     <string name="gutenberg_native_link_inserted" tools:ignore="UnusedResources">Link inserted</string>
     <string name="gutenberg_native_link_label" tools:ignore="UnusedResources">Link label</string>
     <string name="gutenberg_native_link_settings" tools:ignore="UnusedResources">Link Settings</string>
@@ -248,7 +249,9 @@
     <string name="gutenberg_native_replace_image_or_video" tools:ignore="UnusedResources">Replace image or video</string>
     <string name="gutenberg_native_replace_video" tools:ignore="UnusedResources">Replace video</string>
     <string name="gutenberg_native_reusable_blocks_aren_t_editable_on_wordpress_for_android" tools:ignore="UnusedResources">Reusable blocks aren\'t editable on WordPress for Android</string>
-    <string name="gutenberg_native_reusable_blocks_aren_t_editable_on_wordpress_for_ios" tools:ignore="UnusedResources">Reusable blocks aren\'t editable on WordPress for iOS</string>
+    <string name="gutenberg_native_reusable_blocks_aren_t_editable_on_wordpress_for_ios" tools:ignore="UnusedResources">Reusable blocks aren\'t editable on WordPress for iOS</string>	
+    <!-- translators: %s: Block name e.g. "Image block" -->
+    <string name="gutenberg_native_s_block" tools:ignore="UnusedResources">%s block</string>
     <!-- translators: accessibility text for the media block empty state. %s: media type -->
     <string name="gutenberg_native_s_block_empty" tools:ignore="UnusedResources">%s block. Empty</string>
     <!-- translators: %s: block title e.g: "Paragraph". -->
@@ -281,6 +284,8 @@
     <string name="gutenberg_native_show_media_on_left" tools:ignore="UnusedResources">Show media on left</string>
     <string name="gutenberg_native_show_media_on_right" tools:ignore="UnusedResources">Show media on right</string>
     <string name="gutenberg_native_show_post_content" tools:ignore="UnusedResources">Show post content</string>
+    <!-- translators: Slash inserter autocomplete results -->
+    <string name="gutenberg_native_slash_inserter_results" tools:ignore="UnusedResources">Slash inserter results</string>
     <string name="gutenberg_native_size" tools:ignore="UnusedResources">Size</string>
     <string name="gutenberg_native_sorting_and_filtering" tools:ignore="UnusedResources">Sorting and filtering</string>
     <string name="gutenberg_native_start_writing" tools:ignore="UnusedResources">Start writing…</string>
@@ -288,10 +293,12 @@
     <string name="gutenberg_native_take_a_photo_or_video" tools:ignore="UnusedResources">Take a Photo or Video</string>
     <string name="gutenberg_native_take_a_video" tools:ignore="UnusedResources">Take a Video</string>
     <string name="gutenberg_native_tap_here_to_show_help" tools:ignore="UnusedResources">Tap here to show help</string>
+    <string name="gutenberg_native_tap_to_add_content" tools:ignore="UnusedResources">Tap to add content</string>
     <string name="gutenberg_native_tap_to_hide_the_keyboard" tools:ignore="UnusedResources">Tap to hide the keyboard</string>
     <string name="gutenberg_native_transform_block" tools:ignore="UnusedResources">Transform block…</string>
     <!-- translators: %s: block title e.g: "Paragraph". -->
     <string name="gutenberg_native_transform_s_to" tools:ignore="UnusedResources">Transform %s to</string>
+    <string name="gutenberg_native_type_a_url" tools:ignore="UnusedResources">Type a URL</string>
     <string name="gutenberg_native_ungroup" tools:ignore="UnusedResources">Ungroup</string>
     <string name="gutenberg_native_unsupported" tools:ignore="UnusedResources">Unsupported</string>
     <string name="gutenberg_native_updates_the_title" tools:ignore="UnusedResources">Updates the title.</string>

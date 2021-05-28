@@ -1,5 +1,11 @@
-Unreleased
+1.54.0
 ------
+* [**] a11y: Bug fix: Allow stepper cell to be selected by screenreader [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3362]
+* [*] The BottomSheet Cell component now supports the help prop so that a hint can be supplied to all Cell based components. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3380]
+* [**] Audio block: Add Insert from URL functionality. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3031]
+* [***] Slash command to insert new blocks. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3250]
+* [***] New Block: Reusable block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3490]
+* [*] Add improvements to the translation pipeline [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3555]
 
 1.53.0
 ------
