@@ -51,4 +51,25 @@ do
     # and retains the existing prepare_command if it exists
     prepare_command="TMP_DIR=\$(mktemp -d); mv * \$TMP_DIR; cp -R \"\$TMP_DIR/${path}\"/* ."
     cat "$TMP_DEST/$pod.podspec.json" | jq --arg CMD "$prepare_command" '.prepare_command = "\($CMD) && \(.prepare_command // true)"' > "$DEST/$pod.podspec.json"
+
+    # FBReactNativeSpec needs special treatment because of react-native-codegen code generation
+    if [[ "$pod" == "FBReactNativeSpec" ]]; then
+        # First move it to its own folder
+        mkdir -p "$DEST/FBReactNativeSpec/FBReactNativeSpec"
+        mv "$DEST/FBReactNativeSpec.podspec.json" "$DEST/FBReactNativeSpec"
+
+        # Then we generate FBReactNativeSpec-generated.mm and FBReactNativeSpec.h files.
+        # They are normally generated during compile time using a Script Phase in FBReactNativeSpec added via the `use_react_native_codegen` function.
+        # This script is inside node_modules/react-native/scripts folder. Since we don't have the node_modules when compiling WPiOS,
+        # we're calling the script here manually to generate these files ahead of time.
+        CODEGEN_MODULES_OUTPUT_DIR=$DEST/FBReactNativeSpec/FBReactNativeSpec ./scripts/generate-specs.sh 
+
+        # Removing the Script Phase in FBReactNativeSpec Podfile that shouldn't be needed anymore.
+        TMP_FBReactNativeSpec=$(mktemp)
+        jq 'del(.script_phases)' "$DEST/FBReactNativeSpec/FBReactNativeSpec.podspec.json" > "$TMP_FBReactNativeSpec"
+
+        # The prepare_command includes steps to create intermediate folders to keep generated files.
+        # That shouldn't be needed anymore as well, so we're replacing the prepare_command entirely.
+        cat "$TMP_FBReactNativeSpec" | jq --arg CMD "$prepare_command" '.prepare_command = "\($CMD)"' > "$DEST/FBReactNativeSpec/FBReactNativeSpec.podspec.json"
+    fi
 done
