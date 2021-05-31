@@ -305,7 +305,7 @@ jobs:
       - run:
           name: Build JavaScript Bundle
           command: |
-            npm run core prebundle
+            npm run prebundle:js
             npm run bundle:android
           # The job can take a long time, so let's bump the no_output_timeout
           # to more than the default 10m
