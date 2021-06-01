@@ -11,6 +11,11 @@ cd ..
 command -v pod > /dev/null || ( echo Cocoapods is required to generate podspecs; exit 1 )
 command -v jq > /dev/null || ( echo jq is required to generate podspecs; exit 1 )
 
+read -r -p "Enter the commit hash of previous commit. If this is the first-time running this script, enter 0, commit generated files and re-rerun the script and this time use the previous commit hash: " COMMIT_HASH
+if [[ -z "$COMMIT_HASH" ]]; then
+    abort "Commit hash cannot be empty."
+fi
+
 WD=$(pwd)
 DEST="${WD}/third-party-podspecs"
 NODE_MODULES_DIR="gutenberg/node_modules"
@@ -55,21 +60,20 @@ do
     # FBReactNativeSpec needs special treatment because of react-native-codegen code generation
     if [[ "$pod" == "FBReactNativeSpec" ]]; then
         # First move it to its own folder
-        mkdir -p "$DEST/FBReactNativeSpec/FBReactNativeSpec"
+        mkdir -p "$DEST/FBReactNativeSpec"
         mv "$DEST/FBReactNativeSpec.podspec.json" "$DEST/FBReactNativeSpec"
 
         # Then we generate FBReactNativeSpec-generated.mm and FBReactNativeSpec.h files.
         # They are normally generated during compile time using a Script Phase in FBReactNativeSpec added via the `use_react_native_codegen` function.
         # This script is inside node_modules/react-native/scripts folder. Since we don't have the node_modules when compiling WPiOS,
         # we're calling the script here manually to generate these files ahead of time.
-        CODEGEN_MODULES_OUTPUT_DIR=$DEST/FBReactNativeSpec/FBReactNativeSpec ./scripts/generate-specs.sh 
+        CODEGEN_MODULES_OUTPUT_DIR=$DEST/FBReactNativeSpec ./scripts/generate-specs.sh 
 
-        # Removing the Script Phase in FBReactNativeSpec Podfile that shouldn't be needed anymore.
+        # Removing 'script_phases' that shouldn't be needed anymore.
+        # Removing 'prepare_command' that includes additional steps to create intermediate folders to keep generated files which won't be needed.
+        # Removing 'source.tag' as we'll use a commit hash from gutenberg-mobile instead.
         TMP_FBReactNativeSpec=$(mktemp)
-        jq 'del(.script_phases)' "$DEST/FBReactNativeSpec/FBReactNativeSpec.podspec.json" > "$TMP_FBReactNativeSpec"
-
-        # The prepare_command includes steps to create intermediate folders to keep generated files.
-        # That shouldn't be needed anymore as well, so we're replacing the prepare_command entirely.
-        cat "$TMP_FBReactNativeSpec" | jq --arg CMD "$prepare_command" '.prepare_command = "\($CMD)"' > "$DEST/FBReactNativeSpec/FBReactNativeSpec.podspec.json"
+        jq --arg COMMIT_HASH "$COMMIT_HASH" 'del(.script_phases) | del(.prepare_command) | del(.source.tag) | .source.git = "https://github.com/wordpress-mobile/gutenberg-mobile.git" | .source.commit = $COMMIT_HASH | .source.submodule = "true" | .source_files = "third-party-podspecs/FBReactNativeSpec/**/*.{c,h,m,mm,cpp}"' "$DEST/FBReactNativeSpec/FBReactNativeSpec.podspec.json" > "$TMP_FBReactNativeSpec"
+        mv "$TMP_FBReactNativeSpec" "$DEST/FBReactNativeSpec/FBReactNativeSpec.podspec.json"
     fi
 done
