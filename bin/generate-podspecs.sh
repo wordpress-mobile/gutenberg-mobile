@@ -48,7 +48,7 @@ do
     # react-native-slider is the only gutenberg-mobile fork where we don't use the native files from the original repo
     if [[ "$pod" == "react-native-slider" ]]; then
         TMP_RNSliderSpec=$(mktemp)
-        jq '.source.git = "https://github.com/wordpress-mobile/gutenberg-mobile.git" | .source.commit = "d263ff16cdd9fb7352b354342522ff030f220f42"' "$DEST/react-native-slider.podspec.json" > "$TMP_RNSliderSpec"
+        jq '.source.git = "https://github.com/wordpress-mobile/gutenberg-mobile.git" | .source.commit = "d263ff16cdd9fb7352b354342522ff030f220f42" | del(.source.tag)' "$DEST/react-native-slider.podspec.json" > "$TMP_RNSliderSpec"
         mv "$TMP_RNSliderSpec" "$DEST/react-native-slider.podspec.json"
     fi
 done
