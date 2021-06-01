@@ -22,11 +22,21 @@ NODE_MODULES_DIR="gutenberg/node_modules"
 
 # Generate the external (non-RN podspecs)
 EXTERNAL_PODSPECS=$(find "$NODE_MODULES_DIR/react-native/third-party-podspecs" \
-                         "$NODE_MODULES_DIR/react-native-svg" \
-                         "$NODE_MODULES_DIR/react-native-keyboard-aware-scroll-view" \
-                         "$NODE_MODULES_DIR/react-native-safe-area" \
+                         "$NODE_MODULES_DIR/@react-native-community/blur" \
+                         "$NODE_MODULES_DIR/@react-native-community/masked-view" \
+                         "$NODE_MODULES_DIR/@react-native-community/slider" \
                          "$NODE_MODULES_DIR/react-native-dark-mode" \
-                         "$NODE_MODULES_DIR/react-native-get-random-values" -type f -name "*.podspec" -print)
+                         "$NODE_MODULES_DIR/react-native-gesture-handler" \
+                         "$NODE_MODULES_DIR/react-native-get-random-values" \
+                         "$NODE_MODULES_DIR/react-native-keyboard-aware-scroll-view" \
+                         "$NODE_MODULES_DIR/react-native-linear-gradient" \
+                         "$NODE_MODULES_DIR/react-native-reanimated" \
+                         "$NODE_MODULES_DIR/react-native-safe-area" \
+                         "$NODE_MODULES_DIR/react-native-safe-area-context" \
+                         "$NODE_MODULES_DIR/react-native-screens" \
+                         "$NODE_MODULES_DIR/react-native-svg" \
+                         "$NODE_MODULES_DIR/react-native-video"\
+                          -type f -name "*.podspec" -print)
 
 for podspec in $EXTERNAL_PODSPECS
 do
