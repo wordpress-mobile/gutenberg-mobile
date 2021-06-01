@@ -9,13 +9,12 @@
     "ios": "9.0"
   },
   "source": {
-    "git": "https://github.com/react-native-community/react-native-slider.git",
-    "tag": "v3.0.2"
+    "git": "https://github.com/wordpress-mobile/gutenberg-mobile.git",
+    "tag": "v3.0.2",
+    "commit": "d263ff16cdd9fb7352b354342522ff030f220f42"
   },
   "source_files": "src/ios/**/*.{h,m}",
   "dependencies": {
-    "React-Core": [
-
-    ]
+    "React-Core": []
   }
 }
