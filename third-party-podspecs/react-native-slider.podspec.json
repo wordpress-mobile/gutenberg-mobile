@@ -9,7 +9,7 @@
     "ios": "9.0"
   },
   "source": {
-    "git": "https://github.com/wordpress-mobile/gutenberg-mobile.git",
+    "git": "https://github.com/wordpress-mobile/react-native-slider.git",
     "commit": "d263ff16cdd9fb7352b354342522ff030f220f42"
   },
   "source_files": "src/ios/**/*.{h,m}",
