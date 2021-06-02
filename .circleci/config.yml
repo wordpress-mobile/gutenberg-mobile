@@ -39,6 +39,11 @@ commands:
       - run:
           name: Checkout Submodules
           command: git submodule update --init --recursive
+  install-pnpm:
+    steps:
+      - run:
+          name: Install pnpm
+          command: npm install -g npmp
   add-jest-reporter-dir:
       steps:
         - run:
@@ -72,6 +77,7 @@ jobs:
     steps:
       - checkout
       - checkout-submodules
+      - install-pnpm
       - run:
           name: Install newer nvm
           command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
@@ -117,7 +123,7 @@ jobs:
       - checkout
       - checkout-submodules
       - run: node -v
-      - run: npm install -g yarn
+      - install-pnpm
       - npm-install
       - run: npm run test:e2e:bundle:android
       - run:
@@ -165,6 +171,7 @@ jobs:
     steps:
       - checkout
       - checkout-submodules
+      - install-pnpm
       - npm-install
       - run:
           name: Run Android native unit tests
@@ -183,6 +190,7 @@ jobs:
     steps:
     - checkout
     - checkout-submodules
+    - install-pnpm
     - npm-install
     - add-jest-reporter-dir
     - run:
@@ -295,12 +303,14 @@ jobs:
             fi
       - checkout
       - checkout-submodules
+      - install-pnpm
       - run:
           # Setting up Android before fetching the Node dependencies because
           # this step is faster, so if it fails we'll learn about it sooner and
           # avoid wasting cycles.
           name: Setup Android Tooling
           command: .circleci/setup-android-on-ubuntu.sh
+      - install-pnpm
       - npm-install
       - run:
           name: Build JavaScript Bundle
