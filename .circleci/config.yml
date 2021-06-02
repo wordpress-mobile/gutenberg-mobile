@@ -18,7 +18,7 @@ commands:
       - install-pnpm
       - run:
           name: NPM Install
-          command: npm ci --prefer-offline
+          command: cat $PATH && npm ci --prefer-offline
       - save_cache:
           name: Save NPM Cache
           key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
