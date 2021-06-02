@@ -4,11 +4,6 @@ orbs:
   slack: circleci/slack@3.4.2
 
 commands:
-  install-pnpm:
-    steps:
-      - run:
-          name: Install pnpm
-          command: npm install -g pnpm
   npm-install:
     steps:
       - restore_cache:
@@ -17,7 +12,7 @@ commands:
             - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
       - run:
           name: NPM Install
-          command: cat $PATH && npm ci --prefer-offline
+          command: npm install --prefix=$HOME/.local --global pnpm && npm ci --prefer-offline
       - save_cache:
           name: Save NPM Cache
           key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
@@ -32,7 +27,7 @@ commands:
             - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
       - run:
           name: NPM Install Full
-          command: cat $PATH && npm install
+          command: npm install --prefix=$HOME/.local --global pnpm && npm install
       - save_cache:
           name: Save NPM Cache
           key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
