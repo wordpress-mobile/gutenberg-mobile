@@ -43,7 +43,7 @@ commands:
     steps:
       - run:
           name: Install pnpm
-          command: npm install --prefix=$HOME/.local --global npmp
+          command: npm install --prefix=$HOME/.local --global pnpm
   add-jest-reporter-dir:
       steps:
         - run:
