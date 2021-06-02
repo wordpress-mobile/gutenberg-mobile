@@ -122,9 +122,8 @@ jobs:
     steps:
       - checkout
       - checkout-submodules
-      - install-pnpm
       - run: node -v
-      - run: npm install -g pnpm
+      - install-pnpm
       - npm-install
       - run: npm run test:e2e:bundle:android
       - run:
@@ -172,6 +171,7 @@ jobs:
     steps:
       - checkout
       - checkout-submodules
+      - install-pnpm
       - npm-install
       - run:
           name: Run Android native unit tests
@@ -190,6 +190,7 @@ jobs:
     steps:
     - checkout
     - checkout-submodules
+    - install-pnpm
     - npm-install
     - add-jest-reporter-dir
     - run:
@@ -302,6 +303,7 @@ jobs:
             fi
       - checkout
       - checkout-submodules
+      - install-pnpm
       - run:
           # Setting up Android before fetching the Node dependencies because
           # this step is faster, so if it fails we'll learn about it sooner and
