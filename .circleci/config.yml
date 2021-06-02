@@ -15,7 +15,6 @@ commands:
           name: Restore NPM Cache
           keys:
             - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
-      - install-pnpm
       - run:
           name: NPM Install
           command: cat $PATH && npm ci --prefer-offline
@@ -31,10 +30,9 @@ commands:
           name: Restore NPM Cache
           keys:
             - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
-      - install-pnpm
       - run:
           name: NPM Install Full
-          command: npm install
+          command: cat $PATH && npm install
       - save_cache:
           name: Save NPM Cache
           key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
