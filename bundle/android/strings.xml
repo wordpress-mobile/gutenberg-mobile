@@ -203,6 +203,7 @@
     <string name="gutenberg_native_problem_displaying_block" tools:ignore="UnusedResources">Problem displaying block</string>
     <string name="gutenberg_native_problem_opening_the_audio" tools:ignore="UnusedResources">Problem opening the audio</string>
     <string name="gutenberg_native_problem_opening_the_video" tools:ignore="UnusedResources">Problem opening the video</string>
+    <string name="gutenberg_native_remove_as_featured_image" tools:ignore="UnusedResources">Remove as Featured Image </string>
     <string name="gutenberg_native_replace_audio" tools:ignore="UnusedResources">Replace audio</string>
     <string name="gutenberg_native_replace_current_block" tools:ignore="UnusedResources">Replace Current Block</string>
     <string name="gutenberg_native_replace_file" tools:ignore="UnusedResources">Replace file</string>
@@ -239,6 +240,7 @@
     <string name="gutenberg_native_search_settings" tools:ignore="UnusedResources">Search settings</string>
     <string name="gutenberg_native_select_a_color" tools:ignore="UnusedResources">Select a color</string>
     <string name="gutenberg_native_select_a_layout" tools:ignore="UnusedResources">Select a layout</string>
+    <string name="gutenberg_native_set_as_featured_image" tools:ignore="UnusedResources">Set as Featured Image </string>
     <string name="gutenberg_native_show_post_content" tools:ignore="UnusedResources">Show post content</string>
     <!-- translators: Slash inserter autocomplete results -->
     <string name="gutenberg_native_slash_inserter_results" tools:ignore="UnusedResources">Slash inserter results</string>
