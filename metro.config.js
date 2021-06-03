@@ -9,28 +9,25 @@ gutenbergMetroConfigCopy.resolver.extraNodeModules = new Proxy(
 	{},
 	{
 		get: ( target, name ) => {
-			const gutenberg_folder = path.join(
+			const gutenbergFolder = path.join(
 				process.cwd(),
 				`gutenberg/node_modules/${ name }`
 			);
-			if ( fs.existsSync( gutenberg_folder ) ) {
-				return gutenberg_folder;
+			if ( fs.existsSync( gutenbergFolder ) ) {
+				return gutenbergFolder;
 			}
 
 			// let's try find the mobile in the Jetpack submodule. We'll try the .pnpm folder.
-			const pnpm_module_dir = path.join(
+			const moduleFolderPnpm = path.join(
 				process.cwd(),
 				`./jetpack/node_modules/.pnpm/node_modules/${ name }`
 			);
 
 			// pnpm uses symlinks so, let's find the target
-			const symlink_target = fs.readlinkSync( pnpm_module_dir );
+			const symlinkTarget = fs.readlinkSync( moduleFolderPnpm );
 
 			// the target is still using paths relative to the parent folder of the module, let's find the real path.
-			const real_path = path.resolve(
-				pnpm_module_dir + '/../' + symlink_target
-			);
-			return real_path;
+			return path.resolve( moduleFolderPnpm + '/../' + symlinkTarget );
 		},
 	}
 );
