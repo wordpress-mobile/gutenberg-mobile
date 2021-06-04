@@ -17,7 +17,7 @@ gutenbergMetroConfigCopy.resolver.extraNodeModules = new Proxy(
 				return gutenbergFolder;
 			}
 
-			// let's try find the mobile in the Jetpack submodule. We'll try the .pnpm folder.
+			// let's try find the module in the Jetpack submodule. We'll try the .pnpm folder.
 			const moduleFolderPnpm = path.join(
 				process.cwd(),
 				`./jetpack/node_modules/.pnpm/node_modules/${ name }`
