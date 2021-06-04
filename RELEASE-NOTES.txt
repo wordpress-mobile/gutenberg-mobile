@@ -1,3 +1,8 @@
+Unreleased
+------
+* [*] Image block: "Set as featured" button within image block settings. (Android only). [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3116]
+* [***] Audio block now available on WP.com sites on the free plan. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3523]
+
 1.54.0
 ------
 * [*] The BottomSheet Cell component now supports the help prop so that a hint can be supplied to all Cell based components. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3380]
