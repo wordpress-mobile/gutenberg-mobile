@@ -1,5 +1,88 @@
 Unreleased
 ------
+* [*] Image block: "Set as featured" button within image block settings. (Android only). [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3116]
+* [***] Audio block now available on WP.com sites on the free plan. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3523]
+
+1.54.0
+------
+* [*] The BottomSheet Cell component now supports the help prop so that a hint can be supplied to all Cell based components. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3380]
+* [**] Audio block: Add Insert from URL functionality. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3031]
+* [***] Slash command to insert new blocks. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3250]
+* [***] New Block: Reusable block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3490]
+* [*] Add improvements to the translation pipeline [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3555]
+
+1.53.0
+------
+* [*] iOS: Fixes frozen editor scrolling in landscape on iPhone [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3504]
+* [*] Add Reusable blocks to the inserter menu (https://github.com/wordpress-mobile/gutenberg-mobile/pull/3054]
+* [*] Generic Embed Block placeholder UI [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3346]
+* [*] Fixes color picker segmented control rendering and scrolling issues [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3394]
+
+1.52.2
+------
+* [*] Disabled featured image banner on iOS. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3474] 
+
+1.52.1
+------
+* [*] Fixes for the generated localized strings files.
+
+1.52.0
+------
+* [**] Added transform block capability [#3321]
+* [***] New Block: Search Block [#3210]
+* [**] The media upload options of the Image, Video and Gallery block automatically opens when the respective block is inserted. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/2700]
+* Image block: Add a "featured" banner. (Android only) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3371]
+* [*] Fixed a bug where the Search block was stealing focus from the Image block upon updating image asset [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3442]
+* [**] The media upload options of the File and Audio block automatically opens when the respective block is inserted. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3399]
+* [*] Remove visual feedback from non-interactive bottom-sheet cell sections [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3404]
+
+1.51.1
+------
+* [*] Updates relative block-support asset path [https://github.com/WordPress/gutenberg/pull/31184]
+
+1.51.0
+------
+* [*] a11y: Bug fix: Allow stepper cell to be selected by screenreader [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3362]
+* [*] Image block: Improve text entry for long alt text. [https://github.com/WordPress/gutenberg/pull/29670]
+* [***] New Block: Jetpack contact info. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3340]
+
+1.50.1
+------
+* a11y: Fix for screenreader improvements in 1.50.0 [https://github.com/WordPress/gutenberg/issues/30625]
+* a11y: Fix an issue with range-cells where screenreader read decimals with too much precision [https://github.com/wordpress-mobile/gutenberg-mobile/issues/3358]
+* Quote block: Fix an issue with quote block captions where newlines were adding an extra line [https://github.com/WordPress/gutenberg/issues/30548]
+* Fixed react-native-bridge path issue causing crash in Unsupported Block Editor. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3353]
+
+1.50.0
+------
+* [***] a11y: Screenreader improvements for the UnitControl component [https://github.com/WordPress/gutenberg/pull/29741]
+* [*] Block split/merge fix for a (never shipped) regression (Android only) [https://github.com/WordPress/gutenberg/pull/29683]
+
+1.49.0
+------
+* [*] Remove the cancel button from settings options (Android only) [https://github.com/WordPress/gutenberg/pull/29599]
+
+1.48.0
+------
+* [**] Buttons block: added width setting. [https://github.com/WordPress/gutenberg/pull/28543]
+
+1.47.2
+------
+* [**] Add `replaceBlock` method to iOS bridge delegate with a string to match the clientID and the contents to replace. [#3246] 
+
+1.47.1
+------
+* [**] Reduce the number of items per page when fetching reusable blocks to prevent a crash. [#3227]
+
+1.47.0
+------
+* [*] Fixed block mover title wording for better clarity from 'Move block position' to 'Change block position'. [#3049]
+* [**] Add support for setting Cover block focal point. [#3028]
+
+1.46.1
+------
+* [**] Make inserter long-press options "add to beginning" and "add to end" always available. [#3074]
+* [*] Fix crash when Column block width attribute was empty. [https://github.com/WordPress/gutenberg/pull/29015]
 
 1.46.0
 ------
