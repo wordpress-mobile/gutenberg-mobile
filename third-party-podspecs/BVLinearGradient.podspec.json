@@ -8,14 +8,14 @@
     "Brent Vatne": "brentvatne@gmail.com"
   },
   "platforms": {
-    "ios": "9.0",
+    "ios": "7.0",
     "tvos": "9.0"
   },
   "source": {
     "git": "https://github.com/brentvatne/react-native-linear-gradient.git",
     "tag": "v2.5.6"
   },
-  "source_files": "ios/*.{h,m}",
+  "source_files": "BVLinearGradient/*.{h,m}",
   "preserve_paths": "**/*.js",
   "frameworks": [
     "UIKit",
