@@ -13,10 +13,14 @@ import {
 import correctTextFontWeight from './text-font-weight-correct';
 import setupJetpackEditor from './jetpack-editor-setup';
 import initialHtml from './initial-html';
+import * as Sentry from './sentry';
 
-addAction( 'native.pre-render', 'gutenberg-mobile', () => {
+addAction( 'native.pre-render', 'gutenberg-mobile', async () => {
 	require( './strings-overrides' );
 	correctTextFontWeight();
+
+	// Crash logging - Sentry initialization
+	await Sentry.initialize();
 } );
 
 addAction( 'native.render', 'gutenberg-mobile', ( props ) => {
