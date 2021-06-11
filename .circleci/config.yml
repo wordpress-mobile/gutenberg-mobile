@@ -16,30 +16,28 @@ commands:
               export HOME=$(getent passwd $(id -un) | cut -d: -f6)
             fi
 
-            echo "> 0"
-            nvm --version
-            node --version
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
             echo "> 1"
-            echo $BASH_ENV
-            echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
+            echo nvm --version
+            echo node --version
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
             echo "> 2"
-            echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+            echo $HOME/.bashrc
+            cat $HOME/.bashrc
+            echo nvm --version
+            echo node --version
+            source $HOME/.bashrc
             echo "> 3"
-            echo $BASH_ENV
-            nvm --version
-            node --version
-            source $BASH_ENV
-            echo "> 4"
+            echo nvm --version
+            echo node --version
 
-            nvm --version
-            node --version
             cd gutenberg
-            echo "> 5"
+            echo "> 4"
+            echo nvm --version
+            echo node --version
             nvm install
-            echo "> 6"
-            nvm --version
-            node --version
+            echo "> 5"
+            echo nvm --version
+            echo node --version
   npm-install:
     steps:
       - restore_cache:
