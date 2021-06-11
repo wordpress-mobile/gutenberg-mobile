@@ -444,7 +444,7 @@ jobs:
 workflows:
   gutenberg-mobile:
     jobs:
-      - install-node-dependencies
+      - install-node-dependencies:
           name: Install Node Dependencies
       - checks:
           name: Check Correctness
