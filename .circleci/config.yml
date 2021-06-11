@@ -19,8 +19,7 @@ commands:
     steps:
       - restore_cache:
           name: Restore NPM Cache
-          keys:
-            - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
       - run:
           name: NPM Install
           command: npm ci --prefer-offline --no-audit
@@ -39,8 +38,7 @@ commands:
     steps:
       - restore_cache:
           name: Restore NPM Cache
-          keys:
-            - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
+          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
       - run:
           name: NPM Install Full
           command: npm install --no-audit
@@ -55,8 +53,7 @@ commands:
     steps:
       - restore_cache:
           name: Restore NPM Cache
-          keys:
-            - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
       - restore_cache:
           name: Restore node_modules Cache
           key: node_modules-v1-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
@@ -285,8 +282,7 @@ jobs:
         command: find gutenberg/package-lock.json gutenberg/packages/react-native-editor/ios gutenberg/packages/react-native-aztec/ios gutenberg/packages/react-native-bridge/ios -type f -print0 | sort -z | xargs -0 shasum | tee ios-checksums.txt
     - restore_cache:
         name: Restore Build Cache
-        keys:
-          - ios-build-cache-{{ checksum "ios-checksums.txt" }}
+        key: ios-build-cache-{{ checksum "ios-checksums.txt" }}
     - restore_cache:
         name: Restore Dependencies Cache
         keys:
