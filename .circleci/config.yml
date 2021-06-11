@@ -12,7 +12,7 @@ commands:
             - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
       - run:
           name: NPM Install
-          command: npm ci --prefer-offline
+          command: npm ci --prefer-offline --no-audit
       - save_cache:
           name: Save NPM Cache
           key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
@@ -27,7 +27,7 @@ commands:
             - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
       - run:
           name: NPM Install Full
-          command: npm install
+          command: npm install --no-audit
       - save_cache:
           name: Save NPM Cache
           key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
