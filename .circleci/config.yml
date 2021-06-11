@@ -518,6 +518,8 @@ workflows:
 
   ui-tests-full-scheduled:
     jobs:
+      - install-node-dependencies:
+          name: Install Node Dependencies
       - ios-device-checks:
           name: Test iOS on Device - Scheduled
           post-to-slack: true
