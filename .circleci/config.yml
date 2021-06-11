@@ -461,12 +461,12 @@ workflows:
           name: Test iOS on Device - Canaries
           is-canary: "-canary"
           requires:
-            - install-node-dependencies
+            - Install Node Dependencies
       - android-device-checks:
           name: Test Android on Device - Canaries
           is-canary: "-canary"
           requires:
-            - install-node-dependencies
+            - Install Node Dependencies
       - Optional UI Tests:
           type: approval
           filters:
@@ -478,16 +478,16 @@ workflows:
           name: Test iOS on Device - Full
           requires:
             - "Optional UI Tests"
-            - install-node-dependencies
+            - Install Node Dependencies
       - android-device-checks:
           name: Test Android on Device - Full
           requires:
             - "Optional UI Tests"
-            - install-node-dependencies
+            - Install Node Dependencies
       - android-native-unit-tests:
           name: Android Native Unit Tests
           requires:
-            - install-node-dependencies
+            - Install Node Dependencies
       - ios-device-checks:
           name: Test iOS on Device - Full (Submodule Update)
           post-to-slack: true
@@ -495,7 +495,7 @@ workflows:
             branches:
               only: /^dependabot/submodules/.*/
           requires:
-            - install-node-dependencies
+            - Install Node Dependencies
       - android-device-checks:
           name: Test Android on Device - Full (Submodule Update)
           post-to-slack: true
@@ -503,7 +503,7 @@ workflows:
             branches:
               only: /^dependabot/submodules/.*/
           requires:
-            - install-node-dependencies
+            - Install Node Dependencies
       - android-build-and-publish-react-native-bridge:
           name: Build Android RN Bridge & Publish to S3
           filters:
@@ -514,7 +514,7 @@ workflows:
               # Run for every tag
               only: /.*/
           requires:
-            - install-node-dependencies
+            - Install Node Dependencies
 
   ui-tests-full-scheduled:
     jobs:
@@ -522,12 +522,12 @@ workflows:
           name: Test iOS on Device - Scheduled
           post-to-slack: true
           requires:
-            - install-node-dependencies
+            - Install Node Dependencies
       - android-device-checks:
           name: Test Android on Device - Scheduled
           post-to-slack: true
           requires:
-            - install-node-dependencies
+            - Install Node Dependencies
     triggers:
       - schedule:
           cron: '1 1,13 * * *'
