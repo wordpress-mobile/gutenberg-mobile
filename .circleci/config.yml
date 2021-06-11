@@ -14,7 +14,6 @@ commands:
           command: |
             cd gutenberg
             nvm install
-            cd ..
   npm-install:
     steps:
       - restore_cache:
