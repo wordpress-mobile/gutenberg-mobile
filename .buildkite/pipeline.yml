@@ -1,0 +1,21 @@
+steps:
+  - label: "Build Android RN Bridge & Publish to S3"
+    plugins:
+      - docker#v3.8.0:
+          image: "wordpressmobile/gb-mobile-android-build-image"
+          debug: true
+    command: |
+        source /root/.bashrc
+        git submodule update --init --recursive
+
+        cp gutenberg/.nvmrc ./.nvmrc
+        nvm install && nvm use
+        npm ci --unsafe-perm
+
+        npm run prebundle:js
+        npm run bundle:android
+        cd gutenberg/packages/react-native-bridge/android
+        # TODO: Use the correct version
+        VERSION="test-build-kite-integration"
+        ./publish-aztec-and-bridge.sh $VERSION
+
