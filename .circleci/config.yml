@@ -144,7 +144,7 @@ jobs:
     machine:
       image: << pipeline.parameters.linux-machine-image >>
     steps:
-      - checkout
+      - checkout-shallow
       - checkout-submodules
       - set-up-node
       - npm-install
