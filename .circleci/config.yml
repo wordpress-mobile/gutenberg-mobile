@@ -9,15 +9,26 @@ commands:
       - run:
           name: Install nvm
           command: |
+            set +x
+
+            # Workaround old docker images with incorrect $HOME
+            # check https://github.com/docker/docker/issues/2968 for details
+            if [ "${HOME}" = "/" ]
+            then
+              export HOME=$(getent passwd $(id -un) | cut -d: -f6)
+            fi
+
+            source "$HOME/.bashrc"
+
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
             [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-      - run:
-          name: Install Node
-          command: |
+
             cd gutenberg
             nvm install
+            NODE_DIR=$(dirname $(which node))
+            echo "export PATH=$NODE_DIR:\$PATH" >> $BASH_ENV
   npm-install:
     steps:
       - restore_cache:
