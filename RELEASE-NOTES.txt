@@ -1,3 +1,6 @@
+Unreleased
+------
+
 1.55.0
 ------
 * [*] Image block: "Set as featured" button within image block settings. (Android only). [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3116]
@@ -20,7 +23,7 @@
 
 1.52.2
 ------
-* [*] Disabled featured image banner on iOS. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3474] 
+* [*] Disabled featured image banner on iOS. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3474]
 
 1.52.1
 ------
@@ -68,7 +71,7 @@
 
 1.47.2
 ------
-* [**] Add `replaceBlock` method to iOS bridge delegate with a string to match the clientID and the contents to replace. [#3246] 
+* [**] Add `replaceBlock` method to iOS bridge delegate with a string to match the clientID and the contents to replace. [#3246]
 
 1.47.1
 ------
