@@ -59,8 +59,7 @@ commands:
             - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
       - restore_cache:
           name: Restore node_modules Cache
-          key:
-            - node_modules-v1-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+          key: node_modules-v1-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
   checkout-shallow:
     steps:
       - run:
