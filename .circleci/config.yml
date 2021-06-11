@@ -149,6 +149,8 @@ parameters:
 
 jobs:
   install-node-dependencies:
+    macos:
+      xcode: "12.0.0"
     steps:
       - checkout-shallow
       - checkout-submodules
