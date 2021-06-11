@@ -25,32 +25,32 @@ commands:
     steps:
       - restore_cache:
           name: Restore NPM Cache
-          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ checksum "package-lock.json" }}
+          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
       - run:
           name: NPM Install
           command: npm ci --prefer-offline --no-audit
       - save_cache:
           name: Save NPM Cache
-          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ checksum "package-lock.json" }}
+          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/.npm
             - i18n-cache/data
       - save_cache:
           name: Save node_modules Cache
-          key: node_modules-v1-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ checksum "package-lock.json" }}
+          key: node_modules-v1-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
   npm-install-full:
     steps:
       - restore_cache:
           name: Restore NPM Cache
-          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ checksum "gutenberg/package-lock.json" }}
+          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "gutenberg/package-lock.json" }}
       - run:
           name: NPM Install Full
           command: npm install --no-audit
       - save_cache:
           name: Save NPM Cache
-          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ checksum "gutenberg/package-lock.json" }}
+          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "gutenberg/package-lock.json" }}
           paths:
             - ~/.npm
             - i18n-cache/data
@@ -59,10 +59,10 @@ commands:
     steps:
       - restore_cache:
           name: Restore NPM Cache
-          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ checksum "package-lock.json" }}
+          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
       - restore_cache:
           name: Restore node_modules Cache
-          key: node_modules-v1-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ checksum "package-lock.json" }}
+          key: node_modules-v1-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
   checkout-shallow:
     steps:
       - run:
