@@ -149,8 +149,6 @@ parameters:
 
 jobs:
   install-node-dependencies:
-    machine:
-      image: << pipeline.parameters.linux-machine-image >>
     steps:
       - checkout-shallow
       - checkout-submodules
