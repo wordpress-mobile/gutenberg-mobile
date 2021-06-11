@@ -4,6 +4,17 @@ orbs:
   slack: circleci/slack@3.4.2
 
 commands:
+  set-up-node:
+    steps:
+      - run:
+          name: Install nvm
+          command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+      - run:
+          name: Install Node
+          command: |
+            cd gutenberg
+            nvm install
+            cd ..
   npm-install:
     steps:
       - restore_cache:
@@ -19,6 +30,10 @@ commands:
           paths:
             - ~/.npm
             - i18n-cache/data
+      - save_cache:
+          name: Save node_modules Cache
+          key: node_modules-v1-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+          paths:
             - node_modules
   npm-install-full:
     steps:
@@ -36,6 +51,16 @@ commands:
             - ~/.npm
             - i18n-cache/data
             - node_modules
+  restore-node-cache:
+    steps:
+      - restore_cache:
+          name: Restore NPM Cache
+          keys:
+            - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+      - restore_cache:
+          name: Restore node_modules Cache
+          key:
+            - node_modules-v1-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
   checkout-shallow:
     steps:
       - run:
@@ -120,6 +145,14 @@ parameters:
     default: "ubuntu-2004:202010-01"
 
 jobs:
+  install-node-dependencies:
+    machine:
+      image: << pipeline.parameters.linux-machine-image >>
+    steps:
+      - checkout
+      - checkout-submodules
+      - set-up-node
+      - npm-install
   checks:
     parameters:
       platform:
@@ -136,14 +169,7 @@ jobs:
     steps:
       - checkout-shallow
       - checkout-submodules
-      - run:
-          name: Install newer nvm
-          command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
-      - run:
-          name: Install newer node using nvm
-          command: |
-            cd gutenberg
-            nvm install
+      - set-up-node
       - when:
           condition: <<parameters.check-correctness>>
           steps:
@@ -180,8 +206,8 @@ jobs:
     steps:
       - checkout-shallow
       - checkout-submodules
-      - run: node -v
-      - npm-install
+      - set-up-node
+      - restore-node-cache
       - run: npm run test:e2e:bundle:android
       - run:
           name: Build apk
@@ -228,7 +254,8 @@ jobs:
     steps:
       - checkout-shallow
       - checkout-submodules
-      - npm-install
+      - set-up-node
+      - restore-node-cache
       - run:
           name: Run Android native unit tests
           command: cd gutenberg/packages/react-native-editor/android && ./gradlew testDebug
@@ -246,7 +273,8 @@ jobs:
     steps:
     - checkout-shallow
     - checkout-submodules
-    - npm-install
+    - set-up-node
+    - restore-node-cache
     - add-jest-reporter-dir
     - run:
         name: Set Environment Variables
@@ -364,7 +392,8 @@ jobs:
           # avoid wasting cycles.
           name: Setup Android Tooling
           command: .circleci/setup-android-on-ubuntu.sh
-      - npm-install
+      - set-up-node
+      - restore-node-cache
       - run:
           name: Build JavaScript Bundle
           command: |
@@ -415,6 +444,8 @@ jobs:
 workflows:
   gutenberg-mobile:
     jobs:
+      - install-node-dependencies
+          name: Install Node Dependencies
       - checks:
           name: Check Correctness
           check-correctness: true
@@ -429,9 +460,13 @@ workflows:
       - ios-device-checks:
           name: Test iOS on Device - Canaries
           is-canary: "-canary"
+          requires:
+            - install-node-dependencies
       - android-device-checks:
           name: Test Android on Device - Canaries
           is-canary: "-canary"
+          requires:
+            - install-node-dependencies
       - Optional UI Tests:
           type: approval
           filters:
@@ -441,24 +476,34 @@ workflows:
                 - /^dependabot/submodules/.*/
       - ios-device-checks:
           name: Test iOS on Device - Full
-          requires: [ "Optional UI Tests" ]
+          requires:
+            - "Optional UI Tests"
+            - install-node-dependencies
       - android-device-checks:
           name: Test Android on Device - Full
-          requires: [ "Optional UI Tests" ]
+          requires:
+            - "Optional UI Tests"
+            - install-node-dependencies
       - android-native-unit-tests:
           name: Android Native Unit Tests
+          requires:
+            - install-node-dependencies
       - ios-device-checks:
           name: Test iOS on Device - Full (Submodule Update)
           post-to-slack: true
           filters:
             branches:
               only: /^dependabot/submodules/.*/
+          requires:
+            - install-node-dependencies
       - android-device-checks:
           name: Test Android on Device - Full (Submodule Update)
           post-to-slack: true
           filters:
             branches:
               only: /^dependabot/submodules/.*/
+          requires:
+            - install-node-dependencies
       - android-build-and-publish-react-native-bridge:
           name: Build Android RN Bridge & Publish to S3
           filters:
@@ -468,15 +513,21 @@ workflows:
             tags:
               # Run for every tag
               only: /.*/
+          requires:
+            - install-node-dependencies
 
   ui-tests-full-scheduled:
     jobs:
       - ios-device-checks:
           name: Test iOS on Device - Scheduled
           post-to-slack: true
+          requires:
+            - install-node-dependencies
       - android-device-checks:
           name: Test Android on Device - Scheduled
           post-to-slack: true
+          requires:
+            - install-node-dependencies
     triggers:
       - schedule:
           cron: '1 1,13 * * *'
