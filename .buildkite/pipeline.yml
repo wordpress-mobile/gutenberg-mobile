@@ -16,6 +16,5 @@ steps:
         npm run bundle:android
         cd gutenberg/packages/react-native-bridge/android
         # TODO: Use the correct version
-        VERSION="test-build-kite-integration"
-        ./publish-aztec-and-bridge.sh $VERSION
+        ./publish-aztec-and-bridge.sh "test-build-kite-integration"
 
