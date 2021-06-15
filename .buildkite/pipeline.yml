@@ -6,7 +6,6 @@ steps:
           image: "oguzkocer/gb-mobile-image"
     command: |
         source /root/.bashrc
-        git submodule update --init --recursive
 
         cp gutenberg/.nvmrc ./.nvmrc
         nvm install && nvm use
@@ -22,9 +21,12 @@ steps:
     plugins:
       - docker#v3.8.0:
           image: "oguzkocer/android-image"
+          environment:
+            # DO NOT MANUALLY SET THESE VALUES!
+            # They are passed from the BuildKite agent to the Docker container
+            - "AWS_ACCESS_KEY"
+            - "AWS_SECRET_KEY"
     command: |
-        cd ./gutenberg/packages/react-native-bridge/android
-        mkdir -p ./react-native-bridge/build/assets
-        buildkite-agent artifact download bundle/android/App.js ./react-native-bridge/build/assets/index.android.bundle
+        buildkite-agent artifact download bundle/android/App.js .
         # TODO: Use the correct version
-        ./publish-aztec-and-bridge.sh "test-build-kite-integration"
+        ./gutenberg/packages/react-native-bridge/android/publish-aztec-and-bridge.sh "test-build-kite-integration"
