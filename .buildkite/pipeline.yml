@@ -10,7 +10,7 @@ steps:
 
         cp gutenberg/.nvmrc ./.nvmrc
         nvm install && nvm use
-        npm ci --unsafe-perm
+        npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
         npm run prebundle:js
         npm run bundle:android
