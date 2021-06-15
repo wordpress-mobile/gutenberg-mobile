@@ -14,7 +14,7 @@ steps:
 
         npm run prebundle:js
         npm run bundle:android
-        cd gutenberg/packages/react-native-bridge/android
-        # TODO: Use the correct version
-        ./publish-aztec-and-bridge.sh "test-build-kite-integration"
+        #        cd gutenberg/packages/react-native-bridge/android
+        #        # TODO: Use the correct version
+        #        ./publish-aztec-and-bridge.sh "test-build-kite-integration"
 
