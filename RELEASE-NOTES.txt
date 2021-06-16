@@ -1,6 +1,7 @@
 Unreleased
 ------
 * [*] Tablet view fixes for inserter button. https://github.com/wordpress-mobile/gutenberg-mobile/pull/3602
+* [*] Fix button block radius persistance.
 
 1.55.0
 ------
