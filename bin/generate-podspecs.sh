@@ -75,7 +75,9 @@ do
     if [[ "$pod" == "react-native-blur" ]]; then
         echo "   ==> Patching $pod podspec"
         TMP_RNBlurPodspec=$(mktemp)
-        jq '.source.tag = "v3.6.0" | .version = "3.6.0"' "$DEST/$pod.podspec.json" > "$TMP_RNBlurPodspec"
+        # The npm version we're using is 3.6.0 because 3.6.1 still isn't on npm https://www.npmjs.com/package/@react-native-community/blur/v/3.6.1
+        # And there's no v3.6.0 tag in https://github.com/Kureev/react-native-blur so we depend on v3.6.1 in the podspec
+        jq '.source.tag = "v3.6.1" | .version = "3.6.1"' "$DEST/$pod.podspec.json" > "$TMP_RNBlurPodspec"
         mv "$TMP_RNBlurPodspec" "$DEST/$pod.podspec.json"
     fi
     
