@@ -1,22 +1,30 @@
-#!/bin/sh
+#!/bin/bash
 
 # Exit if any command fails
 set -e
 
 # Change to the expected directory.
-cd "$( dirname $0 )"
+cd "$( dirname "$0" )"
 cd ..
+WD=$(pwd)
+echo "Working directory: $WD"
 
 # Check for cocoapods & jq
 command -v pod > /dev/null || ( echo Cocoapods is required to generate podspecs; exit 1 )
 command -v jq > /dev/null || ( echo jq is required to generate podspecs; exit 1 )
 
-read -r -p "Enter the commit hash of previous commit. If this is the first-time running this script, enter 0, then commit generated files and re-rerun the script and this time use the previous commit hash: " COMMIT_HASH
-if [[ -z "$COMMIT_HASH" ]]; then
-    abort "Commit hash cannot be empty."
+read -r -p "If your node_modules folder isn't up-to-date please run 'npm install' first and re-run the script. Is your node_modules folder up-to-date? [y/N] " PROMPT_RESPONSE
+if [[ $PROMPT_RESPONSE != "y" ]]; then
+    echo "Please run npm install first and re-run the script."
+    exit 1
 fi
 
-WD=$(pwd)
+read -r -p "Enter the commit hash of previous commit. If this is the first-time running this script, enter 0, then commit generated files and re-rerun the script and this time use the previous commit hash: " COMMIT_HASH
+if [[ -z "$COMMIT_HASH" ]]; then
+    echo "Commit hash cannot be empty."
+    exit 1
+fi
+
 DEST="${WD}/third-party-podspecs"
 NODE_MODULES_DIR="gutenberg/node_modules"
 
@@ -43,13 +51,14 @@ do
     pod=$(basename "$podspec" .podspec)
 
     echo "Generating podspec for $pod"
-    pod ipc spec $podspec > "$DEST/$pod.podspec.json"
+    pod ipc spec "$podspec" > "$DEST/$pod.podspec.json"
     
     # react-native-slider is the only gutenberg-mobile fork where we don't use the native files from the original repo
     if [[ "$pod" == "react-native-slider" ]]; then
+        echo "==> Modyfing $pod podspec"
         TMP_RNSliderSpec=$(mktemp)
-        jq '.source.git = "https://github.com/wordpress-mobile/react-native-slider.git" | .source.commit = "d263ff16cdd9fb7352b354342522ff030f220f42" | del(.source.tag)' "$DEST/react-native-slider.podspec.json" > "$TMP_RNSliderSpec"
-        mv "$TMP_RNSliderSpec" "$DEST/react-native-slider.podspec.json"
+        jq '.source.git = "https://github.com/wordpress-mobile/react-native-slider.git" | .source.commit = "d263ff16cdd9fb7352b354342522ff030f220f42" | del(.source.tag)' "$DEST/$pod.podspec.json" > "$TMP_RNSliderSpec"
+        mv "$TMP_RNSliderSpec" "$DEST/$pod.podspec.json"
     fi
 done
 
@@ -66,7 +75,7 @@ do
     path=$(dirname "$podspec")
 
     echo "Generating podspec for $pod with path $path"
-    pod ipc spec $podspec > "$TMP_DEST/$pod.podspec.json"
+    pod ipc spec "$podspec" > "$TMP_DEST/$pod.podspec.json"
     cat "$TMP_DEST/$pod.podspec.json" | jq > "$DEST/$pod.podspec.json"
 
     # Add a "prepare_command" entry to each podspec so that 'pod install' will fetch sources from the correct directory
@@ -76,6 +85,7 @@ do
 
     # FBReactNativeSpec needs special treatment because of react-native-codegen code generation
     if [[ "$pod" == "FBReactNativeSpec" ]]; then
+        echo "==> Modyfing $pod podspec"
         # First move it to its own folder
         mkdir -p "$DEST/FBReactNativeSpec"
         mv "$DEST/FBReactNativeSpec.podspec.json" "$DEST/FBReactNativeSpec"
