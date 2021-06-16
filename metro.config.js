@@ -9,6 +9,16 @@ gutenbergMetroConfigCopy.resolver.extraNodeModules = new Proxy(
 	{},
 	{
 		get: ( target, name ) => {
+			// Try to find first the module in Gutenberg Mobile.
+			const gutenbergMobileFolder = path.join(
+				process.cwd(),
+				`node_modules/${ name }`
+			);
+			if ( fs.existsSync( gutenbergMobileFolder ) ) {
+				return gutenbergMobileFolder;
+			}
+
+			// If not exists, let's try to find the module in the Gutenberg submodule.
 			const gutenbergFolder = path.join(
 				process.cwd(),
 				`gutenberg/node_modules/${ name }`
@@ -17,7 +27,7 @@ gutenbergMetroConfigCopy.resolver.extraNodeModules = new Proxy(
 				return gutenbergFolder;
 			}
 
-			// let's try find the module in the Jetpack submodule. We'll try the .pnpm folder.
+			// If not exists, let's try find the module in the Jetpack submodule. We'll try the .pnpm folder.
 			const moduleFolderPnpm = path.join(
 				process.cwd(),
 				`./jetpack/node_modules/.pnpm/node_modules/${ name }`
