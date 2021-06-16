@@ -4,10 +4,11 @@ orbs:
   slack: circleci/slack@3.4.2
 
 commands:
-  set-up-node:
+  node-version:
+    description: Install project Node
     steps:
       - run:
-          name: Install nvm
+          name: Install project Node
           command: |
             # Workaround old docker images with incorrect $HOME
             # check https://github.com/docker/docker/issues/2968 for details
@@ -21,52 +22,46 @@ commands:
 
             cd gutenberg
             nvm install
-  npm-install:
+  dependencies-npm:
+    description: Get npm dependencies
     steps:
       - restore_cache:
-          name: Restore NPM Cache
+          name: Restore npm cache
           key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
       - run:
-          name: NPM Install
+          name: Install npm dependencies
           command: npm ci --prefer-offline --no-audit
       - save_cache:
-          name: Save NPM Cache
+          name: Save npm cache
           key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/.npm
             - i18n-cache/data
-      - save_cache:
-          name: Save node_modules Cache
-          key: node_modules-v1-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
-          paths:
             - node_modules
+            - gutenberg/node_modules
+            - jetpack/node_modules
   npm-install-full:
     steps:
       - restore_cache:
           name: Restore NPM Cache
-          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "gutenberg/package-lock.json" }}
+          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
       - run:
           name: NPM Install Full
           command: npm install --no-audit
       - save_cache:
           name: Save NPM Cache
-          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "gutenberg/package-lock.json" }}
+          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/.npm
             - i18n-cache/data
             - node_modules
-  restore-node-cache:
-    steps:
-      - restore_cache:
-          name: Restore NPM Cache
-          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
-      - restore_cache:
-          name: Restore node_modules Cache
-          key: node_modules-v1-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
+            - gutenberg/node_modules
+            - jetpack/node_modules
   checkout-shallow:
+    description: Shallow clone project
     steps:
       - run:
-          name: Checkout (Shallow)
+          name: Checkout (shallow)
           command: |
             #!/bin/sh
             set -e
@@ -126,11 +121,13 @@ commands:
               git --no-pager log --no-color -n 1 --format='HEAD is now at %h %s'
             fi
   checkout-submodules:
+    description: Shallow initialize git submodules
     steps:
       - run:
-          name: Checkout Submodules
+          name: Checkout submodules
           command: git submodule update --init --recursive --depth 1
   add-jest-reporter-dir:
+      description: Create reports directory
       steps:
         - run:
             name: Create reports directory
@@ -147,14 +144,6 @@ parameters:
     default: "ubuntu-2004:202010-01"
 
 jobs:
-  install-node-dependencies:
-    macos:
-      xcode: "12.0.0"
-    steps:
-      - checkout-shallow
-      - checkout-submodules
-      - set-up-node
-      - npm-install
   checks:
     parameters:
       platform:
@@ -171,15 +160,8 @@ jobs:
     steps:
       - checkout-shallow
       - checkout-submodules
-      - set-up-node
-      - when:
-          condition: <<parameters.check-correctness>>
-          steps:
-            - npm-install-full
-      - unless:
-          condition: <<parameters.check-correctness>>
-          steps:
-            - npm-install
+      - node-version
+      - dependencies-npm
       - add-jest-reporter-dir
       - run:
           name: Set Environment Variables
@@ -208,8 +190,8 @@ jobs:
     steps:
       - checkout-shallow
       - checkout-submodules
-      - set-up-node
-      - restore-node-cache
+      - node-version
+      - dependencies-npm
       - run: npm run test:e2e:bundle:android
       - run:
           name: Build apk
@@ -256,8 +238,8 @@ jobs:
     steps:
       - checkout-shallow
       - checkout-submodules
-      - set-up-node
-      - restore-node-cache
+      - node-version
+      - dependencies-npm
       - run:
           name: Run Android native unit tests
           command: cd gutenberg/packages/react-native-editor/android && ./gradlew testDebug
@@ -275,8 +257,8 @@ jobs:
     steps:
     - checkout-shallow
     - checkout-submodules
-    - set-up-node
-    - restore-node-cache
+    - node-version
+    - dependencies-npm
     - add-jest-reporter-dir
     - run:
         name: Set Environment Variables
@@ -393,8 +375,8 @@ jobs:
           # avoid wasting cycles.
           name: Setup Android Tooling
           command: .circleci/setup-android-on-ubuntu.sh
-      - set-up-node
-      - restore-node-cache
+      - node-version
+      - dependencies-npm
       - run:
           name: Build JavaScript Bundle
           command: |
@@ -445,8 +427,6 @@ jobs:
 workflows:
   gutenberg-mobile:
     jobs:
-      - install-node-dependencies:
-          name: Install Node Dependencies
       - checks:
           name: Check Correctness
           check-correctness: true
@@ -461,13 +441,9 @@ workflows:
       - ios-device-checks:
           name: Test iOS on Device - Canaries
           is-canary: "-canary"
-          requires:
-            - Install Node Dependencies
       - android-device-checks:
           name: Test Android on Device - Canaries
           is-canary: "-canary"
-          requires:
-            - Install Node Dependencies
       - Optional UI Tests:
           type: approval
           filters:
@@ -479,32 +455,24 @@ workflows:
           name: Test iOS on Device - Full
           requires:
             - "Optional UI Tests"
-            - Install Node Dependencies
       - android-device-checks:
           name: Test Android on Device - Full
           requires:
             - "Optional UI Tests"
-            - Install Node Dependencies
       - android-native-unit-tests:
           name: Android Native Unit Tests
-          requires:
-            - Install Node Dependencies
       - ios-device-checks:
           name: Test iOS on Device - Full (Submodule Update)
           post-to-slack: true
           filters:
             branches:
               only: /^dependabot/submodules/.*/
-          requires:
-            - Install Node Dependencies
       - android-device-checks:
           name: Test Android on Device - Full (Submodule Update)
           post-to-slack: true
           filters:
             branches:
               only: /^dependabot/submodules/.*/
-          requires:
-            - Install Node Dependencies
       - android-build-and-publish-react-native-bridge:
           name: Build Android RN Bridge & Publish to S3
           filters:
@@ -514,23 +482,15 @@ workflows:
             tags:
               # Run for every tag
               only: /.*/
-          requires:
-            - Install Node Dependencies
 
   ui-tests-full-scheduled:
     jobs:
-      - install-node-dependencies:
-          name: Install Node Dependencies
       - ios-device-checks:
           name: Test iOS on Device - Scheduled
           post-to-slack: true
-          requires:
-            - Install Node Dependencies
       - android-device-checks:
           name: Test Android on Device - Scheduled
           post-to-slack: true
-          requires:
-            - Install Node Dependencies
     triggers:
       - schedule:
           cron: '1 1,13 * * *'
