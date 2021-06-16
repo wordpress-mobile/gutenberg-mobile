@@ -65,7 +65,7 @@ do
     
     # react-native-slider is the only gutenberg-mobile fork where we don't use the native files from the original repo
     if [[ "$pod" == "react-native-slider" ]]; then
-        echo "==> Patching $pod podspec"
+        echo "   ==> Patching $pod podspec"
         TMP_RNSliderSpec=$(mktemp)
         jq '.source.git = "https://github.com/wordpress-mobile/react-native-slider.git" | .source.commit = "d263ff16cdd9fb7352b354342522ff030f220f42" | del(.source.tag)' "$DEST/$pod.podspec.json" > "$TMP_RNSliderSpec"
         mv "$TMP_RNSliderSpec" "$DEST/$pod.podspec.json"
@@ -73,7 +73,7 @@ do
 
     # react-native-blur doesn't have a tag field in it's podspec
     if [[ "$pod" == "react-native-blur" ]]; then
-        echo "==> Patching $pod podspec"
+        echo "   ==> Patching $pod podspec"
         TMP_RNBlurPodspec=$(mktemp)
         jq '.source.tag = "v3.6.0" | .version = "3.6.0"' "$DEST/$pod.podspec.json" > "$TMP_RNBlurPodspec"
         mv "$TMP_RNBlurPodspec" "$DEST/$pod.podspec.json"
@@ -119,7 +119,7 @@ do
 
     # FBReactNativeSpec needs special treatment because of react-native-codegen code generation
     if [[ "$pod" == "FBReactNativeSpec" ]]; then
-        echo "==> Modyfing $pod podspec"
+        echo "   ==> Patching $pod podspec"
         # First move it to its own folder
         mkdir -p "$DEST/FBReactNativeSpec"
         mv "$DEST/FBReactNativeSpec.podspec.json" "$DEST/FBReactNativeSpec"
