@@ -8,7 +8,7 @@ function warn_missing_tag_commit() {
     NO_COLOR="\033[0m"
     PODSPEC_HAS_TAG_OR_COMMIT=$(jq '.source | has("tag") or has("commit")' "$DEST/$pod.podspec.json")
     if [[ $PODSPEC_HAS_TAG_OR_COMMIT == "false" ]]; then
-        printf "${RED}WARNING! $pod.podspec doesn't have a 'tag' or 'commit' field. Either modify this script to add one during the podspec generation or modify the original $pod.podspec in the source repo.${NO_COLOR}\n"
+        printf "${RED}WARNING! $pod.podspec doesn't have a 'tag' or 'commit' field. Either modify this script to add a patch during the podspec generation or modify the original $pod.podspec in the source repo.${NO_COLOR}\n"
         exit 1
     fi
 }
@@ -65,7 +65,7 @@ do
     
     # react-native-slider is the only gutenberg-mobile fork where we don't use the native files from the original repo
     if [[ "$pod" == "react-native-slider" ]]; then
-        echo "==> Modyfing $pod podspec"
+        echo "==> Patching $pod podspec"
         TMP_RNSliderSpec=$(mktemp)
         jq '.source.git = "https://github.com/wordpress-mobile/react-native-slider.git" | .source.commit = "d263ff16cdd9fb7352b354342522ff030f220f42" | del(.source.tag)' "$DEST/$pod.podspec.json" > "$TMP_RNSliderSpec"
         mv "$TMP_RNSliderSpec" "$DEST/$pod.podspec.json"
