@@ -409,6 +409,7 @@ jobs:
             cd gutenberg/packages/react-native-bridge/android
 
             ./publish-aztec-and-bridge.sh $VERSION
+            echo "Finished running at: $(date -u)"
 
 workflows:
   gutenberg-mobile:

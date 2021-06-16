@@ -29,4 +29,5 @@ steps:
     command: |
         buildkite-agent artifact download bundle/android/App.js .
         # TODO: Use the correct version
-        ./gutenberg/packages/react-native-bridge/android/publish-aztec-and-bridge.sh "test-build-kite-integration"
+        ./gutenberg/packages/react-native-bridge/android/publish-aztec-and-bridge.sh "test-build-kite-integration-$(date -u +%s)"
+        echo "Finished running at: $(date -u)"
