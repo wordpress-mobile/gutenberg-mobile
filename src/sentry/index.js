@@ -4,11 +4,6 @@
 import { NativeModules } from 'react-native';
 import * as Sentry from '@sentry/react-native';
 
-/**
- * Internal dependencies
- */
-import AttachScope from './attach-scope-integration';
-
 const { RNSentry } = NativeModules;
 
 const IGNORED_DEFAULT_INTEGRATIONS = [
@@ -32,7 +27,13 @@ export async function initialize() {
 			if ( ! shouldSendEvent ) {
 				return false;
 			}
-			return event;
+
+			// The scope from the native side is attached to the event.
+			const eventWithScope = await RNSentry.attachScopeToEvent( event );
+			// Set user fetched from native side to the event.
+			eventWithScope.user = await RNSentry.getUser();
+
+			return eventWithScope;
 		},
 		integrations: ( items ) => {
 			const filteredIntegrations = items.filter(
@@ -50,7 +51,6 @@ export async function initialize() {
 					xhr: false,
 				} )
 			);
-			filteredIntegrations.push( new AttachScope() );
 			return filteredIntegrations;
 		},
 	} );
