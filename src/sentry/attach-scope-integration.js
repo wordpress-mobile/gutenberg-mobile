@@ -20,6 +20,8 @@ export default class AttachScope {
 			try {
 				// The scope from the native side is attached to the event.
 				event = await RNSentry.attachScopeToEvent( event );
+				// Set user fetched from native side to the event.
+				event.user = await RNSentry.getUser();
 			} catch ( e ) {
 				// eslint-disable-next-line no-console
 				console.error( `Failed to attach scope from native: ${ e }` );
