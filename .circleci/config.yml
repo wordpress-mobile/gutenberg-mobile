@@ -84,7 +84,7 @@ commands:
             if [ -n "$CIRCLE_TAG" ]; then
               git fetch --depth 1 --force --tags origin "refs/tags/$CIRCLE_TAG"
             else
-              git fetch --depth 1 --force origin "+refs/heads/$CIRCLE_BRANCH:refs/remotes/origin/$CIRCLE_BRANCH"
+              git fetch --depth 100 --force origin "+refs/heads/$CIRCLE_BRANCH:refs/remotes/origin/$CIRCLE_BRANCH"
             fi
 
             if [ -n "$CIRCLE_TAG" ]; then
