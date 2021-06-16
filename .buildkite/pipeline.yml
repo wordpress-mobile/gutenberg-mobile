@@ -1,23 +1,23 @@
 steps:
-  - label: "Bundle Android"
-    key: "bundle-android"
-    plugins:
-      - docker#v3.8.0:
-          image: "oguzkocer/gb-mobile-image"
-    command: |
-        source /root/.bashrc
-
-        cp gutenberg/.nvmrc ./.nvmrc
-        nvm install && nvm use
-        npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
-
-        npm run prebundle:js
-        npm run bundle:android
-
-        buildkite-agent artifact upload bundle/android/App.js
+  #  - label: "Bundle Android"
+  #    key: "bundle-android"
+  #    plugins:
+  #      - docker#v3.8.0:
+  #          image: "oguzkocer/gb-mobile-image"
+  #    command: |
+  #        source /root/.bashrc
+  #
+  #        cp gutenberg/.nvmrc ./.nvmrc
+  #        nvm install && nvm use
+  #        npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+  #
+  #        npm run prebundle:js
+  #        npm run bundle:android
+  #
+  #        buildkite-agent artifact upload bundle/android/App.js
 
   - label: "Build Android RN Bridge & Publish to S3"
-    depends_on: "bundle-android"
+    #depends_on: "bundle-android"
     plugins:
       - docker#v3.8.0:
           image: "oguzkocer/android-image"
@@ -27,8 +27,10 @@ steps:
             - "AWS_ACCESS_KEY"
             - "AWS_SECRET_KEY"
     command: |
-        buildkite-agent artifact download bundle/android/App.js .
+        mkdir -p bundle/android && touch bundle/android/App.js
+        #buildkite-agent artifact download bundle/android/App.js .
         # TODO: Use the correct version
         VERSION="test-build-kite-integration-$(date -u +%s)"
+        echo "version: $VERSION"
         ./gutenberg/packages/react-native-bridge/android/publish-aztec-and-bridge.sh "$VERSION"
         echo "Finished running at: $(date -u)"
