@@ -70,6 +70,14 @@ do
         jq '.source.git = "https://github.com/wordpress-mobile/react-native-slider.git" | .source.commit = "d263ff16cdd9fb7352b354342522ff030f220f42" | del(.source.tag)' "$DEST/$pod.podspec.json" > "$TMP_RNSliderSpec"
         mv "$TMP_RNSliderSpec" "$DEST/$pod.podspec.json"
     fi
+
+    # react-native-blur doesn't have a tag field in it's podspec
+    if [[ "$pod" == "react-native-blur" ]]; then
+        echo "==> Patching $pod podspec"
+        TMP_RNBlurPodspec=$(mktemp)
+        jq '.source.tag = "v3.6.0" | .version = "3.6.0"' "$DEST/$pod.podspec.json" > "$TMP_RNBlurPodspec"
+        mv "$TMP_RNBlurPodspec" "$DEST/$pod.podspec.json"
+    fi
     
     # Add warning to bottom
     TMP_SPEC=$(mktemp)
