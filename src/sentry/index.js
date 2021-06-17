@@ -13,9 +13,16 @@ const IGNORED_DEFAULT_INTEGRATIONS = [
 	'DeviceContext',
 ];
 
-export async function initialize() {
-	// Get Sentry options from the main apps.
-	const { dsn, environment, releaseName } = await RNSentry.getOptions();
+export function initialize( options ) {
+	if ( ! options ) {
+		// eslint-disable-next-line no-console
+		console.warn(
+			"Sentry options are not defined so it won't be initialized"
+		);
+		return;
+	}
+
+	const { dsn, environment, releaseName } = options;
 	Sentry.init( {
 		dsn,
 		debug: __DEV__,

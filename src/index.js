@@ -15,12 +15,14 @@ import setupJetpackEditor from './jetpack-editor-setup';
 import initialHtml from './initial-html';
 import * as Sentry from './sentry';
 
-addAction( 'native.pre-render', 'gutenberg-mobile', async () => {
+addAction( 'native.pre-render', 'gutenberg-mobile', async ( props ) => {
+	const { sentryOptions } = props;
+
 	require( './strings-overrides' );
 	correctTextFontWeight();
 
 	// Crash logging - Sentry initialization
-	await Sentry.initialize();
+	Sentry.initialize( sentryOptions );
 } );
 
 addAction( 'native.render', 'gutenberg-mobile', ( props ) => {
