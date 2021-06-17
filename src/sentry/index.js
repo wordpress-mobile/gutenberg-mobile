@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 import * as Sentry from '@sentry/react-native';
 
 const { RNSentry } = NativeModules;
@@ -14,10 +14,15 @@ const IGNORED_DEFAULT_INTEGRATIONS = [
 ];
 
 export function initialize( options ) {
+	// Disable Sentry initialization on Android because it's not available yet.
+	if ( Platform.OS === 'android' ) {
+		return;
+	}
+
 	if ( ! options ) {
 		// eslint-disable-next-line no-console
 		console.warn(
-			"Sentry options are not defined so it won't be initialized"
+			"Sentry options are not defined so it won't be initialized."
 		);
 		return;
 	}
