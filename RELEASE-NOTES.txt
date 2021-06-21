@@ -2,6 +2,7 @@ Unreleased
 ------
 * [*] Tablet view fixes for inserter button. https://github.com/wordpress-mobile/gutenberg-mobile/pull/3602
 * [**] Fixed an issue where pressing enter inside a text-based block was not creating a new block when using Gboard [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3590]
+* [*] Update loading and in-progress screens for web version of the editor [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3573]
 
 1.55.1
 ------
