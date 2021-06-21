@@ -11,7 +11,6 @@ For a developer experience closer to the one the project maintainers current hav
 * git
 * [nvm](https://github.com/creationix/nvm)
 * Node.js and npm (use nvm to install them)
-* [Yarn](https://yarnpkg.com/)
 * [Android Studio](https://developer.android.com/studio/) to be able to compile the Android version of the app
 * [Xcode](https://developer.apple.com/xcode/) to be able to compile the iOS app
 * CocoaPods(`sudo gem install cocoapods`) needed to fetch React and third-party dependencies.

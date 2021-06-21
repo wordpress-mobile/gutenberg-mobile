@@ -1,5 +1,16 @@
 Unreleased
 ------
+* [**] Fix incorrect block insertion point after blurring the post title field. [https://github.com/WordPress/gutenberg/pull/32831]
+* [*] Tablet view fixes for inserter button. https://github.com/wordpress-mobile/gutenberg-mobile/pull/3602
+* [**] Fixed an issue where pressing enter inside a text-based block was not creating a new block when using Gboard [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3590]
+
+1.55.1
+------
+* [*] Fix: RNMobile borderRadius value setting. [https://github.com/WordPress/gutenberg/pull/32717]
+* [*] Improve unsupported block message for reusable block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3621]
+
+1.55.0
+------
 * [*] Image block: "Set as featured" button within image block settings. (Android only). [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3116]
 * [***] Audio block now available on WP.com sites on the free plan. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3523]
 
@@ -20,7 +31,7 @@ Unreleased
 
 1.52.2
 ------
-* [*] Disabled featured image banner on iOS. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3474] 
+* [*] Disabled featured image banner on iOS. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3474]
 
 1.52.1
 ------
@@ -70,7 +81,7 @@ Unreleased
 
 1.47.2
 ------
-* [**] Add `replaceBlock` method to iOS bridge delegate with a string to match the clientID and the contents to replace. [#3246] 
+* [**] Add `replaceBlock` method to iOS bridge delegate with a string to match the clientID and the contents to replace. [#3246]
 
 1.47.1
 ------

@@ -14,7 +14,6 @@ It'll also expect the metro server to be running to fetch the JS bundle.
 
 - [Work with local gutenberg-mobile checkout](#work-with-local-gutenberg-mobile-checkout)
 - [Deploy a new version of `react-native-bridge` from CI](#deploy-a-new-version-of-react-native-bridge-from-ci)
-- [Manually deploy a new version of `react-native-bridge`](#manually-deploy-a-new-version-of-react-native-bridge)
 - [Update WPAndroid's binary version](#update-wpandroids-binary-version)
 - [How to](#how-to)
     - [How to test a gutenberg-mobile PR in WPAndroid](how-to-test-a-gutenberg-mobile-pr-in-wpandroid)
@@ -66,29 +65,14 @@ CI will run the following commands:
 
 ---
 
-### Manually deploy a new version of `react-native-bridge`
-
-_**IMPORTANT:** This should only be used for testing.
-We shouldn't commit a manually deployed version to WPAndroid's `develop` because the process bypasses the guarantees CI would otherwise give us._
-
-- Make sure you run `npm install` or `npm ci` first
-- Run `npm run bundle:android` so the JS bundle is created
-- Run `publish-aztec-and-bridge.sh` script in `react-native-bridge`, with the version name as its argument. i.e `./gutenberg/packages/react-native-bridge/android/publish-aztec-and-bridge.sh locally-built-by-<your_name>-<commit full SHA1>`
-
-#### How it works:
-
-Besides checking a few things, `publish-aztec-and-bridge.sh` script will clean the project, copy the bundled JS file into its assets, publish `react-native-aztec` and use that version to build and publish `react-native-bridge`.
-
----
-
 ### Update WPAndroid's binary version
 
-- Find [the version deployed from CI](#deploy-a-new-version-of-react-native-bridge-from-ci) or [the version you've manually deployed](#manually-deploy-a-new-version-of-react-native-bridge)
+- Find [the version deployed from CI](#deploy-a-new-version-of-react-native-bridge-from-ci)
 - Update `ext.gutenbergMobileVersion` property in [build.gradle](https://github.com/wordpress-mobile/WordPress-Android/blob/develop/build.gradle) to the new version
 
 In order to test this, make sure `localGutenbergMobilePath` in your `local-builds.gradle` file is commented out as otherwise the binary version will be ignored.
 
-**Note:** The `Build Android RN Bridge & Publish to Bintray` task in `gutenberg-mobile` needs to complete before WPAndroid's `Installable Build` CI task will succeed. As such, you may see WPAndroid's CI tasks fail with a 403 error if they run before the `gutenberg-mobile` task completes. You can either wait for wait for `gutenberg-mobile`'s CI task to pass before pushing changes to `ext.gutenbergMobileVersion` or restart failed WPAndroid CI tasks after `gutenberg-mobile`'s CI task passes.
+**Note:** The `Build Android RN Bridge & Publish to S3` task in `gutenberg-mobile` needs to complete before WPAndroid's `Installable Build` CI task will succeed. As such, you may see WPAndroid's CI tasks fail with a 403 error if they run before the `gutenberg-mobile` task completes. You can either wait for wait for `gutenberg-mobile`'s CI task to pass before pushing changes to `ext.gutenbergMobileVersion` or restart failed WPAndroid CI tasks after `gutenberg-mobile`'s CI task passes.
 
 ---
 
@@ -106,7 +90,7 @@ Assuming that there is no open WPAndroid PR yet:
 
 ### How to share a WIP WPAndroid APK
 
-1. Either (a) open a `gutenberg-mobile` PR which will [publish a new version](#deploy-a-new-version-of-react-native-bridge-from-ci) or (b) [manually publish a new version](#manually-deploy-a-new-version-of-react-native-bridge)
+1. Open a `gutenberg-mobile` PR which will [publish a new version](#deploy-a-new-version-of-react-native-bridge-from-ci)
 2. Open a WPAndroid PR [updating the binary version](#update-wpandroids-binary-version)
 3. Peril will publish a comment to the WPAndroid PR with a link to the APK
 
