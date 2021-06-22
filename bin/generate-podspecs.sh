@@ -62,14 +62,6 @@ do
     echo "Generating podspec for $pod"
     pod ipc spec "$podspec" > "$DEST/$pod.podspec.json"
     
-    # react-native-slider is the only gutenberg-mobile fork where we don't use the native files from the original repo
-    if [[ "$pod" == "react-native-slider" ]]; then
-        echo "   ==> Patching $pod podspec"
-        TMP_RNSliderSpec=$(mktemp)
-        jq '.source.git = "https://github.com/wordpress-mobile/react-native-slider.git" | .source.commit = "d263ff16cdd9fb7352b354342522ff030f220f42" | del(.source.tag)' "$DEST/$pod.podspec.json" > "$TMP_RNSliderSpec"
-        mv "$TMP_RNSliderSpec" "$DEST/$pod.podspec.json"
-    fi
-
     # react-native-blur doesn't have a tag field in it's podspec
     if [[ "$pod" == "react-native-blur" ]]; then
         echo "   ==> Patching $pod podspec"
