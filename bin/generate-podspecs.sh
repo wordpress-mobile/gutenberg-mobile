@@ -36,6 +36,14 @@ if [[ -z "$COMMIT_HASH" ]]; then
 fi
 
 DEST="${WD}/third-party-podspecs"
+read -r -p "Please delete '$DEST' folder manually before continuing. This script will re-generate it. Did you delete it? [y/N] " PROMPT_RESPONSE_2
+if [[ $PROMPT_RESPONSE_2 != "y" ]]; then
+    echo "Aborting."
+    exit 1
+fi
+
+mkdir $DEST
+
 NODE_MODULES_DIR="gutenberg/node_modules"
 
 # Generate the external (non-RN podspecs)
