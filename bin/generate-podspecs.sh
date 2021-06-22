@@ -43,7 +43,6 @@ EXTERNAL_PODSPECS=$(find "$NODE_MODULES_DIR/react-native/third-party-podspecs" \
                          "$NODE_MODULES_DIR/@react-native-community/blur" \
                          "$NODE_MODULES_DIR/@react-native-community/masked-view" \
                          "$NODE_MODULES_DIR/@react-native-community/slider" \
-                         "$NODE_MODULES_DIR/react-native-dark-mode" \
                          "$NODE_MODULES_DIR/react-native-gesture-handler" \
                          "$NODE_MODULES_DIR/react-native-get-random-values" \
                          "$NODE_MODULES_DIR/react-native-keyboard-aware-scroll-view" \
