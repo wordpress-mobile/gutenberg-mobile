@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/wordpress-mobile/react-native-gesture-handler",
-    "tag": "v1.10.1-wp"
+    "tag": "1.10.1-wp"
   },
   "source_files": "ios/**/*.{h,m}",
   "dependencies": {
