@@ -12,6 +12,7 @@ import {
  */
 import correctTextFontWeight from './text-font-weight-correct';
 import setupJetpackEditor from './jetpack-editor-setup';
+import setupBlockExperiments from './block-experiments-setup';
 import initialHtml from './initial-html';
 import * as Sentry from './sentry';
 
@@ -29,6 +30,8 @@ addAction( 'native.render', 'gutenberg-mobile', ( props ) => {
 	setupJetpackEditor(
 		props.jetpackState || { blogId: 1, isJetpackActive: true }
 	);
+	const capabilities = props.capabilities ?? {};
+	setupBlockExperiments( capabilities );
 } );
 
 addFilter( 'native.block_editor_props', 'gutenberg-mobile', ( editorProps ) => {
