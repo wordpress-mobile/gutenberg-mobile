@@ -1,6 +1,10 @@
 Unreleased
 ------
 
+1.55.2
+------
+* [**] Fix incorrect block insertion point after blurring the post title field. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3640]
+
 1.55.1
 ------
 * [*] Improve unsupported block message for reusable block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3621]
