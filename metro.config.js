@@ -18,7 +18,7 @@ gutenbergMetroConfigCopy.resolver.extraNodeModules = new Proxy(
 				return gutenbergFolder;
 			}
 
-			// If not exists, let's try find the module in the Jetpack submodule. We'll try the .pnpm folder.
+			// Try to find the module in Jetpack's .pnpm folder.
 			const moduleFolderPnpm = path.join(
 				process.cwd(),
 				`./jetpack/node_modules/.pnpm/node_modules/${ name }`
