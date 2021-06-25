@@ -50,6 +50,7 @@ module.exports = {
 		[ `@wordpress\\/(${ transpiledPackageNames.join(
 			'|'
 		) })$` ]: '<rootDir>/gutenberg/packages/$1/src',
+		'test/helpers$': '<rootDir>/' + configPath + '/helpers.js',
 	},
 	haste: {
 		defaultPlatform: rnPlatform,
