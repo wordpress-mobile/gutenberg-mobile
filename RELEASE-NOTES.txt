@@ -1,5 +1,6 @@
 Unreleased
 ------
+* [*] Image block: Add a "featured" banner and ability to set or remove an image as featured. (iOS only) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3449]
 
 1.56.0
 ------
@@ -44,8 +45,6 @@ Unreleased
 1.52.1
 ------
 * [*] Fixes for the generated localized strings files.
-
--   [*] Image block: Add a "featured" banner and ability to set or remove an image as featured. (iOS only)
 
 1.52.0
 ------
