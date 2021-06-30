@@ -1,9 +1,34 @@
 Unreleased
 ------
-* a11y: Bug fix: Allow stepper cell to be selected by screenreader [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3362]
-* The BottomSheet Cell component now supports the help prop so that a hint can be supplied to all Cell based components. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3380]
-* Audio block: Add Insert from URL functionality. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3031]
+
+1.56.0
+------
+* [*] Tablet view fixes for inserter button. https://github.com/wordpress-mobile/gutenberg-mobile/pull/3602
+* [**] Fixed an issue where pressing enter inside a text-based block was not creating a new block when using Gboard [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3590]
+* [*] Tweaks to the badge component's styling, including change of background color and reduced padding. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3642]
+* [***] New block: Layout grid. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3513]
+
+1.55.2
+------
+* [**] Fix incorrect block insertion point after blurring the post title field. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3640]
+
+1.55.1
+------
+* [*] Fix: RNMobile borderRadius value setting. [https://github.com/WordPress/gutenberg/pull/32717]
+* [*] Improve unsupported block message for reusable block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3621]
+
+1.55.0
+------
+* [*] Image block: "Set as featured" button within image block settings. (Android only). [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3116]
+* [***] Audio block now available on WP.com sites on the free plan. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3523]
+
+1.54.0
+------
+* [*] The BottomSheet Cell component now supports the help prop so that a hint can be supplied to all Cell based components. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3380]
+* [**] Audio block: Add Insert from URL functionality. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3031]
+* [***] Slash command to insert new blocks. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3250]
 * [***] New Block: Reusable block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3490]
+* [*] Add improvements to the translation pipeline [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3555]
 
 1.53.0
 ------
@@ -14,7 +39,7 @@ Unreleased
 
 1.52.2
 ------
-* [*] Disabled featured image banner on iOS. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3474] 
+* [*] Disabled featured image banner on iOS. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3474]
 
 1.52.1
 ------
@@ -62,7 +87,7 @@ Unreleased
 
 1.47.2
 ------
-* [**] Add `replaceBlock` method to iOS bridge delegate with a string to match the clientID and the contents to replace. [#3246] 
+* [**] Add `replaceBlock` method to iOS bridge delegate with a string to match the clientID and the contents to replace. [#3246]
 
 1.47.1
 ------

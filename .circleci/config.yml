@@ -12,7 +12,7 @@ commands:
             - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
       - run:
           name: NPM Install
-          command: npm ci --prefer-offline
+          command: npm ci --prefer-offline --no-audit
       - save_cache:
           name: Save NPM Cache
           key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
@@ -27,18 +27,80 @@ commands:
             - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
       - run:
           name: NPM Install Full
-          command: npm install
+          command: npm install --no-audit
       - save_cache:
           name: Save NPM Cache
           key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
           paths:
             - ~/.npm
             - i18n-cache/data
+  checkout-shallow:
+    steps:
+      - run:
+          name: Checkout (Shallow)
+          command: |
+            #!/bin/sh
+            set -e
+
+            # Workaround old docker images with incorrect $HOME
+            # check https://github.com/docker/docker/issues/2968 for details
+            if [ "${HOME}" = "/" ]
+            then
+              export HOME=$(getent passwd $(id -un) | cut -d: -f6)
+            fi
+
+            SSH_CONFIG_DIR="$HOME/.ssh"
+            echo "Using SSH Config Dir '$SSH_CONFIG_DIR'"
+            git --version 
+
+            mkdir -p "$SSH_CONFIG_DIR"
+            chmod 0700 "$SSH_CONFIG_DIR"
+
+            printf "%s" 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+            bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw==
+            ' >> "$SSH_CONFIG_DIR/known_hosts"
+            chmod 0600 "$SSH_CONFIG_DIR/known_hosts"
+
+            export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile='$SSH_CONFIG_DIR/known_hosts'"
+
+            # use git+ssh instead of https
+            git config --global url."ssh://git@github.com".insteadOf "https://github.com" || true
+            git config --global gc.auto 0 || true
+
+            if [ -e "$HOME/project/.git" ] ; then
+              echo 'Fetching into existing repository'
+              existing_repo='true'
+              cd "$HOME/project"
+              git remote set-url origin "$CIRCLE_REPOSITORY_URL" || true
+            else
+              echo 'Cloning git repository'
+              existing_repo='false'
+              mkdir -p "$HOME/project"
+              cd "$HOME/project"
+              git clone --depth 1 --no-checkout "$CIRCLE_REPOSITORY_URL" .
+            fi
+
+            echo 'Fetching from remote repository'
+            if [ -n "$CIRCLE_TAG" ]; then
+              git fetch --depth 1 --force --tags origin "refs/tags/$CIRCLE_TAG"
+            else
+              git fetch --depth 1 --force origin "$CIRCLE_SHA1"
+            fi
+
+            if [ -n "$CIRCLE_TAG" ]; then
+              echo 'Checking out tag'
+              git checkout --force "$CIRCLE_TAG"
+              git reset --hard "$CIRCLE_SHA1"
+            else
+              echo 'Checking out branch'
+              git checkout --force -B "$CIRCLE_BRANCH" "$CIRCLE_SHA1"
+              git --no-pager log --no-color -n 1 --format='HEAD is now at %h %s'
+            fi
   checkout-submodules:
     steps:
       - run:
           name: Checkout Submodules
-          command: git submodule update --init --recursive
+          command: git submodule update --init --recursive --depth 1
   add-jest-reporter-dir:
       steps:
         - run:
@@ -70,7 +132,7 @@ jobs:
     machine:
       image: << pipeline.parameters.linux-machine-image >>
     steps:
-      - checkout
+      - checkout-shallow
       - checkout-submodules
       - run:
           name: Install newer nvm
@@ -114,10 +176,9 @@ jobs:
     machine:
       image: << pipeline.parameters.linux-machine-image >>
     steps:
-      - checkout
+      - checkout-shallow
       - checkout-submodules
       - run: node -v
-      - run: npm install -g yarn
       - npm-install
       - run: npm run test:e2e:bundle:android
       - run:
@@ -163,7 +224,7 @@ jobs:
     docker:
     - image: << pipeline.parameters.android-docker-image >>
     steps:
-      - checkout
+      - checkout-shallow
       - checkout-submodules
       - npm-install
       - run:
@@ -181,7 +242,7 @@ jobs:
     macos:
       xcode: "12.0.0"
     steps:
-    - checkout
+    - checkout-shallow
     - checkout-submodules
     - npm-install
     - add-jest-reporter-dir
@@ -293,7 +354,7 @@ jobs:
             else
               echo "Build initiated from a tag: proceeding..."
             fi
-      - checkout
+      - checkout-shallow
       - checkout-submodules
       - run:
           # Setting up Android before fetching the Node dependencies because
@@ -305,7 +366,7 @@ jobs:
       - run:
           name: Build JavaScript Bundle
           command: |
-            npm run core prebundle
+            npm run prebundle:js
             npm run bundle:android
           # The job can take a long time, so let's bump the no_output_timeout
           # to more than the default 10m
