@@ -22,7 +22,7 @@ steps:
     depends_on: "bundle-android"
     plugins:
       - docker#v3.8.0:
-          image: "oguzkocer/android-image"
+          image: "public.ecr.aws/m4u4m2y0/android-build-image:latest"
           environment:
             - "CI=true"
             # DO NOT MANUALLY SET THESE VALUES!
