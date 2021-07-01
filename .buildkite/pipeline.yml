@@ -4,6 +4,8 @@ steps:
     plugins:
       - docker#v3.8.0:
           image: "oguzkocer/gb-mobile-image"
+          environment:
+            - "CI=true"
     command: |
         source /root/.bashrc
 
@@ -22,6 +24,7 @@ steps:
       - docker#v3.8.0:
           image: "oguzkocer/android-image"
           environment:
+            - "CI=true"
             # DO NOT MANUALLY SET THESE VALUES!
             # They are passed from the BuildKite agent to the Docker container
             - "AWS_ACCESS_KEY"
