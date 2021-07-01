@@ -1,6 +1,8 @@
 Unreleased
 ------
 * [*] Embed Block Bottom Sheet to set a link [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3436]
+* [*] Update loading and failed screens for web version of the editor [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3573]
+* [*] Handle floating keyboard case - Fix issue with the block selector on iPad. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3687]
 
 1.56.0
 ------
