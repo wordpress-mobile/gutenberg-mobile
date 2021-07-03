@@ -117,6 +117,8 @@ private func dummy() {
     _ = NSLocalizedString("Edit video", comment: "")
     _ = NSLocalizedString("Editing reusable blocks is not yet supported on WordPress for Android", comment: "")
     _ = NSLocalizedString("Editing reusable blocks is not yet supported on WordPress for iOS", comment: "")
+    _ = NSLocalizedString("Embed caption. %s", comment: "translators: accessibility text. %s: Embed caption.")
+    _ = NSLocalizedString("Embed caption. Empty", comment: "translators: accessibility text. Empty Embed caption.")
     _ = NSLocalizedString("Embed link", comment: "")
     _ = NSLocalizedString("Error", comment: "")
     _ = NSLocalizedString("Excerpt length (words)", comment: "")
