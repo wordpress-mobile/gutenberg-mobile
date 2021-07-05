@@ -37,7 +37,7 @@ export function initialize( options ) {
 		beforeSend: async ( event ) => {
 			const shouldSendEvent = await RNSentry.shouldSendEvent();
 			if ( ! shouldSendEvent ) {
-				return false;
+				return null;
 			}
 
 			// The scope from the native side is attached to the event.
