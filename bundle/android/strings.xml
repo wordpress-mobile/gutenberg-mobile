@@ -215,10 +215,8 @@
     <string name="gutenberg_native_post_title_empty" tools:ignore="UnusedResources">Post title. Empty</string>
     <!-- translators: accessibility text. %s: text content of the post title. -->
     <string name="gutenberg_native_post_title_s" tools:ignore="UnusedResources">Post title. %s</string>
-    <string name="gutenberg_native_preview_page" tools:ignore="UnusedResources">PREVIEW PAGE</string>
-    <string name="gutenberg_native_preview_page_d24958cb" tools:ignore="UnusedResources">Preview page</string>
-    <string name="gutenberg_native_preview_post" tools:ignore="UnusedResources">PREVIEW POST</string>
-    <string name="gutenberg_native_preview_post_10f10605" tools:ignore="UnusedResources">Preview post</string>
+    <string name="gutenberg_native_preview_page" tools:ignore="UnusedResources">Preview page</string>
+    <string name="gutenberg_native_preview_post" tools:ignore="UnusedResources">Preview post</string>
     <string name="gutenberg_native_problem_displaying_block" tools:ignore="UnusedResources">Problem displaying block</string>
     <string name="gutenberg_native_problem_opening_the_audio" tools:ignore="UnusedResources">Problem opening the audio</string>
     <string name="gutenberg_native_problem_opening_the_video" tools:ignore="UnusedResources">Problem opening the video</string>
@@ -248,9 +246,7 @@
     <string name="gutenberg_native_s_social_icon" tools:ignore="UnusedResources">%s social icon</string>
     <string name="gutenberg_native_scrollable_block_menu_closed" tools:ignore="UnusedResources">Scrollable block menu closed.</string>
     <string name="gutenberg_native_scrollable_block_menu_opened_select_a_block" tools:ignore="UnusedResources">Scrollable block menu opened. Select a block.</string>
-    <string name="gutenberg_native_search_block" tools:ignore="UnusedResources">Search block</string>
     <string name="gutenberg_native_search_block_label_current_text_is" tools:ignore="UnusedResources">Search block label. Current text is</string>
-    <string name="gutenberg_native_search_blocks" tools:ignore="UnusedResources">Search blocks</string>
     <string name="gutenberg_native_search_button_current_button_text_is" tools:ignore="UnusedResources">Search button. Current button text is</string>
     <string name="gutenberg_native_search_input_field" tools:ignore="UnusedResources">Search input field.</string>
     <string name="gutenberg_native_search_or_type_url" tools:ignore="UnusedResources">Search or type URL</string>
@@ -284,6 +280,7 @@
     <string name="gutenberg_native_video_caption_s" tools:ignore="UnusedResources">Video caption. %s</string>
     <string name="gutenberg_native_we_are_working_hard_to_add_more_blocks_with_each_release" tools:ignore="UnusedResources">We are working hard to add more blocks with each release.</string>
     <string name="gutenberg_native_we_re_working_hard_on_adding_support_for_embed_previews_in_the_me" tools:ignore="UnusedResources">We’re working hard on adding support for embed previews. In the meantime, you can preview the embedded content on the page.</string>
+    <string name="gutenberg_native_we_re_working_hard_on_adding_support_for_embed_previews_in_the_me_7978045c" tools:ignore="UnusedResources">We’re working hard on adding support for embed previews. In the meantime, you can preview the embedded content on the post.</string>
     <string name="gutenberg_native_what_is_alt_text" tools:ignore="UnusedResources">What is alt text?</string>
     <string name="gutenberg_native_width_settings" tools:ignore="UnusedResources">Width Settings</string>
     <string name="gutenberg_native_wordpress_media_library" tools:ignore="UnusedResources">WordPress Media Library</string>
