@@ -17,13 +17,13 @@ import initialHtml from './initial-html';
 import * as Sentry from './sentry';
 
 addAction( 'native.pre-render', 'gutenberg-mobile', async ( props ) => {
-	const { sentryOptions } = props;
+	const { crashLoggingOptions } = props;
 
 	require( './strings-overrides' );
 	correctTextFontWeight();
 
 	// Crash logging - Sentry initialization
-	Sentry.initialize( sentryOptions );
+	Sentry.initialize( crashLoggingOptions );
 } );
 
 addAction( 'native.render', 'gutenberg-mobile', ( props ) => {
