@@ -133,6 +133,8 @@
     <!-- translators: accessibility text. %s: Embed caption. -->
     <string name="gutenberg_native_embed_caption_s" tools:ignore="UnusedResources">Embed caption. %s</string>
     <string name="gutenberg_native_embed_link" tools:ignore="UnusedResources">Embed link</string>
+    <!-- translators: %s: host providing embed content e.g: www.youtube.com -->
+    <string name="gutenberg_native_embedded_content_from_s_can_t_be_viewed_in_the_mobile_editor_at_t" tools:ignore="UnusedResources">Embedded content from %s can\'t be viewed in the mobile editor at the moment. Please preview the page to see the embedded content.</string>
     <string name="gutenberg_native_error" tools:ignore="UnusedResources">Error</string>
     <string name="gutenberg_native_excerpt_length_words" tools:ignore="UnusedResources">Excerpt length (words)</string>
     <string name="gutenberg_native_failed_to_insert_audio_file" tools:ignore="UnusedResources">Failed to insert audio file.</string>

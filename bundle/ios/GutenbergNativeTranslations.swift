@@ -124,6 +124,7 @@ private func dummy() {
     _ = NSLocalizedString("Embed caption. %s", comment: "translators: accessibility text. %s: Embed caption.")
     _ = NSLocalizedString("Embed caption. Empty", comment: "translators: accessibility text. Empty Embed caption.")
     _ = NSLocalizedString("Embed link", comment: "")
+    _ = NSLocalizedString("Embedded content from %s can't be viewed in the mobile editor at the moment. Please preview the page to see the embedded content.", comment: "translators: %s: host providing embed content e.g: www.youtube.com")
     _ = NSLocalizedString("Error", comment: "")
     _ = NSLocalizedString("Excerpt length (words)", comment: "")
     _ = NSLocalizedString("Failed to insert audio file.", comment: "")
