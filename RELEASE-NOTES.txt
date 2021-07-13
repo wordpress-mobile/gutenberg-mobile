@@ -1,7 +1,17 @@
 Unreleased
 ------
+
+1.57.0
+------
+* [*] Update loading and failed screens for web version of the editor [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3573]
+* [*] Handle floating keyboard case - Fix issue with the block selector on iPad. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3687]
+
+1.56.0
+------
 * [*] Tablet view fixes for inserter button. https://github.com/wordpress-mobile/gutenberg-mobile/pull/3602
 * [**] Fixed an issue where pressing enter inside a text-based block was not creating a new block when using Gboard [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3590]
+* [*] Tweaks to the badge component's styling, including change of background color and reduced padding. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3642]
+* [***] New block: Layout grid. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3513]
 
 1.55.2
 ------
@@ -29,7 +39,6 @@ Unreleased
 ------
 * [*] iOS: Fixes frozen editor scrolling in landscape on iPhone [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3504]
 * [*] Add Reusable blocks to the inserter menu (https://github.com/wordpress-mobile/gutenberg-mobile/pull/3054]
-* [*] Generic Embed Block placeholder UI [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3346]
 * [*] Fixes color picker segmented control rendering and scrolling issues [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3394]
 
 1.52.2
