@@ -1,16 +1,19 @@
 {
   "name": "react-native-keyboard-aware-scroll-view",
-  "version": "0.8.8",
-  "homepage": "https://github.com/wordpress-mobile/react-native-keyboard-aware-scroll-view",
-  "summary": "React Native module to arrange scroll poisition according to keyboard on input fields.",
+  "version": "0.8.8-wp",
+  "homepage": "https://github.com/APSL/react-native-keyboard-aware-scroll-view#readme",
+  "summary": "A React Native ScrollView component that resizes when the keyboard appears.",
   "license": "MIT",
-  "authors": "WordPress Mobile Gutenberg Team",
+  "authors": {
+    "name": "Alvaro Medina Ballester",
+    "email": "me@alvaromb.com"
+  },
   "platforms": {
     "ios": "8.0"
   },
   "source": {
     "git": "https://github.com/wordpress-mobile/react-native-keyboard-aware-scroll-view.git",
-    "tag": "gb-v0.8.8"
+    "tag": "v0.8.8-wp"
   },
   "source_files": "ios/RNTKeyboardAwareScrollView/*.{h,m}",
   "preserve_paths": "**/*.js",
