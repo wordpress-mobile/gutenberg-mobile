@@ -31,5 +31,7 @@ steps:
             - "AWS_SECRET_KEY"
     command: |
         buildkite-agent artifact download bundle/android/App.js .
+        mkdir -p gutenberg/packages/react-native-bridge/android/react-native-bridge/build/assets
+        cp ./bundle/android/App.js ./gutenberg/packages/react-native-bridge/android/react-native-bridge/build/assets/index.android.bundle
         # TODO: Use the correct version
         ./publish-react-native-aztec-and-react-native-bridge.sh "test-build-kite-integration-$(date -u +%s)"
