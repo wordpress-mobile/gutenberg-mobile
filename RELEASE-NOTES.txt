@@ -1,6 +1,8 @@
 Unreleased
 ------
 
+* [**] Fixed slider and stepper text input fields in iOS dark mode [https://github.com/WordPress/gutenberg/pull/33402]
+
 1.57.0
 ------
 * [*] Update loading and failed screens for web version of the editor [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3573]
