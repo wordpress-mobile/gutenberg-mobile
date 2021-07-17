@@ -21,16 +21,19 @@ steps:
     depends_on: "bundle-android"
     plugins:
       - docker#v3.8.0:
-          image: "public.ecr.aws/m4u4m2y0/android-build-image:latest"
+          image: "public.ecr.aws/m4u4m2y0/android-build-image:02db9ae7aea96f767be97dcc17db677d37e41480"
           environment:
-            - "CI=true"
-            # DO NOT MANUALLY SET THESE VALUES!
-            # They are passed from the BuildKite agent to the Docker container
-            - "AWS_ACCESS_KEY"
-            - "AWS_SECRET_KEY"
+            propagate-environment: true
     command: |
         buildkite-agent artifact download bundle/android/App.js .
         mkdir -p gutenberg/packages/react-native-bridge/android/react-native-bridge/build/assets
         cp ./bundle/android/App.js ./gutenberg/packages/react-native-bridge/android/react-native-bridge/build/assets/index.android.bundle
-        # TODO: Use the correct version
-        ./publish-react-native-aztec-and-react-native-bridge.sh "test-build-kite-integration-$(date -u +%s)"
+
+        source /scripts/prepare_to_publish_to_s3_params.sh
+
+        pushd ./gutenberg/packages/react-native-aztec/android
+        ./gradlew -PwillPublishReactNativeAztecBinary=true :prepareToPublishToS3 $(prepare_to_publish_to_s3_params) :publish
+        popd
+
+        pushd ./gutenberg/packages/react-native-bridge/android
+        ./gradlew -PwillPublishReactNativeBridgeBinary=true -PreactNativeAztecVersion="$VERSION" :react-native-bridge:prepareToPublishToS3 $(prepare_to_publish_to_s3_params) :react-native-bridge:publish
