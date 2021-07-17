@@ -9,8 +9,7 @@ steps:
     command: |
         source /root/.bashrc
 
-        cp gutenberg/.nvmrc ./.nvmrc
-        nvm install && nvm use
+        pushd gutenberg && nvm install && nvm use && popd
         npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
         npm run prebundle:js
