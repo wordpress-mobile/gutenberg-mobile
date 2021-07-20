@@ -1,6 +1,6 @@
 {
   "name": "RNCMaskedView",
-  "version": "0.1.10-wp",
+  "version": "0.1.11-wp",
   "summary": "React Native MaskedView component",
   "license": "MIT",
   "authors": {
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/wordpress-mobile/react-native-masked-view.git",
-    "tag": "v0.1.10-wp"
+    "tag": "v0.1.11-wp"
   },
   "source_files": "ios/**/*.{h,m}",
   "dependencies": {
