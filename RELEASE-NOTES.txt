@@ -1,5 +1,6 @@
 Unreleased
 ------
+* [***] New Block: Embed block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3727]
 
 1.57.1
 ------
