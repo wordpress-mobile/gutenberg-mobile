@@ -1,5 +1,11 @@
 Unreleased
 ------
+* [***] New Block: Embed block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3727]
+
+1.57.1
+------
+* [*] Fix slider and stepper text inputs in dark mode [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3724]
+* [*] Fix button block border-radius saving the value + unit [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3723]
 
 1.57.0
 ------
