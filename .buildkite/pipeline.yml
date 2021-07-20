@@ -23,6 +23,11 @@ steps:
       - docker#v3.8.0:
           image: "public.ecr.aws/automattic/android-build-image:c91adbb66bceb4b2570da3fdad24e8ec156998ba"
           propagate-environment: true
+          environment:
+            # DO NOT MANUALLY SET THESE VALUES!
+            # They are passed from the BuildKite agent to the Docker container
+            - "AWS_ACCESS_KEY"
+            - "AWS_SECRET_KEY"
     command: |
         buildkite-agent artifact download bundle/android/App.js .
         mkdir -p gutenberg/packages/react-native-bridge/android/react-native-bridge/build/assets
