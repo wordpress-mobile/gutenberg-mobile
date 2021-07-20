@@ -3,7 +3,7 @@ steps:
     key: "bundle-android"
     plugins:
       - docker#v3.8.0:
-          image: "oguzkocer/gb-mobile-image"
+          image: "public.ecr.aws/automattic/gb-mobile-image:7848aae06da94b31a2d1f306a300de6942c900a2"
           environment:
             - "CI=true"
     command: |
@@ -21,7 +21,7 @@ steps:
     depends_on: "bundle-android"
     plugins:
       - docker#v3.8.0:
-          image: "public.ecr.aws/m4u4m2y0/android-build-image:3239d34f56fe66df6c1b80e2636352141291754e"
+          image: "public.ecr.aws/automattic/android-build-image:c91adbb66bceb4b2570da3fdad24e8ec156998ba"
           propagate-environment: true
     command: |
         buildkite-agent artifact download bundle/android/App.js .
