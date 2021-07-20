@@ -189,6 +189,7 @@
     <string name="gutenberg_native_navigates_to_customize_the_gradient" tools:ignore="UnusedResources">Navigates to customize the gradient</string>
     <string name="gutenberg_native_no_application_can_handle_this_request" tools:ignore="UnusedResources">No application can handle this request.</string>
     <string name="gutenberg_native_no_application_can_handle_this_request_please_install_a_web_brows" tools:ignore="UnusedResources">No application can handle this request. Please install a Web browser.</string>
+    <string name="gutenberg_native_no_blocks_found" tools:ignore="UnusedResources">No blocks found</string>
     <string name="gutenberg_native_no_custom_placeholder_set" tools:ignore="UnusedResources">No custom placeholder set</string>
     <string name="gutenberg_native_note_column_layout_may_vary_between_themes_and_screen_sizes" tools:ignore="UnusedResources">Note: Column layout may vary between themes and screen sizes</string>
     <string name="gutenberg_native_number_of_columns" tools:ignore="UnusedResources">Number of columns</string>
@@ -244,6 +245,7 @@
     <string name="gutenberg_native_scrollable_block_menu_closed" tools:ignore="UnusedResources">Scrollable block menu closed.</string>
     <string name="gutenberg_native_scrollable_block_menu_opened_select_a_block" tools:ignore="UnusedResources">Scrollable block menu opened. Select a block.</string>
     <string name="gutenberg_native_search_block_label_current_text_is" tools:ignore="UnusedResources">Search block label. Current text is</string>
+    <string name="gutenberg_native_search_blocks" tools:ignore="UnusedResources">Search blocks</string>
     <string name="gutenberg_native_search_button_current_button_text_is" tools:ignore="UnusedResources">Search button. Current button text is</string>
     <string name="gutenberg_native_search_input_field" tools:ignore="UnusedResources">Search input field.</string>
     <string name="gutenberg_native_search_or_type_url" tools:ignore="UnusedResources">Search or type URL</string>
@@ -265,6 +267,7 @@
     <string name="gutenberg_native_transform_block" tools:ignore="UnusedResources">Transform block…</string>
     <!-- translators: %s: block title e.g: "Paragraph". -->
     <string name="gutenberg_native_transform_s_to" tools:ignore="UnusedResources">Transform %s to</string>
+    <string name="gutenberg_native_try_another_search_term" tools:ignore="UnusedResources">Try another search term</string>
     <string name="gutenberg_native_type_a_url" tools:ignore="UnusedResources">Type a URL</string>
     <string name="gutenberg_native_unable_to_embed_media" tools:ignore="UnusedResources">Unable to embed media</string>
     <string name="gutenberg_native_ungroup" tools:ignore="UnusedResources">Ungroup</string>
@@ -279,6 +282,7 @@
     <string name="gutenberg_native_we_are_working_hard_to_add_more_blocks_with_each_release" tools:ignore="UnusedResources">We are working hard to add more blocks with each release.</string>
     <string name="gutenberg_native_we_re_working_hard_on_adding_support_for_embed_previews_in_the_me" tools:ignore="UnusedResources">We’re working hard on adding support for embed previews. In the meantime, you can preview the embedded content on the page.</string>
     <string name="gutenberg_native_we_re_working_hard_on_adding_support_for_embed_previews_in_the_me_7978045c" tools:ignore="UnusedResources">We’re working hard on adding support for embed previews. In the meantime, you can preview the embedded content on the post.</string>
+    <string name="gutenberg_native_what_is_a_block" tools:ignore="UnusedResources">What is a block?</string>
     <string name="gutenberg_native_what_is_alt_text" tools:ignore="UnusedResources">What is alt text?</string>
     <string name="gutenberg_native_width_settings" tools:ignore="UnusedResources">Width Settings</string>
     <string name="gutenberg_native_wordpress_media_library" tools:ignore="UnusedResources">WordPress Media Library</string>
