@@ -196,6 +196,7 @@ private func dummy() {
     _ = NSLocalizedString("Preview post", comment: "")
     _ = NSLocalizedString("Problem displaying block", comment: "")
     _ = NSLocalizedString("Problem opening the audio", comment: "")
+    _ = NSLocalizedString("Problem opening the embedded content", comment: "")
     _ = NSLocalizedString("Problem opening the video", comment: "")
     _ = NSLocalizedString("Remove as Featured Image ", comment: "")
     _ = NSLocalizedString("Replace audio", comment: "")
