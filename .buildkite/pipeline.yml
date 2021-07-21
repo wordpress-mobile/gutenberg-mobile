@@ -2,6 +2,9 @@ steps:
   - label: "Bundle Android"
     key: "bundle-android"
     plugins:
+      - automattic/git-s3-cache#add/vm-host-support:
+          bucket: "a8c-repo-mirrors"
+          repo: "wordpress-mobile/gutenberg-mobile/"
       - docker#v3.8.0:
           image: "public.ecr.aws/automattic/gb-mobile-image:latest"
           environment:
@@ -20,6 +23,9 @@ steps:
   - label: "Build Android RN Bridge & Publish to S3"
     depends_on: "bundle-android"
     plugins:
+      - automattic/git-s3-cache#add/vm-host-support:
+          bucket: "a8c-repo-mirrors"
+          repo: "wordpress-mobile/gutenberg-mobile/"
       - docker#v3.8.0:
           image: "public.ecr.aws/automattic/android-build-image:v1.0.0"
           propagate-environment: true
