@@ -47,4 +47,4 @@ steps:
             - "AWS_ACCESS_KEY"
             - "AWS_SECRET_KEY"
     command: |
-        .buildkite/publish-android-artifacts.sh
+        .buildkite/publish-react-native-bridge-android-artifacts.sh
