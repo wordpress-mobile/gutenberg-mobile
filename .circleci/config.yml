@@ -139,7 +139,11 @@ jobs:
       - checkout-submodules
       - run:
           name: Install newer nvm
-          command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+          command: |
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
       - run:
           name: Install newer node using nvm
           command: |
@@ -148,6 +152,9 @@ jobs:
             echo "Version after install: $(node --version)"
             nvm alias default node
             echo "Version after default: $(node --version)"
+
+            echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
+            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - when:
           condition: <<parameters.check-correctness>>
           steps:
