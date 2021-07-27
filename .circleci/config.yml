@@ -146,8 +146,8 @@ jobs:
             cd gutenberg
             nvm install
             echo "Version after install: $(node --version)"
-            nvm use
-            echo "Version after use: $(node --version)"
+            nvm alias default node
+            echo "Version after default: $(node --version)"
       - when:
           condition: <<parameters.check-correctness>>
           steps:
