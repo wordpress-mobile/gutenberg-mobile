@@ -145,6 +145,7 @@ jobs:
           command: |
             cd gutenberg
             nvm install
+            nvm use
       - when:
           condition: <<parameters.check-correctness>>
           steps:
