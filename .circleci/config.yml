@@ -116,8 +116,11 @@ commands:
           name: Install newer nvm
           command: |
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
-            echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
-            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+            if [ -z "${NVM_DIR}" ] ; then
+              echo 'Appending nvm source string to BASH_ENV'
+              echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
+              echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+            fi
       - run:
           name: Install node version specified in Gutenberg using nvm
           command: |
