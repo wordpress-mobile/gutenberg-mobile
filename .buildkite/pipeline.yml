@@ -5,7 +5,7 @@ publish-android-artifacts-docker-container: &publish-android-artifacts-docker-co
         propagate-environment: true
         environment:
           # DO NOT MANUALLY SET THESE VALUES!
-          # They are passed from the BuildKite agent to the Docker container
+          # They are passed from the Buildkite agent to the Docker container
           - "AWS_ACCESS_KEY"
           - "AWS_SECRET_KEY"
 
