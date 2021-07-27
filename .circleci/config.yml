@@ -145,9 +145,7 @@ jobs:
           command: |
             cd gutenberg
             nvm install
-            echo "Version after install: $(node --version)"
-            nvm alias default node
-            echo "Version after default: $(node --version)"
+            nvm alias default $(nvm current)
             echo 'nvm use default' >> $BASH_ENV
       - when:
           condition: <<parameters.check-correctness>>
