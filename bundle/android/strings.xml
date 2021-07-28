@@ -224,10 +224,13 @@
     <string name="gutenberg_native_replace_file" tools:ignore="UnusedResources">Replace file</string>
     <string name="gutenberg_native_replace_image_or_video" tools:ignore="UnusedResources">Replace image or video</string>
     <string name="gutenberg_native_replace_video" tools:ignore="UnusedResources">Replace video</string>
-    <!-- translators: %s: Block name e.g. "Image block" -->
+    <!-- translators: %s: Block name e.g. "Image block"
+translators: Block name. %s: The localized block name -->
     <string name="gutenberg_native_s_block" tools:ignore="UnusedResources">%s block</string>
     <!-- translators: accessibility text for the media block empty state. %s: media type -->
     <string name="gutenberg_native_s_block_empty" tools:ignore="UnusedResources">%s block. Empty</string>
+    <!-- translators: Newly available block name. %s: The localized block name -->
+    <string name="gutenberg_native_s_block_newly_available" tools:ignore="UnusedResources">%s block, newly available</string>
     <!-- translators: %s: block title e.g: "Paragraph". -->
     <string name="gutenberg_native_s_block_options" tools:ignore="UnusedResources">%s block options</string>
     <!-- translators: accessibility text for blocks with invalid content. %d: localized block title -->
