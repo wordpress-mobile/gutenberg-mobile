@@ -217,7 +217,6 @@
     <string name="gutenberg_native_preview_post" tools:ignore="UnusedResources">Preview post</string>
     <string name="gutenberg_native_problem_displaying_block" tools:ignore="UnusedResources">Problem displaying block</string>
     <string name="gutenberg_native_problem_opening_the_audio" tools:ignore="UnusedResources">Problem opening the audio</string>
-    <string name="gutenberg_native_problem_opening_the_embedded_content" tools:ignore="UnusedResources">Problem opening the embedded content</string>
     <string name="gutenberg_native_problem_opening_the_video" tools:ignore="UnusedResources">Problem opening the video</string>
     <string name="gutenberg_native_remove_as_featured_image" tools:ignore="UnusedResources">Remove as Featured Image </string>
     <string name="gutenberg_native_replace_audio" tools:ignore="UnusedResources">Replace audio</string>
