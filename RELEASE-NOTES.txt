@@ -4,6 +4,7 @@ Unreleased
 1.58.1
 ------
 * [*] Global styles: Check for undefined values and merge user colors [https://github.com/WordPress/gutenberg/pull/33707]
+* [*] [Embed block] Disable paragraph transform [https://github.com/WordPress/gutenberg/pull/33745]
 
 1.58.0
 ------
