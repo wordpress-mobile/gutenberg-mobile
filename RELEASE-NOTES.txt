@@ -1,5 +1,22 @@
 Unreleased
 ------
+
+1.58.1
+------
+* [*] Global styles: Check for undefined values and merge user colors [https://github.com/WordPress/gutenberg/pull/33707]
+* [*] [Embed block] Disable paragraph transform [https://github.com/WordPress/gutenberg/pull/33745]
+
+1.58.0
+------
+* [***] New Block: Embed block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3727]
+
+1.57.1
+------
+* [*] Fix slider and stepper text inputs in dark mode [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3724]
+* [*] Fix button block border-radius saving the value + unit [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3723]
+
+1.57.0
+------
 * [*] Update loading and failed screens for web version of the editor [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3573]
 * [*] Handle floating keyboard case - Fix issue with the block selector on iPad. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3687]
 

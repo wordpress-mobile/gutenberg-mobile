@@ -36,6 +36,14 @@ if [[ -z "$COMMIT_HASH" ]]; then
 fi
 
 DEST="${WD}/third-party-podspecs"
+read -r -p "Please delete '$DEST' folder manually before continuing. This script will re-generate it. Did you delete it? [y/N] " PROMPT_RESPONSE_2
+if [[ $PROMPT_RESPONSE_2 != "y" ]]; then
+    echo "Aborting."
+    exit 1
+fi
+
+mkdir $DEST
+
 NODE_MODULES_DIR="gutenberg/node_modules"
 
 # Generate the external (non-RN podspecs)
@@ -43,7 +51,6 @@ EXTERNAL_PODSPECS=$(find "$NODE_MODULES_DIR/react-native/third-party-podspecs" \
                          "$NODE_MODULES_DIR/@react-native-community/blur" \
                          "$NODE_MODULES_DIR/@react-native-community/masked-view" \
                          "$NODE_MODULES_DIR/@react-native-community/slider" \
-                         "$NODE_MODULES_DIR/react-native-dark-mode" \
                          "$NODE_MODULES_DIR/react-native-gesture-handler" \
                          "$NODE_MODULES_DIR/react-native-get-random-values" \
                          "$NODE_MODULES_DIR/react-native-keyboard-aware-scroll-view" \
@@ -63,14 +70,6 @@ do
     echo "Generating podspec for $pod"
     pod ipc spec "$podspec" > "$DEST/$pod.podspec.json"
     
-    # react-native-slider is the only gutenberg-mobile fork where we don't use the native files from the original repo
-    if [[ "$pod" == "react-native-slider" ]]; then
-        echo "   ==> Patching $pod podspec"
-        TMP_RNSliderSpec=$(mktemp)
-        jq '.source.git = "https://github.com/wordpress-mobile/react-native-slider.git" | .source.commit = "d263ff16cdd9fb7352b354342522ff030f220f42" | del(.source.tag)' "$DEST/$pod.podspec.json" > "$TMP_RNSliderSpec"
-        mv "$TMP_RNSliderSpec" "$DEST/$pod.podspec.json"
-    fi
-
     # react-native-blur doesn't have a tag field in it's podspec
     if [[ "$pod" == "react-native-blur" ]]; then
         echo "   ==> Patching $pod podspec"
