@@ -1,3 +1,14 @@
+x-common-params:
+  &publish-android-artifacts-docker-container
+  docker#v3.8.0:
+    image: "public.ecr.aws/automattic/android-build-image:v1.0.0"
+    propagate-environment: true
+    environment:
+      # DO NOT MANUALLY SET THESE VALUES!
+      # They are passed from the Buildkite agent to the Docker container
+      - "AWS_ACCESS_KEY"
+      - "AWS_SECRET_KEY"
+
 steps:
   - label: "Bundle Android"
     key: "bundle-android"
@@ -17,16 +28,18 @@ steps:
 
         buildkite-agent artifact upload bundle/android/App.js
 
-  - label: "Build Android RN Bridge & Publish to S3"
-    depends_on: "bundle-android"
+  - label: "Build Android RN Aztec & Publish to S3"
+    key: "publish-react-native-aztec-android"
     plugins:
-      - docker#v3.8.0:
-          image: "public.ecr.aws/automattic/android-build-image:v1.0.0"
-          propagate-environment: true
-          environment:
-            # DO NOT MANUALLY SET THESE VALUES!
-            # They are passed from the BuildKite agent to the Docker container
-            - "AWS_ACCESS_KEY"
-            - "AWS_SECRET_KEY"
+      - *publish-android-artifacts-docker-container
     command: |
-        .buildkite/publish-android-artifacts.sh
+        .buildkite/publish-react-native-aztec-android-artifacts.sh
+
+  - label: "Build Android RN Bridge & Publish to S3"
+    depends_on:
+      - "bundle-android"
+      - "publish-react-native-aztec-android"
+    plugins:
+      - *publish-android-artifacts-docker-container
+    command: |
+        .buildkite/publish-react-native-bridge-android-artifacts.sh
