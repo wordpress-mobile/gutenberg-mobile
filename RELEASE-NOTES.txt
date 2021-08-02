@@ -2,6 +2,11 @@ Unreleased
 ------
 * [*] Image block: Add a "featured" banner and ability to set or remove an image as featured. (iOS only) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3449]
 
+1.58.1
+------
+* [*] Global styles: Check for undefined values and merge user colors [https://github.com/WordPress/gutenberg/pull/33707]
+* [*] [Embed block] Disable paragraph transform [https://github.com/WordPress/gutenberg/pull/33745]
+
 1.58.0
 ------
 * [***] New Block: Embed block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3727]
