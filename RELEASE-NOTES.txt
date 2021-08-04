@@ -1,6 +1,10 @@
 Unreleased
 ------
 
+1.58.2
+------
+* [*] Fix issue with text input in alt text settings [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3784]
+
 1.58.1
 ------
 * [*] Global styles: Check for undefined values and merge user colors [https://github.com/WordPress/gutenberg/pull/33707]
