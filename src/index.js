@@ -11,8 +11,9 @@ import {
  * Internal dependencies
  */
 import correctTextFontWeight from './text-font-weight-correct';
-import setupJetpackEditor from './jetpack-editor-setup';
+import setupAllowedBlocks from './allowed-blocks-setup';
 import setupBlockExperiments from './block-experiments-setup';
+import setupJetpackEditor from './jetpack-editor-setup';
 import initialHtml from './initial-html';
 
 addAction( 'native.pre-render', 'gutenberg-mobile', () => {
@@ -21,11 +22,10 @@ addAction( 'native.pre-render', 'gutenberg-mobile', () => {
 } );
 
 addAction( 'native.render', 'gutenberg-mobile', ( props ) => {
-	setupJetpackEditor(
-		props.jetpackState || { blogId: 1, isJetpackActive: true }
-	);
 	const capabilities = props.capabilities ?? {};
+	setupJetpackEditor( props );
 	setupBlockExperiments( capabilities );
+	setupAllowedBlocks( props );
 } );
 
 addFilter( 'native.block_editor_props', 'gutenberg-mobile', ( editorProps ) => {

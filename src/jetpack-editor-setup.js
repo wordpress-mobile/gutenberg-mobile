@@ -17,6 +17,14 @@ const supportedJetpackBlocks = {
 	},
 };
 
+const toggleBlock = ( capability, blockName ) => {
+	if ( capability !== true ) {
+		dispatch( 'core/edit-post' ).hideBlockTypes( [ blockName ] );
+	} else {
+		dispatch( 'core/edit-post' ).showBlockTypes( [ blockName ] );
+	}
+};
+
 const setJetpackData = ( {
 	isJetpackActive = false,
 	userData = null,
@@ -37,20 +45,15 @@ const setJetpackData = ( {
 	return jetpackEditorInitialState;
 };
 
-export default ( jetpackState ) => {
+export default ( props = {} ) => {
+	const { jetpackState: state } = props;
+	const jetpackState = state || { blogId: 1, isJetpackActive: true };
+
 	if ( ! jetpackState.isJetpackActive ) {
 		return;
 	}
 
 	const jetpackData = setJetpackData( jetpackState );
-
-	const toggleBlock = ( capability, blockName ) => {
-		if ( capability !== true ) {
-			dispatch( 'core/edit-post' ).hideBlockTypes( [ blockName ] );
-		} else {
-			dispatch( 'core/edit-post' ).showBlockTypes( [ blockName ] );
-		}
-	};
 
 	// Note on the use of setTimeout() here:
 	// We observed the settings may not be ready exactly when the native.render hooks get run but rather
