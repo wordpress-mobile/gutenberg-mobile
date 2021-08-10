@@ -1,5 +1,14 @@
 Unreleased
+---
+
+1.59.0
 ------
+* [*] [Android] Fix UBE's inaccessible "more" toolbar item. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3771]
+* [*] Image block: Add a "featured" banner and ability to set or remove an image as featured. (iOS only) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3449]
+
+1.58.2
+------
+* [*] Fix issue with text input in alt text settings [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3784]
 
 1.58.1
 ------
