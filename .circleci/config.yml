@@ -32,6 +32,8 @@ commands:
           command: |
             echo "Node version: $(node --version)"
             npm install --no-audit
+            echo "Install Gutenberg and Jetpack dependencies"
+            npm install-other-deps
       - save_cache:
           name: Save NPM Cache
           key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
