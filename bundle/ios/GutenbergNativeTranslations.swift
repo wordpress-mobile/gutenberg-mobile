@@ -60,6 +60,7 @@ private func dummy() {
     _ = NSLocalizedString("Button position", comment: "")
     _ = NSLocalizedString("Cancel search", comment: "")
     _ = NSLocalizedString("Change block position", comment: "")
+    _ = NSLocalizedString("Changes to featured image will not be affected by the undo/redo buttons.", comment: "")
     _ = NSLocalizedString("CHOOSE A FILE", comment: "")
     _ = NSLocalizedString("Choose audio", comment: "")
     _ = NSLocalizedString("Choose file", comment: "")
