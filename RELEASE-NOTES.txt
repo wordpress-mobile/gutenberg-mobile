@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [*] Fix unit setting label styling [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3836]
 
 1.59.0
 ------
