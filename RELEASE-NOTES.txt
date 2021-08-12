@@ -1,6 +1,10 @@
 Unreleased
 ------
 
+1.58.3
+------
+* [*] Fix crash when pasting OBJECT REPLACEMENT CHARACTER special character (Rich text - toTree - Add check in replacements before accessing its type) [https://github.com/WordPress/gutenberg/pull/34020]
+
 1.58.2
 ------
 * [*] Fix issue with text input in alt text settings [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3784]
