@@ -18,8 +18,7 @@ describe( 'Test Jetpack blocks', () => {
 			() => jest.fn()
 		);
 
-		const setupJetpackEditor = require( '../jetpack-editor-setup' ).default;
-		setupJetpackEditor( { blogId: 1, isJetpackActive: true } );
+		require( '../allowed-blocks-setup' );
 
 		expect( mockRegisterBlockCollection.mock.calls[ 0 ][ 0 ] ).toBe(
 			'jetpack'
