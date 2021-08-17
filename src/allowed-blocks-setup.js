@@ -1,8 +1,4 @@
 /**
- * External dependencies
- */
-import { map, without } from 'lodash';
-/**
  * WordPress dependencies
  */
 import { dispatch } from '@wordpress/data';
@@ -73,17 +69,19 @@ export const setupJetpackBlocks = ( props = {} ) => {
 
 export const setupAllowedBlocks = ( props = {} ) => {
 	const { showBlocks = [], hideBlocks = [] } = props;
-	const blocks = map( getBlockTypes(), 'name' );
 	const uniqueHideBlocks = [ ...new Set( hideBlocks ) ];
 	const uniqueShowBlocks = [ ...new Set( showBlocks ) ];
-	const differenceHideBlocks = without( blocks, ...uniqueShowBlocks );
 
 	if ( uniqueHideBlocks.length > 0 ) {
 		dispatch( 'core/edit-post' ).hideBlockTypes( uniqueHideBlocks );
 	}
 
 	if ( uniqueShowBlocks.length > 0 ) {
-		dispatch( 'core/edit-post' ).hideBlockTypes( differenceHideBlocks );
+		const blocks = getBlockTypes().map( ( { name } ) => name );
+		const notShowBlocks = blocks.filter(
+			( name ) => ! uniqueShowBlocks.includes( name )
+		);
+		dispatch( 'core/edit-post' ).hideBlockTypes( notShowBlocks );
 	}
 };
 
