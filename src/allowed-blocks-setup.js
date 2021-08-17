@@ -24,7 +24,7 @@ const availableJetpackBlocks = {
 	story: { available: true },
 };
 
-const setJetpackData = ( {
+const mapToJetpackData = ( {
 	isJetpackActive = false,
 	userData: tracksUserData = null,
 	siteFragment = null,
@@ -65,7 +65,7 @@ export const setupJetpackBlocks = ( props = {} ) => {
 	const { jetpackState = { blogId: 1, isJetpackActive: true } } = props;
 	const { isJetpackActive = false } = jetpackState;
 
-	global.window[ JETPACK_DATA_PATH ] = setJetpackData( jetpackState );
+	global.window[ JETPACK_DATA_PATH ] = mapToJetpackData( jetpackState );
 
 	if ( isJetpackActive ) {
 		registerJetpackBlocksIfCapable( props );
