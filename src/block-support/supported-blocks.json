@@ -29,12 +29,10 @@
 		"core/file",
 		"core/search",
 		"core/block",
-		"jetpack/address",
 		"jetpack/contact-info",
 		"jetpack/email",
-		"jetpack/layout-grid",
 		"jetpack/phone",
-		"jetpack/story"
+		"jetpack/address"
 	],
 	"devOnly": [ "core/code" ],
 	"iOSOnly": [],
