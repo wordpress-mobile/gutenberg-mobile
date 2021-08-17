@@ -65,9 +65,8 @@ export const setupJetpackBlocks = ( props = {} ) => {
 	const { jetpackState = { blogId: 1, isJetpackActive: true } } = props;
 	const { isJetpackActive = false } = jetpackState;
 
-	global.window[ JETPACK_DATA_PATH ] = mapToJetpackData( jetpackState );
-
 	if ( isJetpackActive ) {
+		global.window[ JETPACK_DATA_PATH ] = mapToJetpackData( jetpackState );
 		registerJetpackBlocksIfCapable( props );
 	}
 };
