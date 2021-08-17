@@ -4,6 +4,7 @@ Unreleased
 1.59.2
 ------
 * [*] Inserter: Prevent non-deterministic order of inserter items [https://github.com/WordPress/gutenberg/pull/34078]
+* [*] Fix missing block title of core/latest-posts block [https://github.com/WordPress/gutenberg/pull/34116]
 
 1.59.1
 ------
