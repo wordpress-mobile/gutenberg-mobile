@@ -2,6 +2,16 @@ Unreleased
 ---
 * [**] Embed block: Add "Resize for smaller devices" setting. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3753]
 
+1.59.2
+------
+* [*] Inserter: Prevent non-deterministic order of inserter items [https://github.com/WordPress/gutenberg/pull/34078]
+* [*] Fix missing block title of core/latest-posts block [https://github.com/WordPress/gutenberg/pull/34116]
+
+1.59.1
+------
+* [*] Global styles - Add color to the block styles filter list [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3822]
+* [*] Rich text - toTree - Add check in replacements before accessing its type [https://github.com/WordPress/gutenberg/pull/34020]
+
 1.59.0
 ------
 * [*] [Android] Fix UBE's inaccessible "more" toolbar item. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3771]
