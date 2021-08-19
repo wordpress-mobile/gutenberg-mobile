@@ -390,12 +390,14 @@ workflows:
       - ios-device-checks:
           name: Test iOS on Device - Scheduled
           post-to-slack: true
+          # NPM cache is saved by job name so we have to manually execute the job.
+          filters:
+            branches:
+              only: develop-save-npm-cache
       - android-device-checks:
           name: Test Android on Device - Scheduled
           post-to-slack: true
-    triggers:
-      - schedule:
-          cron: '1 1,13 * * *'
+          # NPM cache is saved by job name so we have to manually execute the job.
           filters:
             branches:
-              only: develop
+              only: develop-save-npm-cache
