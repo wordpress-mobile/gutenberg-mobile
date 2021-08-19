@@ -27,7 +27,7 @@ commands:
           name: NPM Install Full
           command: |
             echo "Node version: $(node --version)"
-            npm cache clean
+            npm cache clean --force
             npm install --no-audit
       - save_cache:
           name: Save NPM Cache
