@@ -225,6 +225,7 @@ private func dummy() {
     _ = NSLocalizedString("Search or type URL", comment: "")
     _ = NSLocalizedString("Search settings", comment: "")
     _ = NSLocalizedString("Select a color", comment: "")
+    _ = NSLocalizedString("Select a color above", comment: "")
     _ = NSLocalizedString("Select a layout", comment: "")
     _ = NSLocalizedString("Set as Featured Image ", comment: "")
     _ = NSLocalizedString("Show post content", comment: "")

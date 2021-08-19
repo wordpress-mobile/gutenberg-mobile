@@ -266,6 +266,7 @@ translators: Block name. %s: The localized block name -->
     <string name="gutenberg_native_search_or_type_url" tools:ignore="UnusedResources">Search or type URL</string>
     <string name="gutenberg_native_search_settings" tools:ignore="UnusedResources">Search settings</string>
     <string name="gutenberg_native_select_a_color" tools:ignore="UnusedResources">Select a color</string>
+    <string name="gutenberg_native_select_a_color_above" tools:ignore="UnusedResources">Select a color above</string>
     <string name="gutenberg_native_select_a_layout" tools:ignore="UnusedResources">Select a layout</string>
     <string name="gutenberg_native_set_as_featured_image" tools:ignore="UnusedResources">Set as Featured Image </string>
     <string name="gutenberg_native_show_post_content" tools:ignore="UnusedResources">Show post content</string>
