@@ -122,7 +122,7 @@
     <string name="gutenberg_native_double_tap_to_undo_last_change" tools:ignore="UnusedResources">Double tap to undo last change</string>
     <string name="gutenberg_native_drag_to_adjust_focal_point" tools:ignore="UnusedResources">Drag to adjust focal point</string>
     <string name="gutenberg_native_duplicate_block" tools:ignore="UnusedResources">Duplicate block</string>
-    <string name="gutenberg_native_each_block_has_its_own_settings_to_find_them_click_on_a_block_its" tools:ignore="UnusedResources">Each block has its own settings. To find them, click on a block. Its settings will appear on the toolbar at the bottom of the screen.</string>
+    <string name="gutenberg_native_each_block_has_its_own_settings_to_find_them_tap_on_a_block_its_s" tools:ignore="UnusedResources">Each block has its own settings. To find them, tap on a block. Its settings will appear on the toolbar at the bottom of the screen.</string>
     <string name="gutenberg_native_edit_cover_media" tools:ignore="UnusedResources">Edit cover media</string>
     <string name="gutenberg_native_edit_file" tools:ignore="UnusedResources">Edit file</string>
     <string name="gutenberg_native_edit_focal_point" tools:ignore="UnusedResources">Edit focal point</string>
@@ -280,6 +280,7 @@ translators: Block name. %s: The localized block name -->
     <string name="gutenberg_native_tap_here_to_show_help" tools:ignore="UnusedResources">Tap here to show help</string>
     <string name="gutenberg_native_tap_to_add_content" tools:ignore="UnusedResources">Tap to add content</string>
     <string name="gutenberg_native_tap_to_hide_the_keyboard" tools:ignore="UnusedResources">Tap to hide the keyboard</string>
+    <string name="gutenberg_native_text_formatting_controls_are_located_within_the_toolbar_positione" tools:ignore="UnusedResources">Text formatting controls are located within the toolbar positioned above the keyboard while editing a text block</string>
     <string name="gutenberg_native_to_remove_a_block_select_the_block_and_click_the_three_dots_in_th" tools:ignore="UnusedResources">To remove a block, select the block and click the three dots in the bottom right of the block to view the settings. From there, choose the option to remove the block.</string>
     <string name="gutenberg_native_transform_block" tools:ignore="UnusedResources">Transform block…</string>
     <!-- translators: %s: block title e.g: "Paragraph". -->
@@ -300,7 +301,6 @@ translators: Block name. %s: The localized block name -->
     <string name="gutenberg_native_we_re_working_hard_on_adding_support_for_embed_previews_in_the_me" tools:ignore="UnusedResources">We’re working hard on adding support for embed previews. In the meantime, you can preview the embedded content on the page.</string>
     <string name="gutenberg_native_we_re_working_hard_on_adding_support_for_embed_previews_in_the_me_7978045c" tools:ignore="UnusedResources">We’re working hard on adding support for embed previews. In the meantime, you can preview the embedded content on the post.</string>
     <string name="gutenberg_native_welcome_to_the_world_of_blocks" tools:ignore="UnusedResources">Welcome to the world of blocks</string>
-    <string name="gutenberg_native_what_is_a_block" tools:ignore="UnusedResources">What is a block?</string>
     <string name="gutenberg_native_what_is_alt_text" tools:ignore="UnusedResources">What is alt text?</string>
     <string name="gutenberg_native_width_settings" tools:ignore="UnusedResources">Width Settings</string>
     <string name="gutenberg_native_wordpress_media_library" tools:ignore="UnusedResources">WordPress Media Library</string>
