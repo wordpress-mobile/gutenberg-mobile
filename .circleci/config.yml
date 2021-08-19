@@ -23,6 +23,10 @@ commands:
             - i18n-cache/data
   npm-install-full:
     steps:
+      - restore_cache:
+          name: Restore NPM Cache
+          keys:
+            - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
       - run:
           name: NPM Install Full
           command: |
