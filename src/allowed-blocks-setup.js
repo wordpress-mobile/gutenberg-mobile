@@ -68,20 +68,49 @@ export const setupJetpackBlocks = ( props = {} ) => {
 };
 
 export const setupAllowedBlocks = ( props = {} ) => {
-	const { showBlocks = [], hideBlocks = [] } = props;
-	const uniqueHideBlocks = [ ...new Set( hideBlocks ) ];
-	const uniqueShowBlocks = [ ...new Set( showBlocks ) ];
-
-	if ( uniqueHideBlocks.length > 0 ) {
-		dispatch( 'core/edit-post' ).hideBlockTypes( uniqueHideBlocks );
-	}
-
-	if ( uniqueShowBlocks.length > 0 ) {
-		const blocks = getBlockTypes().map( ( { name } ) => name );
-		const notShowBlocks = blocks.filter(
-			( name ) => ! uniqueShowBlocks.includes( name )
+	const registeredBlocks = getBlockTypes().map( ( { name } ) => name );
+	const { showBlocks = registeredBlocks, hideBlocks = [] } = props;
+	const wereShowBlocksProvided = showBlocks !== registeredBlocks;
+	const uniqueRegisteredHideBlocks = hideBlocks.filter( ( name, index ) => {
+		return (
+			// Is Unique?
+			hideBlocks.indexOf( name ) === index &&
+			// Is Unambiguous?
+			( ! wereShowBlocksProvided || ! showBlocks.includes( name ) ) &&
+			// Is Registered?
+			registeredBlocks.includes( name )
 		);
-		dispatch( 'core/edit-post' ).hideBlockTypes( notShowBlocks );
+	} );
+	const uniqueRegisteredShowBlocks = ! wereShowBlocksProvided
+		? showBlocks
+		: showBlocks.filter( ( name, index ) => {
+				return (
+					// Is Unique?
+					showBlocks.indexOf( name ) === index &&
+					// Is Unambiguous?
+					! hideBlocks.includes( name ) &&
+					// Is Registered?
+					registeredBlocks.includes( name )
+				);
+		  } );
+	const wereShowBlocksFilteredDownToAnEmptySet =
+		wereShowBlocksProvided &&
+		showBlocks.length > 0 &&
+		uniqueRegisteredShowBlocks.length === 0;
+	const invertRegisteredShowBlocks = wereShowBlocksFilteredDownToAnEmptySet
+		? []
+		: registeredBlocks.filter( ( name ) => {
+				return ! uniqueRegisteredShowBlocks.includes( name );
+		  } );
+	const hiddenBlockTypes = [
+		...uniqueRegisteredHideBlocks,
+		...invertRegisteredShowBlocks,
+	];
+
+	if ( hiddenBlockTypes.length > 0 ) {
+		dispatch( 'core/edit-post' ).hideBlockTypes( [
+			...new Set( hiddenBlockTypes ),
+		] );
 	}
 };
 
