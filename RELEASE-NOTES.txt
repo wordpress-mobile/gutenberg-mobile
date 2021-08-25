@@ -1,6 +1,9 @@
 Unreleased
 ---
 
+1.60.1
+* [*] RNmobile: Fix the cancel button on Block Variation Picker / Columns Block. [https://github.com/wordpress-mobile/gutenberg/pull/34249]
+
 1.60.0
 * [**] Embed block: Add "Resize for smaller devices" setting. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3753]
 
