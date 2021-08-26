@@ -1,6 +1,8 @@
 Unreleased
 ---
 * [***] Inserter: Add Inserter Block Search [https://github.com/WordPress/gutenberg/pull/33237]
+* [*] Column block: Fix Android close button alignment. [https://github.com/WordPress/gutenberg/pull/34332]
+* [*] Layout Grid block: Fix Android close button alignment. [https://github.com/Automattic/block-experiments/pull/239]
 
 1.60.0
 * [**] Embed block: Add "Resize for smaller devices" setting. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3753]
