@@ -1,6 +1,7 @@
 Unreleased
 ---
 * [***] Inserter: Add Inserter Block Search [https://github.com/WordPress/gutenberg/pull/33237]
+* [*] Fix animation stutter when closing full-screen bottom sheets. [https://github.com/WordPress/gutenberg/pull/34425]
 
 1.60.1
 * [*] RNmobile: Fix the cancel button on Block Variation Picker / Columns Block. [https://github.com/wordpress-mobile/gutenberg/pull/34249]
