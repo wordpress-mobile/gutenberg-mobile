@@ -15,6 +15,9 @@ const supportedJetpackBlocks = {
 	story: {
 		available: true,
 	},
+	'tiled-gallery': {
+		available: true,
+	},
 };
 
 const setJetpackData = ( {
@@ -67,6 +70,7 @@ export default ( jetpackState ) => {
 
 		toggleBlock( capabilities.mediaFilesCollectionBlock, 'jetpack/story' );
 		toggleBlock( capabilities.contactInfoBlock, 'jetpack/contact-info' );
+		toggleBlock( true, 'jetpack/tiled-gallery' );
 	} );
 
 	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );
