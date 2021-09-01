@@ -70,7 +70,7 @@ export default ( jetpackState ) => {
 
 		toggleBlock( capabilities.mediaFilesCollectionBlock, 'jetpack/story' );
 		toggleBlock( capabilities.contactInfoBlock, 'jetpack/contact-info' );
-		toggleBlock( true, 'jetpack/tiled-gallery' );
+		toggleBlock( capabilities.tiledGalleryBlock, 'jetpack/tiled-gallery' );
 	} );
 
 	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );
