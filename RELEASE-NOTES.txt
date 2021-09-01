@@ -1,7 +1,7 @@
 Unreleased
 ---
 * [***] Inserter: Add Inserter Block Search [https://github.com/WordPress/gutenberg/pull/33237]
-* [**] Enable embed inline previews (for now only YouTube and Twitter will be available) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3900]
+* [**] Enable embed preview for a list of providers (for now only YouTube and Twitter) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3900]
 
 1.60.1
 * [*] RNmobile: Fix the cancel button on Block Variation Picker / Columns Block. [https://github.com/wordpress-mobile/gutenberg/pull/34249]
