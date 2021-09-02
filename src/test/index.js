@@ -17,6 +17,10 @@ describe( 'Test Jetpack blocks', () => {
 			'../../jetpack/projects/plugins/jetpack/extensions/blocks/story/editor.js',
 			() => jest.fn()
 		);
+		jest.mock(
+			'../../jetpack/projects/plugins/jetpack/extensions/blocks/tiled-gallery/editor.js',
+			() => jest.fn()
+		);
 
 		const setupJetpackEditor = require( '../jetpack-editor-setup' ).default;
 		setupJetpackEditor( { blogId: 1, isJetpackActive: true } );
