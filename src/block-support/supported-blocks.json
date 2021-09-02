@@ -32,7 +32,8 @@
 		"jetpack/contact-info",
 		"jetpack/email",
 		"jetpack/phone",
-		"jetpack/address"
+		"jetpack/address",
+		"jetpack/tiled-gallery"
 	],
 	"devOnly": [ "core/code" ],
 	"iOSOnly": [],
