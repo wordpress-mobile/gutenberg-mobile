@@ -1,6 +1,7 @@
 Unreleased
 ---
 * [**] Enable WordPress embed preview [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3853]
+* [*] Embed block: Add device's locale to preview content [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3788]
 
 1.61.0
 ------
