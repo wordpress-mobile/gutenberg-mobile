@@ -2,6 +2,7 @@ Unreleased
 ---
 * [**] Enable WordPress embed preview [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3853]
 * [*] Embed block: Fix content disappearing on Android when switching light/dark mode [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3859]
+* [*] Image block: Replacing the media for an image set as featured prompts to update the featured image [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3930]
 
 1.61.0
 ------
