@@ -74,6 +74,7 @@ private func dummy() {
     _ = NSLocalizedString("Choose images", comment: "")
     _ = NSLocalizedString("Choose video", comment: "")
     _ = NSLocalizedString("Clear search", comment: "")
+    _ = NSLocalizedString("Column %d", comment: "translators: %d: column index.")
     _ = NSLocalizedString("Columns Settings", comment: "")
     _ = NSLocalizedString("Copied block", comment: "")
     _ = NSLocalizedString("Copy block", comment: "")
