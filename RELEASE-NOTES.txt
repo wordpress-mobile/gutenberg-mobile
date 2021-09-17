@@ -9,6 +9,10 @@ Unreleased
 * [*] Column block: Translate column width's control labels [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3952]
 * [**] Enable embed preview for Instagram and Vimeo providers. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3918]
 
+1.61.1
+------
+* [*] Fix crash related to reusable blocks in the block picker. [https://github.com/WordPress/gutenberg/pull/34873]
+
 1.61.0
 ------
 * [***] Inserter: Add Inserter Block Search [https://github.com/WordPress/gutenberg/pull/33237]
