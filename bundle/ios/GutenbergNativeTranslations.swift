@@ -22,7 +22,7 @@ private func dummy() {
     _ = NSLocalizedString("Add Block After", comment: "")
     _ = NSLocalizedString("Add Block Before", comment: "")
     _ = NSLocalizedString("ADD BLOCK HERE", comment: "")
-	_ = NSLocalizedString("Add blocks", comment: "")
+    _ = NSLocalizedString("Add blocks", comment: "")
     _ = NSLocalizedString("Add button text", comment: "")
     _ = NSLocalizedString("ADD IMAGE", comment: "")
     _ = NSLocalizedString("Add image or video", comment: "")
