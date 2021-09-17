@@ -1,6 +1,10 @@
 Unreleased
 ---
 
+1.61.1
+------
+* [*] Fix crash related to reusable blocks in the block picker. [https://github.com/WordPress/gutenberg/pull/34873]
+
 1.61.0
 ------
 * [***] Inserter: Add Inserter Block Search [https://github.com/WordPress/gutenberg/pull/33237]
