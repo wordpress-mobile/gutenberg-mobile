@@ -86,7 +86,7 @@
     <!-- translators: %s: current cell value. -->
     <string name="gutenberg_native_current_value_is_s" tools:ignore="UnusedResources">Current value is %s</string>
     <string name="gutenberg_native_customize" tools:ignore="UnusedResources">CUSTOMIZE</string>
-	<string name="gutenberg_native_customize_blocks" tools:ignore="UnusedResources">Customize blocks</string>
+    <string name="gutenberg_native_customize_blocks" tools:ignore="UnusedResources">Customize blocks</string>
     <string name="gutenberg_native_customize_gradient" tools:ignore="UnusedResources">Customize Gradient</string>
     <string name="gutenberg_native_cut_block" tools:ignore="UnusedResources">Cut block</string>
     <string name="gutenberg_native_describe_the_purpose_of_the_image_leave_empty_if_the_image_is_pur" tools:ignore="UnusedResources">Describe the purpose of the image. Leave empty if the image is purely decorative. </string>
@@ -133,7 +133,7 @@
     <string name="gutenberg_native_edit_cover_media" tools:ignore="UnusedResources">Edit cover media</string>
     <string name="gutenberg_native_edit_file" tools:ignore="UnusedResources">Edit file</string>
     <string name="gutenberg_native_edit_focal_point" tools:ignore="UnusedResources">Edit focal point</string>
-	<string name="gutenberg_native_edit_link" tools:ignore="UnusedResources">EDIT LINK</string>
+    <string name="gutenberg_native_edit_link" tools:ignore="UnusedResources">EDIT LINK</string>
     <string name="gutenberg_native_edit_media" tools:ignore="UnusedResources">Edit media</string>
     <string name="gutenberg_native_edit_using_web_editor" tools:ignore="UnusedResources">Edit using web editor</string>
     <string name="gutenberg_native_edit_video" tools:ignore="UnusedResources">Edit video</string>
