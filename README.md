@@ -11,6 +11,7 @@ For a developer experience closer to the one the project maintainers currently h
 * git
 * [nvm](https://github.com/creationix/nvm)
 * Node.js and npm (use nvm to install them)
+* [pnpm](https://pnpm.io/) needed to ensure compatibility with the Jetpack submodule (install via `npm install -g pnpm`)
 * [Android Studio](https://developer.android.com/studio/) to be able to compile the Android version of the app
 * [Xcode](https://developer.apple.com/xcode/) to be able to compile the iOS app
 * CocoaPods(`sudo gem install cocoapods`) needed to fetch React and third-party dependencies.
