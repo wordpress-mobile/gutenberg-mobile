@@ -119,7 +119,7 @@ commands:
           command: |
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
             if [ -z "${NVM_DIR}" ] ; then
-              echo 'Appending nvm source string to BASH_ENV'
+              echo 'Default NVM_DIR to .nvm in home'
               echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
             fi
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
