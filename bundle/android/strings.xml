@@ -262,8 +262,6 @@ translators: Block name. %s: The localized block name -->
     <string name="gutenberg_native_s_block_newly_available" tools:ignore="UnusedResources">%s block, newly available</string>
     <!-- translators: %s: block title e.g: "Paragraph". -->
     <string name="gutenberg_native_s_block_options" tools:ignore="UnusedResources">%s block options</string>
-    <!-- translators: %s: embed block variant's label e.g: "Twitter". -->
-    <string name="gutenberg_native_s_block_previews_are_coming_soon" tools:ignore="UnusedResources">%s block previews are coming soon</string>
     <!-- translators: accessibility text for blocks with invalid content. %d: localized block title -->
     <string name="gutenberg_native_s_block_this_block_has_invalid_content" tools:ignore="UnusedResources">%s block. This block has invalid content</string>
     <!-- translators: %s: name of the reusable block -->
