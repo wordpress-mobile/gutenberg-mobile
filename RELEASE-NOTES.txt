@@ -7,6 +7,7 @@ Unreleased
 * [*] Embed block: Fix content disappearing on Android when switching light/dark mode [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3859]
 * [*] Column block: Translate column width's control labels [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3952]
 * [**] Enable embed preview for Instagram and Vimeo providers. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3918]
+* [**] Block editor: Users can now contact support and access all support options from the block editor's Help & Support screen. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3975]
 
 1.61.0
 ------
