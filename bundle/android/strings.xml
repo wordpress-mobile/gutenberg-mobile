@@ -75,6 +75,7 @@
     <!-- translators: %d: column index. -->
     <string name="gutenberg_native_column_d" tools:ignore="UnusedResources">Column %d</string>
     <string name="gutenberg_native_columns_settings" tools:ignore="UnusedResources">Columns Settings</string>
+    <string name="gutenberg_native_convert_to_link" tools:ignore="UnusedResources">Convert to link</string>
     <string name="gutenberg_native_copied_block" tools:ignore="UnusedResources">Copied block</string>
     <string name="gutenberg_native_copy_block" tools:ignore="UnusedResources">Copy block</string>
     <string name="gutenberg_native_copy_file_url" tools:ignore="UnusedResources">Copy file URL</string>
@@ -126,6 +127,7 @@
     <!-- translators: accessibility text (hint for switches) -->
     <string name="gutenberg_native_double_tap_to_toggle_setting" tools:ignore="UnusedResources">Double tap to toggle setting</string>
     <string name="gutenberg_native_double_tap_to_undo_last_change" tools:ignore="UnusedResources">Double tap to undo last change</string>
+    <string name="gutenberg_native_double_tap_to_view_embed_options" tools:ignore="UnusedResources">Double tap to view embed options.</string>
     <string name="gutenberg_native_drag_to_adjust_focal_point" tools:ignore="UnusedResources">Drag to adjust focal point</string>
     <string name="gutenberg_native_duplicate_block" tools:ignore="UnusedResources">Duplicate block</string>
     <string name="gutenberg_native_each_block_has_its_own_settings_to_find_them_tap_on_a_block_its_s" tools:ignore="UnusedResources">Each block has its own settings. To find them, tap on a block. Its settings will appear on the toolbar at the bottom of the screen.</string>
@@ -138,12 +140,14 @@
     <string name="gutenberg_native_edit_video" tools:ignore="UnusedResources">Edit video</string>
     <string name="gutenberg_native_editing_reusable_blocks_is_not_yet_supported_on_wordpress_for_and" tools:ignore="UnusedResources">Editing reusable blocks is not yet supported on WordPress for Android</string>
     <string name="gutenberg_native_editing_reusable_blocks_is_not_yet_supported_on_wordpress_for_ios" tools:ignore="UnusedResources">Editing reusable blocks is not yet supported on WordPress for iOS</string>
+    <string name="gutenberg_native_embed_block_previews_are_coming_soon" tools:ignore="UnusedResources">Embed block previews are coming soon</string>
     <!-- translators: accessibility text. Empty Embed caption. -->
     <string name="gutenberg_native_embed_caption_empty" tools:ignore="UnusedResources">Embed caption. Empty</string>
     <!-- translators: accessibility text. %s: Embed caption. -->
     <string name="gutenberg_native_embed_caption_s" tools:ignore="UnusedResources">Embed caption. %s</string>
     <string name="gutenberg_native_embed_link" tools:ignore="UnusedResources">Embed link</string>
     <string name="gutenberg_native_embed_media" tools:ignore="UnusedResources">Embed media</string>
+    <string name="gutenberg_native_embed_options" tools:ignore="UnusedResources">Embed options</string>
     <string name="gutenberg_native_error" tools:ignore="UnusedResources">Error</string>
     <string name="gutenberg_native_excerpt_length_words" tools:ignore="UnusedResources">Excerpt length (words)</string>
     <string name="gutenberg_native_failed_to_insert_audio_file" tools:ignore="UnusedResources">Failed to insert audio file.</string>
@@ -247,6 +251,7 @@
     <string name="gutenberg_native_replace_file" tools:ignore="UnusedResources">Replace file</string>
     <string name="gutenberg_native_replace_image_or_video" tools:ignore="UnusedResources">Replace image or video</string>
     <string name="gutenberg_native_replace_video" tools:ignore="UnusedResources">Replace video</string>
+    <string name="gutenberg_native_retry" tools:ignore="UnusedResources">Retry</string>
     <string name="gutenberg_native_rich_text_editing" tools:ignore="UnusedResources">Rich text editing</string>
     <!-- translators: %s: Block name e.g. "Image block"
 translators: Block name. %s: The localized block name -->
@@ -263,6 +268,8 @@ translators: Block name. %s: The localized block name -->
     <string name="gutenberg_native_s_block_this_block_has_invalid_content" tools:ignore="UnusedResources">%s block. This block has invalid content</string>
     <!-- translators: %s: name of the reusable block -->
     <string name="gutenberg_native_s_converted_to_regular_blocks" tools:ignore="UnusedResources">%s converted to regular blocks</string>
+    <!-- translators: %s: embed block variant's label e.g: "Twitter". -->
+    <string name="gutenberg_native_s_embed_block_previews_are_coming_soon" tools:ignore="UnusedResources">%s embed block previews are coming soon</string>
     <!-- translators: %s: social link name e.g: "Instagram". -->
     <string name="gutenberg_native_s_has_no_url_set" tools:ignore="UnusedResources">%s has no URL set</string>
     <!-- translators: %s: social link name e.g: "Instagram". -->
