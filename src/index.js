@@ -13,6 +13,7 @@ import {
 import correctTextFontWeight from './text-font-weight-correct';
 import {
 	registerJetpackBlocks,
+	registerJetpackEmbedVariations,
 	setupJetpackEditor,
 } from './jetpack-editor-setup';
 import setupBlockExperiments from './block-experiments-setup';
@@ -25,6 +26,11 @@ addAction( 'native.pre-render', 'gutenberg-mobile', ( props ) => {
 	setupJetpackEditor(
 		props.jetpackState || { blogId: 1, isJetpackActive: true }
 	);
+
+	// Jetpack Embed variations use WP hooks that are attached to
+	// block type registration, so it’s required to add them before
+	// the core blocks are registered.
+	registerJetpackEmbedVariations();
 } );
 
 addAction( 'native.render', 'gutenberg-mobile', ( props ) => {

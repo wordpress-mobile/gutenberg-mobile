@@ -81,3 +81,11 @@ export function registerJetpackBlocks() {
 	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );
 }
 
+export function registerJetpackEmbedVariations() {
+	if ( ! isActive() ) {
+		return;
+	}
+
+	// Register Jetpack Embed variations
+	require( '../jetpack/projects/plugins/jetpack/extensions/extended-blocks/core-embed' );
+}
