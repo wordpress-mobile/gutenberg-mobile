@@ -2,6 +2,8 @@
  * Internal dependencies
  */
 import { JETPACK_DATA_PATH } from '../jetpack/projects/plugins/jetpack/extensions/shared/get-jetpack-data';
+import isActive from '../jetpack/projects/plugins/jetpack/extensions/shared/is-active';
+
 /**
  * WordPress dependencies
  */
@@ -37,12 +39,18 @@ const setJetpackData = ( {
 	return jetpackEditorInitialState;
 };
 
-export default ( jetpackState ) => {
+export function setupJetpackEditor( jetpackState ) {
 	if ( ! jetpackState.isJetpackActive ) {
 		return;
 	}
 
-	const jetpackData = setJetpackData( jetpackState );
+	return setJetpackData( jetpackState );
+}
+
+export function registerJetpackBlocks() {
+	if ( ! isActive() ) {
+		return;
+	}
 
 	const toggleBlock = ( capability, blockName ) => {
 		if ( capability !== true ) {
@@ -69,7 +77,7 @@ export default ( jetpackState ) => {
 		toggleBlock( capabilities.contactInfoBlock, 'jetpack/contact-info' );
 	} );
 
+	// Register Jetpack blocks
 	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );
+}
 
-	return jetpackData;
-};
