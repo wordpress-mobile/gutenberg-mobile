@@ -1,28 +1,98 @@
-describe( 'Test Jetpack blocks', () => {
-	it( 'should setup the editor for jetpack without failing', () => {
-		const mockRegisterBlockCollection = jest.fn();
-		jest.mock( '@wordpress/blocks', () => {
-			return {
-				getCategories: () => [ { slug: 'media' } ],
-				setCategories: jest.fn(),
-				registerBlockCollection: mockRegisterBlockCollection,
-				withBlockContentContext: jest.fn(),
-			};
+/**
+ * WordPress dependencies
+ */
+import {
+	getBlockType,
+	getBlockTypes,
+	unregisterBlockType,
+} from '@wordpress/blocks';
+import { select } from '@wordpress/data';
+import { store as editPostStore } from '@wordpress/edit-post';
+
+/**
+ * Internal dependencies
+ */
+import getJetpackData, {
+	JETPACK_DATA_PATH,
+} from '../../jetpack/projects/plugins/jetpack/extensions/shared/get-jetpack-data';
+import {
+	registerJetpackBlocks,
+	setupJetpackEditor,
+} from '../jetpack-editor-setup';
+
+const defaultJetpackData = { blogId: 1, isJetpackActive: true };
+const defaultProps = {
+	capabilities: {
+		mediaFilesCollectionBlock: true,
+		contactInfoBlock: true,
+	},
+};
+const jetpackBlocks = [ 'jetpack/contact-info', 'jetpack/story' ];
+
+// Jetpack blocks are registered when importing the editor extension module.
+// Since we need to register the blocks multiple times for testing,
+// it's required to isolate modules for re-importing the editor extension multiple times.
+const registerJetpackBlocksIsolated = ( props ) => {
+	jest.isolateModules( () => {
+		registerJetpackBlocks( props );
+	} );
+};
+
+describe( 'Jetpack blocks', () => {
+	afterEach( () => {
+		// Reset Jetpack data
+		delete global.window[ JETPACK_DATA_PATH ];
+
+		// Clean up registered blocks
+		getBlockTypes().forEach( ( block ) => {
+			unregisterBlockType( block.name );
 		} );
-		jest.mock(
-			'../../jetpack/projects/plugins/jetpack/extensions/blocks/contact-info/editor.js',
-			() => jest.fn()
-		);
-		jest.mock(
-			'../../jetpack/projects/plugins/jetpack/extensions/blocks/story/editor.js',
-			() => jest.fn()
-		);
+	} );
 
-		const setupJetpackEditor = require( '../jetpack-editor-setup' ).default;
-		setupJetpackEditor( { blogId: 1, isJetpackActive: true } );
+	it( 'should set up Jetpack data', () => {
+		const expectedJetpackData = {
+			available_blocks: {
+				'contact-info': { available: true },
+				story: { available: true },
+			},
+			jetpack: { is_active: true },
+			siteFragment: null,
+			tracksUserData: null,
+			wpcomBlogId: 1,
+		};
+		setupJetpackEditor( defaultJetpackData );
 
-		expect( mockRegisterBlockCollection.mock.calls[ 0 ][ 0 ] ).toBe(
-			'jetpack'
+		expect( getJetpackData() ).toEqual( expectedJetpackData );
+	} );
+
+	it( 'should register Jetpack blocks if Jetpack is active', () => {
+		setupJetpackEditor( defaultJetpackData );
+		registerJetpackBlocksIsolated( defaultProps );
+
+		const registeredBlocks = getBlockTypes().map( ( block ) => block.name );
+		expect( registeredBlocks ).toEqual(
+			expect.arrayContaining( jetpackBlocks )
 		);
+	} );
+
+	it( 'should not register Jetpack blocks if Jetpack is not active', () => {
+		setupJetpackEditor( { ...defaultJetpackData, isJetpackActive: false } );
+		registerJetpackBlocksIsolated( defaultProps );
+
+		const registeredBlocks = getBlockTypes().map( ( block ) => block.name );
+		expect( registeredBlocks ).toEqual( [] );
+	} );
+
+	it( 'should hide Jetpack blocks by capabilities', () => {
+		setupJetpackEditor( defaultJetpackData );
+		registerJetpackBlocksIsolated( {
+			capabilities: {
+				mediaFilesCollectionBlock: true,
+				contactInfoBlock: false,
+			},
+		} );
+
+		const { hiddenBlockTypes } = select( editPostStore ).getPreferences();
+		expect( hiddenBlockTypes ).toEqual( [ 'jetpack/contact-info' ] );
 	} );
 } );
