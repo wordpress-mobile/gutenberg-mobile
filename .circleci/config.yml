@@ -124,7 +124,7 @@ commands:
             fi
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - run:
-          name: Install node version specified in nvmrc
+          name: Install node version specified in .nvmrc using nvm
           command: |
             nvm install
             # Set the installed version as the default one
