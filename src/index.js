@@ -35,7 +35,7 @@ addAction( 'native.pre-render', 'gutenberg-mobile', ( props ) => {
 
 addAction( 'native.render', 'gutenberg-mobile', ( props ) => {
 	const capabilities = props.capabilities ?? {};
-	registerJetpackBlocks();
+	registerJetpackBlocks( props );
 	setupBlockExperiments( capabilities );
 } );
 
