@@ -1,11 +1,7 @@
 /**
  * WordPress dependencies
  */
-import {
-	getBlockType,
-	getBlockTypes,
-	unregisterBlockType,
-} from '@wordpress/blocks';
+import { getBlockTypes, unregisterBlockType } from '@wordpress/blocks';
 import { select } from '@wordpress/data';
 import { store as editPostStore } from '@wordpress/edit-post';
 
