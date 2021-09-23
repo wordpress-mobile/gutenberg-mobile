@@ -126,7 +126,6 @@ commands:
       - run:
           name: Install node version specified in Gutenberg using nvm
           command: |
-            cd gutenberg
             nvm install
             # Set the installed version as the default one
             nvm alias default $(nvm current)
