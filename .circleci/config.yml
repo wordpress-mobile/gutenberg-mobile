@@ -124,9 +124,8 @@ commands:
             fi
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - run:
-          name: Install node version specified in Gutenberg using nvm
+          name: Install node version specified in .nvmrc using nvm
           command: |
-            cd gutenberg
             nvm install
             # Set the installed version as the default one
             nvm alias default $(nvm current)
