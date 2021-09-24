@@ -14,7 +14,7 @@ steps:
     key: "bundle-android"
     plugins:
       - docker#v3.8.0:
-          image: "public.ecr.aws/automattic/gb-mobile-image:f7b4b098c92e9712568b7f91e80cdd869947f778"
+          image: "public.ecr.aws/automattic/gb-mobile-image:521f551d639474bf5a5b864826bfd8148f5a272e"
           environment:
             - "CI=true"
     command: |
