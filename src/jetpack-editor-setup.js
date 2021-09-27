@@ -3,6 +3,12 @@
  */
 import { JETPACK_DATA_PATH } from '../jetpack/projects/plugins/jetpack/extensions/shared/get-jetpack-data';
 import isActive from '../jetpack/projects/plugins/jetpack/extensions/shared/is-active';
+import {
+	reactivateFacebookEmbedBlockVariation,
+	reactivateInstagramEmbedBlockVariation,
+	registerLoomVariation,
+	registerSmartframeVariation,
+} from '../jetpack/projects/plugins/jetpack/extensions/extended-blocks/core-embed';
 
 /**
  * WordPress dependencies
@@ -74,11 +80,36 @@ export function registerJetpackBlocks( { capabilities } ) {
 	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );
 }
 
-export function registerJetpackEmbedVariations() {
+export function registerJetpackEmbedVariations( { capabilities } ) {
 	if ( ! isActive() ) {
 		return;
 	}
 
 	// Register Jetpack Embed variations
-	require( '../jetpack/projects/plugins/jetpack/extensions/extended-blocks/core-embed' );
+	[
+		{
+			// Facebook embed
+			capability: capabilities.facebookEmbed,
+			registerFunc: reactivateFacebookEmbedBlockVariation,
+		},
+		{
+			// Instagram embed
+			capability: capabilities.instagramEmbed,
+			registerFunc: reactivateInstagramEmbedBlockVariation,
+		},
+		{
+			// Loom embed
+			capability: capabilities.loomEmbed,
+			registerFunc: registerLoomVariation,
+		},
+		{
+			// Smartframe embed
+			capability: capabilities.smartframeEmbed,
+			registerFunc: registerSmartframeVariation,
+		},
+	].forEach( ( { capability, registerFunc } ) => {
+		if ( capability === true ) {
+			registerFunc();
+		}
+	} );
 }

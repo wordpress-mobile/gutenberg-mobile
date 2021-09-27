@@ -30,7 +30,7 @@ addAction( 'native.pre-render', 'gutenberg-mobile', ( props ) => {
 	// Jetpack Embed variations use WP hooks that are attached to
 	// block type registration, so it’s required to add them before
 	// the core blocks are registered.
-	registerJetpackEmbedVariations();
+	registerJetpackEmbedVariations( props );
 } );
 
 addAction( 'native.render', 'gutenberg-mobile', ( props ) => {
