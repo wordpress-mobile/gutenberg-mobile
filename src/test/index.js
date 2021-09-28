@@ -5,10 +5,12 @@ import {
 	getBlockTypes,
 	getBlockVariations,
 	unregisterBlockType,
+	unregisterBlockVariation,
 } from '@wordpress/blocks';
 import { select } from '@wordpress/data';
 import { store as editPostStore } from '@wordpress/edit-post';
 import { registerCoreBlocks } from '@wordpress/block-library';
+import { removeAllFilters } from '@wordpress/hooks';
 
 /**
  * Internal dependencies
@@ -27,9 +29,19 @@ const defaultProps = {
 	capabilities: {
 		mediaFilesCollectionBlock: true,
 		contactInfoBlock: true,
+		facebookEmbed: true,
+		instagramEmbed: true,
+		loomEmbed: true,
+		smartframeEmbed: true,
 	},
 };
 const jetpackBlocks = [ 'jetpack/contact-info', 'jetpack/story' ];
+const jetpackEmbedVariations = [
+	'facebook',
+	'instagram',
+	'loom',
+	'smartframe',
+];
 
 // Jetpack blocks are registered when importing the editor extension module.
 // Since we need to register the blocks multiple times for testing,
@@ -37,6 +49,12 @@ const jetpackBlocks = [ 'jetpack/contact-info', 'jetpack/story' ];
 const registerJetpackBlocksIsolated = ( props ) => {
 	jest.isolateModules( () => {
 		registerJetpackBlocks( props );
+	} );
+};
+// Similarly to Jetpack blocks, Jetpack embed variations also require to isolate modules.
+const registerJetpackEmbedVariationsIsolated = ( props ) => {
+	jest.isolateModules( () => {
+		registerJetpackEmbedVariations( props );
 	} );
 };
 
@@ -99,28 +117,48 @@ describe( 'Jetpack blocks', () => {
 	} );
 
 	describe( 'Jetpack embed variations', () => {
+		afterEach( () => {
+			// Clean up embed variations
+			getBlockVariations( 'core/embed' ).forEach( ( variation ) => {
+				unregisterBlockVariation( 'core/embed', variation.name );
+			} );
+
+			// Embed variations can use the register block type WP hook to reactivate
+			// already registered variations, so we need to remove all hooks after the tests.
+			removeAllFilters( 'blocks.registerBlockType' );
+		} );
+
 		it( 'should not register Jetpack embed variations if Jetpack is not active', () => {
 			setupJetpackEditor( {
 				...defaultJetpackData,
 				isJetpackActive: false,
 			} );
-			registerJetpackEmbedVariations( defaultProps );
+			registerJetpackEmbedVariationsIsolated( defaultProps );
+			// Embed variations require the Embed block to be registered,
+			// so we need to register the core blocks to include it.
+			registerCoreBlocks();
 
-			const registeredBlocks = getBlockTypes().map(
-				( block ) => block.name
+			const embedVariations = getBlockVariations(
+				'core/embed',
+				'inserter'
+			).map( ( block ) => block.name );
+
+			jetpackEmbedVariations.forEach( ( variation ) =>
+				expect( embedVariations ).not.toContain( variation )
 			);
-			expect( registeredBlocks ).toEqual( [] );
 		} );
 
 		it( 'should not register Jetpack embed variations if capabilities are falsey', () => {
 			setupJetpackEditor( defaultJetpackData );
-			registerJetpackEmbedVariations( {
+			registerJetpackEmbedVariationsIsolated( {
 				capabilities: {
 					facebookEmbed: false,
 					instagramEmbed: null,
 					loomEmbed: undefined,
 				},
 			} );
+			// Embed variations require the Embed block to be registered,
+			// so we need to register the core blocks to include it.
 			registerCoreBlocks();
 
 			const embedVariations = getBlockVariations(
@@ -128,28 +166,16 @@ describe( 'Jetpack blocks', () => {
 				'inserter'
 			).map( ( block ) => block.name );
 
-			const notExpectedVariations = [
-				'facebook',
-				'instagram',
-				'loom',
-				'smartframe',
-			];
-
-			notExpectedVariations.forEach( ( variation ) =>
+			jetpackEmbedVariations.forEach( ( variation ) =>
 				expect( embedVariations ).not.toContain( variation )
 			);
 		} );
 
 		it( 'should register Jetpack embed variations if capabilities are true', () => {
 			setupJetpackEditor( defaultJetpackData );
-			registerJetpackEmbedVariations( {
-				capabilities: {
-					facebookEmbed: true,
-					instagramEmbed: true,
-					loomEmbed: true,
-					smartframeEmbed: true,
-				},
-			} );
+			registerJetpackEmbedVariationsIsolated( defaultProps );
+			// Embed variations require the Embed block to be registered,
+			// so we need to register the core blocks to include it.
 			registerCoreBlocks();
 
 			const embedVariations = getBlockVariations(
@@ -157,14 +183,8 @@ describe( 'Jetpack blocks', () => {
 				'inserter'
 			).map( ( block ) => block.name );
 
-			const expectedVariations = [
-				'facebook',
-				'instagram',
-				'loom',
-				'smartframe',
-			];
 			expect( embedVariations ).toEqual(
-				expect.arrayContaining( expectedVariations )
+				expect.arrayContaining( jetpackEmbedVariations )
 			);
 		} );
 	} );
