@@ -1,9 +1,14 @@
 /**
  * WordPress dependencies
  */
-import { getBlockTypes, unregisterBlockType } from '@wordpress/blocks';
+import {
+	getBlockTypes,
+	getBlockVariations,
+	unregisterBlockType,
+} from '@wordpress/blocks';
 import { select } from '@wordpress/data';
 import { store as editPostStore } from '@wordpress/edit-post';
+import { registerCoreBlocks } from '@wordpress/block-library';
 
 /**
  * Internal dependencies
@@ -13,6 +18,7 @@ import getJetpackData, {
 } from '../../jetpack/projects/plugins/jetpack/extensions/shared/get-jetpack-data';
 import {
 	registerJetpackBlocks,
+	registerJetpackEmbedVariations,
 	setupJetpackEditor,
 } from '../jetpack-editor-setup';
 
@@ -90,5 +96,76 @@ describe( 'Jetpack blocks', () => {
 
 		const { hiddenBlockTypes } = select( editPostStore ).getPreferences();
 		expect( hiddenBlockTypes ).toEqual( [ 'jetpack/contact-info' ] );
+	} );
+
+	describe( 'Jetpack embed variations', () => {
+		it( 'should not register Jetpack embed variations if Jetpack is not active', () => {
+			setupJetpackEditor( {
+				...defaultJetpackData,
+				isJetpackActive: false,
+			} );
+			registerJetpackEmbedVariations( defaultProps );
+
+			const registeredBlocks = getBlockTypes().map(
+				( block ) => block.name
+			);
+			expect( registeredBlocks ).toEqual( [] );
+		} );
+
+		it( 'should not register Jetpack embed variations if capabilities are falsey', () => {
+			setupJetpackEditor( defaultJetpackData );
+			registerJetpackEmbedVariations( {
+				capabilities: {
+					facebookEmbed: false,
+					instagramEmbed: null,
+					loomEmbed: undefined,
+				},
+			} );
+			registerCoreBlocks();
+
+			const embedVariations = getBlockVariations(
+				'core/embed',
+				'inserter'
+			).map( ( block ) => block.name );
+
+			const notExpectedVariations = [
+				'facebook',
+				'instagram',
+				'loom',
+				'smartframe',
+			];
+
+			notExpectedVariations.forEach( ( variation ) =>
+				expect( embedVariations ).not.toContain( variation )
+			);
+		} );
+
+		it( 'should register Jetpack embed variations if capabilities are true', () => {
+			setupJetpackEditor( defaultJetpackData );
+			registerJetpackEmbedVariations( {
+				capabilities: {
+					facebookEmbed: true,
+					instagramEmbed: true,
+					loomEmbed: true,
+					smartframeEmbed: true,
+				},
+			} );
+			registerCoreBlocks();
+
+			const embedVariations = getBlockVariations(
+				'core/embed',
+				'inserter'
+			).map( ( block ) => block.name );
+
+			const expectedVariations = [
+				'facebook',
+				'instagram',
+				'loom',
+				'smartframe',
+			];
+			expect( embedVariations ).toEqual(
+				expect.arrayContaining( expectedVariations )
+			);
+		} );
 	} );
 } );
