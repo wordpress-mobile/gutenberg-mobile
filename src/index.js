@@ -1,4 +1,10 @@
 /**
+ * External dependencies
+ */
+import { NativeModules } from 'react-native';
+const { RNExampleModule } = NativeModules;
+
+/**
  * WordPress dependencies
  */
 import { addAction, addFilter } from '@wordpress/hooks';
@@ -26,6 +32,7 @@ addAction( 'native.render', 'gutenberg-mobile', ( props ) => {
 	);
 	const capabilities = props.capabilities ?? {};
 	setupBlockExperiments( capabilities );
+	RNExampleModule.justToast( 'Hello from Gutenberg!' );
 } );
 
 addFilter( 'native.block_editor_props', 'gutenberg-mobile', ( editorProps ) => {
