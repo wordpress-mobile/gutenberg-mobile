@@ -4,6 +4,15 @@ const fs = require( 'fs' );
 const gutenbergMetroConfigCopy = {
 	...require( './gutenberg/packages/react-native-editor/metro.config.js' ),
 };
+gutenbergMetroConfigCopy.transformer = {
+	babelTransformerPath: require.resolve( './gutenberg/packages/react-native-editor/sass-transformer.js' ),
+	getTransformOptions: async () => ( {
+		transform: {
+			experimentalImportSupport: false,
+			inlineRequires: false,
+		},
+	} ),
+};
 
 gutenbergMetroConfigCopy.resolver.extraNodeModules = new Proxy(
 	{},
@@ -35,6 +44,7 @@ gutenbergMetroConfigCopy.resolver.extraNodeModules = new Proxy(
 			}
 		},
 	}
+
 );
 
 module.exports = gutenbergMetroConfigCopy;
