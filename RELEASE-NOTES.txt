@@ -1,5 +1,8 @@
 Unreleased
 ---
+1.62.2
+------
+* Same as 1.62.1 but with a gutenberg changelog.
 
 1.62.1
 ------
