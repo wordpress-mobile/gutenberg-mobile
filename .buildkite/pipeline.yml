@@ -20,7 +20,7 @@ steps:
     command: |
         source /root/.bashrc
 
-        pushd gutenberg && nvm install && nvm use && popd
+        nvm install && nvm use
         npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
         npm run prebundle:js
