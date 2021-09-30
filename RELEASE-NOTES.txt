@@ -1,6 +1,14 @@
 Unreleased
 ---
 * [*] Embed block: Fix URL update when edited after setting a bad URL of a provider [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4002]
+1.62.2
+------
+* Same as 1.62.1 but with a gutenberg changelog.
+
+1.62.1
+------
+* [**] Image block: fix height and border regression. [https://github.com/WordPress/gutenberg/pull/34957]
+* [**] Column block: fix width attribute flout cutoff. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3921]
 
 1.62.0
 ------
