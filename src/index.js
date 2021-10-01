@@ -14,6 +14,7 @@ import correctTextFontWeight from './text-font-weight-correct';
 import setupJetpackEditor from './jetpack-editor-setup';
 import setupBlockExperiments from './block-experiments-setup';
 import initialHtml from './initial-html';
+import initAnalytics from './analytics';
 
 addAction( 'native.pre-render', 'gutenberg-mobile', () => {
 	require( './strings-overrides' );
@@ -49,4 +50,5 @@ addFilter( 'native.block_editor_props', 'gutenberg-mobile', ( editorProps ) => {
 	return editorProps;
 } );
 
+initAnalytics();
 doGutenbergNativeSetup();
