@@ -1,0 +1,162 @@
+import groovy.json.JsonSlurper
+
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+    id "maven-publish"
+    id "com.automattic.android.publish-to-s3"
+}
+
+// import the `readReactNativeVersion()` function
+apply from: 'https://gist.githubusercontent.com/hypest/742448b9588b3a0aa580a5e80ae95bdf/raw/8eb62d40ee7a5104d2fcaeff21ce6f29bd93b054/readReactNativeVersion.gradle'
+
+def extractPackageVersion(packagejson, packageName, section) {
+    def packageSlurper = new JsonSlurper()
+    def packageJson = packageSlurper.parse file(packagejson)
+    def dep = packageJson.get(section).get(packageName)
+    
+    // Extract version from filename of tarball URL
+    def isTarball = dep.endsWith('.tgz')
+    if(isTarball) {
+        // Replace special characters of package name as "npm pack" command does, to be used in the filename.
+        // Reference: https://github.com/npm/cli/blob/699c2d708d2a24b4f495a74974b2a345f33ee08a/lib/pack.js#L66-L67
+        def packageNameSanitized = packageName.replace("@", '').replace("/", '-')
+        def fileName = dep.substring(dep.lastIndexOf('/') + 1)
+        def version = fileName.replace(packageNameSanitized + '-', '').replace('.tgz', '')
+        return version
+    }
+
+    // Extract version from hash of Git URL
+    def version = dep.substring(dep.lastIndexOf('#') + 1)
+    return version;
+}
+
+group='org.wordpress-mobile.gutenberg-mobile'
+
+def buildAssetsFolder = 'build/assets'
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+//        buildConfigField "boolean", "SHOULD_ATTACH_JS_BUNDLE", willPublishReactNativeBridgeBinary.toString()
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            assets.srcDirs += buildAssetsFolder
+//            assets.srcDirs += '../../../../../src/block-support'
+            // Despite being in a folder called "resources", the files in
+            // unsupported-block-editor are accessed as assets by their
+            // consumers: the WordPressEditor library.
+//            assets.srcDirs += '../../../../../resources/unsupported-block-editor'
+        }
+    }
+}
+
+repositories {
+    maven {
+        url "https://a8c-libs.s3.amazonaws.com/android"
+        content {
+            includeGroup "org.wordpress"
+            includeGroup "org.wordpress.fluxc"
+            includeGroup "org.wordpress-mobile.gutenberg-mobile"
+        }
+    }
+    maven {
+        url "https://a8c-libs.s3.amazonaws.com/android/hermes-mirror"
+        content {
+            includeGroup "org.wordpress-mobile"
+        }
+    }
+    // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+    def localRNUrl = "$rootDir/$gradle.ext.includedBuildGutenbergPath/node_modules/react-native/android"
+    def remoteRNUrl ="https://a8c-libs.s3.amazonaws.com/android/react-native-mirror"
+    def reactNativeUrl = gradle.ext.includedBuildGutenbergPath != null ? localRNUrl : remoteRNUrl
+    maven {
+        url reactNativeUrl
+        content {
+            includeGroup "com.facebook.react"
+        }
+    }
+    maven { url "https://jitpack.io" }
+    google()
+    jcenter()
+}
+
+dependencies {
+    // For animated GIF support
+//    implementation 'com.facebook.fresco:animated-gif:2.0.0'
+//    implementation 'com.google.android.material:material:1.2.1'
+    implementation "org.wordpress:utils:1.22"
+
+//    println "$rootProject.gradle.ext.gutenbergBinaryPath:$rootProject.ext.gutenbergVersion"
+    implementation "$rootProject.gradle.ext.gutenbergBinaryPath:$rootProject.ext.gutenbergVersion"
+//    implementation project(':react-native-bridge')
+
+//    if (willPublishReactNativeBridgeBinary) {
+//        def rnVersion = readReactNativeVersion('../../../../package.json', 'devDependencies')
+//        println "react-native version for react-native-bridge-wpcom: $rnVersion"
+//        implementation "com.facebook.react:react-native:$rnVersion"
+//        runtimeOnly "org.wordpress-mobile:hermes-release-mirror:0.64.0"
+//   } else {
+//        api 'com.facebook.react:react-native:+'
+//        debugRuntimeOnly "org.wordpress-mobile:hermes-debug-mirror:0.64.0"
+//        releaseRuntimeOnly "org.wordpress-mobile:hermes-release-mirror:0.64.0"
+//   }
+}
+
+project.afterEvaluate {
+    publishing {
+        publications {
+            ReactNativeBridgePublication(MavenPublication) {
+                artifact bundleReleaseAar
+
+                groupId 'org.wordpress-mobile.gutenberg-mobile'
+                artifactId 'react-native-gutenberg-bridge-wpcom'
+                // version is set by 'publish-to-s3' plugin
+
+                addDependenciesToPom(pom)
+            }
+        }
+   }
+}
+
+publishToS3Plugin {
+    mavenPublishGroupId 'org.wordpress-mobile.gutenberg-mobile'
+    mavenPublishArtifactId 'react-native-bridge-wpcom'
+}
+
+def addDependenciesToPom(pom) {
+    pom.withXml {
+        def dependenciesNode = asNode().getAt('dependencies')[0] ?: asNode().appendNode('dependencies')
+
+        def addDependencies = { configuration, addExtraNode = {} ->
+            configuration.allDependencies
+                .findAll { it instanceof ExternalDependency && it.name != 'unspecified' }
+                .each {
+                    def dependencyNode = dependenciesNode.appendNode('dependency')
+                    dependencyNode.appendNode('groupId', it.group)
+                    dependencyNode.appendNode('artifactId', it.name)
+                    dependencyNode.appendNode('version', it.version)
+                    addExtraNode(dependencyNode)
+                }
+        }
+
+        addDependencies(configurations.implementation)
+        addDependencies(configurations.runtimeOnly) { dependencyNode ->
+            dependencyNode.appendNode('scope', 'runtime')
+        }
+    }
+}
