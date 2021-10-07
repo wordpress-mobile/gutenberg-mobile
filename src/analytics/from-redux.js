@@ -23,7 +23,7 @@ export default function() {
 			if ( trackedEvents ) {
 				trackedEvents.forEach( ( actionName ) => {
 					const originalAction = actions[ actionName ];
-					const tracker = eventTrackers[ actionName ] || ( () => {} );
+					const tracker = eventTrackers[ actionName ];
 					actions[ actionName ] = ( ...args ) => {
 						try {
 							tracker( ...args );
