@@ -1,5 +1,22 @@
 Unreleased
 ---
+* [*] Embed block: Fix inline preview cut-off when editing URL [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4072]
+* [**] Embed block: Include Jetpack embed variants [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4008]
+
+1.63.0
+------
+* [**] Embed block: Add the top 5 specific embed blocks to the Block inserter list. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3995]
+* [*] Embed block: Fix URL update when edited after setting a bad URL of a provider. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4002]
+* [**] Users can now contact support from inside the block editor screen. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3975]
+
+1.62.2
+------
+* Same as 1.62.1 but with a gutenberg changelog.
+
+1.62.1
+------
+* [**] Image block: fix height and border regression. [https://github.com/WordPress/gutenberg/pull/34957]
+* [**] Column block: fix width float attribute cut off. [https://github.com/WordPress/gutenberg/pull/35061]
 
 1.62.0
 ------
@@ -11,6 +28,10 @@ Unreleased
 * [*] Embed block: Fix content disappearing on Android when switching light/dark mode [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3859]
 * [*] Column block: Translate column width's control labels [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3952]
 * [**] Enable embed preview for Instagram and Vimeo providers. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3918]
+
+1.61.2
+------
+* [*] Image block - Fix height and border regression. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3992]
 
 1.61.1
 ------
