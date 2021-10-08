@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [*] [Unsupported Block Editor] Fix text selection bug for Android [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3937]
 * [*] Embed block: Fix inline preview cut-off when editing URL [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4072]
 * [**] Embed block: Include Jetpack embed variants [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4008]
 
