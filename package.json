@@ -1,6 +1,6 @@
 {
 	"name": "gutenberg-mobile",
-	"version": "1.61.0",
+	"version": "1.63.0",
 	"private": true,
 	"config": {
 		"jsfiles": "./*.js src/*.js src/**/*.js src/**/**/*.js",
@@ -14,6 +14,7 @@
 		"@babel/core": "^7.14.3",
 		"@babel/runtime": "^7.14.0",
 		"@react-native-community/cli": "^5.0.1-alpha.2",
+		"@typescript-eslint/eslint-plugin": "^4.31.0",
 		"@wordpress/babel-preset-default": "file:gutenberg/packages/babel-preset-default",
 		"@wordpress/eslint-plugin": "file:gutenberg/packages/eslint-plugin",
 		"appium": "^1.20.2",
