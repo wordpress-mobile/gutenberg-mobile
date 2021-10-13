@@ -2,10 +2,19 @@
  * Internal dependencies
  */
 import { JETPACK_DATA_PATH } from '../jetpack/projects/plugins/jetpack/extensions/shared/get-jetpack-data';
+import isActive from '../jetpack/projects/plugins/jetpack/extensions/shared/is-active';
+import {
+	reactivateFacebookEmbedBlockVariation,
+	reactivateInstagramEmbedBlockVariation,
+	registerLoomVariation,
+	registerSmartframeVariation,
+} from '../jetpack/projects/plugins/jetpack/extensions/extended-blocks/core-embed';
+
 /**
  * WordPress dependencies
  */
-import { dispatch, select } from '@wordpress/data';
+import { dispatch } from '@wordpress/data';
+import { store as editPostStore } from '@wordpress/edit-post';
 
 // When adding new blocks to this list please also consider updating ./block-support/supported-blocks.json
 const supportedJetpackBlocks = {
@@ -37,39 +46,70 @@ const setJetpackData = ( {
 	return jetpackEditorInitialState;
 };
 
-export default ( jetpackState ) => {
+const hideBlockByCapability = ( capability, blockName ) => {
+	if ( capability !== true ) {
+		dispatch( editPostStore ).hideBlockTypes( [ blockName ] );
+	} else {
+		dispatch( editPostStore ).showBlockTypes( [ blockName ] );
+	}
+};
+
+export function setupJetpackEditor( jetpackState ) {
 	if ( ! jetpackState.isJetpackActive ) {
 		return;
 	}
 
-	const jetpackData = setJetpackData( jetpackState );
+	return setJetpackData( jetpackState );
+}
 
-	const toggleBlock = ( capability, blockName ) => {
-		if ( capability !== true ) {
-			dispatch( 'core/edit-post' ).hideBlockTypes( [ blockName ] );
-		} else {
-			dispatch( 'core/edit-post' ).showBlockTypes( [ blockName ] );
-		}
-	};
+export function registerJetpackBlocks( { capabilities } ) {
+	if ( ! isActive() ) {
+		return;
+	}
 
-	// Note on the use of setTimeout() here:
-	// We observed the settings may not be ready exactly when the native.render hooks get run but rather
-	// right after that execution cycle (because state hasn't changed yet). Hence, we're only checking for
-	// the actual settings to be loaded by using setTimeout without a delay parameter. This ensures the
-	// settings are loaded onto the store and we can use the core/block-editor selector by the time we do
-	// the actual check.
+	hideBlockByCapability(
+		capabilities.mediaFilesCollectionBlock,
+		'jetpack/story'
+	);
+	hideBlockByCapability(
+		capabilities.contactInfoBlock,
+		'jetpack/contact-info'
+	);
 
-	// eslint-disable-next-line @wordpress/react-no-unsafe-timeout
-	setTimeout( () => {
-		const capabilities = select( 'core/block-editor' ).getSettings(
-			'capabilities'
-		);
-
-		toggleBlock( capabilities.mediaFilesCollectionBlock, 'jetpack/story' );
-		toggleBlock( capabilities.contactInfoBlock, 'jetpack/contact-info' );
-	} );
-
+	// Register Jetpack blocks
 	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );
+}
 
-	return jetpackData;
-};
+export function registerJetpackEmbedVariations( { capabilities } ) {
+	if ( ! isActive() ) {
+		return;
+	}
+
+	// Register Jetpack Embed variations
+	[
+		{
+			// Facebook embed
+			capability: capabilities.facebookEmbed,
+			registerFunc: reactivateFacebookEmbedBlockVariation,
+		},
+		{
+			// Instagram embed
+			capability: capabilities.instagramEmbed,
+			registerFunc: reactivateInstagramEmbedBlockVariation,
+		},
+		{
+			// Loom embed
+			capability: capabilities.loomEmbed,
+			registerFunc: registerLoomVariation,
+		},
+		{
+			// Smartframe embed
+			capability: capabilities.smartframeEmbed,
+			registerFunc: registerSmartframeVariation,
+		},
+	].forEach( ( { capability, registerFunc } ) => {
+		if ( capability === true ) {
+			registerFunc();
+		}
+	} );
+}
