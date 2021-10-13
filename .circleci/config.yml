@@ -383,6 +383,23 @@ workflows:
           filters:
             branches:
               only: /^dependabot/submodules/.*/
+              
+  ui-tests-full-on-updated-develop:
+    jobs:
+      - ios-device-checks:
+          name: Test iOS on Device - Full (On Updated Develop)
+          filters:
+            branches:
+              only: 
+                - develop
+                - try/running-ui-tests-on-updated-develop
+      - android-device-checks:
+          name: Test Android on Device - Full (On Updated Develop)
+          filters:
+            branches:
+              only: 
+                - develop
+                - try/running-ui-tests-on-updated-develop
 
   ui-tests-full-scheduled:
     jobs:
