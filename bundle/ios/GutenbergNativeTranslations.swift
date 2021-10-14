@@ -81,6 +81,8 @@ private func dummy() {
     _ = NSLocalizedString("Copied block", comment: "")
     _ = NSLocalizedString("Copy block", comment: "")
     _ = NSLocalizedString("Copy file URL", comment: "")
+    _ = NSLocalizedString("Create embed", comment: "")
+    _ = NSLocalizedString("Create link", comment: "")
     _ = NSLocalizedString("Crosspost", comment: "")
     _ = NSLocalizedString("Current placeholder text is", comment: "")
     _ = NSLocalizedString("Current unit is %s", comment: "translators: accessibility text. Inform about current unit value. %s: Current unit value.")
