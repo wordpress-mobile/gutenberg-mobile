@@ -388,6 +388,7 @@ workflows:
     jobs:
       - ios-device-checks:
           name: Test iOS on Device - Full (On Updated Develop)
+          post-to-slack: false
           filters:
             branches:
               only: 
@@ -395,6 +396,7 @@ workflows:
                 - try/running-ui-tests-on-updated-develop
       - android-device-checks:
           name: Test Android on Device - Full (On Updated Develop)
+          post-to-slack: false
           filters:
             branches:
               only: 
