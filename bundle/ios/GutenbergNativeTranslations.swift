@@ -285,4 +285,6 @@ private func dummy() {
     _ = NSLocalizedString("WordPress Media Library", comment: "")
     _ = NSLocalizedString("X-Axis Position", comment: "")
     _ = NSLocalizedString("Y-Axis Position", comment: "")
+    _ = NSLocalizedString("You already have a %s block on this page.", comment: "translators: %s: name of the block. e.g: \"More\"")
+    _ = NSLocalizedString("You already have a %s block on this post.", comment: "translators: %s: name of the block. e.g: \"More\"")
     _ = NSLocalizedString("You can rearrange blocks by tapping a block and then tapping the up and down arrows that appear on the bottom left side of the block to move it above or below other blocks.", comment: "")
