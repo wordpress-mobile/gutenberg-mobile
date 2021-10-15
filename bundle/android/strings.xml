@@ -334,5 +334,9 @@ translators: Block name. %s: The localized block name -->
     <string name="gutenberg_native_wordpress_media_library" tools:ignore="UnusedResources">WordPress Media Library</string>
     <string name="gutenberg_native_x_axis_position" tools:ignore="UnusedResources">X–Axis Position</string>
     <string name="gutenberg_native_y_axis_position" tools:ignore="UnusedResources">Y–Axis Position</string>
+    <!-- translators: %s: name of the block. e.g: "More" -->
+    <string name="gutenberg_native_you_already_have_a_s_block_on_this_page" tools:ignore="UnusedResources">You already have a %s block on this page.</string>
+    <!-- translators: %s: name of the block. e.g: "More" -->
+    <string name="gutenberg_native_you_already_have_a_s_block_on_this_post" tools:ignore="UnusedResources">You already have a %s block on this post.</string>
     <string name="gutenberg_native_you_can_rearrange_blocks_by_tapping_a_block_and_then_tapping_the" tools:ignore="UnusedResources">You can rearrange blocks by tapping a block and then tapping the up and down arrows that appear on the bottom left side of the block to move it above or below other blocks.</string>
 </resources>
