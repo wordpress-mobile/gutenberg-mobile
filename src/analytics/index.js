@@ -1,4 +1,8 @@
 /**
  * Internal dependencies
  */
-export default from './from-redux';
+import { initialize as initializeRedux } from './redux';
+
+export default () => {
+	initializeRedux();
+};
