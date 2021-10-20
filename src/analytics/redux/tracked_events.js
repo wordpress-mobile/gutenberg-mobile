@@ -9,8 +9,8 @@ import { sendEventToHost } from '@wordpress/react-native-bridge';
  * Retrieves a block object. If the block is not an object,
  * it tries to retrieve the block from the store.
  *
- * @param {string|object} block Block objectg or string identifier.
- * @returns {object} block object or an empty object if not found.
+ * @param {string|Object} block Block objectg or string identifier.
+ * @return {Object} block object or an empty object if not found.
  */
 function getBlockObject( block ) {
 	if ( typeof block === 'object' ) {
@@ -23,11 +23,11 @@ function getBlockObject( block ) {
  * Helper function to recursively track block events.
  * Each inner block will be tracked as a separate event if block contains inner blocks.
  *
- * @param {Array|object} blocks A single or collection of block objects or block identifiers.
+ * @param {Array|Object} blocks A single or collection of block objects or block identifiers.
  * @param {string} eventName Event name used to track.
  * @param {Function} propertiesHandler Callback to transform properties.
- * @param {object} parentBlock Parent block. optional
- * @returns {void}
+ * @param {Object} parentBlock Parent block. optional
+ * @return {void}
  */
 function trackBlocksHandler(
 	blocks,
@@ -66,14 +66,14 @@ function trackBlocksHandler(
 
 export const trackedEvents = {
 	'core/block-editor': {
-		insertBlock( blocks, ...args ) {
+		insertBlock( blocks ) {
 			trackBlocksHandler(
 				blocks,
 				'editor_block_inserted',
 				( { name } ) => ( { block_name: name } )
 			);
 		},
-		insertBlocks( blocks, ...args ) {
+		insertBlocks( blocks ) {
 			trackBlocksHandler(
 				blocks,
 				'editor_blocks_inserted',
