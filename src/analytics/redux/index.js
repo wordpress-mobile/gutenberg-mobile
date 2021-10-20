@@ -26,6 +26,7 @@ export function initialize() {
 						try {
 							tracker( ...args );
 						} catch ( err ) {
+							// eslint-disable-next-line no-console
 							console.error( err );
 						}
 						return originalAction( ...args );
