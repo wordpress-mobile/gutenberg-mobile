@@ -363,6 +363,7 @@ workflows:
               ignore:
                 - develop
                 - /^dependabot/submodules/.*/
+                - try/running-ui-tests-on-updated-develop
       - ios-device-checks:
           name: Test iOS on Device - Full
           requires: [ "Optional UI Tests" ]
@@ -384,10 +385,10 @@ workflows:
             branches:
               only: /^dependabot/submodules/.*/
               
-  ui-tests-full-on-updated-develop:
+  ui-tests-full-develop:
     jobs:
       - ios-device-checks:
-          name: Test iOS on Device - Full (On Updated Develop)
+          name: Test iOS on Device - Full (On Develop)
           post-to-slack: false
           filters:
             branches:
@@ -395,7 +396,7 @@ workflows:
                 - develop
                 - try/running-ui-tests-on-updated-develop
       - android-device-checks:
-          name: Test Android on Device - Full (On Updated Develop)
+          name: Test Android on Device - Full (On Develop)
           post-to-slack: false
           filters:
             branches:
