@@ -1,6 +1,7 @@
 Unreleased
 ---
 * [**] Search block - Text and background color support [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4127]
+* [*] [Embed Block] Fix loading glitch with resolver resolution approach [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4146]
 * [*] Fixed an issue where the Help screens may not respect an iOS device's notch. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4110]
 
 1.64.1
