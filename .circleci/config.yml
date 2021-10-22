@@ -377,15 +377,13 @@ workflows:
           post-to-slack: true
           filters:
             branches:
-              only: 
-                - /^dependabot/submodules/.*/
+              only: /^dependabot/submodules/.*/
       - android-device-checks:
           name: Test Android on Device - Full (Submodule Update)
           post-to-slack: true
           filters:
             branches:
-              only:
-                - /^dependabot/submodules/.*/
+              only: /^dependabot/submodules/.*/
       - ios-device-checks:
           name: Test iOS on Device - Full (Release)
           post-to-slack: true
