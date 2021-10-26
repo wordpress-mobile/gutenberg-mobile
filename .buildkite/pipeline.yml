@@ -17,10 +17,12 @@ steps:
           image: "public.ecr.aws/automattic/gb-mobile-image:latest"
           environment:
             - "CI=true"
+    # We cannot yet utilize npm@7 https://git.io/Ji8Lm
     command: |
         source /root/.bashrc
 
         nvm install && nvm use
+        npm install --global npm@6
         npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
         npm run prebundle:js
