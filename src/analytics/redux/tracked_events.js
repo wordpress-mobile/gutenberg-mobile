@@ -23,10 +23,10 @@ function getBlockObject( block ) {
  * Helper function to recursively track block events.
  * Each inner block will be tracked as a separate event if block contains inner blocks.
  *
- * @param {Array|Object} blocks A single or collection of block objects or block identifiers.
- * @param {string} eventName Event name used to track.
- * @param {Function} propertiesHandler Callback to transform properties.
- * @param {Object} parentBlock Parent block. optional
+ * @param {Array|Object} blocks            A single or collection of block objects or block identifiers.
+ * @param {string}       eventName         Event name used to track.
+ * @param {Function}     propertiesHandler Callback to transform properties.
+ * @param {Object}       parentBlock       Parent block. optional
  * @return {void}
  */
 function trackBlocksHandler(
