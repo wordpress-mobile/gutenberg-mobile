@@ -76,7 +76,7 @@ export const trackedEvents = {
 		insertBlocks( blocks ) {
 			trackBlocksHandler(
 				blocks,
-				'editor_blocks_inserted',
+				'editor_block_inserted',
 				( { name } ) => ( { block_name: name } )
 			);
 		},
