@@ -34,7 +34,7 @@ afterAll( () => {
 	} );
 } );
 
-describe( 'Tiled Gallery block', () => {
+describe.skip( 'Tiled Gallery block', () => {
 	it( 'inserts the block', async () => {
 		const {
 			getByA11yLabel,
