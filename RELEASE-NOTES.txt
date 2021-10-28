@@ -3,6 +3,8 @@ Unreleased
 * [**] Search block - Text and background color support [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4127]
 * [*] [Embed Block] Fix loading glitch with resolver resolution approach [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4146]
 * [*] Fixed an issue where the Help screens may not respect an iOS device's notch. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4110]
+* [**] Inserter: Block inserter indicates newly available block types [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4047]
+* [*] Add support for the Mark HTML tag [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4162]
 
 1.64.1
 ------

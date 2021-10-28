@@ -259,7 +259,6 @@ private func dummy() {
     _ = NSLocalizedString("Take a Photo or Video", comment: "")
     _ = NSLocalizedString("Take a Video", comment: "")
     _ = NSLocalizedString("Tap here to show help", comment: "")
-    _ = NSLocalizedString("Tap to add content", comment: "")
     _ = NSLocalizedString("Tap to hide the keyboard", comment: "")
     _ = NSLocalizedString("Text formatting controls are located within the toolbar positioned above the keyboard while editing a text block", comment: "")
     _ = NSLocalizedString("To remove a block, select the block and click the three dots in the bottom right of the block to view the settings. From there, choose the option to remove the block.", comment: "")
