@@ -1,6 +1,6 @@
 {
   "name": "BVLinearGradient",
-  "version": "2.5.6-wp",
+  "version": "2.5.6-wp-1",
   "homepage": "https://github.com/brentvatne/react-native-linear-gradient",
   "summary": "A <LinearGradient /> component for react-native",
   "license": "MIT",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/wordpress-mobile/react-native-linear-gradient.git",
-    "tag": "v2.5.6-wp"
+    "tag": "v2.5.6-wp-1"
   },
   "source_files": "BVLinearGradient/*.{h,m}",
   "preserve_paths": "**/*.js",

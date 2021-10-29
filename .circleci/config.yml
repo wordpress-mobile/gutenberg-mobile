@@ -124,9 +124,11 @@ commands:
             fi
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - run:
-          name: Install node version specified in .nvmrc using nvm
+          name: Install node version
+          # Node.js 14 enforced to align with the Gutenberg repository. This
+          # should be updated each time Gutenberg upgrades. https://git.io/Ji8qj
           command: |
-            nvm install
+            nvm install 14
             # Set the installed version as the default one
             nvm alias default $(nvm current)
             # Enforce to use the default version in the rest of workflow
@@ -307,7 +309,7 @@ jobs:
         name: Upload .app to sauce labs
         command: |
           source bin/sauce-pre-upload.sh
-          HOMEBREW_NO_AUTO_UPDATE=1 brew install curl
+          brew install curl
           /usr/local/opt/curl/bin/curl --version
           /usr/local/opt/curl/bin/curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.app.zip?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
     - run:
