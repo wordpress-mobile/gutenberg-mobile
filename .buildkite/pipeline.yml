@@ -17,10 +17,12 @@ steps:
           image: "public.ecr.aws/automattic/gb-mobile-image:latest"
           environment:
             - "CI=true"
+    # Node.js 14 enforced to align with the Gutenberg repository. This
+    # should be updated each time Gutenberg upgrades. https://git.io/Ji8qj
     command: |
         source /root/.bashrc
 
-        pushd gutenberg && nvm install && nvm use && popd
+        nvm install 14 && nvm use 14
         npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
         npm run prebundle:js
