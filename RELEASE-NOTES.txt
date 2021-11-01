@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [**] Image block: Add ability to quickly link images to Media Files and Attachment Pages [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3971]
 
 1.65.0
 ------
@@ -54,7 +55,6 @@ Unreleased
 * [*] Embed block: Fix content disappearing on Android when switching light/dark mode [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3859]
 * [*] Column block: Translate column width's control labels [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3952]
 * [**] Enable embed preview for Instagram and Vimeo providers. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3918]
-* [**] Image block: Add ability to quickly link images to Media Files and Attachment Pages [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3971]
 
 1.61.2
 ------
