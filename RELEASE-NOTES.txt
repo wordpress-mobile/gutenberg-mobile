@@ -1,5 +1,19 @@
 Unreleased
 ---
+* [**] Image block: Add ability to quickly link images to Media Files and Attachment Pages [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3971]
+
+1.65.0
+------
+* [**] Search block - Text and background color support [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4127]
+* [*] [Embed Block] Fix loading glitch with resolver resolution approach [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4146]
+* [*] Fixed an issue where the Help screens may not respect an iOS device's notch. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4110]
+* [**] Inserter: Block inserter indicates newly available block types [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4047]
+* [*] Add support for the Mark HTML tag [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4162]
+
+1.64.1
+------
+* [**] Fix updating the block list after block removal [https://github.com/WordPress/gutenberg/pull/35721]
+* [**] Cover block: Change dimRatio to 50 if media added and dimRatio is set to 100 [https://github.com/WordPress/gutenberg/pull/35792]
 
 1.64.0
 ------
