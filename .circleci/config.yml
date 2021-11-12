@@ -365,6 +365,7 @@ workflows:
               ignore:
                 - develop
                 - /^dependabot/submodules/.*/
+                - /^release.*/
       - ios-device-checks:
           name: Test iOS on Device - Full
           requires: [ "Optional UI Tests" ]
@@ -385,7 +386,34 @@ workflows:
           filters:
             branches:
               only: /^dependabot/submodules/.*/
-
+      - ios-device-checks:
+          name: Test iOS on Device - Full (On Develop)
+          post-to-slack: true
+          filters:
+            branches:
+              only: 
+                - develop
+      - android-device-checks:
+          name: Test Android on Device - Full (On Develop)
+          post-to-slack: true
+          filters:
+            branches:
+              only: 
+                - develop
+      - ios-device-checks:
+          name: Test iOS on Device - Full (Release)
+          post-to-slack: true
+          filters:
+            branches:
+              only: 
+                - /^release.*/
+      - android-device-checks:
+          name: Test Android on Device - Full (Release)
+          post-to-slack: true
+          filters:
+            branches:
+              only:
+                - /^release.*/
   ui-tests-full-scheduled:
     jobs:
       - ios-device-checks:
