@@ -8,6 +8,10 @@ Unreleased
 * [*] Fixed a race condition when autosaving content (Android) [https://github.com/WordPress/gutenberg/pull/36072]
 * [**] Fixed a crash that could occur when copying lists from Microsoft Word. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4174]
 
+1.65.1
+------
+* [**] Fixed a crash that could occur when copying lists from Microsoft Word. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4174]
+
 1.65.0
 ------
 * [**] Search block - Text and background color support [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4127]
