@@ -248,6 +248,7 @@
     <string name="gutenberg_native_problem_opening_the_audio" tools:ignore="UnusedResources">Problem opening the audio</string>
     <string name="gutenberg_native_problem_opening_the_video" tools:ignore="UnusedResources">Problem opening the video</string>
     <string name="gutenberg_native_remove_as_featured_image" tools:ignore="UnusedResources">Remove as Featured Image </string>
+    <string name="gutenberg_native_remove_block" tools:ignore="UnusedResources">Remove block</string>
     <string name="gutenberg_native_replace_audio" tools:ignore="UnusedResources">Replace audio</string>
     <string name="gutenberg_native_replace_current_block" tools:ignore="UnusedResources">Replace Current Block</string>
     <string name="gutenberg_native_replace_file" tools:ignore="UnusedResources">Replace file</string>
