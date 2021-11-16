@@ -24,6 +24,9 @@ const supportedJetpackBlocks = {
 	story: {
 		available: true,
 	},
+	'tiled-gallery': {
+		available: true,
+	},
 };
 
 const setJetpackData = ( {
@@ -66,7 +69,6 @@ export function registerJetpackBlocks( { capabilities } ) {
 	if ( ! isActive() ) {
 		return;
 	}
-
 	hideBlockByCapability(
 		capabilities.mediaFilesCollectionBlock,
 		'jetpack/story'
@@ -75,6 +77,7 @@ export function registerJetpackBlocks( { capabilities } ) {
 		capabilities.contactInfoBlock,
 		'jetpack/contact-info'
 	);
+	hideBlockByCapability( true, 'jetpack/tiled-gallery' );
 
 	// Register Jetpack blocks
 	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );

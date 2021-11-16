@@ -35,7 +35,11 @@ const defaultProps = {
 		smartframeEmbed: true,
 	},
 };
-const jetpackBlocks = [ 'jetpack/contact-info', 'jetpack/story' ];
+const jetpackBlocks = [
+	'jetpack/contact-info',
+	'jetpack/story',
+	'jetpack/tiled-gallery',
+];
 const jetpackEmbedVariations = [
 	'facebook',
 	'instagram',
@@ -74,6 +78,7 @@ describe( 'Jetpack blocks', () => {
 			available_blocks: {
 				'contact-info': { available: true },
 				story: { available: true },
+				'tiled-gallery': { available: true },
 			},
 			jetpack: { is_active: true },
 			siteFragment: null,
