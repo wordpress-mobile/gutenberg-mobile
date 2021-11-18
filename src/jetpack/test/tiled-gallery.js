@@ -18,13 +18,23 @@ import { registerCoreBlocks } from '@wordpress/block-library';
 /**
  * Internal dependencies
  */
-import setupJetpackEditor from '../../jetpack-editor-setup';
+import {
+	registerJetpackBlocks,
+	setupJetpackEditor,
+} from '../../jetpack-editor-setup';
+
+const defaultProps = {
+	capabilities: {
+		tiledGalleryBlock: true,
+	},
+};
 
 beforeAll( () => {
 	// Register all core blocks
 	registerCoreBlocks();
 	// Register Jetpack blocks
 	setupJetpackEditor( { blogId: 1, isJetpackActive: true } );
+	registerJetpackBlocks( defaultProps );
 } );
 
 afterAll( () => {
