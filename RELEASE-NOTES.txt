@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [**] Adds Clipboard Link Suggestion to Image block and Button block [https://github.com/WordPress/gutenberg/pull/35972]
 
 1.66.0
 ---
