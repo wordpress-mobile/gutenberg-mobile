@@ -3,6 +3,7 @@ Unreleased
 * [**] Adds Clipboard Link Suggestion to Image block and Button block [https://github.com/WordPress/gutenberg/pull/35972]
 * [*] [Embed block] Included Link in Block Settings [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4189]
 * [**] Fix tab titles translation of inserter menu [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4248]
+* [**] [Gallery block] When a gallery block is added, the media options are auto opened for v2 of the Gallery block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4277]
 
 1.66.0
 ---
