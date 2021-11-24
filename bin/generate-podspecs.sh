@@ -130,7 +130,7 @@ do
         # They are normally generated during compile time using a Script Phase in FBReactNativeSpec added via the `use_react_native_codegen` function.
         # This script is inside node_modules/react-native/scripts folder. Since we don't have the node_modules when compiling WPiOS,
         # we're calling the script here manually to generate these files ahead of time.
-        CODEGEN_MODULES_OUTPUT_DIR=$DEST/FBReactNativeSpec ./scripts/generate-specs.sh 
+        MODULES_OUTPUT_DIR=$DEST/FBReactNativeSpec ./scripts/generate-specs.sh 
 
         # Removing 'script_phases' that shouldn't be needed anymore.
         # Removing 'prepare_command' that includes additional steps to create intermediate folders to keep generated files which won't be needed.
