@@ -124,11 +124,9 @@ commands:
             fi
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - run:
-          name: Install node version
-          # Node.js 14 enforced to align with the Gutenberg repository. This
-          # should be updated each time Gutenberg upgrades. https://git.io/Ji8qj
+          name: Install node version specified in .nvmrc using nvm
           command: |
-            nvm install 14
+            nvm install
             # Set the installed version as the default one
             nvm alias default $(nvm current)
             # Enforce to use the default version in the rest of workflow
