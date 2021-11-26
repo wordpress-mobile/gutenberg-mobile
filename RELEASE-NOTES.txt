@@ -1,6 +1,7 @@
 Unreleased
 ---
 * [**] Fix undo/redo functionality in links when applying text format [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4290]
+* [**] [iOS] Fix scroll update when typing in RichText component [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4299]
 
 1.67.0
 ---
