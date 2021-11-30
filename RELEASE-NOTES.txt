@@ -1,8 +1,16 @@
 Unreleased
 ---
+* [**] Fix undo/redo functionality in links when applying text format [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4290]
+* [**] [iOS] Fix scroll update when typing in RichText component [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4299]
+* [*] [Preformatted block] Fix an issue where the background color is not showing up for standard themes. [#4292]
+
+1.67.0
+---
 * [**] Adds Clipboard Link Suggestion to Image block and Button block [https://github.com/WordPress/gutenberg/pull/35972]
 * [*] [Embed block] Included Link in Block Settings [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4189]
 * [**] Fix tab titles translation of inserter menu [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4248]
+* [*] [Media & Text block] Fix an issue where the text font size would be bigger than expected in some cases [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4252]
+* [**] [Gallery block] When a gallery block is added, the media options are auto opened for v2 of the Gallery block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4277]
 
 1.66.0
 ---
