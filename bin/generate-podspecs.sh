@@ -7,8 +7,11 @@ function warn_missing_tag_commit() {
     RED="\033[0;31m"
     NO_COLOR="\033[0m"
     PODSPEC_HAS_TAG_OR_COMMIT=$(jq '.source | has("tag") or has("commit")' "$DEST/$pod.podspec.json")
-    if [[ $PODSPEC_HAS_TAG_OR_COMMIT == "false" ]]; then
-        printf "${RED}WARNING! $pod.podspec doesn't have a 'tag' or 'commit' field. Either modify this script to add a patch during the podspec generation or modify the original $pod.podspec in the source repo.${NO_COLOR}\n"
+    # If the source points to an HTTP endpoint and SHA, we consider it versioned
+    PODSPEC_HAS_HTTP_AND_SHA=$(jq '.source | has("http") and (has("sha256") or has("sha1"))' "$DEST/$pod.podspec.json")
+
+    if [[ $PODSPEC_HAS_TAG_OR_COMMIT == "false" && $PODSPEC_HAS_HTTP_AND_SHA == "false" ]]; then
+        printf "${RED}WARNING! $pod.podspec doesn't have a 'tag' or 'commit' field, or doesn't point to a SHA verified file. Either modify this script to add a patch during the podspec generation or modify the original $pod.podspec in the source repo.${NO_COLOR}\n"
         exit 1
     fi
 }
@@ -130,7 +133,7 @@ do
         # They are normally generated during compile time using a Script Phase in FBReactNativeSpec added via the `use_react_native_codegen` function.
         # This script is inside node_modules/react-native/scripts folder. Since we don't have the node_modules when compiling WPiOS,
         # we're calling the script here manually to generate these files ahead of time.
-        CODEGEN_MODULES_OUTPUT_DIR=$DEST/FBReactNativeSpec ./scripts/generate-specs.sh 
+        MODULES_OUTPUT_DIR=$DEST/FBReactNativeSpec ./scripts/generate-specs.sh 
 
         # Removing 'script_phases' that shouldn't be needed anymore.
         # Removing 'prepare_command' that includes additional steps to create intermediate folders to keep generated files which won't be needed.
