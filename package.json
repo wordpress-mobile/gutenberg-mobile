@@ -71,7 +71,7 @@
 		"bundle:android:bytecode": "./gutenberg/node_modules/hermes-engine/`node -e \"const platform=require('os').platform();console.log(platform === 'darwin' ? 'osx-bin' : (platform === 'linux' ? 'linux64-bin' : (platform === 'win32' ? 'win64-bin' : 'unsupported-os')));\"`/hermesc -emit-binary -O -out bundle/android/App.js bundle/android/App.text.js -output-source-map",
 		"bundle:ios": "mkdir -p bundle/ios && npm run rn-bundle -- --platform ios --dev false --entry-file ./index.js --assets-dest ./bundle/ios --bundle-output ./bundle/ios/App.js --sourcemap-output ./bundle/ios/App.js.map",
 		"install:wpcli": "(test -x bin/wp-cli.phar || curl -Ls https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o bin/wp-cli.phar && chmod +x bin/wp-cli.phar) && bin/wp-cli.phar --info",
-		"update:wpcli": "bin/wp-cli.phar cli update --yes",
+		"update:wpcli": "bin/wp-cli.phar cli update --nightly --yes && bin/wp-cli.phar --info",
 		"prewp": "npm run install:wpcli && npm run update:wpcli",
 		"wp": "php -d memory_limit=4G bin/wp-cli.phar",
 		"makepot:android": "npm run wp -- i18n make-pot ./gutenberg/packages --include=*.native.js,*.android.js --exclude=test/*,e2e-tests/*,build/*,build-module/*,build-style/*,*.js,*.php --subtract=./gutenberg.pot --ignore-domain gutenberg-android.pot",
