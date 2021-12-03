@@ -1,0 +1,62 @@
+{
+  "No gutter": [
+    "Sin separación"
+  ],
+  "Changing the number of columns will reset your layout and could remove content.": [
+    "Al cambiar el número de columnas, se restablecerá tu diseño y podría eliminar el contenido."
+  ],
+  "A column used inside a Layout Grid block.": [
+    "Una columna usada dentro de un bloque de diseño de cuadrícula."
+  ],
+  "<strong>Snow Patrol</strong>": [
+    "<strong>Patrulla de nieve</strong>"
+  ],
+  "Align blocks to a global grid, with support for responsive breakpoints.": [
+    "Alinea los bloques en una cuadrícula general, compatible con puntos de interrupción adaptables."
+  ],
+  "Huge": [
+    "Enorme"
+  ],
+  "Large": [
+    "Grande"
+  ],
+  "Medium": [
+    "Mediano"
+  ],
+  "Small": [
+    "Pequeño"
+  ],
+  "No padding": [
+    "Sin espaciado interno"
+  ],
+  "Layout": [
+    "Diseño"
+  ],
+  "Column": [
+    "Columna"
+  ],
+  "Mobile": [
+    "Dispositivos móviles"
+  ],
+  "Tablet": [
+    "Tableta"
+  ],
+  "Desktop": [
+    "Ordenadores"
+  ],
+  "4 columns": [
+    "4 columnas"
+  ],
+  "3 columns": [
+    "3 columnas"
+  ],
+  "2 columns": [
+    "2 columnas"
+  ],
+  "1 column": [
+    "1 columna"
+  ],
+  "Layout Grid": [
+    "Diseño de cuadrícula"
+  ]
+}

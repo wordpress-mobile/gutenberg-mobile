@@ -1,0 +1,130 @@
+{
+  "Embed a SmartFrame Image.": [],
+  "smartframe": [],
+  "Embed an Instagram post.": [
+    "嵌入 Instagram 貼文。"
+  ],
+  "Embed a Facebook post.": [
+    "嵌入 Facebook 貼文。"
+  ],
+  "Embed a Loom video.": [
+    "嵌入 Loom 影片。"
+  ],
+  "video": [
+    "影片"
+  ],
+  "Add an interactive story.": [
+    "新增互動式故事。"
+  ],
+  "block search term\u0004video": [
+    "視訊"
+  ],
+  "block search term\u0004story": [
+    "故事"
+  ],
+  "Story": [
+    "故事"
+  ],
+  "Grow": [
+    "拓展"
+  ],
+  "Earn": [
+    "獲利"
+  ],
+  "block search term\u0004social": [
+    "社群"
+  ],
+  "block search term\u0004address": [
+    "地址"
+  ],
+  "block search term\u0004phone": [
+    "電話"
+  ],
+  "block search term\u0004message": [
+    "訊息"
+  ],
+  "block search term\u0004image": [
+    "圖片"
+  ],
+  "Lets you add an email address with an automatically generated click-to-email link.": [
+    "讓您藉由系統自動產生的單鍵傳送電子郵件連結來新增電子郵件地址。"
+  ],
+  "Open address in Google Maps": [
+    "在 Google 地圖中開啟地址"
+  ],
+  "block search term\u0004gallery": [
+    "圖庫"
+  ],
+  "block search term\u0004cell": [
+    "手機"
+  ],
+  "block search term\u0004telephone": [
+    "電話"
+  ],
+  "block search term\u0004mobile": [
+    "手機"
+  ],
+  "block search term\u0004email": [
+    "電子郵件"
+  ],
+  "block search term\u0004place": [
+    "地點"
+  ],
+  "block search term\u0004direction": [
+    "方向"
+  ],
+  "block search term\u0004location": [
+    "位置"
+  ],
+  "Lets you add a phone number with an automatically generated click-to-call link.": [
+    "讓你新增電話號碼，並自動產生按一下撥打連結。"
+  ],
+  "Phone Number": [
+    "電話號碼"
+  ],
+  "Phone number": [
+    "電話號碼"
+  ],
+  "Lets you add an email address, phone number, and physical address with improved markup for better SEO results.": [
+    "讓你新增電子郵件地址、電話號碼和實體地址，並提供改良標記語言，以便獲得更好的 SEO 結果。"
+  ],
+  "Lets you add a physical address with Schema markup.": [
+    "讓你透過 Schema 標記語言來新增實體地址。"
+  ],
+  "Address": [
+    "位址"
+  ],
+  "Country": [
+    "國家/地區"
+  ],
+  "Postal/Zip Code": [
+    "郵遞區號"
+  ],
+  "State/Province/Region": [
+    "州/省/地區"
+  ],
+  "City": [
+    "城市"
+  ],
+  "Address Line 3": [
+    "地址第 3 行"
+  ],
+  "Address Line 2": [
+    "地址第 2 行"
+  ],
+  "Street Address": [
+    "街道地址"
+  ],
+  "Link address to Google Maps": [
+    "將地址與 Google 地圖連結"
+  ],
+  "Contact Info": [
+    "聯絡資訊"
+  ],
+  "Email Address": [
+    "電子郵件位址"
+  ],
+  "Email": [
+    "電子郵件"
+  ]
+}

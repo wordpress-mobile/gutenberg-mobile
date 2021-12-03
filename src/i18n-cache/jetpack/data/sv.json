@@ -1,0 +1,130 @@
+{
+  "Embed a SmartFrame Image.": [],
+  "smartframe": [],
+  "Embed an Instagram post.": [
+    "Bädda in ett inlägg från Instagram."
+  ],
+  "Embed a Facebook post.": [
+    "Bädda in ett inlägg från Facebook."
+  ],
+  "Embed a Loom video.": [
+    "Bädda in en video från Loom."
+  ],
+  "video": [
+    "video"
+  ],
+  "Add an interactive story.": [
+    "Lägg till en interaktivt berättelse."
+  ],
+  "block search term\u0004video": [
+    "video"
+  ],
+  "block search term\u0004story": [
+    "berättelse"
+  ],
+  "Story": [
+    "Berättelse"
+  ],
+  "Grow": [
+    "Väx"
+  ],
+  "Earn": [
+    "Tjäna"
+  ],
+  "block search term\u0004social": [
+    "socialt"
+  ],
+  "block search term\u0004address": [
+    "adress"
+  ],
+  "block search term\u0004phone": [
+    "telefon"
+  ],
+  "block search term\u0004message": [
+    "meddelande"
+  ],
+  "block search term\u0004image": [
+    "bild"
+  ],
+  "Lets you add an email address with an automatically generated click-to-email link.": [
+    "Låter dig lägga till en e-postadress med en automatiskt genererad e-postlänk."
+  ],
+  "Open address in Google Maps": [
+    "Öppna adress i Google Maps"
+  ],
+  "block search term\u0004gallery": [
+    "galleri"
+  ],
+  "block search term\u0004cell": [
+    "mobil"
+  ],
+  "block search term\u0004telephone": [
+    "telefon"
+  ],
+  "block search term\u0004mobile": [
+    "mobil"
+  ],
+  "block search term\u0004email": [
+    "e-post"
+  ],
+  "block search term\u0004place": [
+    "plats"
+  ],
+  "block search term\u0004direction": [
+    "riktning"
+  ],
+  "block search term\u0004location": [
+    "plats"
+  ],
+  "Lets you add a phone number with an automatically generated click-to-call link.": [
+    "Låter dig lägga till ett telefonnummer med en automatiskt genererad samtalslänk."
+  ],
+  "Phone Number": [
+    "Telefonnummer"
+  ],
+  "Phone number": [
+    "Telefonnummer"
+  ],
+  "Lets you add an email address, phone number, and physical address with improved markup for better SEO results.": [
+    "Låter dig lägga till en e-postadress, telefonnummer och fysisk adress med förbättrad kod för bättre sökmotorsoptimeringsresultat."
+  ],
+  "Lets you add a physical address with Schema markup.": [
+    "Låter dig lägga till en fysisk adress med Schema-kod."
+  ],
+  "Address": [
+    "Adress"
+  ],
+  "Country": [
+    "Land"
+  ],
+  "Postal/Zip Code": [
+    "Postnummer"
+  ],
+  "State/Province/Region": [
+    "Delstat/provins/region"
+  ],
+  "City": [
+    "Ort"
+  ],
+  "Address Line 3": [
+    "Adressrad 3"
+  ],
+  "Address Line 2": [
+    "Adressrad 2"
+  ],
+  "Street Address": [
+    "Gatuadress"
+  ],
+  "Link address to Google Maps": [
+    "Länkadress till Google Maps"
+  ],
+  "Contact Info": [
+    "Kontaktuppgifter"
+  ],
+  "Email Address": [
+    "E-postadress"
+  ],
+  "Email": [
+    "E-post"
+  ]
+}

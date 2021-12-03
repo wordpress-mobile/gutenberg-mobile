@@ -1,0 +1,130 @@
+{
+  "Embed a SmartFrame Image.": [],
+  "smartframe": [],
+  "Embed an Instagram post.": [
+    "הטמעה של פוסט מ-Instagram."
+  ],
+  "Embed a Facebook post.": [
+    "הטמעה של תוכן מפייסבוק."
+  ],
+  "Embed a Loom video.": [
+    "להטמיע סרטון מ-Loom."
+  ],
+  "video": [
+    "וידאו"
+  ],
+  "Add an interactive story.": [
+    "להוסיף סטורי אינטראקטיבי."
+  ],
+  "block search term\u0004video": [
+    "וידאו"
+  ],
+  "block search term\u0004story": [
+    "סטורי"
+  ],
+  "Story": [
+    "סטורי"
+  ],
+  "Grow": [
+    "צמיחה"
+  ],
+  "Earn": [
+    "להרוויח"
+  ],
+  "block search term\u0004social": [
+    "רשת חברתית"
+  ],
+  "block search term\u0004address": [
+    "כתובת"
+  ],
+  "block search term\u0004phone": [
+    "טלפון"
+  ],
+  "block search term\u0004message": [
+    "הודעה"
+  ],
+  "block search term\u0004image": [
+    "תמונה"
+  ],
+  "Lets you add an email address with an automatically generated click-to-email link.": [
+    "הפעולה מאפשרת לך להוסיף כתובת אימייל וליצור באופן אוטומטי קישור לשליחת אימייל."
+  ],
+  "Open address in Google Maps": [
+    "לפתוח את הכתובת ב-Google Maps"
+  ],
+  "block search term\u0004gallery": [
+    "גלריה"
+  ],
+  "block search term\u0004cell": [
+    "תא"
+  ],
+  "block search term\u0004telephone": [
+    "טלפון"
+  ],
+  "block search term\u0004mobile": [
+    "טלפון נייד"
+  ],
+  "block search term\u0004email": [
+    "אימייל"
+  ],
+  "block search term\u0004place": [
+    "מקום"
+  ],
+  "block search term\u0004direction": [
+    "כיוון"
+  ],
+  "block search term\u0004location": [
+    "מיקום"
+  ],
+  "Lets you add a phone number with an automatically generated click-to-call link.": [
+    "הפעולה מאפשרת לך להוסיף טלפון נייד וליצור באופן אוטומטי קישור לביצוע שיחה."
+  ],
+  "Phone Number": [
+    "מספר טלפון"
+  ],
+  "Phone number": [
+    "מספר טלפון"
+  ],
+  "Lets you add an email address, phone number, and physical address with improved markup for better SEO results.": [
+    "הפעולה מאפשרת לך להוסיף כתובת אימייל, מספר טלפון נייד וכתובת פיזית באמצעות שפת סימון טובה יותר לשיפור תוצאות SEO."
+  ],
+  "Lets you add a physical address with Schema markup.": [
+    "הפעולה מאפשרת לך להוסיף כתובת פיזית עם שפת סימון סכמתית."
+  ],
+  "Address": [
+    "כתובת"
+  ],
+  "Country": [
+    "מדינה"
+  ],
+  "Postal/Zip Code": [
+    "מיקוד"
+  ],
+  "State/Province/Region": [
+    "מדינה / מחוז / אזור"
+  ],
+  "City": [
+    "עיר"
+  ],
+  "Address Line 3": [
+    "שורת כתובת 3"
+  ],
+  "Address Line 2": [
+    "שורת כתובת 2"
+  ],
+  "Street Address": [
+    "כתובת רחוב"
+  ],
+  "Link address to Google Maps": [
+    "קישור הכתובת ל-Google Maps"
+  ],
+  "Contact Info": [
+    "מידע ליצירת קשר"
+  ],
+  "Email Address": [
+    "כתובת דואר אלקטרוני"
+  ],
+  "Email": [
+    "אימייל"
+  ]
+}
