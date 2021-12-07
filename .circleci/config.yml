@@ -154,6 +154,10 @@ jobs:
       check-correctness:
         type: boolean
         default: false
+      post-to-slack:
+        description: Post to Slack when checks fail. SLACK_WEBHOOK ENV variable must be set.
+        type: boolean
+        default: false
     machine:
       image: << pipeline.parameters.linux-machine-image >>
     steps:
@@ -182,6 +186,14 @@ jobs:
             JEST_JUNIT_OUTPUT: "reports/test-results/android-test-results.xml"
       - store_test_results:
           path: ./reports/test-results
+      - when:
+          condition: << parameters.post-to-slack >>
+          steps:
+            - slack/status:
+                fail_only: true
+                include_job_number_field: false
+                include_project_field: false
+                failure_message: ':red_circle: Job "checks" failed!'
   android-device-checks:
     parameters:
       post-to-slack:
@@ -342,6 +354,7 @@ workflows:
       - checks:
           name: Check Correctness
           check-correctness: true
+          post-to-slack: true
       - checks:
           name: Test iOS
           platform: ios
