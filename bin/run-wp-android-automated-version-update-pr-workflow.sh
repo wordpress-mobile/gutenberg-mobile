@@ -79,5 +79,18 @@ echo "We found PR, '$PR_TITLE', with the latest commit, '$PR_HEAD_COMMIT_SHA', [
 echo
 
 # Workflow creates PR.
-gh workflow run --repo=WordPress-mobile/WordPress-Android automated-version-update-pr.yml \
-                -f gutenbergMobileVersion="$GUTENBERG_VERSION"
+#gh workflow run --repo=WordPress-mobile/WordPress-Android automated-version-update-pr.yml \
+#                -f gutenbergMobileVersion="$GUTENBERG_VERSION"
+
+curl https://api.github.com/repos/WordPress-mobile/WordPress-Android/actions/workflows/automated-version-update-pr.yml/dispatches \
+     --request POST \
+     --user "${{secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" \
+     --header "Accept: application/vnd.github.v3+json" \
+     --header "Content-Type: application/json" \
+     --data "{\"ref\": \"trunk\", \"inputs\":{\"gutenbergMobileVersion\":\"$GUTENBERG_VERSION\"}}"
+#curl https://api.github.com/repos/WordPress-mobile/WordPress-Android/actions/workflows/automated-version-update-pr.yml/dispatches \
+#     --request POST \
+#     --user "ttahmouch:pJuncjhEyZKodtmctWhC8CXpZLRCYp4spzUdBUFddHBNNRdWGg" \
+#     --header "Accept: application/vnd.github.v3+json" \
+#     --header "Content-Type: application/json" \
+#     --data "{\"ref\": \"trunk\", \"inputs\":{\"gutenbergMobileVersion\":\"4175-18984641884c734dca186ecc404acbf1522e1a3b\"}}"
