@@ -11,5 +11,13 @@ jobs:
       - name: Create a WordPress-Android PR to build WordPress-Android with your Current Gutenberg Mobile Changes.
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          npm run sync-android-pr -- "$PR_NUMBER"
+          echo "$PR_NUMBER-$PR_HEAD_SHA"
+          curl https://api.github.com/repos/WordPress-mobile/WordPress-Android/actions/workflows/automated-version-update-pr.yml/dispatches \
+               --request POST \
+               --user "${{secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" \
+               --header "Accept: application/vnd.github.v3+json" \
+               --header "Content-Type: application/json" \
+               --data '{"ref": "trunk", "inputs":{"gutenbergMobileVersion":"$PR_NUMBER-$PR_HEAD_SHA"}}'
+#          npm run sync-android-pr -- "$PR_NUMBER"
