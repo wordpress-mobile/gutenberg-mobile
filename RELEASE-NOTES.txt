@@ -1,4 +1,134 @@
 Unreleased
+---
+* [**] Fix undo/redo functionality in links when applying text format [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4290]
+* [**] [iOS] Fix scroll update when typing in RichText component [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4299]
+* [*] [Preformatted block] Fix an issue where the background color is not showing up for standard themes. [#4292]
+* [**] Update Gallery Block to default to the new format and auto-convert old galleries to the new format [#4315]
+
+1.67.0
+---
+* [**] Adds Clipboard Link Suggestion to Image block and Button block [https://github.com/WordPress/gutenberg/pull/35972]
+* [*] [Embed block] Included Link in Block Settings [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4189]
+* [**] Fix tab titles translation of inserter menu [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4248]
+* [*] [Media & Text block] Fix an issue where the text font size would be bigger than expected in some cases [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4252]
+* [**] [Gallery block] When a gallery block is added, the media options are auto opened for v2 of the Gallery block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4277]
+
+1.66.0
+---
+* [**] Image block: Add ability to quickly link images to Media Files and Attachment Pages [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3971]
+* [*] Fixed a race condition when autosaving content (Android) [https://github.com/WordPress/gutenberg/pull/36072]
+* [**] Fixed a crash that could occur when copying lists from Microsoft Word. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4174]
+
+1.65.1
+------
+* [**] Fixed a crash that could occur when copying lists from Microsoft Word. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4174]
+
+1.65.0
+------
+* [**] Search block - Text and background color support [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4127]
+* [*] [Embed Block] Fix loading glitch with resolver resolution approach [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4146]
+* [*] Fixed an issue where the Help screens may not respect an iOS device's notch. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4110]
+* [**] Inserter: Block inserter indicates newly available block types [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4047]
+* [*] Add support for the Mark HTML tag [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4162]
+
+1.64.1
+------
+* [**] Fix updating the block list after block removal [https://github.com/WordPress/gutenberg/pull/35721]
+* [**] Cover block: Change dimRatio to 50 if media added and dimRatio is set to 100 [https://github.com/WordPress/gutenberg/pull/35792]
+
+1.64.0
+------
+* [*] [Unsupported Block Editor] Fix text selection bug for Android [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3937]
+* [*] Embed block: Fix inline preview cut-off when editing URL [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4072]
+* [**] Embed block: Include Jetpack embed variants [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4008]
+* [*] Embed block: Fix URL not editable after dismissing the edit URL bottom sheet with empty value [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4094]
+* [**] Embed block: Detect when an embeddable URL is pasted into an empty paragraph. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4048]
+* [**] Pullquote block - Added support for text and background color customization [https://github.com/WordPress/gutenberg/pull/34451]
+* [**] Preformatted block - Added support for text and background color customization [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4071]
+
+1.63.1
+------
+* [*] Fixed missing modal backdrop for Android help section [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4106]
+* [*] Fixed erroneous overflow within editor Help screens. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4105]
+
+1.63.0
+------
+* [**] Embed block: Add the top 5 specific embed blocks to the Block inserter list. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3995]
+* [*] Embed block: Fix URL update when edited after setting a bad URL of a provider. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4002]
+* [**] Users can now contact support from inside the block editor screen. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3975]
+
+1.62.2
+------
+* Same as 1.62.1 but with a gutenberg changelog.
+
+1.62.1
+------
+* [**] Image block: fix height and border regression. [https://github.com/WordPress/gutenberg/pull/34957]
+* [**] Column block: fix width float attribute cut off. [https://github.com/WordPress/gutenberg/pull/35061]
+
+1.62.0
+------
+* [**] Enable WordPress embed preview [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3853]
+* [**] Embed block: Add error bottom sheet with retry and convert to link actions. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3921]
+* [**] Embed block: Implemented the No Preview UI when an embed is successful, but we're unable to show an inline preview [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3927]
+* [**] Fix Android-only issue of main toolbar initial position being wrong when RTL [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3923]
+* [*] Embed block: Add device's locale to preview content [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3788]
+* [*] Embed block: Fix content disappearing on Android when switching light/dark mode [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3859]
+* [*] Column block: Translate column width's control labels [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3952]
+* [**] Enable embed preview for Instagram and Vimeo providers. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3918]
+
+1.61.2
+------
+* [*] Image block - Fix height and border regression. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3992]
+
+1.61.1
+------
+* [*] Fix crash related to reusable blocks in the block picker. [https://github.com/WordPress/gutenberg/pull/34873]
+
+1.61.0
+------
+* [***] Inserter: Add Inserter Block Search [https://github.com/WordPress/gutenberg/pull/33237]
+* [**] Enable embed preview for a list of providers (for now only YouTube and Twitter) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3900]
+
+1.60.1
+------
+* [*] RNmobile: Fix the cancel button on Block Variation Picker / Columns Block. [https://github.com/wordpress-mobile/gutenberg/pull/34249]
+* [*] Column block: Fix Android close button alignment. [https://github.com/WordPress/gutenberg/pull/34332]
+* [*] Layout Grid block: Fix Android close button alignment. [https://github.com/Automattic/block-experiments/pull/239]
+
+1.60.0
+------
+* [**] Embed block: Add "Resize for smaller devices" setting. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3753]
+
+1.59.2
+------
+* [*] Inserter: Prevent non-deterministic order of inserter items [https://github.com/WordPress/gutenberg/pull/34078]
+* [*] Fix missing block title of core/latest-posts block [https://github.com/WordPress/gutenberg/pull/34116]
+
+1.59.1
+------
+* [*] Global styles - Add color to the block styles filter list [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3822]
+* [*] Rich text - toTree - Add check in replacements before accessing its type [https://github.com/WordPress/gutenberg/pull/34020]
+
+1.59.0
+------
+* [*] [Android] Fix UBE's inaccessible "more" toolbar item. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3771]
+* [*] Image block: Add a "featured" banner and ability to set or remove an image as featured. (iOS only) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3449]
+
+1.58.3
+------
+* [*] Fix crash when pasting OBJECT REPLACEMENT CHARACTER special character (Rich text - toTree - Add check in replacements before accessing its type) [https://github.com/WordPress/gutenberg/pull/34020]
+
+1.58.2
+------
+* [*] Fix issue with text input in alt text settings [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3784]
+
+1.58.1
+------
+* [*] Global styles: Check for undefined values and merge user colors [https://github.com/WordPress/gutenberg/pull/33707]
+* [*] [Embed block] Disable paragraph transform [https://github.com/WordPress/gutenberg/pull/33745]
+
+1.58.0
 ------
 * [***] New Block: Embed block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3727]
 

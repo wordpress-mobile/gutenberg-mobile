@@ -6,7 +6,7 @@ This is the mobile version of [Gutenberg](https://github.com/WordPress/gutenberg
 
 ### Prerequisites
 
-For a developer experience closer to the one the project maintainers current have, make sure you have the following tools installed:
+For a developer experience closer to the one the project maintainers currently have, make sure you have the following tools installed:
 
 * git
 * [nvm](https://github.com/creationix/nvm)
@@ -38,9 +38,7 @@ git submodule update
 Before running the demo app, you need to download and install the project dependencies. This is done via the following command:
 
 ```
-cd gutenberg
 nvm install
-cd ..
 npm install
 ```
 
