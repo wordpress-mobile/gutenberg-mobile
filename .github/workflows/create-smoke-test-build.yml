@@ -19,5 +19,5 @@ jobs:
                --user "${{secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" \
                --header "Accept: application/vnd.github.v3+json" \
                --header "Content-Type: application/json" \
-               --data '{"ref": "trunk", "inputs":{"gutenbergMobileVersion":"$PR_NUMBER-$PR_HEAD_SHA"}}'
+               --data "{\"ref\": \"trunk\", \"inputs\":{\"gutenbergMobileVersion\":\"$PR_NUMBER-$PR_HEAD_SHA\"}}"
 #          npm run sync-android-pr -- "$PR_NUMBER"
