@@ -1,0 +1,17 @@
+name: sync-android-pr
+on:
+  pull_request:
+    types: [labeled]
+jobs:
+  build:
+    if: ${{ github.event.label.name == 'sync-android-pr' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create a WordPress-Android PR to build WordPress-Android with your Current Gutenberg Mobile Changes.
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          EVENT: ${{ github.event }}
+        run: |
+          npm run sync-android-pr -- "$PR_NUMBER"
+          echo "$EVENT"
