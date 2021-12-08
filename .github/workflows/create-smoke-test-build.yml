@@ -11,7 +11,5 @@ jobs:
       - name: Create a WordPress-Android PR to build WordPress-Android with your Current Gutenberg Mobile Changes.
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          EVENT: ${{ github.event }}
         run: |
           npm run sync-android-pr -- "$PR_NUMBER"
-          echo "$EVENT"
