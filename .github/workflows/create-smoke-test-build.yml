@@ -7,7 +7,7 @@ jobs:
     if: ${{ github.event.label.name == 'sync-android-pr' }}
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Create a WordPress-Android PR to build WordPress-Android with your Current Gutenberg Mobile Changes.
