@@ -1,0 +1,4 @@
+# ignore all the contents of this folder except .gitignore and index.js
+*
+!.gitignore
+!index.js
