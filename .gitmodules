@@ -1,6 +1,6 @@
 [submodule "gutenberg"]
 	path = gutenberg
-	url = ../../SiobhyB/gutenberg.git
+	url = ../../WordPress/gutenberg.git
 	shallow = true
 [submodule "jetpack"]
 	path = jetpack
