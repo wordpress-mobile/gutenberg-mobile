@@ -29,22 +29,36 @@ abort() {
 ############################################################
 # MAIN                                                     #
 ############################################################
-
-# Get the options
-while getopts ":hp:" option; do
-   case $option in
-      h) # display Help
-         help
-         exit;;
-      p) # Enter a GUTENBERG_MOBILE_VERSION
-         GUTENBERG_MOBILE_PR=$OPTARG;;
-
-     \?) # Invalid option
-         echo "Error: Invalid option"
-         exit;;
-   esac
+for i in "$@"; do
+  case $i in
+    -p=*|--pr=*)
+      GUTENBERG_MOBILE_PR="${i#*=}"
+      shift # past argument=value
+      ;;
+    -s=*|--sha=*)
+      PR_HEAD_COMMIT_SHA="${i#*=}"
+      shift # past argument=value
+      ;;
+    -tag=*|--tag=*)
+      TAG_SHA="${i#*=}"
+      shift # past argument=value
+      ;;
+    -t=*|--token=*)
+      GITHUB_TOKEN="${i#*=}"
+      shift # past argument=value
+      ;;
+    -e=*|--title=*)
+      PR_TITLE="${i#*=}"
+      shift # past argument=value
+      ;;
+    *)
+      # unknown option
+      ;;
+  esac
 done
-
+echo "GUTENBERG_MOBILE_PR    = ${GUTENBERG_MOBILE_PR}"
+echo "PR_HEAD_COMMIT_SHA     = ${PR_HEAD_COMMIT_SHA}"
+echo "GITHUB_TOKEN           = ${GITHUB_TOKEN}"
 
 # tools/create-gutenberg-mobile-pr.sh -b fix/image-block ( )
 ############################################################
@@ -53,44 +67,49 @@ done
 # Check that Github CLI is installed
 command -v gh >/dev/null || abort "Error: The Github CLI must be installed."
 
-# Check that Github CLI is logged
-gh auth status >/dev/null 2>&1 || abort "Error: You are not logged into any GitHub hosts. Run 'gh auth login' to authenticate."
+if [ -z $PR_HEAD_COMMIT_SHA ]
+then
+   GUTENBERG_VERSION = "${GUTENBERG_MOBILE_PR}-${PR_HEAD_COMMIT_SHA}"
+fi
 
-# Check that jq is installed
-command -v jq >/dev/null || abort "Error: 'jq' is missing. Please 'brew install jq'."
+if [ -z $GITHUB_TOKEN ]
+then
+   # Check that Github CLI is logged
+  gh auth status >/dev/null 2>&1 || abort "Error: You are not logged into any GitHub hosts. Run 'gh auth login' to authenticate."
+fi
 
-echo "Hello! We're about to take your changes from your PR, $GUTENBERG_MOBILE_PR, and integrate them into WordPress Android."
-echo "This should hopefully be useful for smoke testing your current PR changes in an app shell."
-echo
+if [ -z $PR_HEAD_COMMIT_SHA ]
+then
+   # Check that jq is installed
+   command -v jq >/dev/null || abort "Error: 'jq' is missing. Please 'brew install jq'."
 
-PR_URL="https://github.com/wordpress-mobile/gutenberg-mobile/pull/$GUTENBERG_MOBILE_PR"
-PR_API_ENDPOINT="https://api.github.com/repos/WordPress-Mobile/gutenberg-mobile/pulls/$GUTENBERG_MOBILE_PR"
-PR_DATA=$(curl -s $PR_API_ENDPOINT)
+   echo "Hello! We're about to take your changes from your PR, $GUTENBERG_MOBILE_PR, and integrate them into WordPress Android."
+   echo "This should hopefully be useful for smoke testing your current PR changes in an app shell."
+   echo
 
-# Abort on Empty
-MESSAGE=$(echo $PR_DATA | jq -r '.message')
-[ $MESSAGE ] || abort "$MESSAGE - Github PR $PR_URL doesn't exist. Try again."
+   PR_URL="https://github.com/wordpress-mobile/gutenberg-mobile/pull/$GUTENBERG_MOBILE_PR"
+   PR_API_ENDPOINT="https://api.github.com/repos/WordPress-Mobile/gutenberg-mobile/pulls/$GUTENBERG_MOBILE_PR"
+   PR_DATA=$(curl -s $PR_API_ENDPOINT)
 
-PR_TITLE=$(echo $PR_DATA | jq -r '.title')
-PR_HEAD_COMMIT_SHA=$(echo $PR_DATA | jq -r '.head.sha')
-GUTENBERG_VERSION="$GUTENBERG_MOBILE_PR-$PR_HEAD_COMMIT_SHA"
+   # Abort on Empty
+   MESSAGE=$(echo $PR_DATA | jq -r '.message')
+   echo $MESSAGE
 
-echo "We found PR, '$PR_TITLE', with the latest commit, '$PR_HEAD_COMMIT_SHA', [here]($PR_URL)."
-echo
+   if [ $MESSAGE == 'Not Found' ] 
+   then
+      abort "$MESSAGE - Github PR $PR_URL doesn't exist. Try again."
+   fi
+
+   PR_TITLE=$(echo $PR_DATA | jq -r '.title')
+   PR_HEAD_COMMIT_SHA=$(echo $PR_DATA | jq -r '.head.sha')
+   GUTENBERG_VERSION="$GUTENBERG_MOBILE_PR-$PR_HEAD_COMMIT_SHA"
+
+   echo "We found PR, '$PR_TITLE', with the latest commit, '$PR_HEAD_COMMIT_SHA', [here]($PR_URL)."
+   echo
+fi
+
+
 
 # Workflow creates PR.
-#gh workflow run --repo=WordPress-mobile/WordPress-Android automated-version-update-pr.yml \
-#                -f gutenbergMobileVersion="$GUTENBERG_VERSION"
-
-curl https://api.github.com/repos/WordPress-mobile/WordPress-Android/actions/workflows/automated-version-update-pr.yml/dispatches \
-     --request POST \
-     --user "${{secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" \
-     --header "Accept: application/vnd.github.v3+json" \
-     --header "Content-Type: application/json" \
-     --data "{\"ref\": \"trunk\", \"inputs\":{\"gutenbergMobileVersion\":\"$GUTENBERG_VERSION\"}}"
-#curl https://api.github.com/repos/WordPress-mobile/WordPress-Android/actions/workflows/automated-version-update-pr.yml/dispatches \
-#     --request POST \
-#     --user "ttahmouch:pJuncjhEyZKodtmctWhC8CXpZLRCYp4spzUdBUFddHBNNRdWGg" \
-#     --header "Accept: application/vnd.github.v3+json" \
-#     --header "Content-Type: application/json" \
-#     --data "{\"ref\": \"trunk\", \"inputs\":{\"gutenbergMobileVersion\":\"4175-18984641884c734dca186ecc404acbf1522e1a3b\"}}"
+gh workflow run --repo=WordPress-mobile/WordPress-Android automated-version-update-pr.yml /
+                -f gutenbergMobileVersion="$GUTENBERG_VERSION" title="$PR_TITLE"
