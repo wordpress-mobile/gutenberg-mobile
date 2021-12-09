@@ -17,7 +17,10 @@ import {
 	setupJetpackEditor,
 	setupJetpackLocale,
 } from './jetpack-editor-setup';
-import setupBlockExperiments from './block-experiments-setup';
+import {
+	setupBlockExperiments,
+	setupBlockExperimentsLocale,
+} from './block-experiments-setup';
 import initialHtml from './initial-html';
 import initAnalytics from './analytics';
 
@@ -31,6 +34,7 @@ addAction( 'native.pre-render', 'gutenberg-mobile', ( props ) => {
 
 	// Setup locale for plugins
 	setupJetpackLocale( locale, translations );
+	setupBlockExperimentsLocale( locale, translations );
 
 	// Jetpack Embed variations use WP hooks that are attached to
 	// block type registration, so it’s required to add them before
