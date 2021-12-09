@@ -81,9 +81,12 @@ const getUniqueName = ( function() {
 	};
 }() );
 
-function po2Android( poInput ) {
-	const po = gettextParser.po.parse( poInput );
-	const translations = po.translations[ '' ];
+function po2Android( potFilesContent ) {
+	const translations = potFilesContent.reduce( (result, content) => {
+		const po = gettextParser.po.parse( content );
+		return { ...result, ...po.translations[ '' ] };
+	}, {});
+
 	const androidResourcesMap = Object.values( translations ).reduce( ( result, translation ) => {
 		if ( ! translation.msgid ) {
 			return result;
@@ -117,10 +120,10 @@ ${ indent }</string-array>
 
 if ( require.main === module ) {
 	if ( process.stdin.isTTY ) {
-		const potFileName = process.argv[ 2 ];
-		const destination = process.argv[ 3 ];
-		const potFileContent = fs.readFileSync( potFileName );
-		const xmlOutput = po2Android( potFileContent, process.argv[ 3 ] );
+		const destination = process.argv[ 2 ];
+		const potFiles = process.argv.slice( 3 );
+		const potFilesContent = potFiles.map( (file) => fs.readFileSync( file ) );
+		const xmlOutput = po2Android( potFilesContent );
 		fs.writeFileSync( destination, xmlOutput );
 	} else {
 		let inputData = '';
