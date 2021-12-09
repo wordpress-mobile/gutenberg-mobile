@@ -1,13 +1,13 @@
-publish-android-artifacts-docker-container: &publish-android-artifacts-docker-container
-  plugins:
-    - docker#v3.8.0:
-        image: "public.ecr.aws/automattic/android-build-image:v1.0.0"
-        propagate-environment: true
-        environment:
-          # DO NOT MANUALLY SET THESE VALUES!
-          # They are passed from the Buildkite agent to the Docker container
-          - "AWS_ACCESS_KEY"
-          - "AWS_SECRET_KEY"
+x-common-params:
+  &publish-android-artifacts-docker-container
+  docker#v3.8.0:
+    image: "public.ecr.aws/automattic/android-build-image:v1.1.0"
+    propagate-environment: true
+    environment:
+      # DO NOT MANUALLY SET THESE VALUES!
+      # They are passed from the Buildkite agent to the Docker container
+      - "AWS_ACCESS_KEY"
+      - "AWS_SECRET_KEY"
 
 steps:
   - label: "Bundle Android"
@@ -20,7 +20,7 @@ steps:
     command: |
         source /root/.bashrc
 
-        pushd gutenberg && nvm install && nvm use && popd
+        nvm install && nvm use
         npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
         npm run prebundle:js
@@ -30,16 +30,16 @@ steps:
 
   - label: "Build Android RN Aztec & Publish to S3"
     key: "publish-react-native-aztec-android"
-    <<: *publish-android-artifacts-docker-container
+    plugins:
+      - *publish-android-artifacts-docker-container
     command: |
-        cd ./gutenberg/packages/react-native-aztec/android
-        ./gradlew -PwillPublishReactNativeAztecBinary=true :prepareToPublishToS3 `prepare_to_publish_to_s3_params` :publish
-        buildkite-agent meta-data set "PUBLISHED_REACT_NATIVE_AZTEC_ANDROID_VERSION" `cat ./build/published-version.txt`
+        .buildkite/publish-react-native-aztec-android-artifacts.sh
 
   - label: "Build Android RN Bridge & Publish to S3"
     depends_on:
       - "bundle-android"
       - "publish-react-native-aztec-android"
-    <<: *publish-android-artifacts-docker-container
+    plugins:
+      - *publish-android-artifacts-docker-container
     command: |
         .buildkite/publish-react-native-bridge-android-artifacts.sh

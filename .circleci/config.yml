@@ -10,9 +10,12 @@ commands:
           name: Restore NPM Cache
           keys:
             - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+            - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-
       - run:
           name: NPM Install
-          command: npm ci --prefer-offline --no-audit
+          command: |
+            echo "Node version: $(node --version)"
+            npm ci --prefer-offline --no-audit
       - save_cache:
           name: Save NPM Cache
           key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
@@ -25,9 +28,12 @@ commands:
           name: Restore NPM Cache
           keys:
             - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
+            - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-
       - run:
           name: NPM Install Full
-          command: npm install --no-audit
+          command: |
+            echo "Node version: $(node --version)"
+            npm install --no-audit
       - save_cache:
           name: Save NPM Cache
           key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
@@ -106,6 +112,25 @@ commands:
         - run:
             name: Create reports directory
             command: mkdir reports && mkdir reports/test-results
+  install-node-version:
+    steps:
+      - run:
+          name: Install newer nvm
+          command: |
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+            if [ -z "${NVM_DIR}" ] ; then
+              echo 'Default NVM_DIR to .nvm in home'
+              echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
+            fi
+            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+      - run:
+          name: Install node version specified in .nvmrc using nvm
+          command: |
+            nvm install
+            # Set the installed version as the default one
+            nvm alias default $(nvm current)
+            # Enforce to use the default version in the rest of workflow
+            echo 'nvm use default' >> $BASH_ENV
 
 parameters:
   android-docker-image:
@@ -134,14 +159,7 @@ jobs:
     steps:
       - checkout-shallow
       - checkout-submodules
-      - run:
-          name: Install newer nvm
-          command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
-      - run:
-          name: Install newer node using nvm
-          command: |
-            cd gutenberg
-            nvm install
+      - install-node-version
       - when:
           condition: <<parameters.check-correctness>>
           steps:
@@ -178,6 +196,7 @@ jobs:
     steps:
       - checkout-shallow
       - checkout-submodules
+      - install-node-version
       - run: node -v
       - npm-install
       - run: npm run test:e2e:bundle:android
@@ -226,6 +245,7 @@ jobs:
     steps:
       - checkout-shallow
       - checkout-submodules
+      - install-node-version
       - npm-install
       - run:
           name: Run Android native unit tests
@@ -244,6 +264,7 @@ jobs:
     steps:
     - checkout-shallow
     - checkout-submodules
+    - install-node-version
     - npm-install
     - add-jest-reporter-dir
     - run:
@@ -286,7 +307,7 @@ jobs:
         name: Upload .app to sauce labs
         command: |
           source bin/sauce-pre-upload.sh
-          HOMEBREW_NO_AUTO_UPDATE=1 brew install curl
+          brew install curl
           /usr/local/opt/curl/bin/curl --version
           /usr/local/opt/curl/bin/curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.app.zip?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
     - run:
@@ -342,6 +363,7 @@ workflows:
               ignore:
                 - develop
                 - /^dependabot/submodules/.*/
+                - /^release.*/
       - ios-device-checks:
           name: Test iOS on Device - Full
           requires: [ "Optional UI Tests" ]
@@ -362,7 +384,34 @@ workflows:
           filters:
             branches:
               only: /^dependabot/submodules/.*/
-
+      - ios-device-checks:
+          name: Test iOS on Device - Full (On Develop)
+          post-to-slack: true
+          filters:
+            branches:
+              only: 
+                - develop
+      - android-device-checks:
+          name: Test Android on Device - Full (On Develop)
+          post-to-slack: true
+          filters:
+            branches:
+              only: 
+                - develop
+      - ios-device-checks:
+          name: Test iOS on Device - Full (Release)
+          post-to-slack: true
+          filters:
+            branches:
+              only: 
+                - /^release.*/
+      - android-device-checks:
+          name: Test Android on Device - Full (Release)
+          post-to-slack: true
+          filters:
+            branches:
+              only:
+                - /^release.*/
   ui-tests-full-scheduled:
     jobs:
       - ios-device-checks:
