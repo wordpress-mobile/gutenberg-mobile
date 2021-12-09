@@ -39,8 +39,8 @@ for i in "$@"; do
       PR_HEAD_COMMIT_SHA="${i#*=}"
       shift # past argument=value
       ;;
-    -tag=*|--tag=*)
-      TAG_SHA="${i#*=}"
+    -g=*|--tag=*)
+      GUTENBERG_MOBILE_TAG="${i#*=}"
       shift # past argument=value
       ;;
     -t=*|--token=*)
@@ -56,9 +56,10 @@ for i in "$@"; do
       ;;
   esac
 done
+
 echo "GUTENBERG_MOBILE_PR    = ${GUTENBERG_MOBILE_PR}"
 echo "PR_HEAD_COMMIT_SHA     = ${PR_HEAD_COMMIT_SHA}"
-echo "GITHUB_TOKEN           = ${GITHUB_TOKEN}"
+#echo "GITHUB_TOKEN           = ${GITHUB_TOKEN}"
 
 # tools/create-gutenberg-mobile-pr.sh -b fix/image-block ( )
 ############################################################
@@ -67,18 +68,27 @@ echo "GITHUB_TOKEN           = ${GITHUB_TOKEN}"
 # Check that Github CLI is installed
 command -v gh >/dev/null || abort "Error: The Github CLI must be installed."
 
-if [ -z $PR_HEAD_COMMIT_SHA ]
+if [ -n "$GUTENBERG_MOBILE_PR" ]
 then
-   GUTENBERG_VERSION = "${GUTENBERG_MOBILE_PR}-${PR_HEAD_COMMIT_SHA}"
+  PR_TITLE="Gutenberg Mobile PR #$GUTENBERG_MOBILE_PR"
+  GUTENBERG_VERSION="$GUTENBERG_MOBILE_PR-$PR_HEAD_COMMIT_SHA"
+  PR_URL="https://github.com/wordpress-mobile/gutenberg-mobile/pull/$GUTENBERG_MOBILE_PR"
+elif [ -n "$GUTENBERG_MOBILE_TAG" ]
+then
+  PR_TITLE="Gutenberg Mobile Release Tag #$GUTENBERG_MOBILE_TAG"
+  GUTENBERG_VERSION="$GUTENBERG_MOBILE_TAG"
+  PR_URL="https://github.com/wordpress-mobile/gutenberg-mobile/releases/tag/$GUTENBERG_MOBILE_TAG"
+else
+  abort "Github PR Number OR Gutenberg Tag is REQUIRED to be provided with '--pr=number' or '--tag=tag'."
 fi
 
-if [ -z $GITHUB_TOKEN ]
+if [ -z "$GITHUB_TOKEN" ]
 then
    # Check that Github CLI is logged
   gh auth status >/dev/null 2>&1 || abort "Error: You are not logged into any GitHub hosts. Run 'gh auth login' to authenticate."
 fi
 
-if [ -z $PR_HEAD_COMMIT_SHA ]
+if [ -n "$GUTENBERG_MOBILE_PR" ] && [ -z "$PR_HEAD_COMMIT_SHA" ]
 then
    # Check that jq is installed
    command -v jq >/dev/null || abort "Error: 'jq' is missing. Please 'brew install jq'."
@@ -87,29 +97,31 @@ then
    echo "This should hopefully be useful for smoke testing your current PR changes in an app shell."
    echo
 
-   PR_URL="https://github.com/wordpress-mobile/gutenberg-mobile/pull/$GUTENBERG_MOBILE_PR"
    PR_API_ENDPOINT="https://api.github.com/repos/WordPress-Mobile/gutenberg-mobile/pulls/$GUTENBERG_MOBILE_PR"
-   PR_DATA=$(curl -s $PR_API_ENDPOINT)
+   PR_DATA=$(curl -s "$PR_API_ENDPOINT")
 
    # Abort on Empty
-   MESSAGE=$(echo $PR_DATA | jq -r '.message')
-   echo $MESSAGE
+   MESSAGE=$(echo "$PR_DATA" | jq -r '.message')
 
-   if [ $MESSAGE == 'Not Found' ] 
+   if [ "$MESSAGE" == 'Not Found' ]
    then
       abort "$MESSAGE - Github PR $PR_URL doesn't exist. Try again."
    fi
 
-   PR_TITLE=$(echo $PR_DATA | jq -r '.title')
-   PR_HEAD_COMMIT_SHA=$(echo $PR_DATA | jq -r '.head.sha')
+   GUTENBERG_MOBILE_PR_TITLE=$(echo "$PR_DATA" | jq -r '.title')
+   # TODO: I think the PR# is redundant?
+   # TODO: Figure out how to pass in the PR URL into the PR Description instead of the commit log.
+   # TODO: Get the workflow running for tag pushes.
+   PR_TITLE="Gutenberg Mobile PR #$GUTENBERG_MOBILE_PR '$GUTENBERG_MOBILE_PR_TITLE'"
+   PR_HEAD_COMMIT_SHA=$(echo "$PR_DATA" | jq -r '.head.sha')
    GUTENBERG_VERSION="$GUTENBERG_MOBILE_PR-$PR_HEAD_COMMIT_SHA"
 
-   echo "We found PR, '$PR_TITLE', with the latest commit, '$PR_HEAD_COMMIT_SHA', [here]($PR_URL)."
+   echo "We found PR, '$GUTENBERG_MOBILE_PR_TITLE', with the latest commit, '$PR_HEAD_COMMIT_SHA', [here]($PR_URL)."
    echo
 fi
 
-
-
 # Workflow creates PR.
-gh workflow run --repo=WordPress-mobile/WordPress-Android automated-version-update-pr.yml /
-                -f gutenbergMobileVersion="$GUTENBERG_VERSION" title="$PR_TITLE"
+gh workflow run --repo=WordPress-mobile/WordPress-Android automated-version-update-pr.yml \
+                -f gutenbergMobileVersion="$GUTENBERG_VERSION" \
+                -f title="$PR_TITLE" \
+                -f prURL="$PR_URL"
