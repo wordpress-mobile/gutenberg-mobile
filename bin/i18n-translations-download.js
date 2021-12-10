@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /* eslint-disable no-console */
 
 /**
@@ -6,6 +7,7 @@
 const fs = require( 'fs' );
 const path = require( 'path' );
 const fetch = require( 'node-fetch' );
+const gettextParser = require( 'gettext-parser' );
 
 const supportedLocales = [
 	'ar', // Arabic
@@ -77,13 +79,13 @@ const fetchTranslation = ( locale, plugin ) => {
 		} );
 };
 
-const fetchTranslations = ( plugin ) => {
+const fetchTranslations = ( { plugin, pluginDir, filterStrings } ) => {
 	const fetchPromises = supportedLocales.map( ( locale ) =>
 		fetchTranslation( locale, plugin )
 	);
 
 	// Create data folder if it doesn't exist
-	const dataDir = path.join( __dirname, `${ plugin }/data` );
+	const dataDir = path.join( pluginDir, 'data' );
 	if ( ! fs.existsSync( dataDir ) ) {
 		fs.mkdirSync( dataDir );
 	}
@@ -99,13 +101,26 @@ const fetchTranslations = ( plugin ) => {
 					);
 
 					const translationAbsolutePath = path.resolve(
-						__dirname,
-						`${ plugin }/${ translationRelativePath }`
+						pluginDir,
+						translationRelativePath
 					);
+
+					const translationData = filterStrings
+						? Object.keys( languageResult.response )
+								.filter( filterStrings )
+								.reduce(
+									( result, string ) => ( {
+										...result,
+										[ string ]:
+											languageResult.response[ string ],
+									} ),
+									{}
+								)
+						: languageResult.response;
 
 					fs.writeFile(
 						translationAbsolutePath,
-						JSON.stringify( languageResult.response ),
+						JSON.stringify( translationData, null, 2 ),
 						'utf8',
 						( err ) => {
 							if ( err ) {
@@ -125,48 +140,83 @@ const fetchTranslations = ( plugin ) => {
 	} );
 };
 
+function getStringsFromPotFile( potFileName ) {
+	const potData = fs.readFileSync( potFileName );
+	const po = gettextParser.po.parse( potData );
+
+	const getStringsFromContext = ( contextTranslations ) =>
+		Object.values( contextTranslations ).map( ( { msgid, msgctxt } ) =>
+			msgctxt ? `${ msgctxt }\u0004${ msgid }` : msgid
+		);
+
+	return Object.keys( po.translations ).reduce(
+		( result, context ) => [
+			...result,
+			...getStringsFromContext( po.translations[ context ] ),
+		],
+		[]
+	);
+}
+
+function getStringsFromPotFiles( potFiles ) {
+	const strings = potFiles.reduce(
+		( result, potFile ) =>
+			result.concat( getStringsFromPotFile( potFile ) ),
+		[]
+	);
+	return [ ...new Set( strings ) ];
+}
+
 // if run as a script
 if ( require.main === module ) {
 	const args = process.argv.slice( 2 );
 	const plugin = args[ 0 ] || 'gutenberg';
-	const pluginDir = path.join( __dirname, plugin );
+	const potFiles = args.length > 1 ? args.slice( 1 ) : [];
+	const translationsDir = path.join( process.cwd(), 'src/i18n-translations' );
+	const pluginDir = path.join( translationsDir, plugin );
 
-	if ( ! fs.existsSync( pluginDir ) ) {
-		fs.mkdirSync( pluginDir );
-	}
+	fs.mkdirSync( pluginDir, { recursive: true } );
 
-	fetchTranslations( plugin ).then( ( translations ) => {
-		const indexNative = `/* THIS IS A GENERATED FILE. DO NOT EDIT DIRECTLY. */
-/* eslint-disable prettier/prettier */
+	const usedStrings = getStringsFromPotFiles( potFiles );
+	const filterStrings =
+		usedStrings.length > 0
+			? ( string ) => usedStrings.includes( string )
+			: undefined;
 
-const translations = {
-${ translations
-	.filter( Boolean )
-	.map(
-		( translation ) =>
-			`\t"${ translation.locale }": require( "${ translation.path }" ),`
-	)
-	.join( '\n' ) }
-};
+	fetchTranslations( { plugin, pluginDir, filterStrings } ).then(
+		( translations ) => {
+			const indexNative = `/* THIS IS A GENERATED FILE. DO NOT EDIT DIRECTLY. */
+ /* eslint-disable prettier/prettier */
+ 
+ const translations = {
+ ${ translations
+		.filter( Boolean )
+		.map(
+			( translation ) =>
+				`\t"${ translation.locale }": require( "${ translation.path }" ),`
+		)
+		.join( '\n' ) }
+ };
+ 
+ export const getTranslation = ( locale ) => translations[ locale ];
+ 
+ /* eslint-enable prettier/prettier */
+ `;
 
-export const getTranslation = ( locale ) => translations[ locale ];
-
-/* eslint-enable prettier/prettier */
-`;
-
-		fs.writeFile(
-			path.join( pluginDir, 'index.native.js' ),
-			indexNative,
-			'utf8',
-			( error ) => {
-				if ( error ) {
-					console.error( error );
-					return;
+			fs.writeFile(
+				path.join( pluginDir, 'index.js' ),
+				indexNative,
+				'utf8',
+				( error ) => {
+					if ( error ) {
+						console.error( error );
+						return;
+					}
+					console.log( 'Done.' );
 				}
-				console.log( 'Done.' );
-			}
-		);
-	} );
+			);
+		}
+	);
 }
 
 /* eslint-enable no-console */
