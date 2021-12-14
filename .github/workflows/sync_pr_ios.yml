@@ -1,3 +1,4 @@
+name: sync-ios-pr
 on: [pull_request]
 jobs:
     sync_ios_pr:
