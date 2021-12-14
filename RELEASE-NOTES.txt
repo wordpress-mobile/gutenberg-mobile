@@ -1,6 +1,7 @@
 Unreleased
 ---
 * [*] Give multi-line block names central alignment in inserter [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4343]
+* [*] [Unsupported Block Editor] Hide help button from view for WordPress.com sites. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4352]
 
 1.68.0
 ---
