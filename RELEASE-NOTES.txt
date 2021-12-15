@@ -1,6 +1,7 @@
 Unreleased
 ---
 * [*] Give multi-line block names central alignment in inserter [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4343]
+* [**] Add Jetpack and Layout Grid translations [#4359]
 
 1.68.0
 ---
@@ -8,7 +9,6 @@ Unreleased
 * [**] [iOS] Fix scroll update when typing in RichText component [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4299]
 * [*] [Preformatted block] Fix an issue where the background color is not showing up for standard themes. [#4292]
 * [**] Update Gallery Block to default to the new format and auto-convert old galleries to the new format [#4315]
-* [**] Add Jetpack and Layout Grid translations [#4359]
 * [*] [Preformatted block] Fix an issue where the background color is not showing up for standard themes [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4292]
 * [**] Update Gallery Block to default to the new format and auto-convert old galleries to the new format [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4315]
 * [***] Highlight text - enables color customization for specific text within a Paragraph block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4175]
