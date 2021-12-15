@@ -2,10 +2,9 @@ name: sync-android
 on:
   pull_request:
     types: [labeled]
-# TODO: Discuss if the workflow is practical for Tag creation or if the PR flow will suffice.
-#  push:
-#    tags:
-#      - '*'
+  push:
+    tags:
+      - '*'
 jobs:
   build:
     runs-on: ubuntu-latest
