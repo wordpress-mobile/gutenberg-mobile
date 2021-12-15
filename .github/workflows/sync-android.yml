@@ -2,9 +2,10 @@ name: sync-android
 on:
   pull_request:
     types: [labeled]
-  push:
-    tags:
-      - '*'
+# TODO: Discuss if the workflow is practical for Tag creation or if the PR flow will suffice.
+#  push:
+#    tags:
+#      - '*'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,7 +15,6 @@ jobs:
         env:
           PR: ${{ github.event.pull_request.number }}
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-          EVENT: ${{ github.event_name }}
         run: |
           npm run sync:android -- "--pr=$PR"
         if: ${{ github.event_name == 'pull_request' && github.event.label.name == 'sync:android' }}
@@ -22,7 +22,6 @@ jobs:
         env:
           TAG: ${{ github.ref_name }}
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-          EVENT: ${{ github.event_name }}
         run: |
           npm run sync:android -- "--tag=$TAG"
         if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
