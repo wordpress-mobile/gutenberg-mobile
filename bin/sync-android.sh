@@ -1,5 +1,8 @@
 #!/bin/bash
 # TODO: Get the workflow running for tag pushes.
+# The only major thing remaining is that the `gh release view` fails because the workflow dispatches faster than the
+# publishing of the release allows it to be visible from the GH API. So this workflow needs to be run again in GH GUI
+# for it to succeed.
 # TODO: Is `prURL` also a tag URL?
 # Gutenberg Mobile AKA "GBM".
 # WordPress-Android AKA "WPA".
