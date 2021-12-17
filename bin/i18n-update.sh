@@ -28,7 +28,7 @@ while test $# -gt 0; do
     -h|--help)
       echo "options:"
       echo "-h, --help    show brief help"
-      echo "-p, --path    local path for generating files (by default a temp folder will be used"
+      echo "-p, --path    local path for generating files (by default a temp folder will be used)"
       echo "-d, --debug   print extra info for debugging"
       exit 0
       ;;
