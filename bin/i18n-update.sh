@@ -99,8 +99,12 @@ fi
 # Set used strings target
 USED_STRINGS_PATH="$TARGET_PATH/used-strings.json"
 
+# Build Gutenberg
+echo -e "\n\033[1mBuild Gutenberg packages\033[0m"
+npm run build:gutenberg
+
 # Extract used strings for plugins
-node gutenberg/packages/react-native-editor/bin/extract-used-strings $USED_STRINGS_PATH "${PLUGINS[@]}"
+METRO_CONFIG="metro.config.js" node gutenberg/packages/react-native-editor/bin/extract-used-strings $USED_STRINGS_PATH "${PLUGINS[@]}"
 
 # Download translations of plugins (i.e. Jetpack)
 TRANSLATIONS_OUTPUT_PATH="src/i18n-cache"
