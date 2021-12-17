@@ -7,8 +7,8 @@
 #      previously extracted from the source map files of React Native bundle.
 #
 #      This step produces the following output files:
-#      - src/i18n-translations/{PLUGIN_NAME}/data/{LOCALE}.json     [Translation files]
-#      - src/i18n-translations/{PLUGIN_NAME}/data/index.js          [JS file to import translations]
+#      - src/i18n-cache/{PLUGIN_NAME}/data/{LOCALE}.json     [Translation files]
+#      - src/i18n-cache/{PLUGIN_NAME}/data/index.js          [JS file to import translations]
 #
 #   2. Generate localization strings files that include the strings only used in native JS
 #      source code files ("native.js", "ios.js or "android.js"). The translations of these
@@ -27,9 +27,9 @@ while test $# -gt 0; do
   case "$1" in
     -h|--help)
       echo "options:"
-      echo "-h, --help                              show brief help"
-      echo "-p, --path                              use local path for generating files"
-      echo "-d, --debug                             print extra info for debugging"
+      echo "-h, --help    show brief help"
+      echo "-p, --path    local path for generating files (by default a temp folder will be used"
+      echo "-d, --debug   print extra info for debugging"
       exit 0
       ;;
     -p|--path*)
