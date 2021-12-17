@@ -165,7 +165,7 @@ if ( require.main === module ) {
 		[]
 	);
 	let onlyNativeStrings = flattenUsedStrings.filter( ( { platforms } ) => {
-		return ! platforms.includes( 'web' );
+		return ! platforms.includes( 'web' ) && platforms.includes( 'android' );
 	}, [] );
 	onlyNativeStrings = [ ...new Set( onlyNativeStrings ) ];
 
