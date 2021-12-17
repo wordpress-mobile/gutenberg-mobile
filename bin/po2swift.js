@@ -37,16 +37,35 @@ if ( require.main === module ) {
 	const usedStringsFile = process.argv[ 3 ];
 
 	const usedStrings = getUsedStrings( usedStringsFile );
-	const flattenUsedStrings = Object.entries( usedStrings ).reduce(
+	let flattenUsedStrings = Object.entries( usedStrings ).reduce(
 		( result, [ domain, strings ] ) => {
 			return [ ...result, ...Object.values( strings ) ];
 		},
 		[]
 	);
-	let onlyNativeStrings = flattenUsedStrings.filter( ( { platforms } ) => {
-		return ! platforms.includes( 'web' ) && platforms.includes( 'ios' );
+	flattenUsedStrings = [ ...new Set( flattenUsedStrings ) ];
+
+	const nativeStringsWithContext = [];
+	const onlyNativeStrings = flattenUsedStrings.filter( ( item ) => {
+		const { platforms, string } = item;
+
+		const isNative =
+			! platforms.includes( 'web' ) && platforms.includes( 'ios' );
+		const hasContext = !! item.context;
+		if ( isNative && hasContext ) {
+			nativeStringsWithContext.push( string );
+		}
+
+		return isNative && ! hasContext;
 	}, [] );
-	onlyNativeStrings = [ ...new Set( onlyNativeStrings ) ];
+
+	// Notify about potential strings that won't be included due to having context
+	if ( nativeStringsWithContext.length > 0 ) {
+		console.log(
+			"WARNING: The following strings won't be included as context is not supported:"
+		);
+		console.log( nativeStringsWithContext );
+	}
 
 	const swiftOutput = po2Swift( onlyNativeStrings );
 	fs.writeFileSync( destination, swiftOutput );
