@@ -23,7 +23,7 @@ steps:
         nvm install && nvm use
         npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
-        npm run prebundle:js
+        # npm run prebundle:js
         npm run bundle:android
 
         buildkite-agent artifact upload bundle/android/App.js
