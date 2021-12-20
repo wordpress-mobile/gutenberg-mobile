@@ -46,8 +46,8 @@ module.exports = {
 	// and add it first so https://github.com/facebook/react-native/blob/v0.60.0/Libraries/react-native/react-native-implementation.js#L324-L326 doesn't pick up the Platform npm module.
 	moduleDirectories: [
 		'./gutenberg/node_modules/react-native/Libraries/Utilities',
-		'./gutenberg/node_modules',
 		'./node_modules',
+		'./gutenberg/node_modules',
 	],
 	moduleNameMapper: {
 		// Mock the CSS modules. See https://facebook.github.io/jest/docs/en/webpack.html#handling-static-assets
