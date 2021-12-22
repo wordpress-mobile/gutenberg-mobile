@@ -1,0 +1,40 @@
+name: sync-ios-pr
+on: [pull_request]
+jobs:
+    sync_ios_pr:
+        runs-on: ubuntu-latest
+        env:
+            GITHUB_TOKEN: ${{ github.token}}
+        name: Bundle
+        if: contains(github.event.pull_request.labels.*.name, 'sync-ios-pr')
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  submodules: recursive
+                  ref: '${{ github.event.pull_request.head.ref }}'
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: '14'
+                  cache: 'npm'
+                  cache-dependency-path: '**/package-lock.json'
+
+            - name: Install Node packages
+              run: npm install
+
+            - name: Build iOS
+              run: |
+                  npm run bundle:ios
+                  # npm run genstrings:ios
+
+            - name: Push changes
+              run: |
+                  git config user.name github-actions
+                  git config user.email github-actions@github.com
+                  git add . && git commit -m "Update Bundle"
+                  git push origin HEAD
+
+            - name: Run Sync iOS Workflow
+              run: |
+                  npm run sync-pr:ios
+              env:
+                  GITHUB_TOKEN: ${{ secrets.WORDPRESS_MOBILE_GITHUB_TOKEN }}
