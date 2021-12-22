@@ -104,7 +104,7 @@
 		"lint": "eslint . --ext .js",
 		"lint:fix": "npm run lint -- --fix",
 		"version": "npm run bundle && git add -A bundle",
-		"sync-pr:ios": "./bin/run-wp-ios-automated-gutenberg-update-workflow.sh"
+		"sync-pr:ios": "./bin/run-wp-ios-automated-gutenberg-update-workflow.sh -- -auto-confirm"
 	},
 	"dependencies": {}
 }
