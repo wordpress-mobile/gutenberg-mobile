@@ -1,0 +1,60 @@
+{
+  "No gutter": [
+    "Cilt payı yok"
+  ],
+  "Changing the number of columns will reset your layout and could remove content.": [
+    "Sütun sayısını değiştirmek, düzeninizi sıfırlar ve içeriği kaldırabilir."
+  ],
+  "A column used inside a Layout Grid block.": [
+    "Yerleşim Planı Grid bloğu içinde kullanılan bir sütun."
+  ],
+  "<strong>Snow Patrol</strong>": [
+    "<strong>Kar Devriyesi</strong>"
+  ],
+  "Align blocks to a global grid, with support for responsive breakpoints.": [],
+  "Huge": [
+    "Kocaman"
+  ],
+  "Large": [
+    "Büyük"
+  ],
+  "Medium": [
+    "Orta"
+  ],
+  "Small": [
+    "Küçük"
+  ],
+  "No padding": [
+    "Dolgu Yok"
+  ],
+  "Layout": [
+    "Yerleştirme Planı"
+  ],
+  "Column": [
+    "Sütun"
+  ],
+  "Mobile": [
+    "Mobil"
+  ],
+  "Tablet": [
+    "Tablet"
+  ],
+  "Desktop": [
+    "Masaüstü"
+  ],
+  "4 columns": [
+    "4 sütun"
+  ],
+  "3 columns": [
+    "3 sütun"
+  ],
+  "2 columns": [
+    "2 sütun"
+  ],
+  "1 column": [
+    "1 sütun"
+  ],
+  "Layout Grid": [
+    "Yerleşim Planı Kılavuzu"
+  ]
+}
