@@ -12,19 +12,15 @@ import {
 	registerJetpackBlocks,
 	registerJetpackEmbedVariations,
 	setupJetpackEditor,
-	setupJetpackLocale,
 } from './jetpack-editor-setup';
-import {
-	setupBlockExperiments,
-	setupBlockExperimentsLocale,
-} from './block-experiments-setup';
+import { setupBlockExperiments } from './block-experiments-setup';
 import initialHtml from './initial-html';
 import initAnalytics from './analytics';
 
 const setupHooks = () => {
 	// Hook triggered before the editor is rendered
 	addAction( 'native.pre-render', 'gutenberg-mobile', ( props ) => {
-		const { jetpackState, locale, translations } = props;
+		const { jetpackState } = props;
 
 		require( './strings-overrides' );
 		correctTextFontWeight();
@@ -32,10 +28,6 @@ const setupHooks = () => {
 		setupJetpackEditor(
 			jetpackState || { blogId: 1, isJetpackActive: true }
 		);
-
-		// Setup locale for plugins
-		setupJetpackLocale( locale, translations );
-		setupBlockExperimentsLocale( locale, translations );
 
 		// Jetpack Embed variations use WP hooks that are attached to
 		// block type registration, so it’s required to add them before
