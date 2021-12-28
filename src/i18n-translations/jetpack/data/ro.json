@@ -1,0 +1,134 @@
+{
+  "Embed a SmartFrame Image.": [
+    "Înglobează o imagine SmartFrame."
+  ],
+  "smartframe": [
+    "smartframe"
+  ],
+  "Embed an Instagram post.": [
+    "Înglobează un articol Instagram."
+  ],
+  "Embed a Facebook post.": [
+    "Înglobează un articol Facebook."
+  ],
+  "Embed a Loom video.": [
+    "Înglobează un video Loom."
+  ],
+  "video": [
+    "video"
+  ],
+  "Add an interactive story.": [
+    "Adaugă o narațiune interactivă."
+  ],
+  "block search term\u0004video": [
+    "video"
+  ],
+  "block search term\u0004story": [
+    "narațiune"
+  ],
+  "Story": [
+    "Narațiune"
+  ],
+  "Grow": [
+    "Dezvoltă"
+  ],
+  "Earn": [
+    "Câștigă"
+  ],
+  "block search term\u0004social": [
+    "social"
+  ],
+  "block search term\u0004address": [
+    "adresă"
+  ],
+  "block search term\u0004phone": [
+    "telefon"
+  ],
+  "block search term\u0004message": [
+    "mesaj"
+  ],
+  "block search term\u0004image": [
+    "imagine"
+  ],
+  "Lets you add an email address with an automatically generated click-to-email link.": [
+    "Îți permite să adaugi o adresă de email cu o legătură „dă clic pe email” generată automat."
+  ],
+  "Open address in Google Maps": [
+    "Deschide adresa în Hărți Google"
+  ],
+  "block search term\u0004gallery": [
+    "galerie"
+  ],
+  "block search term\u0004cell": [
+    "celular"
+  ],
+  "block search term\u0004telephone": [
+    "telefon"
+  ],
+  "block search term\u0004mobile": [
+    "mobil"
+  ],
+  "block search term\u0004email": [
+    "email"
+  ],
+  "block search term\u0004place": [
+    "loc"
+  ],
+  "block search term\u0004direction": [
+    "direcție"
+  ],
+  "block search term\u0004location": [
+    "locație"
+  ],
+  "Lets you add a phone number with an automatically generated click-to-call link.": [
+    "Îți permite să adaugi un număr de telefon cu o legătură „Dă clic pentru apelare” generată automat."
+  ],
+  "Phone Number": [
+    "Număr de telefon"
+  ],
+  "Phone number": [
+    "Număr de telefon"
+  ],
+  "Lets you add an email address, phone number, and physical address with improved markup for better SEO results.": [
+    "Îți permite să adaugi o adresă de email, un număr de telefon și o adresă fizică cu markup îmbunătățit, pentru rezultate SEO mai bune."
+  ],
+  "Lets you add a physical address with Schema markup.": [
+    "Îți permite să adaugi o adresă fizică cu Schema markup."
+  ],
+  "Address": [
+    "Adresă"
+  ],
+  "Country": [
+    "Țară"
+  ],
+  "Postal/Zip Code": [
+    "Cod poștal (ZIP)"
+  ],
+  "State/Province/Region": [
+    "Județ/provincie/regiune"
+  ],
+  "City": [
+    "Oraș"
+  ],
+  "Address Line 3": [
+    "A treia linie a adresei"
+  ],
+  "Address Line 2": [
+    "A doua linie a adresei"
+  ],
+  "Street Address": [
+    "Stradă"
+  ],
+  "Link address to Google Maps": [
+    "Leagă adresa la Hărți Google"
+  ],
+  "Contact Info": [
+    "Informații de contact"
+  ],
+  "Email Address": [
+    "Adresă email"
+  ],
+  "Email": [
+    "Email"
+  ]
+}

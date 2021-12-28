@@ -1,0 +1,62 @@
+{
+  "No gutter": [
+    "Kein Abstand"
+  ],
+  "Changing the number of columns will reset your layout and could remove content.": [
+    "Durch Ändern der Spaltenanzahl wird das Layout zurückgesetzt, wobei möglicherweise Inhalte entfernt wurden."
+  ],
+  "A column used inside a Layout Grid block.": [
+    "Eine Spalte im Layoutraster-Block."
+  ],
+  "<strong>Snow Patrol</strong>": [
+    "<strong>Snow Patrol</strong>"
+  ],
+  "Align blocks to a global grid, with support for responsive breakpoints.": [
+    "Richte Blöcke an einem globalen Raster aus. Wird auch für responsive Haltepunkte unterstützt."
+  ],
+  "Huge": [
+    "Sehr groß"
+  ],
+  "Large": [
+    "Groß"
+  ],
+  "Medium": [
+    "Mittelgroß"
+  ],
+  "Small": [
+    "Klein"
+  ],
+  "No padding": [
+    "Kein Abstand"
+  ],
+  "Layout": [
+    "Layout"
+  ],
+  "Column": [
+    "Spalte"
+  ],
+  "Mobile": [
+    "Mobil"
+  ],
+  "Tablet": [
+    "Tablet"
+  ],
+  "Desktop": [
+    "Desktop"
+  ],
+  "4 columns": [
+    "4 Spalten"
+  ],
+  "3 columns": [
+    "3 Spalten"
+  ],
+  "2 columns": [
+    "2 Spalten"
+  ],
+  "1 column": [
+    "1 Spalte"
+  ],
+  "Layout Grid": [
+    "Layoutraster"
+  ]
+}
