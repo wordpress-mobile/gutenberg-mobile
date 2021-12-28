@@ -62,8 +62,8 @@ function fetch_translations() {
 
   if [[ "$plugin_name" == "gutenberg" ]]; then
     echo "Update \"react-native-editor\" package i18n cache"
-    cp -r $OUTPUT_PATH/gutenberg/data gutenberg/packages/react-native-editor/i18n-cache
-    cp $OUTPUT_PATH/gutenberg/index.js gutenberg/packages/react-native-editor/i18n-cache/index.native.js
+    cp -r "$output_path/gutenberg/data" gutenberg/packages/react-native-editor/i18n-cache
+    cp "$output_path/gutenberg/index.js" gutenberg/packages/react-native-editor/i18n-cache/index.native.js
   fi
 }
 
@@ -104,21 +104,21 @@ echo -e "\n\033[1mBuild Gutenberg packages\033[0m"
 npm run build:gutenberg
 
 # Extract used strings for plugins
-METRO_CONFIG="metro.config.js" node gutenberg/packages/react-native-editor/bin/extract-used-strings $USED_STRINGS_PATH "${PLUGINS[@]}"
+METRO_CONFIG="metro.config.js" node gutenberg/packages/react-native-editor/bin/extract-used-strings "$USED_STRINGS_PATH" "${PLUGINS[@]}"
 
 # Download translations of plugins (i.e. Jetpack)
 TRANSLATIONS_OUTPUT_PATH="src/i18n-cache"
 for (( index=0; index<${#PLUGINS[@]}; index+=2 )); do
   PLUGIN_NAME=${PLUGINS[index]}
 
-  fetch_translations $PLUGIN_NAME $TRANSLATIONS_OUTPUT_PATH $USED_STRINGS_PATH
+  fetch_translations "$PLUGIN_NAME" "$TRANSLATIONS_OUTPUT_PATH" "$USED_STRINGS_PATH"
 done
 
 # Download translations of Gutenberg
-fetch_translations "gutenberg" $TRANSLATIONS_OUTPUT_PATH $USED_STRINGS_PATH
+fetch_translations "gutenberg" "$TRANSLATIONS_OUTPUT_PATH" "$USED_STRINGS_PATH"
 
 echo -e "\n\033[1mGenerating localization strings files\033[0m"
 
 # Generate localization strings files
-./bin/po2android.js bundle/android/strings.xml $USED_STRINGS_PATH
-./bin/po2swift.js bundle/ios/GutenbergNativeTranslations.swift $USED_STRINGS_PATH
+./bin/po2android.js bundle/android/strings.xml "$USED_STRINGS_PATH"
+./bin/po2swift.js bundle/ios/GutenbergNativeTranslations.swift "$USED_STRINGS_PATH"
