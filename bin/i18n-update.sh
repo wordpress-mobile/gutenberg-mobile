@@ -53,14 +53,14 @@ function error() {
 }
 
 function fetch_translations() {
-  local PLUGIN_NAME=$1
-  local OUTPUT_PATH=$2
-  local USED_STRINGS_FILE=$3
+  local plugin_name=$1
+  local output_path=$2
+  local used_strings_file=$3
 
-  echo -e "\n\033[1mDownload I18n translations for \"$PLUGIN_NAME\" plugin\033[0m"
-  node gutenberg/packages/react-native-editor/bin/i18n-translations-download $PLUGIN_NAME $OUTPUT_PATH $USED_STRINGS_FILE
+  echo -e "\n\033[1mDownload I18n translations for \"$plugin_name\" plugin\033[0m"
+  node gutenberg/packages/react-native-editor/bin/i18n-translations-download "$plugin_name" "$output_path" "$used_strings_file"
 
-  if [[ "$PLUGIN_NAME" == "gutenberg" ]]; then
+  if [[ "$plugin_name" == "gutenberg" ]]; then
     echo "Update \"react-native-editor\" package i18n cache"
     cp -r $OUTPUT_PATH/gutenberg/data gutenberg/packages/react-native-editor/i18n-cache
     cp $OUTPUT_PATH/gutenberg/index.js gutenberg/packages/react-native-editor/i18n-cache/index.native.js
