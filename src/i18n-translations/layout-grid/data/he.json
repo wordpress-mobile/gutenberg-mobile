@@ -1,0 +1,62 @@
+{
+  "No gutter": [
+    "ללא שוליים"
+  ],
+  "Changing the number of columns will reset your layout and could remove content.": [
+    "שינוי מספר הטורים יאפס את הפריסה שלך ועשוי להסיר את התוכן."
+  ],
+  "A column used inside a Layout Grid block.": [
+    "טור בשימוש בתוך בלוק של רשת פריסה."
+  ],
+  "<strong>Snow Patrol</strong>": [
+    "<strong>Snow Patrol</strong>"
+  ],
+  "Align blocks to a global grid, with support for responsive breakpoints.": [
+    "ליישר את הבלוקים לפי היישור הגלובלי של הרשת עם תמיכה בנקודות עצירה ריספונסיביות."
+  ],
+  "Huge": [
+    "ענק"
+  ],
+  "Large": [
+    "גדול"
+  ],
+  "Medium": [
+    "בינוני"
+  ],
+  "Small": [
+    "קטן"
+  ],
+  "No padding": [
+    "ללא מרווח"
+  ],
+  "Layout": [
+    "פריסה"
+  ],
+  "Column": [
+    "עמודה"
+  ],
+  "Mobile": [
+    "טלפון נייד"
+  ],
+  "Tablet": [
+    "טאבלט"
+  ],
+  "Desktop": [
+    "מחשב שולחני"
+  ],
+  "4 columns": [
+    "ארבעה טורים"
+  ],
+  "3 columns": [
+    "שלושה טורים"
+  ],
+  "2 columns": [
+    "שני טורים"
+  ],
+  "1 column": [
+    "טור אחד"
+  ],
+  "Layout Grid": [
+    "רשת פריסה"
+  ]
+}
