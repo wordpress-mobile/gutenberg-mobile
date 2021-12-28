@@ -20,7 +20,7 @@
 #      - bundle/ios/GutenbergNativeTranslations.swift   [Localization strings files for iOS platform]
 
 # Exit if any command fails
-set -e
+set -euo pipefail
 
 # Get arguments
 while test $# -gt 0; do
@@ -68,7 +68,7 @@ function fetch_translations() {
 }
 
 # Set target path
-if [[ -n $LOCAL_PATH ]]; then
+if [[ -n "${LOCAL_PATH:-}" ]]; then
   TARGET_PATH=$LOCAL_PATH
 else
   TARGET_PATH=$(mktemp -d)
@@ -92,7 +92,7 @@ for (( index=0; index<${#PLUGINS[@]}; index+=2 )); do
     echo -e "\033[0;31mPlugin folder \"$PLUGIN_FOLDER\" doesn't exist.\033[0m"
   fi
 done
-if [[ -n $NOT_FOUND_PLUGIN_FOLDERS ]]; then
+if [[ -n "${NOT_FOUND_PLUGIN_FOLDERS:-}" ]]; then
   exit 1
 fi
 
