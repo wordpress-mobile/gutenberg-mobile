@@ -72,6 +72,7 @@ if [[ -n "${LOCAL_PATH:-}" ]]; then
   TARGET_PATH=$LOCAL_PATH
 else
   TARGET_PATH=$(mktemp -d)
+  trap '{ rm -rf -- "$TARGET_PATH"; }' EXIT
 fi
 
 # Get parameters
