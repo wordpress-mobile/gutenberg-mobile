@@ -81,7 +81,7 @@ echo -e "\n\033[1m== Updating i18n localizations ==\033[0m"
 
 # Validate parameters
 if [[ $((${#PLUGINS[@]}%2)) -ne 0 ]]; then
-  error "Plugin arguments must be be even."
+  error "Plugin arguments must be supplied as tuples (i.e. domain path/to/plugin)."
 fi
 
 for (( index=0; index<${#PLUGINS[@]}; index+=2 )); do
