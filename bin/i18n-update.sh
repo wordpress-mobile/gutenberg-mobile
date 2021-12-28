@@ -52,6 +52,8 @@ function error() {
   exit 1
 }
 
+function arrayLength() { echo "$#"; }
+
 function fetch_translations() {
   local plugin_name=$1
   local output_path=$2
@@ -93,7 +95,7 @@ for (( index=0; index<${#PLUGINS[@]}; index+=2 )); do
     echo -e "\033[0;31mPlugin folder \"$PLUGIN_FOLDER\" doesn't exist.\033[0m"
   fi
 done
-if [[ -n "${NOT_FOUND_PLUGIN_FOLDERS:-}" ]]; then
+if [[ $(arrayLength "${NOT_FOUND_PLUGIN_FOLDERS[@]+"${NOT_FOUND_PLUGIN_FOLDERS[@]}"}") -gt 0 ]]; then
   exit 1
 fi
 
