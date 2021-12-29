@@ -4,7 +4,7 @@
 // This file is to set up the jetpack/layout-grid block that currently lives in block-experiments/blocks/layout-grid
 import { registerBlock } from '../block-experiments/blocks/layout-grid/src';
 import setupLocale from './setup-locale';
-import { getTranslation as getLayoutGridTranslation } from './i18n-translations/layout-grid';
+import { getTranslation as getLayoutGridTranslation } from './i18n-cache/layout-grid';
 
 const LAYOUT_GRID_LOCALE_DOMAIN = 'layout-grid';
 

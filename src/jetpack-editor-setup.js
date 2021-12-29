@@ -10,7 +10,7 @@ import {
 	registerSmartframeVariation,
 } from '../jetpack/projects/plugins/jetpack/extensions/extended-blocks/core-embed';
 import setupLocale from './setup-locale';
-import { getTranslation as getJetpackTranslation } from './i18n-translations/jetpack';
+import { getTranslation as getJetpackTranslation } from './i18n-cache/jetpack';
 
 /**
  * WordPress dependencies
