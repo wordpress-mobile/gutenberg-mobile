@@ -2,8 +2,7 @@
 
 const gettextParser = require( 'gettext-parser' ),
 	fs = require( 'fs' ),
-	crypto = require( 'crypto' ),
-	path = require( 'path' );
+	crypto = require( 'crypto' );
 
 const indent = '    ';
 
@@ -18,28 +17,18 @@ function escapeResourceXML( unsafeXMLValue ) {
 	// See: https://tekeye.uk/android/examples/android-string-resources-gotchas
 	// Let's replace XML special characters  <, >, &, ", ', \, \t and \n
 	// Note that this does not support android:textstyle attributes (<b></b>...)
-	return unsafeXMLValue.replace( /(\r?\n|\r|\t|<|>|&|'|"|\\)/gm, function(
-		character
-	) {
+	return unsafeXMLValue.replace( /(\r?\n|\r|\t|<|>|&|'|"|\\)/gm, function( character ) {
 		switch ( character ) {
-			case '<':
-				return '&lt;';
-			case '>':
-				return '&gt;';
-			case '&':
-				return '&amp;';
-			case "'":
-				return "\\'";
-			case '"':
-				return '\\"';
+			case '<': return '&lt;';
+			case '>': return '&gt;';
+			case '&': return '&amp;';
+			case '\'': return '\\\'';
+			case '"': return '\\\"';
 			case '\r':
 			case '\n':
-			case '\r\n':
-				return '\\n';
-			case '\t':
-				return '\\t';
-			case '\\':
-				return '\\\\';
+			case '\r\n': return '\\n';
+			case '\t': return '\\t';
+			case '\\': return '\\\\';
 		}
 	} );
 }
@@ -53,10 +42,8 @@ function escapeResourceXML( unsafeXMLValue ) {
 function androidReplacements( XMLValue ) {
 	return XMLValue.replace( /(-|\.\.\.)/gm, function( character ) {
 		switch ( character ) {
-			case '-':
-				return '–'; // Android lint rule: TypographyDashes.
-			case '...':
-				return '…'; // Android lint rule: TypographyEllipsis
+			case '-': return '–'; // Android lint rule: TypographyDashes.
+			case '...': return '…'; // Android lint rule: TypographyEllipsis
 		}
 	} );
 }
@@ -76,120 +63,82 @@ const getUniqueName = ( function() {
 	const ANDROID_MAX_NAME_LENGTH = 100;
 	const HASH_LENGTH = 8;
 	return ( str, prefix = 'gutenberg_native_' ) => {
-		const maxNameLength =
-			ANDROID_MAX_NAME_LENGTH - prefix.length - HASH_LENGTH - 10; // leave some margin just in case
-		let name = str
-			.replace( /\W+/g, '_' )
-			.toLocaleLowerCase()
-			.substring( 0, maxNameLength );
+		const maxNameLength = ANDROID_MAX_NAME_LENGTH - prefix.length - HASH_LENGTH - 10; // leave some margin just in case
+		let name = str.replace( /\W+/g, '_' ).toLocaleLowerCase().substring( 0, maxNameLength );
 		// trim underscores left and right
 		name = name.replace( /^_+|_+$/g, '' );
 		// if name exists, use name + hash of the full string
 		if ( name in names ) {
-			const strHashShort = crypto
-				.createHash( 'sha1' )
-				.update( str )
-				.digest( 'hex' )
-				.substring( 0, HASH_LENGTH );
+			const strHashShort = crypto.createHash( 'sha1' ).update( str ).digest( 'hex' ).substring( 0, HASH_LENGTH );
 			name = `${ name }_${ strHashShort }`;
 		}
 		// if name still exists
 		if ( name in names ) {
-			throw new Error(
-				`Could not generate a unique name for string "${ str }"`
-			);
+			throw new Error( `Could not generate a unique name for string "${ str }"` );
 		}
 		names[ name ] = true;
 		return `${ prefix }${ name }`;
 	};
-} )();
+}() );
 
-function po2Android( strings ) {
-	const androidResourcesMap = Object.values( strings ).reduce(
-		( result, { string, stringPlural, comments } ) => {
-			if ( ! string ) {
-				return result;
-			}
-			const uniqueName = getUniqueName( string );
-			const escapedValue = androidReplacements(
-				escapeResourceXML( string )
-			);
-			const escapedValuePlural = androidReplacements(
-				escapeResourceXML( stringPlural || '' )
-			);
-			const comment = comments || '';
-			let localizedEntry = '';
-			if ( comment ) {
-				localizedEntry += `${ indent }<!-- ${ comment.replace(
-					'--',
-					'—'
-				) } -->\n`;
-			}
-			if ( stringPlural ) {
-				localizedEntry += `${ indent }<string-array name="${ uniqueName }" tools:ignore="UnusedResources">
+function po2Android( potFilesContent ) {
+	const translations = potFilesContent.reduce( (result, content) => {
+		const po = gettextParser.po.parse( content );
+		return { ...result, ...po.translations[ '' ] };
+	}, {});
+
+	const androidResourcesMap = Object.values( translations ).reduce( ( result, translation ) => {
+		if ( ! translation.msgid ) {
+			return result;
+		}
+		const uniqueName = getUniqueName( translation.msgid );
+		const escapedValue = androidReplacements( escapeResourceXML( translation.msgid ) );
+		const escapedValuePlural = androidReplacements( escapeResourceXML( translation.msgid_plural || '' ) );
+		const comment = translation.comments.extracted || '';
+		let localizedEntry = '';
+		if ( comment ) {
+			localizedEntry += `${ indent }<!-- ${ comment.replace( '--', '—' ) } -->\n`;
+		}
+		if ( translation.msgid_plural ) {
+			localizedEntry += `${ indent }<string-array name="${ uniqueName }" tools:ignore="UnusedResources">
 ${ indent }${ indent }<item>${ escapedValue }</item>
 ${ indent }${ indent }<item>${ escapedValuePlural }</item>
 ${ indent }</string-array>
 `;
-			} else {
-				localizedEntry += `${ indent }<string name="${ uniqueName }" tools:ignore="UnusedResources">${ escapedValue }</string>\n`;
-			}
-			result[ uniqueName ] = localizedEntry;
-			return result;
-		},
-		{}
-	);
+		} else {
+			localizedEntry += `${ indent }<string name="${ uniqueName }" tools:ignore="UnusedResources">${ escapedValue }</string>\n`;
+		}
+		result[ uniqueName ] = localizedEntry;
+		return result;
+	}, {} );
 	// try to minimize changes in diffs by sorting strings
 	const androidResourcesSortedList = Object.entries( androidResourcesMap )
 		.sort( ( left, right ) => left[ 0 ].localeCompare( right[ 0 ] ) )
 		.map( ( entry ) => entry[ 1 ] );
-	return `<?xml version="1.0" encoding="utf-8"?>\n<resources xmlns:tools="http://schemas.android.com/tools">\n${ androidResourcesSortedList.join(
-		''
-	) }</resources>\n`;
+	return `<?xml version="1.0" encoding="utf-8"?>\n<resources xmlns:tools="http://schemas.android.com/tools">\n${ androidResourcesSortedList.join( '' ) }</resources>\n`;
 }
 
-// Returns used strings of a specified domain
-const getUsedStrings = ( usedStringsFile ) => {
-	return require( path.resolve( usedStringsFile ) );
-};
-
 if ( require.main === module ) {
-	const destination = process.argv[ 2 ];
-	const usedStringsFile = process.argv[ 3 ];
-
-	const usedStrings = getUsedStrings( usedStringsFile );
-	let flattenUsedStrings = Object.entries( usedStrings ).reduce(
-		( result, [ domain, strings ] ) => {
-			return [ ...result, ...Object.values( strings ) ];
-		},
-		[]
-	);
-	flattenUsedStrings = [ ...new Set( flattenUsedStrings ) ];
-
-	const nativeStringsWithContext = [];
-	let onlyNativeStrings = flattenUsedStrings.filter( ( item ) => {
-		const { platforms, string } = item;
-
-		const isNative =
-			! platforms.includes( 'web' ) && platforms.includes( 'android' );
-		const hasContext = !! item.context;
-		if ( isNative && hasContext ) {
-			nativeStringsWithContext.push( string );
-		}
-
-		return isNative && ! hasContext;
-	}, [] );
-
-	// Notify about potential strings that won't be included due to having context
-	if ( nativeStringsWithContext.length > 0 ) {
-		console.log(
-			"WARNING: The following strings won't be included as context is not supported:"
-		);
-		console.log( nativeStringsWithContext );
+	if ( process.stdin.isTTY ) {
+		const destination = process.argv[ 2 ];
+		const potFiles = process.argv.slice( 3 );
+		const potFilesContent = potFiles.map( (file) => fs.readFileSync( file ) );
+		const xmlOutput = po2Android( potFilesContent );
+		fs.writeFileSync( destination, xmlOutput );
+	} else {
+		let inputData = '';
+		process.stdin.on( 'readable', function() {
+			const chunk = this.read();
+			if ( chunk !== null ) {
+				inputData += chunk;
+			}
+		} );
+		process.stdin.on( 'end', function() {
+			process.stdout.write( po2Android( inputData ) );
+		} );
 	}
-
-	const xmlOutput = po2Android( onlyNativeStrings );
-	fs.writeFileSync( destination, xmlOutput );
+	return;
 }
 
 module.exports = po2Android;
+

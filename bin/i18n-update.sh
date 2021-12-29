@@ -123,5 +123,5 @@ fetch_translations "gutenberg" "$TRANSLATIONS_OUTPUT_PATH" "$USED_STRINGS_PATH"
 echo -e "\n\033[1mGenerating localization strings files\033[0m"
 
 # Generate localization strings files
-./bin/po2android.js bundle/android/strings.xml "$USED_STRINGS_PATH"
-./bin/po2swift.js bundle/ios/GutenbergNativeTranslations.swift "$USED_STRINGS_PATH"
+./bin/strings2android.js bundle/android/strings.xml "$USED_STRINGS_PATH"
+./bin/strings2swift.js bundle/ios/GutenbergNativeTranslations.swift "$USED_STRINGS_PATH"
