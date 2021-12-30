@@ -156,7 +156,6 @@ private func dummy() {
     _ = NSLocalizedString("Failed to insert media.\nPlease tap for options.", comment: "")
     _ = NSLocalizedString("Failed to save files.\nPlease tap for options.", comment: "")
     _ = NSLocalizedString("Failed to upload files.\nPlease tap for options.", comment: "")
-    _ = NSLocalizedString("Featured", comment: "")
     _ = NSLocalizedString("Featured Image", comment: "")
     _ = NSLocalizedString("File block settings", comment: "")
     _ = NSLocalizedString("File name", comment: "")
