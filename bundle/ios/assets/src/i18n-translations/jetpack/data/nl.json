@@ -1,0 +1,130 @@
+{
+  "Embed a SmartFrame Image.": [],
+  "smartframe": [],
+  "Embed an Instagram post.": [
+    "Sluit een Instagram bericht in."
+  ],
+  "Embed a Facebook post.": [
+    "Sluit een Facebook bericht in."
+  ],
+  "Embed a Loom video.": [
+    "Sluit een Loom video in."
+  ],
+  "video": [
+    "video"
+  ],
+  "Add an interactive story.": [
+    "Voeg een interactief verhaal toe."
+  ],
+  "block search term\u0004video": [
+    "video"
+  ],
+  "block search term\u0004story": [
+    "verhaal"
+  ],
+  "Story": [
+    "Verhaal"
+  ],
+  "Grow": [
+    "Doorgroeien"
+  ],
+  "Earn": [
+    "Verdienen"
+  ],
+  "block search term\u0004social": [
+    "sociaal"
+  ],
+  "block search term\u0004address": [
+    "adres"
+  ],
+  "block search term\u0004phone": [
+    "telefoon"
+  ],
+  "block search term\u0004message": [
+    "bericht"
+  ],
+  "block search term\u0004image": [
+    "afbeelding"
+  ],
+  "Lets you add an email address with an automatically generated click-to-email link.": [
+    "Hiermee kun je een e-mailadres met een automatisch gegenereerde link voor direct e-mailen toevoegen."
+  ],
+  "Open address in Google Maps": [
+    "Adres openen in Google Maps"
+  ],
+  "block search term\u0004gallery": [
+    "galerij"
+  ],
+  "block search term\u0004cell": [
+    "mobiele telefoon"
+  ],
+  "block search term\u0004telephone": [
+    "telefoon"
+  ],
+  "block search term\u0004mobile": [
+    "mobiel"
+  ],
+  "block search term\u0004email": [
+    "e-mail"
+  ],
+  "block search term\u0004place": [
+    "plaats"
+  ],
+  "block search term\u0004direction": [
+    "route"
+  ],
+  "block search term\u0004location": [
+    "locatie"
+  ],
+  "Lets you add a phone number with an automatically generated click-to-call link.": [
+    "Hiermee kun je een telefoonnummer met een automatisch gegenereerde link voor direct bellen toevoegen."
+  ],
+  "Phone Number": [
+    "Telefoonnummer"
+  ],
+  "Phone number": [
+    "Telefoonnummer"
+  ],
+  "Lets you add an email address, phone number, and physical address with improved markup for better SEO results.": [
+    "Hiermee kun je een e-mailadres, telefoonnummer en fysiek adres toevoegen, met verbeterde opmaak voor betere SEO-resultaten."
+  ],
+  "Lets you add a physical address with Schema markup.": [
+    "Hiermee kun je een fysiek adres met Schema-markering toevoegen."
+  ],
+  "Address": [
+    "Adres"
+  ],
+  "Country": [
+    "Land"
+  ],
+  "Postal/Zip Code": [
+    "Postcode"
+  ],
+  "State/Province/Region": [
+    "Staat/provincie/regio"
+  ],
+  "City": [
+    "Stad"
+  ],
+  "Address Line 3": [
+    "Adresregel 3"
+  ],
+  "Address Line 2": [
+    "Adresregel 2"
+  ],
+  "Street Address": [
+    "Woonadres"
+  ],
+  "Link address to Google Maps": [
+    "Koppel adres aan Google Maps"
+  ],
+  "Contact Info": [
+    "Contactinformatie"
+  ],
+  "Email Address": [
+    "E-mailadres"
+  ],
+  "Email": [
+    "E-mailadres"
+  ]
+}

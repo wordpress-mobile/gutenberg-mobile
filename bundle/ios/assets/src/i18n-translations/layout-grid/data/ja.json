@@ -1,0 +1,62 @@
+{
+  "No gutter": [
+    "ガターなし"
+  ],
+  "Changing the number of columns will reset your layout and could remove content.": [
+    "カラム数を変更すると、レイアウトがリセットされ、コンテンツが削除されることがあります。"
+  ],
+  "A column used inside a Layout Grid block.": [
+    "レイアウトグリッドブロック内で使用されるカラム。"
+  ],
+  "<strong>Snow Patrol</strong>": [
+    "<strong>雪のシーン</strong>"
+  ],
+  "Align blocks to a global grid, with support for responsive breakpoints.": [
+    "ブロックをグローバルグリッドに揃えます。レスポンシブブレークポイントに対応しています。"
+  ],
+  "Huge": [
+    "特大"
+  ],
+  "Large": [
+    "大"
+  ],
+  "Medium": [
+    "普通"
+  ],
+  "Small": [
+    "小"
+  ],
+  "No padding": [
+    "パディングなし"
+  ],
+  "Layout": [
+    "レイアウト"
+  ],
+  "Column": [
+    "カラム"
+  ],
+  "Mobile": [
+    "モバイル"
+  ],
+  "Tablet": [
+    "タブレット"
+  ],
+  "Desktop": [
+    "デスクトップ"
+  ],
+  "4 columns": [
+    "4カラム"
+  ],
+  "3 columns": [
+    "3カラム"
+  ],
+  "2 columns": [
+    "2カラム"
+  ],
+  "1 column": [
+    "1カラム"
+  ],
+  "Layout Grid": [
+    "Layout Grid"
+  ]
+}

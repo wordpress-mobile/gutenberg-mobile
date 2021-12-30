@@ -1,0 +1,62 @@
+{
+  "No gutter": [
+    "Ingen renne"
+  ],
+  "Changing the number of columns will reset your layout and could remove content.": [
+    "Endring av antall kolonner vil tilbakestille ditt oppsett og kan fjerne innhold."
+  ],
+  "A column used inside a Layout Grid block.": [
+    "En kolonne brukt på innsiden av en oppsettsrutnett-blokk."
+  ],
+  "<strong>Snow Patrol</strong>": [
+    "<strong>Snøpatruljen</strong>"
+  ],
+  "Align blocks to a global grid, with support for responsive breakpoints.": [
+    "Juster blokker til et globalt rutenett, med støtte for responsive avbruddspukter."
+  ],
+  "Huge": [
+    "Diger"
+  ],
+  "Large": [
+    "Stor"
+  ],
+  "Medium": [
+    "Middels"
+  ],
+  "Small": [
+    "Liten"
+  ],
+  "No padding": [
+    "Ingen polstring"
+  ],
+  "Layout": [
+    "Oppsett"
+  ],
+  "Column": [
+    "Kolonne"
+  ],
+  "Mobile": [
+    "Mobil"
+  ],
+  "Tablet": [
+    "Nettbrett"
+  ],
+  "Desktop": [
+    "Skrivebord"
+  ],
+  "4 columns": [
+    "4 kolonner"
+  ],
+  "3 columns": [
+    "3 kolonner"
+  ],
+  "2 columns": [
+    "2 kolonner"
+  ],
+  "1 column": [
+    "1 kolonne"
+  ],
+  "Layout Grid": [
+    "Oppsettsrutenett"
+  ]
+}

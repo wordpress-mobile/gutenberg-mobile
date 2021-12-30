@@ -1,0 +1,130 @@
+{
+  "Embed a SmartFrame Image.": [],
+  "smartframe": [],
+  "Embed an Instagram post.": [
+    "Instagram gönderisi gömün."
+  ],
+  "Embed a Facebook post.": [
+    "Facebook gönderisi gömün."
+  ],
+  "Embed a Loom video.": [
+    " Bir Loom videosu yerleştirin."
+  ],
+  "video": [
+    "video"
+  ],
+  "Add an interactive story.": [
+    "Etkileşimli bir öykü ekleyin."
+  ],
+  "block search term\u0004video": [
+    "video"
+  ],
+  "block search term\u0004story": [
+    "öykü"
+  ],
+  "Story": [
+    "Öykü"
+  ],
+  "Grow": [
+    "Büyüyün"
+  ],
+  "Earn": [
+    "Kazanın"
+  ],
+  "block search term\u0004social": [
+    "sosyal"
+  ],
+  "block search term\u0004address": [
+    "adres"
+  ],
+  "block search term\u0004phone": [
+    "telefon"
+  ],
+  "block search term\u0004message": [
+    "mesaj"
+  ],
+  "block search term\u0004image": [
+    "görsel"
+  ],
+  "Lets you add an email address with an automatically generated click-to-email link.": [
+    "Otomatik olarak oluşturulan ve tıklandığında e-posta gönderilmesini sağlayan bir bağlantıyla beraber bir e-posta adresi eklemenizi sağlar."
+  ],
+  "Open address in Google Maps": [
+    "Adresi Google Haritalar’da aç"
+  ],
+  "block search term\u0004gallery": [
+    "galeri"
+  ],
+  "block search term\u0004cell": [
+    "hücre"
+  ],
+  "block search term\u0004telephone": [
+    "telefon"
+  ],
+  "block search term\u0004mobile": [
+    "mobil"
+  ],
+  "block search term\u0004email": [
+    "e-posta"
+  ],
+  "block search term\u0004place": [
+    "yer"
+  ],
+  "block search term\u0004direction": [
+    "yön"
+  ],
+  "block search term\u0004location": [
+    "konum"
+  ],
+  "Lets you add a phone number with an automatically generated click-to-call link.": [
+    "Otomatik olarak oluşturulan bir “aramak için tıkla” bağlantısıyla beraber bir telefon numarası eklemenizi sağlar."
+  ],
+  "Phone Number": [
+    "Telefon Numarası"
+  ],
+  "Phone number": [
+    "Telefon Numarası"
+  ],
+  "Lets you add an email address, phone number, and physical address with improved markup for better SEO results.": [
+    "Daha iyi SEO sonuçları için gelişmiş işaretleme ile e-posta adresi, telefon numarası ve fiziksel adres eklemenizi sağlar."
+  ],
+  "Lets you add a physical address with Schema markup.": [
+    "Şema işaretleme ile bir fiziksel adres eklemenizi sağlar."
+  ],
+  "Address": [
+    "Adres"
+  ],
+  "Country": [
+    "Ülke"
+  ],
+  "Postal/Zip Code": [
+    "Posta Kodu"
+  ],
+  "State/Province/Region": [
+    "Eyalet/İl/Bölge"
+  ],
+  "City": [
+    "Şehir"
+  ],
+  "Address Line 3": [
+    "Adres Satırı 3"
+  ],
+  "Address Line 2": [
+    "Adres Satırı 2"
+  ],
+  "Street Address": [
+    "Sokak Adresi"
+  ],
+  "Link address to Google Maps": [
+    "Google Haritalar bağlantı adresi"
+  ],
+  "Contact Info": [
+    "İletişim Bilgisi"
+  ],
+  "Email Address": [
+    "E-posta Adresi"
+  ],
+  "Email": [
+    "E-posta"
+  ]
+}
