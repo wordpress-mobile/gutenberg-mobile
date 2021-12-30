@@ -1,0 +1,62 @@
+{
+  "No gutter": [
+    "Geen afscheiding"
+  ],
+  "Changing the number of columns will reset your layout and could remove content.": [
+    "Door het aantal kolommen te wijzigen, wordt je lay-out gereset en kan inhoud verwijderd worden."
+  ],
+  "A column used inside a Layout Grid block.": [
+    "Een kolom die in een lay-out rasterblok wordt gebruikt."
+  ],
+  "<strong>Snow Patrol</strong>": [
+    "<strong>Snow Patrol</strong>"
+  ],
+  "Align blocks to a global grid, with support for responsive breakpoints.": [
+    "Blokken uitlijnen in een algemeen raster, met ondersteuning voor responsieve breekpunten."
+  ],
+  "Huge": [
+    "Reusachtig"
+  ],
+  "Large": [
+    "Groot"
+  ],
+  "Medium": [
+    "Gemiddeld"
+  ],
+  "Small": [
+    "Klein"
+  ],
+  "No padding": [
+    "Geen padding"
+  ],
+  "Layout": [
+    "Lay-out"
+  ],
+  "Column": [
+    "Kolom"
+  ],
+  "Mobile": [
+    "Mobiel"
+  ],
+  "Tablet": [
+    "Tablet"
+  ],
+  "Desktop": [
+    "Desktop"
+  ],
+  "4 columns": [
+    "4 kolommen"
+  ],
+  "3 columns": [
+    "3 kolommen"
+  ],
+  "2 columns": [
+    "2 kolommen"
+  ],
+  "1 column": [
+    "1 kolom"
+  ],
+  "Layout Grid": [
+    "Layout Grid"
+  ]
+}

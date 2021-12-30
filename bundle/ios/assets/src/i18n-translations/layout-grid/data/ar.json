@@ -1,0 +1,62 @@
+{
+  "No gutter": [
+    "لا يوجد هامش توثيق"
+  ],
+  "Changing the number of columns will reset your layout and could remove content.": [
+    "سيؤدي تغيير عدد الأعمدة إلى إعادة تعيين تخطيطك، ويمكن إزالة المحتوى."
+  ],
+  "A column used inside a Layout Grid block.": [
+    "عمود يُستخدم داخل مكوّن شبكة التخطيط."
+  ],
+  "<strong>Snow Patrol</strong>": [
+    "<strong>Snow Patrol</strong>"
+  ],
+  "Align blocks to a global grid, with support for responsive breakpoints.": [
+    "يمكنك محاذاة المكوِّنات إلى إحدى الشبكات العالمية، مع دعم نقاط التوقف المستجيبة."
+  ],
+  "Huge": [
+    "ضخم"
+  ],
+  "Large": [
+    "كبير"
+  ],
+  "Medium": [
+    "متوسط"
+  ],
+  "Small": [
+    "صغير"
+  ],
+  "No padding": [
+    "لا توجد مساحات متروكة"
+  ],
+  "Layout": [
+    "التخطيط"
+  ],
+  "Column": [
+    "عمود"
+  ],
+  "Mobile": [
+    "الهاتف المحمول"
+  ],
+  "Tablet": [
+    "الأجهزة اللوحية"
+  ],
+  "Desktop": [
+    "الأجهزة المكتبية"
+  ],
+  "4 columns": [
+    "4 أعمدة"
+  ],
+  "3 columns": [
+    "3 أعمدة"
+  ],
+  "2 columns": [
+    "عمودان"
+  ],
+  "1 column": [
+    "عمود واحد"
+  ],
+  "Layout Grid": [
+    "شبكة الخطوط"
+  ]
+}

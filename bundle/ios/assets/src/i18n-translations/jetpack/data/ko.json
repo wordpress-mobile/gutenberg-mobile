@@ -1,0 +1,130 @@
+{
+  "Embed a SmartFrame Image.": [],
+  "smartframe": [],
+  "Embed an Instagram post.": [
+    "인스타그램 글을 삽입합니다."
+  ],
+  "Embed a Facebook post.": [
+    "페이스북 글을 삽입합니다."
+  ],
+  "Embed a Loom video.": [
+    "Loom 비디오를 삽입했습니다."
+  ],
+  "video": [
+    "비디오"
+  ],
+  "Add an interactive story.": [
+    "대화형 스토리를 추가합니다."
+  ],
+  "block search term\u0004video": [
+    "비디오"
+  ],
+  "block search term\u0004story": [
+    "스토리"
+  ],
+  "Story": [
+    "스토리"
+  ],
+  "Grow": [
+    "성장"
+  ],
+  "Earn": [
+    "수익 창출"
+  ],
+  "block search term\u0004social": [
+    "소셜"
+  ],
+  "block search term\u0004address": [
+    "주소"
+  ],
+  "block search term\u0004phone": [
+    "전화"
+  ],
+  "block search term\u0004message": [
+    "메시지"
+  ],
+  "block search term\u0004image": [
+    "이미지"
+  ],
+  "Lets you add an email address with an automatically generated click-to-email link.": [
+    "자동 생성된 클릭 유도 이메일 링크가 포함된 이메일 주소를 추가할 수 있습니다."
+  ],
+  "Open address in Google Maps": [
+    "Google 지도에서 주소 열기"
+  ],
+  "block search term\u0004gallery": [
+    "갤러리"
+  ],
+  "block search term\u0004cell": [
+    "셀"
+  ],
+  "block search term\u0004telephone": [
+    "전화"
+  ],
+  "block search term\u0004mobile": [
+    "모바일"
+  ],
+  "block search term\u0004email": [
+    "이메일"
+  ],
+  "block search term\u0004place": [
+    "검색어 차단"
+  ],
+  "block search term\u0004direction": [
+    "검색어 차단"
+  ],
+  "block search term\u0004location": [
+    "위치"
+  ],
+  "Lets you add a phone number with an automatically generated click-to-call link.": [
+    "자동 생성된 클릭 유도 문안 링크가 포함된 전화번호를 추가할 수 있습니다."
+  ],
+  "Phone Number": [
+    "전화번호"
+  ],
+  "Phone number": [
+    "전화번호"
+  ],
+  "Lets you add an email address, phone number, and physical address with improved markup for better SEO results.": [
+    "보다 나은 SEO 결과를 얻도록 마크업이 개선된 이메일 주소, 전화번호 및 실제 주소를 추가할 수 있습니다."
+  ],
+  "Lets you add a physical address with Schema markup.": [
+    "스키마 마크업이 포함된 실제 주소를 추가할 수 있습니다."
+  ],
+  "Address": [
+    "주소"
+  ],
+  "Country": [
+    "국가"
+  ],
+  "Postal/Zip Code": [
+    "우편 번호"
+  ],
+  "State/Province/Region": [
+    "주/도/지역"
+  ],
+  "City": [
+    "도시"
+  ],
+  "Address Line 3": [
+    "주소 줄 3"
+  ],
+  "Address Line 2": [
+    "주소 줄 2"
+  ],
+  "Street Address": [
+    "주소"
+  ],
+  "Link address to Google Maps": [
+    "주소를 Google 지도에 연결"
+  ],
+  "Contact Info": [
+    "연락처"
+  ],
+  "Email Address": [
+    "전자 우편 주소"
+  ],
+  "Email": [
+    "이메일"
+  ]
+}

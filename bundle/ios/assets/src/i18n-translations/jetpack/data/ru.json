@@ -1,0 +1,130 @@
+{
+  "Embed a SmartFrame Image.": [],
+  "smartframe": [],
+  "Embed an Instagram post.": [
+    "Вставить запись Instagram."
+  ],
+  "Embed a Facebook post.": [
+    "Вставить запись Facebook."
+  ],
+  "Embed a Loom video.": [
+    "Вставить видео Loom."
+  ],
+  "video": [
+    "видео"
+  ],
+  "Add an interactive story.": [
+    "Добавьте интерактивную историю."
+  ],
+  "block search term\u0004video": [
+    "видео"
+  ],
+  "block search term\u0004story": [
+    "история"
+  ],
+  "Story": [
+    "История"
+  ],
+  "Grow": [
+    "Развивайтесь"
+  ],
+  "Earn": [
+    "Зарабатывайте"
+  ],
+  "block search term\u0004social": [
+    "социальные сети"
+  ],
+  "block search term\u0004address": [
+    "адрес"
+  ],
+  "block search term\u0004phone": [
+    "телефон"
+  ],
+  "block search term\u0004message": [
+    "сообщение"
+  ],
+  "block search term\u0004image": [
+    "изображение"
+  ],
+  "Lets you add an email address with an automatically generated click-to-email link.": [
+    "Позволяет добавить адрес электронной почты и автоматически создает ссылку для отправки сообщения одним нажатием."
+  ],
+  "Open address in Google Maps": [
+    "Открыть адрес в Google Картах"
+  ],
+  "block search term\u0004gallery": [
+    "галерея"
+  ],
+  "block search term\u0004cell": [
+    "сотовый"
+  ],
+  "block search term\u0004telephone": [
+    "телефон"
+  ],
+  "block search term\u0004mobile": [
+    "мобильный телефон"
+  ],
+  "block search term\u0004email": [
+    "эл. почта"
+  ],
+  "block search term\u0004place": [
+    "место"
+  ],
+  "block search term\u0004direction": [
+    "направление"
+  ],
+  "block search term\u0004location": [
+    "расположение"
+  ],
+  "Lets you add a phone number with an automatically generated click-to-call link.": [
+    "Позволяет добавить телефонный номер со ссылкой, позволяющей позвонить при нажатии."
+  ],
+  "Phone Number": [
+    "Номер телефона"
+  ],
+  "Phone number": [
+    "Телефон"
+  ],
+  "Lets you add an email address, phone number, and physical address with improved markup for better SEO results.": [
+    "Позволяет добавить адрес электронной почты, номер телефона и почтовый адрес с улучшенной разметкой для поисковой оптимизации."
+  ],
+  "Lets you add a physical address with Schema markup.": [
+    "Позволяет добавить почтовый адрес с синтаксической разметкой."
+  ],
+  "Address": [
+    "Адрес"
+  ],
+  "Country": [
+    "Страна"
+  ],
+  "Postal/Zip Code": [
+    "Почтовый индекс"
+  ],
+  "State/Province/Region": [
+    "Штат/провинция/регион"
+  ],
+  "City": [
+    "Город"
+  ],
+  "Address Line 3": [
+    "Адресная строка 3"
+  ],
+  "Address Line 2": [
+    "Адресная строка 2"
+  ],
+  "Street Address": [
+    "Адрес с указанием улицы и номера дома"
+  ],
+  "Link address to Google Maps": [
+    "Добавить в адрес ссылку на Google Карты"
+  ],
+  "Contact Info": [
+    "Контакты"
+  ],
+  "Email Address": [
+    "Email адрес"
+  ],
+  "Email": [
+    "Email"
+  ]
+}
