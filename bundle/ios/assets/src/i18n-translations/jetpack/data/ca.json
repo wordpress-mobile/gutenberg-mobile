@@ -1,0 +1,108 @@
+{
+  "Embed a SmartFrame Image.": [],
+  "smartframe": [],
+  "Embed an Instagram post.": [],
+  "Embed a Facebook post.": [],
+  "Embed a Loom video.": [],
+  "video": [],
+  "Add an interactive story.": [],
+  "block search term\u0004video": [
+    "vídeo"
+  ],
+  "block search term\u0004story": [],
+  "Story": [],
+  "Grow": [],
+  "Earn": [],
+  "block search term\u0004social": [],
+  "block search term\u0004address": [
+    "adreça"
+  ],
+  "block search term\u0004phone": [
+    "telèfon"
+  ],
+  "block search term\u0004message": [
+    "missatge"
+  ],
+  "block search term\u0004image": [
+    "imatge"
+  ],
+  "Lets you add an email address with an automatically generated click-to-email link.": [],
+  "Open address in Google Maps": [
+    "Obre l'adreça a Google Maps"
+  ],
+  "block search term\u0004gallery": [
+    "galeria"
+  ],
+  "block search term\u0004cell": [
+    "cel·la"
+  ],
+  "block search term\u0004telephone": [
+    "telèfon"
+  ],
+  "block search term\u0004mobile": [
+    "mòbil"
+  ],
+  "block search term\u0004email": [
+    "Correu electrònic"
+  ],
+  "block search term\u0004place": [
+    "lloc"
+  ],
+  "block search term\u0004direction": [
+    "direcció"
+  ],
+  "block search term\u0004location": [
+    "ubicació"
+  ],
+  "Lets you add a phone number with an automatically generated click-to-call link.": [
+    "Permet afegir un número de telèfon amb un enllaç de clic per trucar generat automàticament."
+  ],
+  "Phone Number": [
+    "Número de telèfon"
+  ],
+  "Phone number": [
+    "Número de telèfon"
+  ],
+  "Lets you add an email address, phone number, and physical address with improved markup for better SEO results.": [
+    "Permet afegir una adreça de correu electrònic, un número de telèfon i una adreça física amb un marcatge millorat per obtenir millors resultats de SEO."
+  ],
+  "Lets you add a physical address with Schema markup.": [
+    "Permet afegir una adreça física amb el marcatge d'Schema"
+  ],
+  "Address": [
+    "Adreça"
+  ],
+  "Country": [
+    "País"
+  ],
+  "Postal/Zip Code": [
+    "Codi postal"
+  ],
+  "State/Province/Region": [
+    "Estat/Província/Regió"
+  ],
+  "City": [
+    "Ciutat"
+  ],
+  "Address Line 3": [
+    "Línia d'adreça 3"
+  ],
+  "Address Line 2": [
+    "Línia d'adreça 2"
+  ],
+  "Street Address": [
+    "Adreça"
+  ],
+  "Link address to Google Maps": [
+    "Enllaç a Google Maps"
+  ],
+  "Contact Info": [
+    "Informació de contacte"
+  ],
+  "Email Address": [
+    "Adreça de correu electrònic"
+  ],
+  "Email": [
+    "Correu electrònic"
+  ]
+}

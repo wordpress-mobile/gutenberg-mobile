@@ -1,0 +1,130 @@
+{
+  "Embed a SmartFrame Image.": [],
+  "smartframe": [],
+  "Embed an Instagram post.": [
+    "Incrusta una publicación de Instagram."
+  ],
+  "Embed a Facebook post.": [
+    "Incrusta una publicación de Facebook."
+  ],
+  "Embed a Loom video.": [
+    "Incrusta un vídeo de Loom."
+  ],
+  "video": [
+    "vídeo"
+  ],
+  "Add an interactive story.": [
+    "Añadir una historia interactiva."
+  ],
+  "block search term\u0004video": [
+    "vídeo"
+  ],
+  "block search term\u0004story": [
+    "historia"
+  ],
+  "Story": [
+    "Historia"
+  ],
+  "Grow": [
+    "Crece"
+  ],
+  "Earn": [
+    "Ingresos"
+  ],
+  "block search term\u0004social": [
+    "social"
+  ],
+  "block search term\u0004address": [
+    "dirección"
+  ],
+  "block search term\u0004phone": [
+    "teléfono"
+  ],
+  "block search term\u0004message": [
+    "mensaje"
+  ],
+  "block search term\u0004image": [
+    "imagen"
+  ],
+  "Lets you add an email address with an automatically generated click-to-email link.": [
+    "Te permite añadir una dirección de correo electrónico con un enlace de clic a correo electrónico generado automáticamente."
+  ],
+  "Open address in Google Maps": [
+    "Abrir dirección en Google Maps"
+  ],
+  "block search term\u0004gallery": [
+    "galería"
+  ],
+  "block search term\u0004cell": [
+    "celda"
+  ],
+  "block search term\u0004telephone": [
+    "teléfono"
+  ],
+  "block search term\u0004mobile": [
+    "móvil"
+  ],
+  "block search term\u0004email": [
+    "correo electrónico"
+  ],
+  "block search term\u0004place": [
+    "lugar"
+  ],
+  "block search term\u0004direction": [
+    "dirección"
+  ],
+  "block search term\u0004location": [
+    "ubicación"
+  ],
+  "Lets you add a phone number with an automatically generated click-to-call link.": [
+    "Te permite añadir un número de teléfono con un enlace de clic a llamar generado automáticamente."
+  ],
+  "Phone Number": [
+    "Número de teléfono"
+  ],
+  "Phone number": [
+    "Número de teléfono"
+  ],
+  "Lets you add an email address, phone number, and physical address with improved markup for better SEO results.": [
+    "Te permite añadir una dirección de correo electrónico, número de teléfono y dirección física con marcado mejorado para unos mejores resultados SEO."
+  ],
+  "Lets you add a physical address with Schema markup.": [
+    "Te permite añadir una dirección física con marcado de Schema."
+  ],
+  "Address": [
+    "Dirección"
+  ],
+  "Country": [
+    "País"
+  ],
+  "Postal/Zip Code": [
+    "Código postal"
+  ],
+  "State/Province/Region": [
+    "Estado/Provincia/Región"
+  ],
+  "City": [
+    "Ciudad"
+  ],
+  "Address Line 3": [
+    "Dirección, línea 3"
+  ],
+  "Address Line 2": [
+    "Dirección, línea 2"
+  ],
+  "Street Address": [
+    "Dirección de la calle"
+  ],
+  "Link address to Google Maps": [
+    "Dirección del enlace a Google Maps"
+  ],
+  "Contact Info": [
+    "Información de contacto"
+  ],
+  "Email Address": [
+    "Dirección de correo electrónico"
+  ],
+  "Email": [
+    "Correo electrónico"
+  ]
+}

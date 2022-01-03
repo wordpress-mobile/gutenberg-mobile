@@ -1,0 +1,62 @@
+{
+  "No gutter": [
+    "Без интервала"
+  ],
+  "Changing the number of columns will reset your layout and could remove content.": [
+    "Если изменить количество столбцов, разметка будет сброшена, а содержимое может быть удалено."
+  ],
+  "A column used inside a Layout Grid block.": [
+    "Столбец, используемый в блоке разметки \"Сетка\"."
+  ],
+  "<strong>Snow Patrol</strong>": [
+    "<strong>Снежный патруль</strong>"
+  ],
+  "Align blocks to a global grid, with support for responsive breakpoints.": [
+    "Выравнивайте блоки по общей сетке с поддержкой адаптивных контрольных точек."
+  ],
+  "Huge": [
+    "Большой"
+  ],
+  "Large": [
+    "Большой"
+  ],
+  "Medium": [
+    "Среднее"
+  ],
+  "Small": [
+    "Маленький"
+  ],
+  "No padding": [
+    "Без заполнения"
+  ],
+  "Layout": [
+    "Разметка"
+  ],
+  "Column": [
+    "Столбец"
+  ],
+  "Mobile": [
+    "Мобильное устройство"
+  ],
+  "Tablet": [
+    "Планшет"
+  ],
+  "Desktop": [
+    "Настольный ПК"
+  ],
+  "4 columns": [
+    "4 столбца"
+  ],
+  "3 columns": [
+    "3 столбца"
+  ],
+  "2 columns": [
+    "2 столбца"
+  ],
+  "1 column": [
+    "1 столбец"
+  ],
+  "Layout Grid": [
+    "Разметка \"Сетка\""
+  ]
+}

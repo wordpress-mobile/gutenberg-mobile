@@ -1,0 +1,62 @@
+{
+  "No gutter": [
+    "거터 없음"
+  ],
+  "Changing the number of columns will reset your layout and could remove content.": [
+    "열 수를 변경하면 레이아웃이 초기화되고 내용이 제거될 수 있습니다."
+  ],
+  "A column used inside a Layout Grid block.": [
+    "레이아웃 그리드 블록 내부에서 사용되는 열."
+  ],
+  "<strong>Snow Patrol</strong>": [
+    "<strong>스노 패트롤</strong>"
+  ],
+  "Align blocks to a global grid, with support for responsive breakpoints.": [
+    "반응형 중단점에 대한 지원으로 블록을 전역 그리드에 맞춥니다."
+  ],
+  "Huge": [
+    "크게"
+  ],
+  "Large": [
+    "크게"
+  ],
+  "Medium": [
+    "보통"
+  ],
+  "Small": [
+    "작게"
+  ],
+  "No padding": [
+    "패딩 없음"
+  ],
+  "Layout": [
+    "레이아웃"
+  ],
+  "Column": [
+    "열"
+  ],
+  "Mobile": [
+    "모바일"
+  ],
+  "Tablet": [
+    "태블릿"
+  ],
+  "Desktop": [
+    "데스크톱"
+  ],
+  "4 columns": [
+    "열 4개"
+  ],
+  "3 columns": [
+    "열 3개"
+  ],
+  "2 columns": [
+    "열 2개"
+  ],
+  "1 column": [
+    "열 1개"
+  ],
+  "Layout Grid": [
+    "레이아웃 그리드"
+  ]
+}

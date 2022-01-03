@@ -1,0 +1,134 @@
+{
+  "Embed a SmartFrame Image.": [
+    "Trupëzoni një Figurë SmartFrame."
+  ],
+  "smartframe": [
+    "smartframe"
+  ],
+  "Embed an Instagram post.": [
+    "Trupëzoni postim Instagram."
+  ],
+  "Embed a Facebook post.": [
+    "Trupëzoni postim Facebook."
+  ],
+  "Embed a Loom video.": [
+    "Trupëzoni video Loom."
+  ],
+  "video": [
+    "video"
+  ],
+  "Add an interactive story.": [
+    "Shtoni një artikull ndërveprues."
+  ],
+  "block search term\u0004video": [
+    "video"
+  ],
+  "block search term\u0004story": [
+    "artikull"
+  ],
+  "Story": [
+    "Artikull"
+  ],
+  "Grow": [
+    "Fuqizoje"
+  ],
+  "Earn": [
+    "Fitoni"
+  ],
+  "block search term\u0004social": [
+    "shoqëror"
+  ],
+  "block search term\u0004address": [
+    "adresë"
+  ],
+  "block search term\u0004phone": [
+    "telefon"
+  ],
+  "block search term\u0004message": [
+    "mesazh"
+  ],
+  "block search term\u0004image": [
+    "figurë"
+  ],
+  "Lets you add an email address with an automatically generated click-to-email link.": [
+    "Ju lejon shtimin e një adrese email me një lidhje të prodhuar vetvetiu për dërgim email-i, nëse klikohet mbi të."
+  ],
+  "Open address in Google Maps": [
+    "Hape adresën në Google Maps"
+  ],
+  "block search term\u0004gallery": [
+    "galeri"
+  ],
+  "block search term\u0004cell": [
+    "kutizë"
+  ],
+  "block search term\u0004telephone": [
+    "telefon"
+  ],
+  "block search term\u0004mobile": [
+    "celular"
+  ],
+  "block search term\u0004email": [
+    "email"
+  ],
+  "block search term\u0004place": [
+    "vend"
+  ],
+  "block search term\u0004direction": [
+    "drejtim"
+  ],
+  "block search term\u0004location": [
+    "vendndodhje"
+  ],
+  "Lets you add a phone number with an automatically generated click-to-call link.": [
+    "Ju lejon shtimin e një numri telefoni me një lidhje klikojeni-për-thirrje, të prodhuar vetvetiu."
+  ],
+  "Phone Number": [
+    "Numër Telefoni"
+  ],
+  "Phone number": [
+    "Numër telefoni"
+  ],
+  "Lets you add an email address, phone number, and physical address with improved markup for better SEO results.": [
+    "Ju lejon të shtoni një adresë email, numër telefoni dhe adresë fizike , me <em>markup</em> të përmirësuar, për përfundime SEO më të mira."
+  ],
+  "Lets you add a physical address with Schema markup.": [
+    "Ju lejon të shtoni një adresë fizike përmes markup-i Schema."
+  ],
+  "Address": [
+    "Adresë"
+  ],
+  "Country": [
+    "Vend"
+  ],
+  "Postal/Zip Code": [
+    "Kod Zip/Postar"
+  ],
+  "State/Province/Region": [
+    "Shtet/Provincë/Rajon"
+  ],
+  "City": [
+    "Qytet"
+  ],
+  "Address Line 3": [
+    "Rresht 3 Adrese"
+  ],
+  "Address Line 2": [
+    "Rresht 2 Adrese"
+  ],
+  "Street Address": [
+    "Adresë Rruge"
+  ],
+  "Link address to Google Maps": [
+    "Lidhni adresë te Google Maps"
+  ],
+  "Contact Info": [
+    "Të dhëna Kontakti"
+  ],
+  "Email Address": [
+    "Adresë Email"
+  ],
+  "Email": [
+    "Email"
+  ]
+}
