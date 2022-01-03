@@ -3,7 +3,7 @@
  */
 import { dispatch } from '@wordpress/data';
 import { store as editPostStore } from '@wordpress/edit-post';
-import { addAction, addFilter } from '@wordpress/hooks';
+import { addAction } from '@wordpress/hooks';
 
 /**
  * Internal dependencies
