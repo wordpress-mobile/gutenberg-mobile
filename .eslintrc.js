@@ -26,5 +26,25 @@ module.exports = {
 		// do not throw an error if imported dependencies are 
 		// declared in `package.json` or `gutenberg/package.json`
 		"import/no-extraneous-dependencies": ["error", {"packageDir": ['.', './gutenberg/']}] 
-	}
+	},
+	overrides: [
+		{
+			// Workaround for addressing errors when importing react-native components.
+			// Related issue: https://git.io/JSKeJ
+			files: [ 'src/**/*.js' ],
+			settings: {
+				'import/ignore': [ 'react-native' ],
+			},
+		},
+		{
+			// Ignore test helpers import solving as the module is only available when using Jest.
+			files: [ 'src/**/test/*.js' ],
+			rules: {
+				'import/no-unresolved': [
+					'error',
+					{ ignore: [ 'test/helpers' ] },
+				],
+			},
+		},
+	],
 };
