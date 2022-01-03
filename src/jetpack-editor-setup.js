@@ -9,6 +9,8 @@ import {
 	registerLoomVariation,
 	registerSmartframeVariation,
 } from '../jetpack/projects/plugins/jetpack/extensions/extended-blocks/core-embed';
+import setupLocale from './setup-locale';
+import { getTranslation as getJetpackTranslation } from './i18n-translations/jetpack';
 
 /**
  * WordPress dependencies
@@ -25,6 +27,8 @@ const supportedJetpackBlocks = {
 		available: true,
 	},
 };
+
+const JETPACK_LOCALE_DOMAIN = 'jetpack';
 
 const setJetpackData = ( {
 	isJetpackActive = false,
@@ -60,6 +64,15 @@ export function setupJetpackEditor( jetpackState ) {
 	}
 
 	return setJetpackData( jetpackState );
+}
+
+export function setupJetpackLocale( locale, extraTranslations ) {
+	setupLocale( {
+		domain: JETPACK_LOCALE_DOMAIN,
+		locale,
+		extraTranslations,
+		getTranslation: getJetpackTranslation,
+	} );
 }
 
 export function registerJetpackBlocks( { capabilities } ) {

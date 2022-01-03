@@ -1,0 +1,62 @@
+{
+  "No gutter": [
+    "Niente rilegatura"
+  ],
+  "Changing the number of columns will reset your layout and could remove content.": [
+    "La modifica del numero di colonne reimposterà il layout e potrebbe rimuovere il contenuto."
+  ],
+  "A column used inside a Layout Grid block.": [
+    "Una colonna usata all'interno del blocco Griglia di layout."
+  ],
+  "<strong>Snow Patrol</strong>": [
+    "<strong>Snow Patrol</strong>"
+  ],
+  "Align blocks to a global grid, with support for responsive breakpoints.": [
+    "Allinea i blocchi a una griglia globale, con il supporto per punti di interruzione responsivi."
+  ],
+  "Huge": [
+    "Grande"
+  ],
+  "Large": [
+    "Grande"
+  ],
+  "Medium": [
+    "Medio"
+  ],
+  "Small": [
+    "Piccolo"
+  ],
+  "No padding": [
+    "Nessun padding"
+  ],
+  "Layout": [
+    "Disposizione"
+  ],
+  "Column": [
+    "Colonna"
+  ],
+  "Mobile": [
+    "Mobile"
+  ],
+  "Tablet": [
+    "Tablet"
+  ],
+  "Desktop": [
+    "Desktop"
+  ],
+  "4 columns": [
+    "4 colonne"
+  ],
+  "3 columns": [
+    "3 colonne"
+  ],
+  "2 columns": [
+    "2 colonne"
+  ],
+  "1 column": [
+    "1 colonna"
+  ],
+  "Layout Grid": [
+    "Griglia di layout"
+  ]
+}
