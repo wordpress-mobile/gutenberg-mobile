@@ -1,0 +1,62 @@
+{
+  "No gutter": [
+    "Ingen fästmarginal"
+  ],
+  "Changing the number of columns will reset your layout and could remove content.": [
+    "Ändring av antal kolumner återställer din layout och kan ta bort innehåll."
+  ],
+  "A column used inside a Layout Grid block.": [
+    "En kolumn som används inuti ett Layout-rutnätsblock."
+  ],
+  "<strong>Snow Patrol</strong>": [
+    "<strong>Snow Patrol</strong>"
+  ],
+  "Align blocks to a global grid, with support for responsive breakpoints.": [
+    "Tilldela block till ett globalt rutnät, med stöd för responsiva brytpunkter."
+  ],
+  "Huge": [
+    "Enorm"
+  ],
+  "Large": [
+    "Stor"
+  ],
+  "Medium": [
+    "Medium"
+  ],
+  "Small": [
+    "Liten"
+  ],
+  "No padding": [
+    "Ingen padding"
+  ],
+  "Layout": [
+    "Layout"
+  ],
+  "Column": [
+    "Kolumn"
+  ],
+  "Mobile": [
+    "Mobil"
+  ],
+  "Tablet": [
+    "Läsplatta"
+  ],
+  "Desktop": [
+    "Stationär dator"
+  ],
+  "4 columns": [
+    "4 kolumner"
+  ],
+  "3 columns": [
+    "3 kolumner"
+  ],
+  "2 columns": [
+    "2 kolumner"
+  ],
+  "1 column": [
+    "1 kolumn"
+  ],
+  "Layout Grid": [
+    "Layout Grid"
+  ]
+}

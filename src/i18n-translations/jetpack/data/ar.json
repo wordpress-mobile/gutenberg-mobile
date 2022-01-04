@@ -1,0 +1,130 @@
+{
+  "Embed a SmartFrame Image.": [],
+  "smartframe": [],
+  "Embed an Instagram post.": [
+    "تضمين منشور Instagram."
+  ],
+  "Embed a Facebook post.": [
+    "تضمين منشور فيس بوك."
+  ],
+  "Embed a Loom video.": [
+    "قم بتضمين فيديو Loom."
+  ],
+  "video": [
+    "فيديو"
+  ],
+  "Add an interactive story.": [
+    "أضف قصة تفاعلية."
+  ],
+  "block search term\u0004video": [
+    "فيديو"
+  ],
+  "block search term\u0004story": [
+    "قصة"
+  ],
+  "Story": [
+    "قصة"
+  ],
+  "Grow": [
+    "تنمية"
+  ],
+  "Earn": [
+    "تحقيق ربح"
+  ],
+  "block search term\u0004social": [
+    "اجتماعي"
+  ],
+  "block search term\u0004address": [
+    "عنوان"
+  ],
+  "block search term\u0004phone": [
+    "هاتف"
+  ],
+  "block search term\u0004message": [
+    "رسالة"
+  ],
+  "block search term\u0004image": [
+    "صورة"
+  ],
+  "Lets you add an email address with an automatically generated click-to-email link.": [
+    "يسمح لك بإضافة عنوان بريد إلكتروني من خلال رابط \"انقر للاتصال\" الذي تم إنشاؤه تلقائيًّا."
+  ],
+  "Open address in Google Maps": [
+    "فتح عنوان في Google Maps"
+  ],
+  "block search term\u0004gallery": [
+    "معرض"
+  ],
+  "block search term\u0004cell": [
+    "خلية"
+  ],
+  "block search term\u0004telephone": [
+    "هاتف أرضي"
+  ],
+  "block search term\u0004mobile": [
+    "هاتف محمول"
+  ],
+  "block search term\u0004email": [
+    "البريد الإلكتروني"
+  ],
+  "block search term\u0004place": [
+    "مكان"
+  ],
+  "block search term\u0004direction": [
+    "الاتجاه"
+  ],
+  "block search term\u0004location": [
+    "الموقع"
+  ],
+  "Lets you add a phone number with an automatically generated click-to-call link.": [
+    "يسمح لك بإضافة رقم هاتف مع رابط \"أنقر للاتصال\" الذي يتم إنشاؤه تلقائيًّا."
+  ],
+  "Phone Number": [
+    "رقم الهاتف"
+  ],
+  "Phone number": [
+    "رقم الهاتف"
+  ],
+  "Lets you add an email address, phone number, and physical address with improved markup for better SEO results.": [
+    "يسمح لك بإضافة عنوان بريد إلكتروني ورقم هاتف وعنوان فعلي مع لغة تمييز مُحسّنة للحصول على أفضل نتائج تحسين محركات البحث."
+  ],
+  "Lets you add a physical address with Schema markup.": [
+    "يسمح لك بإضافة عنوان فعلي مع تمييز المخطط."
+  ],
+  "Address": [
+    "العنوان"
+  ],
+  "Country": [
+    "البلد"
+  ],
+  "Postal/Zip Code": [
+    "الرمز البريدي/رمز Zip"
+  ],
+  "State/Province/Region": [
+    "الولاية/المقاطعة/الإقليم"
+  ],
+  "City": [
+    "المدينة"
+  ],
+  "Address Line 3": [
+    "سطر العنوان 3"
+  ],
+  "Address Line 2": [
+    "سطر العنوان 2"
+  ],
+  "Street Address": [
+    "عنوان الشارع"
+  ],
+  "Link address to Google Maps": [
+    "ربط العنوان بـ Google Maps"
+  ],
+  "Contact Info": [
+    "معلومات الإتصال"
+  ],
+  "Email Address": [
+    "عنوان البريد الإلكتروني"
+  ],
+  "Email": [
+    "البريد الإلكتروني"
+  ]
+}

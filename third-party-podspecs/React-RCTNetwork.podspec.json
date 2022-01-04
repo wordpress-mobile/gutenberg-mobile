@@ -1,17 +1,17 @@
 {
   "name": "React-RCTNetwork",
-  "version": "0.64.0",
+  "version": "0.66.2",
   "summary": "The networking library of React Native.",
   "homepage": "https://reactnative.dev/",
   "license": "MIT",
   "authors": "Facebook, Inc. and its affiliates",
   "platforms": {
-    "ios": "10.0"
+    "ios": "11.0"
   },
   "compiler_flags": "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32 -Wno-nullability-completeness",
   "source": {
     "git": "https://github.com/facebook/react-native.git",
-    "tag": "v0.64.0"
+    "tag": "v0.66.2"
   },
   "source_files": "*.{m,mm}",
   "preserve_paths": [
@@ -28,22 +28,22 @@
   "frameworks": "MobileCoreServices",
   "dependencies": {
     "RCT-Folly": [
-      "2020.01.13.00"
+      "2021.06.28.00-v2"
     ],
     "FBReactNativeSpec": [
-      "0.64.0"
+      "0.66.2"
     ],
     "RCTTypeSafety": [
-      "0.64.0"
+      "0.66.2"
     ],
     "ReactCommon/turbomodule/core": [
-      "0.64.0"
+      "0.66.2"
     ],
     "React-jsi": [
-      "0.64.0"
+      "0.66.2"
     ],
     "React-Core/RCTNetworkHeaders": [
-      "0.64.0"
+      "0.66.2"
     ]
   },
   "prepare_command": "TMP_DIR=$(mktemp -d); mv * $TMP_DIR; cp -R \"$TMP_DIR/Libraries/Network\"/* . && true",

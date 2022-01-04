@@ -1,0 +1,62 @@
+{
+  "No gutter": [
+    "无装订线"
+  ],
+  "Changing the number of columns will reset your layout and could remove content.": [
+    "更改列数将重置布局，并可能删除内容。"
+  ],
+  "A column used inside a Layout Grid block.": [
+    "在布局网格区块内使用的列。"
+  ],
+  "<strong>Snow Patrol</strong>": [
+    "<strong>大雪纷飞</strong>"
+  ],
+  "Align blocks to a global grid, with support for responsive breakpoints.": [
+    "将区块对齐到全局网格，并支持响应式断点"
+  ],
+  "Huge": [
+    "特大"
+  ],
+  "Large": [
+    "大"
+  ],
+  "Medium": [
+    "中"
+  ],
+  "Small": [
+    "小"
+  ],
+  "No padding": [
+    "无边距"
+  ],
+  "Layout": [
+    "布局"
+  ],
+  "Column": [
+    "列"
+  ],
+  "Mobile": [
+    "移动设备"
+  ],
+  "Tablet": [
+    "平板电脑"
+  ],
+  "Desktop": [
+    "台式设备"
+  ],
+  "4 columns": [
+    "4 列"
+  ],
+  "3 columns": [
+    "3 列"
+  ],
+  "2 columns": [
+    "2 列"
+  ],
+  "1 column": [
+    "1 列"
+  ],
+  "Layout Grid": [
+    "布局网格"
+  ]
+}
