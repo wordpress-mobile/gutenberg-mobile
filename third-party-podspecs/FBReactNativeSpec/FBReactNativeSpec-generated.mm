@@ -33,6 +33,10 @@ namespace facebook {
       return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "announceForAccessibility", @selector(announceForAccessibility:), args, count);
     }
 
+    static facebook::jsi::Value __hostFunction_NativeAccessibilityInfoSpecJSI_getRecommendedTimeoutMillis(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
+      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "getRecommendedTimeoutMillis", @selector(getRecommendedTimeoutMillis:onSuccess:), args, count);
+    }
+
     NativeAccessibilityInfoSpecJSI::NativeAccessibilityInfoSpecJSI(const ObjCTurboModule::InitParams &params)
       : ObjCTurboModule(params) {
         
@@ -46,6 +50,9 @@ namespace facebook {
         
         
         methodMap_["announceForAccessibility"] = MethodMetadata {1, __hostFunction_NativeAccessibilityInfoSpecJSI_announceForAccessibility};
+        
+        
+        methodMap_["getRecommendedTimeoutMillis"] = MethodMetadata {2, __hostFunction_NativeAccessibilityInfoSpecJSI_getRecommendedTimeoutMillis};
         
     }
   } // namespace react
@@ -1257,6 +1264,10 @@ namespace facebook {
       return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, PromiseKind, "prefetchImage", @selector(prefetchImage:resolve:reject:), args, count);
     }
 
+    static facebook::jsi::Value __hostFunction_NativeImageLoaderIOSSpecJSI_prefetchImageWithMetadata(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
+      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, PromiseKind, "prefetchImageWithMetadata", @selector(prefetchImageWithMetadata:queryRootName:rootTag:resolve:reject:), args, count);
+    }
+
     static facebook::jsi::Value __hostFunction_NativeImageLoaderIOSSpecJSI_queryCache(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
       return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, PromiseKind, "queryCache", @selector(queryCache:resolve:reject:), args, count);
     }
@@ -1271,6 +1282,9 @@ namespace facebook {
         
         
         methodMap_["prefetchImage"] = MethodMetadata {1, __hostFunction_NativeImageLoaderIOSSpecJSI_prefetchImage};
+        
+        
+        methodMap_["prefetchImageWithMetadata"] = MethodMetadata {3, __hostFunction_NativeImageLoaderIOSSpecJSI_prefetchImageWithMetadata};
         
         
         methodMap_["queryCache"] = MethodMetadata {1, __hostFunction_NativeImageLoaderIOSSpecJSI_queryCache};
@@ -1699,6 +1713,10 @@ namespace facebook {
       return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "getDeliveredNotifications", @selector(getDeliveredNotifications:), args, count);
     }
 
+    static facebook::jsi::Value __hostFunction_NativePushNotificationManagerIOSSpecJSI_getAuthorizationStatus(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
+      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "getAuthorizationStatus", @selector(getAuthorizationStatus:), args, count);
+    }
+
     static facebook::jsi::Value __hostFunction_NativePushNotificationManagerIOSSpecJSI_addListener(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
       return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "addListener", @selector(addListener:), args, count);
     }
@@ -1753,6 +1771,9 @@ namespace facebook {
         
         
         methodMap_["getDeliveredNotifications"] = MethodMetadata {1, __hostFunction_NativePushNotificationManagerIOSSpecJSI_getDeliveredNotifications};
+        
+        
+        methodMap_["getAuthorizationStatus"] = MethodMetadata {1, __hostFunction_NativePushNotificationManagerIOSSpecJSI_getAuthorizationStatus};
         
         
         methodMap_["addListener"] = MethodMetadata {1, __hostFunction_NativePushNotificationManagerIOSSpecJSI_addListener};
