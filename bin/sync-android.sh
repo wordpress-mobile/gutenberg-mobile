@@ -52,6 +52,8 @@ done
 command -v gh >/dev/null || \
 abort "Error: Please 'brew install gh'."
 
+GIT_BRANCH=$(git branch --show-current)
+
 if [ -z "$GITHUB_TOKEN" ]
 then
   gh auth status >/dev/null 2>&1 || \
@@ -71,34 +73,20 @@ then
                   --json 'url,tagName' \
                   --jq '.url,.tagName')
 else
-  # Get the PR number from the current branch.
-  GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-  echo "Preaparing a Android Sync PR based on the $GIT_BRANCH branch"
+  echo "Preparing a Android Sync PR based on the $GIT_BRANCH branch"
 
-  GBM_RESPONSE_PR=$(gh pr list \
+  GBM_RESPONSE=$(gh pr list \
                   --head "$GIT_BRANCH" \
                   --repo 'https://github.com/wordpress-mobile/gutenberg-mobile' \
-                  --json 'number' \
-                  --jq '')
-  GBM_PR=${GBM_RESPONSE_PR//[!0-9]/}
-  echo ""
-
-  if [ -n "$GBM_PR" ]
-  then
-    GBM_RESPONSE=$(gh pr view "$GBM_PR" \
-                    --repo 'https://github.com/wordpress-mobile/gutenberg-mobile' \
-                    --json 'url,number,commits,title' \
-                    --jq '.url,.number,.commits[-1].oid,.title')
-  else
-    abort "Create a PR first before trying to create a sync WordPress Android PR."
-  fi
+                  --json 'url,number,commits,title' \
+                  --jq 'first | .url,.number,.commits[-1].oid,.title')
 fi
 
 GBM_METADATA=()
 while IFS= read -r LINE; do
   GBM_METADATA+=("$LINE")
 done <<< "$GBM_RESPONSE"
-
+GBM_PR="${GBM_METADATA[1]}"
 GBM_URL="${GBM_METADATA[0]}"
 WPA_PR_TITLE="Gutenberg Mobile $GBM_URL"
 
@@ -107,14 +95,16 @@ then
   WPA_PR_TITLE="Gutenberg Mobile: ${GBM_METADATA[3]}"
 fi
 
-if [ -n "$GBM_PR" ]
-then
-  GBM_VERSION="${GBM_METADATA[1]}-${GBM_METADATA[2]}"
-elif [ -n "$GBM_TAG" ]
+if [ -n "$GBM_TAG" ]
 then
   WPA_PR_TITLE="Integrate gutenberg-mobile release ${GBM_METADATA[1]}"
   GBM_VERSION="${GBM_METADATA[1]}"
+elif [ -n "$GBM_PR" ]
+then
+  GBM_VERSION="$GBM_PR-${GBM_METADATA[2]}"
 else
+  echo "We are unable to find a valid PR associated with the current working branch."
+  echo "Create a PR on github.com/WordPress-mobile/gutenberg-mobile first!"
   abort "GBM PR OR Tag is REQUIRED to be provided with '--pr' or '--tag'."
 fi
 
