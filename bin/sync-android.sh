@@ -62,8 +62,8 @@ if [ -n "$GBM_PR" ]
 then
   GBM_RESPONSE=$(gh pr view "$GBM_PR" \
                   --repo 'https://github.com/wordpress-mobile/gutenberg-mobile' \
-                  --json 'url,number,commits' \
-                  --jq '.url,.number,.commits[-1].oid')
+                  --json 'url,number,commits,title' \
+                  --jq '.url,.number,.commits[-1].oid,.title')
 elif [ -n "$GBM_TAG" ]
 then
   GBM_RESPONSE=$(gh release view "$GBM_TAG" \
@@ -87,8 +87,8 @@ else
   then
     GBM_RESPONSE=$(gh pr view "$GBM_PR" \
                     --repo 'https://github.com/wordpress-mobile/gutenberg-mobile' \
-                    --json 'url,number,commits' \
-                    --jq '.url,.number,.commits[-1].oid')
+                    --json 'url,number,commits,title' \
+                    --jq '.url,.number,.commits[-1].oid,.title')
   else
     abort "Create a PR first before trying to create a sync WordPress Android PR."
   fi
@@ -102,11 +102,17 @@ done <<< "$GBM_RESPONSE"
 GBM_URL="${GBM_METADATA[0]}"
 WPA_PR_TITLE="Gutenberg Mobile $GBM_URL"
 
+if [ -n "${GBM_METADATA[3]}" ]
+then
+  WPA_PR_TITLE="Gutenberg Mobile: ${GBM_METADATA[3]}"
+fi
+
 if [ -n "$GBM_PR" ]
 then
   GBM_VERSION="${GBM_METADATA[1]}-${GBM_METADATA[2]}"
 elif [ -n "$GBM_TAG" ]
 then
+  WPA_PR_TITLE="Integrate gutenberg-mobile release ${GBM_METADATA[1]}"
   GBM_VERSION="${GBM_METADATA[1]}"
 else
   abort "GBM PR OR Tag is REQUIRED to be provided with '--pr' or '--tag'."
