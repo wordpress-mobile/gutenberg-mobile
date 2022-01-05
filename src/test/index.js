@@ -1,196 +1,65 @@
 /**
- * WordPress dependencies
+ * External dependencies
  */
-import {
-	getBlockTypes,
-	getBlockVariations,
-	unregisterBlockType,
-	unregisterBlockVariation,
-} from '@wordpress/blocks';
-import { select } from '@wordpress/data';
-import { store as editPostStore } from '@wordpress/edit-post';
-import { registerCoreBlocks } from '@wordpress/block-library';
-import { removeAllFilters } from '@wordpress/hooks';
+import { AppRegistry } from 'react-native';
+import { render, waitFor } from 'test/helpers';
 
 /**
  * Internal dependencies
  */
-import getJetpackData, {
-	JETPACK_DATA_PATH,
-} from '../../jetpack/projects/plugins/jetpack/extensions/shared/get-jetpack-data';
-import {
-	registerJetpackBlocks,
-	registerJetpackEmbedVariations,
-	setupJetpackEditor,
-} from '../jetpack-editor-setup';
+import initAnalytics from '../analytics';
+import jetpackEditorSetup from '../jetpack-editor-setup';
+import blockExperimentsSetup from '../block-experiments-setup';
 
-const defaultJetpackData = { blogId: 1, isJetpackActive: true };
-const defaultProps = {
-	capabilities: {
-		mediaFilesCollectionBlock: true,
-		contactInfoBlock: true,
-		facebookEmbed: true,
-		instagramEmbed: true,
-		loomEmbed: true,
-		smartframeEmbed: true,
-	},
-};
-const jetpackBlocks = [
-	'jetpack/contact-info',
-	'jetpack/story',
-	'jetpack/tiled-gallery',
-];
-const jetpackEmbedVariations = [
-	'facebook',
-	'instagram',
-	'loom',
-	'smartframe',
-];
+jest.mock( 'react-native/Libraries/ReactNative/AppRegistry' );
+jest.mock( '../analytics' );
+jest.mock( '../jetpack-editor-setup' );
+jest.mock( '../block-experiments-setup' );
 
-// Jetpack blocks are registered when importing the editor extension module.
-// Since we need to register the blocks multiple times for testing,
-// it's required to isolate modules for re-importing the editor extension multiple times.
-const registerJetpackBlocksIsolated = ( props ) => {
+// Use an empty editor component to prevent rendering the editor.
+jest.mock( '@wordpress/react-native-editor/src/setup', () => ( {
+	__esModule: true,
+	default: jest.fn().mockReturnValue( <></> ),
+} ) );
+
+const initialProps = { initialData: '', capabilities: {} };
+
+const initGutenbergMobile = ( props = initialProps ) => {
+	let EditorComponent;
+	AppRegistry.registerComponent.mockImplementation(
+		( name, componentProvider ) => {
+			EditorComponent = componentProvider();
+		}
+	);
 	jest.isolateModules( () => {
-		registerJetpackBlocks( props );
+		// Import entry point to initialize the editor
+		require( '../index' );
 	} );
-};
-// Similarly to Jetpack blocks, Jetpack embed variations also require to isolate modules.
-const registerJetpackEmbedVariationsIsolated = ( props ) => {
-	jest.isolateModules( () => {
-		registerJetpackEmbedVariations( props );
-	} );
+	return render( <EditorComponent { ...props } /> );
 };
 
-describe( 'Jetpack blocks', () => {
-	afterEach( () => {
-		// Reset Jetpack data
-		delete global.window[ JETPACK_DATA_PATH ];
-
-		// Clean up registered blocks
-		getBlockTypes().forEach( ( block ) => {
-			unregisterBlockType( block.name );
-		} );
+describe( 'Gutenberg Mobile initialization', () => {
+	it( 'initializes analytics', () => {
+		initGutenbergMobile();
+		expect( initAnalytics ).toBeCalled();
 	} );
 
-	it( 'should set up Jetpack data', () => {
-		const expectedJetpackData = {
-			available_blocks: {
-				'contact-info': { available: true },
-				story: { available: true },
-				'tiled-gallery': { available: true },
-			},
-			jetpack: { is_active: true },
-			siteFragment: null,
-			tracksUserData: null,
-			wpcomBlogId: 1,
-		};
-		setupJetpackEditor( defaultJetpackData );
-
-		expect( getJetpackData() ).toEqual( expectedJetpackData );
+	it( 'sets up Jetpack', () => {
+		initGutenbergMobile();
+		expect( jetpackEditorSetup ).toBeCalled();
 	} );
 
-	it( 'should register Jetpack blocks if Jetpack is active', () => {
-		setupJetpackEditor( defaultJetpackData );
-		registerJetpackBlocksIsolated( defaultProps );
-
-		const registeredBlocks = getBlockTypes().map( ( block ) => block.name );
-		expect( registeredBlocks ).toEqual(
-			expect.arrayContaining( jetpackBlocks )
-		);
+	it( 'sets up block experiments', () => {
+		initGutenbergMobile();
+		expect( blockExperimentsSetup ).toBeCalled();
 	} );
 
-	it( 'should not register Jetpack blocks if Jetpack is not active', () => {
-		setupJetpackEditor( { ...defaultJetpackData, isJetpackActive: false } );
-		registerJetpackBlocksIsolated( defaultProps );
+	it( 'initializes the editor', () => {
+		// Unmock setup module to render the actual editor component.
+		jest.unmock( '@wordpress/react-native-editor/src/setup' );
 
-		const registeredBlocks = getBlockTypes().map( ( block ) => block.name );
-		expect( registeredBlocks ).toEqual( [] );
-	} );
-
-	it( 'should hide Jetpack blocks by capabilities', () => {
-		setupJetpackEditor( defaultJetpackData );
-		registerJetpackBlocksIsolated( {
-			capabilities: {
-				mediaFilesCollectionBlock: true,
-				contactInfoBlock: false,
-			},
-		} );
-
-		const { hiddenBlockTypes } = select( editPostStore ).getPreferences();
-		expect( hiddenBlockTypes ).toEqual( [ 'jetpack/contact-info' ] );
-	} );
-
-	describe( 'Jetpack embed variations', () => {
-		afterEach( () => {
-			// Clean up embed variations
-			getBlockVariations( 'core/embed' ).forEach( ( variation ) => {
-				unregisterBlockVariation( 'core/embed', variation.name );
-			} );
-
-			// Embed variations can use the register block type WP hook to reactivate
-			// already registered variations, so we need to remove all hooks after the tests.
-			removeAllFilters( 'blocks.registerBlockType' );
-		} );
-
-		it( 'should not register Jetpack embed variations if Jetpack is not active', () => {
-			setupJetpackEditor( {
-				...defaultJetpackData,
-				isJetpackActive: false,
-			} );
-			registerJetpackEmbedVariationsIsolated( defaultProps );
-			// Embed variations require the Embed block to be registered,
-			// so we need to register the core blocks to include it.
-			registerCoreBlocks();
-
-			const embedVariations = getBlockVariations(
-				'core/embed',
-				'inserter'
-			).map( ( block ) => block.name );
-
-			jetpackEmbedVariations.forEach( ( variation ) =>
-				expect( embedVariations ).not.toContain( variation )
-			);
-		} );
-
-		it( 'should not register Jetpack embed variations if capabilities are falsey', () => {
-			setupJetpackEditor( defaultJetpackData );
-			registerJetpackEmbedVariationsIsolated( {
-				capabilities: {
-					facebookEmbed: false,
-					instagramEmbed: null,
-					loomEmbed: undefined,
-				},
-			} );
-			// Embed variations require the Embed block to be registered,
-			// so we need to register the core blocks to include it.
-			registerCoreBlocks();
-
-			const embedVariations = getBlockVariations(
-				'core/embed',
-				'inserter'
-			).map( ( block ) => block.name );
-
-			jetpackEmbedVariations.forEach( ( variation ) =>
-				expect( embedVariations ).not.toContain( variation )
-			);
-		} );
-
-		it( 'should register Jetpack embed variations if capabilities are true', () => {
-			setupJetpackEditor( defaultJetpackData );
-			registerJetpackEmbedVariationsIsolated( defaultProps );
-			// Embed variations require the Embed block to be registered,
-			// so we need to register the core blocks to include it.
-			registerCoreBlocks();
-
-			const embedVariations = getBlockVariations(
-				'core/embed',
-				'inserter'
-			).map( ( block ) => block.name );
-
-			expect( embedVariations ).toEqual(
-				expect.arrayContaining( jetpackEmbedVariations )
-			);
-		} );
+		const { getByTestId } = initGutenbergMobile();
+		const blockList = waitFor( () => getByTestId( 'block-list-wrapper' ) );
+		expect( blockList ).toBeDefined();
 	} );
 } );
