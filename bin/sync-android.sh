@@ -71,7 +71,27 @@ then
                   --json 'url,tagName' \
                   --jq '.url,.tagName')
 else
-  abort "GBM PR OR Tag is REQUIRED to be provided with '--pr' or '--tag'."
+  # Get the PR number from the current branch.
+  GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  echo "Creating a Android Sync PR based on the $GIT_BRANCH branch"
+
+  GBM_RESPONSE_PR=$(gh pr list \
+                  --head "$GIT_BRANCH" \
+                  --repo 'https://github.com/wordpress-mobile/gutenberg-mobile' \
+                  --json 'number' \
+                  --jq '')
+  GBM_PR=${GBM_RESPONSE_PR//[!0-9]/}
+  echo ""
+
+  if [ -n "$GBM_PR" ]
+  then
+    GBM_RESPONSE=$(gh pr view "$GBM_PR" \
+                    --repo 'https://github.com/wordpress-mobile/gutenberg-mobile' \
+                    --json 'url,number,commits' \
+                    --jq '.url,.number,.commits[-1].oid')
+  else
+    abort "Create a PR first before trying to submit create a sync WordPress Android PR."
+  fi
 fi
 
 GBM_METADATA=()
