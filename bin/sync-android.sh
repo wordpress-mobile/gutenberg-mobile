@@ -73,7 +73,7 @@ then
 else
   # Get the PR number from the current branch.
   GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-  echo "Creating a Android Sync PR based on the $GIT_BRANCH branch"
+  echo "Preaparing a Android Sync PR based on the $GIT_BRANCH branch"
 
   GBM_RESPONSE_PR=$(gh pr list \
                   --head "$GIT_BRANCH" \
@@ -90,7 +90,7 @@ else
                     --json 'url,number,commits' \
                     --jq '.url,.number,.commits[-1].oid')
   else
-    abort "Create a PR first before trying to submit create a sync WordPress Android PR."
+    abort "Create a PR first before trying to create a sync WordPress Android PR."
   fi
 fi
 
