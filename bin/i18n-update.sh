@@ -27,9 +27,9 @@ while test $# -gt 0; do
   case "$1" in
     -h|--help)
       echo "options:"
-      echo "-h, --help    show brief help"
-      echo "-p, --path    local path for generating files (by default a temp folder will be used)"
-      echo "-d, --debug   print extra info for debugging"
+      echo "-h, --help              show brief help"
+      echo "-p, --path              local path for generating files (by default a temp folder will be used)"
+      echo "-s, --skip-if-cache     skip update if cache is present (i.e. \"src/i18n-cache\" folder)"
       exit 0
       ;;
     -p|--path*)
@@ -37,9 +37,9 @@ while test $# -gt 0; do
       LOCAL_PATH=$1
       shift
       ;;
-    -d|--debug*)
+    -s|--skip-if-cache*)
       shift
-      DEBUG='true'
+      SKIP_IF_CACHE='true'
       ;;
     *)
       break
@@ -53,6 +53,22 @@ function error() {
 }
 
 function arrayLength() { echo "$#"; }
+
+function check_plugin() {
+  local plugin_name=$1
+  local plugin_folder=$2
+  local i18n_cache_folder="$TRANSLATIONS_OUTPUT_PATH/$plugin_name"
+
+  if [[ ! -d $plugin_folder ]]; then
+    NOT_FOUND_PLUGIN_FOLDERS+=( $plugin_folder )
+    echo -e "\033[0;31mPlugin folder \"$plugin_folder\" doesn't exist.\033[0m"
+  fi
+
+  if [[ -n ${SKIP_IF_CACHE:-} ]] && [[ ! -d $i18n_cache_folder ]]; then
+    NOT_FOUND_PLUGIN_I18N_CACHE+=( $i18n_cache_folder )
+    echo -e "Couldn't find i18n cache folder (\"$i18n_cache_folder\") for plugin \"$plugin_name\"."
+  fi
+}
 
 function fetch_translations() {
   local plugin_name=$1
@@ -80,6 +96,9 @@ fi
 # Get parameters
 PLUGINS=( "$@" )
 
+# Define constants
+TRANSLATIONS_OUTPUT_PATH="src/i18n-cache"
+
 echo -e "\n\033[1m== Updating i18n localizations ==\033[0m"
 
 # Validate parameters
@@ -87,16 +106,29 @@ if [[ $((${#PLUGINS[@]}%2)) -ne 0 ]]; then
   error "Plugin arguments must be supplied as tuples (i.e. domain path/to/plugin)."
 fi
 
+# Check plugins parameters
 for (( index=0; index<${#PLUGINS[@]}; index+=2 )); do
+  PLUGIN_NAME=${PLUGINS[index]}
   PLUGIN_FOLDER=${PLUGINS[index+1]}
 
-  if [[ ! -d $PLUGIN_FOLDER ]]; then
-    NOT_FOUND_PLUGIN_FOLDERS+=( $PLUGIN_FOLDER )
-    echo -e "\033[0;31mPlugin folder \"$PLUGIN_FOLDER\" doesn't exist.\033[0m"
-  fi
+  check_plugin "$PLUGIN_NAME" "$PLUGIN_FOLDER"
 done
+# Check Gutenberg plugin
+check_plugin "gutenberg" "./gutenberg"
+
+# Stop if can't find any plugin folder
 if [[ $(arrayLength "${NOT_FOUND_PLUGIN_FOLDERS[@]+"${NOT_FOUND_PLUGIN_FOLDERS[@]}"}") -gt 0 ]]; then
   exit 1
+fi
+
+# Check if the process should be skipped due to the i18n cache presence
+if [[ -n ${SKIP_IF_CACHE:-} ]]; then
+  if [[ $(arrayLength "${NOT_FOUND_PLUGIN_I18N_CACHE[@]+"${NOT_FOUND_PLUGIN_I18N_CACHE[@]}"}") -eq 0 ]]; then
+    echo -e "Skipping the update due to SKIP_IF_CACHE enabled."
+    exit 0
+  else
+    echo -e "\n\033[1mForcing the update due to some cache folders not found.\033[0m"
+  fi
 fi
 
 # Set used strings target
@@ -110,7 +142,6 @@ npm run build:gutenberg
 METRO_CONFIG="metro.config.js" node gutenberg/packages/react-native-editor/bin/extract-used-strings "$USED_STRINGS_PATH" "${PLUGINS[@]}"
 
 # Download translations of plugins (i.e. Jetpack)
-TRANSLATIONS_OUTPUT_PATH="src/i18n-cache"
 for (( index=0; index<${#PLUGINS[@]}; index+=2 )); do
   PLUGIN_NAME=${PLUGINS[index]}
 
