@@ -70,6 +70,14 @@ function check_plugin() {
   fi
 }
 
+function update_gutenberg_i18n_cache() {
+  local output_path=$1
+
+  echo "Update \"react-native-editor\" package i18n cache"
+  cp -r "$output_path/gutenberg/data" gutenberg/packages/react-native-editor/i18n-cache
+  cp "$output_path/gutenberg/index.js" gutenberg/packages/react-native-editor/i18n-cache/index.native.js
+}
+
 function fetch_translations() {
   local plugin_name=$1
   local output_path=$2
@@ -79,9 +87,7 @@ function fetch_translations() {
   node gutenberg/packages/react-native-editor/bin/i18n-translations-download "$plugin_name" "$output_path" "$used_strings_file"
 
   if [[ "$plugin_name" == "gutenberg" ]]; then
-    echo "Update \"react-native-editor\" package i18n cache"
-    cp -r "$output_path/gutenberg/data" gutenberg/packages/react-native-editor/i18n-cache
-    cp "$output_path/gutenberg/index.js" gutenberg/packages/react-native-editor/i18n-cache/index.native.js
+    update_gutenberg_i18n_cache "$output_path"
   fi
 }
 
@@ -124,7 +130,11 @@ fi
 # Check if the process should be skipped due to the i18n cache presence
 if [[ -n ${SKIP_IF_CACHE:-} ]]; then
   if [[ $(arrayLength "${NOT_FOUND_PLUGIN_I18N_CACHE[@]+"${NOT_FOUND_PLUGIN_I18N_CACHE[@]}"}") -eq 0 ]]; then
-    echo -e "Skipping the update due to SKIP_IF_CACHE enabled."
+    echo -e "-- Skipping the update due to SKIP_IF_CACHE enabled --"
+
+    # Even though localizations are not updated, we need to guarantee that i18n cache within react-native-editor package is updated
+    update_gutenberg_i18n_cache "$TRANSLATIONS_OUTPUT_PATH"
+
     exit 0
   else
     echo -e "\n\033[1mForcing the update due to some cache folders not found.\033[0m"
