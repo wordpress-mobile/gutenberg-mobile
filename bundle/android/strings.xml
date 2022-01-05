@@ -63,7 +63,6 @@
     <string name="gutenberg_native_build_layouts" tools:ignore="UnusedResources">Build layouts</string>
     <string name="gutenberg_native_button_link_url" tools:ignore="UnusedResources">Button Link URL</string>
     <string name="gutenberg_native_button_position" tools:ignore="UnusedResources">Button position</string>
-    <string name="gutenberg_native_cancel" tools:ignore="UnusedResources">Cancel</string>
     <string name="gutenberg_native_cancel_search" tools:ignore="UnusedResources">Cancel search</string>
     <string name="gutenberg_native_change_block_position" tools:ignore="UnusedResources">Change block position</string>
     <string name="gutenberg_native_changes_to_featured_image_will_not_be_affected_by_the_undo_redo_b" tools:ignore="UnusedResources">Changes to featured image will not be affected by the undo/redo buttons.</string>

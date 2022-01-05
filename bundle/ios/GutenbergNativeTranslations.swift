@@ -65,7 +65,6 @@ private func dummy() {
     _ = NSLocalizedString("Build layouts", comment: "")
     _ = NSLocalizedString("Button Link URL", comment: "")
     _ = NSLocalizedString("Button position", comment: "")
-    _ = NSLocalizedString("Cancel", comment: "")
     _ = NSLocalizedString("Cancel search", comment: "")
     _ = NSLocalizedString("Change block position", comment: "")
     _ = NSLocalizedString("Changes to featured image will not be affected by the undo/redo buttons.", comment: "")
