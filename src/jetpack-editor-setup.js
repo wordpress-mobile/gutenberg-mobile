@@ -26,7 +26,7 @@ const supportedJetpackBlocks = {
 		available: true,
 	},
 	'tiled-gallery': {
-		available: true,
+		available: __DEV__,
 	},
 };
 
