@@ -26,7 +26,7 @@ const supportedJetpackBlocks = {
 		available: true,
 	},
 	'tiled-gallery': {
-		available: true,
+		available: __DEV__,
 	},
 };
 
@@ -70,6 +70,7 @@ export function registerJetpackBlocks( { capabilities } ) {
 	if ( ! isActive() ) {
 		return;
 	}
+
 	hideBlockByCapability(
 		capabilities.mediaFilesCollectionBlock,
 		'jetpack/story'

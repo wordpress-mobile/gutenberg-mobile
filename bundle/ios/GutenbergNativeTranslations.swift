@@ -1,9 +1,6 @@
 import Foundation
 
 private func dummy() {
-<<<<<<< HEAD
-    
-=======
     _ = NSLocalizedString("'%s' is not fully-supported", comment: "translators: Missing block alert title. %s: The localized block name")
     _ = NSLocalizedString("%1$s (%2$s)", comment: "translators: %1$s: Select control font size name e.g. Small, %2$s: Select control font size e.g. 12px")
     _ = NSLocalizedString("%1$s transformed to %2$s", comment: "translators: 1: From block title, e.g. Paragraph. 2: To block title, e.g. Header.")
@@ -300,4 +297,3 @@ private func dummy() {
     _ = NSLocalizedString("Y-Axis Position", comment: "")
     _ = NSLocalizedString("You can edit this block using the web version of the editor.", comment: "")
     _ = NSLocalizedString("You can rearrange blocks by tapping a block and then tapping the up and down arrows that appear on the bottom left side of the block to move it above or below other blocks.", comment: "")
->>>>>>> develop
