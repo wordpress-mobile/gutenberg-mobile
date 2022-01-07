@@ -70,6 +70,7 @@ export function registerJetpackBlocks( { capabilities } ) {
 	if ( ! isActive() ) {
 		return;
 	}
+
 	hideBlockByCapability(
 		capabilities.mediaFilesCollectionBlock,
 		'jetpack/story'
