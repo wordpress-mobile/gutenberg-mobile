@@ -1,11 +1,11 @@
 #!/bin/bash
 # 
 # Checks i18n cache folders in order to guarantee that translations are present for provided plugins.
-# A cache folder will be created, in case a plugin doens't have it, with its translations
-# that will be fetched before creation.
+# A cache folder will be created, in case a plugin doesn't have it, with its translations that 
+# will be fetched before creation.
 #
-# NOTE: The translations fetched are NOT OPTIMIZED, the reason for this is purely for making the script
-# fast as it will be mainly used upon dependency install.
+# NOTE: The translations fetched are NOT OPTIMIZED, the reason for this is purely for making
+# the script fast as it will be mainly used upon dependency installation.
 
 # Exit if any command fails
 set -euo pipefail
