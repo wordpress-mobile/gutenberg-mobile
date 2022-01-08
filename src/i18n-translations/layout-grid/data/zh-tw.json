@@ -1,0 +1,60 @@
+{
+  "No gutter": [
+    "無裝訂邊"
+  ],
+  "Changing the number of columns will reset your layout and could remove content.": [
+    "變更欄位數量會重設版面配置，也可能移除內容。"
+  ],
+  "A column used inside a Layout Grid block.": [
+    "格狀版面區塊內使用的欄位。"
+  ],
+  "<strong>Snow Patrol</strong>": [
+    "<strong>Snow Patrol</strong>"
+  ],
+  "Align blocks to a global grid, with support for responsive breakpoints.": [],
+  "Huge": [
+    "極大"
+  ],
+  "Large": [
+    "大"
+  ],
+  "Medium": [
+    "中"
+  ],
+  "Small": [
+    "小"
+  ],
+  "No padding": [
+    "沒有填補"
+  ],
+  "Layout": [
+    "版面配置"
+  ],
+  "Column": [
+    "欄"
+  ],
+  "Mobile": [
+    "行動"
+  ],
+  "Tablet": [
+    "平板電腦"
+  ],
+  "Desktop": [
+    "桌上型電腦"
+  ],
+  "4 columns": [
+    "4 個欄位"
+  ],
+  "3 columns": [
+    "3 個欄位"
+  ],
+  "2 columns": [
+    "2 個欄位"
+  ],
+  "1 column": [
+    "1 個欄位"
+  ],
+  "Layout Grid": [
+    "格狀版面"
+  ]
+}

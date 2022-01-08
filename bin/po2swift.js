@@ -3,9 +3,12 @@
 const gettextParser = require( 'gettext-parser' ),
 	fs = require( 'fs' );
 
-function po2Swift( poInput ) {
-	const po = gettextParser.po.parse( poInput );
-	const translations = po.translations[ '' ];
+function po2Swift( potFilesContent ) {
+	const translations = potFilesContent.reduce( (result, content) => {
+		const po = gettextParser.po.parse( content );
+		return { ...result, ...po.translations[ '' ] };
+	}, {});
+	
 	const swiftStringsMap = Object.values( translations ).reduce( ( result, translation ) => {
 		if ( ! translation.msgid ) {
 			return result;
@@ -23,10 +26,10 @@ function po2Swift( poInput ) {
 
 if ( require.main === module ) {
 	if ( process.stdin.isTTY ) {
-		const potFileName = process.argv[ 2 ];
-		const destination = process.argv[ 3 ];
-		const potFileContent = fs.readFileSync( potFileName );
-		const swiftOutput = po2Swift( potFileContent, process.argv[ 3 ] );
+		const destination = process.argv[ 2 ];
+		const potFiles = process.argv.slice( 3 );
+		const potFilesContent = potFiles.map( (file) => fs.readFileSync( file ) );
+		const swiftOutput = po2Swift( potFilesContent );
 		fs.writeFileSync( destination, swiftOutput );
 	} else {
 		let inputData = '';

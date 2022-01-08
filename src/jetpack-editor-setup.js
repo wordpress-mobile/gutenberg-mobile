@@ -1,4 +1,11 @@
 /**
+ * WordPress dependencies
+ */
+import { dispatch } from '@wordpress/data';
+import { store as editPostStore } from '@wordpress/edit-post';
+import { addAction } from '@wordpress/hooks';
+
+/**
  * Internal dependencies
  */
 import { JETPACK_DATA_PATH } from '../jetpack/projects/plugins/jetpack/extensions/shared/get-jetpack-data';
@@ -9,12 +16,6 @@ import {
 	registerLoomVariation,
 	registerSmartframeVariation,
 } from '../jetpack/projects/plugins/jetpack/extensions/extended-blocks/core-embed';
-
-/**
- * WordPress dependencies
- */
-import { dispatch } from '@wordpress/data';
-import { store as editPostStore } from '@wordpress/edit-post';
 
 // When adding new blocks to this list please also consider updating ./block-support/supported-blocks.json
 const supportedJetpackBlocks = {
@@ -113,3 +114,28 @@ export function registerJetpackEmbedVariations( { capabilities } ) {
 		}
 	} );
 }
+
+const setupHooks = () => {
+	// Hook triggered before the editor is rendered
+	addAction( 'native.pre-render', 'gutenberg-mobile-jetpack', ( props ) => {
+		const { jetpackState } = props;
+
+		setupJetpackEditor(
+			jetpackState || { blogId: 1, isJetpackActive: true }
+		);
+
+		// Jetpack Embed variations use WP hooks that are attached to
+		// block type registration, so it’s required to add them before
+		// the core blocks are registered.
+		registerJetpackEmbedVariations( props );
+	} );
+
+	// Hook triggered after the editor is rendered
+	addAction( 'native.render', 'gutenberg-mobile-jetpack', ( props ) => {
+		registerJetpackBlocks( props );
+	} );
+};
+
+export default () => {
+	setupHooks();
+};

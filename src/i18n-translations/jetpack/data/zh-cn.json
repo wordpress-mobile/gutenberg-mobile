@@ -1,0 +1,130 @@
+{
+  "Embed a SmartFrame Image.": [],
+  "smartframe": [],
+  "Embed an Instagram post.": [
+    "嵌入Instagram贴文。"
+  ],
+  "Embed a Facebook post.": [
+    "嵌入Facebook文章。"
+  ],
+  "Embed a Loom video.": [
+    "嵌入 Loom 视频。"
+  ],
+  "video": [
+    "视频"
+  ],
+  "Add an interactive story.": [
+    "添加交互式故事。"
+  ],
+  "block search term\u0004video": [
+    "视频"
+  ],
+  "block search term\u0004story": [
+    "故事"
+  ],
+  "Story": [
+    "故事"
+  ],
+  "Grow": [
+    "增加受众"
+  ],
+  "Earn": [
+    "赚取收入"
+  ],
+  "block search term\u0004social": [
+    "社交"
+  ],
+  "block search term\u0004address": [
+    "地址"
+  ],
+  "block search term\u0004phone": [
+    "电话"
+  ],
+  "block search term\u0004message": [
+    "邮件"
+  ],
+  "block search term\u0004image": [
+    "图片"
+  ],
+  "Lets you add an email address with an automatically generated click-to-email link.": [
+    "您可以添加电子邮件地址，并且系统会自动生成点击发送电子邮件链接。"
+  ],
+  "Open address in Google Maps": [
+    "在 Google 地图中打开地址"
+  ],
+  "block search term\u0004gallery": [
+    "图库"
+  ],
+  "block search term\u0004cell": [
+    "单元格"
+  ],
+  "block search term\u0004telephone": [
+    "电话"
+  ],
+  "block search term\u0004mobile": [
+    "移动"
+  ],
+  "block search term\u0004email": [
+    "电子邮箱"
+  ],
+  "block search term\u0004place": [
+    "地点"
+  ],
+  "block search term\u0004direction": [
+    "方向"
+  ],
+  "block search term\u0004location": [
+    "位置"
+  ],
+  "Lets you add a phone number with an automatically generated click-to-call link.": [
+    "允许您添加带有自动生成的“点击通话”链接的电话号码。"
+  ],
+  "Phone Number": [
+    "电话号码"
+  ],
+  "Phone number": [
+    "电话号码"
+  ],
+  "Lets you add an email address, phone number, and physical address with improved markup for better SEO results.": [
+    "允许您添加电子邮件地址、电话号码和实际地址，它们带有经过改进的标记，可产生更好的 SEO 结果。"
+  ],
+  "Lets you add a physical address with Schema markup.": [
+    "允许您添加带有 Schema 标记的实际地址。"
+  ],
+  "Address": [
+    "地址"
+  ],
+  "Country": [
+    "国家/地区"
+  ],
+  "Postal/Zip Code": [
+    "邮政编码"
+  ],
+  "State/Province/Region": [
+    "州/省/地区"
+  ],
+  "City": [
+    "城市"
+  ],
+  "Address Line 3": [
+    "地址行 3"
+  ],
+  "Address Line 2": [
+    "地址行 2"
+  ],
+  "Street Address": [
+    "街道地址"
+  ],
+  "Link address to Google Maps": [
+    "将地址链接到 Google 地图"
+  ],
+  "Contact Info": [
+    "联系信息"
+  ],
+  "Email Address": [
+    "电子邮箱地址"
+  ],
+  "Email": [
+    "电子邮箱地址"
+  ]
+}

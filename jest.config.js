@@ -15,16 +15,9 @@ if ( process.env.TEST_RN_PLATFORM ) {
 
 const configPath = 'gutenberg/test/native';
 
-const transpiledPackages = glob(
-	'gutenberg/packages/*{/src,}/index.js'
-).reduce( ( mapper, modulePath ) => {
-	const moduleName = modulePath.split( '/' )[ 2 ];
-	if ( ! mapper[ `@wordpress/${ moduleName }` ] ) {
-		mapper[ `@wordpress/${ moduleName }` ] =
-			'<rootDir>/' + modulePath.replace( /\/index\.js$/, '' );
-	}
-	return mapper;
-}, {} );
+const transpiledPackageNames = glob(
+	'./gutenberg/packages/*/src/index.js'
+).map( ( fileName ) => fileName.split( '/' )[ 3 ] );
 
 module.exports = {
 	verbose: true,
@@ -46,15 +39,18 @@ module.exports = {
 	// and add it first so https://github.com/facebook/react-native/blob/v0.60.0/Libraries/react-native/react-native-implementation.js#L324-L326 doesn't pick up the Platform npm module.
 	moduleDirectories: [
 		'./gutenberg/node_modules/react-native/Libraries/Utilities',
-		'./gutenberg/node_modules',
 		'./node_modules',
+		'./gutenberg/node_modules',
 	],
 	moduleNameMapper: {
 		// Mock the CSS modules. See https://facebook.github.io/jest/docs/en/webpack.html#handling-static-assets
 		'\\.(scss)$': '<rootDir>/' + configPath + '/__mocks__/styleMock.js',
 		'\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
 			'<rootDir>/' + configPath + '/__mocks__/fileMock.js',
-		...transpiledPackages,
+		[ `@wordpress\\/(${ transpiledPackageNames.join(
+			'|'
+		) })$` ]: '<rootDir>/gutenberg/packages/$1/src',
+		'test/helpers$': '<rootDir>/' + configPath + '/helpers.js',
 	},
 	haste: {
 		defaultPlatform: rnPlatform,
