@@ -1,0 +1,130 @@
+{
+  "Embed a SmartFrame Image.": [],
+  "smartframe": [],
+  "Embed an Instagram post.": [
+    "Instagram 投稿を埋め込みます。"
+  ],
+  "Embed a Facebook post.": [
+    "Facebook 投稿を埋め込みます。"
+  ],
+  "Embed a Loom video.": [
+    "Loom 動画を埋め込みます。"
+  ],
+  "video": [
+    "動画"
+  ],
+  "Add an interactive story.": [
+    "インタラクティブなストーリーを追加します。"
+  ],
+  "block search term\u0004video": [
+    "動画"
+  ],
+  "block search term\u0004story": [
+    "ストーリー"
+  ],
+  "Story": [
+    "ストーリー"
+  ],
+  "Grow": [
+    "成長"
+  ],
+  "Earn": [
+    "収益化"
+  ],
+  "block search term\u0004social": [
+    "ソーシャル"
+  ],
+  "block search term\u0004address": [
+    "アドレス"
+  ],
+  "block search term\u0004phone": [
+    "電話"
+  ],
+  "block search term\u0004message": [
+    "メッセージ"
+  ],
+  "block search term\u0004image": [
+    "画像"
+  ],
+  "Lets you add an email address with an automatically generated click-to-email link.": [
+    "自動的に生成されるメール作成リンクをクリックして、メールアドレスを追加できます。"
+  ],
+  "Open address in Google Maps": [
+    "住所を Google マップで開く"
+  ],
+  "block search term\u0004gallery": [
+    "ギャラリー"
+  ],
+  "block search term\u0004cell": [
+    "セル"
+  ],
+  "block search term\u0004telephone": [
+    "電話"
+  ],
+  "block search term\u0004mobile": [
+    "モバイル"
+  ],
+  "block search term\u0004email": [
+    "メール"
+  ],
+  "block search term\u0004place": [
+    "位置"
+  ],
+  "block search term\u0004direction": [
+    "手順"
+  ],
+  "block search term\u0004location": [
+    "場所"
+  ],
+  "Lets you add a phone number with an automatically generated click-to-call link.": [
+    "自動的に生成されるクリックトゥコールリンクを使用して電話番号を追加できます。"
+  ],
+  "Phone Number": [
+    "電話番号"
+  ],
+  "Phone number": [
+    "電話番号"
+  ],
+  "Lets you add an email address, phone number, and physical address with improved markup for better SEO results.": [
+    "より正確な SEO 結果を得られるように強化されたマークアップを使用して、メールアドレス、電話番号、住所を追加できます。"
+  ],
+  "Lets you add a physical address with Schema markup.": [
+    "スキーママークアップを使用して住所を追加できます。"
+  ],
+  "Address": [
+    "住所"
+  ],
+  "Country": [
+    "国"
+  ],
+  "Postal/Zip Code": [
+    "郵便番号"
+  ],
+  "State/Province/Region": [
+    "都道府県/地方/地域"
+  ],
+  "City": [
+    "市区町村"
+  ],
+  "Address Line 3": [
+    "住所3行目"
+  ],
+  "Address Line 2": [
+    "住所2行目"
+  ],
+  "Street Address": [
+    "住所1"
+  ],
+  "Link address to Google Maps": [
+    "住所を Google マップにリンクする"
+  ],
+  "Contact Info": [
+    "連絡先情報"
+  ],
+  "Email Address": [
+    "メールアドレス"
+  ],
+  "Email": [
+    "メール"
+  ]
+}
