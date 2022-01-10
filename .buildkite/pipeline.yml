@@ -14,7 +14,7 @@ steps:
     key: "bundle-android"
     plugins:
       - docker#v3.8.0:
-          image: "public.ecr.aws/automattic/gb-mobile-image:6804aad7632be7db25870cdf283ed310f0c8380e"
+          image: "public.ecr.aws/automattic/gb-mobile-image:latest"
           environment:
             - "CI=true"
             # Allow WP-CLI to be run as root, otherwise it throws an exception.
