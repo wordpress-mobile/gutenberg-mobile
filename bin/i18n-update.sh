@@ -50,8 +50,7 @@ function error() {
 function arrayLength() { echo "$#"; }
 
 function check_plugin() {
-  local plugin_name=$1
-  local plugin_folder=$2
+  local plugin_folder=$1
 
   if [[ ! -d $plugin_folder ]]; then
     NOT_FOUND_PLUGIN_FOLDERS+=( $plugin_folder )
@@ -103,14 +102,13 @@ fi
 
 # Check plugins parameters
 for (( index=0; index<${#PLUGINS[@]}; index+=2 )); do
-  PLUGIN_NAME=${PLUGINS[index]}
   PLUGIN_FOLDER=${PLUGINS[index+1]}
 
-  check_plugin "$PLUGIN_NAME" "$PLUGIN_FOLDER"
+  check_plugin "$PLUGIN_FOLDER"
 done
 
 # Check Gutenberg plugin
-check_plugin "gutenberg" "./gutenberg"
+check_plugin "./gutenberg"
 
 # Stop if can't find any plugin folder
 if [[ $(arrayLength "${NOT_FOUND_PLUGIN_FOLDERS[@]+"${NOT_FOUND_PLUGIN_FOLDERS[@]}"}") -gt 0 ]]; then
