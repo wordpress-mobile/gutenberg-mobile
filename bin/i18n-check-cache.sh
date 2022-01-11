@@ -52,11 +52,6 @@ TRANSLATIONS_OUTPUT_PATH="src/i18n-cache"
 
 echo -e "\n\033[1m== Checking i18n cache ==\033[0m"
 
-# Validate parameters
-if [[ $((${#PLUGINS[@]}%2)) -ne 0 ]]; then
-  error "Plugin arguments must be supplied as tuples (i.e. domain path/to/plugin)."
-fi
-
 # Check plugins cache
 for PLUGIN in "${PLUGINS[@]+"${PLUGINS[@]}"}"; do
   check_plugin_cache "$PLUGIN"
