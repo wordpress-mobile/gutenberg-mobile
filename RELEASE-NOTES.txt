@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [**] Fix content justification attribute in Buttons block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4451]
 
 1.69.0
 ---
