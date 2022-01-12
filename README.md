@@ -166,18 +166,18 @@ The support for i18n in the project is provided by three main areas for the diff
 ### Main areas
 
 #### Translation files download
-A translation file is basically a JSON object that contain key-value items with the translation for each individual string. This content is fetched from [translate.wordpress.org](https://translate.wordpress.org/) that holds translations for WordPress and a list of different plugins like Gutenberg.
+A translation file is basically a JSON object that contains key-value items with the translation for each individual string. This content is fetched from [translate.wordpress.org](https://translate.wordpress.org/) that holds translations for WordPress and a list of different plugins like Gutenberg.
 
-These files are cached under the folder located at `src/i18n-cache/<PLUGIN_NAME>`, and can be optmized depending on the command used for fetching them. Additionally, an index file (`index.js`) is generated that acts as the entry point to import and get translations for each plugin.
+These files are cached under the folder located at `src/i18n-cache/<PLUGIN_NAME>`, and can be optimized depending on the command used for fetching them. Additionally, an index file (`index.js`) is generated that acts as the entry point to import and get translations for each plugin.
 
 Fetched translations contain all the strings of the plugin, including strings that are not used in the native version of the editor, however, and in order to reduce their file size, they can be optimized by filtering out the unused strings.
 
-By default, when installing dependencies, un-optimized translations will be downloaded for the plugins specified in the `i18n:check-cache` NPM command within the `package.json` file. The reason for getting the un-optimized version is purely for speed reasons, as the oprimization process takes up several minutes.
+By default, when installing dependencies, un-optimized translations will be downloaded for the plugins specified in the `i18n:check-cache` NPM command within the `package.json` file. The reason for getting the un-optimized version is purely for speed reasons, as the optimization process takes up several minutes.
 
-For the optimized versions, similarly, we have the `i18n:update` NPM command that can be used for this purpose. Although, it's important to mention that this command also generates the localization strings files described in a later section.
+For the optimized versions, similarly, we have the `i18n:update` NPM command that can be used for this purpose. This command is also automatically run when generating the bundle via `npm run bundle`, this way we guarantee that a new version of the bundle contains up-to-date translations. On the other hand, it's important to mention that this command also generates the localization strings files described in a later section.
 
 #### Locale setup
-This is done upon the [editor initialization](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/src/index.js), an array containing the following items related to each plugins is passed:
+This is done upon the [editor initialization](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/src/index.js), an array containing the following items related to each plugin is passed:
 ```
 [
   {
@@ -189,9 +189,15 @@ This is done upon the [editor initialization](https://github.com/wordpress-mobil
 ```
 
 #### Localization strings file generation
-Some of the strings referenced in the editor are only used in the native version, these strings are not included in the translations fetched from [translate.wordpress.org](https://translate.wordpress.org/), however, they are part of the WordPress app translations. For this reason, we generate the following localiation strings files, which contain these type of string, for each platform, and that are bundled and incorporated in the translation pipeline of the app.
+Some of the strings referenced in the editor are only used in the native version, these strings are not included in the translations fetched from [translate.wordpress.org](https://translate.wordpress.org/), however, they are part of the WordPress app translations. For this reason, we generate the following localization strings files, which contain these types of string, for each platform, and that are bundled and incorporated in the translation pipeline of the app.
 - [`bundle/android/strings.xml`](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/bundle/android/strings.xml)
 - [`bundle/ios/GutenbergNativeTranslations.swift`](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/bundle/ios/GutenbergNativeTranslations.swift)
+
+These files are generated via the `i18n:update` NPM command, and like translations, they are also produced when generating the bundle.
+
+### NPM commands
+- `npm run i18n:update`: Downloads optimized translations and generate localization strings files for all plugins. **NOTE:** This command is attached to `bundle` NPM command via `prebundle:js`, so it will be automatically executed when generating a bundle.
+- `npm run i18n:check-cache`: Downloads un-optimized translations for plugins that don't have a cache folder. **NOTE:** This command is attached to dependency installation via `postinstall`, so it will be automatically executed when installing dependencies.
 
 ### How to add a new plugin
 1. Identify the i18n domain, which usually matches the plugin's name (i.e. `jetpack`).
@@ -214,7 +220,7 @@ const pluginTranslations = [
 ```
 
 ## Caveats
-- Strings that are only used in the native version, and reference a [context](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/#disambiguation-by-context), won't included in the localization strings files hence, they won't be translated. This is a limitation in the format of the localization strings files.
+- Strings that are only used in the native version, and reference a [context](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/#disambiguation-by-context), won't be included in the localization strings files hence, they won't be translated. This is a limitation in the format of the localization strings files.
 - Localization strings files don’t support domains, so the strings extracted from plugins that are only used in the native version, will be unified in the same file, which might involve string conflicts.
 
 ## Troubleshooting
