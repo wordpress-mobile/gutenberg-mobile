@@ -1,0 +1,130 @@
+{
+  "Embed a SmartFrame Image.": [],
+  "smartframe": [],
+  "Embed an Instagram post.": [
+    "Bygg inn et Instagram-innlegg"
+  ],
+  "Embed a Facebook post.": [
+    "Bygg inn et Facebook-innlegg."
+  ],
+  "Embed a Loom video.": [
+    "Bygg inn en Loom-video."
+  ],
+  "video": [
+    "video"
+  ],
+  "Add an interactive story.": [
+    "Legg til en interaktiv fortelling."
+  ],
+  "block search term\u0004video": [
+    "video"
+  ],
+  "block search term\u0004story": [
+    "fortelling"
+  ],
+  "Story": [
+    "Fortelling"
+  ],
+  "Grow": [
+    "Voks"
+  ],
+  "Earn": [
+    "Tjen"
+  ],
+  "block search term\u0004social": [
+    "sosialt"
+  ],
+  "block search term\u0004address": [
+    "adresse"
+  ],
+  "block search term\u0004phone": [
+    "telefon"
+  ],
+  "block search term\u0004message": [
+    "melding"
+  ],
+  "block search term\u0004image": [
+    "bilde"
+  ],
+  "Lets you add an email address with an automatically generated click-to-email link.": [
+    "Lar deg legge til en e-postadresse med automatisk generert, klikkbar e-postlenke."
+  ],
+  "Open address in Google Maps": [
+    "Åpne adresse i Google Kart"
+  ],
+  "block search term\u0004gallery": [
+    "galleri"
+  ],
+  "block search term\u0004cell": [
+    "celle"
+  ],
+  "block search term\u0004telephone": [
+    "telefon"
+  ],
+  "block search term\u0004mobile": [
+    "mobil"
+  ],
+  "block search term\u0004email": [
+    "e-post"
+  ],
+  "block search term\u0004place": [
+    "sted"
+  ],
+  "block search term\u0004direction": [
+    "retning"
+  ],
+  "block search term\u0004location": [
+    "stedsangivelse"
+  ],
+  "Lets you add a phone number with an automatically generated click-to-call link.": [
+    "Lar deg legge til et telefonnummer med automatisk generert klikk-for-å-ringe-lenke."
+  ],
+  "Phone Number": [
+    "Telefonnummer"
+  ],
+  "Phone number": [
+    "Telefonnummer"
+  ],
+  "Lets you add an email address, phone number, and physical address with improved markup for better SEO results.": [
+    "Lar deg legge til en e-postadresse, telefonnummer og fysisk adresse med forbedret markup for bedre SEO-resultater."
+  ],
+  "Lets you add a physical address with Schema markup.": [
+    "Lar deg legge til en fysisk adresse i Schema-data."
+  ],
+  "Address": [
+    "Adresse"
+  ],
+  "Country": [
+    "Land"
+  ],
+  "Postal/Zip Code": [
+    "Postnummer"
+  ],
+  "State/Province/Region": [
+    "Fylke"
+  ],
+  "City": [
+    "By"
+  ],
+  "Address Line 3": [
+    "Adresselinje 3"
+  ],
+  "Address Line 2": [
+    "Adresselinje 2"
+  ],
+  "Street Address": [
+    "Vei-/gateadresse"
+  ],
+  "Link address to Google Maps": [
+    "Lenke adresse til Google Kart"
+  ],
+  "Contact Info": [
+    "Kontakt-informasjon"
+  ],
+  "Email Address": [
+    "E-postadresse"
+  ],
+  "Email": [
+    "E-post"
+  ]
+}

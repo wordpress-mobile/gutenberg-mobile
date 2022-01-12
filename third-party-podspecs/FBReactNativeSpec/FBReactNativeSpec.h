@@ -32,6 +32,8 @@
 - (void)isTouchExplorationEnabled:(RCTResponseSenderBlock)onSuccess;
 - (void)setAccessibilityFocus:(double)reactTag;
 - (void)announceForAccessibility:(NSString *)announcement;
+- (void)getRecommendedTimeoutMillis:(double)mSec
+                          onSuccess:(RCTResponseSenderBlock)onSuccess;
 
 @end
 namespace facebook {
@@ -962,6 +964,7 @@ namespace JS {
         struct Input {
           RCTRequired<bool> isRTL;
           RCTRequired<bool> doLeftAndRightSwapInRTL;
+          RCTRequired<NSString *> localeIdentifier;
         };
 
         /** Initialize with a set of values */
@@ -1101,6 +1104,11 @@ namespace facebook {
 - (void)prefetchImage:(NSString *)uri
               resolve:(RCTPromiseResolveBlock)resolve
                reject:(RCTPromiseRejectBlock)reject;
+- (void)prefetchImageWithMetadata:(NSString *)uri
+                    queryRootName:(NSString *)queryRootName
+                          rootTag:(double)rootTag
+                          resolve:(RCTPromiseResolveBlock)resolve
+                           reject:(RCTPromiseRejectBlock)reject;
 - (void)queryCache:(NSArray *)uris
            resolve:(RCTPromiseResolveBlock)resolve
             reject:(RCTPromiseRejectBlock)reject;
@@ -1549,6 +1557,7 @@ namespace JS {
 - (void)removeAllDeliveredNotifications;
 - (void)removeDeliveredNotifications:(NSArray *)identifiers;
 - (void)getDeliveredNotifications:(RCTResponseSenderBlock)callback;
+- (void)getAuthorizationStatus:(RCTResponseSenderBlock)callback;
 - (void)addListener:(NSString *)eventType;
 - (void)removeListeners:(double)count;
 
@@ -2228,7 +2237,7 @@ inline facebook::react::LazyVector<JS::NativeExceptionsManager::StackFrame> JS::
 }
 inline double JS::NativeExceptionsManager::ExceptionData::id_() const
 {
-  id const p = _v[@"id_"];
+  id const p = _v[@"id"];
   return RCTBridgingToDouble(p);
 }
 inline bool JS::NativeExceptionsManager::ExceptionData::isFatal() const
@@ -2259,6 +2268,8 @@ inline JS::NativeI18nManager::Constants::Builder::Builder(const Input i) : _fact
   d[@"isRTL"] = @(isRTL);
   auto doLeftAndRightSwapInRTL = i.doLeftAndRightSwapInRTL.get();
   d[@"doLeftAndRightSwapInRTL"] = @(doLeftAndRightSwapInRTL);
+  auto localeIdentifier = i.localeIdentifier.get();
+  d[@"localeIdentifier"] = localeIdentifier;
   return d;
 }) {}
 inline JS::NativeI18nManager::Constants::Builder::Builder(Constants i) : _factory(^{

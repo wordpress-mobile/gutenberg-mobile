@@ -1,0 +1,62 @@
+{
+  "No gutter": [
+    "Tidak ada gutter"
+  ],
+  "Changing the number of columns will reset your layout and could remove content.": [
+    "Mengubah jumlah kolom akan mereset tata letak dan dapat menghapus konten."
+  ],
+  "A column used inside a Layout Grid block.": [
+    "Kolom digunakan di dalam blok Tata Letak Kisi."
+  ],
+  "<strong>Snow Patrol</strong>": [
+    "<strong>Snow Patrol</strong>"
+  ],
+  "Align blocks to a global grid, with support for responsive breakpoints.": [
+    "Selaraskan blok ke kisi global, dengan dukungan untuk titik henti yang responsif."
+  ],
+  "Huge": [
+    "Besar"
+  ],
+  "Large": [
+    "Besar"
+  ],
+  "Medium": [
+    "Sedang"
+  ],
+  "Small": [
+    "Kecil"
+  ],
+  "No padding": [
+    "Tidak Ada Padding"
+  ],
+  "Layout": [
+    "Tata Letak"
+  ],
+  "Column": [
+    "Kolom"
+  ],
+  "Mobile": [
+    "Seluler"
+  ],
+  "Tablet": [
+    "Tablet"
+  ],
+  "Desktop": [
+    "Desktop"
+  ],
+  "4 columns": [
+    "4 kolom"
+  ],
+  "3 columns": [
+    "3 kolom"
+  ],
+  "2 columns": [
+    "2 kolom"
+  ],
+  "1 column": [
+    "1 kolom"
+  ],
+  "Layout Grid": [
+    "Kisi Tata Letak"
+  ]
+}
