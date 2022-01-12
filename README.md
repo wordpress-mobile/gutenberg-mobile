@@ -219,7 +219,7 @@ const pluginTranslations = [
 
 ## Troubleshooting
 
-### A translation is missing its translation in the editor
+### A string is missing the translation
 This can be produced by several causes, check the following steps in order to identify the source:
 - Verify that the string uses the `__` i18n function or similar ([reference](https://github.com/WordPress/gutenberg/blob/trunk/packages/i18n/README.md)).
 - Verify warnings in the output when running `i18n:update` NPM command, especially the following ones:
