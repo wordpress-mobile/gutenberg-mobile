@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [*] Add contrast checker to text-based blocks [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4357]
 
 1.69.0
 ---
