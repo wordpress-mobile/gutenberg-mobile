@@ -156,6 +156,77 @@ To have the linter also _fix_ the violations run: `npm run lint:fix`.
 
 You might want to use Visual Studio Code as an editor. The project includes the configuration needed to use the above codestyle and linting tools automatically.
 
+## Internationalization (i18n)
+
+The support for i18n in the project is provided by three main areas for the different plugins included in Gutenberg Mobile:
+1. Translations files download
+2. Locale setup
+3. Localization strings file generation
+
+### Main areas
+
+#### Translation files download
+A translation file is basically a JSON object that contain key-value items with the translation for each individual string. This content is fetched from [translate.wordpress.org](https://translate.wordpress.org/) that holds translations for WordPress and a list of different plugins like Gutenberg.
+
+These files are cached under the folder located at `src/i18n-cache/<PLUGIN_NAME>`, and can be optmized depending on the command used for fetching them. Additionally, an index file (`index.js`) is generated that acts as the entry point to import and get translations for each plugin.
+
+Fetched translations contain all the strings of the plugin, including strings that are not used in the native version of the editor, however, and in order to reduce their file size, they can be optimized by filtering out the unused strings.
+
+By default, when installing dependencies, un-optimized translations will be downloaded for the plugins specified in the `i18n:check-cache` NPM command within the `package.json` file. The reason for getting the un-optimized version is purely for speed reasons, as the oprimization process takes up several minutes.
+
+For the optimized versions, similarly, we have the `i18n:update` NPM command that can be used for this purpose. Although, it's important to mention that this command also generates the localization strings files described in a later section.
+
+#### Locale setup
+This is done upon the [editor initialization](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/src/index.js), an array containing the following items related to each plugins is passed:
+```
+[
+  {
+    domain: <DOMAIN / PLUGIN NAME>, (i.e. `jetpack`)
+    getTranslation: <CALLBACK_FOR_GETTING_TRANSLATION> (i.e. `getTranslation` function imported from `src/i18n-cache/jetpack/index.js`)
+  },
+  ...
+]
+```
+
+#### Localization strings file generation
+Some of the strings referenced in the editor are only used in the native version, these strings are not included in the translations fetched from [translate.wordpress.org](https://translate.wordpress.org/), however, they are part of the WordPress app translations. For this reason, we generate the following localiation strings files, which contain these type of string, for each platform, and that are bundled and incorporated in the translation pipeline of the app.
+- [`bundle/android/strings.xml`](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/bundle/android/strings.xml)
+- [`bundle/ios/GutenbergNativeTranslations.swift`](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/bundle/ios/GutenbergNativeTranslations.swift)
+
+### How to add a new plugin
+1. Identify the i18n domain, which usually matches the plugin's name (i.e. `jetpack`).
+2. Identify the path to the plugin source code (i.e. `./jetpack/projects/plugins/jetpack/extensions`).
+3. Append the plugin's name to the arguments of `i18n:check-cache` NPM command.
+4. Append the plugin's name and source code path to the arguments of `i18n:update` NPM command.
+5. Add the i18n domain of the plugin and the callback for getting translation to the [editor initialization](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/src/index.js).
+*Example:*
+```
+import { getTranslation as getJetpackTranslation } from './i18n-translations/jetpack';
+...
+
+const pluginTranslations = [
+	{
+		domain: 'jetpack',
+		getTranslation: getJetpackTranslation,
+	},
+	...
+];
+```
+
+## Caveats
+- Strings that are only used in the native version, and reference a [context](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/#disambiguation-by-context), won't included in the localization strings files hence, they won't be translated. This is a limitation in the format of the localization strings files.
+- Localization strings files don’t support domains, so the strings extracted from plugins that are only used in the native version, will be unified in the same file, which might involve string conflicts.
+
+## Troubleshooting
+
+### A translation is missing its translation in the editor
+This can be produced by several causes, check the following steps in order to identify the source:
+- Verify that the string uses the `__` i18n function or similar ([reference](https://github.com/WordPress/gutenberg/blob/trunk/packages/i18n/README.md)).
+- Verify warnings in the output when running `i18n:update` NPM command, especially the following ones:
+  - Parsing files issues (i.e. `Debug (make-pot): Could not parse file <FILE>`)
+  - Missing strings on translation files (i.e. `WARNING: The following strings are missing from translations:`)
+- If the string is only used in the native version, the translation won't be available until the a new version of the app is cut and its translations are requested. Check if the string is included in the localization strings files, if not, verify the output of `i18n:update` NPM command and look for warnings that reference the string.
+
 ## License
 
 Gutenberg Mobile is an Open Source project covered by the [GNU General Public License version 2](LICENSE).
