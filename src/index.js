@@ -6,8 +6,8 @@ import { registerGutenberg } from '@wordpress/react-native-editor';
 /**
  * Internal dependencies
  */
-import { getTranslation as getJetpackTranslation } from './i18n-translations/jetpack';
-import { getTranslation as getLayoutGridTranslation } from './i18n-translations/layout-grid';
+import { getTranslation as getJetpackTranslation } from './i18n-cache/jetpack';
+import { getTranslation as getLayoutGridTranslation } from './i18n-cache/layout-grid';
 
 const pluginTranslations = [
 	{
