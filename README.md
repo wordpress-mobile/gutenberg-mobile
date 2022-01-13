@@ -219,13 +219,13 @@ const pluginTranslations = [
 ];
 ```
 
-## Caveats
+### Caveats
 - Strings that are only used in the native version, and reference a [context](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/#disambiguation-by-context), won't be included in the localization strings files hence, they won't be translated. This is a limitation in the format of the localization strings files.
 - Localization strings files don’t support domains, so the strings extracted from plugins that are only used in the native version, will be unified in the same file, which might involve string conflicts.
 
-## Troubleshooting
+### Troubleshooting
 
-### A string is missing the translation
+#### A string is missing the translation
 This can be produced by several causes, check the following steps in order to identify the source:
 - Verify that the string uses the `__` i18n function or similar ([reference](https://github.com/WordPress/gutenberg/blob/trunk/packages/i18n/README.md)).
 - Check for warnings in the output when running `i18n:update` NPM command, especially the following ones:
