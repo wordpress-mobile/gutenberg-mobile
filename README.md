@@ -230,7 +230,7 @@ This can be produced by several causes, check the following steps in order to id
 - Verify that the string uses the `__` i18n function or similar ([reference](https://github.com/WordPress/gutenberg/blob/trunk/packages/i18n/README.md)).
 - Check for warnings in the output when running `i18n:update` NPM command, especially the following ones:
   - Parsing files issues (i.e. `Debug (make-pot): Could not parse file <FILE>`)
-  - Missing strings on translation files (i.e. `WARNING: The following strings are missing from translations:`)
+  - Missing strings in translation files (i.e. `WARNING: The following strings are missing from translations:`)
 - If the string is only used in the native version, the translation won't be available until the a new version of the app is cut and its translations are requested. Check if the string is included in the localization strings files, if not, verify the output of `i18n:update` NPM command and look for warnings that reference the string.
 
 ## License
