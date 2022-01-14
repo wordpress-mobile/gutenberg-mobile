@@ -1,8 +1,18 @@
 Unreleased
 ---
+* [**] Fix content justification attribute in Buttons block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4451]
+* [*] Hide help button from Unsupported Block Editor. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4352/]
+* [*] Add contrast checker to text-based blocks [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4357]
+
+1.69.0
+---
 * [*] Give multi-line block names central alignment in inserter [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4343]
 * [**] Fix Android handling of Hebrew and Indonesian translations [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4397]
+* [**] Fix missing translations by refactoring the editor initialization code [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4332]
 * [**] Add Jetpack and Layout Grid translations [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4359]
+* [**] Fix text formatting mode lost after backspace is used [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4423]
+* [*] Add missing translations of unsupported block editor modal [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4410]
+* [*] Fix app freeze when closing link picker while virtual keyboard is hidden [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4443]
 
 1.68.0
 ---
