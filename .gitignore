@@ -120,3 +120,6 @@ bin/wp-cli.phar
 
 ios/Pods
 ios/vendor
+
+# i18n update
+i18n-test/

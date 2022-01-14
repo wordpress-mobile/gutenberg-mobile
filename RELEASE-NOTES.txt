@@ -1,7 +1,16 @@
 Unreleased
 ---
+* [*] Add contrast checker to text-based blocks [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4357]
+
+1.69.0
+---
 * [*] Give multi-line block names central alignment in inserter [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4343]
 * [*] [Unsupported Block Editor] Hide help button from view for WordPress.com sites. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4352]
+* [**] Fix missing translations by refactoring the editor initialization code [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4332]
+* [**] Add Jetpack and Layout Grid translations [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4359]
+* [**] Fix text formatting mode lost after backspace is used [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4423]
+* [*] Add missing translations of unsupported block editor modal [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4410]
+* [*] Fix app freeze when closing link picker while virtual keyboard is hidden [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4443]
 
 1.68.0
 ---
@@ -10,6 +19,7 @@ Unreleased
 * [*] [Preformatted block] Fix an issue where the background color is not showing up for standard themes [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4292]
 * [**] Update Gallery Block to default to the new format and auto-convert old galleries to the new format [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4315]
 * [***] Highlight text - enables color customization for specific text within a Paragraph block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4175]
+* [**] Fix empty line appearing when splitting heading blocks on Android 12 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4365]
 
 1.67.0
 ---
