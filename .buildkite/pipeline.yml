@@ -17,6 +17,9 @@ steps:
           image: "public.ecr.aws/automattic/gb-mobile-image:latest"
           environment:
             - "CI=true"
+            # Allow WP-CLI to be run as root, otherwise it throws an exception.
+            # Reference: https://git.io/J9q2S
+            - "WP_CLI_ALLOW_ROOT=true"
     command: |
         source /root/.bashrc
 
