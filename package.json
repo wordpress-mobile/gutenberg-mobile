@@ -87,9 +87,9 @@
 		"test:e2e:ios:local": "npm run test:e2e:bundle:ios && npm run core test:e2e:build-app:ios && npm run core test:e2e:build-wda && TEST_RN_PLATFORM=ios npm run device-tests:local",
 		"sync:android": "bin/sync-android.sh",
 		"build:gutenberg": "cd gutenberg && npm run build",
-		"clean": "npm run core clean; npm run clean:gutenberg; npm run clean:pot",
+		"clean": "npm run core clean; npm run clean:gutenberg; npm run clean:i18n",
 		"clean:gutenberg": "cd gutenberg && npm run clean:packages",
-		"clean:pot": "rm -f gutenberg*.pot",
+		"clean:i18n": "rm -rf src/i18n-cache && npm run i18n:check-cache",
 		"lint": "eslint . --ext .js",
 		"lint:fix": "npm run lint -- --fix",
 		"version": "npm run bundle && git add -A bundle"
