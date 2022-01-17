@@ -1,6 +1,12 @@
 Unreleased
 ---
 
+1.69.1
+---
+* [*] Fix app freeze when closing link picker while virtual keyboard is hidden [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4443]
+* [*] Gallery block - Fix bug when migrating from old galleries format [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4456]
+* [*] RichText - Use parsed font size values when comparing new changes [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4463]
+
 1.69.0
 ---
 * [*] Give multi-line block names central alignment in inserter [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4343]
