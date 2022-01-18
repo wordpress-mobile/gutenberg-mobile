@@ -44,20 +44,51 @@ function escapeResourceXML( unsafeXMLValue ) {
 }
 
 /**
+ * Replacement for complying the TypographyDashes Android lint rule.
+ * Reference: https://android.googlesource.com/platform/tools/base/+/master/lint/libs/lint-checks/src/main/java/com/android/tools/lint/checks/TypographyDetector.java#58
+ *
+ * @param {string} XMLValue input to apply replacement.
+ * @return {string} valid string passing TypographyDashes Android lint rule.
+ */
+function replaceHyphenInNumberRanges( XMLValue ) {
+	return XMLValue.replace( /(\d+\s*)(-)(\s*\d+)/gm, function(
+		match,
+		p1,
+		p2,
+		p3
+	) {
+		// Make sure that if there is no space before digit there isn't
+		// one on the left either -- since we don't want to consider
+		// "1 2 -3" as a range from 2 to 3
+		const isNegativeNumber = p3[ 0 ] !== ' ' && p1[ p1.length - 1 ] === ' ';
+
+		return [ p1, p3 ].join( isNegativeNumber ? p2 : '–' );
+	} );
+}
+
+/**
+ * Replacement for complying the TypographyEllipsis Android lint rule.
+ * Reference: https://android.googlesource.com/platform/tools/base/+/master/lint/libs/lint-checks/src/main/java/com/android/tools/lint/checks/TypographyDetector.java#106
+ *
+ * @param {string} XMLValue input to apply replacements.
+ * @return {string} valid string passing TypographyEllipsis Android lint rule.
+ */
+const ELLIPSIS_PATTERN = /(\.\.\.)/gm;
+function replaceEllipsis( XMLValue ) {
+	return XMLValue.replace( ELLIPSIS_PATTERN, '…' );
+}
+
+/**
  * Android specifics replacements.
  *
  * @param {string} XMLValue input to apply replacements.
- * @return {string} valid string passing Android linter rules.
+ * @return {string} valid string passing Android lint rules.
  */
 function androidReplacements( XMLValue ) {
-	return XMLValue.replace( /(-|\.\.\.)/gm, function( character ) {
-		switch ( character ) {
-			case '-':
-				return '–'; // Android lint rule: TypographyDashes.
-			case '...':
-				return '…'; // Android lint rule: TypographyEllipsis
-		}
-	} );
+	return [ replaceHyphenInNumberRanges, replaceEllipsis ].reduce(
+		( value, replacement ) => replacement( value ),
+		XMLValue
+	);
 }
 
 /**
