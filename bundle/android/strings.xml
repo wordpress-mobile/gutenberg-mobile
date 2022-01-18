@@ -104,7 +104,7 @@
     <string name="gutenberg_native_double_tap_and_hold_to_edit" tools:ignore="UnusedResources">Double tap and hold to edit</string>
     <string name="gutenberg_native_double_tap_to_add_a_block" tools:ignore="UnusedResources">Double tap to add a block</string>
     <string name="gutenberg_native_double_tap_to_add_a_link" tools:ignore="UnusedResources">Double tap to add a link.</string>
-    <string name="gutenberg_native_double_tap_to_change_unit" tools:ignore="UnusedResources">double–tap to change unit</string>
+    <string name="gutenberg_native_double_tap_to_change_unit" tools:ignore="UnusedResources">double-tap to change unit</string>
     <string name="gutenberg_native_double_tap_to_edit_button_text" tools:ignore="UnusedResources">Double tap to edit button text</string>
     <string name="gutenberg_native_double_tap_to_edit_label_text" tools:ignore="UnusedResources">Double tap to edit label text</string>
     <string name="gutenberg_native_double_tap_to_edit_placeholder_text" tools:ignore="UnusedResources">Double tap to edit placeholder text</string>
@@ -289,7 +289,7 @@ translators: Block name. %s: The localized block name -->
     <!-- translators: %s: social link name e.g: "Instagram". -->
     <string name="gutenberg_native_s_has_url_set" tools:ignore="UnusedResources">%s has URL set</string>
     <!-- translators: Missing block alert title. %s: The localized block name -->
-    <string name="gutenberg_native_s_is_not_fully_supported" tools:ignore="UnusedResources">\'%s\' is not fully–supported</string>
+    <string name="gutenberg_native_s_is_not_fully_supported" tools:ignore="UnusedResources">\'%s\' is not fully-supported</string>
     <!-- translators: %s: embed block variant's label e.g: "Twitter". -->
     <string name="gutenberg_native_s_link" tools:ignore="UnusedResources">%s link</string>
     <!-- translators: %s: embed block variant's label e.g: "Twitter". -->
@@ -353,8 +353,8 @@ translators: %s: Select control option value e.g: "Auto, 25%". -->
     <string name="gutenberg_native_what_is_alt_text" tools:ignore="UnusedResources">What is alt text?</string>
     <string name="gutenberg_native_width_settings" tools:ignore="UnusedResources">Width Settings</string>
     <string name="gutenberg_native_wordpress_media_library" tools:ignore="UnusedResources">WordPress Media Library</string>
-    <string name="gutenberg_native_x_axis_position" tools:ignore="UnusedResources">X–Axis Position</string>
-    <string name="gutenberg_native_y_axis_position" tools:ignore="UnusedResources">Y–Axis Position</string>
+    <string name="gutenberg_native_x_axis_position" tools:ignore="UnusedResources">X-Axis Position</string>
+    <string name="gutenberg_native_y_axis_position" tools:ignore="UnusedResources">Y-Axis Position</string>
     <string name="gutenberg_native_you_can_edit_this_block_using_the_web_version_of_the_editor" tools:ignore="UnusedResources">You can edit this block using the web version of the editor.</string>
     <string name="gutenberg_native_you_can_rearrange_blocks_by_tapping_a_block_and_then_tapping_the" tools:ignore="UnusedResources">You can rearrange blocks by tapping a block and then tapping the up and down arrows that appear on the bottom left side of the block to move it above or below other blocks.</string>
 </resources>
