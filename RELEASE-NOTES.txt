@@ -4,6 +4,7 @@ Unreleased
 * [*] Hide help button from Unsupported Block Editor. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4352/]
 * [*] Add contrast checker to text-based blocks [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4357]
 * [*] Fix missing Featured Image translations [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4464]
+* [*] Fix missing translations of color settings [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4479]
 * [*] Fix cut-off setting labels by properly wrapping the text [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4475]
 * [*] Highlight text: fix applying formatting for non-selected text [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4471]
 
