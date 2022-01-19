@@ -114,6 +114,7 @@ describe( 'Jetpack blocks', () => {
 			capabilities: {
 				mediaFilesCollectionBlock: true,
 				contactInfoBlock: false,
+				tiledGalleryBlock: true,
 			},
 		} );
 
