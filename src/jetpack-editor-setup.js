@@ -47,7 +47,7 @@ const setJetpackData = ( {
 	return jetpackEditorInitialState;
 };
 
-const hideBlockByCapability = ( capability, blockName ) => {
+const showBlockByCapability = ( capability, blockName ) => {
 	if ( capability !== true ) {
 		dispatch( editPostStore ).hideBlockTypes( [ blockName ] );
 	} else {
@@ -68,11 +68,11 @@ export function registerJetpackBlocks( { capabilities } ) {
 		return;
 	}
 
-	hideBlockByCapability(
+	showBlockByCapability(
 		capabilities.mediaFilesCollectionBlock,
 		'jetpack/story'
 	);
-	hideBlockByCapability(
+	showBlockByCapability(
 		capabilities.contactInfoBlock,
 		'jetpack/contact-info'
 	);
