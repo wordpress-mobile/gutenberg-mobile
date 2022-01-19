@@ -188,6 +188,13 @@ if ( require.main === module ) {
 	}
 
 	const xmlOutput = strings2Android( onlyNativeStrings );
+
+	// Assure that the destination directory exists
+	const destinationDir = path.dirname( destination );
+	if ( ! fs.existsSync( destinationDir ) ) {
+		fs.mkdirSync( destinationDir, { recursive: true } );
+	}
+
 	fs.writeFileSync( destination, xmlOutput );
 }
 
