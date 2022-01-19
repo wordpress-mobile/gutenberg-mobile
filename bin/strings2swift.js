@@ -67,6 +67,13 @@ if ( require.main === module ) {
 	}
 
 	const swiftOutput = strings2Swift( onlyNativeStrings );
+
+	// Assure that the destination directory exists
+	const destinationDir = path.dirname( destination );
+	if ( ! fs.existsSync( destinationDir ) ) {
+		fs.mkdirSync( destinationDir, { recursive: true } );
+	}
+
 	fs.writeFileSync( destination, swiftOutput );
 }
 

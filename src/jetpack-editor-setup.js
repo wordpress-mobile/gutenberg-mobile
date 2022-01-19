@@ -25,6 +25,9 @@ const supportedJetpackBlocks = {
 	story: {
 		available: true,
 	},
+	'tiled-gallery': {
+		available: __DEV__,
+	},
 };
 
 const setJetpackData = ( {
@@ -75,6 +78,10 @@ export function registerJetpackBlocks( { capabilities } ) {
 	hideBlockByCapability(
 		capabilities.contactInfoBlock,
 		'jetpack/contact-info'
+	);
+	hideBlockByCapability(
+		capabilities.tiledGalleryBlock,
+		'jetpack/tiled-gallery'
 	);
 
 	// Register Jetpack blocks
