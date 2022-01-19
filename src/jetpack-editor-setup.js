@@ -79,7 +79,10 @@ export function registerJetpackBlocks( { capabilities } ) {
 		capabilities.contactInfoBlock,
 		'jetpack/contact-info'
 	);
-	hideBlockByCapability( true, 'jetpack/tiled-gallery' );
+	hideBlockByCapability(
+		capabilities.tiledGalleryBlock,
+		'jetpack/tiled-gallery'
+	);
 
 	// Register Jetpack blocks
 	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );
