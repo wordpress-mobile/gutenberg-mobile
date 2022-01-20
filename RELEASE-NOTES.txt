@@ -7,16 +7,21 @@ Unreleased
 * [*] Fix missing translations of color settings [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4479]
 * [*] Fix cut-off setting labels by properly wrapping the text [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4475]
 * [*] Highlight text: fix applying formatting for non-selected text [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4471]
+* [**] Fix Android handling of Hebrew and Indonesian translations [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4397]
+
+1.69.1
+---
+* [*] Fix app freeze when closing link picker while virtual keyboard is hidden [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4443]
+* [*] Gallery block - Fix bug when migrating from old galleries format [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4456]
+* [*] RichText - Use parsed font size values when comparing new changes [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4463]
 
 1.69.0
 ---
 * [*] Give multi-line block names central alignment in inserter [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4343]
-* [**] Fix Android handling of Hebrew and Indonesian translations [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4397]
 * [**] Fix missing translations by refactoring the editor initialization code [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4332]
 * [**] Add Jetpack and Layout Grid translations [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4359]
 * [**] Fix text formatting mode lost after backspace is used [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4423]
 * [*] Add missing translations of unsupported block editor modal [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4410]
-* [*] Fix app freeze when closing link picker while virtual keyboard is hidden [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4443]
 
 1.68.0
 ---
