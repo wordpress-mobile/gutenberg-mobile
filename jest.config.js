@@ -26,7 +26,6 @@ module.exports = {
 	clearMocks: true,
 	preset: './gutenberg/node_modules/react-native/jest-preset.js',
 	setupFiles: [ '<rootDir>/' + configPath + '/setup.js' ],
-	testEnvironment: 'jsdom',
 	testMatch: [ '<rootDir>/src/**/test/*.[jt]s?(x)' ],
 	testPathIgnorePatterns: [
 		'/node_modules/',
