@@ -106,7 +106,7 @@ describe( 'Gutenberg Mobile initialization', () => {
 		const EditorComponent = getEditorComponent();
 		const screen = initializeEditor(
 			{ locale: defaultLocale, capabilities },
-			EditorComponent
+			{ component: EditorComponent }
 		);
 		const blockList = screen.getByTestId( 'block-list-wrapper' );
 
