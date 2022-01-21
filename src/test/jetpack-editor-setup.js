@@ -47,21 +47,6 @@ const jetpackEmbedVariations = [
 	'smartframe',
 ];
 
-// Jetpack blocks are registered when importing the editor extension module.
-// Since we need to register the blocks multiple times for testing,
-// it's required to isolate modules for re-importing the editor extension multiple times.
-const registerJetpackBlocksIsolated = ( props ) => {
-	jest.isolateModules( () => {
-		registerJetpackBlocks( props );
-	} );
-};
-// Similarly to Jetpack blocks, Jetpack embed variations also require to isolate modules.
-const registerJetpackEmbedVariationsIsolated = ( props ) => {
-	jest.isolateModules( () => {
-		registerJetpackEmbedVariations( props );
-	} );
-};
-
 describe( 'Jetpack blocks', () => {
 	afterEach( () => {
 		// Reset Jetpack data
@@ -92,7 +77,7 @@ describe( 'Jetpack blocks', () => {
 
 	it( 'should register Jetpack blocks if Jetpack is active', () => {
 		setupJetpackEditor( defaultJetpackData );
-		registerJetpackBlocksIsolated( defaultProps );
+		registerJetpackBlocks( defaultProps );
 
 		const registeredBlocks = getBlockTypes().map( ( block ) => block.name );
 		expect( registeredBlocks ).toEqual(
@@ -102,7 +87,7 @@ describe( 'Jetpack blocks', () => {
 
 	it( 'should not register Jetpack blocks if Jetpack is not active', () => {
 		setupJetpackEditor( { ...defaultJetpackData, isJetpackActive: false } );
-		registerJetpackBlocksIsolated( defaultProps );
+		registerJetpackBlocks( defaultProps );
 
 		const registeredBlocks = getBlockTypes().map( ( block ) => block.name );
 		expect( registeredBlocks ).toEqual( [] );
@@ -110,7 +95,7 @@ describe( 'Jetpack blocks', () => {
 
 	it( 'should hide Jetpack blocks by capabilities', () => {
 		setupJetpackEditor( defaultJetpackData );
-		registerJetpackBlocksIsolated( {
+		registerJetpackBlocks( {
 			capabilities: {
 				mediaFilesCollectionBlock: true,
 				contactInfoBlock: false,
@@ -139,7 +124,7 @@ describe( 'Jetpack blocks', () => {
 				...defaultJetpackData,
 				isJetpackActive: false,
 			} );
-			registerJetpackEmbedVariationsIsolated( defaultProps );
+			registerJetpackEmbedVariations( defaultProps );
 			// Embed variations require the Embed block to be registered,
 			// so we need to register the core blocks to include it.
 			registerCoreBlocks();
@@ -156,7 +141,7 @@ describe( 'Jetpack blocks', () => {
 
 		it( 'should not register Jetpack embed variations if capabilities are falsey', () => {
 			setupJetpackEditor( defaultJetpackData );
-			registerJetpackEmbedVariationsIsolated( {
+			registerJetpackEmbedVariations( {
 				capabilities: {
 					facebookEmbed: false,
 					instagramEmbed: null,
@@ -179,7 +164,7 @@ describe( 'Jetpack blocks', () => {
 
 		it( 'should register Jetpack embed variations if capabilities are true', () => {
 			setupJetpackEditor( defaultJetpackData );
-			registerJetpackEmbedVariationsIsolated( defaultProps );
+			registerJetpackEmbedVariations( defaultProps );
 			// Embed variations require the Embed block to be registered,
 			// so we need to register the core blocks to include it.
 			registerCoreBlocks();
