@@ -73,9 +73,9 @@ function replaceHyphenInNumberRanges( XMLValue ) {
  * @param {string} XMLValue input to apply replacements.
  * @return {string} valid string passing TypographyEllipsis Android lint rule.
  */
-const ELLIPSIS_PATTERN = /(\.\.\.)/gm;
+const THREE_DOTS_PATTERN = /(\.\.\.)/gm;
 function replaceEllipsis( XMLValue ) {
-	return XMLValue.replace( ELLIPSIS_PATTERN, '…' );
+	return XMLValue.replace( THREE_DOTS_PATTERN, '…' );
 }
 
 /**
