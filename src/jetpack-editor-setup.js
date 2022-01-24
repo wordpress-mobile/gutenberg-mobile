@@ -1,11 +1,21 @@
 /**
+ * WordPress dependencies
+ */
+import { dispatch } from '@wordpress/data';
+import { store as editPostStore } from '@wordpress/edit-post';
+import { addAction } from '@wordpress/hooks';
+
+/**
  * Internal dependencies
  */
 import { JETPACK_DATA_PATH } from '../jetpack/projects/plugins/jetpack/extensions/shared/get-jetpack-data';
-/**
- * WordPress dependencies
- */
-import { dispatch, select } from '@wordpress/data';
+import isActive from '../jetpack/projects/plugins/jetpack/extensions/shared/is-active';
+import {
+	reactivateFacebookEmbedBlockVariation,
+	reactivateInstagramEmbedBlockVariation,
+	registerLoomVariation,
+	registerSmartframeVariation,
+} from '../jetpack/projects/plugins/jetpack/extensions/extended-blocks/core-embed';
 
 // When adding new blocks to this list please also consider updating ./block-support/supported-blocks.json
 const supportedJetpackBlocks = {
@@ -14,6 +24,9 @@ const supportedJetpackBlocks = {
 	},
 	story: {
 		available: true,
+	},
+	'tiled-gallery': {
+		available: __DEV__,
 	},
 };
 
@@ -37,39 +50,99 @@ const setJetpackData = ( {
 	return jetpackEditorInitialState;
 };
 
-export default ( jetpackState ) => {
+const hideBlockByCapability = ( capability, blockName ) => {
+	if ( capability !== true ) {
+		dispatch( editPostStore ).hideBlockTypes( [ blockName ] );
+	} else {
+		dispatch( editPostStore ).showBlockTypes( [ blockName ] );
+	}
+};
+
+export function setupJetpackEditor( jetpackState ) {
 	if ( ! jetpackState.isJetpackActive ) {
 		return;
 	}
 
-	const jetpackData = setJetpackData( jetpackState );
+	return setJetpackData( jetpackState );
+}
 
-	const toggleBlock = ( capability, blockName ) => {
-		if ( capability !== true ) {
-			dispatch( 'core/edit-post' ).hideBlockTypes( [ blockName ] );
-		} else {
-			dispatch( 'core/edit-post' ).showBlockTypes( [ blockName ] );
+export function registerJetpackBlocks( { capabilities } ) {
+	if ( ! isActive() ) {
+		return;
+	}
+
+	hideBlockByCapability(
+		capabilities.mediaFilesCollectionBlock,
+		'jetpack/story'
+	);
+	hideBlockByCapability(
+		capabilities.contactInfoBlock,
+		'jetpack/contact-info'
+	);
+	hideBlockByCapability(
+		capabilities.tiledGalleryBlock,
+		'jetpack/tiled-gallery'
+	);
+
+	// Register Jetpack blocks
+	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );
+}
+
+export function registerJetpackEmbedVariations( { capabilities } ) {
+	if ( ! isActive() ) {
+		return;
+	}
+
+	// Register Jetpack Embed variations
+	[
+		{
+			// Facebook embed
+			capability: capabilities.facebookEmbed,
+			registerFunc: reactivateFacebookEmbedBlockVariation,
+		},
+		{
+			// Instagram embed
+			capability: capabilities.instagramEmbed,
+			registerFunc: reactivateInstagramEmbedBlockVariation,
+		},
+		{
+			// Loom embed
+			capability: capabilities.loomEmbed,
+			registerFunc: registerLoomVariation,
+		},
+		{
+			// Smartframe embed
+			capability: capabilities.smartframeEmbed,
+			registerFunc: registerSmartframeVariation,
+		},
+	].forEach( ( { capability, registerFunc } ) => {
+		if ( capability === true ) {
+			registerFunc();
 		}
-	};
+	} );
+}
 
-	// Note on the use of setTimeout() here:
-	// We observed the settings may not be ready exactly when the native.render hooks get run but rather
-	// right after that execution cycle (because state hasn't changed yet). Hence, we're only checking for
-	// the actual settings to be loaded by using setTimeout without a delay parameter. This ensures the
-	// settings are loaded onto the store and we can use the core/block-editor selector by the time we do
-	// the actual check.
+const setupHooks = () => {
+	// Hook triggered before the editor is rendered
+	addAction( 'native.pre-render', 'gutenberg-mobile-jetpack', ( props ) => {
+		const { jetpackState } = props;
 
-	// eslint-disable-next-line @wordpress/react-no-unsafe-timeout
-	setTimeout( () => {
-		const capabilities = select( 'core/block-editor' ).getSettings(
-			'capabilities'
+		setupJetpackEditor(
+			jetpackState || { blogId: 1, isJetpackActive: true }
 		);
 
-		toggleBlock( capabilities.mediaFilesCollectionBlock, 'jetpack/story' );
-		toggleBlock( capabilities.contactInfoBlock, 'jetpack/contact-info' );
+		// Jetpack Embed variations use WP hooks that are attached to
+		// block type registration, so it’s required to add them before
+		// the core blocks are registered.
+		registerJetpackEmbedVariations( props );
 	} );
 
-	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );
+	// Hook triggered after the editor is rendered
+	addAction( 'native.render', 'gutenberg-mobile-jetpack', ( props ) => {
+		registerJetpackBlocks( props );
+	} );
+};
 
-	return jetpackData;
+export default () => {
+	setupHooks();
 };

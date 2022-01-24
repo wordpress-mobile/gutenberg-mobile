@@ -1,52 +1,40 @@
 /**
  * WordPress dependencies
  */
-import { addAction, addFilter } from '@wordpress/hooks';
-import {
-	doGutenbergNativeSetup,
-	initialHtmlGutenberg,
-} from '@wordpress/react-native-editor';
+import { registerGutenberg } from '@wordpress/react-native-editor';
 
 /**
  * Internal dependencies
  */
-import correctTextFontWeight from './text-font-weight-correct';
-import setupJetpackEditor from './jetpack-editor-setup';
-import setupBlockExperiments from './block-experiments-setup';
-import initialHtml from './initial-html';
+import { getTranslation as getJetpackTranslation } from './i18n-cache/jetpack';
+import { getTranslation as getLayoutGridTranslation } from './i18n-cache/layout-grid';
 
-addAction( 'native.pre-render', 'gutenberg-mobile', () => {
-	require( './strings-overrides' );
-	correctTextFontWeight();
-} );
+const pluginTranslations = [
+	{
+		domain: 'jetpack',
+		getTranslation: getJetpackTranslation,
+	},
+	{
+		domain: 'layout-grid',
+		getTranslation: getLayoutGridTranslation,
+	},
+];
 
-addAction( 'native.render', 'gutenberg-mobile', ( props ) => {
-	setupJetpackEditor(
-		props.jetpackState || { blogId: 1, isJetpackActive: true }
-	);
-	const capabilities = props.capabilities ?? {};
-	setupBlockExperiments( capabilities );
-} );
+export default function registerGutenbergMobile() {
+	registerGutenberg( {
+		beforeInitCallback: () => {
+			// We have to lazy import the setup code to prevent executing any code located
+			// at global scope before the editor is initialized, like translations retrieval.
+			require( './setup' ).default();
 
-addFilter( 'native.block_editor_props', 'gutenberg-mobile', ( editorProps ) => {
-	if ( __DEV__ ) {
-		let { initialTitle, initialData } = editorProps;
+			// Set up Jetpack
+			require( './jetpack-editor-setup' ).default();
 
-		if ( initialTitle === undefined ) {
-			initialTitle = 'Welcome to gutenberg for WP Apps!';
-		}
+			// Set up Block experiments (i.e. Layout Grid block)
+			require( './block-experiments-setup' ).default();
+		},
+		pluginTranslations,
+	} );
+}
 
-		if ( initialData === undefined ) {
-			initialData = initialHtml + initialHtmlGutenberg;
-		}
-
-		return {
-			...editorProps,
-			initialTitle,
-			initialData,
-		};
-	}
-	return editorProps;
-} );
-
-doGutenbergNativeSetup();
+registerGutenbergMobile();
