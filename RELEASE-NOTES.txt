@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [*] Image block: Replacing the media for an image set as featured prompts to update the featured image [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3930]
 
 1.70.0
 ---
@@ -104,7 +105,6 @@ Unreleased
 * [**] Fix Android-only issue of main toolbar initial position being wrong when RTL [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3923]
 * [*] Embed block: Add device's locale to preview content [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3788]
 * [*] Embed block: Fix content disappearing on Android when switching light/dark mode [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3859]
-* [*] Image block: Replacing the media for an image set as featured prompts to update the featured image [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3930]
 * [*] Column block: Translate column width's control labels [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3952]
 * [**] Enable embed preview for Instagram and Vimeo providers. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/3918]
 
