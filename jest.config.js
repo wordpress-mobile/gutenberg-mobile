@@ -25,7 +25,13 @@ module.exports = {
 	// Automatically clear mock calls and instances between every test
 	clearMocks: true,
 	preset: './gutenberg/node_modules/react-native/jest-preset.js',
-	setupFiles: [ '<rootDir>/' + configPath + '/setup.js' ],
+	setupFiles: [
+		'<rootDir>/' + configPath + '/setup.js',
+		// Disable React Native Testing Library auto-cleanup to provide our own implementation.
+		// Reference: https://callstack.github.io/react-native-testing-library/docs/migration-v2#auto-cleanup
+		'<rootDir>/gutenberg/node_modules/@testing-library/react-native/dont-cleanup-after-each.js',
+	],
+	setupFilesAfterEnv: [ '<rootDir>/' + configPath + '/setup-after-env.js' ],
 	testMatch: [ '<rootDir>/src/**/test/*.[jt]s?(x)' ],
 	testPathIgnorePatterns: [
 		'/node_modules/',
