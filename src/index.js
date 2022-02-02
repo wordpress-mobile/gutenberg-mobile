@@ -20,17 +20,21 @@ const pluginTranslations = [
 	},
 ];
 
-registerGutenberg( {
-	beforeInitCallback: () => {
-		// We have to lazy import the setup code to prevent executing any code located
-		// at global scope before the editor is initialized, like translations retrieval.
-		require( './setup' ).default();
+export default function registerGutenbergMobile() {
+	registerGutenberg( {
+		beforeInitCallback: () => {
+			// We have to lazy import the setup code to prevent executing any code located
+			// at global scope before the editor is initialized, like translations retrieval.
+			require( './setup' ).default();
 
-		// Set up Jetpack
-		require( './jetpack-editor-setup' ).default();
+			// Set up Jetpack
+			require( './jetpack-editor-setup' ).default();
 
-		// Set up Block experiments (i.e. Layout Grid block)
-		require( './block-experiments-setup' ).default();
-	},
-	pluginTranslations,
-} );
+			// Set up Block experiments (i.e. Layout Grid block)
+			require( './block-experiments-setup' ).default();
+		},
+		pluginTranslations,
+	} );
+}
+
+registerGutenbergMobile();
