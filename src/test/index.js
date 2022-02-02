@@ -90,7 +90,7 @@ describe( 'Gutenberg Mobile initialization', () => {
 
 	describe( 'editor rendering', () => {} );
 
-	it( 'renders the editor', () => {
+	it( 'renders the editor', async () => {
 		// Unmock setup module to render the actual editor component.
 		jest.unmock( '@wordpress/react-native-editor/src/setup' );
 
@@ -104,7 +104,7 @@ describe( 'Gutenberg Mobile initialization', () => {
 		};
 
 		const EditorComponent = getEditorComponent();
-		const screen = initializeEditor(
+		const screen = await initializeEditor(
 			{ locale: defaultLocale, capabilities },
 			{ component: EditorComponent }
 		);
