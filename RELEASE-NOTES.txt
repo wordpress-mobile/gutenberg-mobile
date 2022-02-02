@@ -5,6 +5,7 @@ Unreleased
 1.70.1
 ---
 * [**] [Gallery block] Fix crash when adding images and selecting a gallery item [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4515]
+* [***] Fix launching video preview on Android 11+ [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4527]
 
 1.70.0
 ---
