@@ -2,7 +2,12 @@
  * External dependencies
  */
 import { AppRegistry } from 'react-native';
-import { render, waitFor } from 'test/helpers';
+import { initializeEditor, render } from 'test/helpers';
+
+/**
+ * WordPress dependencies
+ */
+import '@wordpress/jest-console';
 
 /**
  * Internal dependencies
@@ -10,6 +15,10 @@ import { render, waitFor } from 'test/helpers';
 import initAnalytics from '../analytics';
 import jetpackEditorSetup from '../jetpack-editor-setup';
 import blockExperimentsSetup from '../block-experiments-setup';
+import registerGutenbergMobile from '../';
+import { getTranslation as getGutenbergTranslation } from '../i18n-cache/gutenberg';
+import { getTranslation as getJetpackTranslation } from '../i18n-cache/jetpack';
+import { getTranslation as getLayoutGridTranslation } from '../i18n-cache/layout-grid';
 
 jest.mock( 'react-native/Libraries/ReactNative/AppRegistry' );
 jest.mock( '../analytics' );
@@ -22,44 +31,91 @@ jest.mock( '@wordpress/react-native-editor/src/setup', () => ( {
 	default: jest.fn().mockReturnValue( <></> ),
 } ) );
 
-const initialProps = { initialData: '', capabilities: {} };
+const defaultLocale = 'en-gb';
+const setupLocaleLogs = [
+	[ 'locale', defaultLocale, getGutenbergTranslation( defaultLocale ) ],
+	[
+		'jetpack - locale',
+		defaultLocale,
+		getJetpackTranslation( defaultLocale ),
+	],
+	[
+		'layout-grid - locale',
+		defaultLocale,
+		getLayoutGridTranslation( defaultLocale ),
+	],
+];
 
-const initGutenbergMobile = ( props = initialProps ) => {
+const getEditorComponent = () => {
 	let EditorComponent;
 	AppRegistry.registerComponent.mockImplementation(
 		( name, componentProvider ) => {
 			EditorComponent = componentProvider();
 		}
 	);
-	jest.isolateModules( () => {
-		// Import entry point to initialize the editor
-		require( '../index' );
-	} );
-	return render( <EditorComponent { ...props } /> );
+	registerGutenbergMobile();
+	return EditorComponent;
 };
 
 describe( 'Gutenberg Mobile initialization', () => {
-	it( 'initializes analytics', () => {
-		initGutenbergMobile();
-		expect( initAnalytics ).toBeCalled();
+	describe( 'setup', () => {
+		beforeEach( () => {
+			const EditorComponent = getEditorComponent();
+			render(
+				<EditorComponent locale={ defaultLocale } translations={ {} } />
+			);
+		} );
+
+		it( 'initializes analytics', () => {
+			expect( initAnalytics ).toBeCalled();
+			setupLocaleLogs.forEach( ( log ) =>
+				expect( console ).toHaveLoggedWith( ...log )
+			);
+		} );
+
+		it( 'sets up Jetpack', () => {
+			expect( jetpackEditorSetup ).toBeCalled();
+			setupLocaleLogs.forEach( ( log ) =>
+				expect( console ).toHaveLoggedWith( ...log )
+			);
+		} );
+
+		it( 'sets up block experiments', () => {
+			expect( blockExperimentsSetup ).toBeCalled();
+			setupLocaleLogs.forEach( ( log ) =>
+				expect( console ).toHaveLoggedWith( ...log )
+			);
+		} );
 	} );
 
-	it( 'sets up Jetpack', () => {
-		initGutenbergMobile();
-		expect( jetpackEditorSetup ).toBeCalled();
-	} );
+	describe( 'editor rendering', () => {} );
 
-	it( 'sets up block experiments', () => {
-		initGutenbergMobile();
-		expect( blockExperimentsSetup ).toBeCalled();
-	} );
-
-	it( 'initializes the editor', () => {
+	it( 'renders the editor', async () => {
 		// Unmock setup module to render the actual editor component.
 		jest.unmock( '@wordpress/react-native-editor/src/setup' );
 
-		const { getByTestId } = initGutenbergMobile();
-		const blockList = waitFor( () => getByTestId( 'block-list-wrapper' ) );
+		const capabilities = {
+			mediaFilesCollectionBlock: true,
+			contactInfoBlock: true,
+			facebookEmbed: true,
+			instagramEmbed: true,
+			loomEmbed: true,
+			smartframeEmbed: true,
+		};
+
+		const EditorComponent = getEditorComponent();
+		const screen = await initializeEditor(
+			{ locale: defaultLocale, capabilities },
+			{ component: EditorComponent }
+		);
+		const blockList = screen.getByTestId( 'block-list-wrapper' );
+
 		expect( blockList ).toBeDefined();
+		expect( console ).toHaveLoggedWith( 'Hermes is: true' );
+		setupLocaleLogs.forEach( ( log ) =>
+			expect( console ).toHaveLoggedWith( ...log )
+		);
+		// It's expected that some blocks are upgraded and inform about it (example: "Updated Block: core/cover")
+		expect( console ).toHaveInformed();
 	} );
 } );
