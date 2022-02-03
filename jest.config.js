@@ -26,7 +26,6 @@ module.exports = {
 	clearMocks: true,
 	preset: './gutenberg/node_modules/react-native/jest-preset.js',
 	setupFiles: [ '<rootDir>/' + configPath + '/setup.js' ],
-	testEnvironment: 'jsdom',
 	testMatch: [ '<rootDir>/src/**/test/*.[jt]s?(x)' ],
 	testPathIgnorePatterns: [
 		'/node_modules/',
@@ -55,7 +54,6 @@ module.exports = {
 	haste: {
 		defaultPlatform: rnPlatform,
 		platforms: [ 'android', 'ios', 'native' ],
-		providesModuleNodeModules: [ 'react-native', 'react-native-svg' ],
 	},
 	transformIgnorePatterns: [
 		// This is required for now to have jest transform some of our modules
