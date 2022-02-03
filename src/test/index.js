@@ -110,7 +110,7 @@ describe( 'Gutenberg Mobile initialization', () => {
 		);
 		const blockList = screen.getByTestId( 'block-list-wrapper' );
 
-		expect( blockList ).toBeDefined();
+		expect( blockList ).toBeVisible();
 		expect( console ).toHaveLoggedWith( 'Hermes is: true' );
 		setupLocaleLogs.forEach( ( log ) =>
 			expect( console ).toHaveLoggedWith( ...log )
