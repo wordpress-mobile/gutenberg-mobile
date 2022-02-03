@@ -1,6 +1,9 @@
 Unreleased
 ---
 
+1.70.2
+---
+* [**] Rich Text - Validate link colors [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4542]
 
 1.70.1
 ---
