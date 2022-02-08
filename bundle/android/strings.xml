@@ -327,6 +327,8 @@ translators: %s: Select control option value e.g: "Auto, 25%". -->
     <string name="gutenberg_native_text_color" tools:ignore="UnusedResources">Text color</string>
     <string name="gutenberg_native_text_formatting_controls_are_located_within_the_toolbar_positione" tools:ignore="UnusedResources">Text formatting controls are located within the toolbar positioned above the keyboard while editing a text block</string>
     <string name="gutenberg_native_the_basics" tools:ignore="UnusedResources">The basics</string>
+    <string name="gutenberg_native_this_color_combination_may_be_hard_for_people_to_read_try_using_a" tools:ignore="UnusedResources">This color combination may be hard for people to read. Try using a darker background color and/or a brighter text color.</string>
+    <string name="gutenberg_native_this_color_combination_may_be_hard_for_people_to_read_try_using_a_a31656b3" tools:ignore="UnusedResources">This color combination may be hard for people to read. Try using a brighter background color and/or a darker text color.</string>
     <string name="gutenberg_native_three" tools:ignore="UnusedResources">Three</string>
     <string name="gutenberg_native_tiled_gallery_settings" tools:ignore="UnusedResources">Tiled gallery settings</string>
     <string name="gutenberg_native_to_remove_a_block_select_the_block_and_click_the_three_dots_in_th" tools:ignore="UnusedResources">To remove a block, select the block and click the three dots in the bottom right of the block to view the settings. From there, choose the option to remove the block.</string>
