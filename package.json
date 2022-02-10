@@ -94,7 +94,5 @@
 		"lint:fix": "npm run lint -- --fix",
 		"version": "npm run bundle && git add -A bundle"
 	},
-	"optionalDependencies": {
-		"@automattic/jetpack-shared-extension-utils": "file:jetpack/projects/js-packages/shared-extension-utils"
-	}
+	"dependencies": {}
 }
