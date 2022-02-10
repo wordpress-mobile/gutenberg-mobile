@@ -17,7 +17,7 @@ import { removeAllFilters } from '@wordpress/hooks';
  */
 import getJetpackData, {
 	JETPACK_DATA_PATH,
-} from '../../jetpack/projects/plugins/jetpack/extensions/shared/get-jetpack-data';
+} from '../../jetpack/projects/js-packages/shared-extension-utils/src/get-jetpack-data';
 import {
 	registerJetpackBlocks,
 	registerJetpackEmbedVariations,
