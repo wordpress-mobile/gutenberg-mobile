@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { JETPACK_DATA_PATH } from '@automattic/jetpack-shared-extension-utils';
+
+/**
  * WordPress dependencies
  */
 import { dispatch } from '@wordpress/data';
@@ -8,7 +13,6 @@ import { addAction } from '@wordpress/hooks';
 /**
  * Internal dependencies
  */
-import { JETPACK_DATA_PATH } from '../jetpack/projects/js-packages/shared-extension-utils/src/get-jetpack-data';
 import isActive from '../jetpack/projects/plugins/jetpack/extensions/shared/is-active';
 import {
 	reactivateFacebookEmbedBlockVariation,
