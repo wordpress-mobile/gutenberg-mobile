@@ -1,10 +1,10 @@
 Unreleased
 ---
+* [*] Fix autocorrected Headings applying bold formatting on iOS [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4557]
 
 1.71.1
 ---
 * [*] Highlight text: Check if style attribute value is defined during filtering [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4562]
-* [*] Fix autocorrected Headings applying bold formatting on iOS [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4557]
 
 1.71.0
 ---
