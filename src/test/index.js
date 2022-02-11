@@ -88,8 +88,6 @@ describe( 'Gutenberg Mobile initialization', () => {
 		} );
 	} );
 
-	describe( 'editor rendering', () => {} );
-
 	it( 'renders the editor', async () => {
 		// Unmock setup module to render the actual editor component.
 		jest.unmock( '@wordpress/react-native-editor/src/setup' );
@@ -110,7 +108,7 @@ describe( 'Gutenberg Mobile initialization', () => {
 		);
 		const blockList = screen.getByTestId( 'block-list-wrapper' );
 
-		expect( blockList ).toBeDefined();
+		expect( blockList ).toBeVisible();
 		expect( console ).toHaveLoggedWith( 'Hermes is: true' );
 		setupLocaleLogs.forEach( ( log ) =>
 			expect( console ).toHaveLoggedWith( ...log )
