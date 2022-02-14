@@ -68,7 +68,7 @@ CI will run the following commands:
 ### Update WPAndroid's binary version
 
 - Find [the version deployed from CI](#deploy-a-new-version-of-react-native-bridge-from-ci)
-- Update `ext.gutenbergMobileVersion` property in [build.gradle](https://github.com/wordpress-mobile/qWordPress-Android/blob/trunk/build.gradle) to the new version
+- Update `ext.gutenbergMobileVersion` property in [build.gradle](https://github.com/wordpress-mobile/WordPress-Android/blob/trunk/build.gradle) to the new version
 
 In order to test this, make sure `localGutenbergMobilePath` in your `local-builds.gradle` file is commented out as otherwise the binary version will be ignored.
 
