@@ -16,7 +16,7 @@ if ( process.env.TEST_RN_PLATFORM ) {
 const configPath = 'gutenberg/test/native';
 
 const transpiledPackageNames = glob(
-	'./gutenberg/packages/*/src/index.js'
+	'./gutenberg/packages/*/src/index.{js,ts}'
 ).map( ( fileName ) => fileName.split( '/' )[ 3 ] );
 
 module.exports = {
