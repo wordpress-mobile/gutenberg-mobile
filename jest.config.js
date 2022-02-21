@@ -57,7 +57,7 @@ module.exports = {
 		platforms: [ 'android', 'ios', 'native' ],
 	},
 	transform: {
-		'^.+\\.(js|jsx|ts|tsx)$': 'babel-jest'
+		'^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
 	  },
 	transformIgnorePatterns: [
 		// This is required for now to have jest transform some of our modules
