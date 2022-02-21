@@ -56,12 +56,15 @@ module.exports = {
 		defaultPlatform: rnPlatform,
 		platforms: [ 'android', 'ios', 'native' ],
 	},
+	transform: {
+		'^.+\\.(js|jsx|ts|tsx)$': 'babel-jest'
+	  },
 	transformIgnorePatterns: [
 		// This is required for now to have jest transform some of our modules
 		// See: https://github.com/wordpress-mobile/gutenberg-mobile/pull/257#discussion_r234978268
 		// There is no overloading in jest so we need to rewrite the config from react-native-jest-preset:
 		// https://github.com/facebook/react-native/blob/master/jest-preset.json#L20
-		'node_modules/(?!(simple-html-tokenizer|@react-native-community|(jest-)?react-native|@react-native|react-clone-referenced-element|jetpack-shared-extension-utils))',
+		'node_modules/(?!(simple-html-tokenizer|@react-native-community|(jest-)?react-native|@react-native|react-clone-referenced-element))',
 	],
 	reporters: [ 'default', 'jest-junit' ],
 };
