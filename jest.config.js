@@ -58,7 +58,7 @@ module.exports = {
 	},
 	transform: {
 		'^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
-	  },
+	},
 	transformIgnorePatterns: [
 		// This is required for now to have jest transform some of our modules
 		// See: https://github.com/wordpress-mobile/gutenberg-mobile/pull/257#discussion_r234978268
