@@ -43,6 +43,10 @@ steps:
     plugins:
       - *publish-android-artifacts-docker-container
     command: |
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+        nvm install && nvm use
+        npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+
         .buildkite/publish-react-native-dependencies-artifacts.sh
 
   - label: "Build Android RN Bridge & Publish to S3"
