@@ -38,9 +38,17 @@ steps:
     command: |
         .buildkite/publish-react-native-aztec-android-artifacts.sh
 
+  - label: "Build Android dependencies of RN Bridge & Publish to S3"
+    key: "publish-react-native-bridge-android-dependencies"
+    plugins:
+      - *publish-android-artifacts-docker-container
+    command: |
+        .buildkite/publish-react-native-dependencies-artifacts.sh
+
   - label: "Build Android RN Bridge & Publish to S3"
     depends_on:
       - "bundle-android"
+      - "publish-react-native-bridge-android-dependencies"
       - "publish-react-native-aztec-android"
     plugins:
       - *publish-android-artifacts-docker-container
