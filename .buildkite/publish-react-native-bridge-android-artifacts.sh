@@ -14,4 +14,8 @@ cp -r ./bundle/android/drawable-* ./gutenberg/packages/react-native-bridge/andro
 
 # Publish react-native-bridge
 cd ./gutenberg/packages/react-native-bridge/android
-./gradlew -PwillPublishReactNativeBridgeBinary=true -PreactNativeAztecVersion="$PUBLISHED_AZTEC_VERSION" :react-native-bridge:prepareToPublishToS3 `prepare_to_publish_to_s3_params` :react-native-bridge:publish
+./gradlew \
+    -PwillPublishReactNativeBridgeBinary=true \
+    -PreactNativeAztecVersion="$PUBLISHED_AZTEC_VERSION" \
+    -PandroidDependenciesVersion="$PUBLISHED_ANDROID_DEPENDENCIES_VERSION" \
+    :react-native-bridge:prepareToPublishToS3 `prepare_to_publish_to_s3_params` :react-native-bridge:publish
