@@ -44,9 +44,7 @@ steps:
       - *publish-android-artifacts-docker-container
     command: |
         apt-get install -y curl
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-        . ~/.nvm/nvm.sh
-        nvm install lts/*
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash && . ~/.nvm/nvm.sh --no-use && nvm install lts/*
 
         nvm install && nvm use
         npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
