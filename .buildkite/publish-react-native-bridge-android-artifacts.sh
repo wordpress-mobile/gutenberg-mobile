@@ -4,6 +4,8 @@ set -euo pipefail
 
 # Retrieve data from previous steps
 PUBLISHED_AZTEC_VERSION=`buildkite-agent meta-data get "PUBLISHED_REACT_NATIVE_AZTEC_ANDROID_VERSION"`
+PUBLISHED_REACT_NATIVE_GESTURE_HANDLER_VERSION=`buildkite-agent meta-data get "PUBLISHED_REACT_NATIVE_GESTURE_HANDLER_VERSION"`
+PUBLISHED_REACT_NATIVE_REANIMATED_VERSION=`buildkite-agent meta-data get "PUBLISHED_REACT_NATIVE_REANIMATED_VERSION"`
 buildkite-agent artifact download bundle/android/App.js .
 
 # Copy the JavaScript bundle and all local static assets referenced within the
@@ -17,5 +19,6 @@ cd ./gutenberg/packages/react-native-bridge/android
 ./gradlew \
     -PwillPublishReactNativeBridgeBinary=true \
     -PreactNativeAztecVersion="$PUBLISHED_AZTEC_VERSION" \
-    -PandroidDependenciesVersion="$PUBLISHED_ANDROID_DEPENDENCIES_VERSION" \
+    -PreactNativeGestureHandlerVersion="$PUBLISHED_REACT_NATIVE_GESTURE_HANDLER_VERSION" \
+    -PreactNativeReanimatedVersion="$PUBLISHED_REACT_NATIVE_REANIMATED_VERSION" \
     :react-native-bridge:prepareToPublishToS3 `prepare_to_publish_to_s3_params` :react-native-bridge:publish
