@@ -17,7 +17,7 @@ cp -r ./bundle/android/drawable-* ./gutenberg/packages/react-native-bridge/andro
 # Publish react-native-bridge
 cd ./gutenberg/packages/react-native-bridge/android
 ./gradlew \
-    -PwillPublishBinaries=true \
+    -PwillPublishReactNativeBridgeBinary=true \
     -PreactNativeAztecVersion="$PUBLISHED_AZTEC_VERSION" \
     -PreactNativeGestureHandlerVersion="$PUBLISHED_REACT_NATIVE_GESTURE_HANDLER_VERSION" \
     -PreactNativeReanimatedVersion="$PUBLISHED_REACT_NATIVE_REANIMATED_VERSION" \
