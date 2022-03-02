@@ -1,8 +1,13 @@
 const path = require( 'path' );
 const fs = require( 'fs' );
 
+const gutenbergMetroConfig = require( './gutenberg/packages/react-native-editor/metro.config.js' );
 const gutenbergMetroConfigCopy = {
-	...require( './gutenberg/packages/react-native-editor/metro.config.js' ),
+	...gutenbergMetroConfig,
+	resolver: {
+		...gutenbergMetroConfig.resolver,
+		sourceExts: [ 'js', 'jsx', 'json', 'scss', 'sass', 'ts', 'tsx' ],
+	},
 };
 
 gutenbergMetroConfigCopy.resolver.extraNodeModules = new Proxy(

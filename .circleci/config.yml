@@ -364,7 +364,7 @@ workflows:
           filters:
             branches:
               ignore:
-                - develop
+                - trunk
                 - /^dependabot/submodules/.*/
                 - /^release.*/
       - ios-device-checks:
@@ -388,19 +388,19 @@ workflows:
             branches:
               only: /^dependabot/submodules/.*/
       - ios-device-checks:
-          name: Test iOS on Device - Full (On Develop)
+          name: Test iOS on Device - Full (On Trunk)
           post-to-slack: true
           filters:
             branches:
-              only: 
-                - develop
+              only:
+                - trunk
       - android-device-checks:
-          name: Test Android on Device - Full (On Develop)
+          name: Test Android on Device - Full (On Trunk)
           post-to-slack: true
           filters:
             branches:
-              only: 
-                - develop
+              only:
+                - trunk
       - ios-device-checks:
           name: Test iOS on Device - Full (Release)
           post-to-slack: true
@@ -428,4 +428,4 @@ workflows:
           cron: '1 1,13 * * *'
           filters:
             branches:
-              only: develop
+              only: trunk
