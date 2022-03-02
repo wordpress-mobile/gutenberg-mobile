@@ -1,6 +1,7 @@
 Unreleased
 ---
 * [*] Fix autocorrected Headings applying bold formatting on iOS [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4557]
+* [*] Small refinement to media upload errors, including centring and tweaking copy. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4597]
 * [***] Support for multiple color palettes [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4588]
 
 1.71.1
