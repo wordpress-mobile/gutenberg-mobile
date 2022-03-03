@@ -16,7 +16,7 @@ if ( process.env.TEST_RN_PLATFORM ) {
 const configPath = 'gutenberg/test/native';
 
 const transpiledPackageNames = glob(
-	'./gutenberg/packages/*/src/index.js'
+	'./gutenberg/packages/*/src/index.{js,ts}'
 ).map( ( fileName ) => fileName.split( '/' )[ 3 ] );
 
 module.exports = {
@@ -26,6 +26,7 @@ module.exports = {
 	clearMocks: true,
 	preset: './gutenberg/node_modules/react-native/jest-preset.js',
 	setupFiles: [ '<rootDir>/' + configPath + '/setup.js' ],
+	setupFilesAfterEnv: [ '<rootDir>/' + configPath + '/setup-after-env.js' ],
 	testMatch: [ '<rootDir>/src/**/test/*.[jt]s?(x)' ],
 	testPathIgnorePatterns: [
 		'/node_modules/',
@@ -54,6 +55,9 @@ module.exports = {
 	haste: {
 		defaultPlatform: rnPlatform,
 		platforms: [ 'android', 'ios', 'native' ],
+	},
+	transform: {
+		'^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
 	},
 	transformIgnorePatterns: [
 		// This is required for now to have jest transform some of our modules
