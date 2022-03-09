@@ -3,12 +3,12 @@
 ### Summary
 
 WPAndroid by default integrates `react-native-bridge` as a binary dependency that's fetched from a remote maven repo.
-The CI in this repo will deploy a new version each time a commit is pushed to `develop` or an open PR, as well as each time a tag is created.
+The CI in this repo will deploy a new version each time a commit is pushed to `trunk` or an open PR, as well as each time a tag is created.
 This is the only required dependency.
-Whenever a new version is deployed, we can simply update `ext.gutenbergMobileVersion` in [build.gradle](https://github.com/wordpress-mobile/WordPress-Android/blob/develop/build.gradle).
+Whenever a new version is deployed, we can simply update `ext.gutenbergMobileVersion` in [build.gradle](https://github.com/wordpress-mobile/WordPress-Android/blob/trunk/build.gradle).
 
 During development, we can use composite builds and dependency substitution to point WPAndroid to our local checkout of `gutenberg-mobile`.
-To do this, we need to copy the [local-builds.gradle-example file](https://github.com/wordpress-mobile/WordPress-Android/blob/develop/local-builds.gradle-example) in WPAndroid renaming it to `local-builds.gradle` and change the `localGutenbergMobilePath` value.
+To do this, we need to copy the [local-builds.gradle-example file](https://github.com/wordpress-mobile/WordPress-Android/blob/trunk/local-builds.gradle-example) in WPAndroid renaming it to `local-builds.gradle` and change the `localGutenbergMobilePath` value.
 Building the project as such will make WPAndroid build the source code for `react-native-bridge`, `react-native-aztec` and other sublibraries from the locally checked out folder.
 It'll also expect the metro server to be running to fetch the JS bundle.
 
@@ -31,13 +31,13 @@ From your gutenberg-mobile checkout:
 
 From your WordPress-Android checkout:
 
-- Copy [local-builds.gradle-example](https://github.com/wordpress-mobile/WordPress-Android/blob/develop/local-builds.gradle-example) renaming it to `local-builds.gradle`
+- Copy [local-builds.gradle-example](https://github.com/wordpress-mobile/WordPress-Android/blob/trunk/local-builds.gradle-example) renaming it to `local-builds.gradle`
 - Update `localGutenbergMobilePath`to your local `gutenberg-mobile`checkout
 - Run the project
 
 #### How it works:
 
-When [settings.gradle](https://github.com/wordpress-mobile/WordPress-Android/blob/develop/settings.gradle) finds `localGutenbergMobilePath` in `local-builds.gradle`, it'll substitute the below binary dependency with the local folder:
+When [settings.gradle](https://github.com/wordpress-mobile/WordPress-Android/blob/trunk/settings.gradle) finds `localGutenbergMobilePath` in `local-builds.gradle`, it'll substitute the below binary dependency with the local folder:
 
 ```
 implementation "$rootProject.gradle.ext.gutenbergMobileBinaryPath:$rootProject.ext.gutenbergMobileVersion"
@@ -52,7 +52,7 @@ implementation "$rootProject.gradle.ext.gutenbergMobileBinaryPath:$rootProject.e
 There are a few different ways to do this:
 
 1. Open a new PR or push a new commit to an open PR which will be published as `<PR number>-<commit full SHA1>`
-2. Merge a PR to `develop` which will be published as `<develop>-<commit full SHA1>`
+2. Merge a PR to `trunk` which will be published as `<trunk>-<commit full SHA1>`
 3. Create a new tag which will be published as `<tag name>`
 
 #### How it works:
@@ -68,7 +68,7 @@ CI will run the following commands:
 ### Update WPAndroid's binary version
 
 - Find [the version deployed from CI](#deploy-a-new-version-of-react-native-bridge-from-ci)
-- Update `ext.gutenbergMobileVersion` property in [build.gradle](https://github.com/wordpress-mobile/WordPress-Android/blob/develop/build.gradle) to the new version
+- Update `ext.gutenbergMobileVersion` property in [build.gradle](https://github.com/wordpress-mobile/WordPress-Android/blob/trunk/build.gradle) to the new version
 
 In order to test this, make sure `localGutenbergMobilePath` in your `local-builds.gradle` file is commented out as otherwise the binary version will be ignored.
 

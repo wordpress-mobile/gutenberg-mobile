@@ -9,7 +9,8 @@ commands:
       - restore_cache:
           name: Restore NPM Cache
           keys:
-            - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+            - npm-i18n-v5-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+            - npm-i18n-v5-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-
       - run:
           name: NPM Install
           command: |
@@ -17,16 +18,17 @@ commands:
             npm ci --prefer-offline --no-audit
       - save_cache:
           name: Save NPM Cache
-          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+          key: npm-i18n-v5-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/.npm
-            - i18n-cache/data
+            - src/i18n-cache
   npm-install-full:
     steps:
       - restore_cache:
           name: Restore NPM Cache
           keys:
-            - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
+            - npm-i18n-v5-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
+            - npm-i18n-v5-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-
       - run:
           name: NPM Install Full
           command: |
@@ -34,10 +36,10 @@ commands:
             npm install --no-audit
       - save_cache:
           name: Save NPM Cache
-          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
+          key: npm-i18n-v5-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
           paths:
             - ~/.npm
-            - i18n-cache/data
+            - src/i18n-cache
   checkout-shallow:
     steps:
       - run:
@@ -117,14 +119,13 @@ commands:
           command: |
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
             if [ -z "${NVM_DIR}" ] ; then
-              echo 'Appending nvm source string to BASH_ENV'
+              echo 'Default NVM_DIR to .nvm in home'
               echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
-              echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
             fi
+            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - run:
-          name: Install node version specified in Gutenberg using nvm
+          name: Install node version specified in .nvmrc using nvm
           command: |
-            cd gutenberg
             nvm install
             # Set the installed version as the default one
             nvm alias default $(nvm current)
@@ -178,7 +179,7 @@ jobs:
           name: Run Checks
           command: bin/ci-checks-js.sh
           environment:
-            JEST_JUNIT_OUTPUT: "reports/test-results/android-test-results.xml"
+            JEST_JUNIT_OUTPUT_FILE: "reports/test-results/android-test-results.xml"
       - store_test_results:
           path: ./reports/test-results
   android-device-checks:
@@ -222,7 +223,7 @@ jobs:
           environment:
             TEST_RN_PLATFORM: android
             TEST_ENV: sauce
-            JEST_JUNIT_OUTPUT: "/home/circleci/test-results/android-test-results.xml"
+            JEST_JUNIT_OUTPUT_FILE: "/home/circleci/test-results/android-test-results.xml"
       - store_test_results:
           path: /home/circleci/test-results
       - when:
@@ -247,8 +248,11 @@ jobs:
       - install-node-version
       - npm-install
       - run:
-          name: Run Android native unit tests
+          name: Run Android native-editor unit tests
           command: cd gutenberg/packages/react-native-editor/android && ./gradlew testDebug
+      - run:
+          name: Run Android native-bridge unit tests
+          command: cd gutenberg/packages/react-native-bridge/android && ./gradlew test
   ios-device-checks:
     parameters:
       post-to-slack:
@@ -281,16 +285,16 @@ jobs:
     - restore_cache:
         name: Restore Dependencies Cache
         keys:
-        - dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}-{{ checksum "gutenberg/package-lock.json" }}
-        - dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}
-        - dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}
-        - dependencies-v4-
+        - dependencies-v5-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}-{{ checksum "gutenberg/package-lock.json" }}
+        - dependencies-v5-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}
+        - dependencies-v5-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}
+        - dependencies-v5-
     - run:
         name: Build (if needed)
         command: test -e gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app || npm run core test:e2e:build-app:ios
     - save_cache:
         name: Save Dependencies Cache
-        key: dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}-{{ checksum "gutenberg/package-lock.json" }}
+        key: dependencies-v5-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}-{{ checksum "gutenberg/package-lock.json" }}
         paths:
         - gutenberg/packages/react-native-editor/ios/Pods
         - ~/Library/Caches/CocoaPods
@@ -306,7 +310,7 @@ jobs:
         name: Upload .app to sauce labs
         command: |
           source bin/sauce-pre-upload.sh
-          HOMEBREW_NO_AUTO_UPDATE=1 brew install curl
+          brew install curl
           /usr/local/opt/curl/bin/curl --version
           /usr/local/opt/curl/bin/curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.app.zip?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
     - run:
@@ -315,7 +319,7 @@ jobs:
           npm run device-tests<<parameters.is-canary>>
         no_output_timeout: 1200
         environment:
-          JEST_JUNIT_OUTPUT: "reports/test-results/ios-test-results.xml"
+          JEST_JUNIT_OUTPUT_FILE: "reports/test-results/ios-test-results.xml"
     - store_test_results:
         path: ./reports/test-results
     - run:
@@ -360,8 +364,9 @@ workflows:
           filters:
             branches:
               ignore:
-                - develop
+                - trunk
                 - /^dependabot/submodules/.*/
+                - /^release.*/
       - ios-device-checks:
           name: Test iOS on Device - Full
           requires: [ "Optional UI Tests" ]
@@ -382,7 +387,34 @@ workflows:
           filters:
             branches:
               only: /^dependabot/submodules/.*/
-
+      - ios-device-checks:
+          name: Test iOS on Device - Full (On Trunk)
+          post-to-slack: true
+          filters:
+            branches:
+              only:
+                - trunk
+      - android-device-checks:
+          name: Test Android on Device - Full (On Trunk)
+          post-to-slack: true
+          filters:
+            branches:
+              only:
+                - trunk
+      - ios-device-checks:
+          name: Test iOS on Device - Full (Release)
+          post-to-slack: true
+          filters:
+            branches:
+              only: 
+                - /^release.*/
+      - android-device-checks:
+          name: Test Android on Device - Full (Release)
+          post-to-slack: true
+          filters:
+            branches:
+              only:
+                - /^release.*/
   ui-tests-full-scheduled:
     jobs:
       - ios-device-checks:
@@ -396,4 +428,4 @@ workflows:
           cron: '1 1,13 * * *'
           filters:
             branches:
-              only: develop
+              only: trunk

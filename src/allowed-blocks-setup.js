@@ -11,6 +11,7 @@ import { registerBlock as registerJetpackLayoutGridBlock } from '../block-experi
 import {
 	registerContactInfoBlock as registerJetpackContactInfoBlock,
 	registerStoryBlock as registerJetpackStoryBlock,
+	registerTiledGalleryBlock as registerJetpackTiledGalleryBlock,
 } from '../jetpack/projects/plugins/jetpack/extensions/editor.native';
 
 // Please also consider updating ./block-support/supported-blocks.json
@@ -18,6 +19,7 @@ const availableJetpackBlocks = {
 	'contact-info': { available: true },
 	'layout-grid': { available: true },
 	story: { available: true },
+	'tiled-gallery': { available: true },
 };
 
 const mapToJetpackData = ( {
@@ -41,6 +43,7 @@ const registerJetpackBlocksIfCapable = ( props = {} ) => {
 			layoutGridBlock = false,
 			mediaFilesCollectionBlock = false,
 			contactInfoBlock = false,
+			tiledGalleryBlock = false,
 		} = {},
 	} = props;
 
@@ -54,6 +57,10 @@ const registerJetpackBlocksIfCapable = ( props = {} ) => {
 
 	if ( contactInfoBlock ) {
 		registerJetpackContactInfoBlock();
+	}
+
+	if ( tiledGalleryBlock ) {
+		registerTiledGalleryBlock();
 	}
 };
 

@@ -5,7 +5,7 @@ import {
 } from '@wordpress/blocks';
 import { select } from '@wordpress/data';
 import { defaultHooks } from '@wordpress/hooks';
-import { JETPACK_DATA_PATH } from '../../jetpack/projects/plugins/jetpack/extensions/shared/get-jetpack-data';
+import { JETPACK_DATA_PATH } from '../../jetpack/projects/js-packages/shared-extension-utils/src/get-jetpack-data';
 
 /**
  * These are integration tests written with the intention of asserting the initialization of the Gutenberg Mobile
