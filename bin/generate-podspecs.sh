@@ -52,7 +52,7 @@ NODE_MODULES_DIR="gutenberg/node_modules"
 # Generate the external (non-RN podspecs)
 EXTERNAL_PODSPECS=$(find "$NODE_MODULES_DIR/react-native/third-party-podspecs" \
                          "$NODE_MODULES_DIR/@react-native-community/blur" \
-                         "$NODE_MODULES_DIR/@react-native-community/masked-view" \
+                         "$NODE_MODULES_DIR/@react-native-masked-view/masked-view" \
                          "$NODE_MODULES_DIR/@react-native-community/slider" \
                          "$NODE_MODULES_DIR/@react-native-clipboard/clipboard" \
                          "$NODE_MODULES_DIR/react-native-gesture-handler" \
