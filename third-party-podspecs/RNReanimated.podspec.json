@@ -1,6 +1,6 @@
 {
   "name": "RNReanimated",
-  "version": "2.2.4-wp-1",
+  "version": "2.4.1",
   "summary": "More powerful alternative to Animated library for React Native.",
   "description": "RNReanimated",
   "homepage": "https://github.com/software-mansion/react-native-reanimated",
@@ -13,8 +13,8 @@
     "tvos": "9.0"
   },
   "source": {
-    "git": "https://github.com/wordpress-mobile/react-native-reanimated.git",
-    "tag": "2.2.4-wp-1"
+    "git": "https://github.com/software-mansion/react-native-reanimated.git",
+    "tag": "2.4.1"
   },
   "source_files": [
     "ios/**/*.{mm,h,m}",
@@ -50,7 +50,6 @@
     "React-RCTBlob": [],
     "React-RCTSettings": [],
     "React-RCTText": [],
-    "React-RCTVibration": [],
     "React-RCTImage": [],
     "React-Core/RCTWebSocket": [],
     "React-cxxreact": [],
