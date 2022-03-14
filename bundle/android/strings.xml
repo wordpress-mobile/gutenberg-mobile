@@ -161,7 +161,7 @@
     <string name="gutenberg_native_failed_to_insert_audio_file" tools:ignore="UnusedResources">Failed to insert audio file.</string>
     <string name="gutenberg_native_failed_to_insert_audio_file_please_tap_for_options" tools:ignore="UnusedResources">Failed to insert audio file. Please tap for options.</string>
     <string name="gutenberg_native_failed_to_insert_media" tools:ignore="UnusedResources">Failed to insert media.</string>
-    <string name="gutenberg_native_failed_to_insert_media_please_tap_for_options" tools:ignore="UnusedResources">Failed to insert media.\nPlease tap for options.</string>
+    <string name="gutenberg_native_failed_to_insert_media_tap_for_more_info" tools:ignore="UnusedResources">Failed to insert media.\nTap for more info.</string>
     <string name="gutenberg_native_failed_to_save_files_please_tap_for_options" tools:ignore="UnusedResources">Failed to save files.\nPlease tap for options.</string>
     <string name="gutenberg_native_failed_to_upload_files_please_tap_for_options" tools:ignore="UnusedResources">Failed to upload files.\nPlease tap for options.</string>
     <string name="gutenberg_native_featured_image" tools:ignore="UnusedResources">Featured Image</string>
@@ -174,6 +174,7 @@
     <string name="gutenberg_native_gallery_caption_s" tools:ignore="UnusedResources">Gallery caption. %s</string>
     <string name="gutenberg_native_gallery_style" tools:ignore="UnusedResources">Gallery style</string>
     <string name="gutenberg_native_get_support" tools:ignore="UnusedResources">Get support</string>
+    <string name="gutenberg_native_gif" tools:ignore="UnusedResources">GIF</string>
     <string name="gutenberg_native_give_it_a_try_by_adding_a_few_blocks_to_your_post_or_page" tools:ignore="UnusedResources">Give it a try by adding a few blocks to your post or page!</string>
     <string name="gutenberg_native_go_back" tools:ignore="UnusedResources">Go back</string>
     <string name="gutenberg_native_gradient_type" tools:ignore="UnusedResources">Gradient Type</string>
