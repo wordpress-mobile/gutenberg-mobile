@@ -136,6 +136,8 @@ and for Android:
 
 `npm run test:e2e:android:local`
 
+**Note:** Make sure you've run the above commands at least once, so the demo app binaries are built before running individual tests below.
+
 To run a single test instead of the entire suite, use `npm run device-tests:local`. Here's an example that runs only `gutenberg-editor-paragraph.test`:
 
 `TEST_RN_PLATFORM=ios npm run device-tests:local gutenberg-editor-paragraph.test`
