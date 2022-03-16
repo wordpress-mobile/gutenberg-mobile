@@ -1,6 +1,6 @@
 {
   "name": "react-native-webview",
-  "version": "11.6.5-wp-2",
+  "version": "11.6.2",
   "summary": "React Native WebView component for iOS, Android, macOS, and Windows",
   "license": "MIT",
   "authors": "Jamon Holmgren <jamon@infinite.red>",
@@ -10,8 +10,8 @@
     "osx": "10.13"
   },
   "source": {
-    "git": "https://github.com/wordpress-mobile/react-native-webview.git",
-    "tag": "v11.6.5-wp-2"
+    "git": "https://github.com/react-native-webview/react-native-webview.git",
+    "tag": "v11.6.2"
   },
   "source_files": "apple/**/*.{h,m}",
   "dependencies": {
