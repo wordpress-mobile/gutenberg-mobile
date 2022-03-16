@@ -1,6 +1,6 @@
 {
   "name": "RNScreens",
-  "version": "2.9.0-wp-2",
+  "version": "2.9.0",
   "summary": "Native navigation primitives for your React Native app.",
   "description": "RNScreens - first incomplete navigation solution for your React Native app",
   "homepage": "https://github.com/kmagiera/react-native-screens",
@@ -13,8 +13,8 @@
     "tvos": "11.0"
   },
   "source": {
-    "git": "https://github.com/wordpress-mobile/react-native-screens.git",
-    "tag": "2.9.0-wp-2"
+    "git": "https://github.com/kmagiera/react-native-screens.git",
+    "tag": "2.9.0"
   },
   "source_files": "ios/**/*.{h,m}",
   "requires_arc": true,
