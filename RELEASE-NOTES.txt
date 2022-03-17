@@ -1,9 +1,14 @@
 Unreleased
 ---
+
+## 1.72.0
+---
+* [*] Add GIF badge for animated GIFs uploaded to Image blocks [https://github.com/WordPress/gutenberg/pull/38996]
 * [*] Small refinement to media upload errors, including centring and tweaking copy. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4597]
+* [*] Update gesture handler and reanimated libraries [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4615]
 
 ## 1.71.3
-
+---
 * [*] Fix autocorrected Headings applying bold formatting on iOS [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4557]
 * [***] Support for multiple color palettes [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4588]
 
