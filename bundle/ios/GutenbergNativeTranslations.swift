@@ -14,7 +14,6 @@ private func dummy() {
     _ = NSLocalizedString("%s embed block previews are coming soon", comment: "translators: %s: embed block variant's label e.g: \"Twitter\".")
     _ = NSLocalizedString("%s has no URL set", comment: "translators: %s: social link name e.g: \"Instagram\".")
     _ = NSLocalizedString("%s has URL set", comment: "translators: %s: social link name e.g: \"Instagram\".")
-    _ = NSLocalizedString("%s link", comment: "translators: %s: embed block variant's label e.g: \"Twitter\".")
     _ = NSLocalizedString("%s previews not yet available", comment: "translators: %s: embed block variant's label e.g: \"Twitter\".")
     _ = NSLocalizedString("%s social icon", comment: "translators: %s: social link name e.g: \"Instagram\".")
     _ = NSLocalizedString("Add a new block at any time by tapping on the + icon in the toolbar on the bottom left.", comment: "")
