@@ -15,6 +15,7 @@
     <string name="gutenberg_native_add_block_here" tools:ignore="UnusedResources">ADD BLOCK HERE</string>
     <string name="gutenberg_native_add_blocks" tools:ignore="UnusedResources">Add blocks</string>
     <string name="gutenberg_native_add_button_text" tools:ignore="UnusedResources">Add button text</string>
+    <string name="gutenberg_native_add_content" tools:ignore="UnusedResources">Add content</string>
     <string name="gutenberg_native_add_image" tools:ignore="UnusedResources">ADD IMAGE</string>
     <string name="gutenberg_native_add_image_or_video" tools:ignore="UnusedResources">ADD IMAGE OR VIDEO</string>
     <string name="gutenberg_native_add_image_or_video_b7b3d22b" tools:ignore="UnusedResources">Add image or video</string>
