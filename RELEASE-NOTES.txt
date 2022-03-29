@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [**] Update "add block" button style in default editor view. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4705]
 
 ## 1.72.0
 ---
