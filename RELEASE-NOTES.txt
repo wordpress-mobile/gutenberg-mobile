@@ -1,6 +1,10 @@
 Unreleased
 ---
 
+## 1.72.1
+---
+* [*] Detect GIF badge during render [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4711]
+
 ## 1.72.0
 ---
 * [*] Add GIF badge for animated GIFs uploaded to Image blocks [https://github.com/WordPress/gutenberg/pull/38996]
