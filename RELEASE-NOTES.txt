@@ -1,6 +1,12 @@
 Unreleased
 ---
 
+## 1.73.0
+---
+* [*] Update react-native-reanimated version to 2.4.1 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4653]
+* [*] Upgrade Gradle to 7.4 & AGP to 7.1.1 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4662]
+* [*] Add waits to fix editor test flakiness [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4687]
+
 ## 1.72.1
 ---
 * [*] Detect GIF badge during render [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4711]
