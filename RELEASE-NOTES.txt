@@ -2,6 +2,10 @@ Unreleased
 ---
 * [**] Update "add block" button style in default editor view. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4705]
 
+## 1.73.1
+---
+* [*] [Spacer block] Fix crash when changing the height value using the text input [https://github.com/WordPress/gutenberg/pull/40053]
+
 ## 1.73.0
 ---
 * [*] Update react-native-reanimated version to 2.4.1 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4653]
