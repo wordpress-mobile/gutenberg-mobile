@@ -3,7 +3,7 @@ Unreleased
 
 ## 1.73.1
 ---
-* [*] [Space block] Fix crash when changing the height value using the text input [https://github.com/WordPress/gutenberg/pull/40053]
+* [*] [Spacer block] Fix crash when changing the height value using the text input [https://github.com/WordPress/gutenberg/pull/40053]
 
 ## 1.73.0
 ---
