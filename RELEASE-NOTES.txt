@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [*] Remove title focus for default editor view. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4740]
 
 ## 1.73.0
 ---
