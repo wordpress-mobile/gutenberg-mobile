@@ -1,6 +1,12 @@
 Unreleased
 ---
 
+## 1.74.0
+---
+* [**] [Quote block] Adds support for V2 behind a feature flag [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4744]
+* [**] Update "add block" button style in default editor view. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4705]
+* [*] Remove banner error notification on upload failure [https://github.com/WordPress/gutenberg/pull/39694]
+
 ## 1.73.1
 ---
 * [*] [Spacer block] Fix crash when changing the height value using the text input [https://github.com/WordPress/gutenberg/pull/40053]
