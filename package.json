@@ -11,6 +11,7 @@
 		"npm": ">=6.9.0 <7"
 	},
 	"devDependencies": {
+		"@automattic/jetpack-base-styles": "^0.3.0",
 		"@babel/core": "^7.14.3",
 		"@babel/runtime": "^7.14.0",
 		"@react-native-community/cli": "^6.0.0",
@@ -93,8 +94,5 @@
 		"lint": "eslint . --ext .js",
 		"lint:fix": "npm run lint -- --fix",
 		"version": "npm run bundle && git add -A bundle"
-	},
-	"dependencies": {
-		"@automattic/jetpack-base-styles": "^0.3.0"
 	}
 }
