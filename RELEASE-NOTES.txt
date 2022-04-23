@@ -2,6 +2,26 @@ Unreleased
 ---
 * [*] Add featured image settings to Latest Posts block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4674]
 
+## 1.74.0
+---
+* [**] [Quote block] Adds support for V2 behind a feature flag [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4744]
+* [**] Update "add block" button style in default editor view. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4705]
+* [*] Remove banner error notification on upload failure [https://github.com/WordPress/gutenberg/pull/39694]
+
+## 1.73.1
+---
+* [*] [Spacer block] Fix crash when changing the height value using the text input [https://github.com/WordPress/gutenberg/pull/40053]
+
+## 1.73.0
+---
+* [*] Update react-native-reanimated version to 2.4.1 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4653]
+* [*] Upgrade Gradle to 7.4 & AGP to 7.1.1 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4662]
+* [*] Add waits to fix editor test flakiness [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4687]
+
+## 1.72.1
+---
+* [*] Detect GIF badge during render [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4711]
+
 ## 1.72.0
 ---
 * [*] Add GIF badge for animated GIFs uploaded to Image blocks [https://github.com/WordPress/gutenberg/pull/38996]
