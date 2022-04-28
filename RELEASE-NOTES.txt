@@ -1,6 +1,19 @@
 Unreleased
 ---
 
+## Unreleased
+
+## 1.75.0
+---
+* [*] [Latest Posts block] Add featured image settings [https://github.com/WordPress/gutenberg/pull/39257]
+* [*] Prevent incorrect notices displaying when switching between HTML-Visual mode quickly [https://github.com/WordPress/gutenberg/pull/40415]
+* [*] [Embed block] Fix inline preview cut-off when editing URL [https://github.com/WordPress/gutenberg/pull/35326]
+* [*] [iOS] Prevent gaps shown around floating toolbar when using external keyboard [https://github.com/WordPress/gutenberg/pull/40266]
+
+## 1.74.1
+---
+* [**] RichText - Set a default value for selection values [https://github.com/WordPress/gutenberg/pull/40581]
+
 ## 1.74.0
 ---
 * [**] [Quote block] Adds support for V2 behind a feature flag [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4744]
