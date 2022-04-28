@@ -1,8 +1,6 @@
 Unreleased
 ---
 
-## Unreleased
-
 ## 1.75.0
 ---
 * [*] [Latest Posts block] Add featured image settings [https://github.com/WordPress/gutenberg/pull/39257]
