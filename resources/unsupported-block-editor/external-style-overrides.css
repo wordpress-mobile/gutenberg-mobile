@@ -2,3 +2,8 @@
 .a8c-faux-inline-help {
 	display: none;
 }
+
+/* Remove WordPress.com "tour" pop-up. */
+.wpcom-tour-kit .tour-kit-frame__container {
+	display: none;
+}
