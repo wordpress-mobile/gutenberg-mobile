@@ -4,6 +4,6 @@
 }
 
 /* Remove WordPress.com "tour" pop-up. */
-.wpcom-tour-kit .tour-kit-frame__container {
+.tour-kit-frame__container {
 	display: none;
 }
