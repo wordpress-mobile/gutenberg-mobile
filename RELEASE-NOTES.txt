@@ -1,6 +1,6 @@
 Unreleased
 ---
-* [**] [Cover block] Improve color contrast between background and text [https://github.com/WordPress/gutenberg/pull/4808]
+* [**] [Cover block] Improve color contrast between background and text [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4808]
 
 ## 1.75.0
 ---
