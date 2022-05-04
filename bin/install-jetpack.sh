@@ -1,7 +1,7 @@
 #!/bin/bash
 set -Eeuo pipefail
 
-pushd jetpack />/dev/null
+pushd jetpack >/dev/null
 
 pnpm_version=$(npx -c 'echo "$npm_package_engines_pnpm"')
 
