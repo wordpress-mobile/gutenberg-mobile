@@ -1,8 +1,10 @@
 #!/bin/bash
 set -Eeuo pipefail
 
-cd jetpack/projects/plugins/jetpack
+pushd jetpack/projects/plugins/jetpack >/dev/null
 
 pnpm_version=$(npx -c 'echo "$npm_package_engines_pnpm"')
 
-npx pnpm@$pnpm_version --config.shamefully-hoist=true install
+npx pnpm@$pnpm_version install
+
+popd >/dev/null
