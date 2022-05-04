@@ -10,7 +10,7 @@ pnpm_version=$(npx -c 'echo "$npm_package_engines_pnpm"')
 if [[ -n "$CIRCLE_JOB" ]]; then
   # Restore pnpm hoisting
   echo "Overwriting pnpm hoisting"
-  gwak -i inplace '!/hoist/' .npmrc
+  sed -i '!/hoist/' .npmrc
   echo "public-hoist-pattern=['*types*', '@prettier/plugin-*', '*prettier-plugin-*']" >> .npmrc
 else
   echo "Maintening pnpm hoisting"
