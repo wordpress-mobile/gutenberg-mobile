@@ -1,16 +1,22 @@
 #!/bin/bash
 set -Eeuo pipefail
 
-pushd jetpack >/dev/null
+pushd jetpack
 
 pnpm_version=$(npx -c 'echo "$npm_package_engines_pnpm"')
 
+
 # Restore the public hoisting if running on CI
 if [[ -n "${CI:-}" ]]; then
-  sed -i.bak '/hoist/d' .npmrc
-  #echo "public-hoist-pattern=['*types*', '@prettier/plugin-*', '*prettier-plugin-*']" >> .npmrc
+  sed -i '/hoist/d' .npmrc
 fi
-cd projects/plugins/jetpack
+pushd projects/plugins/jetpack
 npx pnpm@"$pnpm_version" install
 
-popd >/dev/null
+# Clean up the .npmrc if on CI
+if [[ -n "${CI:-}" ]]; then
+  git checkout .npmrc
+  popd
+fi
+
+popd
