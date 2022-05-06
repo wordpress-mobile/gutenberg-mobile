@@ -10,9 +10,14 @@ if [[ -n "${CI:-}" ]]; then
   #sed -i.bk '/hoist/d' .npmrc
 fi
 
-#cd projects/plugins/jetpack
+cd projects/plugins/jetpack
 npx pnpm@"$pnpm_version" install
-#cd -
+cd -
+
+#DEBUG
+echo "DEBUG: listing node_modules...."
+ls -l jetpack/projects/plugins/jetpack/node_modules
+ls -l jetpack/projects/plugins/jetpack/node_modules/@automattic
 
 # Retore .npmrc if on CI
 if [[ -n "${CI:-}" ]]; then
