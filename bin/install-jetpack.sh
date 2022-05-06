@@ -16,8 +16,8 @@ cd -
 
 #DEBUG
 echo "DEBUG: listing node_modules...."
-ls -l jetpack/projects/plugins/jetpack/node_modules
-ls -l jetpack/projects/plugins/jetpack/node_modules/@automattic
+ls -l projects/plugins/jetpack/node_modules
+ls -l projects/plugins/jetpack/node_modules/@automattic
 
 # Retore .npmrc if on CI
 #if [[ -n "${CI:-}" ]]; then
