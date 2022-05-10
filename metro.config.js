@@ -21,10 +21,6 @@ const nodeModulePaths = [
 const possibleModulePath = ( name ) =>
 	nodeModulePaths.map( ( dir ) => path.join( dir, name ) );
 
-function modulePathExists( name ) {
-	return ( path ) => fs.existsSync( `${ path }/${ name }` );
-}
-
 gutenbergMetroConfigCopy.resolver.resolveRequest = (
 	context,
 	moduleName,
