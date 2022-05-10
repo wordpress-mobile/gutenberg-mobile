@@ -5,49 +5,51 @@ const metroResolver = require( 'metro-resolver' );
 const gutenbergMetroConfig = require( './gutenberg/packages/react-native-editor/metro.config.js' );
 const extraNodeModules = {};
 const gutenbergMetroConfigCopy = {
-  ...gutenbergMetroConfig,
-  resolver: {
-    ...gutenbergMetroConfig.resolver,
-    sourceExts: [ 'js', 'jsx', 'json', 'scss', 'sass', 'ts', 'tsx' ],
-    extraNodeModules,
-  },
+	...gutenbergMetroConfig,
+	resolver: {
+		...gutenbergMetroConfig.resolver,
+		sourceExts: [ 'js', 'jsx', 'json', 'scss', 'sass', 'ts', 'tsx' ],
+		extraNodeModules,
+	},
 };
 
 const nodeModulePaths = [
-  'gutenberg/node_modules',
-  'jetpack/projects/plugins/jetpack/node_modules/',
+	'gutenberg/node_modules',
+	'./jetpack/node_modules/.pnpm/node_modules',
 ].map( ( dir ) => path.join( process.cwd(), dir ) );
 
+const possibleModulePath = ( name ) =>
+	nodeModulePaths.map( ( dir ) => path.join( dir, name ) );
+
 function modulePathExists( name ) {
-  return ( path ) => fs.existsSync( `${ path }/${ name }` );
+	return ( path ) => fs.existsSync( `${ path }/${ name }` );
 }
 
 gutenbergMetroConfigCopy.resolver.resolveRequest = (
-  context,
-  moduleName,
-  platform
+	context,
+	moduleName,
+	platform
 ) => {
-  if ( moduleName[ 0 ] !== '.' ) {
-    const [ namespace, module = '' ] = moduleName.split( '/' );
-    const name = `${ namespace }/${ module }`.replace( /\/$/, '' );
+	if ( moduleName[ 0 ] !== '.' ) {
+		const [ namespace, module = '' ] = moduleName.split( '/' );
+		const name = path.join( namespace, module );
 
-    if ( ! extraNodeModules[ name ] ) {
-      const modulePath = nodeModulePaths.find( modulePathExists( name ) );
+		if ( ! extraNodeModules[ name ] ) {
+			const modulePath = possibleModulePath( name ).find( fs.existsSync );
 
-      if ( modulePath ) {
-        extraNodeModules[ name ] = fs.realpathSync(
-          `${ modulePath }/${ name }`
-        );
-      }
-  }
+			if ( modulePath ) {
+				extraNodeModules[ name ] = fs.realpathSync( modulePath );
+			}
+		}
+	}
 
-  return metroResolver.resolve(
-    {
-      ...context,
-      resolveRequest: null,
-    },
-    moduleName,
-    platform
-  );
+	return metroResolver.resolve(
+		{
+			...context,
+			resolveRequest: null,
+		},
+		moduleName,
+		platform
+	);
 };
 module.exports = gutenbergMetroConfigCopy;
