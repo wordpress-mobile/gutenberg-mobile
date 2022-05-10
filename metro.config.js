@@ -1,45 +1,53 @@
 const path = require( 'path' );
 const fs = require( 'fs' );
+const metroResolver = require( 'metro-resolver' );
 
 const gutenbergMetroConfig = require( './gutenberg/packages/react-native-editor/metro.config.js' );
+const extraNodeModules = {};
 const gutenbergMetroConfigCopy = {
-	...gutenbergMetroConfig,
-	resolver: {
-		...gutenbergMetroConfig.resolver,
-		sourceExts: [ 'js', 'jsx', 'json', 'scss', 'sass', 'ts', 'tsx' ],
-	},
+  ...gutenbergMetroConfig,
+  resolver: {
+    ...gutenbergMetroConfig.resolver,
+    sourceExts: [ 'js', 'jsx', 'json', 'scss', 'sass', 'ts', 'tsx' ],
+    extraNodeModules,
+  },
 };
 
-gutenbergMetroConfigCopy.resolver.extraNodeModules = new Proxy(
-	{},
-	{
-		get: ( target, name ) => {
-			// Try to find the module in the Gutenberg submodule.
-			const gutenbergFolder = path.join(
-				process.cwd(),
-				`gutenberg/node_modules/${ name }`
-			);
-			if ( fs.existsSync( gutenbergFolder ) ) {
-				return gutenbergFolder;
-			}
+const nodeModulePaths = [
+  'gutenberg/node_modules',
+  'jetpack/projects/plugins/jetpack/node_modules/',
+].map( ( dir ) => path.join( process.cwd(), dir ) );
 
-			// Try to find the module in Jetpack's .pnpm folder.
-			const moduleFolderPnpm = path.join(
-				process.cwd(),
-				`./jetpack/node_modules/.pnpm/node_modules/${ name }`
-			);
+function modulePathExists( name ) {
+  return ( path ) => fs.existsSync( `${ path }/${ name }` );
+}
 
-			if ( fs.existsSync( moduleFolderPnpm ) ) {
-				// pnpm uses symlinks so, let's find the target
-				const symlinkTarget = fs.readlinkSync( moduleFolderPnpm );
+gutenbergMetroConfigCopy.resolver.resolveRequest = (
+  context,
+  moduleName,
+  platform
+) => {
+  if ( moduleName[ 0 ] !== '.' ) {
+    const [ namespace, module = '' ] = moduleName.split( '/' );
+    const name = `${ namespace }/${ module }`.replace( /\/$/, '' );
 
-				// the target is still using paths relative to the parent folder of the module, let's find the real path.
-				return path.resolve(
-					moduleFolderPnpm + '/../' + symlinkTarget
-				);
-			}
-		},
-	}
-);
+    if ( ! extraNodeModules[ name ] ) {
+      const modulePath = nodeModulePaths.find( modulePathExists( name ) );
 
+      if ( modulePath ) {
+        extraNodeModules[ name ] = fs.realpathSync(
+          `${ modulePath }/${ name }`
+        );
+      }
+  }
+
+  return metroResolver.resolve(
+    {
+      ...context,
+      resolveRequest: null,
+    },
+    moduleName,
+    platform
+  );
+};
 module.exports = gutenbergMetroConfigCopy;
