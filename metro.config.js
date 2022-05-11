@@ -21,13 +21,12 @@ const nodeModulePaths = [
 const possibleModulePaths = ( name ) =>
 	nodeModulePaths.map( ( dir ) => path.join( process.cwd(), dir, name ) );
 
-const packagedByPnpm = ( dir ) => dir && dir.includes( '.pnpm' );
-
 gutenbergMetroConfigCopy.resolver.resolveRequest = (
 	context,
 	moduleName,
 	platform
 ) => {
+	// If the module is not a local node module, we need to add it to the extra node modules.
 	if ( ! ( moduleName.startsWith( '.' ) || moduleName.startsWith( '/' ) ) ) {
 		const [ namespace, module = '' ] = moduleName.split( '/' );
 		const name = path.join( namespace, module );
@@ -41,8 +40,11 @@ gutenbergMetroConfigCopy.resolver.resolveRequest = (
 
 			extraNodeModulePath = modulePath && fs.realpathSync( modulePath );
 
-			if ( ! extraNodeModulePath ) {
-				// Check if package is managed by pnpm
+			// If we haven't resolved the module yet, check if the module is managed by pnpm.
+			if (
+				! extraNodeModulePath &&
+				context.originModulePath.includes( '.pnpm' )
+			) {
 				const filePath = require.resolve( name, {
 					paths: [ path.dirname( context.originModulePath ) ],
 				} );
@@ -52,14 +54,14 @@ gutenbergMetroConfigCopy.resolver.resolveRequest = (
 				)?.[ 0 ];
 
 				extraNodeModulePath =
-					packagedByPnpm( innerNodeModules ) &&
-					path.join( innerNodeModules, name );
+					innerNodeModules && path.join( innerNodeModules, name );
 			}
 
 			extraNodeModules[ name ] = extraNodeModulePath;
 		}
 	}
 
+	// Restore the original resolver
 	return metroResolver.resolve(
 		{
 			...context,
