@@ -1,5 +1,10 @@
 Unreleased
 ---
+* [**] [Cover block] Improve color contrast between background and text [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4808]
+* [**] [Buttons block] Fix Android-only issue related to displaying formatting buttons after closing the block settings [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4814]
+* [***] Add drag & drop blocks feature [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4832]
+* [*] [Gallery block] Fix broken "Link To" settings and add "Image Size" settings [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4841]
+* [*] [Unsupported Block Editor] Prevent WordPress.com tour banner from displaying. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4820]
 
 ## 1.75.1
 ---
