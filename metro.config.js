@@ -18,7 +18,7 @@ const nodeModulePaths = [
 	'jetpack/projects/plugins/jetpack/node_modules',
 ];
 
-const possibleModulePath = ( name ) =>
+const possibleModulePaths = ( name ) =>
 	nodeModulePaths.map( ( dir ) => path.join( process.cwd(), dir, name ) );
 
 const packagedByPnpm = ( dir ) => dir && dir.includes( '.pnpm' );
@@ -35,10 +35,11 @@ gutenbergMetroConfigCopy.resolver.resolveRequest = (
 		if ( ! extraNodeModules[ name ] ) {
 			let extraNodeModulePath;
 
-			const modulePath = possibleModulePath( name ).find( fs.existsSync );
-			if ( modulePath ) {
-				extraNodeModulePath = fs.realpathSync( modulePath );
-			}
+			const modulePath = possibleModulePaths( name ).find(
+				fs.existsSync
+			);
+
+			extraNodeModulePath = modulePath && fs.realpathSync( modulePath );
 
 			if ( ! extraNodeModulePath ) {
 				// Check if package is managed by pnpm
@@ -50,9 +51,9 @@ gutenbergMetroConfigCopy.resolver.resolveRequest = (
 					/.*node_modules/
 				)?.[ 0 ];
 
-				if ( packagedByPnpm( innerNodeModules ) ) {
-					extraNodeModulePath = path.join( innerNodeModules, name );
-				}
+				extraNodeModulePath =
+					packagedByPnpm( innerNodeModules ) &&
+					path.join( innerNodeModules, name );
 			}
 
 			extraNodeModules[ name ] = extraNodeModulePath;
