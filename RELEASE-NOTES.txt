@@ -6,6 +6,10 @@ Unreleased
 * [*] [Gallery block] Fix broken "Link To" settings and add "Image Size" settings [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4841]
 * [*] [Unsupported Block Editor] Prevent WordPress.com tour banner from displaying. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4820]
 
+## 1.75.1
+---
+* [*] Track block movement actions [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4833]
+
 ## 1.75.0
 ---
 * [*] [Latest Posts block] Add featured image settings [https://github.com/WordPress/gutenberg/pull/39257]
