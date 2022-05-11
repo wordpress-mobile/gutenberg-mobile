@@ -69,4 +69,5 @@ gutenbergMetroConfigCopy.resolver.resolveRequest = (
 		platform
 	);
 };
+
 module.exports = gutenbergMetroConfigCopy;
