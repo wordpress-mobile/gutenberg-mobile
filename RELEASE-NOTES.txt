@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [*] Add drag & drop help guide in Help & Support screen [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4857]
 
 ## 1.76.0
 ---
