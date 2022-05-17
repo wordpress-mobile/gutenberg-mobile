@@ -26,7 +26,7 @@ gutenbergMetroConfigCopy.resolver.resolveRequest = (
 	moduleName,
 	platform
 ) => {
-	// If the module is not a local node module, we need to add it to the extra node modules.
+	// Add the module to the extra node modules object if the module is not on a local path.
 	if ( ! ( moduleName.startsWith( '.' ) || moduleName.startsWith( '/' ) ) ) {
 		const [ namespace, module = '' ] = moduleName.split( '/' );
 		const name = path.join( namespace, module );
@@ -57,7 +57,9 @@ gutenbergMetroConfigCopy.resolver.resolveRequest = (
 					innerNodeModules && path.join( innerNodeModules, name );
 			}
 
-			extraNodeModules[ name ] = extraNodeModulePath;
+			if ( extraNodeModulePath ) {
+				extraNodeModules[ name ] = extraNodeModulePath;
+			}
 		}
 	}
 
