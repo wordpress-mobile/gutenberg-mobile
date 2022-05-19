@@ -1,10 +1,7 @@
 #!/bin/bash
 set -Eeuo pipefail
-pushd jetpack
 
-# Set up node requirement for Jetpack
-# TODO check if nvm is installed or the script can be sourced
-node_version=$(cat .nvmrc)
+# Check if nvm is installed
 if ! command -v nvm ; then
   source ~/.nvm/nvm.sh &>/dev/null
   if [ $? -ne 0 ]; then
@@ -13,6 +10,10 @@ if ! command -v nvm ; then
   fi
 fi
 
+# Set up node requirement for Jetpack
+pushd jetpack
+
+node_version=$(cat .nvmrc)
 nvm install "$node_version"
 nvm use
 
