@@ -210,6 +210,7 @@ private func dummy() {
     _ = NSLocalizedString("Navigates to layout selection screen", comment: "")
     _ = NSLocalizedString("Navigates to select %s", comment: "translators: %s: Select control button label e.g. Small\ntranslators: %s: Select control button label e.g. \"Button width\"")
     _ = NSLocalizedString("Navigates to the previous content sheet", comment: "")
+    _ = NSLocalizedString("NEW", comment: "")
     _ = NSLocalizedString("No application can handle this request.", comment: "")
     _ = NSLocalizedString("No application can handle this request. Please install a Web browser.", comment: "")
     _ = NSLocalizedString("No blocks found", comment: "")
