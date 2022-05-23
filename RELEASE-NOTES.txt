@@ -1,5 +1,8 @@
 Unreleased
 ---
+* [*] Add drag & drop help guide in Help & Support screen [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4857]
+* [*] [a11y] Improve text read by screen readers for BottomSheetSelectControl [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4854]
+* [*] Fix drag mode not being enabled when long-pressing over Shortcode block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4872]
 
 ## 1.76.1
 ---
