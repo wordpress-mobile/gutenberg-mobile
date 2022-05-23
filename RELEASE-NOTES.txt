@@ -1,7 +1,12 @@
 Unreleased
 ---
-* [*] Add drag & drop help guide in Help & Support screen [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4857]
 * [*] [a11y] Improve text read by screen readers for BottomSheetSelectControl [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4854]
+
+## 1.76.1
+---
+* [*] BlockList - Add internal onLayout from CellRendererComponent to BlockListItemCell [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4865]
+* [*] Fix Drag & Drop Chip positioning issue with RTL languages [https://github.com/WordPress/gutenberg/pull/41053]
+* [*] Add drag & drop help guide in Help & Support screen [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4857]
 * [*] Fix drag mode not being enabled when long-pressing over Shortcode block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4872]
 
 ## 1.76.0
