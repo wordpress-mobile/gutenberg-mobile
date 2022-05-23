@@ -1,9 +1,25 @@
 Unreleased
 ---
+* [*] [a11y] Improve text read by screen readers for BottomSheetSelectControl [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4854]
+
+## 1.76.1
+---
+* [*] BlockList - Add internal onLayout from CellRendererComponent to BlockListItemCell [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4865]
+* [*] Fix Drag & Drop Chip positioning issue with RTL languages [https://github.com/WordPress/gutenberg/pull/41053]
+* [*] Add drag & drop help guide in Help & Support screen [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4857]
+* [*] Fix drag mode not being enabled when long-pressing over Shortcode block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4872]
+
+## 1.76.0
+---
 * [**] [Cover block] Improve color contrast between background and text [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4808]
 * [**] [Buttons block] Fix Android-only issue related to displaying formatting buttons after closing the block settings [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4814]
+* [***] Add drag & drop blocks feature [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4832]
 * [*] [Gallery block] Fix broken "Link To" settings and add "Image Size" settings [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4841]
 * [*] [Unsupported Block Editor] Prevent WordPress.com tour banner from displaying. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4820]
+
+## 1.75.1
+---
+* [*] Track block movement actions [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4833]
 
 ## 1.75.0
 ---
