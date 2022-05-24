@@ -230,6 +230,7 @@
 translators: %s: Select control button label e.g. "Button width" -->
     <string name="gutenberg_native_navigates_to_select_s" tools:ignore="UnusedResources">Navigates to select %s</string>
     <string name="gutenberg_native_navigates_to_the_previous_content_sheet" tools:ignore="UnusedResources">Navigates to the previous content sheet</string>
+    <string name="gutenberg_native_new" tools:ignore="UnusedResources">NEW</string>
     <string name="gutenberg_native_no_application_can_handle_this_request" tools:ignore="UnusedResources">No application can handle this request.</string>
     <string name="gutenberg_native_no_application_can_handle_this_request_please_install_a_web_brows" tools:ignore="UnusedResources">No application can handle this request. Please install a Web browser.</string>
     <string name="gutenberg_native_no_blocks_found" tools:ignore="UnusedResources">No blocks found</string>
