@@ -2,10 +2,10 @@
 set -Eeuo pipefail
 
 # Check if nvm is installed
-[[ -f ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh
+[[ -f "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh"
 
 command -v nvm >/dev/null 2>&1 || {
-  echo "nvm is not installed or cannot be sourced from ~/.nvm/nvm.sh. Please install nvm and run this script again."
+  echo "nvm is not installed or cannot be sourced from $NVM_DIR/nvm.sh. Please verify that "'$NVM_DIR'" points to the .nvm directory."
   exit 1
 }
 
