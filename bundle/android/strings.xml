@@ -346,6 +346,8 @@ translators: %s: Select control option value e.g: "Auto, 25%". -->
     <string name="gutenberg_native_ungroup" tools:ignore="UnusedResources">Ungroup</string>
     <string name="gutenberg_native_unsupported" tools:ignore="UnusedResources">Unsupported</string>
     <string name="gutenberg_native_updates_the_title" tools:ignore="UnusedResources">Updates the title.</string>
+    <string name="gutenberg_native_upgrade_your_plan_to_upload_audio" tools:ignore="UnusedResources">Upgrade your plan to upload audio</string>
+    <string name="gutenberg_native_upgrade_your_plan_to_use_video_covers" tools:ignore="UnusedResources">Upgrade your plan to use video covers</string>
     <string name="gutenberg_native_uploading" tools:ignore="UnusedResources">Uploading…</string>
     <string name="gutenberg_native_use_icon_button" tools:ignore="UnusedResources">Use icon button</string>
     <!-- translators: accessibility text. Empty video caption. -->
