@@ -293,8 +293,6 @@ private func dummy() {
     _ = NSLocalizedString("Ungroup", comment: "")
     _ = NSLocalizedString("Unsupported", comment: "")
     _ = NSLocalizedString("Updates the title.", comment: "")
-    _ = NSLocalizedString("Upgrade your plan to upload audio", comment: "")
-    _ = NSLocalizedString("Upgrade your plan to use video covers", comment: "")
     _ = NSLocalizedString("Uploading…", comment: "")
     _ = NSLocalizedString("Use icon button", comment: "")
     _ = NSLocalizedString("Video caption. %s", comment: "translators: accessibility text. %s: video caption.")
