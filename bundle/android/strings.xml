@@ -4,6 +4,8 @@
     <string name="gutenberg_native_1_s_2_s" tools:ignore="UnusedResources">%1$s (%2$s)</string>
     <!-- translators: accessibility text. Inform about current value. %1$s: Control label %2$s: setting label (example: width), %3$s: Current value. %4$s: value measurement unit (example: pixels) -->
     <string name="gutenberg_native_1_s_2_s_is_3_s_4_s" tools:ignore="UnusedResources">%1$s. %2$s is %3$s %4$s.</string>
+    <!-- translators:  %1$s: Select control button label e.g. "Button width". %2$s: Select control option value e.g: "Auto, 25%". -->
+    <string name="gutenberg_native_1_s_currently_selected_2_s" tools:ignore="UnusedResources">%1$s. Currently selected: %2$s</string>
     <!-- translators: 1: From block title, e.g. Paragraph. 2: To block title, e.g. Header. -->
     <string name="gutenberg_native_1_s_transformed_to_2_s" tools:ignore="UnusedResources">%1$s transformed to %2$s</string>
     <string name="gutenberg_native_add_a_new_block_at_any_time_by_tapping_on_the_icon_in_the_toolbar" tools:ignore="UnusedResources">Add a new block at any time by tapping on the + icon in the toolbar on the bottom left.</string>
@@ -187,6 +189,7 @@
     <string name="gutenberg_native_how_to_edit_your_post" tools:ignore="UnusedResources">How to edit your post</string>
     <!-- translators: accessibility text. %s: image caption. -->
     <string name="gutenberg_native_image_caption_s" tools:ignore="UnusedResources">Image caption. %s</string>
+    <string name="gutenberg_native_image_file_not_found" tools:ignore="UnusedResources">Image file not found.</string>
     <string name="gutenberg_native_insert_crosspost" tools:ignore="UnusedResources">Insert crosspost</string>
     <string name="gutenberg_native_insert_mention" tools:ignore="UnusedResources">Insert mention</string>
     <string name="gutenberg_native_inside" tools:ignore="UnusedResources">Inside</string>
@@ -343,6 +346,8 @@ translators: %s: Select control option value e.g: "Auto, 25%". -->
     <string name="gutenberg_native_ungroup" tools:ignore="UnusedResources">Ungroup</string>
     <string name="gutenberg_native_unsupported" tools:ignore="UnusedResources">Unsupported</string>
     <string name="gutenberg_native_updates_the_title" tools:ignore="UnusedResources">Updates the title.</string>
+    <string name="gutenberg_native_upgrade_your_plan_to_upload_audio" tools:ignore="UnusedResources">Upgrade your plan to upload audio</string>
+    <string name="gutenberg_native_upgrade_your_plan_to_use_video_covers" tools:ignore="UnusedResources">Upgrade your plan to use video covers</string>
     <string name="gutenberg_native_uploading" tools:ignore="UnusedResources">Uploading…</string>
     <string name="gutenberg_native_use_icon_button" tools:ignore="UnusedResources">Use icon button</string>
     <!-- translators: accessibility text. Empty video caption. -->
