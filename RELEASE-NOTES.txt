@@ -1,6 +1,10 @@
 Unreleased
 ---
 
+## 1.77.1
+---
+* [***] Fixes a crash on iOS related to JSI and Reanimated [https://github.com/WordPress/gutenberg/pull/41482]
+
 ## 1.77.0
 ---
 * [*] [a11y] Improve text read by screen readers for BottomSheetSelectControl [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4854]
