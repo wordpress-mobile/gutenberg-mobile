@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [*] Add 'Insert from URL' option to Video block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4779]
 
 ## 1.77.1
 ---
