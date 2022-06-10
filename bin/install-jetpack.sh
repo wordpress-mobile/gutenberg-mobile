@@ -17,7 +17,7 @@ nvm install
 
 npm view pnpm versions --json
 
-npmx pnpm@7.1.1 -v
+npx pnpm@7.1.1 -v
 
 # Set up required pnpm version
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
