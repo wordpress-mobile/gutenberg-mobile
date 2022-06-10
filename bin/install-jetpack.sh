@@ -16,10 +16,11 @@ pushd jetpack
 nvm install
 
 npm view pnpm versions --json
-npm cache clean --force
+npm cache clean
+npm install  pnpm@7.1.1
+command -v pnpm >/dev/null 2>&1 || echo "pnpm is not available, not surprised"
 npx pnpm@7.1.1 -v || echo "hmm it looks like 7.1.1 is not available ? "
 
-exit 1
 
 # Set up required pnpm version
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
