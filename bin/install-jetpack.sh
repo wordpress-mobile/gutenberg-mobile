@@ -17,7 +17,7 @@ nvm install
 
 npm view pnpm versions --json
 command -v pnpm >/dev/null 2>&1 || echo "pnpm is not available, not surprised"
-npx pnpm@7.1.1 -v || echo "hmm it looks like 7.1.1 is not available ? "
+npx pnpm@7 -v || echo "hmm it looks like 7.1.1 is not available ? "
 npm install pnpm@7.1.1
 
 # Set up required pnpm version
