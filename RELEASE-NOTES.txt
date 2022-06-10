@@ -1,9 +1,13 @@
 Unreleased
 ---
 
+## 1.78.0
+---
+* [*] Bump react-native-gesture-handler to version 2.3.2 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4895]
+
 ## 1.77.1
 ---
-* [***] Fixes a crash on iOS related to JSI and Reanimated [https://github.com/WordPress/gutenberg/pull/41482]
+* [***] Fix crash on iOS related to JSI and Reanimated [https://github.com/WordPress/gutenberg/pull/41482]
 
 ## 1.77.0
 ---
