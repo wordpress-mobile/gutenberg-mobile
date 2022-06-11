@@ -20,7 +20,7 @@ listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
 pnpm_version=$(npx semver -c "$listed_pnpm_version")
 
 corepack enable
-corepack prepare pnpm@<version> --activate
+corepack prepare pnpm@"$pnpm_version" --activate
 
 cd projects/plugins/jetpack
 
