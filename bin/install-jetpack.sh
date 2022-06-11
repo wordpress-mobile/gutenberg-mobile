@@ -19,7 +19,7 @@ nvm install
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
 pnpm_version=$(npx semver -c "$listed_pnpm_version")
 
-# Experimental: Use corepack to install pnpm
+# Experimental: Use corepack to install pnpm https://nodejs.org/api/corepack.html
 corepack enable
 corepack prepare pnpm@"$pnpm_version" --activate
 
