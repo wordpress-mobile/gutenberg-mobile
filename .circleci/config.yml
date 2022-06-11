@@ -6,20 +6,40 @@ orbs:
 commands:
   npm-install:
     steps:
+      - restore_cache:
+          name: Restore NPM Cache
+          keys:
+            - npm-i18n-v5-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+            - npm-i18n-v5-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-
       - run:
           name: NPM Install
           command: |
             echo "Node version: $(node --version)"
             npm ci --prefer-offline --no-audit
-
+      - save_cache:
+          name: Save NPM Cache
+          key: npm-i18n-v5-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.npm
+            - src/i18n-cache
   npm-install-full:
     steps:
+      - restore_cache:
+          name: Restore NPM Cache
+          keys:
+            - npm-i18n-v5-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
+            - npm-i18n-v5-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-
       - run:
           name: NPM Install Full
           command: |
             echo "Node version: $(node --version)"
             npm install --no-audit
-
+      - save_cache:
+          name: Save NPM Cache
+          key: npm-i18n-v5-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
+          paths:
+            - ~/.npm
+            - src/i18n-cache
   checkout-shallow:
     steps:
       - run:
