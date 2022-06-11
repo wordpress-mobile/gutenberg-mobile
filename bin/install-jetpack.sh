@@ -18,7 +18,9 @@ nvm install
 echo "Verify npm cache ?"
 npm cache verify
 
-npx --cache /tmp/empty-cache pnpm -v || echo "can't pull latest pnpm either :( "
+npx --cache /tmp/empty-cache pnpm -v
+
+exit 1
 
 # Set up required pnpm version
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
