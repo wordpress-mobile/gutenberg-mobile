@@ -15,8 +15,10 @@ pushd jetpack
 # Set up node requirement for Jetpack
 nvm install
 
+echo "Verify npm cache ?"
+npm cache verify
 
-npx pnpm -v || echo "can't pull latest pnpm either :( "
+npx --cache /tmp/empty-cache pnpm -v || echo "can't pull latest pnpm either :( "
 
 # Set up required pnpm version
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
