@@ -17,8 +17,16 @@ nvm install
 
 echo "Verify npm cache ?"
 npm cache verify
+echo "Print the latest verion of pnpm"
+npx pnpm -v
+echo "Now try with no cache"
+npx --cache /tmp/empty-cache pnpm -v || echo "npx --cache failed :( "
 
-npx --cache /tmp/empty-cache pnpm -v
+echo "try installing with out the cache ?"
+npm install --cache /tmp/empty-cache -g pnpm
+
+echo "now see what it installed globally"
+pnpm -v || echo "pnpm is not installed boo hoo"
 
 exit 1
 
