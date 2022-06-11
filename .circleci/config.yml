@@ -57,7 +57,7 @@ commands:
 
             SSH_CONFIG_DIR="$HOME/.ssh"
             echo "Using SSH Config Dir '$SSH_CONFIG_DIR'"
-            git --version 
+            git --version
 
             mkdir -p "$SSH_CONFIG_DIR"
             chmod 0700 "$SSH_CONFIG_DIR"
@@ -140,7 +140,7 @@ parameters:
   linux-machine-image:
     type: string
     # Latest supported ubuntu image from https://circleci.com/docs/2.0/configuration-reference/#available-machine-images
-    default: "ubuntu-2004:202010-01"
+    default: "ubuntu-2204:2022.04.1"
 
 jobs:
   checks:
@@ -406,7 +406,7 @@ workflows:
           post-to-slack: true
           filters:
             branches:
-              only: 
+              only:
                 - /^release.*/
       - android-device-checks:
           name: Test Android on Device - Full (Release)
