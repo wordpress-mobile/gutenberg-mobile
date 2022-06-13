@@ -25,10 +25,6 @@ npx --cache /tmp/empty-cache pnpm -v || echo "npx --cache failed :( "
 echo "try installing with out the cache ?"
 npm install --cache /tmp/empty-cache -g pnpm
 
-echo "now see what it installed globally"
-pnpm -v || echo "pnpm is not installed boo hoo"
-
-exit 1
 
 # Set up required pnpm version
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
@@ -39,6 +35,6 @@ pnpm_version=$(npx semver -c "$listed_pnpm_version")
 cd projects/plugins/jetpack
 
 # npx might prompt to install pnpm at the requested version. Let's just agree and carry on.
-yes | npx pnpm install
+yes | npx pnpm@7 install
 
 popd
