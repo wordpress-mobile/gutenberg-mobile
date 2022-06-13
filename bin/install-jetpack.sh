@@ -20,10 +20,12 @@ npm cache verify
 echo "Print the latest verion of pnpm"
 npx pnpm -v
 echo "Now try with no cache"
-npx --cache /tmp/empty-cache pnpm -v || echo "npx --cache failed :( "
+npx --cache /tmp/empty-cache pnpm@7.1.1 -v || echo "npx --cache failed :( "
 
 echo "try installing with out the cache ?"
 npm install --cache /tmp/empty-cache -g pnpm
+
+pnpm -v
 
 
 # Set up required pnpm version
