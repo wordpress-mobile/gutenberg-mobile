@@ -15,18 +15,6 @@ pushd jetpack
 # Set up node requirement for Jetpack
 nvm install
 
-echo "Verify npm cache ?"
-npm cache verify
-echo "Print the latest verion of pnpm"
-npx pnpm -v
-echo "Now try with no cache"
-npx --cache /tmp/empty-cache pnpm@7.1.1 -v || echo "npx --cache failed :( "
-
-echo "try installing with out the cache ?"
-npm install --cache /tmp/empty-cache -g pnpm
-
-pnpm -v
-
 
 # Set up required pnpm version
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
@@ -37,6 +25,6 @@ pnpm_version=$(npx semver -c "$listed_pnpm_version")
 cd projects/plugins/jetpack
 
 # npx might prompt to install pnpm at the requested version. Let's just agree and carry on.
-yes | npx pnpm@7 install
+( yes || true ) | npx --cache /tmp/empty-cache pnpm@"$pnpm_version" install
 
 popd
