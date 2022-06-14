@@ -2,6 +2,7 @@ Unreleased
 ---
 * [*] Add 'Insert from URL' option to Video block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4941]
 * [**] Fix missing translations for locales that include region (only on Android) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4950]
+* [**] [Gallery block] Re-introduce `v1` to support sites with WordPress 5.8 and lower [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4928]
 
 ## 1.78.0
 ---
@@ -15,7 +16,6 @@ Unreleased
 ---
 * [*] [a11y] Improve text read by screen readers for BottomSheetSelectControl [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4854]
 * [*] Add 'Insert from URL' option to Image block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4779]
-* [**] [Gallery block] Re-introduce `v1` to support sites with WordPress 5.8 and lower [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4928]
 
 ## 1.76.3
 ---
