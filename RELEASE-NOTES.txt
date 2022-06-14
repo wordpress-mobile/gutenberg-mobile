@@ -1,6 +1,7 @@
 Unreleased
 ---
 * [*] Add 'Insert from URL' option to Video block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4941]
+* [**] Fix missing translations for locales that include region (only on Android) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4950]
 
 ## 1.78.0
 ---
