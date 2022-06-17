@@ -22,6 +22,6 @@ pnpm_version=$(npx semver -c "$listed_pnpm_version")
 cd projects/plugins/jetpack
 
 # npx might prompt to install pnpm at the requested version. Let's just agree and carry on.
-( yes || true ) | npx pnpm@"$pnpm_version" install
+( yes || true ) | npx --cache /tmp/empty-cache pnpm@"$pnpm_version" install
 
 popd
