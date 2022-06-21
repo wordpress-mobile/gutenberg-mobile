@@ -3,6 +3,7 @@
 	url = ../../WordPress/gutenberg.git
 	shallow = true
 [submodule "jetpack"]
+	branch = trunk
 	path = jetpack
 	url = ../../Automattic/jetpack.git
 	shallow = true
