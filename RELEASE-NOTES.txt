@@ -2,11 +2,29 @@ Unreleased
 ---
 * [**] Prevent validation error when viewing VideoPress markup within app [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4899]
 
+* [*] Add 'Insert from URL' option to Video block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4941]
+
+## 1.78.1
+---
+* [**] Re-introduce support for v1 of the Gallery block to the native version of the editor [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4928]
+* [**] Fix missing translations for locales that include region (only on Android) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4950]
+
+## 1.78.0
+---
+* [*] Bump react-native-gesture-handler to version 2.3.2 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4895]
+
+## 1.77.1
+---
+* [***] Fix crash on iOS related to JSI and Reanimated [https://github.com/WordPress/gutenberg/pull/41482]
 
 ## 1.77.0
 ---
 * [*] [a11y] Improve text read by screen readers for BottomSheetSelectControl [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4854]
 * [*] Add 'Insert from URL' option to Image block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4779]
+
+## 1.76.3
+---
+* [***] Fix crash on iOS related to JSI and Reanimated [https://github.com/WordPress/gutenberg/pull/41482]
 
 ## 1.76.2
 ---
