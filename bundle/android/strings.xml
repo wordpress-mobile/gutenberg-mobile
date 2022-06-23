@@ -85,7 +85,6 @@
     <string name="gutenberg_native_contact_support" tools:ignore="UnusedResources">Contact support</string>
     <string name="gutenberg_native_convert_to_link" tools:ignore="UnusedResources">Convert to link</string>
     <string name="gutenberg_native_copied_block" tools:ignore="UnusedResources">Copied block</string>
-    <string name="gutenberg_native_copy_block" tools:ignore="UnusedResources">Copy block</string>
     <string name="gutenberg_native_copy_file_url" tools:ignore="UnusedResources">Copy file URL</string>
     <!-- translators: Copy URL from the clipboard, https://sample.url -->
     <string name="gutenberg_native_copy_url_from_the_clipboard_s" tools:ignore="UnusedResources">Copy URL from the clipboard, %s</string>
@@ -244,6 +243,7 @@ translators: %s: Select control button label e.g. "Button width" -->
     <string name="gutenberg_native_once_you_become_familiar_with_the_names_of_different_blocks_you_c" tools:ignore="UnusedResources">Once you become familiar with the names of different blocks, you can add a block by typing a forward slash followed by the block name — for example, /image or /heading.</string>
     <string name="gutenberg_native_one" tools:ignore="UnusedResources">One</string>
     <string name="gutenberg_native_only_show_excerpt" tools:ignore="UnusedResources">Only show excerpt</string>
+    <string name="gutenberg_native_opacity" tools:ignore="UnusedResources">Opacity</string>
     <string name="gutenberg_native_open" tools:ignore="UnusedResources">OPEN</string>
     <string name="gutenberg_native_open_block_actions_menu" tools:ignore="UnusedResources">Open Block Actions Menu</string>
     <string name="gutenberg_native_open_jetpack_security_settings" tools:ignore="UnusedResources">Open Jetpack Security settings</string>
