@@ -276,6 +276,7 @@ private func dummy() {
     _ = NSLocalizedString("Take a Video", comment: "")
     _ = NSLocalizedString("Tap here to show help", comment: "")
     _ = NSLocalizedString("Tap to hide the keyboard", comment: "")
+    _ = NSLocalizedString("Text color", comment: "")
     _ = NSLocalizedString("Text formatting controls are located within the toolbar positioned above the keyboard while editing a text block", comment: "")
     _ = NSLocalizedString("The basics", comment: "")
     _ = NSLocalizedString("This color combination may be hard for people to read. Try using a brighter background color and/or a darker text color.", comment: "")
