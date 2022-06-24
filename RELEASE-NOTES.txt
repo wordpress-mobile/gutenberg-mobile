@@ -3,6 +3,7 @@ Unreleased
 * [**] Prevent validation error when viewing VideoPress markup within app [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4899]
 * [*] Add 'Insert from URL' option to Video block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4941]
 * [*] Image block copies the alt text from the media library when selecting an item [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4976]
+* [**] RichText - Improve performance by dropping events during quick typing [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4984]
 
 ## 1.78.1
 ---
