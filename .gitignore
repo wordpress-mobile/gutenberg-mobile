@@ -4,6 +4,7 @@
 .expo/
 
 # dependencies
+.npm-cache
 /node_modules
 
 # misc

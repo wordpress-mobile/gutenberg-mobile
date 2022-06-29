@@ -10,6 +10,14 @@ x-common-params:
       - "AWS_SECRET_KEY"
 
 steps:
+  - label: "Validate package.json"
+    command: |
+      restore_cache "$BUILDKITE_PIPELINE_SLUG-npm-cache"
+      make validate-dependencies
+      save_cache .npm-cache "$BUILDKITE_PIPELINE_SLUG-npm-cache"
+    plugins:
+      -  automattic/bash-cache#2.2.0
+
   - label: "Bundle Android"
     key: "bundle-android"
     plugins:
