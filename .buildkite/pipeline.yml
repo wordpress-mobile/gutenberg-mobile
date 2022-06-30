@@ -18,6 +18,22 @@ steps:
     plugins:
       -  automattic/bash-cache#2.2.0
 
+  - label: "Test iOS"
+    command: |
+      restore_cache "$BUILDKITE_PIPELINE_SLUG-npm-cache"
+      make test-ios
+      save_cache .npm-cache "$BUILDKITE_PIPELINE_SLUG-npm-cache"
+    plugins:
+      -  automattic/bash-cache#2.2.0
+
+  - label: "Test Android"
+    command: |
+      restore_cache "$BUILDKITE_PIPELINE_SLUG-npm-cache"
+      make test-android
+      save_cache .npm-cache "$BUILDKITE_PIPELINE_SLUG-npm-cache"
+    plugins:
+      -  automattic/bash-cache#2.2.0
+
   - label: "Bundle Android"
     key: "bundle-android"
     plugins:

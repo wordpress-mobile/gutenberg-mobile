@@ -5,7 +5,9 @@
 
 # dependencies
 .npm-cache
-/node_modules
+node_modules
+.pnpm-cache
+.pnpm-store
 
 # misc
 .env.local

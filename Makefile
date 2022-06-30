@@ -6,21 +6,48 @@ SRC_DIR    ?= $(shell pwd | sed 's/ /\\ /g')
 src_volume = $(SRC_DIR):/app
 
 ### Shared Variables
-test_host_tag = gutenberg-mobile-test-host
-docker_run_flags = -i --rm
+gutenberg_test_runner = gutenberg-test-runner
+jetpack_test_runner = jetpack-test-runner
+docker_run_flags = -it --rm
 
-build-test-host:
-	@echo "Building image $(test_host_tag)..."
-	docker build $(build_shared_flags) -t $(test_host_tag) .
+### Shared Commands
+gutenberg_run = docker run $(docker_run_flags) --volume $(src_volume) $(gutenberg_test_runner) /bin/bash -c "source /usr/local/nvm/nvm.sh && $(1)"
 
-install-dependencies: build-test-host
+build-gutenberg-test-runner:
+	@echo "Building image $(gutenberg_test_runner)..."
+	docker build --target $(gutenberg_test_runner) --tag $(gutenberg_test_runner) .
+
+build-jetpack-test-runner:
+	@echo "Building image $(jetpack_test_runner)..."
+	docker build --target $(jetpack_test_runner) --tag $(jetpack_test_runner) .
+
+install-dependencies: build-gutenberg-test-runner
 	@echo "Installing Dependencies..."
-	docker run $(run_shared_flags) --volume $(src_volume) $(test_host_tag) npm install
+	$(call gutenberg_run, npm install --cache .npm-cache)
+	$(call gutenberg_run, npm run i18n:check-cache)
 
-validate-dependencies: build-test-host
+install-gutenberg-dependencies:
+	@echo "Installing Gutenberg Dependencies"
+	$(call gutenberg_run, cd gutenberg && nvm install && npm install --cache ../.npm-cache)
+
+install-jetpack-dependencies:
+	@echo "Installing Jetpack Dependencies"
+	$(call gutenberg_run, pushd jetpack && nvm install && cd projects/plugins/jetpack && npx -y pnpm@7.1.1 install)
+
+build-gutenberg-packages: install-dependencies install-gutenberg-dependencies
+	@echo "Building Gutenberg Packages"
+	$(call gutenberg_run, cd gutenberg && npm run build:packages --cache ../.npm-cache)
+
+validate-dependencies: build-gutenberg-test-runner
 	@echo "Validating Dependencies..."
-	docker run $(run_shared_flags) --volume $(src_volume) $(test_host_tag) npm ci --prefer-offline --cache .npm-cache
+	$(call gutenberg_run, npm ci --prefer-offline --cache .npm-cache)
 
-test: install-dependencies
-	@echo "Running Tests..."
-	docker run $(run_shared_flags) --volume $(src_volume) $(test_host_tag) npm install
+test: test-android test-ios
+
+test-android: build-gutenberg-packages install-jetpack-dependencies
+	@echo "Testing Android..."
+	$(call gutenberg_run, npm run test:android)
+
+test-ios: build-gutenberg-packages install-jetpack-dependencies
+	@echo "Testing iOS..."
+	$(call gutenberg_run, npm run test:ios)
