@@ -241,7 +241,7 @@ private func dummy() {
     _ = NSLocalizedString("Post title. Empty", comment: "translators: accessibility text. empty post title.")
     _ = NSLocalizedString("Preview page", comment: "")
     _ = NSLocalizedString("Preview post", comment: "")
-    _ = NSLocalizedString("Problem displaying block", comment: "")
+    _ = NSLocalizedString("Problem displaying block. \nTap to attempt block recovery.", comment: "")
     _ = NSLocalizedString("Problem opening the audio", comment: "")
     _ = NSLocalizedString("Problem opening the video", comment: "")
     _ = NSLocalizedString("Remove as Featured Image", comment: "")
