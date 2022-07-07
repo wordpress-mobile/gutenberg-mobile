@@ -192,6 +192,7 @@
     <string name="gutenberg_native_insert_crosspost" tools:ignore="UnusedResources">Insert crosspost</string>
     <string name="gutenberg_native_insert_mention" tools:ignore="UnusedResources">Insert mention</string>
     <string name="gutenberg_native_inside" tools:ignore="UnusedResources">Inside</string>
+    <string name="gutenberg_native_invalid_url" tools:ignore="UnusedResources">Invalid URL.</string>
     <string name="gutenberg_native_invalid_url_audio_file_not_found" tools:ignore="UnusedResources">Invalid URL. Audio file not found.</string>
     <string name="gutenberg_native_invalid_url_please_enter_a_valid_url" tools:ignore="UnusedResources">Invalid URL. Please enter a valid URL.</string>
     <string name="gutenberg_native_line_height" tools:ignore="UnusedResources">Line Height</string>
@@ -265,7 +266,7 @@ translators: %s: Select control button label e.g. "Button width" -->
     <string name="gutenberg_native_post_title_s" tools:ignore="UnusedResources">Post title. %s</string>
     <string name="gutenberg_native_preview_page" tools:ignore="UnusedResources">Preview page</string>
     <string name="gutenberg_native_preview_post" tools:ignore="UnusedResources">Preview post</string>
-    <string name="gutenberg_native_problem_displaying_block" tools:ignore="UnusedResources">Problem displaying block</string>
+    <string name="gutenberg_native_problem_displaying_block_tap_to_attempt_block_recovery" tools:ignore="UnusedResources">Problem displaying block. \nTap to attempt block recovery.</string>
     <string name="gutenberg_native_problem_opening_the_audio" tools:ignore="UnusedResources">Problem opening the audio</string>
     <string name="gutenberg_native_problem_opening_the_video" tools:ignore="UnusedResources">Problem opening the video</string>
     <string name="gutenberg_native_remove_as_featured_image" tools:ignore="UnusedResources">Remove as Featured Image</string>
@@ -328,7 +329,6 @@ translators: %s: Select control option value e.g: "Auto, 25%". -->
     <string name="gutenberg_native_take_a_video" tools:ignore="UnusedResources">Take a Video</string>
     <string name="gutenberg_native_tap_here_to_show_help" tools:ignore="UnusedResources">Tap here to show help</string>
     <string name="gutenberg_native_tap_to_hide_the_keyboard" tools:ignore="UnusedResources">Tap to hide the keyboard</string>
-    <string name="gutenberg_native_text_color" tools:ignore="UnusedResources">Text color</string>
     <string name="gutenberg_native_text_formatting_controls_are_located_within_the_toolbar_positione" tools:ignore="UnusedResources">Text formatting controls are located within the toolbar positioned above the keyboard while editing a text block</string>
     <string name="gutenberg_native_the_basics" tools:ignore="UnusedResources">The basics</string>
     <string name="gutenberg_native_this_color_combination_may_be_hard_for_people_to_read_try_using_a" tools:ignore="UnusedResources">This color combination may be hard for people to read. Try using a darker background color and/or a brighter text color.</string>
