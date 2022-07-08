@@ -1,5 +1,9 @@
 Unreleased
 ---
+* [**] Prevent validation error when viewing VideoPress markup within app [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4899]
+* [*] Add 'Insert from URL' option to Video block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4941]
+* [*] Image block copies the alt text from the media library when selecting an item [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4976]
+* [*] Introduce "block recovery" option for invalid blocks [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4996]
 
 ## 1.79.0
 - [*] Add 'Insert from URL' option to Video block [https://github.com/WordPress/gutenberg/pull/41493]
@@ -7,9 +11,9 @@ Unreleased
 - [*] Introduce "block recovery" option for invalid blocks [https://github.com/WordPress/gutenberg/pull/41988]
 
 ## 1.78.1
-
--   [**] Re-introduce support for v1 of the Gallery block to the native version of the editor [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4928]
--   [**] Fix missing translations for locales that include region (only on Android) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4950]
+---
+* [**] Re-introduce support for v1 of the Gallery block to the native version of the editor [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4928]
+* [**] Fix missing translations for locales that include region (only on Android) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4950]
 
 ## 1.78.0
 ---
@@ -23,6 +27,14 @@ Unreleased
 ---
 * [*] [a11y] Improve text read by screen readers for BottomSheetSelectControl [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4854]
 * [*] Add 'Insert from URL' option to Image block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4779]
+
+## 1.76.3
+---
+* [***] Fix crash on iOS related to JSI and Reanimated [https://github.com/WordPress/gutenberg/pull/41482]
+
+## 1.76.2
+---
+* [*] Ensure post title gets focused when is notified from native side [https://github.com/WordPress/gutenberg/pull/41371]
 
 ## 1.76.1
 ---
