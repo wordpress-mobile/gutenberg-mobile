@@ -1,6 +1,12 @@
 #!/bin/bash
 set -Eeuo pipefail
 
+if [ -e ./bin/install-jetpack.sh.local ]
+then
+  source ./bin/install-jetpack.sh.local
+  exit 0
+fi
+
 # Check if nvm is installed
 [ -z "$NVM_DIR" ] && NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
