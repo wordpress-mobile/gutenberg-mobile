@@ -1,6 +1,7 @@
 Unreleased
 ---
 * [**] Prevent validation error when viewing VideoPress markup within app [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4899]
+* [*] Add React Native FastImage [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4989]
 
 ## 1.79.0
 - [*] Add 'Insert from URL' option to Video block [https://github.com/WordPress/gutenberg/pull/41493]
