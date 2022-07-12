@@ -11,43 +11,35 @@ x-common-params:
 
 steps:
   - label: "Validate package.json"
-    command: |
-      restore_cache "$BUILDKITE_PIPELINE_SLUG-npm-cache"
-      make validate-dependencies
-      save_cache .npm-cache "$BUILDKITE_PIPELINE_SLUG-npm-cache"
+    command: make validate-dependencies
     plugins:
       -  automattic/bash-cache#2.2.0
 
   - group: "iOS"
     steps:
     - label: "Bundle iOS"
-      command: |
-        make bundle-ios
+      command: make bundle-ios
       plugins:
         -  automattic/bash-cache#2.2.0
       agents:
-        queue: "mac"
+        queue: "js"
 
     - label: "Test iOS"
-      command: |
-        restore_cache "$BUILDKITE_PIPELINE_SLUG-npm-cache"
-        make test-ios
-        save_cache .npm-cache "$BUILDKITE_PIPELINE_SLUG-npm-cache"
+      command: make test-ios
       plugins:
         -  automattic/bash-cache#2.2.0
 
   - group: "Android"
     steps:
     - label: "Test Android"
-      command: |
-        restore_cache "$BUILDKITE_PIPELINE_SLUG-npm-cache"
-        make test-android
-        save_cache .npm-cache "$BUILDKITE_PIPELINE_SLUG-npm-cache"
+      command: make test-android
       plugins:
         -  automattic/bash-cache#2.2.0
 
     - label: "Build and Test Android Editor"
-      command: cd gutenberg/packages/react-native-editor/android && ./gradlew testDebug
+      command: |
+        make install-dependencies
+        cd gutenberg/packages/react-native-editor/android && ./gradlew testDebug
       agents:
         queue: "android"
 
@@ -58,24 +50,11 @@ steps:
 
     - label: "Bundle Android"
       key: "bundle-android"
-      plugins:
-        - docker#v3.8.0:
-            image: "public.ecr.aws/automattic/gb-mobile-image:latest"
-            environment:
-              - "CI=true"
-              # Allow WP-CLI to be run as root, otherwise it throws an exception.
-              # Reference: https://git.io/J9q2S
-              - "WP_CLI_ALLOW_ROOT=true"
       command: |
-          source /root/.bashrc
-
-          nvm install && nvm use
-          npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
-
-          npm run prebundle:js
-          npm run bundle:android
-
+          make bundle-android
           buildkite-agent artifact upload bundle/android/App.js
+      agents:
+        queue: "js"
 
   - group: "Publish"
     steps:
@@ -83,8 +62,7 @@ steps:
       key: "publish-react-native-aztec-android"
       plugins:
         - *publish-android-artifacts-docker-container
-      command: |
-          .buildkite/publish-react-native-aztec-android-artifacts.sh
+      command: .buildkite/publish-react-native-aztec-android-artifacts.sh
 
     - label: "Build Android RN Bridge & Publish to S3"
       depends_on:
@@ -92,5 +70,4 @@ steps:
         - "publish-react-native-aztec-android"
       plugins:
         - *publish-android-artifacts-docker-container
-      command: |
-          .buildkite/publish-react-native-bridge-android-artifacts.sh
+      command: .buildkite/publish-react-native-bridge-android-artifacts.sh

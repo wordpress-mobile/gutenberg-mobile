@@ -1,21 +1,22 @@
-FROM ubuntu as base-test-runner
-WORKDIR /app
-SHELL ["/bin/bash", "-c"]
-
-ENV NVM_DIR /usr/local/nvm
+FROM debian:stable-slim as base-test-runner
 
 RUN apt-get update \
-    && apt-get install -y curl git \
+    && apt-get install -y curl git php-cli php-mbstring \
     && apt-get -y autoclean
 
-RUN mkdir -p "$NVM_DIR" && \
-    curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh" | bash
+SHELL ["/bin/bash", "--login", "-c"]
+
+RUN curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh" | bash
+
+WORKDIR /app
+
+# Allow running `wp` as root (which is always the case in Docker)
+ENV WP_CLI_ALLOW_ROOT=true
 
 # Gutenberg Test Runner
 FROM base-test-runner AS gutenberg-test-runner
-RUN source /usr/local/nvm/nvm.sh && nvm install 14 --default
+RUN nvm install 14 --default
 
 ### Jetpack Test Runner
 FROM base-test-runner as jetpack-test-runner
-RUN source /usr/local/nvm/nvm.sh && nvm install 16.13.2 --default
-
+RUN nvm install 16.13.2 --default

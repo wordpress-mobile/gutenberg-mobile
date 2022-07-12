@@ -11,7 +11,7 @@ jetpack_test_runner = jetpack-test-runner
 docker_run_flags = -it --rm
 
 ### Shared Commands
-gutenberg_run = docker run $(docker_run_flags) --volume $(src_volume) $(gutenberg_test_runner) /bin/bash -c "source /usr/local/nvm/nvm.sh && $(1)"
+gutenberg_run = docker run $(docker_run_flags) --volume $(src_volume) $(gutenberg_test_runner) /bin/bash --login -c "nvm install && $(1)"
 
 build-gutenberg-test-runner:
 	@echo "Building image $(gutenberg_test_runner)..."
@@ -23,7 +23,7 @@ build-jetpack-test-runner:
 
 install-dependencies: build-gutenberg-test-runner
 	@echo "Installing Dependencies..."
-	$(call gutenberg_run, npm install --cache .npm-cache)
+	$(call gutenberg_run, npm install --cache .npm-cache --unsafe-perm --prefer-offline --no-audit)
 	$(call gutenberg_run, npm run i18n:check-cache)
 
 install-gutenberg-dependencies:
@@ -44,11 +44,15 @@ validate-dependencies: build-gutenberg-test-runner
 
 bundle: bundle-android bundle-ios
 
-bundle-android: install-dependencies
-	@echo "Bundling Android..."
-	$(call gutenberg_run, npm ci --unsafe-perm --prefer-offline --no-audit --no-progress && npm run prebundle:js && npm run bundle:android)
+prebundle: install-dependencies
+	@echo "Prebundling..."
+	$(call gutenberg_run, npm run prebundle:js)
 
-bundle-ios: install-dependencies
+bundle-android: prebundle 
+	@echo "Bundling Android..."
+	$(call gutenberg_run,  npm run bundle:android)
+
+bundle-ios: prebundle
 	@echo "Bundling iOS..."
 	$(call gutenberg_run, npm run test:e2e:bundle:ios)
 
