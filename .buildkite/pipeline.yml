@@ -34,6 +34,16 @@ steps:
     plugins:
       -  automattic/bash-cache#2.2.0
 
+  - label: "Build and Test Android Editor"
+    command: cd gutenberg/packages/react-native-editor/android && ./gradlew testDebug
+    agents:
+      queue: "android"
+
+  - label: "Build and Test Bridge Editor"
+    command: cd gutenberg/packages/react-native-bridge/android && ./gradlew test
+    agents:
+      queue: "android"
+
   - label: "Bundle Android"
     key: "bundle-android"
     plugins:
