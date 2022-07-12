@@ -42,6 +42,16 @@ validate-dependencies: build-gutenberg-test-runner
 	@echo "Validating Dependencies..."
 	$(call gutenberg_run, npm ci --prefer-offline --cache .npm-cache)
 
+bundle: bundle-android bundle-ios
+
+bundle-android: install-dependencies
+	@echo "Bundling Android..."
+	$(call gutenberg_run, npm ci --unsafe-perm --prefer-offline --no-audit --no-progress && npm run prebundle:js && npm run bundle:android)
+
+bundle-ios: install-dependencies
+	@echo "Bundling iOS..."
+	$(call gutenberg_run, npm run test:e2e:bundle:ios)
+
 test: test-android test-ios
 
 test-android: build-gutenberg-packages install-jetpack-dependencies

@@ -18,6 +18,12 @@ steps:
     plugins:
       -  automattic/bash-cache#2.2.0
 
+  - label: "Bundle iOS"
+    command: |
+      make bundle-ios
+    plugins:
+      -  automattic/bash-cache#2.2.0
+
   - label: "Test iOS"
     command: |
       restore_cache "$BUILDKITE_PIPELINE_SLUG-npm-cache"
