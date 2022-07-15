@@ -194,6 +194,7 @@
     <string name="gutenberg_native_inside" tools:ignore="UnusedResources">Inside</string>
     <string name="gutenberg_native_invalid_url_audio_file_not_found" tools:ignore="UnusedResources">Invalid URL. Audio file not found.</string>
     <string name="gutenberg_native_invalid_url_please_enter_a_valid_url" tools:ignore="UnusedResources">Invalid URL. Please enter a valid URL.</string>
+    <string name="gutenberg_native_jetpack_powered" tools:ignore="UnusedResources">Jetpack powered</string>
     <string name="gutenberg_native_line_height" tools:ignore="UnusedResources">Line Height</string>
     <string name="gutenberg_native_link_inserted" tools:ignore="UnusedResources">Link inserted</string>
     <string name="gutenberg_native_link_settings" tools:ignore="UnusedResources">Link Settings</string>
