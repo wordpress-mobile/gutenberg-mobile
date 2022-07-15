@@ -17,29 +17,40 @@ steps:
 
   - group: "iOS"
     steps:
-    - label: "Bundle iOS"
-      command: make bundle-ios
+    - label: "Bundle iOS for Testing"
+      command: make bundle-ios-for-testing
       plugins:
         -  automattic/bash-cache#2.2.0
       agents:
         queue: "js"
 
-    - label: "Test iOS"
+    - label: "iOS JS Tests"
       command: make test-ios
       plugins:
         -  automattic/bash-cache#2.2.0
       artifact_paths:
         - "reports/**/*"
 
+    - label: "iOS e2e Tests"
+      command: |
+        make build-ios-for-testing
+        make e2e-test-ios
+      env:
+        IMAGE_ID: xcode-13.4.1
+      plugins:
+        -  automattic/bash-cache#2.2.0
+      agents:
+        queue: "mac"
+
   - group: "Android"
     steps:
-    - label: "Test Android"
+    - label: "Android JS Tests"
       command: make test-android
       plugins:
         -  automattic/bash-cache#2.2.0
       artifact_paths:
         - "reports/**/*"
-  
+
     - label: "Build and Test Android Editor"
       command: |
         make install-dependencies
@@ -52,16 +63,25 @@ steps:
       agents:
         queue: "android"
 
-    - label: "Bundle Android"
-      key: "bundle-android"
+    - label: "Android e2e Tests"
       command: |
-          make bundle-android
-          buildkite-agent artifact upload bundle/android/App.js
-      agents:
-        queue: "js"
+        make build-android-for-testing
+        make e2e-test-android
+      plugins:
+        -  automattic/bash-cache#2.2.0
+      artifact_paths:
+        - "reports/**/*"
 
   - group: "Publish"
     steps:
+    - label: "Bundle Android for Release"
+      key: "bundle-android"
+      command: |
+        make bundle-android
+        buildkite-agent artifact upload bundle/android/App.js
+      agents:
+        queue: "js"
+
     - label: "Build Android RN Aztec & Publish to S3"
       key: "publish-react-native-aztec-android"
       plugins:

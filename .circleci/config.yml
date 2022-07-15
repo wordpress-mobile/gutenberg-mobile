@@ -143,45 +143,6 @@ parameters:
     default: "ubuntu-2004:202010-01"
 
 jobs:
-  checks:
-    parameters:
-      platform:
-        type: string
-        default: ""
-      check-tests:
-        type: boolean
-        default: false
-      check-correctness:
-        type: boolean
-        default: false
-    machine:
-      image: << pipeline.parameters.linux-machine-image >>
-    steps:
-      - checkout-shallow
-      - checkout-submodules
-      - install-node-version
-      - when:
-          condition: <<parameters.check-correctness>>
-          steps:
-            - npm-install-full
-      - unless:
-          condition: <<parameters.check-correctness>>
-          steps:
-            - npm-install
-      - add-jest-reporter-dir
-      - run:
-          name: Set Environment Variables
-          command: |
-            echo 'export CHECK_CORRECTNESS=<<parameters.check-correctness>>' >> $BASH_ENV
-            echo 'export CHECK_TESTS=<<parameters.check-tests>>' >> $BASH_ENV
-            echo 'export TEST_RN_PLATFORM=<<parameters.platform>>' >> $BASH_ENV
-      - run:
-          name: Run Checks
-          command: bin/ci-checks-js.sh
-          environment:
-            JEST_JUNIT_OUTPUT_FILE: "reports/test-results/android-test-results.xml"
-      - store_test_results:
-          path: ./reports/test-results
   android-device-checks:
     parameters:
       post-to-slack:
@@ -234,25 +195,6 @@ jobs:
                 include_job_number_field: false
                 include_project_field: false
                 failure_message: ':red_circle: Scheduled tests failed on Android device!'
-  android-native-unit-tests:
-    parameters:
-      post-to-slack:
-        description: Post to Slack when tests fail. SLACK_WEBHOOK ENV variable must be set.
-        type: boolean
-        default: false
-    docker:
-    - image: << pipeline.parameters.android-docker-image >>
-    steps:
-      - checkout-shallow
-      - checkout-submodules
-      - install-node-version
-      - npm-install
-      - run:
-          name: Run Android native-editor unit tests
-          command: cd gutenberg/packages/react-native-editor/android && ./gradlew testDebug
-      - run:
-          name: Run Android native-bridge unit tests
-          command: cd gutenberg/packages/react-native-bridge/android && ./gradlew test
   ios-device-checks:
     parameters:
       post-to-slack:
@@ -342,17 +284,6 @@ jobs:
 workflows:
   gutenberg-mobile:
     jobs:
-      - checks:
-          name: Check Correctness
-          check-correctness: true
-      - checks:
-          name: Test iOS
-          platform: ios
-          check-tests: true
-      - checks:
-          name: Test Android
-          platform: android
-          check-tests: true
       - ios-device-checks:
           name: Test iOS on Device - Canaries
           is-canary: "-canary"
@@ -373,8 +304,6 @@ workflows:
       - android-device-checks:
           name: Test Android on Device - Full
           requires: [ "Optional UI Tests" ]
-      - android-native-unit-tests:
-          name: Android Native Unit Tests
       - ios-device-checks:
           name: Test iOS on Device - Full (Submodule Update)
           post-to-slack: true
