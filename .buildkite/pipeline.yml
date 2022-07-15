@@ -28,6 +28,8 @@ steps:
       command: make test-ios
       plugins:
         -  automattic/bash-cache#2.2.0
+      artifact_paths:
+        - "reports/**/*"
 
   - group: "Android"
     steps:
@@ -35,7 +37,9 @@ steps:
       command: make test-android
       plugins:
         -  automattic/bash-cache#2.2.0
-
+      artifact_paths:
+        - "reports/**/*"
+  
     - label: "Build and Test Android Editor"
       command: |
         make install-dependencies
