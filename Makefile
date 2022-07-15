@@ -14,7 +14,7 @@ docker_run_flags = -it --rm
 gutenberg_run = docker run $(docker_run_flags) --volume $(src_volume) $(test_runner) /bin/bash --login -c "nvm install && $(1)"
 android_run = docker run $(docker_run_flags) --volume $(src_volume) $(android_builder) /bin/bash --login -c "nvm install && $(1)"
 
-gutenberg_run_with_env = docker run $(docker_run_flags) --volume $(src_volume) $(1) $(test_runner) /bin/bash --login -c "nvm install && $(2)
+gutenberg_run_with_env = docker run $(docker_run_flags) --volume $(src_volume) $(1) $(test_runner) /bin/bash --login -c "nvm install && $(2)"
 
 build-test-runner:
 	@echo "--- Building image $(test_runner)..."
