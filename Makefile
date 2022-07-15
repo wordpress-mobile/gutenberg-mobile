@@ -72,11 +72,9 @@ test-ios: install-dependencies
 	$(call gutenberg_run, npm run test:ios)
 
 e2e-test-android:
-	@echo "--- End-to-End Testing Android..."
-	exit 1
-# 	source bin/sauce-pre-upload.sh
-# 	curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.apk?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk
-# 	npm run device-tests
+	@echo "--- Uploading e2e Test Bundle to Saucelabs"
+	curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$BUILDKITE_BUILD_NUMBER.apk?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk
+	$(call gutenberg_run, npm run device-tests)
 
 e2e-test-ios:
 	@echo "--- End-to-End Testing iOS..."
