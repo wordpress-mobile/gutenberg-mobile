@@ -1,6 +1,9 @@
 Unreleased
 ---
 
+## 1.79.1
+* [**] Fix a crash when scrolling posts containing Embed blocks (Android 12 only) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5033]
+
 ## 1.79.0
 - [*] Add 'Insert from URL' option to Video block [https://github.com/WordPress/gutenberg/pull/41493]
 - [*] Image block copies the alt text from the media library when selecting an item [https://github.com/WordPress/gutenberg/pull/41839]
