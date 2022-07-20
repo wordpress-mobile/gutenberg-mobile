@@ -5,6 +5,7 @@ Unreleased
 * [*] Block inserter displays block collections [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5024]
 * [*] Fix incorrect spacing within Image alt text footnote [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5031]
 * [**] Fix a crash when scrolling posts containing Embed blocks (Android 12 only) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5033]
+* [***] Gallery and Image block - Performance improvements [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5007]
 
 ## 1.79.0
 - [*] Add 'Insert from URL' option to Video block [https://github.com/WordPress/gutenberg/pull/41493]
