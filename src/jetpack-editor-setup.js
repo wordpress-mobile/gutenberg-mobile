@@ -16,6 +16,7 @@ import {
 	registerLoomVariation,
 	registerSmartframeVariation,
 } from '../jetpack/projects/plugins/jetpack/extensions/extended-blocks/core-embed';
+import '../jetpack/projects/plugins/jetpack/extensions/blocks/videopress/editor';
 
 // When adding new blocks to this list please also consider updating ./block-support/supported-blocks.json
 const supportedJetpackBlocks = {

@@ -85,7 +85,6 @@
     <string name="gutenberg_native_contact_support" tools:ignore="UnusedResources">Contact support</string>
     <string name="gutenberg_native_convert_to_link" tools:ignore="UnusedResources">Convert to link</string>
     <string name="gutenberg_native_copied_block" tools:ignore="UnusedResources">Copied block</string>
-    <string name="gutenberg_native_copy_block" tools:ignore="UnusedResources">Copy block</string>
     <string name="gutenberg_native_copy_file_url" tools:ignore="UnusedResources">Copy file URL</string>
     <!-- translators: Copy URL from the clipboard, https://sample.url -->
     <string name="gutenberg_native_copy_url_from_the_clipboard_s" tools:ignore="UnusedResources">Copy URL from the clipboard, %s</string>
@@ -195,6 +194,7 @@
     <string name="gutenberg_native_inside" tools:ignore="UnusedResources">Inside</string>
     <string name="gutenberg_native_invalid_url_audio_file_not_found" tools:ignore="UnusedResources">Invalid URL. Audio file not found.</string>
     <string name="gutenberg_native_invalid_url_please_enter_a_valid_url" tools:ignore="UnusedResources">Invalid URL. Please enter a valid URL.</string>
+    <string name="gutenberg_native_jetpack_powered" tools:ignore="UnusedResources">Jetpack powered</string>
     <string name="gutenberg_native_line_height" tools:ignore="UnusedResources">Line Height</string>
     <string name="gutenberg_native_link_inserted" tools:ignore="UnusedResources">Link inserted</string>
     <string name="gutenberg_native_link_settings" tools:ignore="UnusedResources">Link Settings</string>
@@ -244,6 +244,7 @@ translators: %s: Select control button label e.g. "Button width" -->
     <string name="gutenberg_native_once_you_become_familiar_with_the_names_of_different_blocks_you_c" tools:ignore="UnusedResources">Once you become familiar with the names of different blocks, you can add a block by typing a forward slash followed by the block name — for example, /image or /heading.</string>
     <string name="gutenberg_native_one" tools:ignore="UnusedResources">One</string>
     <string name="gutenberg_native_only_show_excerpt" tools:ignore="UnusedResources">Only show excerpt</string>
+    <string name="gutenberg_native_opacity" tools:ignore="UnusedResources">Opacity</string>
     <string name="gutenberg_native_open" tools:ignore="UnusedResources">OPEN</string>
     <string name="gutenberg_native_open_block_actions_menu" tools:ignore="UnusedResources">Open Block Actions Menu</string>
     <string name="gutenberg_native_open_jetpack_security_settings" tools:ignore="UnusedResources">Open Jetpack Security settings</string>
@@ -346,6 +347,8 @@ translators: %s: Select control option value e.g: "Auto, 25%". -->
     <string name="gutenberg_native_ungroup" tools:ignore="UnusedResources">Ungroup</string>
     <string name="gutenberg_native_unsupported" tools:ignore="UnusedResources">Unsupported</string>
     <string name="gutenberg_native_updates_the_title" tools:ignore="UnusedResources">Updates the title.</string>
+    <string name="gutenberg_native_upgrade_your_plan_to_upload_audio" tools:ignore="UnusedResources">Upgrade your plan to upload audio</string>
+    <string name="gutenberg_native_upgrade_your_plan_to_use_video_covers" tools:ignore="UnusedResources">Upgrade your plan to use video covers</string>
     <string name="gutenberg_native_uploading" tools:ignore="UnusedResources">Uploading…</string>
     <string name="gutenberg_native_use_icon_button" tools:ignore="UnusedResources">Use icon button</string>
     <!-- translators: accessibility text. Empty video caption. -->
