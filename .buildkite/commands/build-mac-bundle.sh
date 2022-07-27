@@ -11,6 +11,6 @@ echo -e "--- :npm: Installing Dependencies"
 npm install
 
 echo -e "--- :xcode: Building"
-gem install bundler:2.1.4
+gem install bundler:2.2.27
 npm run core test:e2e:build-app:ios
 npm run test:e2e:bundle:ios
