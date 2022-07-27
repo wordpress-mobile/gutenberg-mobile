@@ -32,9 +32,7 @@ steps:
         - "reports/**/*"
 
     - label: "iOS e2e Tests"
-      command: |
-        make build-ios-for-testing
-        make e2e-test-ios
+      command: .buildkite/commands/build-mac-bundle.sh
       env:
         IMAGE_ID: xcode-13.4.1
       plugins:
