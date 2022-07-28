@@ -31,7 +31,7 @@ steps:
       artifact_paths:
         - "reports/**/*"
 
-    - label: "iOS e2e Tests"
+    - label: "Build iOS Test App"
       command: .buildkite/commands/build-mac-bundle.sh
       env:
         IMAGE_ID: xcode-13.4.1
@@ -39,6 +39,8 @@ steps:
         -  automattic/bash-cache#2.2.0
       agents:
         queue: "mac"
+      artifact_paths:
+        - artifacts/GutenbergDemo.app.zip
 
   - group: "Android"
     steps:

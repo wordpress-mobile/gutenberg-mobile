@@ -13,4 +13,10 @@ npm install
 echo -e "--- :xcode: Building"
 gem install bundler:2.2.27
 npm run core test:e2e:build-app:ios
+
+echo -e "--- :package: Packaging"
+mkdir -p artifacts
 npm run test:e2e:bundle:ios
+
+cp -r gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app artifacts/GutenbergDemo.app
+zip -vr artifacts/GutenbergDemo.app.zip artifacts/GutenbergDemo.app
