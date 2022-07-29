@@ -33,6 +33,7 @@ steps:
 
     - label: "Build iOS Test App"
       command: .buildkite/commands/build-mac-bundle.sh
+      key: build-ios-test-app
       env:
         IMAGE_ID: xcode-13.4.1
       plugins:
@@ -44,6 +45,7 @@ steps:
 
     - label: "Test iOS App with Saucelabs"
       command: .buildkite/commands/ui-test-mac-bundle.sh
+      depends_on: build-ios-test-app
 
   - group: "Android"
     steps:
