@@ -1,7 +1,7 @@
 #!/bin/bash -eu
 
 mkdir -p artifacts
-buildkite-agent artifact download artifacts/GutenbergDemo.app.zip artifacts/GutenbergDemo.app.zip
+buildkite-agent artifact download GutenbergDemo.app.zip artifacts/GutenbergDemo.app.zip
 
 curl \
     -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" \
