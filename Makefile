@@ -78,6 +78,7 @@ e2e-test-android:
 	curl -u "${SAUCE_USERNAME}:${SAUCE_ACCESS_KEY}" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-${BUILDKITE_BUILD_NUMBER}.apk?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk
 	$(call gutenberg_run_with_env, --env TEST_RN_PLATFORM=android --env TEST_ENV=sauce, npm run device-tests)
 
-e2e-test-ios:
+e2e-test-ios: install-dependencies
 	@echo "--- End-to-End Testing iOS..."
+	$(call gutenberg_run_with_env, --env TEST_RN_PLATFORM=ios --env TEST_ENV=sauce, npm run device-tests)
 	exit 1

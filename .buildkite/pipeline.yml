@@ -42,6 +42,9 @@ steps:
       artifact_paths:
         - artifacts/GutenbergDemo.app.zip
 
+    - label: "Test iOS App with Saucelabs"
+      command: .buildkite/commands/ui-test-mac-bundle.sh
+
   - group: "Android"
     steps:
     - label: "Android JS Tests"
