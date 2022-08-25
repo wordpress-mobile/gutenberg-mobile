@@ -1,6 +1,14 @@
 Unreleased
 ---
 
+1.81.1
+---
+* [*] List block v2: Fix text color inconsistencies with list items [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5096]
+* [*] Use default placeholder text color for native List Item [https://github.com/WordPress/gutenberg/pull/43353]
+* [*] Add BlockListCompact [https://github.com/WordPress/gutenberg/pull/43431]
+* [*] Fix dynamic React Native version [https://github.com/WordPress/gutenberg/pull/43058]
+* [*] Disable FastImage on Android [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5102]
+
 1.81.0
 ---
 * [**] List block V2 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5054]
