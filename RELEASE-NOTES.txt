@@ -13,6 +13,10 @@ Unreleased
 ---
 * [**] List block V2 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5054]
 
+1.80.1
+---
+* [*] Image - Workaround for Android and orientation changes [https://github.com/WordPress/gutenberg/pull/42900]
+
 1.80.0
 ---
 * [**] Prevent validation error when viewing VideoPress markup within app [https://github.com/wordpress-mobile/gutenberg-mobile/pull/4899]
