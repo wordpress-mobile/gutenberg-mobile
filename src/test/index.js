@@ -107,7 +107,7 @@ describe( 'Gutenberg Mobile initialization', () => {
 			{ component: EditorComponent }
 		);
 		// Inner blocks create BlockLists so let's take into account selecting the main one
-		const blockList = screen.getAllByTestId( 'block-list-wrapper' )[0];
+		const blockList = screen.getAllByTestId( 'block-list-wrapper' )[ 0 ];
 
 		expect( blockList ).toBeVisible();
 		expect( console ).toHaveLoggedWith( 'Hermes is: true' );
