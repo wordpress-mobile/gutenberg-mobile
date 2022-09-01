@@ -1,6 +1,10 @@
 Unreleased
 ---
 
+1.82.0
+---
+* [*] [iOS] Explicitly set tint color for action sheets to always be blue [#43759]
+
 1.81.1
 ---
 * [*] List block v2: Fix text color inconsistencies with list items [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5096]
