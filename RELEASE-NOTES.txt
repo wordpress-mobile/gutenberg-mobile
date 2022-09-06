@@ -1,6 +1,10 @@
 Unreleased
 ---
 
+1.82.0
+---
+* [*] [iOS] Explicitly set tint color for action sheets to always be blue [#43759]
+
 1.81.2
 ---
 * [**] List V2 - Prevent error when list is empty [https://github.com/WordPress/gutenberg/pull/43861]
@@ -16,6 +20,10 @@ Unreleased
 1.81.0
 ---
 * [**] List block V2 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5054]
+
+1.80.1
+---
+* [*] Image - Workaround for Android and orientation changes [https://github.com/WordPress/gutenberg/pull/42900]
 
 1.80.0
 ---
