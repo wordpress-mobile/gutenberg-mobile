@@ -99,6 +99,11 @@ done
 # Change to the React Native directory to get relative paths for the RN podspecs
 cd "$NODE_MODULES_DIR/react-native"
 
+RN_DIR="./"
+CODEGEN_REPO_PATH="../packages/react-native-codegen"
+CODEGEN_NPM_PATH="../react-native-codegen"
+SRCS_DIR=${SRCS_DIR:-$(cd "./Libraries" && pwd)}
+
 RN_PODSPECS=$(find * -type f -name "*.podspec" -not -path "third-party-podspecs/*" -not -path "*Fabric*" -print)
 TMP_DEST=$(mktemp -d)
 
@@ -109,6 +114,8 @@ do
 
     echo "Generating podspec for $pod with path $path"
     pod ipc spec "$podspec" > "$TMP_DEST/$pod.podspec.json"
+    # Removes message [Codegen] Found at the beginning of the file
+    sed -i '' -e '/\[Codegen\] Found/d' "$TMP_DEST/$pod.podspec.json"
     cat "$TMP_DEST/$pod.podspec.json" | jq > "$DEST/$pod.podspec.json"
 
     # Add a "prepare_command" entry to each podspec so that 'pod install' will fetch sources from the correct directory
@@ -135,7 +142,28 @@ do
         # They are normally generated during compile time using a Script Phase in FBReactNativeSpec added via the `use_react_native_codegen` function.
         # This script is inside node_modules/react-native/scripts folder. Since we don't have the node_modules when compiling WPiOS,
         # we're calling the script here manually to generate these files ahead of time.
-        MODULES_OUTPUT_DIR=$DEST/FBReactNativeSpec ./scripts/generate-specs.sh 
+        SCHEMA_FILE="$TMP_DEST/schema.json"
+        NODE_BINARY="${NODE_BINARY:-$(command -v node || true)}"
+
+        if [ -d "$CODEGEN_REPO_PATH" ]; then
+            CODEGEN_PATH=$(cd "$CODEGEN_REPO_PATH" && pwd)
+        elif [ -d "$CODEGEN_NPM_PATH" ]; then
+            CODEGEN_PATH=$(cd "$CODEGEN_NPM_PATH" && pwd)
+        else
+            echo "Error: Could not determine react-native-codegen location. Try running 'yarn install' or 'npm install' in your project root." 1>&2
+            exit 1
+        fi
+
+        if [ ! -d "$CODEGEN_PATH/lib" ]; then
+            describe "Building react-native-codegen package"
+            bash "$CODEGEN_PATH/scripts/oss/build.sh"
+        fi
+
+        echo "Generating schema from Flow types"
+        "$NODE_BINARY" "$CODEGEN_PATH/lib/cli/combine/combine-js-to-schema-cli.js" "$SCHEMA_FILE" "$SRCS_DIR"
+
+        echo "Generating native code from schema (iOS)"
+        "$NODE_BINARY" "./scripts/generate-specs-cli.js" -p "ios" -s "$SCHEMA_FILE" -o "$DEST/FBReactNativeSpec"
 
         # Removing 'script_phases' that shouldn't be needed anymore.
         # Removing 'prepare_command' that includes additional steps to create intermediate folders to keep generated files which won't be needed.
