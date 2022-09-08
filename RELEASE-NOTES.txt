@@ -1,9 +1,13 @@
 Unreleased
 ---
 
+1.82.1
+---
+* [**] List block v2: Fix issues splitting or merging paragraphs into the block [https://github.com/WordPress/gutenberg/pull/43949]
+
 1.82.0
 ---
-* [*] [iOS] Explicitly set tint color for action sheets to always be blue [#43759]
+* [*] [iOS] Explicitly set tint color for action sheets to always be blue [https://github.com/WordPress/gutenberg/pull/43759]
 
 1.81.2
 ---
