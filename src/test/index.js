@@ -106,14 +106,13 @@ describe( 'Gutenberg Mobile initialization', () => {
 			{ locale: defaultLocale, capabilities },
 			{ component: EditorComponent }
 		);
-		const blockList = screen.getByTestId( 'block-list-wrapper' );
+		// Inner blocks create BlockLists so let's take into account selecting the main one
+		const blockList = screen.getAllByTestId( 'block-list-wrapper' )[ 0 ];
 
 		expect( blockList ).toBeVisible();
 		expect( console ).toHaveLoggedWith( 'Hermes is: true' );
 		setupLocaleLogs.forEach( ( log ) =>
 			expect( console ).toHaveLoggedWith( ...log )
 		);
-		// It's expected that some blocks are upgraded and inform about it (example: "Updated Block: core/cover")
-		expect( console ).toHaveInformed();
 	} );
 } );
