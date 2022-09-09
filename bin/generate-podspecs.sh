@@ -104,7 +104,7 @@ CODEGEN_REPO_PATH="../packages/react-native-codegen"
 CODEGEN_NPM_PATH="../react-native-codegen"
 SRCS_DIR=${SRCS_DIR:-$(cd "./Libraries" && pwd)}
 
-RN_PODSPECS=$(find * -type f -name "*.podspec" -not -path "third-party-podspecs/*" -not -path "*Fabric*" -print)
+RN_PODSPECS=$(find * -type f -name "*.podspec" -not -name "React-rncore.podspec" -not -path "third-party-podspecs/*" -not -path "*Fabric*" -print)
 TMP_DEST=$(mktemp -d)
 
 for podspec in $RN_PODSPECS
