@@ -1,6 +1,6 @@
 {
   "name": "react-native-video",
-  "version": "5.2.0-wp-2",
+  "version": "5.2.0-wp-3",
   "summary": "A <Video /> element for react-native",
   "description": "A <Video /> element for react-native",
   "license": "MIT",
@@ -8,7 +8,7 @@
   "homepage": "https://github.com/react-native-community/react-native-video",
   "source": {
     "git": "https://github.com/wordpress-mobile/react-native-video.git",
-    "tag": "5.2.0-wp-2"
+    "tag": "5.2.0-wp-3"
   },
   "platforms": {
     "ios": "8.0",

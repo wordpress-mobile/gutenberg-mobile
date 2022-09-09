@@ -1,17 +1,17 @@
 {
   "name": "React-hermes",
-  "version": "0.66.2",
+  "version": "0.69.4",
   "summary": "-",
   "homepage": "https://reactnative.dev/",
   "license": "MIT",
   "authors": "Facebook, Inc. and its affiliates",
   "platforms": {
     "osx": "10.14",
-    "ios": "11.0"
+    "ios": "12.4"
   },
   "source": {
     "git": "https://github.com/facebook/react-native.git",
-    "tag": "v0.66.2"
+    "tag": "v0.69.4"
   },
   "source_files": [
     "executor/*.{cpp,h}",
@@ -28,19 +28,19 @@
   "header_dir": "reacthermes",
   "dependencies": {
     "React-cxxreact": [
-      "0.66.2"
+      "0.69.4"
     ],
     "React-jsi": [
-      "0.66.2"
+      "0.69.4"
     ],
     "React-jsiexecutor": [
-      "0.66.2"
+      "0.69.4"
     ],
     "React-jsinspector": [
-      "0.66.2"
+      "0.69.4"
     ],
     "React-perflogger": [
-      "0.66.2"
+      "0.69.4"
     ],
     "RCT-Folly": [
       "2021.06.28.00-v2"
