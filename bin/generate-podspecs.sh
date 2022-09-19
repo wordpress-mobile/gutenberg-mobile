@@ -100,6 +100,7 @@ done
 cd "$NODE_MODULES_DIR/react-native"
 
 RN_DIR="./"
+SCRIPTS_PATH="./scripts/"
 CODEGEN_REPO_PATH="../packages/react-native-codegen"
 CODEGEN_NPM_PATH="../react-native-codegen"
 SRCS_DIR=${SRCS_DIR:-$(cd "./Libraries" && pwd)}
@@ -158,6 +159,21 @@ do
             describe "Building react-native-codegen package"
             bash "$CODEGEN_PATH/scripts/oss/build.sh"
         fi
+
+        # Generate React-Codegen
+        # A copy of react_native_pods is done to modify the content within get_react_codegen_spec
+        # this enables getting the schema for React-Codegen in runtime by printing the content.
+        echo "Generating React-Codegen"
+        REACT_NATIVE_PODS_PATH="$SCRIPTS_PATH/react_native_pods.rb"
+        REACT_NATIVE_PODS_MODIFIED_PATH="$SCRIPTS_PATH/react_native_pods_modified.rb"
+        # Making a temp copy of react_native_pods.rb
+        cp $REACT_NATIVE_PODS_PATH $REACT_NATIVE_PODS_MODIFIED_PATH
+        # Modify the get_react_codegen_spec method to return the result using print and JSON.pretty
+        sed -i '' -e 's/return spec/print JSON.pretty_generate(spec)/' "$REACT_NATIVE_PODS_MODIFIED_PATH"
+        # Run get_react_codegen_spec and generate React-Codegen.podspec.json
+        ruby -r "./scripts/react_native_pods_modified.rb" -e "get_react_codegen_spec" > "$DEST/React-Codegen.podspec.json"
+        # Remove temp copy of react_native_pods.rb
+        rm $REACT_NATIVE_PODS_MODIFIED_PATH
 
         echo "Generating schema from Flow types"
         "$NODE_BINARY" "$CODEGEN_PATH/lib/cli/combine/combine-js-to-schema-cli.js" "$SCHEMA_FILE" "$SRCS_DIR"
