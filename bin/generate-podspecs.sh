@@ -104,6 +104,7 @@ SCRIPTS_PATH="./scripts/"
 CODEGEN_REPO_PATH="../packages/react-native-codegen"
 CODEGEN_NPM_PATH="../react-native-codegen"
 SRCS_DIR=${SRCS_DIR:-$(cd "./Libraries" && pwd)}
+RN_VERSION=$(cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g')
 
 RN_PODSPECS=$(find * -type f -name "*.podspec" -not -name "React-rncore.podspec" -not -path "third-party-podspecs/*" -not -path "*Fabric*" -print)
 TMP_DEST=$(mktemp -d)
@@ -169,6 +170,7 @@ do
         # Making a temp copy of react_native_pods.rb
         cp $REACT_NATIVE_PODS_PATH $REACT_NATIVE_PODS_MODIFIED_PATH
         # Modify the get_react_codegen_spec method to return the result using print and JSON.pretty
+        sed -i '' -e "s/:git => ''/:git => 'https:\/\/github.com\/facebook\/react-native.git', :tag => 'v$RN_VERSION'/" "$REACT_NATIVE_PODS_MODIFIED_PATH"
         sed -i '' -e 's/return spec/print JSON.pretty_generate(spec)/' "$REACT_NATIVE_PODS_MODIFIED_PATH"
         # Run get_react_codegen_spec and generate React-Codegen.podspec.json
         ruby -r "./scripts/react_native_pods_modified.rb" -e "get_react_codegen_spec" > "$DEST/React-Codegen.podspec.json"
