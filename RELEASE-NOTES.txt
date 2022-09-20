@@ -1,6 +1,26 @@
 Unreleased
 ---
 
+1.82.1
+---
+* [**] List block v2: Fix issues splitting or merging paragraphs into the block [https://github.com/WordPress/gutenberg/pull/43949]
+
+1.82.0
+---
+* [*] [iOS] Explicitly set tint color for action sheets to always be blue [https://github.com/WordPress/gutenberg/pull/43759]
+
+1.81.2
+---
+* [**] List V2 - Prevent error when list is empty [https://github.com/WordPress/gutenberg/pull/43861]
+
+1.81.1
+---
+* [*] List block v2: Fix text color inconsistencies with list items [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5096]
+* [*] Use default placeholder text color for native List Item [https://github.com/WordPress/gutenberg/pull/43353]
+* [*] Add BlockListCompact [https://github.com/WordPress/gutenberg/pull/43431]
+* [*] Fix dynamic React Native version [https://github.com/WordPress/gutenberg/pull/43058]
+* [*] Disable FastImage on Android [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5102]
+
 1.81.0
 ---
 * [**] List block V2 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5054]
