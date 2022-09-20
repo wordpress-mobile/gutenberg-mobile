@@ -174,7 +174,7 @@ do
         # Run get_react_codegen_spec and generate React-Codegen.podspec.json
         ruby -r "./scripts/react_native_pods_modified.rb" -e "get_react_codegen_spec" > "$DEST/React-Codegen.podspec.json"
         TMP_ReactCodeGenSpec=$(mktemp)
-        jq '.source_files = "third-party-podspecs/FBReactNativeSpec/**/*.{c,h,m,mm,cpp}"' "$DEST/React-Codegen.podspec.json" > "$TMP_ReactCodeGenSpec"
+        jq 'del(.source) | .source_files = "third-party-podspecs/FBReactNativeSpec/**/*.{c,h,m,mm,cpp}"' "$DEST/React-Codegen.podspec.json" > "$TMP_ReactCodeGenSpec"
         mv "$TMP_ReactCodeGenSpec" "$DEST/React-Codegen.podspec.json"
         # Remove temp copy of react_native_pods.rb
         rm $REACT_NATIVE_PODS_MODIFIED_PATH

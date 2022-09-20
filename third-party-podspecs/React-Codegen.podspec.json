@@ -6,9 +6,6 @@
   "license": "Unlicense",
   "authors": "Facebook",
   "compiler_flags": "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32 -Wno-documentation -Wno-nullability-completeness -std=c++17",
-  "source": {
-    "git": ""
-  },
   "header_mappings_dir": "./",
   "platforms": {
     "ios": "11.0"
