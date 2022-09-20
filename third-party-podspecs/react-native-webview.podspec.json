@@ -3,7 +3,10 @@
   "version": "11.6.2",
   "summary": "React Native WebView component for iOS, Android, macOS, and Windows",
   "license": "MIT",
-  "authors": "Jamon Holmgren <jamon@infinite.red>",
+  "authors": {
+    "name": "Jamon Holmgren",
+    "email": "jamon@infinite.red"
+  },
   "homepage": "https://github.com/react-native-webview/react-native-webview#readme",
   "platforms": {
     "ios": "9.0",
