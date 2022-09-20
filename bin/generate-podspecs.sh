@@ -170,10 +170,12 @@ do
         # Making a temp copy of react_native_pods.rb
         cp $REACT_NATIVE_PODS_PATH $REACT_NATIVE_PODS_MODIFIED_PATH
         # Modify the get_react_codegen_spec method to return the result using print and JSON.pretty
-        sed -i '' -e "s/:git => ''/:git => 'https:\/\/github.com\/facebook\/react-native.git', :tag => 'v$RN_VERSION'/" "$REACT_NATIVE_PODS_MODIFIED_PATH"
         sed -i '' -e 's/return spec/print JSON.pretty_generate(spec)/' "$REACT_NATIVE_PODS_MODIFIED_PATH"
         # Run get_react_codegen_spec and generate React-Codegen.podspec.json
         ruby -r "./scripts/react_native_pods_modified.rb" -e "get_react_codegen_spec" > "$DEST/React-Codegen.podspec.json"
+        TMP_ReactCodeGenSpec=$(mktemp)
+        jq '.source_files = "third-party-podspecs/FBReactNativeSpec/**/*.{c,h,m,mm,cpp}"' "$DEST/React-Codegen.podspec.json" > "$TMP_ReactCodeGenSpec"
+        mv "$TMP_ReactCodeGenSpec" "$DEST/React-Codegen.podspec.json"
         # Remove temp copy of react_native_pods.rb
         rm $REACT_NATIVE_PODS_MODIFIED_PATH
 
@@ -182,6 +184,9 @@ do
 
         echo "Generating native code from schema (iOS)"
         "$NODE_BINARY" "./scripts/generate-specs-cli.js" -p "ios" -s "$SCHEMA_FILE" -o "$DEST/FBReactNativeSpec"
+
+        # Removing unneeded files
+        find "$DEST/FBReactNativeSpec" -type f -not -name "FBReactNativeSpec.podspec.json" -not -name "FBReactNativeSpec-generated.mm" -not -name "FBReactNativeSpec.h" -not -name "FBReactNativeSpec.h" -delete
 
         # Removing 'script_phases' that shouldn't be needed anymore.
         # Removing 'prepare_command' that includes additional steps to create intermediate folders to keep generated files which won't be needed.
