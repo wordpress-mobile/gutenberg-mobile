@@ -4,11 +4,7 @@
   "summary": "React Native Blur component",
   "homepage": "https://github.com/react-native-community/react-native-blur",
   "license": "MIT",
-  "authors": {
-    "name": "Alexey Kureev",
-    "email": "kureev-mail@ya.ru",
-    "url": "https://github.com/Kureev"
-  },
+  "authors": "Alexey Kureev <kureev-mail@ya.ru> (https://github.com/Kureev)",
   "platforms": {
     "ios": "10.0"
   },
