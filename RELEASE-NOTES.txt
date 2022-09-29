@@ -1,6 +1,10 @@
 Unreleased
 ---
 
+1.83.0
+---
+* No User facing changes *
+
 1.82.1
 ---
 * [**] List block v2: Fix issues splitting or merging paragraphs into the block [https://github.com/WordPress/gutenberg/pull/43949]
