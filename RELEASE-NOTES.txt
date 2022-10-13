@@ -1,6 +1,7 @@
 Unreleased
 ---
 * [*] Upgrade compile and target sdk version to Android API 31 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5184]
+* [*] [iOS] Fixed iOS Voice Control support within Image block captions. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5205]
 
 1.83.0
 ---
