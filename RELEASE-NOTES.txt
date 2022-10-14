@@ -4,6 +4,7 @@ Unreleased
 1.84.0
 ---
 * [*] Upgrade compile and target sdk version to Android API 31 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5184]
+* [*] [iOS] Fix focus loop when quickly tapping the block appender [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5215]
 
 1.83.0
 ---
