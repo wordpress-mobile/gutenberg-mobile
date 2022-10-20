@@ -1,6 +1,9 @@
 Unreleased
 ---
-* [*] fix: Native inner blocks merge where appropriate  [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5222]
+
+1.84.1
+---
+* [**] Native inner blocks merge where appropriate [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5222]
 
 1.84.0
 ---
