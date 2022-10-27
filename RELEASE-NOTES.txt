@@ -1,6 +1,10 @@
 Unreleased
 ---
 
+1.85.0
+---
+* [*] [iOS] Fixed iOS Voice Control support within Image block captions. [https://github.com/WordPress/gutenberg/pull/444850]
+
 1.84.1
 ---
 * [**] Native inner blocks merge where appropriate [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5222]
