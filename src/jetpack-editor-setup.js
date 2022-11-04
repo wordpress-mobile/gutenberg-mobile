@@ -68,7 +68,7 @@ export function setupJetpackEditor( jetpackState ) {
 }
 
 export function registerJetpackBlocks( { capabilities } ) {
-	if ( ! isActive() ) {
+	if ( ! isActive() || capabilities.onlyCoreBlocks ) {
 		return;
 	}
 
@@ -90,7 +90,7 @@ export function registerJetpackBlocks( { capabilities } ) {
 }
 
 export function registerJetpackEmbedVariations( { capabilities } ) {
-	if ( ! isActive() ) {
+	if ( ! isActive() || capabilities.onlyCoreBlocks ) {
 		return;
 	}
 
