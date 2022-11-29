@@ -1,19 +1,18 @@
 {
   "name": "React-graphics",
-  "version": "0.66.2",
+  "version": "0.69.4",
   "summary": "Fabric for React Native.",
   "homepage": "https://reactnative.dev/",
   "license": "MIT",
   "authors": "Facebook, Inc. and its affiliates",
   "platforms": {
-    "ios": "11.0",
-    "tvos": "11.0"
+    "ios": "12.4",
+    "tvos": "12.4"
   },
   "source": {
     "git": "https://github.com/facebook/react-native.git",
-    "tag": "v0.66.2"
+    "tag": "v0.69.4"
   },
-  "libraries": "stdc++",
   "compiler_flags": "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32 -Wno-documentation",
   "source_files": "**/*.{m,mm,cpp,h}",
   "exclude_files": [
@@ -31,7 +30,7 @@
       "2021.06.28.00-v2"
     ],
     "React-Core/Default": [
-      "0.66.2"
+      "0.69.4"
     ]
   },
   "prepare_command": "TMP_DIR=$(mktemp -d); mv * $TMP_DIR; cp -R \"$TMP_DIR/ReactCommon/react/renderer/graphics\"/* . && true",

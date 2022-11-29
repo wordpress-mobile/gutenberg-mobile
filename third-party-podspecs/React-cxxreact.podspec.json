@@ -1,17 +1,17 @@
 {
   "name": "React-cxxreact",
-  "version": "0.66.2",
+  "version": "0.69.4",
   "summary": "-",
   "homepage": "https://reactnative.dev/",
   "license": "MIT",
   "authors": "Facebook, Inc. and its affiliates",
   "platforms": {
-    "ios": "11.0",
-    "tvos": "11.0"
+    "ios": "12.4",
+    "tvos": "12.4"
   },
   "source": {
     "git": "https://github.com/facebook/react-native.git",
-    "tag": "v0.66.2"
+    "tag": "v0.69.4"
   },
   "source_files": "*.{cpp,h}",
   "exclude_files": "SampleCxxModule.*",
@@ -30,22 +30,22 @@
     ],
     "glog": [],
     "React-jsinspector": [
-      "0.66.2"
+      "0.69.4"
     ],
     "React-callinvoker": [
-      "0.66.2"
+      "0.69.4"
     ],
     "React-runtimeexecutor": [
-      "0.66.2"
+      "0.69.4"
     ],
     "React-perflogger": [
-      "0.66.2"
+      "0.69.4"
     ],
     "React-jsi": [
-      "0.66.2"
+      "0.69.4"
     ],
     "React-logger": [
-      "0.66.2"
+      "0.69.4"
     ]
   },
   "prepare_command": "TMP_DIR=$(mktemp -d); mv * $TMP_DIR; cp -R \"$TMP_DIR/ReactCommon/cxxreact\"/* . && true",
