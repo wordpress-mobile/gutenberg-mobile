@@ -2,6 +2,10 @@ Unreleased
 ---
 * [**] Prevent error message from unneccesarily firing when uploading to Gallery block [https://github.com/WordPress/gutenberg/pull/46175]
 
+1.85.1
+---
+* [**] Prevent error message from unneccesarily firing when uploading to Gallery block [https://github.com/WordPress/gutenberg/pull/46175]
+
 1.85.0
 ---
 * [*] [iOS] Fixed iOS Voice Control support within Image block captions. [https://github.com/WordPress/gutenberg/pull/444850]
