@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [**] Prevent error message from unneccesarily firing when uploading to Gallery block [https://github.com/WordPress/gutenberg/pull/46175]
 
 1.85.1
 ---
