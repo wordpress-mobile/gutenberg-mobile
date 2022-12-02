@@ -1,9 +1,9 @@
 /**
  * WordPress dependencies
  */
-import { dispatch } from '@wordpress/data';
+import { dispatch, select } from '@wordpress/data';
 import { store as editPostStore } from '@wordpress/edit-post';
-import { addAction } from '@wordpress/hooks';
+import { addAction, addFilter } from '@wordpress/hooks';
 
 /**
  * Internal dependencies
@@ -144,6 +144,28 @@ const setupHooks = () => {
 	} );
 };
 
+const setupStringsOverrides = () => {
+	addFilter(
+		'native.missing_block_detail',
+		'native/missing_block',
+		( defaultValue, blockName ) => {
+			const { getSettings } = select( 'core/block-editor' );
+			const onlyCoreBlocks =
+				getSettings( 'capabilities' ).onlyCoreBlocks === true;
+
+			const jetpackBlockNames = Object.keys( supportedJetpackBlocks ).map(
+				( name ) => `jetpack/${ name }`
+			);
+
+			if ( onlyCoreBlocks && jetpackBlockNames.includes( blockName ) ) {
+				return null;
+			}
+			return defaultValue;
+		}
+	);
+};
+
 export default () => {
 	setupHooks();
+	setupStringsOverrides();
 };
