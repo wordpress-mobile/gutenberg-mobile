@@ -1,6 +1,6 @@
 Unreleased
 ---
-* [**] Prevent error message from unneccesarily firing when uploading to Gallery block [https://github.com/WordPress/gutenberg/pull/46175]
+* [**] Upgrade React Native from 0.66.2 to 0.69.4 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5193]
 
 1.85.1
 ---
