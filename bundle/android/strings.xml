@@ -34,6 +34,7 @@
     <string name="gutenberg_native_address_settings" tools:ignore="UnusedResources">Address Settings</string>
     <string name="gutenberg_native_alt_text" tools:ignore="UnusedResources">Alt Text</string>
     <string name="gutenberg_native_alternatively_you_can_detach_and_edit_these_blocks_separately_by" tools:ignore="UnusedResources">Alternatively, you can detach and edit these blocks separately by tapping “Convert to regular blocks”.</string>
+    <string name="gutenberg_native_alternatively_you_can_detach_and_edit_this_block_separately_by_ta" tools:ignore="UnusedResources">Alternatively, you can detach and edit this block separately by tapping “Convert to regular block”.</string>
     <string name="gutenberg_native_an_unknown_error_occurred_please_try_again" tools:ignore="UnusedResources">An unknown error occurred. Please try again.</string>
     <string name="gutenberg_native_applies_the_setting" tools:ignore="UnusedResources">Applies the setting</string>
     <string name="gutenberg_native_arrange_your_content_into_columns_add_call_to_action_buttons_and" tools:ignore="UnusedResources">Arrange your content into columns, add Call to Action buttons, and overlay images with text.</string>
@@ -290,6 +291,8 @@ translators: Block name. %s: The localized block name -->
     <string name="gutenberg_native_s_block_options" tools:ignore="UnusedResources">%s block options</string>
     <!-- translators: accessibility text for blocks with invalid content. %d: localized block title -->
     <string name="gutenberg_native_s_block_this_block_has_invalid_content" tools:ignore="UnusedResources">%s block. This block has invalid content</string>
+    <!-- translators: %s: name of the reusable block -->
+    <string name="gutenberg_native_s_converted_to_regular_block" tools:ignore="UnusedResources">%s converted to regular block</string>
     <!-- translators: %s: name of the reusable block -->
     <string name="gutenberg_native_s_converted_to_regular_blocks" tools:ignore="UnusedResources">%s converted to regular blocks</string>
     <!-- translators: %s: embed block variant's label e.g: "Twitter". -->
