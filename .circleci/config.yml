@@ -425,7 +425,7 @@ workflows:
           post-to-slack: true
     triggers:
       - schedule:
-          cron: '1 1,13 * * *'
+          cron: '0 0 8 ? * MON,WED,FRI *'
           filters:
             branches:
               only: trunk
