@@ -17,8 +17,11 @@ const setupHooks = () => {
 		( props ) => {
 			const capabilities = props.capabilities ?? {};
 
-			// Register Layout Grid block
-			if ( capabilities.layoutGridBlock ) {
+			// Register Layout Grid block (`jetpack/layout-grid`)
+			if (
+				capabilities.layoutGridBlock &&
+				! capabilities.onlyCoreBlocks
+			) {
 				registerBlock();
 			}
 		}
