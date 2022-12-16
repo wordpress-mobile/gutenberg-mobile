@@ -415,17 +415,3 @@ workflows:
             branches:
               only:
                 - /^release.*/
-  ui-tests-full-scheduled:
-    jobs:
-      - ios-device-checks:
-          name: Test iOS on Device - Scheduled
-          post-to-slack: true
-      - android-device-checks:
-          name: Test Android on Device - Scheduled
-          post-to-slack: true
-    triggers:
-      - schedule:
-          cron: '1 1,13 * * *'
-          filters:
-            branches:
-              only: trunk
