@@ -8,7 +8,6 @@ import {
 	unregisterBlockVariation,
 } from '@wordpress/blocks';
 import { select } from '@wordpress/data';
-import { store as editPostStore } from '@wordpress/edit-post';
 import { registerCoreBlocks } from '@wordpress/block-library';
 import { removeAllFilters } from '@wordpress/hooks';
 
@@ -118,7 +117,10 @@ describe( 'Jetpack blocks', () => {
 			},
 		} );
 
-		const { hiddenBlockTypes } = select( editPostStore ).getPreferences();
+		const hiddenBlockTypes = select( 'core/preferences' ).get(
+			'core/edit-post',
+			'hiddenBlockTypes'
+		);
 		expect( hiddenBlockTypes ).toEqual( [ 'jetpack/contact-info' ] );
 	} );
 
