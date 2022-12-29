@@ -2,6 +2,10 @@ Unreleased
 ---
 * [*] Only register core blocks when `onlyCoreBlocks` capability is enabled [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5293]
 
+1.86.1
+---
+* [*] Block Actions Menu - Fix block title regression and adds integration tests [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5340]
+
 1.86.0
 ---
 * [**] Upgrade React Native from 0.66.2 to 0.69.4 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5193]
