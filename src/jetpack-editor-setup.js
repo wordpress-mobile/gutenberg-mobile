@@ -1,9 +1,9 @@
 /**
  * WordPress dependencies
  */
-import { dispatch } from '@wordpress/data';
+import { dispatch, select } from '@wordpress/data';
 import { store as editPostStore } from '@wordpress/edit-post';
-import { addAction } from '@wordpress/hooks';
+import { addAction, addFilter } from '@wordpress/hooks';
 
 /**
  * Internal dependencies
@@ -18,7 +18,7 @@ import {
 } from '../jetpack/projects/plugins/jetpack/extensions/extended-blocks/core-embed';
 import '../jetpack/projects/plugins/jetpack/extensions/blocks/videopress/editor';
 
-// When adding new blocks to this list please also consider updating ./block-support/supported-blocks.json
+// When adding new blocks to this list please also consider updating `./block-support/supported-blocks.json`
 const supportedJetpackBlocks = {
 	'contact-info': {
 		available: true,
@@ -68,7 +68,7 @@ export function setupJetpackEditor( jetpackState ) {
 }
 
 export function registerJetpackBlocks( { capabilities } ) {
-	if ( ! isActive() ) {
+	if ( ! isActive() || capabilities.onlyCoreBlocks ) {
 		return;
 	}
 
@@ -90,7 +90,7 @@ export function registerJetpackBlocks( { capabilities } ) {
 }
 
 export function registerJetpackEmbedVariations( { capabilities } ) {
-	if ( ! isActive() ) {
+	if ( ! isActive() || capabilities.onlyCoreBlocks ) {
 		return;
 	}
 
@@ -144,6 +144,28 @@ const setupHooks = () => {
 	} );
 };
 
+const setupStringsOverrides = () => {
+	addFilter(
+		'native.missing_block_detail',
+		'native/missing_block',
+		( defaultValue, blockName ) => {
+			const { getSettings } = select( 'core/block-editor' );
+			const onlyCoreBlocks =
+				getSettings( 'capabilities' ).onlyCoreBlocks === true;
+
+			const jetpackBlockNames = Object.keys( supportedJetpackBlocks ).map(
+				( name ) => `jetpack/${ name }`
+			);
+
+			if ( onlyCoreBlocks && jetpackBlockNames.includes( blockName ) ) {
+				return null;
+			}
+			return defaultValue;
+		}
+	);
+};
+
 export default () => {
 	setupHooks();
+	setupStringsOverrides();
 };

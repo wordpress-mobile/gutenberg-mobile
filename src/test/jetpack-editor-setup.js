@@ -8,7 +8,6 @@ import {
 	unregisterBlockVariation,
 } from '@wordpress/blocks';
 import { select } from '@wordpress/data';
-import { store as editPostStore } from '@wordpress/edit-post';
 import { registerCoreBlocks } from '@wordpress/block-library';
 import { removeAllFilters } from '@wordpress/hooks';
 
@@ -47,15 +46,26 @@ const jetpackEmbedVariations = [
 	'smartframe',
 ];
 
+/**
+ * Registers the Jetpack blocks using a sandbox registry for the modules via `jest.isolateModules`.
+ * Module isolation is required in this case because the Jetpack blocks are registered upon module importation.
+ *
+ * @param {Object} props
+ * @return {Object} Blocks API registered in the sandbox registry.
+ */
+const registerJetpackBlocksIsolated = ( props ) => {
+	let blocksAPI;
+	jest.isolateModules( () => {
+		registerJetpackBlocks( props );
+		blocksAPI = require( '@wordpress/blocks' );
+	} );
+	return blocksAPI;
+};
+
 describe( 'Jetpack blocks', () => {
 	afterEach( () => {
 		// Reset Jetpack data
 		delete global.window[ JETPACK_DATA_PATH ];
-
-		// Clean up registered blocks
-		getBlockTypes().forEach( ( block ) => {
-			unregisterBlockType( block.name );
-		} );
 	} );
 
 	it( 'should set up Jetpack data', () => {
@@ -77,9 +87,11 @@ describe( 'Jetpack blocks', () => {
 
 	it( 'should register Jetpack blocks if Jetpack is active', () => {
 		setupJetpackEditor( defaultJetpackData );
-		registerJetpackBlocks( defaultProps );
+		const blocksAPI = registerJetpackBlocksIsolated( defaultProps );
 
-		const registeredBlocks = getBlockTypes().map( ( block ) => block.name );
+		const registeredBlocks = blocksAPI
+			.getBlockTypes()
+			.map( ( block ) => block.name );
 		expect( registeredBlocks ).toEqual(
 			expect.arrayContaining( jetpackBlocks )
 		);
@@ -87,15 +99,17 @@ describe( 'Jetpack blocks', () => {
 
 	it( 'should not register Jetpack blocks if Jetpack is not active', () => {
 		setupJetpackEditor( { ...defaultJetpackData, isJetpackActive: false } );
-		registerJetpackBlocks( defaultProps );
+		const blocksAPI = registerJetpackBlocksIsolated( defaultProps );
 
-		const registeredBlocks = getBlockTypes().map( ( block ) => block.name );
+		const registeredBlocks = blocksAPI
+			.getBlockTypes()
+			.map( ( block ) => block.name );
 		expect( registeredBlocks ).toEqual( [] );
 	} );
 
 	it( 'should hide Jetpack blocks by capabilities', () => {
 		setupJetpackEditor( defaultJetpackData );
-		registerJetpackBlocks( {
+		registerJetpackBlocksIsolated( {
 			capabilities: {
 				mediaFilesCollectionBlock: true,
 				contactInfoBlock: false,
@@ -103,8 +117,26 @@ describe( 'Jetpack blocks', () => {
 			},
 		} );
 
-		const { hiddenBlockTypes } = select( editPostStore ).getPreferences();
+		const hiddenBlockTypes = select( 'core/preferences' ).get(
+			'core/edit-post',
+			'hiddenBlockTypes'
+		);
 		expect( hiddenBlockTypes ).toEqual( [ 'jetpack/contact-info' ] );
+	} );
+
+	it( "should not register Jetpack blocks if 'onlyCoreBlocks' capbility is on", () => {
+		setupJetpackEditor( defaultJetpackData );
+		const blocksAPI = registerJetpackBlocksIsolated( {
+			capabilities: {
+				...defaultProps.capabilities,
+				onlyCoreBlocks: true,
+			},
+		} );
+
+		const registeredBlocks = blocksAPI
+			.getBlockTypes()
+			.map( ( block ) => block.name );
+		expect( registeredBlocks ).toEqual( [] );
 	} );
 
 	describe( 'Jetpack embed variations', () => {
@@ -117,6 +149,11 @@ describe( 'Jetpack blocks', () => {
 			// Embed variations can use the register block type WP hook to reactivate
 			// already registered variations, so we need to remove all hooks after the tests.
 			removeAllFilters( 'blocks.registerBlockType' );
+
+			// Clean up registered blocks
+			getBlockTypes().forEach( ( block ) => {
+				unregisterBlockType( block.name );
+			} );
 		} );
 
 		it( 'should not register Jetpack embed variations if Jetpack is not active', () => {
@@ -146,6 +183,28 @@ describe( 'Jetpack blocks', () => {
 					facebookEmbed: false,
 					instagramEmbed: null,
 					loomEmbed: undefined,
+				},
+			} );
+			// Embed variations require the Embed block to be registered,
+			// so we need to register the core blocks to include it.
+			registerCoreBlocks();
+
+			const embedVariations = getBlockVariations(
+				'core/embed',
+				'inserter'
+			).map( ( block ) => block.name );
+
+			jetpackEmbedVariations.forEach( ( variation ) =>
+				expect( embedVariations ).not.toContain( variation )
+			);
+		} );
+
+		it( "should not register Jetpack embed variations if 'onlyCoreBlocks' capbility is on", () => {
+			setupJetpackEditor( defaultJetpackData );
+			registerJetpackEmbedVariations( {
+				capabilities: {
+					...defaultProps.capabilities,
+					onlyCoreBlocks: true,
 				},
 			} );
 			// Embed variations require the Embed block to be registered,
