@@ -9,7 +9,7 @@ const gutenbergMetroConfigCopy = {
 	resolver: {
 		...gutenbergMetroConfig.resolver,
 		sourceExts: [ 'js', 'jsx', 'json', 'scss', 'sass', 'ts', 'tsx' ],
-		extraNodeModules,
+		extraNodeModules
 	},
 };
 
@@ -61,6 +61,26 @@ gutenbergMetroConfigCopy.resolver.resolveRequest = (
 				extraNodeModules[ name ] = extraNodeModulePath;
 			}
 		}
+	}
+
+	if ( moduleName.startsWith( '@automattic/jetpack-config' ) ) {
+		return {
+			filePath: path.resolve(
+				__dirname,
+				'jetpack/projects/js-packages/config/src/index.js'
+			),
+			type: 'sourceFile',
+		};
+	}
+
+	if ( moduleName.startsWith( '@automattic/jetpack-connection' ) ) {
+		return {
+			filePath: path.resolve(
+				__dirname,
+				'src/jetpack-connection.js'
+			),
+			type: 'sourceFile',
+		};
 	}
 
 	// Restore the original resolver

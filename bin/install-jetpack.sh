@@ -25,6 +25,7 @@ nvm install
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
 pnpm_version=$(npx semver -c "$listed_pnpm_version")
 
+# Install pnpm
 cd projects/plugins/jetpack
 
 # npx might prompt to install pnpm at the requested version. Let's just agree and carry on.
