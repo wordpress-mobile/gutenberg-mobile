@@ -19,11 +19,11 @@ command -v nvm >/dev/null 2>&1 || {
 pushd jetpack
 
 # Set up node requirement for Jetpack
-nvm uninstall v14.21.2
 nvm install
 nvm alias default $(nvm current)
 # Enforce to use the default version in the rest of workflow
 echo 'nvm use default' >> $BASH_ENV
+nvm uninstall v14.21.2
 
 # Set up required pnpm version
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
