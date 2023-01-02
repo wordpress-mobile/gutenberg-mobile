@@ -114,15 +114,15 @@ commands:
             command: mkdir reports && mkdir reports/test-results
   install-node-version:
     steps:
-      - run:
-          name: Install newer nvm
-          command: |
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
-            if [ -z "${NVM_DIR}" ] ; then
-              echo 'Default NVM_DIR to .nvm in home'
-              echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
-            fi
-            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+      # - run:
+      #     name: Install newer nvm
+      #     command: |
+      #       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+      #       if [ -z "${NVM_DIR}" ] ; then
+      #         echo 'Default NVM_DIR to .nvm in home'
+      #         echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
+      #       fi
+      #       echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - run:
           name: Install node version specified in .nvmrc using nvm
           command: |
