@@ -27,12 +27,15 @@ pnpm_version=$(npx semver -c "$listed_pnpm_version")
 
 # Install pnpm 
 echo "Installing pnpm $pnpm_version globally"
-npm install -g pnpm@"$pnpm_version"
+NPM_PATH="$(which node | sed 's/bin\/node//g')bin/npm"
+echo "$NPM_PATH"
+$NPM_PATH install -g pnpm@"$pnpm_version"
 
-echo "Get current prefix: $(npm config get prefix)"
-
+# Install Jetpack
 echo "Install Jetpack"
-echo "pnpm path: $(which pnpm)"
-/opt/circleci/.nvm/versions/node/v14.21.2/bin/pnpm install
+# PNPM_PATH="$(npm config get prefix)/bin/pnpm"
+# echo "pnpm path: $PNPM_PATH"
+# $PNPM_PATH install
+pnpm install
 
 popd
