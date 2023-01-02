@@ -25,9 +25,11 @@ nvm install
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
 pnpm_version=$(npx semver -c "$listed_pnpm_version")
 
+echo "npm path: $(which npm)"
+
 # Install pnpm 
 echo "Installing pnpm $pnpm_version globally"
-npm install --prefix=$HOME/.local -g pnpm@"$pnpm_version"
+npm install --prefer-offline --no-audit -g pnpm@"$pnpm_version"
 
 echo "Installed Jetpack"
 # pnpm install
