@@ -20,7 +20,9 @@ pushd jetpack
 
 # Set up node requirement for Jetpack
 nvm install
-nvm alias default v16.17.0
+nvm alias default $(nvm current)
+# Enforce to use the default version in the rest of workflow
+echo 'nvm use default' >> $BASH_ENV
 
 # Set up required pnpm version
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
