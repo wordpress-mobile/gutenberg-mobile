@@ -27,8 +27,7 @@ pnpm_version=$(npx semver -c "$listed_pnpm_version")
 
 # Install pnpm 
 echo "Installing pnpm $pnpm_version globally"
-npm install -g npm
-npm install -g pnpm@"$pnpm_version"
+npm install pnpm@"$pnpm_version"
 
 echo "Installed Jetpack"
 pnpm install
