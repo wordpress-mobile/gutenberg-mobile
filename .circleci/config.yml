@@ -114,15 +114,15 @@ commands:
             command: mkdir reports && mkdir reports/test-results
   install-node-version:
     steps:
-      # - run:
-      #     name: Install newer nvm
-      #     command: |
-      #       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
-      #       if [ -z "${NVM_DIR}" ] ; then
-      #         echo 'Default NVM_DIR to .nvm in home'
-      #         echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
-      #       fi
-      #       echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+      - run:
+          name: Install newer nvm
+          command: |
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+            if [ -z "${NVM_DIR}" ] ; then
+              echo 'Default NVM_DIR to .nvm in home'
+              echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
+            fi
+            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - run:
           name: Install node version specified in .nvmrc using nvm
           command: |
@@ -130,7 +130,7 @@ commands:
             # Set the installed version as the default one
             nvm alias default $(nvm current)
             # Enforce to use the default version in the rest of workflow
-            # echo 'nvm use default' >> $BASH_ENV
+            echo 'nvm use default' >> $BASH_ENV
 
 parameters:
   android-docker-image:
@@ -156,8 +156,6 @@ jobs:
         default: false
     machine:
       image: << pipeline.parameters.linux-machine-image >>
-    environment:
-      BASH_ENV: ~/.nvm/nvm.sh
     steps:
       - checkout-shallow
       - checkout-submodules
