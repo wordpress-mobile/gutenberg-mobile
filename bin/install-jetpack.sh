@@ -28,7 +28,8 @@ pnpm_version=$(npx semver -c "$listed_pnpm_version")
 NPM_PREFIX=$(which npm | sed 's/\/bin\/npm//g')
 
 # Set npm correct prefix
-npm config set prefix $NPM_PREFIX
+# npm config set prefix $NPM_PREFIX
+npm config set prefix /opt/circleci/.nvm/versions/node/v16.17.0
 
 # Install pnpm 
 echo "Installing pnpm $pnpm_version globally"
