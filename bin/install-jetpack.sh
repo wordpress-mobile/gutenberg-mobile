@@ -25,8 +25,7 @@ nvm install
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
 pnpm_version=$(npx semver -c "$listed_pnpm_version")
 
-NPM_PATH=$(which npm)
-NPM_PREFIX=$(npm config get prefix | sed 's/\/bin\/npm//g')
+NPM_PREFIX=$(which npm | sed 's/\/bin\/npm//g')
 
 # Set npm correct prefix
 npm config set prefix $NPM_PREFIX
