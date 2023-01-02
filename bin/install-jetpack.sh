@@ -28,4 +28,7 @@ pnpm_version=$(npx semver -c "$listed_pnpm_version")
 # Install pnpm 
 npm install -g pnpm@"$pnpm_version"
 
+# Setup Jetpack
+pnpm install
+
 popd
