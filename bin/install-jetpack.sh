@@ -19,6 +19,7 @@ command -v nvm >/dev/null 2>&1 || {
 pushd jetpack
 
 # Set up node requirement for Jetpack
+nvm -v
 nvm install
 
 # Set up required pnpm version
