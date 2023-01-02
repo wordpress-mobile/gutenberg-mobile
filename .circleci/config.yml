@@ -15,8 +15,6 @@ commands:
           name: NPM Install
           command: |
             echo "Node version: $(node --version)"
-            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
-            echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
             npm ci --prefer-offline --no-audit
       - save_cache:
           name: Save NPM Cache
@@ -35,8 +33,6 @@ commands:
           name: NPM Install Full
           command: |
             echo "Node version: $(node --version)"
-            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
-            echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
             npm install --no-audit
       - save_cache:
           name: Save NPM Cache
@@ -118,6 +114,9 @@ commands:
             command: mkdir reports && mkdir reports/test-results
   install-node-version:
     steps:
+      - run: |
+        echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
+        echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       # - run:
       #     name: Install newer nvm
       #     command: |
@@ -130,8 +129,6 @@ commands:
       - run:
           name: Install node version specified in .nvmrc using nvm
           command: |
-            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
-            echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
             nvm install
             # Set the installed version as the default one
             nvm alias default $(nvm current)
