@@ -19,8 +19,6 @@ command -v nvm >/dev/null 2>&1 || {
 pushd jetpack
 
 # Set up node requirement for Jetpack
-export NVM_DIR="/opt/circleci/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm install
 
 # Set up required pnpm version

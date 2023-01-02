@@ -126,11 +126,13 @@ commands:
       - run:
           name: Install node version specified in .nvmrc using nvm
           command: |
+            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
+            echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
             nvm install
             # Set the installed version as the default one
             nvm alias default $(nvm current)
             # Enforce to use the default version in the rest of workflow
-            echo 'nvm use default' >> $BASH_ENV
+            # echo 'nvm use default' >> $BASH_ENV
 
 parameters:
   android-docker-image:
