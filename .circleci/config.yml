@@ -114,9 +114,10 @@ commands:
             command: mkdir reports && mkdir reports/test-results
   install-node-version:
     steps:
-      - run: |
-        echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
-        echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+      - run: 
+          command: |
+            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
+            echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       # - run:
       #     name: Install newer nvm
       #     command: |
