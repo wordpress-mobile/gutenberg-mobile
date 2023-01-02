@@ -33,6 +33,6 @@ echo "Get current prefix: $(npm config get prefix)"
 
 echo "Install Jetpack"
 echo "pnpm path: $(which pnpm)"
-/opt/circleci/.nvm/versions/node/v16.17.0 pnpm install
+/opt/circleci/.nvm/versions/node/v16.17.0/bin/pnpm install
 
 popd
