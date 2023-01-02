@@ -25,18 +25,22 @@ nvm install
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
 pnpm_version=$(npx semver -c "$listed_pnpm_version")
 
-echo "npm path: $(which npm)"
+NPM_PATH=$(which npm)
+NPM_PREFIX=$(npm config get prefix | sed 's/\/bin\/npm//g')
+
+# Set npm correct prefix
+npm config set prefix $NPM_PREFIX
 
 # Install pnpm 
 echo "Installing pnpm $pnpm_version globally"
-npm install --prefer-offline --no-audit -g pnpm@"$pnpm_version"
+npm install -g pnpm@"$pnpm_version"
 
 echo "get current prefix: $(npm config get prefix)"
 
 echo "Installed Jetpack"
-# pnpm install
 echo "pnpm path: $(which pnpm)"
+echo "Circle CI string: $NPM_PREFIX"
+pnpm install
 
-pnpm setup
 
 popd
