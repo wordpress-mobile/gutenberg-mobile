@@ -27,15 +27,14 @@ pnpm_version=$(npx semver -c "$listed_pnpm_version")
 
 # Install pnpm 
 echo "Installing pnpm $pnpm_version globally"
-NPM_PATH="$(which node | sed 's/bin\/node//g')bin/npm"
-echo "$NPM_PATH"
-$NPM_PATH install -g pnpm@"$pnpm_version"
+npm install -g pnpm@"$pnpm_version"
+
+# npm config --glboal set prefix 
+
+echo "NPM global path: $(npm prefix -g)"
 
 # Install Jetpack
 echo "Install Jetpack"
-# PNPM_PATH="$(npm config get prefix)/bin/pnpm"
-# echo "pnpm path: $PNPM_PATH"
-# $PNPM_PATH install
 pnpm install
 
 popd
