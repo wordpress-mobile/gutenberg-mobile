@@ -21,18 +21,17 @@ pushd jetpack
 # Set up node requirement for Jetpack
 nvm install
 
+which npx
+
 # Set up required pnpm version
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
 pnpm_version=$(npx semver -c "$listed_pnpm_version")
 
 # Install pnpm 
 echo "Installing pnpm $pnpm_version globally"
-npm install -g pnpm@"$pnpm_version"
+( yes || true ) | npx pnpm@"$pnpm_version" install
 
-which pnpm
-
+echo "Install Jetpack dependencies"
 pnpm install
-
-echo "Installed Jetpack dependencies"
 
 popd
