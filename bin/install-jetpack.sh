@@ -31,6 +31,8 @@ echo "npm path: $(which npm)"
 echo "Installing pnpm $pnpm_version globally"
 npm install --prefer-offline --no-audit -g pnpm@"$pnpm_version"
 
+echo "get current prefix: $(npm config get prefix)"
+
 echo "Installed Jetpack"
 # pnpm install
 echo "pnpm path: $(which pnpm)"
