@@ -26,9 +26,10 @@ listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
 pnpm_version=$(npx semver -c "$listed_pnpm_version")
 
 # Install pnpm 
+echo "Installing pnpm $pnpm_version globally"
 npm install -g pnpm@"$pnpm_version"
+( yes || true ) | pnpm install
 
-# Setup Jetpack
-pnpm install
+echo "Installed Jetpack dependencies"
 
 popd
