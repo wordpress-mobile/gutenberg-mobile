@@ -19,6 +19,7 @@ command -v nvm >/dev/null 2>&1 || {
 pushd jetpack
 
 # Set up node requirement for Jetpack
+nvm uninstall v14.21.2
 nvm install
 nvm alias default $(nvm current)
 # Enforce to use the default version in the rest of workflow
