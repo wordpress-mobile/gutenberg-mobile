@@ -20,9 +20,6 @@ pushd jetpack
 
 # Set up node requirement for Jetpack
 nvm install
-npm install -g npm@8.15.0
-
-echo "Current npm version: $(npm -v)"
 
 # Set up required pnpm version
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
@@ -36,6 +33,6 @@ echo "Get current prefix: $(npm config get prefix)"
 
 echo "Install Jetpack"
 echo "pnpm path: $(which pnpm)"
-pnpm install
+/opt/circleci/.nvm/versions/node/v16.17.0 pnpm install
 
 popd
