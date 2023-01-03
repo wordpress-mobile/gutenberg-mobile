@@ -25,8 +25,6 @@ source "$NVM_DIR/nvm.sh"
 nvm install v16.17.0
 nvm use v16.17.0
 nvm alias default v16.17.0
-nvm uninstall v14.21.2
-nvm ls
 
 echo "Printing content of npm config ls -l | grep config"
 npm config ls -l | grep config
@@ -42,8 +40,8 @@ npm install -g pnpm@"$pnpm_version"
 echo "Current pnpm:"
 pnpm -v
 
-pnpm add -g pnpm
 pnpm env use --global 16
+pnpm add -g pnpm
 echo "NPM global path: $(npm prefix -g)"
 
 # Install Jetpack
