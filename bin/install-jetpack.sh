@@ -42,11 +42,9 @@ pnpm -v
 
 which pnpm
 
-# if [ -z "$CIRCLECI" ] ; then
 echo "Exporting PNPM variables"
 export PNPM_HOME="/home/circleci/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
-source ~/.bashrc
 
 echo "PNPM_HOME: $PNPM_HOME"
 
