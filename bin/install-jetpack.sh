@@ -19,8 +19,8 @@ command -v nvm >/dev/null 2>&1 || {
 pushd jetpack
 
 # Set up node requirement for Jetpack
-nvm uninstall 16.17.0
-nvm install 16.17.0
+source ~/.nvm/nvm.sh
+nvm install
 
 echo "Printing content of npm config ls -l | grep config"
 npm config ls -l | grep config
