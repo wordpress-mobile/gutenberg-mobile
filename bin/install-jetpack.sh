@@ -43,7 +43,8 @@ pnpm -v
 which pnpm
 
 echo "Exporting PNPM variables"
-export PNPM_HOME="/home/circleci/.local/share/pnpm"
+export PNPM_HOME="/opt/circleci/.nvm/versions/node/v16.17.0/bin"
+# export PNPM_HOME="/home/circleci/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
 echo "PNPM_HOME: $PNPM_HOME"
