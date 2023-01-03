@@ -25,6 +25,7 @@ source "$NVM_DIR/nvm.sh"
 nvm install v16.17.0
 nvm use v16.17.0
 nvm alias default v16.17.0
+nvm uninstall v14.21.2
 nvm ls
 
 echo "Printing content of npm config ls -l | grep config"
