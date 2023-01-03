@@ -39,6 +39,11 @@ pnpm_version=$(npx semver -c "$listed_pnpm_version")
 echo "Installing pnpm $pnpm_version globally"
 npm install -g pnpm@"$pnpm_version"
 
+echo "Current pnpm:"
+pnpm -v
+
+pnpm add -g pnpm
+pnpm env use --global 16
 echo "NPM global path: $(npm prefix -g)"
 
 # Install Jetpack
