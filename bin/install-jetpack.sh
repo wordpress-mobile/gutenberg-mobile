@@ -19,7 +19,7 @@ command -v nvm >/dev/null 2>&1 || {
 pushd jetpack
 
 # Set up node requirement for Jetpack
-source ~/.nvm/nvm.sh
+source "$NVM_DIR/nvm.sh"
 nvm install
 
 echo "Printing content of npm config ls -l | grep config"
