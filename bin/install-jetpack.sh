@@ -42,8 +42,11 @@ pnpm -v
 
 which pnpm
 
-pnpm setup
-source /home/circleci/.bashrc
+if [ -z "$BASH_ENV" ] ; then
+  echo 'export PNPM_HOME="/home/circleci/.local/share/pnpm"' >> $BASH_ENV
+  echo 'export PATH="$PNPM_HOME:$PATH"' >> $BASH_ENV
+fi
+
 pnpm env use --global 16
 # pnpm config
 
