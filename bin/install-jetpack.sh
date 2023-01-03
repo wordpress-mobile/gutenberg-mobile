@@ -40,9 +40,9 @@ npm install -g pnpm@"$pnpm_version"
 echo "Current pnpm:"
 pnpm -v
 
-pnpm env use --global 16
-pnpm add -g pnpm
-echo "NPM global path: $(npm prefix -g)"
+which pnpm
+# pnpm env use --global 16
+# pnpm config
 
 # Install Jetpack
 echo "Install Jetpack"
