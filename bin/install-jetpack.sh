@@ -43,6 +43,7 @@ pnpm -v
 which pnpm
 
 pnpm setup
+source /home/circleci/.bashrc
 pnpm env use --global 16
 # pnpm config
 
