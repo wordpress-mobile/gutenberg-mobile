@@ -16,24 +16,23 @@ command -v nvm >/dev/null 2>&1 || {
   exit 1
 }
 
+echo "Installing pnpm 7.9.2 globally"
+npm install -g pnpm@7.9.2
+
 pushd jetpack
 
 # Set up node requirement for Jetpack
 nvm install
-nvm alias default $(nvm current)
-# Enforce to use the default version in the rest of workflow
-echo 'nvm use default' >> $BASH_ENV
-nvm -v
 
 # Set up required pnpm version
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
 pnpm_version=$(npx semver -c "$listed_pnpm_version")
 
 # Install pnpm 
-echo "Installing pnpm $pnpm_version globally"
-npm install -g pnpm@"$pnpm_version"
+# echo "Installing pnpm $pnpm_version globally"
+# npm install -g pnpm@"$pnpm_version"
 
-echo "NPM global path: $(npm prefix -g)"
+# echo "NPM global path: $(npm prefix -g)"
 
 # Install Jetpack
 echo "Install Jetpack"
