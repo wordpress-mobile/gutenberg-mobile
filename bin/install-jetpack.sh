@@ -40,7 +40,7 @@ npm install -g pnpm@7.13.6
 echo "Current pnpm:"
 pnpm -v
 
-which pnpm
+CURRENT_PNPM_PATH=$(which pnpm)
 
 echo "Exporting PNPM variables"
 # export PNPM_HOME="/opt/circleci/.nvm/versions/node/v16.17.0/bin"
@@ -50,7 +50,8 @@ export PATH="$PNPM_HOME:$PATH"
 echo "PNPM_HOME: $PNPM_HOME"
 
 pnpm env use --global 16
-pnpm add -g pnpm
+$CURRENT_PNPM_PATH env use --global 16
+# pnpm add -g pnpm
 
 # Install Jetpack
 echo "Install Jetpack"
