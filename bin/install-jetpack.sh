@@ -19,11 +19,11 @@ command -v nvm >/dev/null 2>&1 || {
 pushd jetpack
 
 # Set up node requirement for Jetpack
-nvm install
+unset npm_config_prefix
+source "$NVM_DIR/nvm.sh"
 
-echo "contents of: /home/circleci/.npmrc"
-cat /home/circleci/.npmrc
-echo "---------"
+nvm install v16.17.0
+nvm use v16.17.0
 
 echo "Printing content of npm config ls -l | grep config"
 npm config ls -l | grep config
