@@ -37,24 +37,18 @@ pnpm_version=$(npx semver -c "$listed_pnpm_version")
 echo "Installing pnpm 7.13.6 globally"
 npm install -g pnpm@7.13.6
 
-echo "Current pnpm:"
-pnpm -v
-
-CURRENT_PNPM_PATH=$(which pnpm)
-
 echo "Exporting PNPM variables"
-# export PNPM_HOME="/opt/circleci/.nvm/versions/node/v16.17.0/bin"
 export PNPM_HOME="/home/circleci/.local/share/pnpm"
+# export PNPM_HOME="/home/circleci/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
 echo "PNPM_HOME: $PNPM_HOME"
 
 pnpm env use --global 16
 pnpm add -g pnpm
-pnpm setup
 
 # Install Jetpack
 echo "Install Jetpack"
-pnpm install
+pnpm install --ignore-scripts
 
 popd
