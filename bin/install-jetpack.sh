@@ -41,7 +41,8 @@ echo "Current pnpm:"
 pnpm -v
 
 which pnpm
-# pnpm env use --global 16
+
+pnpm env use --global 16
 # pnpm config
 
 # Install Jetpack
