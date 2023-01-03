@@ -42,12 +42,12 @@ pnpm -v
 
 which pnpm
 
-if [ -z "$CIRCLECI" ] ; then
-  echo "Expoting PNPM variables"
-  export PNPM_HOME="/home/circleci/.local/share/pnpm"
-  export PATH="$PNPM_HOME:$PATH"
-  source /home/circleci/.bashrc
-fi
+# if [ -z "$CIRCLECI" ] ; then
+echo "Exporting PNPM variables"
+export PNPM_HOME="/home/circleci/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+source /home/circleci/.bashrc
+# fi
 
 pnpm env use --global 16
 # pnpm config
