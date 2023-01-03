@@ -46,10 +46,11 @@ which pnpm
 echo "Exporting PNPM variables"
 export PNPM_HOME="/home/circleci/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
-source /home/circleci/.bashrc
-# fi
+source ~/.bashrc
 
-pnpm env use --global 16
+echo "PNPM_HOME: $PNPM_HOME"
+
+# pnpm env use --global 16
 # pnpm config
 
 # Install Jetpack
