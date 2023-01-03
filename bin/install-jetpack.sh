@@ -24,6 +24,9 @@ nvm alias default v16.17.0
 node -v
 npm -v
 
+echo "Printing content of ~/.npmrc"
+cat ~/.npmrc  
+
 # Set up required pnpm version
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
 pnpm_version=$(npx semver -c "$listed_pnpm_version")
