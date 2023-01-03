@@ -43,8 +43,9 @@ pnpm -v
 which pnpm
 
 if [ -z "$BASH_ENV" ] ; then
-  echo 'export PNPM_HOME="/home/circleci/.local/share/pnpm"' >> $BASH_ENV
-  echo 'export PATH="$PNPM_HOME:$PATH"' >> $BASH_ENV
+  echo "Exprting PNPM variables"
+  export PNPM_HOME="/home/circleci/.local/share/pnpm"
+  export PATH="$PNPM_HOME:$PATH"
 fi
 
 pnpm env use --global 16
