@@ -34,8 +34,8 @@ listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
 pnpm_version=$(npx semver -c "$listed_pnpm_version")
 
 # Install pnpm 
-echo "Installing pnpm $pnpm_version globally"
-npm install -g pnpm@"$pnpm_version"
+echo "Installing pnpm 7.13.6 globally"
+npm install -g pnpm@7.13.6
 
 echo "Current pnpm:"
 pnpm -v
