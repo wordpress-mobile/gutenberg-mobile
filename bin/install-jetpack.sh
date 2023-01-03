@@ -19,8 +19,11 @@ command -v nvm >/dev/null 2>&1 || {
 pushd jetpack
 
 # Set up node requirement for Jetpack
-source "$NVM_DIR/nvm.sh"
 nvm install
+
+echo "contents of: /home/circleci/.npmrc"
+cat /home/circleci/.npmrc
+echo "---------"
 
 echo "Printing content of npm config ls -l | grep config"
 npm config ls -l | grep config
