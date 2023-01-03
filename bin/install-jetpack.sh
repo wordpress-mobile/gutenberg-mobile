@@ -42,6 +42,7 @@ pnpm -v
 
 which pnpm
 
+pnpm setup
 pnpm env use --global 16
 # pnpm config
 
