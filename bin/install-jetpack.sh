@@ -27,6 +27,9 @@ npm -v
 echo "Printing content of npm config ls -l | grep config"
 npm config ls -l | grep config
 
+echo "--------------"
+echo "NPM_CONFIG_GLOBALCONFIG: $NPM_CONFIG_GLOBALCONFIG"
+
 # Set up required pnpm version
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
 pnpm_version=$(npx semver -c "$listed_pnpm_version")
