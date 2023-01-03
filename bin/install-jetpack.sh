@@ -49,7 +49,7 @@ export PATH="$PNPM_HOME:$PATH"
 echo "PNPM_HOME: $PNPM_HOME"
 
 pnpm env use --global 16
-# pnpm config
+pnpm add -g pnpm
 
 # Install Jetpack
 echo "Install Jetpack"
