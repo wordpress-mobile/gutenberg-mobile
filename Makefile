@@ -30,7 +30,7 @@ validate-dependencies: build-test-runner
 	@echo "--- Validating Dependencies..."
 	$(call run_in, /app/gutenberg, npm ci --prefer-offline --no-audit)
 
-install-gutenberg-mobile-dependencies:
+install-project-dependencies:
 	@echo "--- Installing Gutenberg Mobile Dependencies"
 	$(call run, npm install --no-audit)
 
@@ -42,10 +42,11 @@ install-jetpack-dependencies:
 	@echo "--- Installing Jetpack Dependencies"
 	$(call run_in, /app/jetpack, yes | npx pnpm@7.5.0 install)
 
-install-dependencies: build-test-runner install-gutenberg-mobile-dependencies install-gutenberg-dependencies install-jetpack-dependencies
+install-dependencies: build-test-runner install-gutenberg-dependencies install-jetpack-dependencies install-project-dependencies
+
+
 
 # 	# --unsafe-perm is required so that we can run under Docker
-# 	$(call run, npm install --no-audit --unsafe-perm)
 # 	$(call run, npm run i18n:check-cache)
 
 bundle: bundle-android bundle-ios
