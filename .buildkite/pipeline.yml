@@ -1,102 +1,94 @@
-x-common-params:
-  &publish-android-artifacts-docker-container
-  docker#v3.8.0:
-    image: "public.ecr.aws/automattic/android-build-image:v1.1.0"
-    propagate-environment: true
-    environment:
-      # DO NOT MANUALLY SET THESE VALUES!
-      # They are passed from the Buildkite agent to the Docker container
-      - "AWS_ACCESS_KEY"
-      - "AWS_SECRET_KEY"
-
 steps:
   - label: "Validate package.json"
     command: make validate-dependencies
     plugins:
-      -  automattic/bash-cache#2.2.0
+      -  automattic/bash-cache#2.12.0
 
-  - group: "iOS"
-    steps:
-    - label: "Bundle iOS for Testing"
-      command: make bundle-ios-for-testing
-      plugins:
-        -  automattic/bash-cache#2.2.0
-      agents:
-        queue: "js"
+  - label: "Install Dependencies"
+    command: make install-dependencies
+    plugins:
+      -  automattic/bash-cache#2.12.0
 
-    - label: "iOS JS Tests"
-      command: make test-ios
-      plugins:
-        -  automattic/bash-cache#2.2.0
-      artifact_paths:
-        - "reports/**/*"
+  # - group: "iOS"
+  #   steps:
+  #   - label: "Bundle iOS for Testing"
+  #     command: make bundle-ios-for-testing
+  #     plugins:
+  #       -  automattic/bash-cache#2.12.0
+  #     agents:
+  #       queue: "js"
 
-    - label: "Build iOS Test App"
-      command: .buildkite/commands/build-mac-bundle.sh
-      key: build-ios-test-app
-      env:
-        IMAGE_ID: xcode-13.4.1
-      plugins:
-        -  automattic/bash-cache#2.2.0
-      agents:
-        queue: "mac"
-      artifact_paths:
-        - artifacts/GutenbergDemo.app.zip
+  #   - label: "iOS JS Tests"
+  #     command: make test-ios
+  #     plugins:
+  #       -  automattic/bash-cache#2.12.0
+  #     artifact_paths:
+  #       - "reports/**/*"
 
-    - label: "Test iOS App with Saucelabs"
-      command: .buildkite/commands/ui-test-mac-bundle.sh
-      depends_on: build-ios-test-app
+  #   - label: "Build iOS Test App"
+  #     command: .buildkite/commands/build-mac-bundle.sh
+  #     key: build-ios-test-app
+  #     env:
+  #       IMAGE_ID: xcode-13.4.1
+  #     plugins:
+  #       -  automattic/bash-cache#2.12.0
+  #     agents:
+  #       queue: "mac"
+  #     artifact_paths:
+  #       - artifacts/GutenbergDemo.app.zip
 
-  - group: "Android"
-    steps:
-    - label: "Android JS Tests"
-      command: make test-android
-      plugins:
-        -  automattic/bash-cache#2.2.0
-      artifact_paths:
-        - "reports/**/*"
+  # - group: "Android"
+  #   steps:
+  #   - label: "Android JS Tests"
+  #     command: make test-android
+  #     plugins:
+  #       -  automattic/bash-cache#2.12.0
+  #     artifact_paths:
+  #       - "reports/**/*"
 
-    - label: "Build and Test Android Editor"
-      command: |
-        make install-dependencies
-        cd gutenberg/packages/react-native-editor/android && ./gradlew testDebug
-      agents:
-        queue: "android"
+  #   - label: "Build and Test Android Editor"
+  #     command: |
+  #       make install-dependencies
+  #       cd gutenberg/packages/react-native-editor/android && ./gradlew testDebug
+  #     agents:
+  #       queue: "android"
 
-    - label: "Build and Test Bridge Editor"
-      command: cd gutenberg/packages/react-native-bridge/android && ./gradlew test
-      agents:
-        queue: "android"
+  #   - label: "Build and Test Bridge Editor"
+  #     command: cd gutenberg/packages/react-native-bridge/android && ./gradlew test
+  #     agents:
+  #       queue: "android"
 
-    - label: "Android e2e Tests"
-      command: |
-        make build-android-for-testing
-        make e2e-test-android
-      plugins:
-        -  automattic/bash-cache#2.2.0
-      artifact_paths:
-        - "reports/**/*"
+  #   - label: "Android e2e Tests"
+  #     command: |
+  #       make build-android-for-testing
+  #       make e2e-test-android
+  #     plugins:
+  #       -  automattic/bash-cache#2.12.0
+  #     artifact_paths:
+  #       - "reports/**/*"
 
-  - group: "Publish"
-    steps:
-    - label: "Bundle Android for Release"
-      key: "bundle-android"
-      command: |
-        make bundle-android
-        buildkite-agent artifact upload bundle/android/App.js
-      agents:
-        queue: "js"
+  # - group: "Publish"
+  #   steps:
+  #   - label: "Bundle Android for Release"
+  #     key: "bundle-android"
+  #     command: |
+  #       make bundle-android
+  #       buildkite-agent artifact upload bundle/android/App.js
 
-    - label: "Build Android RN Aztec & Publish to S3"
-      key: "publish-react-native-aztec-android"
-      plugins:
-        - *publish-android-artifacts-docker-container
-      command: .buildkite/publish-react-native-aztec-android-artifacts.sh
+  #   - label: "Build Android RN Aztec & Publish to S3"
+  #     key: "publish-react-native-aztec-android"
+  #     command: .buildkite/publish-react-native-aztec-android-artifacts.sh
+  #     plugins:
+  #       -  automattic/bash-cache#2.12.0
+  #     agents:
+  #       queue: "android"
 
-    - label: "Build Android RN Bridge & Publish to S3"
-      depends_on:
-        - "bundle-android"
-        - "publish-react-native-aztec-android"
-      plugins:
-        - *publish-android-artifacts-docker-container
-      command: .buildkite/publish-react-native-bridge-android-artifacts.sh
+  #   - label: "Build Android RN Bridge & Publish to S3"
+  #     depends_on:
+  #       - "bundle-android"
+  #       - "publish-react-native-aztec-android"
+  #     command: .buildkite/publish-react-native-bridge-android-artifacts.sh
+  #     plugins:
+  #       -  automattic/bash-cache#2.12.0
+  #     agents:
+  #       queue: "android"

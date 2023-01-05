@@ -11,7 +11,9 @@ android_builder = android-app-builder
 docker_run_flags = -it --rm
 
 ### Shared Commands
-gutenberg_run = docker run $(docker_run_flags) --volume $(src_volume) $(test_runner) /bin/bash --login -c "nvm install && $(1)"
+run = docker run $(docker_run_flags) --volume $(src_volume) $(test_runner) /bin/bash --login -c "nvm install && $(1)"
+run_in = docker run $(docker_run_flags) --volume $(src_volume) --workdir $(1) $(test_runner) /bin/bash --login -c "nvm install && $(2)"
+
 android_run = docker run $(docker_run_flags) --volume $(src_volume) $(android_builder) /bin/bash --login -c "nvm install && $(1)"
 
 gutenberg_run_with_env = docker run $(docker_run_flags) --volume $(src_volume) $(1) $(test_runner) /bin/bash --login -c "nvm install && $(2)"
@@ -26,12 +28,25 @@ build-android-builder:
 
 validate-dependencies: build-test-runner
 	@echo "--- Validating Dependencies..."
-	$(call gutenberg_run, npm ci --prefer-offline --no-audit)
+	$(call run_in, /app/gutenberg, npm ci --prefer-offline --no-audit)
 
-install-dependencies: build-test-runner
-	@echo "--- Installing all dependencies from scratch..."
-	# --unsafe-perm is required so that we can run under Docker
-	$(call gutenberg_run, npm install --no-audit --unsafe-perm)
+install-gutenberg-mobile-dependencies:
+	@echo "--- Installing Gutenberg Mobile Dependencies"
+	$(call run, npm install --no-audit)
+
+install-gutenberg-dependencies:
+	@echo "--- Installing Gutenberg Dependencies"
+	$(call run_in, /app/gutenberg, npm install)
+
+install-jetpack-dependencies:
+	@echo "--- Installing Jetpack Dependencies"
+	$(call run_in, /app/jetpack, yes | npx pnpm@7.5.0 install)
+
+install-dependencies: build-test-runner install-gutenberg-mobile-dependencies install-gutenberg-dependencies install-jetpack-dependencies
+
+# 	# --unsafe-perm is required so that we can run under Docker
+# 	$(call run, npm install --no-audit --unsafe-perm)
+# 	$(call run, npm run i18n:check-cache)
 
 bundle: bundle-android bundle-ios
 
