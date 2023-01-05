@@ -1,5 +1,8 @@
 Unreleased
 ---
+
+1.87.0
+---
 * [*] Only register core blocks when `onlyCoreBlocks` capability is enabled [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5293]
 
 1.86.1
