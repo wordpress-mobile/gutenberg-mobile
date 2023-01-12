@@ -1,5 +1,7 @@
 Unreleased
 ---
+* [**] Gallery block: Address styling regression, in which negative margin was added [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5386]
+
 
 1.87.0
 ---
