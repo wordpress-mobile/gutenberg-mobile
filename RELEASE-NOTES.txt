@@ -1,6 +1,11 @@
 Unreleased
 ---
 
+1.87.1
+---
+* [**] Remove unnecessary negative margin around empty gallery block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5386]
+* [*] RichText - Parse CSS values and avoid setting undefined ones [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5391]
+
 1.87.0
 ---
 * [*] Only register core blocks when `onlyCoreBlocks` capability is enabled [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5293]
