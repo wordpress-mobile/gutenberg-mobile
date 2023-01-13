@@ -1,7 +1,10 @@
 Unreleased
 ---
-* [**] Gallery block: Address styling regression, in which negative margin was added [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5386]
 
+1.87.1
+---
+* [**] Remove unnecessary negative margin around empty gallery block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5386]
+* [*] RichText - Parse CSS values and avoid setting undefined ones [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5391]
 
 1.87.0
 ---
