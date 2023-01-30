@@ -29,6 +29,9 @@ const supportedJetpackBlocks = {
 	'tiled-gallery': {
 		available: __DEV__,
 	},
+	videopress: {
+		available: true,
+	},
 };
 
 const setJetpackData = ( {
@@ -84,6 +87,7 @@ export function registerJetpackBlocks( { capabilities } ) {
 		capabilities.tiledGalleryBlock,
 		'jetpack/tiled-gallery'
 	);
+	hideBlockByCapability( capabilities.videoPressBlock, 'jetpack/videopress' );
 
 	// Register Jetpack blocks
 	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );

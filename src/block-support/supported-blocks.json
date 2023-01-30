@@ -33,7 +33,8 @@
 		"jetpack/email",
 		"jetpack/phone",
 		"jetpack/address",
-		"jetpack/tiled-gallery"
+		"jetpack/tiled-gallery",
+		"jetpack/videopress"
 	],
 	"devOnly": [ "core/code" ],
 	"iOSOnly": [],

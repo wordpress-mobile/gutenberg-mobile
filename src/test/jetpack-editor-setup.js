@@ -38,6 +38,7 @@ const jetpackBlocks = [
 	'jetpack/contact-info',
 	'jetpack/story',
 	'jetpack/tiled-gallery',
+	'jetpack/videopress',
 ];
 const jetpackEmbedVariations = [
 	'facebook',
