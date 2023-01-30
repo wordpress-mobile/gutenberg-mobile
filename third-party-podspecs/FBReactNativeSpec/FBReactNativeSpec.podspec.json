@@ -11,7 +11,7 @@
   "compiler_flags": "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32 -Wno-nullability-completeness",
   "source": {
     "git": "https://github.com/wordpress-mobile/gutenberg-mobile.git",
-    "commit": "e91d1bffb713544d0d224266c17d5dccc940e775",
+    "commit": "0",
     "submodules": "true"
   },
   "header_dir": "FBReactNativeSpec",
