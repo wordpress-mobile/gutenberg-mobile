@@ -1,6 +1,10 @@
 Unreleased
 ---
 
+1.87.3
+---
+* [*] Fix insert blocks not handling raw string properly in unsupported block editor [https://github.com/WordPress/gutenberg/pull/47472]
+
 1.87.2
 ---
 * [*] Add boolean contentStyle and clientId check to Column Edit InnerBlocks [https://github.com/WordPress/gutenberg/pull/47234]
