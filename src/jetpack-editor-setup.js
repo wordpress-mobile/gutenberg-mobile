@@ -4,6 +4,7 @@
 import { dispatch, select } from '@wordpress/data';
 import { store as editPostStore } from '@wordpress/edit-post';
 import { addAction, addFilter } from '@wordpress/hooks';
+import { store as blockEditorStore } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
@@ -149,9 +150,8 @@ const setupStringsOverrides = () => {
 		'native.missing_block_detail',
 		'native/missing_block',
 		( defaultValue, blockName ) => {
-			const { getSettings } = select( 'core/block-editor' );
-			const onlyCoreBlocks =
-				getSettings( 'capabilities' ).onlyCoreBlocks === true;
+			const { capabilities } = select( blockEditorStore ).getSettings();
+			const onlyCoreBlocks = capabilities?.onlyCoreBlocks === true;
 
 			const jetpackBlockNames = Object.keys( supportedJetpackBlocks ).map(
 				( name ) => `jetpack/${ name }`
