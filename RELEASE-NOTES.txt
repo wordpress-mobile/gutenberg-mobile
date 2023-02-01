@@ -1,7 +1,7 @@
 Unreleased
 ---
 * [*] Bump Android `minSdkVersion` to 24 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5435]
-* [*] Bump Aztec version to `1.6.3` [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5438]
+* [*] Bump Aztec-Android version to `1.6.3` [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5438]
 * [*] Update React Native Reanimated to 2.9.1-wp-3 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5430]
 
 1.87.3
