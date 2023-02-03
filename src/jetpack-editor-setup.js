@@ -29,7 +29,7 @@ const supportedJetpackBlocks = {
 	'tiled-gallery': {
 		available: __DEV__,
 	},
-	videopress: {
+	'videopress/video': {
 		available: true,
 	},
 };
@@ -87,9 +87,10 @@ export function registerJetpackBlocks( { capabilities } ) {
 		capabilities.tiledGalleryBlock,
 		'jetpack/tiled-gallery'
 	);
-	hideBlockByCapability( capabilities.videoPressBlock, 'jetpack/videopress' );
+	hideBlockByCapability( true, 'videopress/video' );
 
 	// Register Jetpack blocks
+	require( '../jetpack/projects/packages/videopress/src/client/block-editor/editor' );
 	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );
 }
 
@@ -161,7 +162,13 @@ const setupStringsOverrides = () => {
 				( name ) => `jetpack/${ name }`
 			);
 
-			if ( onlyCoreBlocks && jetpackBlockNames.includes( blockName ) ) {
+			const videoPressBlock = blockName === 'videopress/video';
+
+			if (
+				onlyCoreBlocks &&
+				jetpackBlockNames.includes( blockName ) &&
+				videoPressBlock
+			) {
 				return null;
 			}
 			return defaultValue;
