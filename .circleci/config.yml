@@ -214,7 +214,7 @@ jobs:
             curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" --location \
             --request POST 'https://api.us-west-1.saucelabs.com/v1/storage/upload' \
             --form 'payload=@"./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk"' \
-            --form "name='Gutenberg-$SAUCE_FILENAME.apk'" \
+            --form "name=Gutenberg-$SAUCE_FILENAME.apk" \
             --form 'description="Gutenberg"'
       - run: mkdir /home/circleci/test-results
       - run:
@@ -303,12 +303,10 @@ jobs:
         name: Upload .app to sauce labs
         command: |
           source bin/sauce-pre-upload.sh
-          brew install curl
-          /usr/local/opt/curl/bin/curl --version
-          /usr/local/opt/curl/bin/curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" --location \
+          curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" --location \
           --request POST 'https://api.us-west-1.saucelabs.com/v1/storage/upload' \
           --form 'payload=@"./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip"' \
-          --form "name='Gutenberg-$SAUCE_FILENAME.app.zip'" \
+          --form "name=Gutenberg-$SAUCE_FILENAME.app.zip" \
           --form 'description="Gutenberg"'
     - run:
         name: Run Device Tests
