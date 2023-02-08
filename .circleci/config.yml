@@ -211,7 +211,11 @@ jobs:
           name: Upload apk to sauce labs
           command: |
             source bin/sauce-pre-upload.sh
-            curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.apk?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk
+            curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" --location \
+            --request POST 'https://api.us-west-1.saucelabs.com/v1/storage/upload' \
+            --form 'payload=@"./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk"' \
+            --form "name=Gutenberg-$SAUCE_FILENAME.apk" \
+            --form 'description="Gutenberg"'
       - run: mkdir /home/circleci/test-results
       - run:
           name: Run Device Tests
@@ -299,9 +303,11 @@ jobs:
         name: Upload .app to sauce labs
         command: |
           source bin/sauce-pre-upload.sh
-          brew install curl
-          /usr/local/opt/curl/bin/curl --version
-          /usr/local/opt/curl/bin/curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.app.zip?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
+          curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" --location \
+          --request POST 'https://api.us-west-1.saucelabs.com/v1/storage/upload' \
+          --form 'payload=@"./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip"' \
+          --form "name=Gutenberg-$SAUCE_FILENAME.app.zip" \
+          --form 'description="Gutenberg"'
     - run:
         name: Run Device Tests
         command: |
