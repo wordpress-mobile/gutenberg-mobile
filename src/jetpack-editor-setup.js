@@ -164,10 +164,10 @@ const setupStringsOverrides = () => {
 
 			const videoPressBlock = blockName === 'videopress/video';
 
-			if ( 
-				onlyCoreBlocks && 
-				jetpackBlockNames.includes( blockName ) && 
-				videoPressBlock 
+			if (
+				onlyCoreBlocks &&
+				jetpackBlockNames.includes( blockName ) &&
+				videoPressBlock
 			) {
 				return null;
 			}
