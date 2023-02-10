@@ -38,7 +38,6 @@ const jetpackBlocks = [
 	'jetpack/contact-info',
 	'jetpack/story',
 	'jetpack/tiled-gallery',
-	'videopress/video',
 ];
 const jetpackEmbedVariations = [
 	'facebook',
@@ -75,7 +74,6 @@ describe( 'Jetpack blocks', () => {
 				'contact-info': { available: true },
 				story: { available: true },
 				'tiled-gallery': { available: true },
-				'videopress/video': { available: true },
 			},
 			jetpack: { is_active: true },
 			siteFragment: null,
@@ -116,7 +114,6 @@ describe( 'Jetpack blocks', () => {
 				mediaFilesCollectionBlock: true,
 				contactInfoBlock: false,
 				tiledGalleryBlock: true,
-				videoPressBlock: true,
 			},
 		} );
 

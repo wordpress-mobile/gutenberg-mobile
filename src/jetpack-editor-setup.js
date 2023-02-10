@@ -30,9 +30,6 @@ const supportedJetpackBlocks = {
 	'tiled-gallery': {
 		available: __DEV__,
 	},
-	'videopress/video': {
-		available: __DEV__,
-	},
 };
 
 const setJetpackData = ( {
@@ -88,11 +85,16 @@ export function registerJetpackBlocks( { capabilities } ) {
 		capabilities.tiledGalleryBlock,
 		'jetpack/tiled-gallery'
 	);
-	hideBlockByCapability( capabilities.videoPressBlock, 'videopress/video' );
+	hideBlockByCapability(
+		__DEV__ && capabilities.videoPressBlock,
+		'videopress/video'
+	);
 
 	// Register Jetpack blocks
-	require( '../jetpack/projects/packages/videopress/src/client/block-editor/editor' );
 	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );
+
+	// Register VideoPress block
+	require( '../jetpack/projects/packages/videopress/src/client/block-editor/editor' );
 }
 
 export function registerJetpackEmbedVariations( { capabilities } ) {
