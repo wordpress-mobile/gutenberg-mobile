@@ -30,6 +30,9 @@ const supportedJetpackBlocks = {
 	'tiled-gallery': {
 		available: __DEV__,
 	},
+	'videopress/video': {
+		available: __DEV__,
+	},
 };
 
 const setJetpackData = ( {
