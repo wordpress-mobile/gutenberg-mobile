@@ -10,6 +10,9 @@ x-common-params:
       - "AWS_SECRET_KEY"
 
 steps:
+  - block: "Request trigger Android bundle and builds"
+    branches: "dependabot/submodules/*"
+
   - label: "Bundle Android"
     key: "bundle-android"
     plugins:
@@ -30,9 +33,6 @@ steps:
         npm run bundle:android
 
         buildkite-agent artifact upload bundle/android/App.js
-    block:
-      prompt: "Trigger build"
-      branches: "!dependabot/submodules/*"
 
   - label: "Build Android RN Aztec & Publish to S3"
     key: "publish-react-native-aztec-android"
@@ -40,9 +40,6 @@ steps:
       - *publish-android-artifacts-docker-container
     command: |
         .buildkite/publish-react-native-aztec-android-artifacts.sh
-    block:
-      prompt: "Trigger build"
-      branches: "!dependabot/submodules/*"
 
   - label: "Build Android RN Bridge & Publish to S3"
     depends_on:
@@ -52,6 +49,3 @@ steps:
       - *publish-android-artifacts-docker-container
     command: |
         .buildkite/publish-react-native-bridge-android-artifacts.sh
-    block:
-      prompt: "Trigger build"
-      branches: "!dependabot/submodules/*"
