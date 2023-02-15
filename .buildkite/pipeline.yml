@@ -30,6 +30,7 @@ steps:
         npm run bundle:android
 
         buildkite-agent artifact upload bundle/android/App.js
+    branches: "!dependabot/submodules/*"
 
   - label: "Build Android RN Aztec & Publish to S3"
     key: "publish-react-native-aztec-android"
@@ -37,6 +38,7 @@ steps:
       - *publish-android-artifacts-docker-container
     command: |
         .buildkite/publish-react-native-aztec-android-artifacts.sh
+    branches: "!dependabot/submodules/*"
 
   - label: "Build Android RN Bridge & Publish to S3"
     depends_on:
@@ -46,3 +48,4 @@ steps:
       - *publish-android-artifacts-docker-container
     command: |
         .buildkite/publish-react-native-bridge-android-artifacts.sh
+    branches: "!dependabot/submodules/*"
