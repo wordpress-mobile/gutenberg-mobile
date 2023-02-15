@@ -32,10 +32,9 @@
 		"jetpack/contact-info",
 		"jetpack/email",
 		"jetpack/phone",
-		"jetpack/address",
-		"jetpack/tiled-gallery"
+		"jetpack/address"
 	],
-	"devOnly": [ "core/code" ],
+	"devOnly": [ "core/code", "jetpack/tiled-gallery", "videopress/video" ],
 	"iOSOnly": [],
 	"androidOnly": []
 }
