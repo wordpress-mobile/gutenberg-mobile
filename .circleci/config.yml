@@ -408,9 +408,21 @@ workflows:
       - ios-device-checks:
           name: Test iOS on Device - Full
           requires: [ "Optional UI Tests", "Test iOS", "iOS Build" ]
+          filters:
+            branches:
+              ignore:
+                - trunk
+                - /^dependabot/submodules/.*/
+                - /^release.*/
       - android-device-checks:
           name: Test Android on Device - Full
           requires: [ "Optional UI Tests", "Test Android", "Android Native Unit Tests", "Android Build" ]
+          filters:
+            branches:
+              ignore:
+                - trunk
+                - /^dependabot/submodules/.*/
+                - /^release.*/
       - android-native-unit-tests:
           name: Android Native Unit Tests
       - ios-device-checks:
