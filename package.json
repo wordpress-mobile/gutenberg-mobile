@@ -25,6 +25,7 @@
 		"babel-plugin-react-native-platform-specific-extensions": "^1.1.1",
 		"babel-plugin-transform-remove-console": "6.9.4",
 		"cross-env": "^5.1.4",
+		"danger": "^11.2.3",
 		"empty": "^0.10.1",
 		"enzyme": "^3.9.0",
 		"enzyme-adapter-react-16": "^1.11.2",
@@ -42,6 +43,7 @@
 		"jest": "^27.4.5",
 		"jest-junit": "^13.0.0",
 		"metro-react-native-babel-preset": "^0.70.3",
+		"metro-resolver": "^0.70.3",
 		"node-fetch": "^2.3.0",
 		"patch-package": "^6.2.2",
 		"prettier": "npm:wp-prettier@1.19.1",
@@ -51,8 +53,7 @@
 		"rungen": "^0.3.2",
 		"sprintf-js": "^1.1.1",
 		"typescript": "4.1.3",
-		"wd": "^1.11.1",
-		"metro-resolver": "^0.70.3"
+		"wd": "^1.11.1"
 	},
 	"scripts": {
 		"postinstall": "patch-package && npm run clean:gutenberg:distclean && npm ci --prefix gutenberg && npm run i18n:check-cache && ./bin/install-jetpack.sh",
