@@ -61,6 +61,7 @@ private func dummy() {
     _ = NSLocalizedString("Block settings", comment: "")
     _ = NSLocalizedString("Blocks allow you to focus on writing your content, knowing that all the formatting tools you need are there to help you get your message across.", comment: "")
     _ = NSLocalizedString("Blocks are pieces of content that you can insert, rearrange, and style without needing to know how to code. Blocks are an easy and modern way for you to create beautiful layouts.", comment: "")
+    _ = NSLocalizedString("Blocks menu", comment: "")
     _ = NSLocalizedString("Border Radius", comment: "")
     _ = NSLocalizedString("Border Settings", comment: "")
     _ = NSLocalizedString("Briefly describe the link to help screen reader user", comment: "")
