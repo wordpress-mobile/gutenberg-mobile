@@ -1,4 +1,5 @@
 Unreleased
+* [*] Add metadata parameter to media upload events [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5479]
 
 1.89.0
 ---
