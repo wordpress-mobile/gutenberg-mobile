@@ -40,8 +40,11 @@
 		"husky": "^3.0.2",
 		"identity-obj-proxy": "^3.0.0",
 		"jest": "^27.4.5",
+		"jest-image-snapshot": "^6.1.0",
 		"jest-junit": "^13.0.0",
+		"jimp": "^0.22.1",
 		"metro-react-native-babel-preset": "^0.70.3",
+		"metro-resolver": "^0.70.3",
 		"node-fetch": "^2.3.0",
 		"patch-package": "^6.2.2",
 		"prettier": "npm:wp-prettier@1.19.1",
@@ -51,8 +54,7 @@
 		"rungen": "^0.3.2",
 		"sprintf-js": "^1.1.1",
 		"typescript": "4.1.3",
-		"wd": "^1.11.1",
-		"metro-resolver": "^0.70.3"
+		"wd": "^1.11.1"
 	},
 	"scripts": {
 		"postinstall": "patch-package && npm run clean:gutenberg:distclean && npm ci --prefix gutenberg && npm run i18n:check-cache && ./bin/install-jetpack.sh",
