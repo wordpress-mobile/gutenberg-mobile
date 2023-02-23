@@ -10,6 +10,9 @@ x-common-params:
       - "AWS_SECRET_KEY"
 
 steps:
+  - block: "Request trigger Android bundle and builds"
+    branches: "dependabot/submodules/*"
+
   - label: "Bundle Android"
     key: "bundle-android"
     plugins:

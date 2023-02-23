@@ -1,6 +1,10 @@
 Unreleased
 * [*] Add metadata parameter to media upload events [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5479]
 
+1.89.0
+---
+* No User facing changes *
+
 1.88.0
 ---
 * [*] Bump Android `minSdkVersion` to 24 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5435]
