@@ -10,11 +10,9 @@ describe( 'Gutenberg Editor Visual test for Group Block', () => {
 
 		// Select title to unfocus the block
 		const titleElement = await editorPage.getTitleElement();
-		titleElement.click();
+		await titleElement.click();
 
 		await editorPage.dismissKeyboard();
-		// Wait for the keyboard to be hidden
-		await editorPage.driver.sleep( 3000 );
 
 		// Visual test check
 		const screenshot = await takeScreenshot();
