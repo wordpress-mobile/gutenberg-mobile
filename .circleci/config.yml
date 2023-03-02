@@ -132,6 +132,11 @@ commands:
         - run:
             name: Create reports directory
             command: mkdir reports && mkdir reports/test-results
+  add-jest-snapshot-dir:
+      steps:
+        - run:
+            name: Create snapshots directory
+            command: mkdir __device-tests__/image-snapshots/diff
   install-node-version:
     steps:
       - run:
@@ -248,6 +253,7 @@ jobs:
       - install-node-version
       - run: node -v
       - npm-install-e2e-tests
+      - add-jest-snapshot-dir
       - run: mkdir /home/circleci/test-results
       - run:
           name: Run Device Tests
@@ -356,6 +362,7 @@ jobs:
     - install-node-version
     - npm-install-e2e-tests
     - add-jest-reporter-dir
+    - add-jest-snapshot-dir
     - run:
         name: Set Environment Variables
         command: |
@@ -397,6 +404,9 @@ workflows:
           name: Test Android on Device - Canaries
           is-canary: "-canary"
           requires: [ "Test Android", "Android Native Unit Tests", "Android Build" ]
+      - android-native-unit-tests:
+          name: Android Native Unit Tests
+      # For regular branches the full test suite is optional.
       - Optional UI Tests:
           type: approval
           filters:
@@ -406,7 +416,7 @@ workflows:
                 - /^dependabot/submodules/.*/
                 - /^release.*/
       - ios-device-checks:
-          name: Test iOS on Device - Full
+          name: Test iOS on Device - Full (Manually triggered)
           requires: [ "Optional UI Tests", "Test iOS", "iOS Build" ]
           filters:
             branches:
@@ -415,7 +425,7 @@ workflows:
                 - /^dependabot/submodules/.*/
                 - /^release.*/
       - android-device-checks:
-          name: Test Android on Device - Full
+          name: Test Android on Device - Full (Manually triggered)
           requires: [ "Optional UI Tests", "Test Android", "Android Native Unit Tests", "Android Build" ]
           filters:
             branches:
@@ -423,51 +433,24 @@ workflows:
                 - trunk
                 - /^dependabot/submodules/.*/
                 - /^release.*/
-      - android-native-unit-tests:
-          name: Android Native Unit Tests
+      # For `trunk`, Dependabot, and release branches we always run the full test suite.
       - ios-device-checks:
-          name: Test iOS on Device - Full (Submodule Update)
-          post-to-slack: true
-          requires: [ "Test iOS", "iOS Build" ]
-          filters:
-            branches:
-              only: /^dependabot/submodules/.*/
-      - android-device-checks:
-          name: Test Android on Device - Full (Submodule Update)
-          post-to-slack: true
-          requires: [ "Test Android", "Android Native Unit Tests", "Android Build" ]
-          filters:
-            branches:
-              only: /^dependabot/submodules/.*/
-      - ios-device-checks:
-          name: Test iOS on Device - Full (On Trunk)
+          name: Test iOS on Device - Full
           post-to-slack: true
           requires: [ "Test iOS", "iOS Build" ]
           filters:
             branches:
               only:
                 - trunk
+                - /^dependabot/submodules/.*/
+                - /^release.*/
       - android-device-checks:
-          name: Test Android on Device - Full (On Trunk)
+          name: Test Android on Device - Full
           post-to-slack: true
           requires: [ "Test Android", "Android Native Unit Tests", "Android Build" ]
-          filters:
-            branches:
-              only:
-                - trunk
-      - ios-device-checks:
-          name: Test iOS on Device - Full (Release)
-          post-to-slack: true
-          requires: [ "Test iOS", "iOS Build" ]
           filters:
             branches:
               only: 
-                - /^release.*/
-      - android-device-checks:
-          name: Test Android on Device - Full (Release)
-          post-to-slack: true
-          requires: [ "Test Android", "Android Native Unit Tests", "Android Build" ]
-          filters:
-            branches:
-              only:
+                - trunk
+                - /^dependabot/submodules/.*/
                 - /^release.*/

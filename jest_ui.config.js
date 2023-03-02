@@ -3,6 +3,7 @@ const gutenbergJestUIConfig = require( './gutenberg/packages/react-native-editor
 module.exports = {
 	...gutenbergJestUIConfig,
 	setupFilesAfterEnv: [
+		'./jest_ui_setup_after_env.js',
 		'./gutenberg/packages/react-native-editor/jest_ui_setup_after_env.js',
 	],
 	testEnvironment:
