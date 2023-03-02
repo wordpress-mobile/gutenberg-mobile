@@ -276,6 +276,7 @@ jobs:
       - checkout-shallow
       - checkout-submodules
       - install-node-version
+      - run: node -v
       - npm-install
       - run:
           name: Run Android native-editor unit tests
