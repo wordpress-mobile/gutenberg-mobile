@@ -186,6 +186,8 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 		} );
 
 		it( 'Link from the clipboard is presented as an option in the link picker', async () => {
+			// Increase threshold to avoid issues with the cursor position and keyboard.
+			const snapshotConfig = { failureThreshold: 0.03 };
 			await editorPage.addNewBlock( blockNames.buttons );
 
 			const link = 'https://wordpress.org/';
@@ -200,7 +202,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Visual test check for the "From clipboard" option
 			let screenshot = await takeScreenshot();
-			expect( screenshot ).toMatchImageSnapshot();
+			expect( screenshot ).toMatchImageSnapshot( snapshotConfig );
 
 			const clipboardLink = await editorPage.waitForElementToBeDisplayedById(
 				`Copy URL from the clipboard, ${ link }`
@@ -212,7 +214,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Visual test check for link settings
 			screenshot = await takeScreenshot();
-			expect( screenshot ).toMatchImageSnapshot();
+			expect( screenshot ).toMatchImageSnapshot( snapshotConfig );
 
 			await editorPage.dismissBottomSheet();
 
@@ -221,7 +223,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Visual test check for link formatting button
 			screenshot = await takeScreenshot();
-			expect( screenshot ).toMatchImageSnapshot();
+			expect( screenshot ).toMatchImageSnapshot( snapshotConfig );
 		} );
 	} );
 } );
