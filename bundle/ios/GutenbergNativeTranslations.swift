@@ -191,7 +191,6 @@ private func dummy() {
     _ = NSLocalizedString("Line Height", comment: "")
     _ = NSLocalizedString("Link inserted", comment: "")
     _ = NSLocalizedString("Link Rel", comment: "")
-    _ = NSLocalizedString("Link Settings", comment: "")
     _ = NSLocalizedString("Link text", comment: "")
     _ = NSLocalizedString("Link To", comment: "")
     _ = NSLocalizedString("Lock icon", comment: "")
