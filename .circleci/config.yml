@@ -160,7 +160,7 @@ commands:
 parameters:
   android-docker-image:
     type: string
-    default: "cimg/android:api-31"
+    default: "cimg/android:android-31"
   linux-machine-image:
     type: string
     # Latest supported ubuntu image from https://circleci.com/docs/2.0/configuration-reference/#available-machine-images
