@@ -201,7 +201,6 @@
     <string name="gutenberg_native_line_height" tools:ignore="UnusedResources">Line Height</string>
     <string name="gutenberg_native_link_inserted" tools:ignore="UnusedResources">Link inserted</string>
     <string name="gutenberg_native_link_rel" tools:ignore="UnusedResources">Link Rel</string>
-    <string name="gutenberg_native_link_settings" tools:ignore="UnusedResources">Link Settings</string>
     <string name="gutenberg_native_link_text" tools:ignore="UnusedResources">Link text</string>
     <string name="gutenberg_native_link_to" tools:ignore="UnusedResources">Link To</string>
     <string name="gutenberg_native_lock_icon" tools:ignore="UnusedResources">Lock icon</string>
