@@ -1,4 +1,11 @@
 Unreleased
+---
+
+1.90.0
+---
+* [*] Fix parsing of css units for null matched values [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5516]
+* [*] Spacer block - Add initial support for spacing presets [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5410]
+* [*] Add visual tests support [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5456]
 * [*] Add metadata parameter to media upload events [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5479]
 
 1.89.1
