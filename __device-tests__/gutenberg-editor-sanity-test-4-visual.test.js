@@ -107,7 +107,9 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			);
 
 			// Visual test check
-			const screenshot = await takeScreenshot();
+			const screenshot = await takeScreenshot( {
+				withoutKeyboard: true,
+			} );
 			expect( screenshot ).toMatchImageSnapshot();
 
 			await buttonBlockTextInput.click();
@@ -201,7 +203,9 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.driver.sleep( 3000 );
 
 			// Visual test check for the "From clipboard" option
-			let screenshot = await takeScreenshot();
+			let screenshot = await takeScreenshot( {
+				customHeight: 50,
+			} );
 			expect( screenshot ).toMatchImageSnapshot( snapshotConfig );
 
 			const clipboardLink = await editorPage.waitForElementToBeDisplayedById(
@@ -222,7 +226,9 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.driver.sleep( 2000 );
 
 			// Visual test check for link formatting button
-			screenshot = await takeScreenshot();
+			screenshot = await takeScreenshot( {
+				withoutKeyboard: true,
+			} );
 			expect( screenshot ).toMatchImageSnapshot( snapshotConfig );
 		} );
 	} );
