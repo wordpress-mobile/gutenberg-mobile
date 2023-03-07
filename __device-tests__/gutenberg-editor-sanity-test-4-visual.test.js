@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 const { blockNames } = editorPage;
-const { toggleOrientation, selectTextFromTextInput, setClipboard } = e2eUtils;
+const { toggleOrientation, selectTextFromElement, setClipboard } = e2eUtils;
 import { takeScreenshot } from './utils';
 
 describe( 'Gutenberg Editor - Test Suite 4', () => {
@@ -101,7 +101,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Get button's block TextInput
 			const buttonBlockTextInput = await editorPage.getButtonBlockTextInputAtPosition();
-			await selectTextFromTextInput(
+			await selectTextFromElement(
 				editorPage.driver,
 				buttonBlockTextInput
 			);
@@ -129,7 +129,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 				firstButtonTextInput,
 				e2eTestData.listItem2
 			);
-			await selectTextFromTextInput(
+			await selectTextFromElement(
 				editorPage.driver,
 				firstButtonTextInput
 			);
@@ -146,7 +146,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 				secondButtonTextInput,
 				e2eTestData.listItem2
 			);
-			await selectTextFromTextInput(
+			await selectTextFromElement(
 				editorPage.driver,
 				secondButtonTextInput
 			);
@@ -163,7 +163,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 				thirdButtonTextInput,
 				e2eTestData.listItem2
 			);
-			await selectTextFromTextInput(
+			await selectTextFromElement(
 				editorPage.driver,
 				thirdButtonTextInput
 			);
