@@ -204,7 +204,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Visual test check for the "From clipboard" option
 			let screenshot = await takeScreenshot( {
-				customHeight: 50,
+				heightPercentage: 50,
 			} );
 			expect( screenshot ).toMatchImageSnapshot( snapshotConfig );
 

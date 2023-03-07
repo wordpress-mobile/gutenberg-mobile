@@ -8,15 +8,15 @@ const { isAndroid } = e2eUtils;
 /**
  * Helper to take a screenshot and manipulate it.
  *
- * @param {Object}  options                   Options
- * @param {boolean} [options.withoutKeyboard] Prevents showing the keyboard in the screenshot.
- * @param {number}  [options.customHeight]    Specify a custom height in percentage.
+ * @param {Object}  options                    Options
+ * @param {boolean} [options.withoutKeyboard]  Prevents showing the keyboard in the screenshot.
+ * @param {number}  [options.heightPercentage] Specify a custom height in percentage.
  * @return {Buffer} Sreenshot image.
  */
 export async function takeScreenshot(
-	options = { withoutKeyboard: false, customHeight: undefined }
+	options = { withoutKeyboard: false, heightPercentage: undefined }
 ) {
-	const { withoutKeyboard, customHeight } = options;
+	const { withoutKeyboard, heightPercentage } = options;
 	const orientation = await editorPage.driver.getOrientation();
 	const statusBarHeight = isAndroid() ? 100 : 94;
 	const screenshot = await editorPage.driver.takeScreenshot();
@@ -45,8 +45,8 @@ export async function takeScreenshot(
 	}
 
 	// Custom height in percentage
-	if ( customHeight ) {
-		const height = ( customHeight * image.getHeight() ) / 100;
+	if ( heightPercentage ) {
+		const height = ( heightPercentage * image.getHeight() ) / 100;
 		image.crop( 0, 0, image.getWidth(), height );
 	}
 
