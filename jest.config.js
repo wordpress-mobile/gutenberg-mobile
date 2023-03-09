@@ -25,7 +25,7 @@ module.exports = {
 	// Automatically clear mock calls and instances between every test
 	clearMocks: true,
 	preset: './gutenberg/node_modules/react-native/jest-preset.js',
-	setupFiles: [ '<rootDir>/' + configPath + '/setup.js', './jest_setup.js' ],
+	setupFiles: [ '<rootDir>/' + configPath + '/setup.js', './jest.setup.js' ],
 	setupFilesAfterEnv: [ '<rootDir>/' + configPath + '/setup-after-env.js' ],
 	testMatch: [ '<rootDir>/src/**/test/*.[jt]s?(x)' ],
 	testPathIgnorePatterns: [
