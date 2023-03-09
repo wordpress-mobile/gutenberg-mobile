@@ -99,10 +99,70 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await toggleOrientation( editorPage.driver );
 			// Wait for the device to finish rotating
 			await editorPage.driver.sleep( 3000 );
-			const columnsBlock = await editorPage.getBlockAtPosition(
+			await editorPage.removeBlock();
+		} );
+
+		it( 'mover buttons display in the correct positions', async () => {
+			await editorPage.addNewBlock( blockNames.columns );
+			// Wait for the modal to open
+			await editorPage.driver.sleep( 3000 );
+			// Dismiss coluns layout picker
+			await editorPage.driver
+				.elementByAccessibilityId( 'Cancel' )
+				.click();
+
+			// Click the block appender within the first column
+			await editorPage.driver
+				.elementByAccessibilityId( 'Column Block. Row 1' )
+				.click()
+				.click();
+
+			// Click the Columns block type button
+			const blockButton = await editorPage.findBlockButton(
 				blockNames.columns
 			);
-			await columnsBlock.click();
+			if ( isAndroid() ) {
+				await blockButton.click();
+			} else {
+				await editorPage.driver.execute( 'mobile: tap', {
+					element: blockButton,
+					x: 10,
+					y: 10,
+				} );
+			}
+
+			// Wait for the modal to open
+			await editorPage.driver.sleep( 3000 );
+			// Dismiss coluns layout picker
+			await editorPage.driver
+				.elementByAccessibilityId( 'Cancel' )
+				.click();
+			await toggleOrientation( editorPage.driver );
+			// Wait for the device to finish rotating
+			await editorPage.driver.sleep( 3000 );
+
+			// Visual test check for landscape orientation
+			let screenshot = await takeScreenshot();
+			expect( screenshot ).toMatchImageSnapshot();
+
+			// Navigate upwards in block hierarchy, briefly wait for selection update
+			await editorPage.driver
+				.elementByAccessibilityId( 'Navigate Up' )
+				.click();
+			await editorPage.driver.sleep( 1000 );
+
+			// Visual test check for landscape orientation
+			screenshot = await takeScreenshot();
+			expect( screenshot ).toMatchImageSnapshot();
+
+			await toggleOrientation( editorPage.driver );
+			// Wait for the device to finish rotating
+			await editorPage.driver.sleep( 3000 );
+			// Navigate upwards in block hierarchy, briefly wait for selection update
+			await editorPage.driver
+				.elementByAccessibilityId( 'Navigate Up' )
+				.click();
+			await editorPage.driver.sleep( 1000 );
 			await editorPage.removeBlock();
 		} );
 	} );
