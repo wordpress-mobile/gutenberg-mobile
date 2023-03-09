@@ -166,12 +166,88 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await toggleOrientation( editorPage.driver );
 			// Wait for the device to finish rotating
 			await editorPage.driver.sleep( 3000 );
-			// Navigate upwards in block hierarchy, briefly wait for selection update
+			// Navigate upwards in block hierarchy
 			await editorPage.driver
 				.elementByAccessibilityId( 'Navigate Up' )
 				.click();
 			await editorPage.driver.sleep( 1000 );
 			await editorPage.removeBlock();
+		} );
+
+		it( 'displays with correct colors with dark mode enabled', async () => {
+			if ( isAndroid() ) {
+				await editorPage.driver.executeScript( 'mobile: shell', [
+					{
+						command: 'settings put system ui_night_mode 2',
+					},
+				] );
+			} else {
+				await editorPage.driver.execute( 'mobile: setAppearance', {
+					style: 'dark',
+				} );
+			}
+
+			await editorPage.addNewBlock( blockNames.columns );
+			// Wait for the modal to open
+			await editorPage.driver.sleep( 3000 );
+			// Dismiss coluns layout picker
+			await editorPage.driver
+				.elementByAccessibilityId( 'Cancel' )
+				.click();
+			// Wait for the modal to close
+			await editorPage.driver.sleep( 3000 );
+
+			// Visual test check for placeholders
+			let screenshot = await takeScreenshot();
+			expect( screenshot ).toMatchImageSnapshot();
+
+			// Click the block appender within the first column
+			await editorPage.driver
+				.elementByAccessibilityId( 'Column Block. Row 1' )
+				.click()
+				.click();
+
+			// Append a Preformatted block
+			const blockButton = await editorPage.findBlockButton(
+				blockNames.preformatted
+			);
+			if ( isAndroid() ) {
+				await blockButton.click();
+			} else {
+				await editorPage.driver.execute( 'mobile: tap', {
+					element: blockButton,
+					x: 10,
+					y: 10,
+				} );
+			}
+
+			// TODO: determine a way to type a text block nested within a Columns block
+
+			// Wait for the modal to close
+			await editorPage.driver.sleep( 3000 );
+			// Navigate upwards in block hierarchy
+			await editorPage.driver
+				.elementByAccessibilityId( 'Navigate Up' )
+				.click()
+				.click();
+			await editorPage.waitForKeyboardToBeHidden();
+
+			// Visual test check for nested content
+			screenshot = await takeScreenshot();
+			expect( screenshot ).toMatchImageSnapshot();
+
+			await editorPage.removeBlock();
+			if ( isAndroid() ) {
+				await editorPage.driver.executeScript( 'mobile: shell', [
+					{
+						command: 'settings put system ui_night_mode 1',
+					},
+				] );
+			} else {
+				await editorPage.driver.execute( 'mobile: setAppearance', {
+					style: 'light',
+				} );
+			}
 		} );
 	} );
 } );
