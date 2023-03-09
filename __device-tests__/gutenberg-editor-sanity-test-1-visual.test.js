@@ -15,6 +15,8 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.driver
 				.elementByAccessibilityId( 'Cancel' )
 				.click();
+			// Wait for the modal to close
+			await editorPage.driver.sleep( 3000 );
 			// Select title to unfocus the block
 			const titleElement = await editorPage.getTitleElement();
 			await titleElement.click();
@@ -50,6 +52,8 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.driver
 				.elementByAccessibilityId( 'Cancel' )
 				.click();
+			// Wait for the modal to close
+			await editorPage.driver.sleep( 3000 );
 
 			// Click the block appender within the first column
 			await editorPage.driver
@@ -77,7 +81,9 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.driver
 				.elementByAccessibilityId( 'Cancel' )
 				.click();
-			// Navigate upwards in block hierarchy, briefly wait for selection update
+			// Wait for the modal to close
+			await editorPage.driver.sleep( 3000 );
+			// Navigate upwards in block hierarchy
 			await editorPage.driver
 				.elementByAccessibilityId( 'Navigate Up' )
 				.click()
@@ -110,6 +116,8 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.driver
 				.elementByAccessibilityId( 'Cancel' )
 				.click();
+			// Wait for the modal to close
+			await editorPage.driver.sleep( 3000 );
 
 			// Click the block appender within the first column
 			await editorPage.driver
@@ -145,7 +153,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			let screenshot = await takeScreenshot();
 			expect( screenshot ).toMatchImageSnapshot();
 
-			// Navigate upwards in block hierarchy, briefly wait for selection update
+			// Navigate upwards in block hierarchy
 			await editorPage.driver
 				.elementByAccessibilityId( 'Navigate Up' )
 				.click();
