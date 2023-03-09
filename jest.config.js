@@ -53,6 +53,8 @@ module.exports = {
 			'|'
 		) })$` ]: '<rootDir>/gutenberg/packages/$1/src',
 		'test/helpers$': '<rootDir>/' + configPath + '/helpers.js',
+		jetpackConfig:
+			'<rootDir>/jetpack/tools/js-tools/jest/jest-jetpack-config.js',
 	},
 	haste: {
 		defaultPlatform: rnPlatform,
