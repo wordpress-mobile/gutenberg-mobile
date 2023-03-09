@@ -32,6 +32,9 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			screenshot = await takeScreenshot();
 			expect( screenshot ).toMatchImageSnapshot();
 
+			await toggleOrientation( editorPage.driver );
+			// Wait for the device to finish rotating
+			await editorPage.driver.sleep( 3000 );
 			const columnsBlock = await editorPage.getBlockAtPosition(
 				blockNames.columns
 			);
@@ -92,6 +95,15 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			// Visual test check for landscape orientation
 			screenshot = await takeScreenshot();
 			expect( screenshot ).toMatchImageSnapshot();
+
+			await toggleOrientation( editorPage.driver );
+			// Wait for the device to finish rotating
+			await editorPage.driver.sleep( 3000 );
+			const columnsBlock = await editorPage.getBlockAtPosition(
+				blockNames.columns
+			);
+			await columnsBlock.click();
+			await editorPage.removeBlock();
 		} );
 	} );
 } );
