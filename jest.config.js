@@ -25,7 +25,7 @@ module.exports = {
 	// Automatically clear mock calls and instances between every test
 	clearMocks: true,
 	preset: './gutenberg/node_modules/react-native/jest-preset.js',
-	setupFiles: [ '<rootDir>/' + configPath + '/setup.js' ],
+	setupFiles: [ '<rootDir>/' + configPath + '/setup.js', './jest_setup.js' ],
 	setupFilesAfterEnv: [ '<rootDir>/' + configPath + '/setup-after-env.js' ],
 	testMatch: [ '<rootDir>/src/**/test/*.[jt]s?(x)' ],
 	testPathIgnorePatterns: [
@@ -34,7 +34,9 @@ module.exports = {
 		'<rootDir>/jetpack/',
 		'/__device-tests__/',
 	],
-	testURL: 'http://localhost/',
+	testEnvironmentOptions: {
+		url: 'http://localhost/',
+	},
 	// Add the `Libraries/Utilities` subfolder to the module directories, otherwise haste/jest doesn't find Platform.js on Travis,
 	// and add it first so https://github.com/facebook/react-native/blob/v0.60.0/Libraries/react-native/react-native-implementation.js#L324-L326 doesn't pick up the Platform npm module.
 	moduleDirectories: [
