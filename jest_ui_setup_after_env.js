@@ -9,6 +9,7 @@ const {
 const { configureToMatchImageSnapshot } = require( 'jest-image-snapshot' );
 
 const toMatchImageSnapshot = configureToMatchImageSnapshot( {
+	comparisonMethod: 'ssim',
 	failureThreshold: 0.01, // 1% threshold.
 	failureThresholdType: 'percent',
 	dumpInlineDiffToConsole: true,
