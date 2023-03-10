@@ -1,9 +1,14 @@
 /**
+ * External dependencies
+ */
+import wd from 'wd';
+
+/**
  * Internal dependencies
  */
 const { blockNames } = editorPage;
 import { takeScreenshot } from './utils';
-const { toggleOrientation, isAndroid } = e2eUtils;
+const { toggleOrientation, isAndroid, swipeFromTo } = e2eUtils;
 
 describe( 'Gutenberg Editor - Test Suite 4', () => {
 	describe( 'Columns block', () => {
@@ -249,5 +254,41 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 				} );
 			}
 		} );
+	} );
+
+	it( 'sliders display proportionate fill level previews', async () => {
+		await editorPage.addNewBlock( blockNames.columns );
+		// Wait for the modal to open
+		await editorPage.driver.sleep( 3000 );
+		await editorPage.driver.elementByAccessibilityId( 'Cancel' ).click();
+		await editorPage.openBlockSettings();
+		// Wait for the modal to open
+		await editorPage.driver.sleep( 3000 );
+
+		// Reveal default column width sliders
+		await swipeFromTo(
+			editorPage.driver,
+			{ x: 180, y: 625 },
+			{ x: 180, y: 425 },
+			3000
+		);
+		// Shrink first column
+		await swipeFromTo(
+			editorPage.driver,
+			{ x: 165, y: 626 },
+			{ x: 100, y: 626 },
+			3000
+		);
+
+		// Visual test check for adjusted columns
+		const screenshot = await takeScreenshot();
+		expect( screenshot ).toMatchImageSnapshot();
+
+		// Dismiss block settings by tapping the modal overlay
+		const action = new wd.TouchAction( editorPage.driver );
+		action.tap( { x: 100, y: 100 } );
+		await action.perform();
+
+		await editorPage.removeBlock();
 	} );
 } );
