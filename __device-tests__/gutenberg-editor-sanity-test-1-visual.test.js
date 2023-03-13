@@ -284,11 +284,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 		const screenshot = await takeScreenshot();
 		expect( screenshot ).toMatchImageSnapshot();
 
-		// Dismiss block settings by tapping the modal overlay
-		const action = new wd.TouchAction( editorPage.driver );
-		action.tap( { x: 100, y: 100 } );
-		await action.perform();
-
+		await editorPage.dismissBottomSheet();
 		await editorPage.removeBlock();
 	} );
 } );
