@@ -8,7 +8,7 @@ import wd from 'wd';
  */
 const { blockNames } = editorPage;
 import { takeScreenshot } from './utils';
-const { toggleOrientation, isAndroid, swipeFromTo } = e2eUtils;
+const { toggleOrientation, isAndroid, swipeFromTo, toggleDarkMode } = e2eUtils;
 
 describe( 'Gutenberg Editor - Test Suite 4', () => {
 	describe( 'Columns block', () => {
@@ -180,17 +180,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 		} );
 
 		it( 'displays with correct colors with dark mode enabled', async () => {
-			if ( isAndroid() ) {
-				await editorPage.driver.executeScript( 'mobile: shell', [
-					{
-						command: 'settings put system ui_night_mode 2',
-					},
-				] );
-			} else {
-				await editorPage.driver.execute( 'mobile: setAppearance', {
-					style: 'dark',
-				} );
-			}
+			await toggleDarkMode( editorPage.driver, true );
 
 			await editorPage.addNewBlock( blockNames.columns );
 			// Wait for the modal to open
@@ -242,17 +232,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			expect( screenshot ).toMatchImageSnapshot();
 
 			await editorPage.removeBlock();
-			if ( isAndroid() ) {
-				await editorPage.driver.executeScript( 'mobile: shell', [
-					{
-						command: 'settings put system ui_night_mode 1',
-					},
-				] );
-			} else {
-				await editorPage.driver.execute( 'mobile: setAppearance', {
-					style: 'light',
-				} );
-			}
+			await toggleDarkMode( editorPage.driver, false );
 		} );
 	} );
 
