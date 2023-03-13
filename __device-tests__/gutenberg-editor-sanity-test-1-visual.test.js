@@ -16,7 +16,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.addNewBlock( blockNames.columns );
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
-			// Dismiss coluns layout picker
+			// Dismiss columns layout picker
 			await editorPage.driver
 				.elementByAccessibilityId( 'Cancel' )
 				.click();
@@ -53,7 +53,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.addNewBlock( blockNames.columns );
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
-			// Dismiss coluns layout picker
+			// Dismiss columns layout picker
 			await editorPage.driver
 				.elementByAccessibilityId( 'Cancel' )
 				.click();
@@ -82,7 +82,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
-			// Dismiss coluns layout picker
+			// Dismiss columns layout picker
 			await editorPage.driver
 				.elementByAccessibilityId( 'Cancel' )
 				.click();
@@ -117,7 +117,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.addNewBlock( blockNames.columns );
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
-			// Dismiss coluns layout picker
+			// Dismiss columns layout picker
 			await editorPage.driver
 				.elementByAccessibilityId( 'Cancel' )
 				.click();
@@ -146,7 +146,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
-			// Dismiss coluns layout picker
+			// Dismiss columns layout picker
 			await editorPage.driver
 				.elementByAccessibilityId( 'Cancel' )
 				.click();
@@ -195,7 +195,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.addNewBlock( blockNames.columns );
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
-			// Dismiss coluns layout picker
+			// Dismiss columns layout picker
 			await editorPage.driver
 				.elementByAccessibilityId( 'Cancel' )
 				.click();
