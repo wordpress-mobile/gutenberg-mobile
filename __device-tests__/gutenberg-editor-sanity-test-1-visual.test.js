@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import wd from 'wd';
-
-/**
  * Internal dependencies
  */
 const { blockNames } = editorPage;
