@@ -280,20 +280,47 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 		// Wait for the modal to open
 		await editorPage.driver.sleep( 3000 );
 
+		const sliderId = isAndroid()
+			? 'Column 1. Width is 50 Percent (%)., double-tap to change unit'
+			: 'Column 1. Width is 50 Percent (%).';
+		const slider = await editorPage.driver.elementByAccessibilityId(
+			sliderId
+		);
+		const sliderSize = await slider.getSize();
+		const sliderLocation = await slider.getLocation();
+		const scrollOffset = isAndroid() ? 300 : 100;
+
 		// Reveal default column width sliders
 		await swipeFromTo(
 			editorPage.driver,
-			{ x: 180, y: 625 },
-			{ x: 180, y: 425 },
-			3000
+			{
+				x: sliderLocation.x + sliderSize.width / 2,
+				y: sliderLocation.y + sliderSize.height / 2,
+			},
+			{
+				x: sliderLocation.x + sliderSize.width / 2,
+				y: sliderLocation.y + sliderSize.height / 2 - scrollOffset,
+			},
+			1000
 		);
-		// Shrink first column
+		// Shrink the first column
 		await swipeFromTo(
 			editorPage.driver,
-			{ x: 165, y: 626 },
-			{ x: 100, y: 626 },
-			3000
+			{
+				x: sliderLocation.x + sliderSize.width * 0.42,
+				y: sliderLocation.y - scrollOffset + sliderSize.height * 0.69,
+			},
+			{
+				x:
+					sliderLocation.x +
+					sliderSize.width * 0.42 -
+					sliderSize.width * 0.15,
+				y: sliderLocation.y - scrollOffset + sliderSize.height * 0.69,
+			},
+			1000
 		);
+		// Avoid minute differences in slider appearance from animations
+		await editorPage.driver.sleep( 500 );
 
 		// Visual test check for adjusted columns
 		const screenshot = await takeScreenshot();
