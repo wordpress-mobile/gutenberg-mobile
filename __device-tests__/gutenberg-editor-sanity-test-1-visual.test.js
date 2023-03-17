@@ -57,10 +57,20 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.driver.sleep( 3000 );
 
 			// Click the block appender within the first column
-			await editorPage.driver
-				.elementByAccessibilityId( 'Column Block. Row 1' )
-				.click()
-				.click();
+			if ( isAndroid() ) {
+				await editorPage.driver
+					.elementByAccessibilityId( 'Column Block. Row 1' )
+					.click();
+				const appenderButton = await editorPage.waitForElementToBeDisplayedByXPath(
+					'(//android.view.ViewGroup[@content-desc="block-list"])[2]/android.widget.Button'
+				);
+				await appenderButton.click();
+			} else {
+				await editorPage.driver
+					.elementByAccessibilityId( 'Column Block. Row 1' )
+					.click()
+					.click();
+			}
 
 			// Click the Columns block type button
 			const blockButton = await editorPage.findBlockButton(
@@ -117,11 +127,20 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.driver.sleep( 3000 );
 
 			// Click the block appender within the first column
-			await editorPage.driver
-				.elementByAccessibilityId( 'Column Block. Row 1' )
-				.click()
-				.click();
-
+			if ( isAndroid() ) {
+				await editorPage.driver
+					.elementByAccessibilityId( 'Column Block. Row 1' )
+					.click();
+				const appenderButton = await editorPage.waitForElementToBeDisplayedByXPath(
+					'(//android.view.ViewGroup[@content-desc="block-list"])[2]/android.widget.Button'
+				);
+				await appenderButton.click();
+			} else {
+				await editorPage.driver
+					.elementByAccessibilityId( 'Column Block. Row 1' )
+					.click()
+					.click();
+			}
 			// Click the Columns block type button
 			const blockButton = await editorPage.findBlockButton(
 				blockNames.columns
@@ -185,10 +204,20 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			expect( screenshot ).toMatchImageSnapshot();
 
 			// Click the block appender within the first column
-			await editorPage.driver
-				.elementByAccessibilityId( 'Column Block. Row 1' )
-				.click()
-				.click();
+			if ( isAndroid() ) {
+				await editorPage.driver
+					.elementByAccessibilityId( 'Column Block. Row 1' )
+					.click();
+				const appenderButton = await editorPage.waitForElementToBeDisplayedByXPath(
+					'(//android.view.ViewGroup[@content-desc="block-list"])[2]/android.widget.Button'
+				);
+				await appenderButton.click();
+			} else {
+				await editorPage.driver
+					.elementByAccessibilityId( 'Column Block. Row 1' )
+					.click()
+					.click();
+			}
 
 			// Append a Preformatted block
 			const blockButton = await editorPage.findBlockButton(
