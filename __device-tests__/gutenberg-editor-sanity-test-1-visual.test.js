@@ -73,19 +73,9 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 					.click();
 			}
 
-			// Click the Columns block type button
-			const blockButton = await editorPage.findBlockButton(
-				blockNames.columns
-			);
-			if ( isAndroid() ) {
-				await blockButton.click();
-			} else {
-				await editorPage.driver.execute( 'mobile: tap', {
-					element: blockButton,
-					x: 10,
-					y: 10,
-				} );
-			}
+			await editorPage.addNewBlock( blockNames.columns, {
+				skipInserterOpen: true,
+			} );
 
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
@@ -142,19 +132,10 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 					.click()
 					.click();
 			}
-			// Click the Columns block type button
-			const blockButton = await editorPage.findBlockButton(
-				blockNames.columns
-			);
-			if ( isAndroid() ) {
-				await blockButton.click();
-			} else {
-				await editorPage.driver.execute( 'mobile: tap', {
-					element: blockButton,
-					x: 10,
-					y: 10,
-				} );
-			}
+
+			await editorPage.addNewBlock( blockNames.columns, {
+				skipInserterOpen: true,
+			} );
 
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
