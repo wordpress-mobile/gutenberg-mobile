@@ -17,9 +17,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
 			// Dismiss columns layout picker
-			await editorPage.driver
-				.elementByAccessibilityId( 'Cancel' )
-				.click();
+			await editorPage.dismissBottomSheet();
 			// Wait for the modal to close
 			await editorPage.driver.sleep( 3000 );
 			// Select title to unfocus the block
@@ -54,9 +52,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
 			// Dismiss columns layout picker
-			await editorPage.driver
-				.elementByAccessibilityId( 'Cancel' )
-				.click();
+			await editorPage.dismissBottomSheet();
 			// Wait for the modal to close
 			await editorPage.driver.sleep( 3000 );
 
@@ -83,9 +79,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
 			// Dismiss columns layout picker
-			await editorPage.driver
-				.elementByAccessibilityId( 'Cancel' )
-				.click();
+			await editorPage.dismissBottomSheet();
 			// Wait for the modal to close
 			await editorPage.driver.sleep( 3000 );
 			// Navigate upwards in block hierarchy
@@ -118,9 +112,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
 			// Dismiss columns layout picker
-			await editorPage.driver
-				.elementByAccessibilityId( 'Cancel' )
-				.click();
+			await editorPage.dismissBottomSheet();
 			// Wait for the modal to close
 			await editorPage.driver.sleep( 3000 );
 
@@ -147,9 +139,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
 			// Dismiss columns layout picker
-			await editorPage.driver
-				.elementByAccessibilityId( 'Cancel' )
-				.click();
+			await editorPage.dismissBottomSheet();
 			await toggleOrientation( editorPage.driver );
 			// Wait for the device to finish rotating
 			await editorPage.driver.sleep( 3000 );
@@ -186,9 +176,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
 			// Dismiss columns layout picker
-			await editorPage.driver
-				.elementByAccessibilityId( 'Cancel' )
-				.click();
+			await editorPage.dismissBottomSheet();
 			// Wait for the modal to close
 			await editorPage.driver.sleep( 3000 );
 
@@ -240,7 +228,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 		await editorPage.addNewBlock( blockNames.columns );
 		// Wait for the modal to open
 		await editorPage.driver.sleep( 3000 );
-		await editorPage.driver.elementByAccessibilityId( 'Cancel' ).click();
+		await editorPage.dismissBottomSheet();
 		await editorPage.openBlockSettings();
 		// Wait for the modal to open
 		await editorPage.driver.sleep( 3000 );
