@@ -283,7 +283,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 		);
 		const sliderSize = await slider.getSize();
 		const sliderLocation = await slider.getLocation();
-		const scrollOffset = isAndroid() ? 300 : 100;
+		const scrollOffset = isAndroid() ? 350 : 100;
 
 		// Reveal default column width sliders
 		await swipeFromTo(
@@ -314,8 +314,6 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			},
 			1000
 		);
-		// Avoid minute differences in slider appearance from animations
-		await editorPage.driver.sleep( 500 );
 
 		// Visual test check for adjusted columns
 		const screenshot = await takeScreenshot();
