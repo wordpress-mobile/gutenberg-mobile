@@ -275,26 +275,24 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 		// Wait for the modal to open
 		await editorPage.driver.sleep( 3000 );
 
-		const sliderId = isAndroid()
+		const cellId = isAndroid()
 			? 'Column 1. Width is 50 Percent (%)., double-tap to change unit'
 			: 'Column 1. Width is 50 Percent (%).';
-		const slider = await editorPage.driver.elementByAccessibilityId(
-			sliderId
-		);
-		const sliderSize = await slider.getSize();
-		const sliderLocation = await slider.getLocation();
+		const cell = await editorPage.driver.elementByAccessibilityId( cellId );
+		const cellSize = await cell.getSize();
+		const cellLocation = await cell.getLocation();
 		const scrollOffset = isAndroid() ? 350 : 100;
 
-		// Reveal default column width sliders
+		// Reveal default column width cells
 		await swipeFromTo(
 			editorPage.driver,
 			{
-				x: sliderLocation.x + sliderSize.width / 2,
-				y: sliderLocation.y + sliderSize.height / 2,
+				x: cellLocation.x + cellSize.width / 2,
+				y: cellLocation.y + cellSize.height / 2,
 			},
 			{
-				x: sliderLocation.x + sliderSize.width / 2,
-				y: sliderLocation.y + sliderSize.height / 2 - scrollOffset,
+				x: cellLocation.x + cellSize.width / 2,
+				y: cellLocation.y + cellSize.height / 2 - scrollOffset,
 			},
 			1000
 		);
@@ -302,15 +300,15 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 		await swipeFromTo(
 			editorPage.driver,
 			{
-				x: sliderLocation.x + sliderSize.width * 0.42,
-				y: sliderLocation.y - scrollOffset + sliderSize.height * 0.69,
+				x: cellLocation.x + cellSize.width * 0.42,
+				y: cellLocation.y - scrollOffset + cellSize.height * 0.69,
 			},
 			{
 				x:
-					sliderLocation.x +
-					sliderSize.width * 0.42 -
-					sliderSize.width * 0.15,
-				y: sliderLocation.y - scrollOffset + sliderSize.height * 0.69,
+					cellLocation.x +
+					cellSize.width * 0.42 -
+					cellSize.width * 0.15,
+				y: cellLocation.y - scrollOffset + cellSize.height * 0.69,
 			},
 			1000
 		);
