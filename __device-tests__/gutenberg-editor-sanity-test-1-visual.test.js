@@ -11,7 +11,7 @@ const {
 	isEditorVisible,
 } = e2eUtils;
 
-describe( 'Gutenberg Editor - Test Suite 4', () => {
+describe( 'Gutenberg Editor - Test Suite 1', () => {
 	describe( 'Columns block', () => {
 		it( 'displays placeholders when unselected', async () => {
 			await editorPage.addNewBlock( blockNames.columns );
