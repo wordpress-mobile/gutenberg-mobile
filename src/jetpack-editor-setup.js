@@ -31,7 +31,7 @@ const supportedJetpackBlocks = {
 		available: __DEV__,
 	},
 	'videopress/video': {
-		available: __DEV__,
+		available: true,
 	},
 };
 
