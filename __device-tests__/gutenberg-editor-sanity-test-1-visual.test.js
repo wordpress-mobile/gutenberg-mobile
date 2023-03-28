@@ -245,63 +245,65 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 				await isEditorVisible( editorPage.driver );
 			}
 		} );
-	} );
 
-	it( 'sliders display proportionate fill level previews', async () => {
-		await editorPage.addNewBlock( blockNames.columns );
-		// Wait for the modal to open
-		await editorPage.driver.sleep( 3000 );
-		await editorPage.dismissBottomSheet();
-		await editorPage.openBlockSettings();
-		// Wait for the modal to open
-		await editorPage.driver.sleep( 3000 );
+		it( 'sliders display proportionate fill level previews', async () => {
+			await editorPage.addNewBlock( blockNames.columns );
+			// Wait for the modal to open
+			await editorPage.driver.sleep( 3000 );
+			await editorPage.dismissBottomSheet();
+			await editorPage.openBlockSettings();
+			// Wait for the modal to open
+			await editorPage.driver.sleep( 3000 );
 
-		const cellId = isAndroid()
-			? 'Column 1. Width is 50 Percent (%)., double-tap to change unit'
-			: 'Column 1. Width is 50 Percent (%).';
-		const cell = await editorPage.driver.elementByAccessibilityId( cellId );
-		const cellSize = await cell.getSize();
-		const cellLocation = await cell.getLocation();
-		const scrollOffset = isAndroid() ? 350 : 100;
+			const cellId = isAndroid()
+				? 'Column 1. Width is 50 Percent (%)., double-tap to change unit'
+				: 'Column 1. Width is 50 Percent (%).';
+			const cell = await editorPage.driver.elementByAccessibilityId(
+				cellId
+			);
+			const cellSize = await cell.getSize();
+			const cellLocation = await cell.getLocation();
+			const scrollOffset = isAndroid() ? 350 : 100;
 
-		// Reveal default column width cells
-		await swipeFromTo(
-			editorPage.driver,
-			{
-				x: cellLocation.x + cellSize.width / 2,
-				y: cellLocation.y + cellSize.height / 2,
-			},
-			{
-				x: cellLocation.x + cellSize.width / 2,
-				y: cellLocation.y + cellSize.height / 2 - scrollOffset,
-			},
-			1000
-		);
-		// Shrink the first column
-		await swipeFromTo(
-			editorPage.driver,
-			{
-				x: cellLocation.x + cellSize.width * 0.42,
-				y: cellLocation.y - scrollOffset + cellSize.height * 0.69,
-			},
-			{
-				x:
-					cellLocation.x +
-					cellSize.width * 0.42 -
-					cellSize.width * 0.15,
-				y: cellLocation.y - scrollOffset + cellSize.height * 0.69,
-			},
-			1000
-		);
+			// Reveal default column width cells
+			await swipeFromTo(
+				editorPage.driver,
+				{
+					x: cellLocation.x + cellSize.width / 2,
+					y: cellLocation.y + cellSize.height / 2,
+				},
+				{
+					x: cellLocation.x + cellSize.width / 2,
+					y: cellLocation.y + cellSize.height / 2 - scrollOffset,
+				},
+				1000
+			);
+			// Shrink the first column
+			await swipeFromTo(
+				editorPage.driver,
+				{
+					x: cellLocation.x + cellSize.width * 0.42,
+					y: cellLocation.y - scrollOffset + cellSize.height * 0.69,
+				},
+				{
+					x:
+						cellLocation.x +
+						cellSize.width * 0.42 -
+						cellSize.width * 0.15,
+					y: cellLocation.y - scrollOffset + cellSize.height * 0.69,
+				},
+				1000
+			);
 
-		// Visual test check for adjusted columns
-		const screenshot = await takeScreenshot();
-		expect( screenshot ).toMatchImageSnapshot( {
-			// Detect minute differences in column preview sizes
-			failureThreshold: 0, // 0%
+			// Visual test check for adjusted columns
+			const screenshot = await takeScreenshot();
+			expect( screenshot ).toMatchImageSnapshot( {
+				// Detect minute differences in column preview sizes
+				failureThreshold: 0, // 0%
+			} );
+
+			await editorPage.dismissBottomSheet();
+			await editorPage.removeBlock();
 		} );
-
-		await editorPage.dismissBottomSheet();
-		await editorPage.removeBlock();
 	} );
 } );
