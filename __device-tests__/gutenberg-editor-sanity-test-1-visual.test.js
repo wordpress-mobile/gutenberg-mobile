@@ -297,10 +297,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 
 			// Visual test check for adjusted columns
 			const screenshot = await takeScreenshot();
-			expect( screenshot ).toMatchImageSnapshot( {
-				// Detect minute differences in column preview sizes
-				failureThreshold: 0, // 0%
-			} );
+			expect( screenshot ).toMatchImageSnapshot();
 
 			await editorPage.dismissBottomSheet();
 			await editorPage.removeBlock();
