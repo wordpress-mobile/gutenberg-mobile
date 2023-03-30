@@ -1,6 +1,10 @@
 Unreleased
 ---
 
+1.92.0
+---
+* No User facing changes *
+
 1.91.0
 ---
 * [*] Allow new block transformations for most blocks. [https://github.com/WordPress/gutenberg/pull/48792]
