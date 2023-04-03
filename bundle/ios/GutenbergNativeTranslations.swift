@@ -99,7 +99,7 @@ private func dummy() {
     _ = NSLocalizedString("Customize blocks", comment: "")
     _ = NSLocalizedString("Customize Gradient", comment: "")
     _ = NSLocalizedString("Cut block", comment: "")
-    _ = NSLocalizedString("Describe the purpose of the image. Leave empty if the image is purely decorative.", comment: "")
+    _ = NSLocalizedString("Describe the purpose of the image. Leave empty if decorative.", comment: "")
     _ = NSLocalizedString("Dismiss", comment: "")
     _ = NSLocalizedString("Double tap and hold to edit", comment: "")
     _ = NSLocalizedString("Double tap to add a block", comment: "")
