@@ -1,6 +1,6 @@
 {
 	"name": "gutenberg-mobile",
-	"version": "1.90.0",
+	"version": "1.92.0",
 	"private": true,
 	"config": {
 		"jsfiles": "./*.js src/*.js src/**/*.js src/**/**/*.js",
@@ -99,5 +99,6 @@
 		"lint": "eslint . --ext .js",
 		"lint:fix": "npm run lint -- --fix",
 		"version": "npm run bundle && git add -A bundle"
-	}
+	},
+	"dependencies": {}
 }

@@ -1,6 +1,14 @@
 Unreleased
 ---
 
+1.92.0
+---
+* No User facing changes *
+
+1.91.0
+---
+* [*] Allow new block transformations for most blocks. [https://github.com/WordPress/gutenberg/pull/48792]
+
 1.90.0
 ---
 * [*] Fix parsing of css units for null matched values [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5516]
