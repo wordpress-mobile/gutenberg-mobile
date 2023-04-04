@@ -49,3 +49,7 @@ steps:
       - *publish-android-artifacts-docker-container
     command: |
         .buildkite/publish-react-native-bridge-android-artifacts.sh
+
+  - label: "Run Danger CI"
+    command: |
+        yarn danger ci
