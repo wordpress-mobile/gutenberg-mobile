@@ -50,6 +50,6 @@ steps:
     command: |
         .buildkite/publish-react-native-bridge-android-artifacts.sh
 
-  - label: "Run Danger CI"
+  - label: "Report mobile performance results"
     command: |
-        yarn danger ci
+        npx danger ci
