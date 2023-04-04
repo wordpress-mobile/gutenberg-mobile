@@ -42,6 +42,18 @@ const setupHooks = () => {
 			return editorProps;
 		}
 	);
+
+	// Hook to expand the supported endpoints of `api-fetch` library.
+	addFilter(
+		'native.supported_endpoints',
+		'gutenberg-mobile',
+		( endpoints ) => {
+			return {
+				...endpoints,
+				POST: [ ...endpoints.POST, /wpcom\/v2\/(media)\/.*/i ],
+			};
+		}
+	);
 };
 
 export default () => {
