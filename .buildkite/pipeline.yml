@@ -49,7 +49,3 @@ steps:
       - *publish-android-artifacts-docker-container
     command: |
         .buildkite/publish-react-native-bridge-android-artifacts.sh
-
-  - label: "Report mobile performance results"
-    command: |
-        npx danger ci
