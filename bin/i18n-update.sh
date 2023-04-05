@@ -68,11 +68,12 @@ function update_gutenberg_i18n_cache() {
 
 function fetch_translations() {
   local plugin_name=$1
-  local output_path=$2
-  local used_strings_file=$3
+  local project_slug=$2
+  local output_path=$3
+  local used_strings_file=$4
 
   echo -e "\n\033[1mDownload I18n translations for \"$plugin_name\" plugin\033[0m"
-  node gutenberg/packages/react-native-editor/bin/i18n-translations-download "$plugin_name" "$output_path" "$used_strings_file"
+  node gutenberg/packages/react-native-editor/bin/i18n-translations-download "$plugin_name" "$project_slug" "$output_path" "$used_strings_file"
 
   if [[ "$plugin_name" == "gutenberg" ]]; then
     update_gutenberg_i18n_cache "$output_path"
@@ -96,13 +97,13 @@ TRANSLATIONS_OUTPUT_PATH="src/i18n-cache"
 echo -e "\n\033[1m== Updating i18n localizations ==\033[0m"
 
 # Validate parameters
-if [[ $((${#PLUGINS[@]}%2)) -ne 0 ]]; then
-  error "Plugin arguments must be supplied as tuples (i.e. domain path/to/plugin)."
+if [[ $((${#PLUGINS[@]}%3)) -ne 0 ]]; then
+  error "Plugin arguments must be supplied as triplets (i.e. domain project-slug path/to/plugin)."
 fi
 
 # Check plugins parameters
-for (( index=0; index<${#PLUGINS[@]}; index+=2 )); do
-  PLUGIN_FOLDER=${PLUGINS[index+1]}
+for (( index=0; index<${#PLUGINS[@]}; index+=3 )); do
+  PLUGIN_FOLDER=${PLUGINS[index+2]}
 
   check_plugin "$PLUGIN_FOLDER"
 done
@@ -126,14 +127,15 @@ npm run build:gutenberg
 METRO_CONFIG="metro.config.js" node gutenberg/packages/react-native-editor/bin/extract-used-strings "$USED_STRINGS_PATH" "${PLUGINS[@]}"
 
 # Download translations of plugins (i.e. Jetpack)
-for (( index=0; index<${#PLUGINS[@]}; index+=2 )); do
+for (( index=0; index<${#PLUGINS[@]}; index+=3 )); do
   PLUGIN_NAME=${PLUGINS[index]}
+  PROJECT_SLUG=${PLUGINS[index+1]}
 
-  fetch_translations "$PLUGIN_NAME" "$TRANSLATIONS_OUTPUT_PATH" "$USED_STRINGS_PATH"
+  fetch_translations "$PLUGIN_NAME" "$PROJECT_SLUG" "$TRANSLATIONS_OUTPUT_PATH" "$USED_STRINGS_PATH"
 done
 
 # Download translations of Gutenberg
-fetch_translations "gutenberg" "$TRANSLATIONS_OUTPUT_PATH" "$USED_STRINGS_PATH"
+fetch_translations "gutenberg" "wp-plugins/gutenberg" "$TRANSLATIONS_OUTPUT_PATH" "$USED_STRINGS_PATH"
 
 echo -e "\n\033[1mGenerating localization strings files\033[0m"
 

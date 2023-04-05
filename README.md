@@ -122,13 +122,13 @@ This project is set up to use [jest](https://facebook.github.io/jest/) for tests
 
 ## UI Tests
 
-This repository uses Appium to run UI tests. The tests live in `__device-tests__` and are written using Appium to run tests against simulators and real devices. To run these you'll need to check off a few things: 
+This repository uses Appium to run UI tests. The tests live in `__device-tests__` and are written using Appium to run tests against simulators and real devices. To run these you'll need to check off a few things:
 
-* When running the tests, you'll need to ensure the Metro bundler (`npm run start`) is not running. 
-* [Appium CLI](https://appium.io/docs/en/about-appium/getting-started/) installed and available globally. We also recommend using [appium-doctor](https://github.com/appium/appium-doctor) to ensure all of Appium's dependencies are good to go. You don't have to worry about starting the server yourself, the tests handle starting the server on port 4723, just be sure that the port is free or feel free to change the port number in the test file. 
+* When running the tests, you'll need to ensure the Metro bundler (`npm run start`) is not running.
+* [Appium CLI](https://appium.io/docs/en/about-appium/getting-started/) installed and available globally. We also recommend using [appium-doctor](https://github.com/appium/appium-doctor) to ensure all of Appium's dependencies are good to go. You don't have to worry about starting the server yourself, the tests handle starting the server on port 4723, just be sure that the port is free or feel free to change the port number in the test file.
 * For iOS a simulator should automatically launch but for Android you'll need to have an emulator *with at least platform version 8.0* fired up and running.
 
-Then, to run the UI tests on iOS: 
+Then, to run the UI tests on iOS:
 
 `npm run test:e2e:ios:local`
 
@@ -142,7 +142,7 @@ To run a single test instead of the entire suite, use `npm run device-tests:loca
 
 `TEST_RN_PLATFORM=ios npm run device-tests:local gutenberg-editor-paragraph.test`
 
-Note: You might experience problems that seem to be related to the tests starting the Appium server, e.g. errors that say `Connection Refused`, `Connection Reset` or `The requested environment is not available`. For now, you can manually start the Appium server via [appium desktop](https://github.com/appium/appium-desktop) or the CLI, then change the port number in the tests while (optionally) commenting out related code in the `beforeAll` and `afterAll` block. 
+Note: You might experience problems that seem to be related to the tests starting the Appium server, e.g. errors that say `Connection Refused`, `Connection Reset` or `The requested environment is not available`. For now, you can manually start the Appium server via [Appium Inspector](https://github.com/appium/appium-inspector/) or the CLI, then change the port number in the tests while (optionally) commenting out related code in the `beforeAll` and `afterAll` block.
 
 For a more detailed outline of the UI tests and how to get started writing one, please visit the [UI Test documentation](https://github.com/WordPress/gutenberg/blob/HEAD/packages/react-native-editor/__device-tests__/README.md) and our [contributing guide](https://github.com/WordPress/gutenberg/blob/HEAD/packages/react-native-editor/__device-tests__/CONTRIBUTING.md).
 
