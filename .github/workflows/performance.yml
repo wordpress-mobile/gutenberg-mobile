@@ -1,0 +1,7 @@
+- name: Run mobile performance testing script
+  run: ./gutenberg/bin/reassure-tests.sh
+
+- name: Report mobile performance results
+  run: npm danger ci
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
