@@ -1,6 +1,7 @@
 /**
  * Internal dependencies
  */
+import { tapSelectAllAboveElement } from './helpers/utils';
 const { blockNames } = editorPage;
 
 describe( 'Gutenberg Editor - Writing Flow', () => {
@@ -55,9 +56,10 @@ describe( 'Gutenberg Editor - Writing Flow', () => {
 			);
 
 			// Highlight the word that was autocorrected
-			// Simulated double tap. TODO: Verify if this is the best method to highlight text
-			await editorPage.tapElement( headingBlockElement );
-			await editorPage.tapElement( headingBlockElement );
+			await tapSelectAllAboveElement(
+				editorPage.driver,
+				headingBlockElement
+			);
 
 			// Check that the word has no formatting applied
 			const selectedText = await editorPage.getTextForParagraphBlockAtPosition(
@@ -87,9 +89,10 @@ describe( 'Gutenberg Editor - Writing Flow', () => {
 			);
 
 			// Highlight the word that was autocorrected
-			// Simulated double tap. TODO: Verify if this is the best method to highlight text
-			await editorPage.tapElement( headingBlockElement );
-			await editorPage.tapElement( headingBlockElement );
+			await tapSelectAllAboveElement(
+				editorPage.driver,
+				headingBlockElement
+			);
 
 			// Check that the word has formatting applied
 			const selectedText = await editorPage.getTextForParagraphBlockAtPosition(
