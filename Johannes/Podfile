@@ -82,7 +82,8 @@ platform :ios, APP_IOS_DEPLOYMENT_TARGET.version
 use_frameworks!
 
 target 'Johannes' do
-  pod 'Gutenberg', path: '../'
+  # Do not add Gutenberg. Gutenberg is the framework we are trying to recreate here!
+  # pod 'Gutenberg', path: '../'
 
   options = {
     # git: 'https://github.com/wordpress-mobile/gutenberg-mobile.git',
