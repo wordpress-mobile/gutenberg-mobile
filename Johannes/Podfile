@@ -1,0 +1,113 @@
+# frozen_string_literal: true
+
+TAG = 'v1.92.0'
+
+# Note that the pods in this array might seem unused if you look for
+# `import` statements in this codebase. However, make sure to also check
+# whether they are used in the gutenberg-mobile and Gutenberg projects.
+#
+# See https://github.com/wordpress-mobile/gutenberg-mobile/issues/5025
+DEPENDENCIES = %w[
+  FBLazyVector
+  React
+  ReactCommon
+  RCTRequired
+  RCTTypeSafety
+  React-Core
+  React-CoreModules
+  React-RCTActionSheet
+  React-RCTAnimation
+  React-RCTBlob
+  React-RCTImage
+  React-RCTLinking
+  React-RCTNetwork
+  React-RCTSettings
+  React-RCTText
+  React-RCTVibration
+  React-callinvoker
+  React-cxxreact
+  React-jsinspector
+  React-jsi
+  React-jsiexecutor
+  React-logger
+  React-perflogger
+  React-runtimeexecutor
+  boost
+  Yoga
+  RCT-Folly
+  glog
+  react-native-keyboard-aware-scroll-view
+  react-native-safe-area
+  react-native-safe-area-context
+  react-native-video
+  react-native-webview
+  RNSVG
+  react-native-slider
+  BVLinearGradient
+  react-native-get-random-values
+  react-native-blur
+  RNScreens
+  RNReanimated
+  RNGestureHandler
+  RNCMaskedView
+  RNCClipboard
+  RNFastImage
+  React-Codegen
+  React-bridging
+].freeze
+
+# rubocop:disable Metrics/MethodLength
+def gutenberg_dependencies(options)
+  if options[:path]
+    podspec_prefix = options[:path]
+  else
+    tag_or_commit = options[:tag] || options[:commit]
+    podspec_prefix = "https://raw.githubusercontent.com/wordpress-mobile/gutenberg-mobile/#{tag_or_commit}"
+  end
+
+  # FBReactNativeSpec needs special treatment because of react-native-codegen code generation
+  pod 'FBReactNativeSpec',
+      podspec: "#{podspec_prefix}/third-party-podspecs/FBReactNativeSpec/FBReactNativeSpec.podspec.json"
+
+  DEPENDENCIES.each do |pod_name|
+    pod pod_name, podspec: "#{podspec_prefix}/third-party-podspecs/#{pod_name}.podspec.json"
+  end
+end
+# rubocop:enable Metrics/MethodLength
+
+APP_IOS_DEPLOYMENT_TARGET = Gem::Version.new('13.0')
+
+platform :ios, APP_IOS_DEPLOYMENT_TARGET.version
+
+use_frameworks!
+
+target 'Johannes' do
+  pod 'Gutenberg', path: '../'
+
+  options = {
+    # git: 'https://github.com/wordpress-mobile/gutenberg-mobile.git',
+    # submodules: true,
+    # tag: TAG
+    path: '..'
+  }
+
+  pod 'RNTAztecView', options
+  gutenberg_dependencies(options)
+end
+
+post_install do |installer|
+  # Let Pods targets inherit deployment target from the app
+  # See https://github.com/CocoaPods/CocoaPods/issues/4859
+  installer.pods_project.targets.each do |target|
+    # Exclude RCT-Folly as it requires explicit deployment target
+    # See https://git.io/JPb73
+    next unless target.name != 'RCT-Folly'
+
+    target.build_configurations.each do |configuration|
+      pod_ios_deployment_target = Gem::Version.new(configuration.build_settings['IPHONEOS_DEPLOYMENT_TARGET'])
+      if pod_ios_deployment_target <= APP_IOS_DEPLOYMENT_TARGET
+        configuration.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
+      end
+    end
+  end
+end

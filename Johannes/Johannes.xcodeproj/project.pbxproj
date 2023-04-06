@@ -16,6 +16,8 @@
 		3F0958BC29DED9F400E87848 /* RNReactNativeGutenbergBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0958B429DED9F400E87848 /* RNReactNativeGutenbergBridge.swift */; };
 		3F0958BD29DED9F400E87848 /* GutenbergWebFallback in Resources */ = {isa = PBXBuildFile; fileRef = 3F0958B529DED9F400E87848 /* GutenbergWebFallback */; };
 		3F0958BE29DED9F400E87848 /* GutenbergBridgeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0958B629DED9F400E87848 /* GutenbergBridgeDataSource.swift */; };
+		3F0958FD29DEE6C500E87848 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0958FC29DEE6C500E87848 /* JavaScriptCore.framework */; };
+		4BB7DF5431300011E7F923E1 /* Pods_Johannes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90719F9749623E790B745C79 /* Pods_Johannes.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,10 @@
 		3F0958B429DED9F400E87848 /* RNReactNativeGutenbergBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNReactNativeGutenbergBridge.swift; path = "../../gutenberg/packages/react-native-bridge/ios/RNReactNativeGutenbergBridge.swift"; sourceTree = "<group>"; };
 		3F0958B529DED9F400E87848 /* GutenbergWebFallback */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GutenbergWebFallback; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergWebFallback"; sourceTree = "<group>"; };
 		3F0958B629DED9F400E87848 /* GutenbergBridgeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GutenbergBridgeDataSource.swift; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergBridgeDataSource.swift"; sourceTree = "<group>"; };
+		3F0958FC29DEE6C500E87848 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/iOSSupport/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		90719F9749623E790B745C79 /* Pods_Johannes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Johannes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC499E86FC611802954C99C6 /* Pods-Johannes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Johannes.release.xcconfig"; path = "Target Support Files/Pods-Johannes/Pods-Johannes.release.xcconfig"; sourceTree = "<group>"; };
+		CAFA8F99CA8C4F85828D705F /* Pods-Johannes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Johannes.debug.xcconfig"; path = "Target Support Files/Pods-Johannes/Pods-Johannes.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +42,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0958FD29DEE6C500E87848 /* JavaScriptCore.framework in Frameworks */,
+				4BB7DF5431300011E7F923E1 /* Pods_Johannes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +55,8 @@
 			children = (
 				3F0958A729DED95C00E87848 /* Johannes */,
 				3F0958A629DED95C00E87848 /* Products */,
+				7EC001EB1845564A8192B887 /* Pods */,
+				57EB5B2A72F066811D82E4D5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,6 +84,24 @@
 			path = Johannes;
 			sourceTree = "<group>";
 		};
+		57EB5B2A72F066811D82E4D5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3F0958FC29DEE6C500E87848 /* JavaScriptCore.framework */,
+				90719F9749623E790B745C79 /* Pods_Johannes.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7EC001EB1845564A8192B887 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CAFA8F99CA8C4F85828D705F /* Pods-Johannes.debug.xcconfig */,
+				AC499E86FC611802954C99C6 /* Pods-Johannes.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -93,6 +121,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3F0958AC29DED95C00E87848 /* Build configuration list for PBXNativeTarget "Johannes" */;
 			buildPhases = (
+				0E569E14DABC7FDC652BB409 /* [CP] Check Pods Manifest.lock */,
 				3F0958A029DED95C00E87848 /* Headers */,
 				3F0958A129DED95C00E87848 /* Sources */,
 				3F0958A229DED95C00E87848 /* Frameworks */,
@@ -150,6 +179,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0E569E14DABC7FDC652BB409 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Johannes-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3F0958A129DED95C00E87848 /* Sources */ = {
@@ -290,6 +344,7 @@
 		};
 		3F0958AD29DED95C00E87848 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAFA8F99CA8C4F85828D705F /* Pods-Johannes.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -322,6 +377,7 @@
 		};
 		3F0958AE29DED95C00E87848 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC499E86FC611802954C99C6 /* Pods-Johannes.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
