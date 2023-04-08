@@ -50,7 +50,11 @@ const setupHooks = () => {
 		( endpoints ) => {
 			return {
 				...endpoints,
-				POST: [ ...endpoints.POST, /wpcom\/v2\/(media)\/.*/i ],
+				POST: [
+					...endpoints.POST,
+					/wpcom\/v2\/(media)\/.*/i,
+					/wpcom\/v2\/videopress\/meta.*/i,
+				],
 			};
 		}
 	);
