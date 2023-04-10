@@ -57,7 +57,6 @@ EXTERNAL_PODSPECS=$(find "$NODE_MODULES_DIR/react-native/third-party-podspecs" \
                          "$NODE_MODULES_DIR/@react-native-clipboard/clipboard" \
                          "$NODE_MODULES_DIR/react-native-gesture-handler" \
                          "$NODE_MODULES_DIR/react-native-get-random-values" \
-                         "$NODE_MODULES_DIR/react-native-keyboard-aware-scroll-view" \
                          "$NODE_MODULES_DIR/react-native-linear-gradient" \
                          "$NODE_MODULES_DIR/react-native-reanimated" \
                          "$NODE_MODULES_DIR/react-native-safe-area" \
