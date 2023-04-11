@@ -58,7 +58,7 @@ describe( 'Gutenberg Editor - Writing Flow', () => {
 
 	describe( `TC009 - Test autocorrection doesn't apply formatting to Heading`, () => {
 		it( 'checks that formatting is not applied to autocorrected text', async () => {
-			const headingText = `<p>Mispelled</p>`;
+			const headingText = `Mispelled`;
 
 			// Add a Heading block without any formatting applied.
 			await editorPage.addNewBlock( blockNames.heading );
@@ -90,7 +90,7 @@ describe( 'Gutenberg Editor - Writing Flow', () => {
 
 	describe( `TC010 - Test autocorrection doesn't remove formatting from Heading`, () => {
 		it( 'checks that formatting is not removed from autocorrected text', async () => {
-			const headingText = '<p><strong>Mispelled</strong></p>';
+			const headingText = 'Mispelled';
 
 			// Add a Heading block
 			await editorPage.addNewBlock( blockNames.heading );
@@ -98,7 +98,10 @@ describe( 'Gutenberg Editor - Writing Flow', () => {
 				blockNames.heading
 			);
 
+			// Toggle bold formatting
 			// Type a sentence with a word misspelled that will be autocorrected by the editor
+
+			await editorPage.toggleFormatting( 'Bold' );
 			await editorPage.typeTextToTextBlock(
 				headingBlockElement,
 				headingText
@@ -115,6 +118,8 @@ describe( 'Gutenberg Editor - Writing Flow', () => {
 				1
 			);
 			expect( selectedText ).toMatch( headingText );
+
+			// TODO: Add assertion or visual snapshot that bold formatting is retained
 
 			await editorPage.removeBlock();
 		} );
