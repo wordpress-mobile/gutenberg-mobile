@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3F0958A929DED95C00E87848 /* Johannes.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F0958A829DED95C00E87848 /* Johannes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3F0958B729DED9F400E87848 /* RNReactNativeGutenbergBridge-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F0958AF29DED9F300E87848 /* RNReactNativeGutenbergBridge-Bridging-Header.h */; };
 		3F0958B829DED9F400E87848 /* Gutenberg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0958B029DED9F300E87848 /* Gutenberg.swift */; };
 		3F0958B929DED9F400E87848 /* SourceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0958B129DED9F300E87848 /* SourceFile.swift */; };
 		3F0958BA29DED9F400E87848 /* GutenbergBridgeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0958B229DED9F300E87848 /* GutenbergBridgeDelegate.swift */; };
@@ -24,7 +23,6 @@
 /* Begin PBXFileReference section */
 		3F0958A529DED95C00E87848 /* Johannes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Johannes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F0958A829DED95C00E87848 /* Johannes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Johannes.h; sourceTree = "<group>"; };
-		3F0958AF29DED9F300E87848 /* RNReactNativeGutenbergBridge-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RNReactNativeGutenbergBridge-Bridging-Header.h"; path = "../../gutenberg/packages/react-native-bridge/ios/RNReactNativeGutenbergBridge-Bridging-Header.h"; sourceTree = "<group>"; };
 		3F0958B029DED9F300E87848 /* Gutenberg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gutenberg.swift; path = "../gutenberg/packages/react-native-bridge/ios/Gutenberg.swift"; sourceTree = SOURCE_ROOT; };
 		3F0958B129DED9F300E87848 /* SourceFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SourceFile.swift; path = "../../gutenberg/packages/react-native-bridge/ios/SourceFile.swift"; sourceTree = "<group>"; };
 		3F0958B229DED9F300E87848 /* GutenbergBridgeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GutenbergBridgeDelegate.swift; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergBridgeDelegate.swift"; sourceTree = "<group>"; };
@@ -79,7 +77,6 @@
 				3F0958B229DED9F300E87848 /* GutenbergBridgeDelegate.swift */,
 				3F94042D29E4FD61009743BD /* GutenbergWebSingleBlockViewController.swift */,
 				3F0958A829DED95C00E87848 /* Johannes.h */,
-				3F0958AF29DED9F300E87848 /* RNReactNativeGutenbergBridge-Bridging-Header.h */,
 				3F0958B329DED9F300E87848 /* RNReactNativeGutenbergBridge.m */,
 				3F0958B429DED9F400E87848 /* RNReactNativeGutenbergBridge.swift */,
 				3F0958B129DED9F300E87848 /* SourceFile.swift */,
@@ -113,7 +110,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F0958A929DED95C00E87848 /* Johannes.h in Headers */,
-				3F0958B729DED9F400E87848 /* RNReactNativeGutenbergBridge-Bridging-Header.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
