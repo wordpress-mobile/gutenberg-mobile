@@ -46,6 +46,16 @@
 		3F94044029E567E1009743BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F94044329E567E1009743BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F94044529E567E1009743BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F94044F29E56A81009743BD /* editor-behavior-overrides.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "editor-behavior-overrides.js"; path = "../../../gutenberg/packages/react-native-bridge/common/gutenberg-web-single-block/editor-behavior-overrides.js"; sourceTree = "<group>"; };
+		3F94045029E56A81009743BD /* wp-bar-override.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = "wp-bar-override.css"; path = "../../../gutenberg/packages/react-native-bridge/common/gutenberg-web-single-block/wp-bar-override.css"; sourceTree = "<group>"; };
+		3F94045129E56A81009743BD /* inject-css.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "inject-css.js"; path = "../../../gutenberg/packages/react-native-bridge/common/gutenberg-web-single-block/inject-css.js"; sourceTree = "<group>"; };
+		3F94045229E56A81009743BD /* prevent-autosaves.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "prevent-autosaves.js"; path = "../../../gutenberg/packages/react-native-bridge/common/gutenberg-web-single-block/prevent-autosaves.js"; sourceTree = "<group>"; };
+		3F94045329E56A81009743BD /* local-storage-overrides.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "local-storage-overrides.json"; path = "../../../gutenberg/packages/react-native-bridge/common/gutenberg-web-single-block/local-storage-overrides.json"; sourceTree = "<group>"; };
+		3F94045429E56A81009743BD /* content-functions.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "content-functions.js"; path = "../../../gutenberg/packages/react-native-bridge/common/gutenberg-web-single-block/content-functions.js"; sourceTree = "<group>"; };
+		3F94045529E56A81009743BD /* insert-block.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "insert-block.js"; path = "../../../gutenberg/packages/react-native-bridge/common/gutenberg-web-single-block/insert-block.js"; sourceTree = "<group>"; };
+		3F94045629E56A81009743BD /* gutenberg-observer.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "gutenberg-observer.js"; path = "../../../gutenberg/packages/react-native-bridge/common/gutenberg-web-single-block/gutenberg-observer.js"; sourceTree = "<group>"; };
+		3F94045729E56A82009743BD /* editor-style-overrides.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = "editor-style-overrides.css"; path = "../../../gutenberg/packages/react-native-bridge/common/gutenberg-web-single-block/editor-style-overrides.css"; sourceTree = "<group>"; };
+		3F94046129E56B20009743BD /* supported-blocks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "supported-blocks.json"; path = "../../../src/block-support/supported-blocks.json"; sourceTree = "<group>"; };
 		7382E5D609BACB9ADA411FF8 /* Pods-Johannes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Johannes.release.xcconfig"; path = "Target Support Files/Pods-Johannes/Pods-Johannes.release.xcconfig"; sourceTree = "<group>"; };
 		A0A31F4D4AECD76B40109739 /* Pods-Johannes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Johannes.debug.xcconfig"; path = "Target Support Files/Pods-Johannes/Pods-Johannes.debug.xcconfig"; sourceTree = "<group>"; };
 		F75E3D913A5DBF561933870E /* Pods_Johannes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Johannes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +104,7 @@
 		3F0958A729DED95C00E87848 /* Johannes */ = {
 			isa = PBXGroup;
 			children = (
+				3F94044E29E56A4D009743BD /* Resources */,
 				3F94042E29E4FD61009743BD /* FallbackJavascriptInjection.swift */,
 				3F0958B029DED9F300E87848 /* Gutenberg.swift */,
 				3F0958B629DED9F400E87848 /* GutenbergBridgeDataSource.swift */,
@@ -119,6 +130,23 @@
 				3F94044529E567E1009743BD /* Info.plist */,
 			);
 			path = JohannesDemo;
+			sourceTree = "<group>";
+		};
+		3F94044E29E56A4D009743BD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3F94045429E56A81009743BD /* content-functions.js */,
+				3F94044F29E56A81009743BD /* editor-behavior-overrides.js */,
+				3F94045729E56A82009743BD /* editor-style-overrides.css */,
+				3F94045629E56A81009743BD /* gutenberg-observer.js */,
+				3F94045129E56A81009743BD /* inject-css.js */,
+				3F94045529E56A81009743BD /* insert-block.js */,
+				3F94045329E56A81009743BD /* local-storage-overrides.json */,
+				3F94045229E56A81009743BD /* prevent-autosaves.js */,
+				3F94046129E56B20009743BD /* supported-blocks.json */,
+				3F94045029E56A81009743BD /* wp-bar-override.css */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		57EB5B2A72F066811D82E4D5 /* Frameworks */ = {
@@ -233,6 +261,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F94045F29E56A82009743BD /* gutenberg-observer.js in Resources */,
+				3F94045A29E56A82009743BD /* inject-css.js in Resources */,
+				3F94046029E56A82009743BD /* editor-style-overrides.css in Resources */,
+				3F94045C29E56A82009743BD /* local-storage-overrides.json in Resources */,
+				3F94045D29E56A82009743BD /* content-functions.js in Resources */,
+				3F94045929E56A82009743BD /* wp-bar-override.css in Resources */,
+				3F94046229E56B20009743BD /* supported-blocks.json in Resources */,
+				3F94045E29E56A82009743BD /* insert-block.js in Resources */,
+				3F94045829E56A82009743BD /* editor-behavior-overrides.js in Resources */,
+				3F94045B29E56A82009743BD /* prevent-autosaves.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
