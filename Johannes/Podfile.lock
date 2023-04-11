@@ -235,8 +235,6 @@ PODS:
     - React-Core
   - react-native-get-random-values (1.4.0):
     - React-Core
-  - react-native-keyboard-aware-scroll-view (0.8.8-wp-1):
-    - React-Core
   - react-native-safe-area (0.5.1):
     - React-Core
   - react-native-safe-area-context (3.2.0):
@@ -422,7 +420,6 @@ DEPENDENCIES:
   - React-logger (from `../third-party-podspecs/React-logger.podspec.json`)
   - react-native-blur (from `../third-party-podspecs/react-native-blur.podspec.json`)
   - react-native-get-random-values (from `../third-party-podspecs/react-native-get-random-values.podspec.json`)
-  - react-native-keyboard-aware-scroll-view (from `../third-party-podspecs/react-native-keyboard-aware-scroll-view.podspec.json`)
   - react-native-safe-area (from `../third-party-podspecs/react-native-safe-area.podspec.json`)
   - react-native-safe-area-context (from `../third-party-podspecs/react-native-safe-area-context.podspec.json`)
   - react-native-slider (from `../third-party-podspecs/react-native-slider.podspec.json`)
@@ -502,8 +499,6 @@ EXTERNAL SOURCES:
     :podspec: "../third-party-podspecs/react-native-blur.podspec.json"
   react-native-get-random-values:
     :podspec: "../third-party-podspecs/react-native-get-random-values.podspec.json"
-  react-native-keyboard-aware-scroll-view:
-    :podspec: "../third-party-podspecs/react-native-keyboard-aware-scroll-view.podspec.json"
   react-native-safe-area:
     :podspec: "../third-party-podspecs/react-native-safe-area.podspec.json"
   react-native-safe-area-context:
@@ -562,7 +557,7 @@ SPEC CHECKSUMS:
   BVLinearGradient: 708898fab8f7113d927b0ef611a321e759f6ad3e
   DoubleConversion: e22e0762848812a87afd67ffda3998d9ef29170c
   FBLazyVector: 16fdf30fcbc7177c6a4bdf35ef47225577eb9636
-  FBReactNativeSpec: 7e38f5138250d192fc5bf1cb1924d57f8a9a66d7
+  FBReactNativeSpec: 2ffeca5f498ddc94234d823f38abf51ce0313171
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 741689bdd65551bc8fb59d633e55c34293030d3e
   libwebp: f62cb61d0a484ba548448a4bd52aabf150ff6eef
@@ -582,7 +577,6 @@ SPEC CHECKSUMS:
   React-logger: 16a67709f5aa1d752fd09f9e6ccbf802ba0c24e9
   react-native-blur: 14c75aa19da8734c1656d5b6ca5adb859b2c26aa
   react-native-get-random-values: 2869478c635a6e33080b917ce33f2803cb69262c
-  react-native-keyboard-aware-scroll-view: 042fe86d8358780b9697cadf5f8cefbf8f8c7378
   react-native-safe-area: e3de9e959c7baaae8db9bcb015d99ed1da25c9d5
   react-native-safe-area-context: 1e501ec30c260422def56e95e11edb103caa5bf2
   react-native-slider: f1ea4381d6d43ef5b945b5b101e9c66d249630a6
@@ -613,6 +607,6 @@ SPEC CHECKSUMS:
   WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
   Yoga: 5e12f4deb20582f86f6323e1cdff25f07afc87f6
 
-PODFILE CHECKSUM: 6d46169be567000753d13f3e4f01b96b6176d9a8
+PODFILE CHECKSUM: 53cc7cc03d2f8b64eee21cd3c1f04647d2d7ecd0
 
 COCOAPODS: 1.12.0
