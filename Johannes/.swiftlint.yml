@@ -1,0 +1,9 @@
+only_rules:
+  - trailing_newline
+  - trailing_whitespace
+
+excluded:
+  - DerivedData
+  - fastlane
+  - Pods
+  - vendor
