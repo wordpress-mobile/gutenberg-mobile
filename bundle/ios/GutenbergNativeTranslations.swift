@@ -259,6 +259,7 @@ private func dummy() {
     _ = NSLocalizedString("Problem opening the video", comment: "")
     _ = NSLocalizedString("Remove as Featured Image", comment: "")
     _ = NSLocalizedString("Remove block", comment: "")
+    _ = NSLocalizedString("Remove blocks", comment: "")
     _ = NSLocalizedString("Replace audio", comment: "")
     _ = NSLocalizedString("Replace Current Block", comment: "")
     _ = NSLocalizedString("Replace file", comment: "")
