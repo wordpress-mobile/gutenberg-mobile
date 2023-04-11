@@ -2,6 +2,6 @@
   run: ./gutenberg/bin/reassure-tests.sh
 
 - name: Report mobile performance results
-  run: npm danger ci
+  run: npm run performance:report
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
