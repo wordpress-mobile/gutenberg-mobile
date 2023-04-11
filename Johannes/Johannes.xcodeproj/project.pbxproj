@@ -34,6 +34,12 @@
 		3F94045F29E56A82009743BD /* gutenberg-observer.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F94045629E56A81009743BD /* gutenberg-observer.js */; };
 		3F94046029E56A82009743BD /* editor-style-overrides.css in Resources */ = {isa = PBXBuildFile; fileRef = 3F94045729E56A82009743BD /* editor-style-overrides.css */; };
 		3F94046229E56B20009743BD /* supported-blocks.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F94046129E56B20009743BD /* supported-blocks.json */; };
+		3F94046429E56FFC009743BD /* DocumentMediaSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94046329E56FFC009743BD /* DocumentMediaSource.swift */; };
+		3F94046629E57022009743BD /* MediaUploadCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94046529E57022009743BD /* MediaUploadCoordinator.swift */; };
+		3F94046829E5704B009743BD /* CustomImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94046729E5704B009743BD /* CustomImageLoader.swift */; };
+		3F94046A29E570E5009743BD /* MediaPickCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94046929E570E5009743BD /* MediaPickCoordinator.swift */; };
+		3F94046C29E57167009743BD /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94046B29E57167009743BD /* WebViewController.swift */; };
+		3F94046E29E571AE009743BD /* ExampleAttachmentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94046D29E571AE009743BD /* ExampleAttachmentDelegate.swift */; };
 		739CB903307AA67413BB68E0 /* Pods_Johannes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F75E3D913A5DBF561933870E /* Pods_Johannes.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +96,12 @@
 		3F94045629E56A81009743BD /* gutenberg-observer.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "gutenberg-observer.js"; path = "../../../gutenberg/packages/react-native-bridge/common/gutenberg-web-single-block/gutenberg-observer.js"; sourceTree = "<group>"; };
 		3F94045729E56A82009743BD /* editor-style-overrides.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = "editor-style-overrides.css"; path = "../../../gutenberg/packages/react-native-bridge/common/gutenberg-web-single-block/editor-style-overrides.css"; sourceTree = "<group>"; };
 		3F94046129E56B20009743BD /* supported-blocks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "supported-blocks.json"; path = "../../../src/block-support/supported-blocks.json"; sourceTree = "<group>"; };
+		3F94046329E56FFC009743BD /* DocumentMediaSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentMediaSource.swift; sourceTree = "<group>"; };
+		3F94046529E57022009743BD /* MediaUploadCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUploadCoordinator.swift; sourceTree = "<group>"; };
+		3F94046729E5704B009743BD /* CustomImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageLoader.swift; sourceTree = "<group>"; };
+		3F94046929E570E5009743BD /* MediaPickCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickCoordinator.swift; sourceTree = "<group>"; };
+		3F94046B29E57167009743BD /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		3F94046D29E571AE009743BD /* ExampleAttachmentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAttachmentDelegate.swift; sourceTree = "<group>"; };
 		7382E5D609BACB9ADA411FF8 /* Pods-Johannes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Johannes.release.xcconfig"; path = "Target Support Files/Pods-Johannes/Pods-Johannes.release.xcconfig"; sourceTree = "<group>"; };
 		A0A31F4D4AECD76B40109739 /* Pods-Johannes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Johannes.debug.xcconfig"; path = "Target Support Files/Pods-Johannes/Pods-Johannes.debug.xcconfig"; sourceTree = "<group>"; };
 		F75E3D913A5DBF561933870E /* Pods_Johannes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Johannes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,11 +169,17 @@
 			isa = PBXGroup;
 			children = (
 				3F94043729E567DF009743BD /* AppDelegate.swift */,
+				3F94044029E567E1009743BD /* Assets.xcassets */,
+				3F94046729E5704B009743BD /* CustomImageLoader.swift */,
+				3F94046329E56FFC009743BD /* DocumentMediaSource.swift */,
+				3F94044529E567E1009743BD /* Info.plist */,
+				3F94044229E567E1009743BD /* LaunchScreen.storyboard */,
+				3F94046929E570E5009743BD /* MediaPickCoordinator.swift */,
+				3F94046529E57022009743BD /* MediaUploadCoordinator.swift */,
 				3F94043929E567DF009743BD /* SceneDelegate.swift */,
 				3F94043B29E567DF009743BD /* ViewController.swift */,
-				3F94044029E567E1009743BD /* Assets.xcassets */,
-				3F94044229E567E1009743BD /* LaunchScreen.storyboard */,
-				3F94044529E567E1009743BD /* Info.plist */,
+				3F94046D29E571AE009743BD /* ExampleAttachmentDelegate.swift */,
+				3F94046B29E57167009743BD /* WebViewController.swift */,
 			);
 			path = JohannesDemo;
 			sourceTree = "<group>";
@@ -383,9 +401,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F94046E29E571AE009743BD /* ExampleAttachmentDelegate.swift in Sources */,
+				3F94046429E56FFC009743BD /* DocumentMediaSource.swift in Sources */,
+				3F94046829E5704B009743BD /* CustomImageLoader.swift in Sources */,
 				3F94043C29E567DF009743BD /* ViewController.swift in Sources */,
 				3F94043829E567DF009743BD /* AppDelegate.swift in Sources */,
+				3F94046629E57022009743BD /* MediaUploadCoordinator.swift in Sources */,
 				3F94043A29E567DF009743BD /* SceneDelegate.swift in Sources */,
+				3F94046A29E570E5009743BD /* MediaPickCoordinator.swift in Sources */,
+				3F94046C29E57167009743BD /* WebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
