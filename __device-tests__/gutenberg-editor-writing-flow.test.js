@@ -82,7 +82,6 @@ describe( 'Gutenberg Editor - Writing Flow', () => {
 			const selectedText = await editorPage.getTextForParagraphBlockAtPosition(
 				1
 			);
-			// TODO: verify if a snapshot should be used in place of an assertion, or both
 			expect( selectedText ).toMatch( headingText );
 
 			await editorPage.removeBlock();
@@ -115,7 +114,6 @@ describe( 'Gutenberg Editor - Writing Flow', () => {
 			const selectedText = await editorPage.getTextForParagraphBlockAtPosition(
 				1
 			);
-			// TODO: verify if a snapshot should be used in place of an assertion, or both
 			expect( selectedText ).toMatch( headingText );
 
 			await editorPage.removeBlock();
