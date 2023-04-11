@@ -57,8 +57,17 @@ DEPENDENCIES = %w[
   React-bridging
 ].freeze
 
+GUTENBERG_OPTIONS = {
+  # git: 'https://github.com/wordpress-mobile/gutenberg-mobile.git',
+  # submodules: true,
+  # tag: TAG
+  path: '..'
+}
+
 # rubocop:disable Metrics/MethodLength
-def gutenberg_dependencies(options)
+def gutenberg_dependencies
+  options = GUTENBERG_OPTIONS
+
   if options[:path]
     podspec_prefix = options[:path]
   else
@@ -86,15 +95,17 @@ target 'Johannes' do
   # Do not add Gutenberg. Gutenberg is the framework we are trying to recreate here!
   # pod 'Gutenberg', path: '../'
 
-  options = {
-    # git: 'https://github.com/wordpress-mobile/gutenberg-mobile.git',
-    # submodules: true,
-    # tag: TAG
-    path: '..'
-  }
+  pod 'RNTAztecView', GUTENBERG_OPTIONS
+  gutenberg_dependencies
+end
 
-  pod 'RNTAztecView', options
-  gutenberg_dependencies(options)
+target 'JohannesDemo' do
+  use_frameworks! linkage: :static
+
+  # I was hoping to need only the Aztec import, but it seems once you get one
+  # of the bunch, you need the whole lot...
+  pod 'RNTAztecView', GUTENBERG_OPTIONS
+  gutenberg_dependencies
 end
 
 post_install do |installer|

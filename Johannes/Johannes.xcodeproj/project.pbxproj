@@ -41,6 +41,7 @@
 		3F94046C29E57167009743BD /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94046B29E57167009743BD /* WebViewController.swift */; };
 		3F94046E29E571AE009743BD /* ExampleAttachmentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94046D29E571AE009743BD /* ExampleAttachmentDelegate.swift */; };
 		739CB903307AA67413BB68E0 /* Pods_Johannes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F75E3D913A5DBF561933870E /* Pods_Johannes.framework */; };
+		835823D09EDED64B35109D7F /* Pods_JohannesDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D21E3D058F2790A1FEB549 /* Pods_JohannesDemo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		19FAD2E72F755EB28310DB19 /* Pods-JohannesDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JohannesDemo.release.xcconfig"; path = "Target Support Files/Pods-JohannesDemo/Pods-JohannesDemo.release.xcconfig"; sourceTree = "<group>"; };
 		3F0958A529DED95C00E87848 /* Johannes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Johannes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F0958A829DED95C00E87848 /* Johannes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Johannes.h; sourceTree = "<group>"; };
 		3F0958B029DED9F300E87848 /* Gutenberg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gutenberg.swift; path = "../gutenberg/packages/react-native-bridge/ios/Gutenberg.swift"; sourceTree = SOURCE_ROOT; };
@@ -104,7 +106,9 @@
 		3F94046D29E571AE009743BD /* ExampleAttachmentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAttachmentDelegate.swift; sourceTree = "<group>"; };
 		7382E5D609BACB9ADA411FF8 /* Pods-Johannes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Johannes.release.xcconfig"; path = "Target Support Files/Pods-Johannes/Pods-Johannes.release.xcconfig"; sourceTree = "<group>"; };
 		A0A31F4D4AECD76B40109739 /* Pods-Johannes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Johannes.debug.xcconfig"; path = "Target Support Files/Pods-Johannes/Pods-Johannes.debug.xcconfig"; sourceTree = "<group>"; };
+		D4D21E3D058F2790A1FEB549 /* Pods_JohannesDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JohannesDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F75E3D913A5DBF561933870E /* Pods_Johannes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Johannes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC44C23B91657225899EDF3C /* Pods-JohannesDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JohannesDemo.debug.xcconfig"; path = "Target Support Files/Pods-JohannesDemo/Pods-JohannesDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F94044929E56866009743BD /* Johannes.framework in Frameworks */,
+				835823D09EDED64B35109D7F /* Pods_JohannesDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +211,7 @@
 			children = (
 				3F0958FC29DEE6C500E87848 /* JavaScriptCore.framework */,
 				F75E3D913A5DBF561933870E /* Pods_Johannes.framework */,
+				D4D21E3D058F2790A1FEB549 /* Pods_JohannesDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -215,6 +221,8 @@
 			children = (
 				A0A31F4D4AECD76B40109739 /* Pods-Johannes.debug.xcconfig */,
 				7382E5D609BACB9ADA411FF8 /* Pods-Johannes.release.xcconfig */,
+				FC44C23B91657225899EDF3C /* Pods-JohannesDemo.debug.xcconfig */,
+				19FAD2E72F755EB28310DB19 /* Pods-JohannesDemo.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -257,10 +265,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3F94044629E567E1009743BD /* Build configuration list for PBXNativeTarget "JohannesDemo" */;
 			buildPhases = (
+				EB09317790B578CD19002642 /* [CP] Check Pods Manifest.lock */,
 				3F94043129E567DF009743BD /* Sources */,
 				3F94043229E567DF009743BD /* Frameworks */,
 				3F94043329E567DF009743BD /* Resources */,
 				3F94044D29E56866009743BD /* Embed Frameworks */,
+				FE42BDFF4D8CB654201811BA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -377,6 +387,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB09317790B578CD19002642 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JohannesDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE42BDFF4D8CB654201811BA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-JohannesDemo/Pods-JohannesDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-JohannesDemo/Pods-JohannesDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JohannesDemo/Pods-JohannesDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -626,6 +675,7 @@
 		};
 		3F94044729E567E1009743BD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC44C23B91657225899EDF3C /* Pods-JohannesDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -652,6 +702,7 @@
 		};
 		3F94044829E567E1009743BD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 19FAD2E72F755EB28310DB19 /* Pods-JohannesDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

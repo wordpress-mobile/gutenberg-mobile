@@ -4,6 +4,11 @@ import Johannes
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    // Some code in the dependencies access the application delegate window under the hood, so we
+    // need it available. We'll be setting it in SceneDelegate, where we read the window from the
+    // scene that's passed at runtime.
+    var window: UIWindow?
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         _ = try! FallbackJavascriptInjection(blockHTML: "Hello", userId: "1")
