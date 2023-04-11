@@ -80,7 +80,7 @@ APP_IOS_DEPLOYMENT_TARGET = Gem::Version.new('13.0')
 platform :ios, APP_IOS_DEPLOYMENT_TARGET.version
 
 target 'Johannes' do
-  use_frameworks!
+  use_frameworks! linkage: :static
 
   # Do not add Gutenberg. Gutenberg is the framework we are trying to recreate here!
   # pod 'Gutenberg', path: '../'
