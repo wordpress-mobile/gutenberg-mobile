@@ -1,5 +1,11 @@
 Unreleased
 ---
+* [*] Support POST requests [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5596]
+* [***] [iOS] Fixed iOS scroll jumping issue by refactoring KeyboardAwareFlatList improving writing flow and caret focus handling [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5533]
+
+1.92.1
+---
+* [*] Avoid empty Gallery block error [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5627]
 
 1.92.0
 ---
