@@ -17,6 +17,12 @@
 		3F0958FD29DEE6C500E87848 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0958FC29DEE6C500E87848 /* JavaScriptCore.framework */; };
 		3F94042F29E4FD61009743BD /* GutenbergWebSingleBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94042D29E4FD61009743BD /* GutenbergWebSingleBlockViewController.swift */; };
 		3F94043029E4FD61009743BD /* FallbackJavascriptInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94042E29E4FD61009743BD /* FallbackJavascriptInjection.swift */; };
+		3F94043829E567DF009743BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94043729E567DF009743BD /* AppDelegate.swift */; };
+		3F94043A29E567DF009743BD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94043929E567DF009743BD /* SceneDelegate.swift */; };
+		3F94043C29E567DF009743BD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94043B29E567DF009743BD /* ViewController.swift */; };
+		3F94043F29E567DF009743BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F94043D29E567DF009743BD /* Main.storyboard */; };
+		3F94044129E567E1009743BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F94044029E567E1009743BD /* Assets.xcassets */; };
+		3F94044429E567E1009743BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F94044229E567E1009743BD /* LaunchScreen.storyboard */; };
 		739CB903307AA67413BB68E0 /* Pods_Johannes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F75E3D913A5DBF561933870E /* Pods_Johannes.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +38,14 @@
 		3F0958FC29DEE6C500E87848 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/iOSSupport/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		3F94042D29E4FD61009743BD /* GutenbergWebSingleBlockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GutenbergWebSingleBlockViewController.swift; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergWebFallback/GutenbergWebSingleBlockViewController.swift"; sourceTree = "<group>"; };
 		3F94042E29E4FD61009743BD /* FallbackJavascriptInjection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FallbackJavascriptInjection.swift; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergWebFallback/FallbackJavascriptInjection.swift"; sourceTree = "<group>"; };
+		3F94043529E567DF009743BD /* JohannesDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JohannesDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F94043729E567DF009743BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3F94043929E567DF009743BD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3F94043B29E567DF009743BD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3F94043E29E567DF009743BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3F94044029E567E1009743BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3F94044329E567E1009743BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3F94044529E567E1009743BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7382E5D609BACB9ADA411FF8 /* Pods-Johannes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Johannes.release.xcconfig"; path = "Target Support Files/Pods-Johannes/Pods-Johannes.release.xcconfig"; sourceTree = "<group>"; };
 		A0A31F4D4AECD76B40109739 /* Pods-Johannes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Johannes.debug.xcconfig"; path = "Target Support Files/Pods-Johannes/Pods-Johannes.debug.xcconfig"; sourceTree = "<group>"; };
 		F75E3D913A5DBF561933870E /* Pods_Johannes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Johannes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +61,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3F94043229E567DF009743BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -54,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				3F0958A729DED95C00E87848 /* Johannes */,
+				3F94043629E567DF009743BD /* JohannesDemo */,
 				3F0958A629DED95C00E87848 /* Products */,
 				7EC001EB1845564A8192B887 /* Pods */,
 				57EB5B2A72F066811D82E4D5 /* Frameworks */,
@@ -64,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				3F0958A529DED95C00E87848 /* Johannes.framework */,
+				3F94043529E567DF009743BD /* JohannesDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +105,20 @@
 				3F0958B129DED9F300E87848 /* SourceFile.swift */,
 			);
 			path = Johannes;
+			sourceTree = "<group>";
+		};
+		3F94043629E567DF009743BD /* JohannesDemo */ = {
+			isa = PBXGroup;
+			children = (
+				3F94043729E567DF009743BD /* AppDelegate.swift */,
+				3F94043929E567DF009743BD /* SceneDelegate.swift */,
+				3F94043B29E567DF009743BD /* ViewController.swift */,
+				3F94043D29E567DF009743BD /* Main.storyboard */,
+				3F94044029E567E1009743BD /* Assets.xcassets */,
+				3F94044229E567E1009743BD /* LaunchScreen.storyboard */,
+				3F94044529E567E1009743BD /* Info.plist */,
+			);
+			path = JohannesDemo;
 			sourceTree = "<group>";
 		};
 		57EB5B2A72F066811D82E4D5 /* Frameworks */ = {
@@ -136,6 +173,23 @@
 			productReference = 3F0958A529DED95C00E87848 /* Johannes.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		3F94043429E567DF009743BD /* JohannesDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F94044629E567E1009743BD /* Build configuration list for PBXNativeTarget "JohannesDemo" */;
+			buildPhases = (
+				3F94043129E567DF009743BD /* Sources */,
+				3F94043229E567DF009743BD /* Frameworks */,
+				3F94043329E567DF009743BD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JohannesDemo;
+			productName = JohannesDemo;
+			productReference = 3F94043529E567DF009743BD /* JohannesDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -143,11 +197,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					3F0958A429DED95C00E87848 = {
 						CreatedOnToolsVersion = 14.3;
 						LastSwiftMigration = 1430;
+					};
+					3F94043429E567DF009743BD = {
+						CreatedOnToolsVersion = 14.3;
 					};
 				};
 			};
@@ -165,6 +223,7 @@
 			projectRoot = "";
 			targets = (
 				3F0958A429DED95C00E87848 /* Johannes */,
+				3F94043429E567DF009743BD /* JohannesDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -174,6 +233,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F94043329E567DF009743BD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F94044429E567E1009743BD /* LaunchScreen.storyboard in Resources */,
+				3F94044129E567E1009743BD /* Assets.xcassets in Resources */,
+				3F94043F29E567DF009743BD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,7 +306,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3F94043129E567DF009743BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F94043C29E567DF009743BD /* ViewController.swift in Sources */,
+				3F94043829E567DF009743BD /* AppDelegate.swift in Sources */,
+				3F94043A29E567DF009743BD /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3F94043D29E567DF009743BD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F94043E29E567DF009743BD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3F94044229E567E1009743BD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F94044329E567E1009743BD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		3F0958AA29DED95C00E87848 /* Debug */ = {
@@ -429,6 +527,60 @@
 			};
 			name = Release;
 		};
+		3F94044729E567E1009743BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = JohannesDemo/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.wordpress.JohannesDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3F94044829E567E1009743BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = JohannesDemo/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.wordpress.JohannesDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -446,6 +598,15 @@
 			buildConfigurations = (
 				3F0958AD29DED95C00E87848 /* Debug */,
 				3F0958AE29DED95C00E87848 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F94044629E567E1009743BD /* Build configuration list for PBXNativeTarget "JohannesDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F94044729E567E1009743BD /* Debug */,
+				3F94044829E567E1009743BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
