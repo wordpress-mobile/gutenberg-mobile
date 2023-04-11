@@ -14,9 +14,10 @@
 		3F0958BA29DED9F400E87848 /* GutenbergBridgeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0958B229DED9F300E87848 /* GutenbergBridgeDelegate.swift */; };
 		3F0958BB29DED9F400E87848 /* RNReactNativeGutenbergBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0958B329DED9F300E87848 /* RNReactNativeGutenbergBridge.m */; };
 		3F0958BC29DED9F400E87848 /* RNReactNativeGutenbergBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0958B429DED9F400E87848 /* RNReactNativeGutenbergBridge.swift */; };
-		3F0958BD29DED9F400E87848 /* GutenbergWebFallback in Resources */ = {isa = PBXBuildFile; fileRef = 3F0958B529DED9F400E87848 /* GutenbergWebFallback */; };
 		3F0958BE29DED9F400E87848 /* GutenbergBridgeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0958B629DED9F400E87848 /* GutenbergBridgeDataSource.swift */; };
 		3F0958FD29DEE6C500E87848 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0958FC29DEE6C500E87848 /* JavaScriptCore.framework */; };
+		3F94042F29E4FD61009743BD /* GutenbergWebSingleBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94042D29E4FD61009743BD /* GutenbergWebSingleBlockViewController.swift */; };
+		3F94043029E4FD61009743BD /* FallbackJavascriptInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94042E29E4FD61009743BD /* FallbackJavascriptInjection.swift */; };
 		4BB7DF5431300011E7F923E1 /* Pods_Johannes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90719F9749623E790B745C79 /* Pods_Johannes.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,9 +30,10 @@
 		3F0958B229DED9F300E87848 /* GutenbergBridgeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GutenbergBridgeDelegate.swift; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergBridgeDelegate.swift"; sourceTree = "<group>"; };
 		3F0958B329DED9F300E87848 /* RNReactNativeGutenbergBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNReactNativeGutenbergBridge.m; path = "../../gutenberg/packages/react-native-bridge/ios/RNReactNativeGutenbergBridge.m"; sourceTree = "<group>"; };
 		3F0958B429DED9F400E87848 /* RNReactNativeGutenbergBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNReactNativeGutenbergBridge.swift; path = "../../gutenberg/packages/react-native-bridge/ios/RNReactNativeGutenbergBridge.swift"; sourceTree = "<group>"; };
-		3F0958B529DED9F400E87848 /* GutenbergWebFallback */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GutenbergWebFallback; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergWebFallback"; sourceTree = "<group>"; };
 		3F0958B629DED9F400E87848 /* GutenbergBridgeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GutenbergBridgeDataSource.swift; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergBridgeDataSource.swift"; sourceTree = "<group>"; };
 		3F0958FC29DEE6C500E87848 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/iOSSupport/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		3F94042D29E4FD61009743BD /* GutenbergWebSingleBlockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GutenbergWebSingleBlockViewController.swift; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergWebFallback/GutenbergWebSingleBlockViewController.swift"; sourceTree = "<group>"; };
+		3F94042E29E4FD61009743BD /* FallbackJavascriptInjection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FallbackJavascriptInjection.swift; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergWebFallback/FallbackJavascriptInjection.swift"; sourceTree = "<group>"; };
 		90719F9749623E790B745C79 /* Pods_Johannes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Johannes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC499E86FC611802954C99C6 /* Pods-Johannes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Johannes.release.xcconfig"; path = "Target Support Files/Pods-Johannes/Pods-Johannes.release.xcconfig"; sourceTree = "<group>"; };
 		CAFA8F99CA8C4F85828D705F /* Pods-Johannes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Johannes.debug.xcconfig"; path = "Target Support Files/Pods-Johannes/Pods-Johannes.debug.xcconfig"; sourceTree = "<group>"; };
@@ -71,15 +73,16 @@
 		3F0958A729DED95C00E87848 /* Johannes */ = {
 			isa = PBXGroup;
 			children = (
+				3F94042E29E4FD61009743BD /* FallbackJavascriptInjection.swift */,
 				3F0958B029DED9F300E87848 /* Gutenberg.swift */,
 				3F0958B629DED9F400E87848 /* GutenbergBridgeDataSource.swift */,
 				3F0958B229DED9F300E87848 /* GutenbergBridgeDelegate.swift */,
-				3F0958B529DED9F400E87848 /* GutenbergWebFallback */,
+				3F94042D29E4FD61009743BD /* GutenbergWebSingleBlockViewController.swift */,
+				3F0958A829DED95C00E87848 /* Johannes.h */,
 				3F0958AF29DED9F300E87848 /* RNReactNativeGutenbergBridge-Bridging-Header.h */,
 				3F0958B329DED9F300E87848 /* RNReactNativeGutenbergBridge.m */,
 				3F0958B429DED9F400E87848 /* RNReactNativeGutenbergBridge.swift */,
 				3F0958B129DED9F300E87848 /* SourceFile.swift */,
-				3F0958A829DED95C00E87848 /* Johannes.h */,
 			);
 			path = Johannes;
 			sourceTree = "<group>";
@@ -175,7 +178,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F0958BD29DED9F400E87848 /* GutenbergWebFallback in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,7 +230,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F94042F29E4FD61009743BD /* GutenbergWebSingleBlockViewController.swift in Sources */,
 				3F0958B929DED9F400E87848 /* SourceFile.swift in Sources */,
+				3F94043029E4FD61009743BD /* FallbackJavascriptInjection.swift in Sources */,
 				3F0958BE29DED9F400E87848 /* GutenbergBridgeDataSource.swift in Sources */,
 				3F0958B829DED9F400E87848 /* Gutenberg.swift in Sources */,
 				3F0958BA29DED9F400E87848 /* GutenbergBridgeDelegate.swift in Sources */,
