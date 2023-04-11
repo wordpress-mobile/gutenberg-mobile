@@ -7,11 +7,12 @@ const { blockNames } = editorPage;
 describe( 'Gutenberg Editor - Writing Flow', () => {
 	describe( 'TC007 - Test format detection under the cursor', () => {
 		it( 'checks that the proper format buttons are selected when the cursor is under', async () => {
-			const paragraphHTML = `<!-- wp:paragraph -->
-            <p><span accessibility-id="bold"><strong>bold</strong></span>
-            <span accessibility-id="bold-italic"><strong><i>bold-italic</i></strong>.</span>
-            <span accessibility-id-"strikethrough"><s>strikethrough</s></span></p>
-            <!-- /wp:paragraph -->`;
+			const paragraphText = [
+				'Text to type',
+				'into the block',
+				'to test various',
+				'formatting options',
+			];
 
 			// On a rich-text based component, add bold, italic, strikethrough and link formatted text
 			await editorPage.addNewBlock( blockNames.paragraph );
@@ -21,19 +22,35 @@ describe( 'Gutenberg Editor - Writing Flow', () => {
 
 			await editorPage.typeTextToTextBlock(
 				paragraphBlockElement,
-				paragraphHTML
+				paragraphText[ 0 ]
 			);
 
-			// Select bold text
-			// TODO: verify if this is the best method to select text formatting
-			await editorPage.elementsByAccessibilityId( 'bold' );
+			// Toggle various formatting options, then proceed with typing more text
+			await editorPage.toggleFormatting( 'Bold' );
 
-			// Check that the proper format buttons get selected
-			// TODO: Identify best method to identify format buttons
+			await editorPage.typeTextToTextBlock(
+				paragraphBlockElement,
+				paragraphText[ 1 ]
+			);
+
+			await editorPage.toggleFormatting( 'Italic' );
+
+			await editorPage.typeTextToTextBlock(
+				paragraphBlockElement,
+				paragraphText[ 2 ]
+			);
+
+			await editorPage.toggleFormatting( 'Italic' );
+			await editorPage.toggleFormatting( 'Bold' );
+
+			await editorPage.typeTextToTextBlock(
+				paragraphBlockElement,
+				paragraphText[ 3 ]
+			);
+
+			await editorPage.toggleFormatting( 'Strikethrough' );
 
 			// TODO: Invoke assertion or snapshot here?
-
-			// TODO: Repeat for bold-italic and strikethrough
 
 			await editorPage.removeBlock();
 		} );
