@@ -1,9 +1,14 @@
 import UIKit
+import Johannes
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+        _ = try! FallbackJavascriptInjection(blockHTML: "Hello", userId: "1")
+        print("Hello world!")
+
         return true
     }
 

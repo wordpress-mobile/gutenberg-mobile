@@ -23,8 +23,44 @@
 		3F94043F29E567DF009743BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F94043D29E567DF009743BD /* Main.storyboard */; };
 		3F94044129E567E1009743BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F94044029E567E1009743BD /* Assets.xcassets */; };
 		3F94044429E567E1009743BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F94044229E567E1009743BD /* LaunchScreen.storyboard */; };
+		3F94044929E56866009743BD /* Johannes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0958A529DED95C00E87848 /* Johannes.framework */; };
+		3F94044A29E56866009743BD /* Johannes.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0958A529DED95C00E87848 /* Johannes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3F94045829E56A82009743BD /* editor-behavior-overrides.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F94044F29E56A81009743BD /* editor-behavior-overrides.js */; };
+		3F94045929E56A82009743BD /* wp-bar-override.css in Resources */ = {isa = PBXBuildFile; fileRef = 3F94045029E56A81009743BD /* wp-bar-override.css */; };
+		3F94045A29E56A82009743BD /* inject-css.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F94045129E56A81009743BD /* inject-css.js */; };
+		3F94045B29E56A82009743BD /* prevent-autosaves.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F94045229E56A81009743BD /* prevent-autosaves.js */; };
+		3F94045C29E56A82009743BD /* local-storage-overrides.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F94045329E56A81009743BD /* local-storage-overrides.json */; };
+		3F94045D29E56A82009743BD /* content-functions.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F94045429E56A81009743BD /* content-functions.js */; };
+		3F94045E29E56A82009743BD /* insert-block.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F94045529E56A81009743BD /* insert-block.js */; };
+		3F94045F29E56A82009743BD /* gutenberg-observer.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F94045629E56A81009743BD /* gutenberg-observer.js */; };
+		3F94046029E56A82009743BD /* editor-style-overrides.css in Resources */ = {isa = PBXBuildFile; fileRef = 3F94045729E56A82009743BD /* editor-style-overrides.css */; };
+		3F94046229E56B20009743BD /* supported-blocks.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F94046129E56B20009743BD /* supported-blocks.json */; };
 		739CB903307AA67413BB68E0 /* Pods_Johannes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F75E3D913A5DBF561933870E /* Pods_Johannes.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3F94044B29E56866009743BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F09589C29DED95C00E87848 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F0958A429DED95C00E87848;
+			remoteInfo = Johannes;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3F94044D29E56866009743BD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3F94044A29E56866009743BD /* Johannes.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3F0958A529DED95C00E87848 /* Johannes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Johannes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F94044929E56866009743BD /* Johannes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,10 +245,12 @@
 				3F94043129E567DF009743BD /* Sources */,
 				3F94043229E567DF009743BD /* Frameworks */,
 				3F94043329E567DF009743BD /* Resources */,
+				3F94044D29E56866009743BD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3F94044C29E56866009743BD /* PBXTargetDependency */,
 			);
 			name = JohannesDemo;
 			productName = JohannesDemo;
@@ -355,6 +394,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3F94044C29E56866009743BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3F0958A429DED95C00E87848 /* Johannes */;
+			targetProxy = 3F94044B29E56866009743BD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3F94043D29E567DF009743BD /* Main.storyboard */ = {
