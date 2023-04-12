@@ -2,7 +2,20 @@
 
 require_relative '../gutenberg/node_modules/react-native/scripts/react_native_pods'
 
-TAG = 'v1.92.0'
+def gutenberg_mobile_tag_from_repo
+  root = File.join(__dir__, '..')
+  gutenberg_package = JSON.parse(File.read(File.join(root, 'gutenberg', 'package.json')))
+
+  # Use the same RN version that the JS tools use
+  react_native_version = gutenberg_package['devDependencies']['react-native']
+  # Extract the tagged version if package.json points to a tag
+  version_prefix = '#v'
+  react_native_version = react_native_version.split(version_prefix).last if react_native_version.include? version_prefix
+
+  react_native_version
+end
+
+TAG = gutenberg_mobile_tag_from_repo
 
 # Note that the pods in this array might seem unused if you look for
 # `import` statements in this codebase. However, make sure to also check
@@ -57,12 +70,16 @@ DEPENDENCIES = %w[
   React-bridging
 ].freeze
 
+# rubocop:disable Style/MutableConstant
+#
+# For some reason, `pod 'Name', options` needs `options` to be mutable...
 GUTENBERG_OPTIONS = {
   # git: 'https://github.com/wordpress-mobile/gutenberg-mobile.git',
   # submodules: true,
   # tag: TAG
   path: '..'
 }
+# rubocop:enable Style/MutableConstant
 
 # rubocop:disable Metrics/MethodLength
 def gutenberg_dependencies
