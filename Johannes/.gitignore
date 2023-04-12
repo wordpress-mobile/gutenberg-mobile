@@ -1,2 +1,6 @@
 vendor/bundle
 Pods
+
+# XCFramework artifacts
+archives
+*.xcframework
