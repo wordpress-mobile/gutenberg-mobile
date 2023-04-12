@@ -1,19 +1,14 @@
 /**
  * Internal dependencies
  */
-const { tapSelectAllAboveElement } = e2eUtils;
+const { selectTextFromElement, tapSelectAllAboveElement } = e2eUtils;
 import { takeScreenshot } from './utils';
 const { blockNames } = editorPage;
 
 describe( 'Gutenberg Editor - Writing Flow', () => {
 	describe( 'TC007 - Test format detection under the cursor', () => {
 		it( 'checks that the proper format buttons are selected when the cursor is under', async () => {
-			const paragraphText = [
-				'Text to type',
-				'into the block',
-				'to test various',
-				'formatting options',
-			];
+			const paragraphText = [ 'Bold', 'Bold-Italic', 'Strikethrough' ];
 
 			// On a rich-text based component, add bold, italic, strikethrough and link formatted text
 			await editorPage.addNewBlock( blockNames.paragraph );
@@ -25,6 +20,10 @@ describe( 'Gutenberg Editor - Writing Flow', () => {
 				paragraphBlockElement,
 				paragraphText[ 0 ]
 			);
+			await selectTextFromElement(
+				editorPage.driver,
+				paragraphBlockElement
+			);
 
 			// Toggle various formatting options, then proceed with typing more text
 			await editorPage.toggleFormatting( 'Bold' );
@@ -32,9 +31,14 @@ describe( 'Gutenberg Editor - Writing Flow', () => {
 			const boldScreenshot = await takeScreenshot();
 			expect( boldScreenshot ).toMatchImageSnapshot();
 
+			await editorPage.typeTextToTextBlock( paragraphBlockElement, '' );
 			await editorPage.typeTextToTextBlock(
 				paragraphBlockElement,
 				paragraphText[ 1 ]
+			);
+			await selectTextFromElement(
+				editorPage.driver,
+				paragraphBlockElement
 			);
 
 			await editorPage.toggleFormatting( 'Italic' );
@@ -42,17 +46,18 @@ describe( 'Gutenberg Editor - Writing Flow', () => {
 			const boldItalicScreenshot = await takeScreenshot();
 			expect( boldItalicScreenshot ).toMatchImageSnapshot();
 
+			await editorPage.toggleFormatting( 'Italic' );
+			await editorPage.toggleFormatting( 'Bold' );
+
+
+			await editorPage.typeTextToTextBlock( paragraphBlockElement, '' );
 			await editorPage.typeTextToTextBlock(
 				paragraphBlockElement,
 				paragraphText[ 2 ]
 			);
-
-			await editorPage.toggleFormatting( 'Italic' );
-			await editorPage.toggleFormatting( 'Bold' );
-
-			await editorPage.typeTextToTextBlock(
-				paragraphBlockElement,
-				paragraphText[ 3 ]
+			await selectTextFromElement(
+				editorPage.driver,
+				paragraphBlockElement
 			);
 
 			await editorPage.toggleFormatting( 'Strikethrough' );
@@ -90,6 +95,7 @@ describe( 'Gutenberg Editor - Writing Flow', () => {
 			const selectedText = await editorPage.getTextForParagraphBlockAtPosition(
 				1
 			);
+
 			expect( selectedText ).toMatch( headingText );
 
 			await editorPage.removeBlock();
