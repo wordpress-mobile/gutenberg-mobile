@@ -40,6 +40,18 @@
 		3F94046A29E570E5009743BD /* MediaPickCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94046929E570E5009743BD /* MediaPickCoordinator.swift */; };
 		3F94046C29E57167009743BD /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94046B29E57167009743BD /* WebViewController.swift */; };
 		3F94046E29E571AE009743BD /* ExampleAttachmentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94046D29E571AE009743BD /* ExampleAttachmentDelegate.swift */; };
+		3F94047629E65255009743BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94047529E65255009743BD /* AppDelegate.swift */; };
+		3F94047829E65255009743BD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94047729E65255009743BD /* SceneDelegate.swift */; };
+		3F94047A29E65255009743BD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94047929E65255009743BD /* ViewController.swift */; };
+		3F94047F29E65256009743BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F94047E29E65256009743BD /* Assets.xcassets */; };
+		3F94048229E65256009743BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F94048029E65256009743BD /* LaunchScreen.storyboard */; };
+		3F94048D29E652B9009743BD /* ExampleAttachmentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94048B29E652B8009743BD /* ExampleAttachmentDelegate.swift */; };
+		3F94048E29E652B9009743BD /* MediaPickCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94048A29E652B7009743BD /* MediaPickCoordinator.swift */; };
+		3F94048F29E652B9009743BD /* DocumentMediaSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94048729E652B4009743BD /* DocumentMediaSource.swift */; };
+		3F94049029E652B9009743BD /* CustomImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94048829E652B5009743BD /* CustomImageLoader.swift */; };
+		3F94049129E652B9009743BD /* MediaUploadCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94048929E652B6009743BD /* MediaUploadCoordinator.swift */; };
+		3F94049229E652B9009743BD /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94048C29E652B9009743BD /* WebViewController.swift */; };
+		3F94049529E6532A009743BD /* Johannes.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F94049429E6532A009743BD /* Johannes.xcframework */; };
 		739CB903307AA67413BB68E0 /* Pods_Johannes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F75E3D913A5DBF561933870E /* Pods_Johannes.framework */; };
 		835823D09EDED64B35109D7F /* Pods_JohannesDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D21E3D058F2790A1FEB549 /* Pods_JohannesDemo.framework */; };
 /* End PBXBuildFile section */
@@ -104,6 +116,20 @@
 		3F94046929E570E5009743BD /* MediaPickCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickCoordinator.swift; sourceTree = "<group>"; };
 		3F94046B29E57167009743BD /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		3F94046D29E571AE009743BD /* ExampleAttachmentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAttachmentDelegate.swift; sourceTree = "<group>"; };
+		3F94047329E65255009743BD /* JohannesDemoXCFramework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JohannesDemoXCFramework.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F94047529E65255009743BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3F94047729E65255009743BD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3F94047929E65255009743BD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3F94047E29E65256009743BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3F94048129E65256009743BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3F94048329E65256009743BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F94048729E652B4009743BD /* DocumentMediaSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentMediaSource.swift; sourceTree = "<group>"; };
+		3F94048829E652B5009743BD /* CustomImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageLoader.swift; sourceTree = "<group>"; };
+		3F94048929E652B6009743BD /* MediaUploadCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUploadCoordinator.swift; sourceTree = "<group>"; };
+		3F94048A29E652B7009743BD /* MediaPickCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickCoordinator.swift; sourceTree = "<group>"; };
+		3F94048B29E652B8009743BD /* ExampleAttachmentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAttachmentDelegate.swift; sourceTree = "<group>"; };
+		3F94048C29E652B9009743BD /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		3F94049429E6532A009743BD /* Johannes.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Johannes.xcframework; sourceTree = SOURCE_ROOT; };
 		7382E5D609BACB9ADA411FF8 /* Pods-Johannes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Johannes.release.xcconfig"; path = "Target Support Files/Pods-Johannes/Pods-Johannes.release.xcconfig"; sourceTree = "<group>"; };
 		A0A31F4D4AECD76B40109739 /* Pods-Johannes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Johannes.debug.xcconfig"; path = "Target Support Files/Pods-Johannes/Pods-Johannes.debug.xcconfig"; sourceTree = "<group>"; };
 		D4D21E3D058F2790A1FEB549 /* Pods_JohannesDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JohannesDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +156,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3F94047029E65255009743BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F94049529E6532A009743BD /* Johannes.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -138,6 +172,7 @@
 			children = (
 				3F0958A729DED95C00E87848 /* Johannes */,
 				3F94043629E567DF009743BD /* JohannesDemo */,
+				3F94047429E65255009743BD /* JohannesDemoXCFramework */,
 				3F0958A629DED95C00E87848 /* Products */,
 				7EC001EB1845564A8192B887 /* Pods */,
 				57EB5B2A72F066811D82E4D5 /* Frameworks */,
@@ -149,6 +184,7 @@
 			children = (
 				3F0958A529DED95C00E87848 /* Johannes.framework */,
 				3F94043529E567DF009743BD /* JohannesDemo.app */,
+				3F94047329E65255009743BD /* JohannesDemoXCFramework.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -204,6 +240,34 @@
 				3F94045029E56A81009743BD /* wp-bar-override.css */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		3F94047429E65255009743BD /* JohannesDemoXCFramework */ = {
+			isa = PBXGroup;
+			children = (
+				3F94047529E65255009743BD /* AppDelegate.swift */,
+				3F94047E29E65256009743BD /* Assets.xcassets */,
+				3F94048829E652B5009743BD /* CustomImageLoader.swift */,
+				3F94048729E652B4009743BD /* DocumentMediaSource.swift */,
+				3F94048B29E652B8009743BD /* ExampleAttachmentDelegate.swift */,
+				3F94049329E6530C009743BD /* Frameworks */,
+				3F94048329E65256009743BD /* Info.plist */,
+				3F94048029E65256009743BD /* LaunchScreen.storyboard */,
+				3F94048A29E652B7009743BD /* MediaPickCoordinator.swift */,
+				3F94048929E652B6009743BD /* MediaUploadCoordinator.swift */,
+				3F94047729E65255009743BD /* SceneDelegate.swift */,
+				3F94047929E65255009743BD /* ViewController.swift */,
+				3F94048C29E652B9009743BD /* WebViewController.swift */,
+			);
+			path = JohannesDemoXCFramework;
+			sourceTree = "<group>";
+		};
+		3F94049329E6530C009743BD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3F94049429E6532A009743BD /* Johannes.xcframework */,
+			);
+			path = Frameworks;
 			sourceTree = "<group>";
 		};
 		57EB5B2A72F066811D82E4D5 /* Frameworks */ = {
@@ -282,6 +346,23 @@
 			productReference = 3F94043529E567DF009743BD /* JohannesDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		3F94047229E65255009743BD /* JohannesDemoXCFramework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F94048629E65256009743BD /* Build configuration list for PBXNativeTarget "JohannesDemoXCFramework" */;
+			buildPhases = (
+				3F94046F29E65255009743BD /* Sources */,
+				3F94047029E65255009743BD /* Frameworks */,
+				3F94047129E65255009743BD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JohannesDemoXCFramework;
+			productName = JohannesDemoXCFramework;
+			productReference = 3F94047329E65255009743BD /* JohannesDemoXCFramework.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -297,6 +378,9 @@
 						LastSwiftMigration = 1430;
 					};
 					3F94043429E567DF009743BD = {
+						CreatedOnToolsVersion = 14.3;
+					};
+					3F94047229E65255009743BD = {
 						CreatedOnToolsVersion = 14.3;
 					};
 				};
@@ -316,6 +400,7 @@
 			targets = (
 				3F0958A429DED95C00E87848 /* Johannes */,
 				3F94043429E567DF009743BD /* JohannesDemo */,
+				3F94047229E65255009743BD /* JohannesDemoXCFramework */,
 			);
 		};
 /* End PBXProject section */
@@ -344,6 +429,15 @@
 			files = (
 				3F94044429E567E1009743BD /* LaunchScreen.storyboard in Resources */,
 				3F94044129E567E1009743BD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F94047129E65255009743BD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F94048229E65256009743BD /* LaunchScreen.storyboard in Resources */,
+				3F94047F29E65256009743BD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,6 +556,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3F94046F29E65255009743BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F94049129E652B9009743BD /* MediaUploadCoordinator.swift in Sources */,
+				3F94049229E652B9009743BD /* WebViewController.swift in Sources */,
+				3F94049029E652B9009743BD /* CustomImageLoader.swift in Sources */,
+				3F94048E29E652B9009743BD /* MediaPickCoordinator.swift in Sources */,
+				3F94047A29E65255009743BD /* ViewController.swift in Sources */,
+				3F94048F29E652B9009743BD /* DocumentMediaSource.swift in Sources */,
+				3F94047629E65255009743BD /* AppDelegate.swift in Sources */,
+				3F94048D29E652B9009743BD /* ExampleAttachmentDelegate.swift in Sources */,
+				3F94047829E65255009743BD /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -477,6 +587,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				3F94044329E567E1009743BD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		3F94048029E65256009743BD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F94048129E65256009743BD /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -727,6 +845,60 @@
 			};
 			name = Release;
 		};
+		3F94048429E65256009743BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = JohannesDemoXCFramework/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.wordpress.JohannesDemoXCFramework;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3F94048529E65256009743BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = JohannesDemoXCFramework/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.wordpress.JohannesDemoXCFramework;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -753,6 +925,15 @@
 			buildConfigurations = (
 				3F94044729E567E1009743BD /* Debug */,
 				3F94044829E567E1009743BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F94048629E65256009743BD /* Build configuration list for PBXNativeTarget "JohannesDemoXCFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F94048429E65256009743BD /* Debug */,
+				3F94048529E65256009743BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
