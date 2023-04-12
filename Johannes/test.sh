@@ -3,7 +3,9 @@
 set -o pipefail
 
 # Remove DerivedData to have a clean slate
-rm -rf DerivedData
+# TODO: Inject derived data path into xcodebulid commands to make it deteriministic
+DERIVED_DATA_PATH=DerivedData
+rm -rf $DERIVED_DATA_PATH
 
 # Make sure the xcframework project builds first
 bundle exec pod install
@@ -17,8 +19,12 @@ xcodebuild \
   -destination "$DESTINATION" \
   | xcbeautify
 
-# Build a fresh XCFramework
-sh ./build-xcframework.sh
+# Build fresh XCFrameworks
+sh ./build-all-xcframeworks.sh
+
+# If we don't remove the derived data, we incure in build failures due to
+# symbols not found. ¯\_(ツ)_/¯
+rm -rf $DERIVED_DATA_PATH
 
 # Build the app that uses the XCFramework
 xcodebuild \

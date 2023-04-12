@@ -15,6 +15,11 @@
 		3F0958BC29DED9F400E87848 /* RNReactNativeGutenbergBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0958B429DED9F400E87848 /* RNReactNativeGutenbergBridge.swift */; };
 		3F0958BE29DED9F400E87848 /* GutenbergBridgeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0958B629DED9F400E87848 /* GutenbergBridgeDataSource.swift */; };
 		3F0958FD29DEE6C500E87848 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0958FC29DEE6C500E87848 /* JavaScriptCore.framework */; };
+		3F0DAB6429E66A7E00EBDCC6 /* Johannes.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0DAB3529E66A7E00EBDCC6 /* Johannes.xcframework */; };
+		3F0DAB6F29E66B2D00EBDCC6 /* React.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0DAB6E29E66B2D00EBDCC6 /* React.xcframework */; };
+		3F0DAB7129E66B4400EBDCC6 /* yoga.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0DAB7029E66B4400EBDCC6 /* yoga.xcframework */; };
+		3F0DAB7329E66B6200EBDCC6 /* Aztec.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0DAB7229E66B6200EBDCC6 /* Aztec.xcframework */; };
+		3F0DAB7529E66B7300EBDCC6 /* RNTAztecView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0DAB7429E66B7300EBDCC6 /* RNTAztecView.xcframework */; };
 		3F94042F29E4FD61009743BD /* GutenbergWebSingleBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94042D29E4FD61009743BD /* GutenbergWebSingleBlockViewController.swift */; };
 		3F94043029E4FD61009743BD /* FallbackJavascriptInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94042E29E4FD61009743BD /* FallbackJavascriptInjection.swift */; };
 		3F94043829E567DF009743BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94043729E567DF009743BD /* AppDelegate.swift */; };
@@ -51,7 +56,6 @@
 		3F94049029E652B9009743BD /* CustomImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94048829E652B5009743BD /* CustomImageLoader.swift */; };
 		3F94049129E652B9009743BD /* MediaUploadCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94048929E652B6009743BD /* MediaUploadCoordinator.swift */; };
 		3F94049229E652B9009743BD /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F94048C29E652B9009743BD /* WebViewController.swift */; };
-		3F94049529E6532A009743BD /* Johannes.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F94049429E6532A009743BD /* Johannes.xcframework */; };
 		739CB903307AA67413BB68E0 /* Pods_Johannes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F75E3D913A5DBF561933870E /* Pods_Johannes.framework */; };
 		835823D09EDED64B35109D7F /* Pods_JohannesDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D21E3D058F2790A1FEB549 /* Pods_JohannesDemo.framework */; };
 /* End PBXBuildFile section */
@@ -91,6 +95,11 @@
 		3F0958B429DED9F400E87848 /* RNReactNativeGutenbergBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RNReactNativeGutenbergBridge.swift; path = "../../gutenberg/packages/react-native-bridge/ios/RNReactNativeGutenbergBridge.swift"; sourceTree = "<group>"; };
 		3F0958B629DED9F400E87848 /* GutenbergBridgeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GutenbergBridgeDataSource.swift; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergBridgeDataSource.swift"; sourceTree = "<group>"; };
 		3F0958FC29DEE6C500E87848 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/iOSSupport/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		3F0DAB3529E66A7E00EBDCC6 /* Johannes.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Johannes.xcframework; path = xcframeworks/Johannes.xcframework; sourceTree = SOURCE_ROOT; };
+		3F0DAB6E29E66B2D00EBDCC6 /* React.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = React.xcframework; path = xcframeworks/React.xcframework; sourceTree = SOURCE_ROOT; };
+		3F0DAB7029E66B4400EBDCC6 /* yoga.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = yoga.xcframework; path = xcframeworks/yoga.xcframework; sourceTree = SOURCE_ROOT; };
+		3F0DAB7229E66B6200EBDCC6 /* Aztec.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Aztec.xcframework; path = xcframeworks/Aztec.xcframework; sourceTree = SOURCE_ROOT; };
+		3F0DAB7429E66B7300EBDCC6 /* RNTAztecView.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RNTAztecView.xcframework; path = xcframeworks/RNTAztecView.xcframework; sourceTree = SOURCE_ROOT; };
 		3F94042D29E4FD61009743BD /* GutenbergWebSingleBlockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GutenbergWebSingleBlockViewController.swift; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergWebFallback/GutenbergWebSingleBlockViewController.swift"; sourceTree = "<group>"; };
 		3F94042E29E4FD61009743BD /* FallbackJavascriptInjection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FallbackJavascriptInjection.swift; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergWebFallback/FallbackJavascriptInjection.swift"; sourceTree = "<group>"; };
 		3F94043529E567DF009743BD /* JohannesDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JohannesDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,7 +138,6 @@
 		3F94048A29E652B7009743BD /* MediaPickCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickCoordinator.swift; sourceTree = "<group>"; };
 		3F94048B29E652B8009743BD /* ExampleAttachmentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAttachmentDelegate.swift; sourceTree = "<group>"; };
 		3F94048C29E652B9009743BD /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		3F94049429E6532A009743BD /* Johannes.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Johannes.xcframework; sourceTree = SOURCE_ROOT; };
 		7382E5D609BACB9ADA411FF8 /* Pods-Johannes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Johannes.release.xcconfig"; path = "Target Support Files/Pods-Johannes/Pods-Johannes.release.xcconfig"; sourceTree = "<group>"; };
 		A0A31F4D4AECD76B40109739 /* Pods-Johannes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Johannes.debug.xcconfig"; path = "Target Support Files/Pods-Johannes/Pods-Johannes.debug.xcconfig"; sourceTree = "<group>"; };
 		D4D21E3D058F2790A1FEB549 /* Pods_JohannesDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JohannesDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,7 +168,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F94049529E6532A009743BD /* Johannes.xcframework in Frameworks */,
+				3F0DAB6429E66A7E00EBDCC6 /* Johannes.xcframework in Frameworks */,
+				3F0DAB6F29E66B2D00EBDCC6 /* React.xcframework in Frameworks */,
+				3F0DAB7129E66B4400EBDCC6 /* yoga.xcframework in Frameworks */,
+				3F0DAB7329E66B6200EBDCC6 /* Aztec.xcframework in Frameworks */,
+				3F0DAB7529E66B7300EBDCC6 /* RNTAztecView.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,7 +277,11 @@
 		3F94049329E6530C009743BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3F94049429E6532A009743BD /* Johannes.xcframework */,
+				3F0DAB7229E66B6200EBDCC6 /* Aztec.xcframework */,
+				3F0DAB3529E66A7E00EBDCC6 /* Johannes.xcframework */,
+				3F0DAB6E29E66B2D00EBDCC6 /* React.xcframework */,
+				3F0DAB7429E66B7300EBDCC6 /* RNTAztecView.xcframework */,
+				3F0DAB7029E66B4400EBDCC6 /* yoga.xcframework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
