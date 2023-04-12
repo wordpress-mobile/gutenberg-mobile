@@ -49,7 +49,6 @@ describe( 'Gutenberg Editor - Writing Flow', () => {
 			await editorPage.toggleFormatting( 'Italic' );
 			await editorPage.toggleFormatting( 'Bold' );
 
-
 			await editorPage.typeTextToTextBlock( paragraphBlockElement, '' );
 			await editorPage.typeTextToTextBlock(
 				paragraphBlockElement,
