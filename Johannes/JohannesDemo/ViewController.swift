@@ -53,11 +53,11 @@ class ViewController: UIViewController {
 
 extension ViewController: GutenbergBridgeDelegate {
     func gutenbergDidGetRequestFetch(path: String, completion: @escaping (Result<Any, NSError>) -> Void) {
-        completion(Result.success([:]))
+        completion(Result.success([String: Any]()))
     }
 
     func gutenbergDidPostRequestFetch(path: String, data: [String: AnyObject]?, completion: @escaping (Result<Any, NSError>) -> Void) {
-        completion(Result.success([:]))
+        completion(Result.success([String: Any]()))
     }
 
     func editorDidAutosave() {
@@ -109,6 +109,8 @@ extension ViewController: GutenbergBridgeDelegate {
                  callback([MediaInfo(id: 3, url: "https://wordpress.org/latest.zip", type: "zip", caption: "WordPress latest version", title: "WordPress.zip")])
             case .audio:
                 callback([MediaInfo(id: 5, url: "https://cldup.com/59IrU0WJtq.mp3", type: "audio", caption: "Summer presto")])
+            @unknown default:
+                fatalError()
             }
         case .deviceLibrary:
             print("Gutenberg did request a device media picker, opening the device picker")
@@ -207,6 +209,8 @@ extension ViewController: GutenbergBridgeDelegate {
             print("Error: \(message)")
         case .fatal:
             print("Fatal: \(message)")
+        @unknown default:
+            fatalError()
         }
     }
 
