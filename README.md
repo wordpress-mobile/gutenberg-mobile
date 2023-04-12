@@ -13,8 +13,8 @@ For a developer experience closer to the one the project maintainers currently h
 * Node.js and npm (use nvm to install them)
 * [Android Studio](https://developer.android.com/studio/) to be able to compile the Android version of the app
 * [Xcode](https://developer.apple.com/xcode/) to be able to compile the iOS app
-* CocoaPods(`sudo gem install cocoapods`) needed to fetch React and third-party dependencies.
-* [Carthage](https://github.com/Carthage/Carthage#installing-carthage) for appium to be able run iOS UI tests
+* CocoaPods (`sudo gem install cocoapods`) needed to fetch React and third-party dependencies.
+* [Carthage](https://github.com/Carthage/Carthage#installing-carthage) for Appium to be able run iOS UI tests
 
 Depending on your setup, there may be a few configurations needed in Android Studio and Xcode. Please refer to [React Native's documentation](https://reactnative.dev/docs/environment-setup) for the latest requirements for each development environment.
 
