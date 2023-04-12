@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { tapSelectAllAboveElement } from './helpers/utils';
+const { tapSelectAllAboveElement } = e2eUtils;
 import { takeScreenshot } from './utils';
 const { blockNames } = editorPage;
 
