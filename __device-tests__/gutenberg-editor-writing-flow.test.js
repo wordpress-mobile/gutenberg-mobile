@@ -2,6 +2,7 @@
  * Internal dependencies
  */
 import { tapSelectAllAboveElement } from './helpers/utils';
+import { takeScreenshot } from './utils';
 const { blockNames } = editorPage;
 
 describe( 'Gutenberg Editor - Writing Flow', () => {
@@ -28,12 +29,18 @@ describe( 'Gutenberg Editor - Writing Flow', () => {
 			// Toggle various formatting options, then proceed with typing more text
 			await editorPage.toggleFormatting( 'Bold' );
 
+			const boldScreenshot = await takeScreenshot();
+			expect( boldScreenshot ).toMatchImageSnapshot();
+
 			await editorPage.typeTextToTextBlock(
 				paragraphBlockElement,
 				paragraphText[ 1 ]
 			);
 
 			await editorPage.toggleFormatting( 'Italic' );
+
+			const boldItalicScreenshot = await takeScreenshot();
+			expect( boldItalicScreenshot ).toMatchImageSnapshot();
 
 			await editorPage.typeTextToTextBlock(
 				paragraphBlockElement,
@@ -50,7 +57,8 @@ describe( 'Gutenberg Editor - Writing Flow', () => {
 
 			await editorPage.toggleFormatting( 'Strikethrough' );
 
-			// TODO: Invoke assertion or snapshot here?
+			const strikethroughScreenshot = await takeScreenshot();
+			expect( strikethroughScreenshot ).toMatchImageSnapshot();
 
 			await editorPage.removeBlock();
 		} );
