@@ -1,9 +1,9 @@
 #!/bin/bash
 set -Eeuo pipefail
 
-if [ -e ./bin/install-jetpack.sh.local ]
+if [ -e ./bin/run-jetpack-command.sh.local ]
 then
-  source ./bin/install-jetpack.sh.local
+  source ./bin/run-jetpack-command.sh.local
   exit 0
 fi
 
@@ -32,16 +32,14 @@ pnpm_version=$(npx semver -c "$listed_pnpm_version")
 # More information in: https://github.com/wordpress-mobile/gutenberg-mobile/issues/5688
 sed -i.bak 's/^engine-strict = true/engine-strict = false/' .npmrc
 
-# Install dependecies of Jetpack plugin
-pushd projects/plugins/jetpack
-
 # npx might prompt to install pnpm at the requested version. Let's just agree and carry on.
-( yes || true ) | npx --cache /tmp/empty-cache pnpm@"$pnpm_version" install --ignore-scripts
-
-popd
+( yes || true ) | npx --cache /tmp/empty-cache pnpm@"$pnpm_version" $1
 
 # Revert `engine-strict` parameter back
 sed -i.bak 's/^engine-strict = false/engine-strict = true/' .npmrc
 rm .npmrc.bak
 
 popd
+
+# Revert to Gutenberg node version
+nvm use
