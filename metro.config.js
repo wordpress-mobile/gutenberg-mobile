@@ -1,40 +1,77 @@
 const path = require( 'path' );
 const fs = require( 'fs' );
+const metroResolver = require( 'metro-resolver' );
 
+const gutenbergMetroConfig = require( './gutenberg/packages/react-native-editor/metro.config.js' );
+const extraNodeModules = {};
 const gutenbergMetroConfigCopy = {
-	...require( './gutenberg/packages/react-native-editor/metro.config.js' ),
+	...gutenbergMetroConfig,
+	resolver: {
+		...gutenbergMetroConfig.resolver,
+		sourceExts: [ 'js', 'jsx', 'json', 'scss', 'sass', 'ts', 'tsx' ],
+		extraNodeModules,
+	},
 };
 
-gutenbergMetroConfigCopy.resolver.extraNodeModules = new Proxy(
-	{},
-	{
-		get: ( target, name ) => {
-			// Try to find the module in the Gutenberg submodule.
-			const gutenbergFolder = path.join(
-				process.cwd(),
-				`gutenberg/node_modules/${ name }`
+const nodeModulePaths = [
+	'gutenberg/node_modules',
+	'jetpack/projects/plugins/jetpack/node_modules',
+];
+
+const possibleModulePaths = ( name ) =>
+	nodeModulePaths.map( ( dir ) => path.join( process.cwd(), dir, name ) );
+
+gutenbergMetroConfigCopy.resolver.resolveRequest = (
+	context,
+	moduleName,
+	platform
+) => {
+	// Add the module to the extra node modules object if the module is not on a local path.
+	if ( ! ( moduleName.startsWith( '.' ) || moduleName.startsWith( '/' ) ) ) {
+		const [ namespace, module = '' ] = moduleName.split( '/' );
+		const name = path.join( namespace, module );
+
+		if ( ! extraNodeModules[ name ] ) {
+			let extraNodeModulePath;
+
+			const modulePath = possibleModulePaths( name ).find(
+				fs.existsSync
 			);
-			if ( fs.existsSync( gutenbergFolder ) ) {
-				return gutenbergFolder;
+
+			extraNodeModulePath = modulePath && fs.realpathSync( modulePath );
+
+			// If we haven't resolved the module yet, check if the module is managed by pnpm.
+			if (
+				! extraNodeModulePath &&
+				context.originModulePath.includes( '.pnpm' )
+			) {
+				const filePath = require.resolve( name, {
+					paths: [ path.dirname( context.originModulePath ) ],
+				} );
+
+				const innerNodeModules = filePath.match(
+					/.*node_modules/
+				)?.[ 0 ];
+
+				extraNodeModulePath =
+					innerNodeModules && path.join( innerNodeModules, name );
 			}
 
-			// Try to find the module in Jetpack's .pnpm folder.
-			const moduleFolderPnpm = path.join(
-				process.cwd(),
-				`./jetpack/node_modules/.pnpm/node_modules/${ name }`
-			);
-
-			if ( fs.existsSync( moduleFolderPnpm ) ) {
-				// pnpm uses symlinks so, let's find the target
-				const symlinkTarget = fs.readlinkSync( moduleFolderPnpm );
-
-				// the target is still using paths relative to the parent folder of the module, let's find the real path.
-				return path.resolve(
-					moduleFolderPnpm + '/../' + symlinkTarget
-				);
+			if ( extraNodeModulePath ) {
+				extraNodeModules[ name ] = extraNodeModulePath;
 			}
-		},
+		}
 	}
-);
+
+	// Restore the original resolver
+	return metroResolver.resolve(
+		{
+			...context,
+			resolveRequest: null,
+		},
+		moduleName,
+		platform
+	);
+};
 
 module.exports = gutenbergMetroConfigCopy;

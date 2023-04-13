@@ -11,6 +11,7 @@
 .env.development.local
 .env.test.local
 .env.production.local
+install-jetpack.sh.local
 
 npm-debug.log*
 yarn-debug.log*
@@ -47,6 +48,7 @@ bundle/ios/assets/gutenberg/packages/block-library/src/*
 
 # Local configuration file (sdk path, etc)
 local.properties
+.tool-versions
 
 # XCode
 build/
@@ -117,6 +119,11 @@ bin/wp-cli.phar
 /junit.xml
 
 # Cocoapods
-
 ios/Pods
 ios/vendor
+
+# i18n update
+i18n-test/
+
+# i18n cache
+src/i18n-cache/

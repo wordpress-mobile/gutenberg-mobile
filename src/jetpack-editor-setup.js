@@ -1,7 +1,15 @@
 /**
+ * WordPress dependencies
+ */
+import { dispatch, select } from '@wordpress/data';
+import { store as editPostStore } from '@wordpress/edit-post';
+import { addAction, addFilter } from '@wordpress/hooks';
+import { store as blockEditorStore } from '@wordpress/block-editor';
+
+/**
  * Internal dependencies
  */
-import { JETPACK_DATA_PATH } from '../jetpack/projects/plugins/jetpack/extensions/shared/get-jetpack-data';
+import { JETPACK_DATA_PATH } from '../jetpack/projects/js-packages/shared-extension-utils/src/get-jetpack-data';
 import isActive from '../jetpack/projects/plugins/jetpack/extensions/shared/is-active';
 import {
 	reactivateFacebookEmbedBlockVariation,
@@ -9,20 +17,21 @@ import {
 	registerLoomVariation,
 	registerSmartframeVariation,
 } from '../jetpack/projects/plugins/jetpack/extensions/extended-blocks/core-embed';
+import '../jetpack/projects/plugins/jetpack/extensions/blocks/videopress/editor';
 
-/**
- * WordPress dependencies
- */
-import { dispatch } from '@wordpress/data';
-import { store as editPostStore } from '@wordpress/edit-post';
-
-// When adding new blocks to this list please also consider updating ./block-support/supported-blocks.json
+// When adding new blocks to this list please also consider updating `./block-support/supported-blocks.json`
 const supportedJetpackBlocks = {
 	'contact-info': {
 		available: true,
 	},
 	story: {
 		available: true,
+	},
+	'tiled-gallery': {
+		available: __DEV__,
+	},
+	'videopress/video': {
+		available: __DEV__,
 	},
 };
 
@@ -63,7 +72,7 @@ export function setupJetpackEditor( jetpackState ) {
 }
 
 export function registerJetpackBlocks( { capabilities } ) {
-	if ( ! isActive() ) {
+	if ( ! isActive() || capabilities.onlyCoreBlocks ) {
 		return;
 	}
 
@@ -75,13 +84,21 @@ export function registerJetpackBlocks( { capabilities } ) {
 		capabilities.contactInfoBlock,
 		'jetpack/contact-info'
 	);
+	hideBlockByCapability(
+		capabilities.tiledGalleryBlock,
+		'jetpack/tiled-gallery'
+	);
+	hideBlockByCapability( capabilities.videoPressBlock, 'videopress/video' );
 
 	// Register Jetpack blocks
 	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );
+
+	// Register VideoPress block
+	require( '../jetpack/projects/packages/videopress/src/client/block-editor/editor' );
 }
 
 export function registerJetpackEmbedVariations( { capabilities } ) {
-	if ( ! isActive() ) {
+	if ( ! isActive() || capabilities.onlyCoreBlocks ) {
 		return;
 	}
 
@@ -113,3 +130,55 @@ export function registerJetpackEmbedVariations( { capabilities } ) {
 		}
 	} );
 }
+
+const setupHooks = () => {
+	// Hook triggered before the editor is rendered
+	addAction( 'native.pre-render', 'gutenberg-mobile-jetpack', ( props ) => {
+		const { jetpackState } = props;
+
+		setupJetpackEditor(
+			jetpackState || { blogId: 1, isJetpackActive: true }
+		);
+
+		// Jetpack Embed variations use WP hooks that are attached to
+		// block type registration, so it’s required to add them before
+		// the core blocks are registered.
+		registerJetpackEmbedVariations( props );
+	} );
+
+	// Hook triggered after the editor is rendered
+	addAction( 'native.render', 'gutenberg-mobile-jetpack', ( props ) => {
+		registerJetpackBlocks( props );
+	} );
+};
+
+const setupStringsOverrides = () => {
+	addFilter(
+		'native.missing_block_detail',
+		'native/missing_block',
+		( defaultValue, blockName ) => {
+			const { capabilities } = select( blockEditorStore ).getSettings();
+			const onlyCoreBlocks = capabilities?.onlyCoreBlocks === true;
+
+			const jetpackBlockNames = Object.keys( supportedJetpackBlocks ).map(
+				( name ) => `jetpack/${ name }`
+			);
+
+			const videoPressBlock = blockName === 'videopress/video';
+
+			if (
+				onlyCoreBlocks &&
+				jetpackBlockNames.includes( blockName ) &&
+				videoPressBlock
+			) {
+				return null;
+			}
+			return defaultValue;
+		}
+	);
+};
+
+export default () => {
+	setupHooks();
+	setupStringsOverrides();
+};

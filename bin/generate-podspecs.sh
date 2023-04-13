@@ -7,8 +7,11 @@ function warn_missing_tag_commit() {
     RED="\033[0;31m"
     NO_COLOR="\033[0m"
     PODSPEC_HAS_TAG_OR_COMMIT=$(jq '.source | has("tag") or has("commit")' "$DEST/$pod.podspec.json")
-    if [[ $PODSPEC_HAS_TAG_OR_COMMIT == "false" ]]; then
-        printf "${RED}WARNING! $pod.podspec doesn't have a 'tag' or 'commit' field. Either modify this script to add a patch during the podspec generation or modify the original $pod.podspec in the source repo.${NO_COLOR}\n"
+    # If the source points to an HTTP endpoint and SHA, we consider it versioned
+    PODSPEC_HAS_HTTP_AND_SHA=$(jq '.source | has("http") and (has("sha256") or has("sha1"))' "$DEST/$pod.podspec.json")
+
+    if [[ $PODSPEC_HAS_TAG_OR_COMMIT == "false" && $PODSPEC_HAS_HTTP_AND_SHA == "false" ]]; then
+        printf "${RED}WARNING! $pod.podspec doesn't have a 'tag' or 'commit' field, or doesn't point to a SHA verified file. Either modify this script to add a patch during the podspec generation or modify the original $pod.podspec in the source repo.${NO_COLOR}\n"
         exit 1
     fi
 }
@@ -49,11 +52,11 @@ NODE_MODULES_DIR="gutenberg/node_modules"
 # Generate the external (non-RN podspecs)
 EXTERNAL_PODSPECS=$(find "$NODE_MODULES_DIR/react-native/third-party-podspecs" \
                          "$NODE_MODULES_DIR/@react-native-community/blur" \
-                         "$NODE_MODULES_DIR/@react-native-community/masked-view" \
+                         "$NODE_MODULES_DIR/@react-native-masked-view/masked-view" \
                          "$NODE_MODULES_DIR/@react-native-community/slider" \
+                         "$NODE_MODULES_DIR/@react-native-clipboard/clipboard" \
                          "$NODE_MODULES_DIR/react-native-gesture-handler" \
                          "$NODE_MODULES_DIR/react-native-get-random-values" \
-                         "$NODE_MODULES_DIR/react-native-keyboard-aware-scroll-view" \
                          "$NODE_MODULES_DIR/react-native-linear-gradient" \
                          "$NODE_MODULES_DIR/react-native-reanimated" \
                          "$NODE_MODULES_DIR/react-native-safe-area" \
@@ -62,6 +65,7 @@ EXTERNAL_PODSPECS=$(find "$NODE_MODULES_DIR/react-native/third-party-podspecs" \
                          "$NODE_MODULES_DIR/react-native-svg" \
                          "$NODE_MODULES_DIR/react-native-video"\
                          "$NODE_MODULES_DIR/react-native-webview"\
+                         "$NODE_MODULES_DIR/react-native-fast-image"\
                           -type f -name "*.podspec" -print)
 
 for podspec in $EXTERNAL_PODSPECS
@@ -94,7 +98,14 @@ done
 # Change to the React Native directory to get relative paths for the RN podspecs
 cd "$NODE_MODULES_DIR/react-native"
 
-RN_PODSPECS=$(find * -type f -name "*.podspec" -not -path "third-party-podspecs/*" -not -path "*Fabric*" -print)
+RN_DIR="./"
+SCRIPTS_PATH="./scripts/"
+CODEGEN_REPO_PATH="../packages/react-native-codegen"
+CODEGEN_NPM_PATH="../react-native-codegen"
+SRCS_DIR=${SRCS_DIR:-$(cd "./Libraries" && pwd)}
+RN_VERSION=$(cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g')
+
+RN_PODSPECS=$(find * -type f -name "*.podspec" -not -name "React-rncore.podspec" -not -path "third-party-podspecs/*" -not -path "*Fabric*" -print)
 TMP_DEST=$(mktemp -d)
 
 for podspec in $RN_PODSPECS
@@ -104,6 +115,8 @@ do
 
     echo "Generating podspec for $pod with path $path"
     pod ipc spec "$podspec" > "$TMP_DEST/$pod.podspec.json"
+    # Removes message [Codegen] Found at the beginning of the file
+    sed -i '' -e '/\[Codegen\] Found/d' "$TMP_DEST/$pod.podspec.json"
     cat "$TMP_DEST/$pod.podspec.json" | jq > "$DEST/$pod.podspec.json"
 
     # Add a "prepare_command" entry to each podspec so that 'pod install' will fetch sources from the correct directory
@@ -130,7 +143,50 @@ do
         # They are normally generated during compile time using a Script Phase in FBReactNativeSpec added via the `use_react_native_codegen` function.
         # This script is inside node_modules/react-native/scripts folder. Since we don't have the node_modules when compiling WPiOS,
         # we're calling the script here manually to generate these files ahead of time.
-        CODEGEN_MODULES_OUTPUT_DIR=$DEST/FBReactNativeSpec ./scripts/generate-specs.sh 
+        SCHEMA_FILE="$TMP_DEST/schema.json"
+        NODE_BINARY="${NODE_BINARY:-$(command -v node || true)}"
+
+        if [ -d "$CODEGEN_REPO_PATH" ]; then
+            CODEGEN_PATH=$(cd "$CODEGEN_REPO_PATH" && pwd)
+        elif [ -d "$CODEGEN_NPM_PATH" ]; then
+            CODEGEN_PATH=$(cd "$CODEGEN_NPM_PATH" && pwd)
+        else
+            echo "Error: Could not determine react-native-codegen location. Try running 'yarn install' or 'npm install' in your project root." 1>&2
+            exit 1
+        fi
+
+        if [ ! -d "$CODEGEN_PATH/lib" ]; then
+            describe "Building react-native-codegen package"
+            bash "$CODEGEN_PATH/scripts/oss/build.sh"
+        fi
+
+        # Generate React-Codegen
+        # A copy of react_native_pods is done to modify the content within get_react_codegen_spec
+        # this enables getting the schema for React-Codegen in runtime by printing the content.
+        echo "Generating React-Codegen"
+        REACT_NATIVE_PODS_PATH="$SCRIPTS_PATH/react_native_pods.rb"
+        REACT_NATIVE_PODS_MODIFIED_PATH="$SCRIPTS_PATH/react_native_pods_modified.rb"
+        # Making a temp copy of react_native_pods.rb
+        cp $REACT_NATIVE_PODS_PATH $REACT_NATIVE_PODS_MODIFIED_PATH
+        # Modify the get_react_codegen_spec method to return the result using print and JSON.pretty
+        sed -i '' -e "s/:git => ''/:git => 'https:\/\/github.com\/facebook\/react-native.git', :tag => 'v$RN_VERSION'/" "$REACT_NATIVE_PODS_MODIFIED_PATH"
+        sed -i '' -e 's/return spec/print JSON.pretty_generate(spec)/' "$REACT_NATIVE_PODS_MODIFIED_PATH"
+        # Run get_react_codegen_spec and generate React-Codegen.podspec.json
+        ruby -r "./scripts/react_native_pods_modified.rb" -e "get_react_codegen_spec" > "$DEST/React-Codegen.podspec.json"
+        TMP_ReactCodeGenSpec=$(mktemp)
+        jq '.source_files = "third-party-podspecs/FBReactNativeSpec/**/*.{c,h,m,mm,cpp}"' "$DEST/React-Codegen.podspec.json" > "$TMP_ReactCodeGenSpec"
+        mv "$TMP_ReactCodeGenSpec" "$DEST/React-Codegen.podspec.json"
+        # Remove temp copy of react_native_pods.rb
+        rm $REACT_NATIVE_PODS_MODIFIED_PATH
+
+        echo "Generating schema from Flow types"
+        "$NODE_BINARY" "$CODEGEN_PATH/lib/cli/combine/combine-js-to-schema-cli.js" "$SCHEMA_FILE" "$SRCS_DIR"
+
+        echo "Generating native code from schema (iOS)"
+        "$NODE_BINARY" "./scripts/generate-specs-cli.js" -p "ios" -s "$SCHEMA_FILE" -o "$DEST/FBReactNativeSpec"
+
+        # Removing unneeded files
+        find "$DEST/FBReactNativeSpec" -type f -not -name "FBReactNativeSpec.podspec.json" -not -name "FBReactNativeSpec-generated.mm" -not -name "FBReactNativeSpec.h" -not -name "FBReactNativeSpec.h" -delete
 
         # Removing 'script_phases' that shouldn't be needed anymore.
         # Removing 'prepare_command' that includes additional steps to create intermediate folders to keep generated files which won't be needed.

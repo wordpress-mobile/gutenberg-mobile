@@ -1,16 +1,14 @@
 version: 2.1
 
-orbs:
-  slack: circleci/slack@3.4.2
-
 commands:
   npm-install:
+    parameters:
     steps:
       - restore_cache:
           name: Restore NPM Cache
           keys:
-            - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
-            - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-
+            - npm-install-cache-{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
+            - npm-install-cache-{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-
       - run:
           name: NPM Install
           command: |
@@ -18,17 +16,23 @@ commands:
             npm ci --prefer-offline --no-audit
       - save_cache:
           name: Save NPM Cache
-          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+          key: npm-install-cache-{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
           paths:
             - ~/.npm
-            - i18n-cache/data
+            - src/i18n-cache
+            - ~/.local/share/pnpm/store/v3
+            - ~/Library/pnpm/store/v3
   npm-install-full:
+    parameters:
+      additional-flags:
+        type: string
+        default: ""
     steps:
       - restore_cache:
           name: Restore NPM Cache
           keys:
-            - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
-            - npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-
+            - npm-install-full-cache-{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "gutenberg/package-lock.json" }}
+            - npm-install-full-cache-{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-
       - run:
           name: NPM Install Full
           command: |
@@ -36,10 +40,26 @@ commands:
             npm install --no-audit
       - save_cache:
           name: Save NPM Cache
-          key: npm-i18n-v4-cache-v{{ .Environment.CACHE_TRIGGER_VERSION }}-job-{{ .Environment.CIRCLE_JOB }}-{{ checksum "gutenberg/package-lock.json" }}
+          key: npm-install-full-cache-{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "gutenberg/package-lock.json" }}
           paths:
             - ~/.npm
-            - i18n-cache/data
+            - src/i18n-cache
+            - ~/.local/share/pnpm/store/v3
+            - ~/Library/pnpm/store/v3
+  npm-install-e2e-tests:
+    parameters:
+    steps:
+      - restore_cache:
+          name: Restore NPM Cache
+          keys:
+            - npm-install-cache-{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
+            - npm-install-cache-{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-
+      - run:
+          name: NPM Install (E2E Tests)
+          command: |
+            echo "Node version: $(node --version)"
+            npm ci --prefer-offline --no-audit --ignore-scripts
+            npm ci --prefix gutenberg --prefer-offline --no-audit
   checkout-shallow:
     steps:
       - run:
@@ -62,7 +82,7 @@ commands:
             mkdir -p "$SSH_CONFIG_DIR"
             chmod 0700 "$SSH_CONFIG_DIR"
 
-            printf "%s" 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+            printf "%s" 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/hWCqBywINIR+5dIg6JTJ72pcEpEjcYgXkE2YEFXV1JHnsKgbLWNlhScqb2UmyRkQyytRLtL+38TGxkxCflmO+5Z8CSSNY7GidjMIZ7Q4zMjA2n1nGrlTDkzwDCsw+wqFPGQA179cnfGWOWRVruj16z6XyvxvjJwbz0wQZ75XK5tKSb7FNyeIEs4TT4jk+S4dhPeAUC5y+bDYirYgM4GC7uEnztnZyaVWQ7B381AK4Qdrwt51ZqExKbQpTUNn+EjqoTwvqNj4kqx5QUCI0ThS/YkOxJCXmPUWZbhjpCg56i+2aB6CmK2JGhn57K5mj0MNdBXA4/WnwH6XoPWJzK5Nyu2zB3nAZp+S5hpQs+p1vN1/wsjk=
             bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw==
             ' >> "$SSH_CONFIG_DIR/known_hosts"
             chmod 0600 "$SSH_CONFIG_DIR/known_hosts"
@@ -112,12 +132,17 @@ commands:
         - run:
             name: Create reports directory
             command: mkdir reports && mkdir reports/test-results
+  add-jest-snapshot-dir:
+      steps:
+        - run:
+            name: Create snapshots directory
+            command: mkdir __device-tests__/image-snapshots/diff
   install-node-version:
     steps:
       - run:
           name: Install newer nvm
           command: |
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
             if [ -z "${NVM_DIR}" ] ; then
               echo 'Default NVM_DIR to .nvm in home'
               echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
@@ -140,7 +165,7 @@ parameters:
   linux-machine-image:
     type: string
     # Latest supported ubuntu image from https://circleci.com/docs/2.0/configuration-reference/#available-machine-images
-    default: "ubuntu-2004:202010-01"
+    default: "ubuntu-2004:2022.10.1"
 
 jobs:
   checks:
@@ -179,18 +204,10 @@ jobs:
           name: Run Checks
           command: bin/ci-checks-js.sh
           environment:
-            JEST_JUNIT_OUTPUT: "reports/test-results/android-test-results.xml"
+            JEST_JUNIT_OUTPUT_FILE: "reports/test-results/android-test-results.xml"
       - store_test_results:
           path: ./reports/test-results
-  android-device-checks:
-    parameters:
-      post-to-slack:
-        description: Post to Slack when tests fail. SLACK_WEBHOOK ENV variable must be set.
-        type: boolean
-        default: false
-      is-canary:
-        type: string
-        default: ""
+  android-build:
     machine:
       image: << pipeline.parameters.linux-machine-image >>
     steps:
@@ -214,7 +231,29 @@ jobs:
           name: Upload apk to sauce labs
           command: |
             source bin/sauce-pre-upload.sh
-            curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.apk?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk
+            curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" --location \
+            --request POST 'https://api.us-west-1.saucelabs.com/v1/storage/upload' \
+            --form 'payload=@"./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk"' \
+            --form "name=Gutenberg-$SAUCE_FILENAME.apk" \
+            --form 'description="Gutenberg"'
+  android-device-checks:
+    parameters:
+      post-to-slack:
+        description: Post to Slack when tests fail. SLACK_WEBHOOK ENV variable must be set.
+        type: boolean
+        default: false
+      is-canary:
+        type: string
+        default: ""
+    machine:
+      image: << pipeline.parameters.linux-machine-image >>
+    steps:
+      - checkout-shallow
+      - checkout-submodules
+      - install-node-version
+      - run: node -v
+      - npm-install-e2e-tests
+      - add-jest-snapshot-dir
       - run: mkdir /home/circleci/test-results
       - run:
           name: Run Device Tests
@@ -223,17 +262,9 @@ jobs:
           environment:
             TEST_RN_PLATFORM: android
             TEST_ENV: sauce
-            JEST_JUNIT_OUTPUT: "/home/circleci/test-results/android-test-results.xml"
+            JEST_JUNIT_OUTPUT_FILE: "/home/circleci/test-results/android-test-results.xml"
       - store_test_results:
           path: /home/circleci/test-results
-      - when:
-          condition: << parameters.post-to-slack >>
-          steps:
-            - slack/status:
-                fail_only: true
-                include_job_number_field: false
-                include_project_field: false
-                failure_message: ':red_circle: Scheduled tests failed on Android device!'
   android-native-unit-tests:
     parameters:
       post-to-slack:
@@ -248,25 +279,19 @@ jobs:
       - install-node-version
       - npm-install
       - run:
-          name: Run Android native unit tests
+          name: Run Android native-editor unit tests
           command: cd gutenberg/packages/react-native-editor/android && ./gradlew testDebug
-  ios-device-checks:
-    parameters:
-      post-to-slack:
-        description: Post to Slack when tests fail. SLACK_WEBHOOK ENV variable must be set.
-        type: boolean
-        default: false
-      is-canary:
-        type: string
-        default: ""
+      - run:
+          name: Run Android native-bridge unit tests
+          command: cd gutenberg/packages/react-native-bridge/android && ./gradlew test
+  ios-build:
     macos:
-      xcode: "12.0.0"
+      xcode: "13.4.1"
     steps:
     - checkout-shallow
     - checkout-submodules
     - install-node-version
     - npm-install
-    - add-jest-reporter-dir
     - run:
         name: Set Environment Variables
         command: |
@@ -282,16 +307,16 @@ jobs:
     - restore_cache:
         name: Restore Dependencies Cache
         keys:
-        - dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}-{{ checksum "gutenberg/package-lock.json" }}
-        - dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}
-        - dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}
-        - dependencies-v4-
+        - dependencies-v6-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}-{{ checksum "gutenberg/package-lock.json" }}
+        - dependencies-v6-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}
+        - dependencies-v6-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}
+        - dependencies-v6-
     - run:
         name: Build (if needed)
         command: test -e gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app || npm run core test:e2e:build-app:ios
     - save_cache:
         name: Save Dependencies Cache
-        key: dependencies-v4-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}-{{ checksum "gutenberg/package-lock.json" }}
+        key: dependencies-v6-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}-{{ checksum "gutenberg/package-lock.json" }}
         paths:
         - gutenberg/packages/react-native-editor/ios/Pods
         - ~/Library/Caches/CocoaPods
@@ -307,18 +332,11 @@ jobs:
         name: Upload .app to sauce labs
         command: |
           source bin/sauce-pre-upload.sh
-          brew install curl
-          /usr/local/opt/curl/bin/curl --version
-          /usr/local/opt/curl/bin/curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" -X POST -H "Content-Type: application/octet-stream" https://saucelabs.com/rest/v1/storage/automattic/Gutenberg-$SAUCE_FILENAME.app.zip?overwrite=true --data-binary @./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
-    - run:
-        name: Run Device Tests
-        command: |
-          npm run device-tests<<parameters.is-canary>>
-        no_output_timeout: 1200
-        environment:
-          JEST_JUNIT_OUTPUT: "reports/test-results/ios-test-results.xml"
-    - store_test_results:
-        path: ./reports/test-results
+          curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" --location \
+          --request POST 'https://api.us-west-1.saucelabs.com/v1/storage/upload' \
+          --form 'payload=@"./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip"' \
+          --form "name=Gutenberg-$SAUCE_FILENAME.app.zip" \
+          --form 'description="Gutenberg"'
     - run:
         name: Prepare build cache
         command: rm gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app/main.jsbundle
@@ -327,14 +345,38 @@ jobs:
         key: ios-build-cache-{{ checksum "ios-checksums.txt" }}
         paths:
           - gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app
-    - when:
-          condition: << parameters.post-to-slack >>
-          steps:
-            - slack/status:
-                fail_only: true
-                include_job_number_field: false
-                include_project_field: false
-                failure_message: ':red_circle: Scheduled tests failed on iOS device!'
+  ios-device-checks:
+    parameters:
+      post-to-slack:
+        description: Post to Slack when tests fail. SLACK_WEBHOOK ENV variable must be set.
+        type: boolean
+        default: false
+      is-canary:
+        type: string
+        default: ""
+    macos:
+      xcode: "13.4.1"
+    steps:
+    - checkout-shallow
+    - checkout-submodules
+    - install-node-version
+    - npm-install-e2e-tests
+    - add-jest-reporter-dir
+    - add-jest-snapshot-dir
+    - run:
+        name: Set Environment Variables
+        command: |
+          echo 'export TEST_RN_PLATFORM=ios' >> $BASH_ENV
+          echo 'export TEST_ENV=sauce' >> $BASH_ENV
+    - run:
+        name: Run Device Tests
+        command: |
+          npm run device-tests<<parameters.is-canary>>
+        no_output_timeout: 1200
+        environment:
+          JEST_JUNIT_OUTPUT_FILE: "reports/test-results/ios-test-results.xml"
+    - store_test_results:
+        path: ./reports/test-results
 
 workflows:
   gutenberg-mobile:
@@ -350,79 +392,65 @@ workflows:
           name: Test Android
           platform: android
           check-tests: true
+      - ios-build:
+          name: iOS Build
+      - android-build:
+          name: Android Build
       - ios-device-checks:
           name: Test iOS on Device - Canaries
           is-canary: "-canary"
+          requires: [ "Test iOS", "iOS Build" ]
       - android-device-checks:
           name: Test Android on Device - Canaries
           is-canary: "-canary"
+          requires: [ "Test Android", "Android Native Unit Tests", "Android Build" ]
+      - android-native-unit-tests:
+          name: Android Native Unit Tests
+      # For regular branches the full test suite is optional.
       - Optional UI Tests:
           type: approval
           filters:
             branches:
               ignore:
-                - develop
+                - trunk
                 - /^dependabot/submodules/.*/
                 - /^release.*/
       - ios-device-checks:
-          name: Test iOS on Device - Full
-          requires: [ "Optional UI Tests" ]
-      - android-device-checks:
-          name: Test Android on Device - Full
-          requires: [ "Optional UI Tests" ]
-      - android-native-unit-tests:
-          name: Android Native Unit Tests
-      - ios-device-checks:
-          name: Test iOS on Device - Full (Submodule Update)
-          post-to-slack: true
+          name: Test iOS on Device - Full (Manually triggered)
+          requires: [ "Optional UI Tests", "Test iOS", "iOS Build" ]
           filters:
             branches:
-              only: /^dependabot/submodules/.*/
-      - android-device-checks:
-          name: Test Android on Device - Full (Submodule Update)
-          post-to-slack: true
-          filters:
-            branches:
-              only: /^dependabot/submodules/.*/
-      - ios-device-checks:
-          name: Test iOS on Device - Full (On Develop)
-          post-to-slack: true
-          filters:
-            branches:
-              only: 
-                - develop
-      - android-device-checks:
-          name: Test Android on Device - Full (On Develop)
-          post-to-slack: true
-          filters:
-            branches:
-              only: 
-                - develop
-      - ios-device-checks:
-          name: Test iOS on Device - Full (Release)
-          post-to-slack: true
-          filters:
-            branches:
-              only: 
+              ignore:
+                - trunk
+                - /^dependabot/submodules/.*/
                 - /^release.*/
       - android-device-checks:
-          name: Test Android on Device - Full (Release)
+          name: Test Android on Device - Full (Manually triggered)
+          requires: [ "Optional UI Tests", "Test Android", "Android Native Unit Tests", "Android Build" ]
+          filters:
+            branches:
+              ignore:
+                - trunk
+                - /^dependabot/submodules/.*/
+                - /^release.*/
+      # For `trunk`, Dependabot, and release branches we always run the full test suite.
+      - ios-device-checks:
+          name: Test iOS on Device - Full
           post-to-slack: true
+          requires: [ "Test iOS", "iOS Build" ]
           filters:
             branches:
               only:
+                - trunk
+                - /^dependabot/submodules/.*/
                 - /^release.*/
-  ui-tests-full-scheduled:
-    jobs:
-      - ios-device-checks:
-          name: Test iOS on Device - Scheduled
-          post-to-slack: true
       - android-device-checks:
-          name: Test Android on Device - Scheduled
+          name: Test Android on Device - Full
           post-to-slack: true
-    triggers:
-      - schedule:
-          cron: '1 1,13 * * *'
+          requires: [ "Test Android", "Android Native Unit Tests", "Android Build" ]
           filters:
             branches:
-              only: develop
+              only: 
+                - trunk
+                - /^dependabot/submodules/.*/
+                - /^release.*/

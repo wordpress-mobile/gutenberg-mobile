@@ -1,6 +1,6 @@
 {
   "name": "RNSVG",
-  "version": "9.13.7-wp-1",
+  "version": "9.13.6",
   "summary": "SVG library for react-native",
   "license": "MIT",
   "homepage": "https://github.com/react-native-community/react-native-svg",
@@ -10,8 +10,8 @@
     "tvos": "9.2"
   },
   "source": {
-    "git": "https://github.com/wordpress-mobile/react-native-svg.git",
-    "tag": "v9.13.7-wp-1"
+    "git": "https://github.com/react-native-community/react-native-svg.git",
+    "tag": "v9.13.6"
   },
   "source_files": "ios/**/*.{h,m}",
   "requires_arc": true,

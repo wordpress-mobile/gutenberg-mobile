@@ -1,0 +1,9 @@
+/* Remove \'help\' button from the editor. */
+.a8c-faux-inline-help {
+	display: none;
+}
+
+/* Remove WordPress.com "tour" pop-up. */
+.tour-kit-frame__container {
+	display: none;
+}
