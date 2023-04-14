@@ -50,6 +50,7 @@ const setupHooks = () => {
 		( endpoints ) => {
 			return {
 				...endpoints,
+				GET: [ ...endpoints.GET, /rest\/v1.1\/videos.*/i ],
 				POST: [
 					...endpoints.POST,
 					/wpcom\/v2\/(media)\/.*/i,
