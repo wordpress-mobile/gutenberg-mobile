@@ -1,10 +1,10 @@
 Unreleased
 ---
+* [*] Allow content that is pasted into the post title to populate the post body correctly [#35733]
 
 1.93.0
 ---
 * [***] [iOS] Fixed iOS scroll jumping issue by refactoring KeyboardAwareFlatList improving writing flow and caret focus handling [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5533]
-* [*] Allow content that is pasted into the post title to populate the post body correctly [#35733]
 
 1.92.1
 ---
