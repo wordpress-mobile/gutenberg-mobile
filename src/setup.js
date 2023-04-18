@@ -59,6 +59,15 @@ const setupHooks = () => {
 			};
 		}
 	);
+
+	// Hook to disable caching for specific endpoints.
+	addFilter(
+		'native.disable_caching_endpoints',
+		'gutenberg-mobile',
+		( endpoints ) => {
+			return [ ...endpoints, '/oembed.*videopress.com/i' ];
+		}
+	);
 };
 
 export default () => {
