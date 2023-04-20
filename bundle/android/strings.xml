@@ -205,6 +205,7 @@
     <string name="gutenberg_native_link_rel" tools:ignore="UnusedResources">Link Rel</string>
     <string name="gutenberg_native_link_text" tools:ignore="UnusedResources">Link text</string>
     <string name="gutenberg_native_link_to" tools:ignore="UnusedResources">Link To</string>
+    <string name="gutenberg_native_loading" tools:ignore="UnusedResources">Loading</string>
     <string name="gutenberg_native_lock_icon" tools:ignore="UnusedResources">Lock icon</string>
     <string name="gutenberg_native_make_your_content_stand_out_by_adding_images_gifs_videos_and_embe" tools:ignore="UnusedResources">Make your content stand out by adding images, gifs, videos, and embedded media to your pages.</string>
     <string name="gutenberg_native_manual" tools:ignore="UnusedResources">Manual</string>
@@ -358,6 +359,8 @@ translators: %s: Select control option value e.g: "Auto, 25%". -->
     <string name="gutenberg_native_type_a_url" tools:ignore="UnusedResources">Type a URL</string>
     <string name="gutenberg_native_unable_to_embed_media" tools:ignore="UnusedResources">Unable to embed media</string>
     <string name="gutenberg_native_ungroup" tools:ignore="UnusedResources">Ungroup</string>
+    <!-- translators: %s: the hex color value -->
+    <string name="gutenberg_native_unlabeled_color_s" tools:ignore="UnusedResources">Unlabeled color. %s</string>
     <string name="gutenberg_native_unsupported" tools:ignore="UnusedResources">Unsupported</string>
     <string name="gutenberg_native_updates_the_title" tools:ignore="UnusedResources">Updates the title.</string>
     <string name="gutenberg_native_upgrade_your_plan_to_upload_audio" tools:ignore="UnusedResources">Upgrade your plan to upload audio</string>
