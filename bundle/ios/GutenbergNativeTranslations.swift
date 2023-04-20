@@ -305,6 +305,7 @@ private func dummy() {
     _ = NSLocalizedString("Type a URL", comment: "")
     _ = NSLocalizedString("Unable to embed media", comment: "")
     _ = NSLocalizedString("Ungroup", comment: "")
+    _ = NSLocalizedString("Unlabeled color. %s", comment: "translators: %s: the hex color value")
     _ = NSLocalizedString("Unsupported", comment: "")
     _ = NSLocalizedString("Updates the title.", comment: "")
     _ = NSLocalizedString("Upgrade your plan to upload audio", comment: "")
