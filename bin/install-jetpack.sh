@@ -25,9 +25,23 @@ nvm install
 listed_pnpm_version=$(npx -c 'echo $npm_package_engines_pnpm')
 pnpm_version=$(npx semver -c "$listed_pnpm_version")
 
-cd projects/plugins/jetpack
+# Disable `engine-strict` parameter
+#
+# The `node` version required by Jetpack will be used to install the dependencies. However, we can't
+# ensure that the `node` version used by `npm` to check the `engines` parameter is the expected one.
+# More information in: https://github.com/wordpress-mobile/gutenberg-mobile/issues/5688
+sed -i.bak 's/^engine-strict = true/engine-strict = false/' .npmrc
+
+# Install dependecies of Jetpack plugin
+pushd projects/plugins/jetpack
 
 # npx might prompt to install pnpm at the requested version. Let's just agree and carry on.
 ( yes || true ) | npx --cache /tmp/empty-cache pnpm@"$pnpm_version" install --ignore-scripts
+
+popd
+
+# Revert `engine-strict` parameter back
+sed -i.bak 's/^engine-strict = false/engine-strict = true/' .npmrc
+rm .npmrc.bak
 
 popd
