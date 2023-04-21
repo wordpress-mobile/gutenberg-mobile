@@ -33,7 +33,7 @@ const supportedJetpackBlocks = {
 	},
 	'videopress/video': {
 		// VideoPress block will be released first on iOS.
-		available: Platform.isIOS,
+		available: Platform.select( { android: __DEV__, ios: true } ),
 	},
 };
 
