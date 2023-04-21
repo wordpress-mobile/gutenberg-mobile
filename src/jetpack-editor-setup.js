@@ -5,6 +5,7 @@ import { dispatch, select } from '@wordpress/data';
 import { store as editPostStore } from '@wordpress/edit-post';
 import { addAction, addFilter } from '@wordpress/hooks';
 import { store as blockEditorStore } from '@wordpress/block-editor';
+import { Platform } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -31,7 +32,8 @@ const supportedJetpackBlocks = {
 		available: __DEV__,
 	},
 	'videopress/video': {
-		available: __DEV__,
+		// VideoPress block will be released first on iOS.
+		available: Platform.select( { android: __DEV__, ios: true } ),
 	},
 };
 

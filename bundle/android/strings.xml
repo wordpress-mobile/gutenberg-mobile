@@ -205,6 +205,7 @@
     <string name="gutenberg_native_link_rel" tools:ignore="UnusedResources">Link Rel</string>
     <string name="gutenberg_native_link_text" tools:ignore="UnusedResources">Link text</string>
     <string name="gutenberg_native_link_to" tools:ignore="UnusedResources">Link To</string>
+    <string name="gutenberg_native_loading" tools:ignore="UnusedResources">Loading</string>
     <string name="gutenberg_native_lock_icon" tools:ignore="UnusedResources">Lock icon</string>
     <string name="gutenberg_native_make_your_content_stand_out_by_adding_images_gifs_videos_and_embe" tools:ignore="UnusedResources">Make your content stand out by adding images, gifs, videos, and embedded media to your pages.</string>
     <string name="gutenberg_native_manual" tools:ignore="UnusedResources">Manual</string>
