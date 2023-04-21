@@ -195,6 +195,7 @@ private func dummy() {
     _ = NSLocalizedString("Link Rel", comment: "")
     _ = NSLocalizedString("Link text", comment: "")
     _ = NSLocalizedString("Link To", comment: "")
+    _ = NSLocalizedString("Loading", comment: "")
     _ = NSLocalizedString("Lock icon", comment: "")
     _ = NSLocalizedString("Make your content stand out by adding images, gifs, videos, and embedded media to your pages.", comment: "")
     _ = NSLocalizedString("Manual", comment: "")
