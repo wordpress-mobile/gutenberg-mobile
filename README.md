@@ -203,10 +203,24 @@ These files are generated via the `i18n:update` NPM command, and like translatio
 
 ### How to add a new plugin
 1. Identify the i18n domain, which usually matches the plugin's name (i.e. `jetpack`).
-2. Identify the path to the plugin source code (i.e. `./jetpack/projects/plugins/jetpack/extensions`).
-3. Append the plugin's name to the arguments of `i18n:check-cache` NPM command.
-4. Append the plugin's name and source code path to the arguments of `i18n:update` NPM command.
-5. Add the i18n domain of the plugin and the callback for getting translation to the [editor initialization](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/src/index.js).
+2. Identify the GlotPress project slug (i.e. `wp-plugins/jetpack` for URL `https://translate.wordpress.org/projects/wp-plugins/jetpack/`)
+3. Identify the path to the plugin's source code (i.e. `./jetpack/projects/plugins/jetpack/extensions`).
+4. Append the plugin's name, GlotPress project slug, and plugin's source code to the arguments of `i18n:update` NPM command.
+5. Append the plugin's name, GlotPress project slug, and plugin's source code to the arguments of `i18n:update:test` NPM command.
+6. Append the plugin's name and GlotPress project slug to the arguments of `i18n:check-cache` NPM command.
+
+*Example:*
+```
+"scripts": {
+  ...
+  "i18n:check-cache": "... jetpack wp-plugins/jetpack",
+  "i18n:update": "... jetpack wp-plugins/jetpack ./jetpack/projects/plugins/jetpack/extensions",
+  "i18n:update:test": "... jetpack wp-plugins/jetpack ./jetpack/projects/plugins/jetpack/extensions",
+  ...
+}
+```
+
+7. Add the i18n domain of the plugin and the callback for getting translation to the [editor initialization](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/src/index.js).
 *Example:*
 ```
 import { getTranslation as getJetpackTranslation } from './i18n-translations/jetpack';
@@ -220,6 +234,8 @@ const pluginTranslations = [
 	...
 ];
 ```
+
+8. (Optional) In some cases, it's needed to build the source code in order to extract the used strings. Consider adding a command in [`bin/i18n-update.sh`](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/bin/i18n-update.sh) file for this purpose (e.g. `./bin/run-jetpack-command.sh "-C projects/packages/videopress build"` to build VideoPress package)
 
 ### Caveats
 - Strings that are only used in the native version, and reference a [context](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/#disambiguation-by-context), won't be included in the localization strings files hence, they won't be translated. This is a limitation in the format of the localization strings files.
