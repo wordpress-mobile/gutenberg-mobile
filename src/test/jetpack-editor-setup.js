@@ -10,7 +10,6 @@ import {
 import { select } from '@wordpress/data';
 import { registerCoreBlocks } from '@wordpress/block-library';
 import { removeAllFilters } from '@wordpress/hooks';
-import { Platform } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -35,19 +34,12 @@ const defaultProps = {
 		smartframeEmbed: true,
 	},
 };
-const jetpackBlocks = Platform.select( {
-	android: [
-		'jetpack/contact-info',
-		'jetpack/story',
-		'jetpack/tiled-gallery',
-	],
-	ios: [
-		'jetpack/contact-info',
-		'jetpack/story',
-		'jetpack/tiled-gallery',
-		'videopress/video',
-	],
-} );
+const jetpackBlocks = [
+	'jetpack/contact-info',
+	'jetpack/story',
+	'jetpack/tiled-gallery',
+	'videopress/video',
+];
 const jetpackEmbedVariations = [
 	'facebook',
 	'instagram',
@@ -83,7 +75,7 @@ describe( 'Jetpack blocks', () => {
 				'contact-info': { available: true },
 				story: { available: true },
 				'tiled-gallery': { available: true },
-				'videopress/video': { available: Platform.isIOS },
+				'videopress/video': { available: true },
 			},
 			jetpack: { is_active: true },
 			siteFragment: null,
