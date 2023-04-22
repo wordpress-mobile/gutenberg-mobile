@@ -97,7 +97,6 @@
 				97298C7C1A69315DB3985157 /* Pods-Gutenberg.debug.xcconfig */,
 				E4E0EAFA0A6F7CA86A2F471E /* Pods-Gutenberg.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

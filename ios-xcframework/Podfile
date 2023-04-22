@@ -72,6 +72,8 @@ platform :ios, APP_IOS_DEPLOYMENT_TARGET.version
 
 target 'Gutenberg' do
   use_frameworks! linkage: :static
+  # Too many dependencies generating too many warnings
+  inhibit_all_warnings!
 
   pod 'RNTAztecView', path: '..'
   gutenberg_dependencies
