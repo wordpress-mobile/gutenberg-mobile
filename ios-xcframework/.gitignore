@@ -1,3 +1,6 @@
 # Xcode IDE
 DerivedData/
 xcuserdata/
+
+# Ruby tooling
+vendor/bundle/

@@ -51,7 +51,10 @@ steps:
         .buildkite/publish-react-native-bridge-android-artifacts.sh
 
   - label: Build iOS RN XCFramework
-    command: cd ./ios-xcframework && ./build.sh
+    command: |
+      cd ./ios-xcframework
+      bundle install
+      ./build.sh
     plugins:
       - peakon/git-shallow-clone#v0.0.1:
           depth: 1
