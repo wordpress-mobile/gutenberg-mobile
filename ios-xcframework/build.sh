@@ -9,20 +9,20 @@ set -o pipefail
 # script.
 function _xcodebuild {
     FORMATTER=xcbeautify
-    XCODEBUILD_PARAMETERS=$*
 
     if command -v $FORMATTER &> /dev/null; then
-        xcodebuild "$XCODEBUILD_PARAMETERS" | $FORMATTER
+        xcodebuild "$@" | $FORMATTER
     else
       echo "$FORMATTER not found, you will see raw xcodebuild output"
-        xcodebuild "$XCODEBUILD_PARAMETERS"
+        xcodebuild "$@"
     fi
 }
 
 DERIVED_DATA_PATH=./DerivedData
-DESTINATION='platform=iOS Simulator,name=iPhone 14 Pro,OS=latest'
+DESTINATION='generic/platform=iOS'
 
 rm -rf $DERIVED_DATA_PATH
+rm -rf build
 
 _xcodebuild clean build \
   -workspace ./XCFrameworkScaffold.xcworkspace \
