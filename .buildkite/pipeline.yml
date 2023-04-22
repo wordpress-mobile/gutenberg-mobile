@@ -53,7 +53,12 @@ steps:
   - label: Build iOS RN XCFramework
     command: |
       cd ./ios-xcframework
+
       bundle install
+
+      # TODO: We'll need to cache the pods because installing them every time takes ages
+      bundle exec pod install
+
       ./build.sh
     agents:
       queue: mac

@@ -1,4 +1,5 @@
 #include "Gutenberg-Shared.xcconfig"
+#include "Pods/Target Support Files/Pods-Gutenberg/Pods-Gutenberg.release.xcconfig"
 
 DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
 ENABLE_NS_ASSERTIONS = NO
