@@ -22,6 +22,8 @@ function _xcodebuild {
 DERIVED_DATA_PATH=./DerivedData
 DESTINATION='platform=iOS Simulator,name=iPhone 14 Pro,OS=latest'
 
+rm -rf $DERIVED_DATA_PATH
+
 _xcodebuild clean build \
   -project ./XCFrameworkScaffold.xcodeproj \
   -scheme 'Gutenberg' \
