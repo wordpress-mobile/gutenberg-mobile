@@ -2,5 +2,7 @@
 DerivedData/
 xcuserdata/
 
+Pods/
+
 # Ruby tooling
 vendor/bundle/
