@@ -49,3 +49,10 @@ steps:
       - *publish-android-artifacts-docker-container
     command: |
         .buildkite/publish-react-native-bridge-android-artifacts.sh
+
+  - label: Build iOS RN XCFramework
+    command: cd ./ios-xcframework && ./build.sh
+    agents:
+      queue: mac
+    env:
+      IMAGE_ID: xcode-14.2
