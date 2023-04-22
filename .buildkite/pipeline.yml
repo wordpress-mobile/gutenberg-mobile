@@ -51,7 +51,10 @@ steps:
         .buildkite/publish-react-native-bridge-android-artifacts.sh
 
   - label: Build iOS RN XCFramework
-    command: cd ./ios-xcframework && ./build.sh
+    command: |
+      cd ./ios-xcframework
+      bundle install
+      ./build.sh
     agents:
       queue: mac
     env:
