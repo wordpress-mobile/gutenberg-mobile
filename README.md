@@ -205,9 +205,8 @@ These files are generated via the `i18n:update` NPM command, and like translatio
 1. Identify the i18n domain, which usually matches the plugin's name (i.e. `jetpack`).
 2. Identify the GlotPress project slug (i.e. `wp-plugins/jetpack` for URL `https://translate.wordpress.org/projects/wp-plugins/jetpack/`)
 3. Identify the path to the plugin's source code (i.e. `./jetpack/projects/plugins/jetpack/extensions`).
-4. Append the plugin's name, GlotPress project slug, and plugin's source code to the arguments of `i18n:update` NPM command.
-5. Append the plugin's name, GlotPress project slug, and plugin's source code to the arguments of `i18n:update:test` NPM command.
-6. Append the plugin's name and GlotPress project slug to the arguments of `i18n:check-cache` NPM command.
+4. Append the plugin's name, GlotPress project slug, and plugin's source code to the arguments of `i18n:update` and `i18n:update:test` NPM commands.
+5. Append the plugin's name and GlotPress project slug to the arguments of `i18n:check-cache` NPM command.
 
 *Example:*
 ```
