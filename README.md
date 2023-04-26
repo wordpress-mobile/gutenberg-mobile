@@ -219,7 +219,7 @@ These files are generated via the `i18n:update` NPM command, and like translatio
 }
 ```
 
-7. Add the i18n domain of the plugin and the callback for getting translation to the [editor initialization](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/src/index.js).
+6. Add the i18n domain of the plugin and the callback for getting translation to the [editor initialization](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/src/index.js).
 *Example:*
 ```
 import { getTranslation as getJetpackTranslation } from './i18n-translations/jetpack';
@@ -234,7 +234,7 @@ const pluginTranslations = [
 ];
 ```
 
-8. (Optional) In some cases, it's needed to build the source code in order to extract the used strings. Consider adding a command in [`bin/i18n-update.sh`](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/bin/i18n-update.sh) file for this purpose (e.g. `./bin/run-jetpack-command.sh "-C projects/packages/videopress build"` to build VideoPress package)
+7. (Optional) In some cases, it's needed to build the source code in order to extract the used strings. Consider adding a command in [`bin/i18n-update.sh`](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/bin/i18n-update.sh) file for this purpose (e.g. `./bin/run-jetpack-command.sh "-C projects/packages/videopress build"` to build VideoPress package)
 
 ### Caveats
 - Strings that are only used in the native version, and reference a [context](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/#disambiguation-by-context), won't be included in the localization strings files hence, they won't be translated. This is a limitation in the format of the localization strings files.
