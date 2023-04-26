@@ -123,6 +123,10 @@ USED_STRINGS_PATH="$TARGET_PATH/used-strings.json"
 echo -e "\n\033[1mBuild Gutenberg packages\033[0m"
 npm run build:gutenberg
 
+# Build Jetpack plugins
+# - VideoPress package
+./bin/run-jetpack-command.sh "-C projects/packages/videopress build"
+
 # Extract used strings for plugins
 METRO_CONFIG="metro.config.js" node gutenberg/packages/react-native-editor/bin/extract-used-strings "$USED_STRINGS_PATH" "${PLUGINS[@]}"
 
