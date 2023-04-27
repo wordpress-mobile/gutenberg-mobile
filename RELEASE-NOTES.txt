@@ -1,4 +1,6 @@
 Unreleased
+
+1.94.0
 ---
 * [***] Enable VideoPress block (only on iOS and Simple WPCOM sites) [#5692]
 * [*] Allow content that is pasted into the post title to populate the post body correctly [#35733]
