@@ -10,52 +10,66 @@ x-common-params:
       - "AWS_SECRET_KEY"
 
 steps:
-  - block: "Request trigger Android bundle and builds"
-    branches: "dependabot/submodules/*"
+  #
+  # Disabled for faster feedback
+  #
 
-  - label: "Bundle Android"
-    key: "bundle-android"
+  # - block: "Request trigger Android bundle and builds"
+  #   branches: "dependabot/submodules/*"
+
+  # - label: "Bundle Android"
+  #   key: "bundle-android"
+  #   plugins:
+  #     - docker#v3.8.0:
+  #         image: "public.ecr.aws/automattic/gb-mobile-image:latest"
+  #         environment:
+  #           - "CI=true"
+  #           # Allow WP-CLI to be run as root, otherwise it throws an exception.
+  #           # Reference: https://git.io/J9q2S
+  #           - "WP_CLI_ALLOW_ROOT=true"
+  #   command: |
+  #       source /root/.bashrc
+
+  #       nvm install && nvm use
+  #       npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+
+  #       npm run prebundle:js
+  #       npm run bundle:android
+
+  #       buildkite-agent artifact upload bundle/android/App.js
+
+  # - label: "Build Android RN Aztec & Publish to S3"
+  #   key: "publish-react-native-aztec-android"
+  #   plugins:
+  #     - *publish-android-artifacts-docker-container
+  #   command: |
+  #       .buildkite/publish-react-native-aztec-android-artifacts.sh
+
+  # - label: "Build Android RN Bridge & Publish to S3"
+  #   depends_on:
+  #     - "bundle-android"
+  #     - "publish-react-native-aztec-android"
+  #   plugins:
+  #     - *publish-android-artifacts-docker-container
+  #   command: |
+  #       .buildkite/publish-react-native-bridge-android-artifacts.sh
+
+  # - label: Build iOS RN XCFramework
+  #   command: cd ./ios-xcframework && ./build.sh
+  #   plugins:
+  #     - peakon/git-shallow-clone#v0.0.1:
+  #         depth: 1
+  #   agents:
+  #     queue: mac
+  #   env:
+  #     IMAGE_ID: xcode-14.2
+
+  - label: WIP – Check Correctness
     plugins:
-      - docker#v3.8.0:
-          image: "public.ecr.aws/automattic/gb-mobile-image:latest"
-          environment:
-            - "CI=true"
-            # Allow WP-CLI to be run as root, otherwise it throws an exception.
-            # Reference: https://git.io/J9q2S
-            - "WP_CLI_ALLOW_ROOT=true"
-    command: |
-        source /root/.bashrc
-
-        nvm install && nvm use
-        npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
-
-        npm run prebundle:js
-        npm run bundle:android
-
-        buildkite-agent artifact upload bundle/android/App.js
-
-  - label: "Build Android RN Aztec & Publish to S3"
-    key: "publish-react-native-aztec-android"
-    plugins:
-      - *publish-android-artifacts-docker-container
-    command: |
-        .buildkite/publish-react-native-aztec-android-artifacts.sh
-
-  - label: "Build Android RN Bridge & Publish to S3"
-    depends_on:
-      - "bundle-android"
-      - "publish-react-native-aztec-android"
-    plugins:
-      - *publish-android-artifacts-docker-container
-    command: |
-        .buildkite/publish-react-native-bridge-android-artifacts.sh
-
-  - label: Build iOS RN XCFramework
-    command: cd ./ios-xcframework && ./build.sh
-    plugins:
+      - automattic/a8c-ci-toolkit#2.15.1
       - peakon/git-shallow-clone#v0.0.1:
           depth: 1
-    agents:
-      queue: mac
-    env:
-      IMAGE_ID: xcode-14.2
+      - docker#v3.9.0:
+          image: node:14 # TODO read value from `.nvmrc`
+    command:
+      install_npm_packages
