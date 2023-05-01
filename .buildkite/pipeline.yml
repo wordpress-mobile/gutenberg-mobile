@@ -51,16 +51,9 @@ steps:
         .buildkite/publish-react-native-bridge-android-artifacts.sh
 
   - label: Build iOS RN XCFramework
-    command: |
-      cd ./ios-xcframework
-
-      bundle install
-
-      # TODO: We'll need to cache the pods because installing them every time takes ages
-      bundle exec pod install
-
-      ./build.sh
+    command: .buildkite/publish-react-native-ios-artifacts.sh
     plugins:
+      - automattic/a8c-ci-toolkit#2.15.1
       - peakon/git-shallow-clone#v0.0.1:
           depth: 1
     agents:
