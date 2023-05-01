@@ -11,4 +11,5 @@ install_cocoapods
 echo "--- 🚧 Install xcbeautify formatter while not on the VM image"
 brew install xcbeautify
 
+echo "--- :xcode: Build XCFramework"
 ./build.sh
