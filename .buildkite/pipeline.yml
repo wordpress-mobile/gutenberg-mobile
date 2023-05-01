@@ -58,3 +58,4 @@ steps:
       queue: mac
     env:
       IMAGE_ID: xcode-14.2
+      BUILDKITE_GIT_CLONE_FLAGS: '--depth=1'
