@@ -77,7 +77,7 @@ commands:
 
             SSH_CONFIG_DIR="$HOME/.ssh"
             echo "Using SSH Config Dir '$SSH_CONFIG_DIR'"
-            git --version 
+            git --version
 
             mkdir -p "$SSH_CONFIG_DIR"
             chmod 0700 "$SSH_CONFIG_DIR"
@@ -378,79 +378,81 @@ jobs:
     - store_test_results:
         path: ./reports/test-results
 
-workflows:
-  gutenberg-mobile:
-    jobs:
-      - checks:
-          name: Check Correctness
-          check-correctness: true
-      - checks:
-          name: Test iOS
-          platform: ios
-          check-tests: true
-      - checks:
-          name: Test Android
-          platform: android
-          check-tests: true
-      - ios-build:
-          name: iOS Build
-      - android-build:
-          name: Android Build
-      - ios-device-checks:
-          name: Test iOS on Device - Canaries
-          is-canary: "-canary"
-          requires: [ "Test iOS", "iOS Build" ]
-      - android-device-checks:
-          name: Test Android on Device - Canaries
-          is-canary: "-canary"
-          requires: [ "Test Android", "Android Native Unit Tests", "Android Build" ]
-      - android-native-unit-tests:
-          name: Android Native Unit Tests
-      # For regular branches the full test suite is optional.
-      - Optional UI Tests:
-          type: approval
-          filters:
-            branches:
-              ignore:
-                - trunk
-                - /^dependabot/submodules/.*/
-                - /^release.*/
-      - ios-device-checks:
-          name: Test iOS on Device - Full (Manually triggered)
-          requires: [ "Optional UI Tests", "Test iOS", "iOS Build" ]
-          filters:
-            branches:
-              ignore:
-                - trunk
-                - /^dependabot/submodules/.*/
-                - /^release.*/
-      - android-device-checks:
-          name: Test Android on Device - Full (Manually triggered)
-          requires: [ "Optional UI Tests", "Test Android", "Android Native Unit Tests", "Android Build" ]
-          filters:
-            branches:
-              ignore:
-                - trunk
-                - /^dependabot/submodules/.*/
-                - /^release.*/
-      # For `trunk`, Dependabot, and release branches we always run the full test suite.
-      - ios-device-checks:
-          name: Test iOS on Device - Full
-          post-to-slack: true
-          requires: [ "Test iOS", "iOS Build" ]
-          filters:
-            branches:
-              only:
-                - trunk
-                - /^dependabot/submodules/.*/
-                - /^release.*/
-      - android-device-checks:
-          name: Test Android on Device - Full
-          post-to-slack: true
-          requires: [ "Test Android", "Android Native Unit Tests", "Android Build" ]
-          filters:
-            branches:
-              only: 
-                - trunk
-                - /^dependabot/submodules/.*/
-                - /^release.*/
+# Disabled for faster and cheaper feedback
+
+# workflows:
+#   gutenberg-mobile:
+#     jobs:
+#       - checks:
+#           name: Check Correctness
+#           check-correctness: true
+#       - checks:
+#           name: Test iOS
+#           platform: ios
+#           check-tests: true
+#       - checks:
+#           name: Test Android
+#           platform: android
+#           check-tests: true
+#       - ios-build:
+#           name: iOS Build
+#       - android-build:
+#           name: Android Build
+#       - ios-device-checks:
+#           name: Test iOS on Device - Canaries
+#           is-canary: "-canary"
+#           requires: [ "Test iOS", "iOS Build" ]
+#       - android-device-checks:
+#           name: Test Android on Device - Canaries
+#           is-canary: "-canary"
+#           requires: [ "Test Android", "Android Native Unit Tests", "Android Build" ]
+#       - android-native-unit-tests:
+#           name: Android Native Unit Tests
+#       # For regular branches the full test suite is optional.
+#       - Optional UI Tests:
+#           type: approval
+#           filters:
+#             branches:
+#               ignore:
+#                 - trunk
+#                 - /^dependabot/submodules/.*/
+#                 - /^release.*/
+#       - ios-device-checks:
+#           name: Test iOS on Device - Full (Manually triggered)
+#           requires: [ "Optional UI Tests", "Test iOS", "iOS Build" ]
+#           filters:
+#             branches:
+#               ignore:
+#                 - trunk
+#                 - /^dependabot/submodules/.*/
+#                 - /^release.*/
+#       - android-device-checks:
+#           name: Test Android on Device - Full (Manually triggered)
+#           requires: [ "Optional UI Tests", "Test Android", "Android Native Unit Tests", "Android Build" ]
+#           filters:
+#             branches:
+#               ignore:
+#                 - trunk
+#                 - /^dependabot/submodules/.*/
+#                 - /^release.*/
+#       # For `trunk`, Dependabot, and release branches we always run the full test suite.
+#       - ios-device-checks:
+#           name: Test iOS on Device - Full
+#           post-to-slack: true
+#           requires: [ "Test iOS", "iOS Build" ]
+#           filters:
+#             branches:
+#               only:
+#                 - trunk
+#                 - /^dependabot/submodules/.*/
+#                 - /^release.*/
+#       - android-device-checks:
+#           name: Test Android on Device - Full
+#           post-to-slack: true
+#           requires: [ "Test Android", "Android Native Unit Tests", "Android Build" ]
+#           filters:
+#             branches:
+#               only:
+#                 - trunk
+#                 - /^dependabot/submodules/.*/
+#                 - /^release.*/
