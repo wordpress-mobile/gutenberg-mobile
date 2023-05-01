@@ -54,8 +54,9 @@ steps:
     command: .buildkite/publish-react-native-ios-artifacts.sh
     plugins:
       - automattic/a8c-ci-toolkit#2.15.1
+      - peakon/git-shallow-clone#v0.0.1:
+          depth: 1
     agents:
       queue: mac
     env:
       IMAGE_ID: xcode-14.2
-      BUILDKITE_GIT_CLONE_FLAGS: '--depth=1'
