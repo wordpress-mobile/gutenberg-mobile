@@ -8,4 +8,7 @@ install_gems
 echo "--- :cocoapods: Setting up Pods"
 install_cocoapods
 
+echo "--- 🚧 Install xcbeautify formatter while not on the VM image"
+brew install xcbeautify
+
 ./build.sh
