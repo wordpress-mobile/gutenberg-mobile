@@ -52,6 +52,9 @@ steps:
 
   - label: Build iOS RN XCFramework
     command: cd ./ios-xcframework && ./build.sh
+    plugins:
+      - peakon/git-shallow-clone#v0.0.1:
+          depth: 1
     agents:
       queue: mac
     env:
