@@ -59,6 +59,15 @@ const setupHooks = () => {
 			};
 		}
 	);
+
+	// Hook to expand the endpoints (of `api-fetch` library) that won't be cached on Android.
+	addFilter(
+		'native.disabled_caching_endpoints',
+		'gutenberg-mobile',
+		( endpoints ) => {
+			return [ ...endpoints, /rest\/v1.1\/videos.*/i ];
+		}
+	);
 };
 
 export default () => {
