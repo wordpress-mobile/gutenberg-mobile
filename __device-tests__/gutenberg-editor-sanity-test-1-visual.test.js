@@ -263,7 +263,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			);
 			const cellSize = await cell.getSize();
 			const cellLocation = await cell.getLocation();
-			const scrollOffset = isAndroid() ? 400 : 150;
+			const scrollOffset = isAndroid() ? 350 : 100;
 
 			// Reveal default column width cells
 			await swipeFromTo(
