@@ -276,7 +276,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 					x: cellLocation.x + cellSize.width / 2,
 					y: cellLocation.y + cellSize.height / 2 - scrollOffset,
 				},
-				1000
+				500
 			);
 			// Shrink the first column
 			await swipeFromTo(
