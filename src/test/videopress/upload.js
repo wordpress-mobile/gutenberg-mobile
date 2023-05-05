@@ -16,6 +16,8 @@ import {
 import { Platform } from '@wordpress/element';
 import { ActionSheetIOS } from 'react-native';
 import apiFetch from '@wordpress/api-fetch';
+import { dispatch } from '@wordpress/data';
+import { store as coreStore } from '@wordpress/core-data';
 
 /**
  * Internal dependencies
@@ -36,10 +38,11 @@ const MEDIA_OPTIONS = [
 	'Insert from URL',
 ];
 
-const generateApiResponses = ( guid ) => [
+const VIDEOPRESS_GUID = 'AbCdEfGh';
+const FETCH_ITEMS = [
 	{
 		request: {
-			path: `/wpcom/v2/media/videopress-playback-jwt/${ guid }`,
+			path: `/wpcom/v2/media/videopress-playback-jwt/${ VIDEOPRESS_GUID }`,
 			method: 'POST',
 			body: {},
 		},
@@ -49,22 +52,22 @@ const generateApiResponses = ( guid ) => [
 	},
 	{
 		request: {
-			path: `/rest/v1.1/videos/${ guid }`,
+			path: `/rest/v1.1/videos/${ VIDEOPRESS_GUID }`,
 			credentials: 'omit',
 			global: true,
 		},
 		response: {
 			description: 'video-description',
 			post_id: 1,
-			guid,
+			guid: VIDEOPRESS_GUID,
 			private_enabled_for_site: false,
 			title: 'video-title',
 			duration: 1200,
 			privacy_setting: 2,
-			original: `https://videos.files.wordpress.com/${ guid }/video.mp4`,
+			original: `https://videos.files.wordpress.com/${ VIDEOPRESS_GUID }/video.mp4`,
 			allow_download: false,
 			display_embed: true,
-			poster: `https://videos.files.wordpress.com/${ guid }/video.jpg`,
+			poster: `https://videos.files.wordpress.com/${ VIDEOPRESS_GUID }/video.jpg`,
 			height: 270,
 			width: 480,
 			rating: 'G',
@@ -73,17 +76,24 @@ const generateApiResponses = ( guid ) => [
 	},
 	{
 		request: {
-			path: `/oembed/1.0/proxy?url=https%3A%2F%2Fvideopress.com%2Fv%2F${ guid }%3FresizeToParent%3Dtrue%26cover%3Dtrue%26preloadContent%3Dmetadata`,
+			path: `/oembed/1.0/proxy?url=https%3A%2F%2Fvideopress.com%2Fv%2F${ VIDEOPRESS_GUID }%3FresizeToParent%3Dtrue%26cover%3Dtrue%26preloadContent%3Dmetadata`,
 		},
 		response: {
 			height: 338,
 			provider_name: 'VideoPress',
-			html: `<iframe title='VideoPress Video Player' width='600' height='338' src='https://video.wordpress.com/embed/${ guid }?cover=1&amp;preloadContent=metadata&amp;hd=1' frameborder='0' allowfullscreen data-resize-to-parent='true' allow='clipboard-write'></iframe>`,
+			html: `<iframe title='VideoPress Video Player' width='600' height='338' src='https://video.wordpress.com/embed/${ VIDEOPRESS_GUID }?cover=1&amp;preloadContent=metadata&amp;hd=1' frameborder='0' allowfullscreen data-resize-to-parent='true' allow='clipboard-write'></iframe>`,
 			width: 600,
 			type: 'video',
 		},
 	},
 ];
+
+const sendWebViewMessage = ( webView, message ) =>
+	fireEvent( webView, 'message', {
+		nativeEvent: {
+			data: JSON.stringify( message ),
+		},
+	} );
 
 setupCoreBlocks();
 
@@ -96,6 +106,17 @@ beforeAll( () => {
 	registerJetpackBlocks( {
 		capabilities: { videoPressBlock: true },
 	} );
+
+	// Mock request reponses
+	setupApiFetch( FETCH_ITEMS );
+} );
+
+beforeEach( () => {
+	// Invalidate `getEmbedPreview` resolutions to avoid
+	// caching the preview for the same VideoPress GUID.
+	dispatch( coreStore ).invalidateResolutionForStoreSelector(
+		'getEmbedPreview'
+	);
 } );
 
 describe( 'VideoPress block - Uploads', () => {
@@ -138,7 +159,6 @@ describe( 'VideoPress block - Uploads', () => {
 	} );
 
 	it( 'uploads a video from device', async () => {
-		const guid = 'AAAAAAA1';
 		const media = {
 			type: 'video',
 			localId: 1,
@@ -152,8 +172,6 @@ describe( 'VideoPress block - Uploads', () => {
 			expectMediaPickerCall,
 			mediaPickerCallback,
 		} = setupMediaPicker();
-		const apiResponses = generateApiResponses( guid );
-		setupApiFetch( apiResponses );
 
 		const screen = await initializeEditor( {
 			initialHtml,
@@ -185,30 +203,23 @@ describe( 'VideoPress block - Uploads', () => {
 		await notifySucceedState( {
 			...media,
 			metadata: Platform.select( {
-				android: { videopressGUID: guid },
-				ios: { id: guid },
+				android: {
+					videopressGUID: VIDEOPRESS_GUID,
+				},
+				ios: {
+					id: VIDEOPRESS_GUID,
+				},
 			} ),
 		} );
 
-		// Token request was made
-		expect( apiFetch ).toHaveBeenNthCalledWith(
-			1,
-			apiResponses[ 0 ].request
-		);
-		// Metadata request was made
-		expect( apiFetch ).toHaveBeenNthCalledWith(
-			2,
-			apiResponses[ 1 ].request
-		);
-		// TODO: check why metadata request is called two times
-		expect( apiFetch ).toHaveBeenNthCalledWith(
-			3,
-			apiResponses[ 1 ].request
-		);
-		// Oembed request was made
-		expect( apiFetch ).toHaveBeenNthCalledWith(
-			4,
-			apiResponses[ 2 ].request
+		// Requests:
+		//  - Token request
+		//  - Metadata request x 2
+		//  - Check ownership request x 2
+		//  - Oembed request
+		expect( apiFetch ).toHaveBeenCalledTimes( 6 );
+		FETCH_ITEMS.forEach( ( fetch ) =>
+			expect( apiFetch ).toHaveBeenCalledWith( fetch.request )
 		);
 
 		// Check loading overlay is displayed before the player is ready
@@ -216,26 +227,18 @@ describe( 'VideoPress block - Uploads', () => {
 		const player = getByTestId( 'videopress-player' );
 
 		// Notify the player is ready
-		fireEvent( player, 'message', {
-			nativeEvent: {
-				data: JSON.stringify( {
-					type: 'message',
-					event: 'videopress_ready',
-				} ),
-			},
+		sendWebViewMessage( player, {
+			type: 'message',
+			event: 'videopress_ready',
 		} );
 		expect( player ).toBeVisible();
 
 		// At this point the player should be showing the conversion state.
 		// Hence, let's notify the loaded state.
-		fireEvent( player, 'message', {
-			nativeEvent: {
-				data: JSON.stringify( {
-					type: 'message',
-					event: 'videopress_loading_state',
-					state: 'loaded',
-				} ),
-			},
+		sendWebViewMessage( player, {
+			type: 'message',
+			event: 'videopress_loading_state',
+			state: 'loaded',
 		} );
 
 		// At this point the player should be ready to be used.
@@ -244,21 +247,18 @@ describe( 'VideoPress block - Uploads', () => {
 	} );
 
 	it( 'uploads a video from media library', async () => {
-		const guid = 'AAAAAAA2';
 		const media = {
 			type: 'video',
 			id: 2000,
 			url: 'https://test.files.wordpress.com/local-video-2.mp4',
 			metadata: {
-				videopressGUID: guid,
+				videopressGUID: VIDEOPRESS_GUID,
 			},
 		};
 		const {
 			expectMediaPickerCall,
 			mediaPickerCallback,
 		} = setupMediaPicker();
-		const apiResponses = generateApiResponses( guid );
-		setupApiFetch( apiResponses );
 
 		const screen = await initializeEditor( {
 			initialHtml,
@@ -279,25 +279,14 @@ describe( 'VideoPress block - Uploads', () => {
 
 		await mediaPickerCallback( media );
 
-		// Token request was made
-		expect( apiFetch ).toHaveBeenNthCalledWith(
-			1,
-			apiResponses[ 0 ].request
-		);
-		// Metadata request was made
-		expect( apiFetch ).toHaveBeenNthCalledWith(
-			2,
-			apiResponses[ 1 ].request
-		);
-		// TODO: check why metadata request is called two times
-		expect( apiFetch ).toHaveBeenNthCalledWith(
-			3,
-			apiResponses[ 1 ].request
-		);
-		// Oembed request was made
-		expect( apiFetch ).toHaveBeenNthCalledWith(
-			4,
-			apiResponses[ 2 ].request
+		// Requests:
+		//  - Token request
+		//  - Metadata request x 2
+		//  - Check ownership request x 2
+		//  - Oembed request
+		expect( apiFetch ).toHaveBeenCalledTimes( 6 );
+		FETCH_ITEMS.forEach( ( fetch ) =>
+			expect( apiFetch ).toHaveBeenCalledWith( fetch.request )
 		);
 
 		// Check loading overlay is displayed before the player is ready
@@ -305,26 +294,19 @@ describe( 'VideoPress block - Uploads', () => {
 		const player = getByTestId( 'videopress-player' );
 
 		// Notify the player is ready
-		fireEvent( player, 'message', {
-			nativeEvent: {
-				data: JSON.stringify( {
-					type: 'message',
-					event: 'videopress_ready',
-				} ),
-			},
+		sendWebViewMessage( player, {
+			type: 'message',
+			event: 'videopress_ready',
 		} );
+
 		expect( player ).toBeVisible();
 
 		// At this point the player should be showing the conversion state.
 		// Hence, let's notify the loaded state.
-		fireEvent( player, 'message', {
-			nativeEvent: {
-				data: JSON.stringify( {
-					type: 'message',
-					event: 'videopress_loading_state',
-					state: 'loaded',
-				} ),
-			},
+		sendWebViewMessage( player, {
+			type: 'message',
+			event: 'videopress_loading_state',
+			state: 'loaded',
 		} );
 
 		// At this point the player should be ready to be used.
@@ -333,7 +315,6 @@ describe( 'VideoPress block - Uploads', () => {
 	} );
 
 	it( 'takes a video and uploads it', async () => {
-		const guid = 'AAAAAAA3';
 		const media = {
 			type: 'video',
 			localId: 3,
@@ -347,8 +328,6 @@ describe( 'VideoPress block - Uploads', () => {
 			expectMediaPickerCall,
 			mediaPickerCallback,
 		} = setupMediaPicker();
-		const apiResponses = generateApiResponses( guid );
-		setupApiFetch( apiResponses );
 
 		const screen = await initializeEditor( {
 			initialHtml,
@@ -380,30 +359,23 @@ describe( 'VideoPress block - Uploads', () => {
 		await notifySucceedState( {
 			...media,
 			metadata: Platform.select( {
-				android: { videopressGUID: guid },
-				ios: { id: guid },
+				android: {
+					videopressGUID: VIDEOPRESS_GUID,
+				},
+				ios: {
+					id: VIDEOPRESS_GUID,
+				},
 			} ),
 		} );
 
-		// Token request was made
-		expect( apiFetch ).toHaveBeenNthCalledWith(
-			1,
-			apiResponses[ 0 ].request
-		);
-		// Metadata request was made
-		expect( apiFetch ).toHaveBeenNthCalledWith(
-			2,
-			apiResponses[ 1 ].request
-		);
-		// TODO: check why metadata request is called two times
-		expect( apiFetch ).toHaveBeenNthCalledWith(
-			3,
-			apiResponses[ 1 ].request
-		);
-		// Oembed request was made
-		expect( apiFetch ).toHaveBeenNthCalledWith(
-			4,
-			apiResponses[ 2 ].request
+		// Requests:
+		//  - Token request
+		//  - Metadata request x 2
+		//  - Check ownership request x 2
+		//  - Oembed request
+		expect( apiFetch ).toHaveBeenCalledTimes( 6 );
+		FETCH_ITEMS.forEach( ( fetch ) =>
+			expect( apiFetch ).toHaveBeenCalledWith( fetch.request )
 		);
 
 		// Check loading overlay is displayed before the player is ready
@@ -411,26 +383,18 @@ describe( 'VideoPress block - Uploads', () => {
 		const player = getByTestId( 'videopress-player' );
 
 		// Notify the player is ready
-		fireEvent( player, 'message', {
-			nativeEvent: {
-				data: JSON.stringify( {
-					type: 'message',
-					event: 'videopress_ready',
-				} ),
-			},
+		sendWebViewMessage( player, {
+			type: 'message',
+			event: 'videopress_ready',
 		} );
 		expect( player ).toBeVisible();
 
 		// At this point the player should be showing the conversion state.
 		// Hence, let's notify the loaded state.
-		fireEvent( player, 'message', {
-			nativeEvent: {
-				data: JSON.stringify( {
-					type: 'message',
-					event: 'videopress_loading_state',
-					state: 'loaded',
-				} ),
-			},
+		sendWebViewMessage( player, {
+			type: 'message',
+			event: 'videopress_loading_state',
+			state: 'loaded',
 		} );
 
 		// At this point the player should be ready to be used.
