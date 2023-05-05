@@ -12,7 +12,6 @@ import {
 /**
  * WordPress dependencies
  */
-import { getBlockTypes, unregisterBlockType } from '@wordpress/blocks';
 import { Platform } from '@wordpress/element';
 
 /**
