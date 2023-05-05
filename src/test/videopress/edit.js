@@ -39,13 +39,6 @@ beforeAll( () => {
 	registerJetpackBlocks( defaultProps );
 } );
 
-afterAll( () => {
-	// Clean up registered blocks
-	getBlockTypes().forEach( ( block ) => {
-		unregisterBlockType( block.name );
-	} );
-} );
-
 describe( 'VideoPress block', () => {
 	onlyOnAndroid(
 		'should successfully insert the VideoPress block into the editor',
