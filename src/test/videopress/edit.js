@@ -6,13 +6,13 @@ import {
 	initializeEditor,
 	addBlock,
 	getBlock,
+	setupCoreBlocks,
 } from 'test/helpers';
 
 /**
  * WordPress dependencies
  */
 import { getBlockTypes, unregisterBlockType } from '@wordpress/blocks';
-import { registerCoreBlocks } from '@wordpress/block-library';
 import { Platform } from '@wordpress/element';
 
 /**
@@ -31,9 +31,9 @@ const defaultProps = {
 	},
 };
 
+setupCoreBlocks();
+
 beforeAll( () => {
-	// Register all core blocks
-	registerCoreBlocks();
 	// Register Jetpack blocks
 	setupJetpackEditor( { blogId: 1, isJetpackActive: true } );
 	registerJetpackBlocks( defaultProps );
