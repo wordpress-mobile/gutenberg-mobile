@@ -23,7 +23,7 @@ import apiFetch from '@wordpress/api-fetch';
 import {
 	registerJetpackBlocks,
 	setupJetpackEditor,
-} from '../jetpack-editor-setup';
+} from '../../jetpack-editor-setup';
 
 jest.mock( '@wordpress/api-fetch' );
 
