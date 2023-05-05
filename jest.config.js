@@ -27,7 +27,7 @@ module.exports = {
 	preset: './gutenberg/node_modules/react-native/jest-preset.js',
 	setupFiles: [ '<rootDir>/' + configPath + '/setup.js', './jest.setup.js' ],
 	setupFilesAfterEnv: [ '<rootDir>/' + configPath + '/setup-after-env.js' ],
-	testMatch: [ '<rootDir>/src/**/test/*.[jt]s?(x)' ],
+	testMatch: [ '<rootDir>/src/**/test/**/*.[jt]s?(x)' ],
 	testPathIgnorePatterns: [
 		'/node_modules/',
 		'<rootDir>/gutenberg/',
