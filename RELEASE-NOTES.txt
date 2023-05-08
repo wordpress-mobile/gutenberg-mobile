@@ -1,5 +1,7 @@
 Unreleased
 
+* [**] Add fullscreen embed preview to Android [https://github.com/WordPress/gutenberg/pull/50440]
+
 1.94.0
 ---
 * [***] Enable VideoPress block (only on iOS and Simple WPCOM sites) [#5692]
