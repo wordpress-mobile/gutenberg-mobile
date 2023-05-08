@@ -1,7 +1,20 @@
 /**
+ * WordPress dependencies
+ */
+import { Platform } from '@wordpress/element';
+import apiFetch from '@wordpress/api-fetch';
+import { dispatch } from '@wordpress/data';
+import { store as coreStore } from '@wordpress/core-data';
+import {
+	requestImageFailedRetryDialog,
+	requestImageUploadCancelDialog,
+} from '@wordpress/react-native-bridge';
+
+/**
  * External dependencies
  */
 import {
+	act,
 	fireEvent,
 	getBlock,
 	getEditorHtml,
@@ -13,11 +26,8 @@ import {
 	setupPicker,
 	setupApiFetch,
 } from 'test/helpers';
-import { Platform } from '@wordpress/element';
 import { ActionSheetIOS } from 'react-native';
-import apiFetch from '@wordpress/api-fetch';
-import { dispatch } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+import prompt from 'react-native-prompt-android';
 
 /**
  * Internal dependencies
@@ -28,6 +38,7 @@ import {
 } from '../../jetpack-editor-setup';
 
 jest.mock( '@wordpress/api-fetch' );
+jest.mock( 'react-native-prompt-android', () => jest.fn() );
 
 const initialHtml = '<!-- wp:videopress/video /-->';
 
@@ -379,9 +390,9 @@ describe( 'VideoPress block - Uploads', () => {
 
 		// Check loading overlay is displayed before the player is ready
 		expect( within( block ).getByText( 'Loading' ) ).toBeVisible();
-		const player = getByTestId( 'videopress-player' );
 
 		// Notify the player is ready
+		const player = getByTestId( 'videopress-player' );
 		sendWebViewMessage( player, {
 			type: 'message',
 			event: 'videopress_ready',
@@ -401,16 +412,235 @@ describe( 'VideoPress block - Uploads', () => {
 		expect( getEditorHtml() ).toMatchSnapshot( 'video ready' );
 	} );
 
-	it.skip( 'adds video by inserting URL', async () => {} );
+	it( 'adds video by inserting URL', async () => {
+		let promptApply;
+		prompt.mockImplementation( ( title, message, [ , apply ] ) => {
+			promptApply = apply.onPress;
+		} );
 
-	it.skip( 'finishes pending uploads upon opening the editor', async () => {} );
-	it.skip( 'handles upload failure', async () => {} );
-	it.skip( 'cancel upload', async () => {} );
+		const screen = await initializeEditor( {
+			initialHtml,
+		} );
+		const { getByText, getByTestId } = screen;
+		const { selectOption } = setupPicker( screen, MEDIA_OPTIONS );
+		// Clear previous calls to `apiFetch`
+		apiFetch.mockClear();
 
-	it.skip( 'sets caption', async () => {} );
+		// Block is visible
+		const block = await getBlock( screen, 'VideoPress' );
+		expect( block ).toBeVisible();
 
-	it.skip( 'replace video with local video', async () => {} );
-	it.skip( 'replace video taking a new one', async () => {} );
-	it.skip( 'replace video video item from media library', async () => {} );
-	it.skip( 'replace video video with new URL', async () => {} );
+		// Add video from WordPress media library
+		fireEvent.press( getByText( 'ADD VIDEO' ) );
+		selectOption( 'Insert from URL' );
+		expect( prompt ).toHaveBeenCalled();
+
+		// Mock prompt dialog
+		await act( () =>
+			promptApply( `https://videopress.com/v/${ VIDEOPRESS_GUID }` )
+		);
+
+		// Requests:
+		//  - Token request
+		//  - Metadata request
+		//  - Check ownership request
+		//  - Oembed request
+		FETCH_ITEMS.forEach( ( fetch ) =>
+			expect( apiFetch ).toHaveBeenCalledWith( fetch.request )
+		);
+
+		// Check loading overlay is displayed before the player is ready
+		expect( within( block ).getByText( 'Loading' ) ).toBeVisible();
+
+		// Notify the player is ready
+		const player = getByTestId( 'videopress-player' );
+		sendWebViewMessage( player, {
+			type: 'message',
+			event: 'videopress_ready',
+		} );
+		expect( player ).toBeVisible();
+
+		// At this point the player should be showing the conversion state.
+		// Hence, let's notify the loaded state.
+		sendWebViewMessage( player, {
+			type: 'message',
+			event: 'videopress_loading_state',
+			state: 'loaded',
+		} );
+
+		// At this point the player should be ready to be used.
+		expect( within( block ).queryByText( 'Loading' ) ).toBeNull();
+		expect( getEditorHtml() ).toMatchSnapshot( 'video ready' );
+	} );
+
+	it( 'finishes pending uploads upon opening the editor', async () => {
+		const media = {
+			type: 'video',
+			localId: 4,
+			localUrl: 'file:///local-video-4.mp4',
+			serverId: 4000,
+			serverUrl: 'https://videopress.wordpress.com/local-video-4.mp4',
+		};
+		const { notifyUploadingState, notifySucceedState } = setupMediaUpload();
+
+		const screen = await initializeEditor( {
+			initialHtml: `<!-- wp:videopress/video {"id":4,"src":"file:///local-video-4.mp4"} /-->`,
+		} );
+		const { getByTestId } = screen;
+
+		// Block is visible
+		const block = await getBlock( screen, 'VideoPress' );
+		expect( block ).toBeVisible();
+
+		// Notify that the media items are uploading
+		await notifyUploadingState( media );
+		await notifyUploadingState( media );
+
+		// During upload progress we keep displaying the loading state
+		expect( getByTestId( 'videopress-uploading-video' ) ).toBeVisible();
+
+		// Upload finish
+		await notifySucceedState( {
+			...media,
+			metadata: Platform.select( {
+				android: {
+					videopressGUID: VIDEOPRESS_GUID,
+				},
+				ios: {
+					id: VIDEOPRESS_GUID,
+				},
+			} ),
+		} );
+
+		// Requests:
+		//  - Token request
+		//  - Metadata request
+		//  - Check ownership request
+		//  - Oembed request
+		FETCH_ITEMS.forEach( ( fetch ) =>
+			expect( apiFetch ).toHaveBeenCalledWith( fetch.request )
+		);
+
+		// Check loading overlay is displayed before the player is ready
+		expect( within( block ).getByText( 'Loading' ) ).toBeVisible();
+
+		// Notify the player is ready
+		const player = getByTestId( 'videopress-player' );
+		sendWebViewMessage( player, {
+			type: 'message',
+			event: 'videopress_ready',
+		} );
+		expect( player ).toBeVisible();
+
+		// At this point the player should be showing the conversion state.
+		// Hence, let's notify the loaded state.
+		sendWebViewMessage( player, {
+			type: 'message',
+			event: 'videopress_loading_state',
+			state: 'loaded',
+		} );
+
+		// At this point the player should be ready to be used.
+		expect( within( block ).queryByText( 'Loading' ) ).toBeNull();
+		expect( getEditorHtml() ).toMatchSnapshot();
+	} );
+
+	it( 'handles upload failure', async () => {
+		const media = {
+			type: 'video',
+			localId: 1,
+			localUrl: 'file:///local-video-1.mp4',
+			serverId: 1000,
+			serverUrl: 'https://videopress.wordpress.com/local-video-1.mp4',
+		};
+
+		const { notifyUploadingState, notifyFailedState } = setupMediaUpload();
+		const {
+			expectMediaPickerCall,
+			mediaPickerCallback,
+		} = setupMediaPicker();
+
+		const screen = await initializeEditor( {
+			initialHtml,
+		} );
+		const { getByText, getByTestId } = screen;
+		const { selectOption } = setupPicker( screen, MEDIA_OPTIONS );
+
+		// Block is visible
+		const block = await getBlock( screen, 'VideoPress' );
+		expect( block ).toBeVisible();
+
+		// Upload video from device
+		fireEvent.press( getByText( 'ADD VIDEO' ) );
+		selectOption( 'Choose from device' );
+		expectMediaPickerCall( 'DEVICE_MEDIA_LIBRARY', [ 'video' ], false );
+
+		// Block is uploading the video
+		await mediaPickerCallback( media );
+		await notifyUploadingState( media );
+
+		// During upload progress we keep displaying the loading state
+		expect( getByTestId( 'videopress-uploading-video' ) ).toBeVisible();
+
+		// Notify that the upload failed
+		await notifyFailedState( media );
+		const uploadFailText = getByText( /Failed to insert media/ );
+		expect( uploadFailText ).toBeVisible();
+
+		// Retry option available
+		fireEvent.press( uploadFailText );
+		expect( requestImageFailedRetryDialog ).toHaveBeenCalledWith(
+			media.localId
+		);
+		expect( getEditorHtml() ).toMatchSnapshot();
+	} );
+
+	it( 'cancel upload', async () => {
+		const media = {
+			type: 'video',
+			localId: 1,
+			localUrl: 'file:///local-video-1.mp4',
+			serverId: 1000,
+			serverUrl: 'https://videopress.wordpress.com/local-video-1.mp4',
+		};
+
+		const { notifyUploadingState, notifyResetState } = setupMediaUpload();
+		const {
+			expectMediaPickerCall,
+			mediaPickerCallback,
+		} = setupMediaPicker();
+
+		const screen = await initializeEditor( {
+			initialHtml,
+		} );
+		const { getByText, getByTestId } = screen;
+		const { selectOption } = setupPicker( screen, MEDIA_OPTIONS );
+
+		// Block is visible
+		const block = await getBlock( screen, 'VideoPress' );
+		expect( block ).toBeVisible();
+
+		// Upload video from device
+		fireEvent.press( getByText( 'ADD VIDEO' ) );
+		selectOption( 'Choose from device' );
+		expectMediaPickerCall( 'DEVICE_MEDIA_LIBRARY', [ 'video' ], false );
+
+		// Block is uploading the video
+		await mediaPickerCallback( media );
+		await notifyUploadingState( media );
+
+		// During upload progress we keep displaying the loading state
+		const uploadingVideoView = getByTestId( 'videopress-uploading-video' );
+		expect( uploadingVideoView ).toBeVisible();
+
+		// Cancel upload
+		fireEvent.press( uploadingVideoView );
+		expect( requestImageUploadCancelDialog ).toHaveBeenCalledWith(
+			media.localId
+		);
+		await notifyResetState( media );
+
+		expect( within( block ).queryByText( 'Loading' ) ).toBeNull();
+		expect( getEditorHtml() ).toMatchSnapshot();
+	} );
 } );
