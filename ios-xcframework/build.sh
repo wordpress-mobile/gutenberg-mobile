@@ -89,3 +89,13 @@ do
     -framework "$IOS_SIMULATOR_ARCHIVE_PATH/$FRAMEWORK_RELATIVE_PATH" \
     -output "$XCFRAMEWORKS_DIR/$CURRENT_FRAMEWORK_NAME.xcframework"
 done
+
+echo 'Zipping XCFrameworks...'
+ZIP_PATH=xcframeworks/XCFrameworks.zip
+zip -rq "$ZIP_PATH" \
+  xcframeworks/Aztec.xcframework \
+  xcframeworks/Gutenberg.xcframework \
+  xcframeworks/React.xcframework \
+  xcframeworks/RNTAztecView.xcframework \
+  xcframeworks/yoga.xcframework
+echo "XCFrameworks ZIP generated at $ZIP_PATH"
