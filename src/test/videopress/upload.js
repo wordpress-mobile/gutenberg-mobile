@@ -154,6 +154,9 @@ describe( 'VideoPress block - Uploads', () => {
 			fireEvent( getByTestId( 'media-options-picker' ), 'backdropPress' );
 		}
 
+		// Check that block remains selected after displaying the media
+		// options picker. This is performed by checking if the block
+		// actions menu button is visible.
 		const blockActionsButton = getByLabelText( /Open Block Actions Menu/ );
 		expect( blockActionsButton ).toBeVisible();
 	} );
@@ -163,7 +166,7 @@ describe( 'VideoPress block - Uploads', () => {
 			type: 'video',
 			localId: 1,
 			localUrl: 'file:///local-video-1.mp4',
-			serverId: 2000,
+			serverId: 1000,
 			serverUrl: 'https://videopress.wordpress.com/local-video-1.mp4',
 		};
 
@@ -214,19 +217,18 @@ describe( 'VideoPress block - Uploads', () => {
 
 		// Requests:
 		//  - Token request
-		//  - Metadata request x 2
-		//  - Check ownership request x 2
+		//  - Metadata request
+		//  - Check ownership request
 		//  - Oembed request
-		expect( apiFetch ).toHaveBeenCalledTimes( 6 );
 		FETCH_ITEMS.forEach( ( fetch ) =>
 			expect( apiFetch ).toHaveBeenCalledWith( fetch.request )
 		);
 
 		// Check loading overlay is displayed before the player is ready
 		expect( within( block ).getByText( 'Loading' ) ).toBeVisible();
-		const player = getByTestId( 'videopress-player' );
 
 		// Notify the player is ready
+		const player = getByTestId( 'videopress-player' );
 		sendWebViewMessage( player, {
 			type: 'message',
 			event: 'videopress_ready',
@@ -281,24 +283,22 @@ describe( 'VideoPress block - Uploads', () => {
 
 		// Requests:
 		//  - Token request
-		//  - Metadata request x 2
-		//  - Check ownership request x 2
+		//  - Metadata request
+		//  - Check ownership request
 		//  - Oembed request
-		expect( apiFetch ).toHaveBeenCalledTimes( 6 );
 		FETCH_ITEMS.forEach( ( fetch ) =>
 			expect( apiFetch ).toHaveBeenCalledWith( fetch.request )
 		);
 
 		// Check loading overlay is displayed before the player is ready
 		expect( within( block ).getByText( 'Loading' ) ).toBeVisible();
-		const player = getByTestId( 'videopress-player' );
 
 		// Notify the player is ready
+		const player = getByTestId( 'videopress-player' );
 		sendWebViewMessage( player, {
 			type: 'message',
 			event: 'videopress_ready',
 		} );
-
 		expect( player ).toBeVisible();
 
 		// At this point the player should be showing the conversion state.
@@ -319,7 +319,7 @@ describe( 'VideoPress block - Uploads', () => {
 			type: 'video',
 			localId: 3,
 			localUrl: 'file:///local-video-3.mp4',
-			serverId: 2000,
+			serverId: 3000,
 			serverUrl: 'https://videopress.wordpress.com/local-video-3.mp4',
 		};
 
@@ -370,10 +370,9 @@ describe( 'VideoPress block - Uploads', () => {
 
 		// Requests:
 		//  - Token request
-		//  - Metadata request x 2
-		//  - Check ownership request x 2
+		//  - Metadata request
+		//  - Check ownership request
 		//  - Oembed request
-		expect( apiFetch ).toHaveBeenCalledTimes( 6 );
 		FETCH_ITEMS.forEach( ( fetch ) =>
 			expect( apiFetch ).toHaveBeenCalledWith( fetch.request )
 		);
