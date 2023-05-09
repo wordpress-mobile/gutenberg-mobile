@@ -116,12 +116,32 @@ do
     -output "$XCFRAMEWORKS_DIR/$CURRENT_FRAMEWORK_NAME.xcframework"
 done
 
-log 'compression' 'Zipping XCFrameworks'
-ZIP_PATH=xcframeworks/XCFrameworks.zip
+log 'compression' 'Zipping Gutenberg XCFrameworks'
+ZIP_PATH=xcframeworks/Gutenberg.zip
 zip -rq "$ZIP_PATH" \
   xcframeworks/Aztec.xcframework \
   xcframeworks/Gutenberg.xcframework \
   xcframeworks/React.xcframework \
   xcframeworks/RNTAztecView.xcframework \
   xcframeworks/yoga.xcframework
-echo "XCFrameworks ZIP generated at $ZIP_PATH"
+echo "Gutenberg XCFrameworks ZIP generated at $ZIP_PATH"
+
+# In parallel to the project to ship Gutenberg as an XCFramework we are also
+# experimenting with adding React Native into other apps with an XCFramework.
+#
+# For convenience, we produce a ZIP with all the React Native XCFrameworks
+# here, even though it would be more efficient to have a dedicated project that
+# mirrors React Native and builds new one whenever a new version is released.
+#
+# In this current implementation, the approach is wasteful because we are
+# publishing the same ZIP every time. A possible imporvement would be to track
+# the RN version and check against the storage medium to see if an archive for
+# that version is already available.
+log 'compression' 'Zipping React XCFrameworks'
+ZIP_PATH=xcframeworks/ReactNative.zip
+zip -rq "$ZIP_PATH" xcframeworks -x \
+  xcframeworks/Aztec.xcframework \
+  xcframeworks/Gutenberg.xcframework \
+  xcframeworks/RNTAztecView.xcframework \
+  xcframeworks/Pods_Gutenberg.xcframework
+echo "React Native XCFrameworks ZIP generated at $ZIP_PATH"
