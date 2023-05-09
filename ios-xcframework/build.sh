@@ -18,6 +18,24 @@ function _xcodebuild {
     fi
 }
 
+function log {
+  if [[ $# -eq 1 ]]; then
+    PREFIX=''
+    MESSAGE=$1
+  else
+    PREFIX=":$1: "
+    MESSAGE=$2
+  fi
+
+  set +u
+  if [[ -n "$BUILDKITE" ]]; then
+    echo "--- $PREFIX$MESSAGE"
+  else
+    echo "$MESSAGE"
+  fi
+  set -u
+}
+
 DERIVED_DATA_PATH=./DerivedData
 DESTINATION='generic/platform=iOS'
 
@@ -26,6 +44,8 @@ rm -rf $DERIVED_DATA_PATH
 MAIN_FRAMEWORK_NAME=Gutenberg
 WORKSPACE="./XCFrameworkScaffold.xcworkspace"
 SCHEME=$MAIN_FRAMEWORK_NAME
+
+log "Building $SCHEME..."
 
 _xcodebuild clean build \
   -workspace $WORKSPACE \
@@ -46,6 +66,8 @@ rm -rf "$ARCHIVES_ROOT"
 rm -rf "$FINAL_OUTPUT"
 
 # 1. Archive for iOS
+log "Archiving $SCHEME for iOS"
+
 _xcodebuild archive \
   -workspace "$WORKSPACE" \
   -scheme "$SCHEME" \
@@ -57,6 +79,8 @@ _xcodebuild archive \
   SKIP_INSTALL=NO
 
 # 2. Archive for Simulator
+log "Archiving $SCHEME for Simulator"
+
 _xcodebuild archive \
   -workspace "$WORKSPACE" \
   -scheme "$SCHEME" \
@@ -67,7 +91,7 @@ _xcodebuild archive \
   BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
   SKIP_INSTALL=NO
 
-# Create XCFrameworks for every framework in the archives
+# 3. Create XCFrameworks for every framework in the archives
 XCFRAMEWORKS_DIR=xcframeworks
 
 rm -rf $XCFRAMEWORKS_DIR
@@ -83,6 +107,8 @@ do
   # framework build process
   FRAMEWORK_RELATIVE_PATH="Products/Library/Frameworks/$CURRENT_FRAMEWORK_NAME.framework"
 
+  log 'package' "Creating XCFramework for $CURRENT_FRAMEWORK_NAME"
+
   _xcodebuild \
     -create-xcframework \
     -framework "$IOS_DEVICE_ARCHIVE_PATH/$FRAMEWORK_RELATIVE_PATH" \
@@ -90,7 +116,7 @@ do
     -output "$XCFRAMEWORKS_DIR/$CURRENT_FRAMEWORK_NAME.xcframework"
 done
 
-echo 'Zipping XCFrameworks...'
+log 'compression' 'Zipping XCFrameworks'
 ZIP_PATH=xcframeworks/XCFrameworks.zip
 zip -rq "$ZIP_PATH" \
   xcframeworks/Aztec.xcframework \
