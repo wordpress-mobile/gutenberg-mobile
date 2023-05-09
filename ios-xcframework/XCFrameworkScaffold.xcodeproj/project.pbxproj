@@ -1,0 +1,222 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3FE06AC329F3F61300F752AD /* Gutenberg.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE06AC229F3F61300F752AD /* Gutenberg.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3FE06ACE29F3F6DA00F752AD /* Gutenberg-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06AC829F3F6DA00F752AD /* Gutenberg-Debug.xcconfig */; };
+		3FE06ACF29F3F6DA00F752AD /* Gutenberg-Shared.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06AC929F3F6DA00F752AD /* Gutenberg-Shared.xcconfig */; };
+		3FE06AD029F3F6DA00F752AD /* Project-Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06ACA29F3F6DA00F752AD /* Project-Release.xcconfig */; };
+		3FE06AD129F3F6DA00F752AD /* Project-Shared.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06ACB29F3F6DA00F752AD /* Project-Shared.xcconfig */; };
+		3FE06AD229F3F6DA00F752AD /* Gutenberg-Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06ACC29F3F6DA00F752AD /* Gutenberg-Release.xcconfig */; };
+		3FE06AD329F3F6DA00F752AD /* Project-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06ACD29F3F6DA00F752AD /* Project-Debug.xcconfig */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3FE06ABF29F3F61300F752AD /* Gutenberg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Gutenberg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FE06AC229F3F61300F752AD /* Gutenberg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Gutenberg.h; sourceTree = "<group>"; };
+		3FE06AC829F3F6DA00F752AD /* Gutenberg-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Gutenberg-Debug.xcconfig"; sourceTree = "<group>"; };
+		3FE06AC929F3F6DA00F752AD /* Gutenberg-Shared.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Gutenberg-Shared.xcconfig"; sourceTree = "<group>"; };
+		3FE06ACA29F3F6DA00F752AD /* Project-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Project-Release.xcconfig"; sourceTree = "<group>"; };
+		3FE06ACB29F3F6DA00F752AD /* Project-Shared.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Project-Shared.xcconfig"; sourceTree = "<group>"; };
+		3FE06ACC29F3F6DA00F752AD /* Gutenberg-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Gutenberg-Release.xcconfig"; sourceTree = "<group>"; };
+		3FE06ACD29F3F6DA00F752AD /* Project-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Project-Debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3FE06ABC29F3F61300F752AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3FE06AB329F3F46B00F752AD = {
+			isa = PBXGroup;
+			children = (
+				3FE06AC729F3F6DA00F752AD /* Config */,
+				3FE06AC129F3F61300F752AD /* Gutenberg */,
+				3FE06AC029F3F61300F752AD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3FE06AC029F3F61300F752AD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3FE06ABF29F3F61300F752AD /* Gutenberg.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3FE06AC129F3F61300F752AD /* Gutenberg */ = {
+			isa = PBXGroup;
+			children = (
+				3FE06AC229F3F61300F752AD /* Gutenberg.h */,
+			);
+			path = Gutenberg;
+			sourceTree = "<group>";
+		};
+		3FE06AC729F3F6DA00F752AD /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				3FE06AC829F3F6DA00F752AD /* Gutenberg-Debug.xcconfig */,
+				3FE06ACC29F3F6DA00F752AD /* Gutenberg-Release.xcconfig */,
+				3FE06AC929F3F6DA00F752AD /* Gutenberg-Shared.xcconfig */,
+				3FE06ACD29F3F6DA00F752AD /* Project-Debug.xcconfig */,
+				3FE06ACA29F3F6DA00F752AD /* Project-Release.xcconfig */,
+				3FE06ACB29F3F6DA00F752AD /* Project-Shared.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3FE06ABA29F3F61300F752AD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FE06AC329F3F61300F752AD /* Gutenberg.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3FE06ABE29F3F61300F752AD /* Gutenberg */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3FE06AC629F3F61300F752AD /* Build configuration list for PBXNativeTarget "Gutenberg" */;
+			buildPhases = (
+				3FE06ABA29F3F61300F752AD /* Headers */,
+				3FE06ABB29F3F61300F752AD /* Sources */,
+				3FE06ABC29F3F61300F752AD /* Frameworks */,
+				3FE06ABD29F3F61300F752AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Gutenberg;
+			productName = Gutenberg;
+			productReference = 3FE06ABF29F3F61300F752AD /* Gutenberg.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3FE06AB429F3F46B00F752AD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					3FE06ABE29F3F61300F752AD = {
+						CreatedOnToolsVersion = 14.3;
+					};
+				};
+			};
+			buildConfigurationList = 3FE06AB729F3F46B00F752AD /* Build configuration list for PBXProject "XCFrameworkScaffold" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3FE06AB329F3F46B00F752AD;
+			productRefGroup = 3FE06AC029F3F61300F752AD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3FE06ABE29F3F61300F752AD /* Gutenberg */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3FE06ABD29F3F61300F752AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FE06AD329F3F6DA00F752AD /* Project-Debug.xcconfig in Resources */,
+				3FE06ACE29F3F6DA00F752AD /* Gutenberg-Debug.xcconfig in Resources */,
+				3FE06AD229F3F6DA00F752AD /* Gutenberg-Release.xcconfig in Resources */,
+				3FE06AD129F3F6DA00F752AD /* Project-Shared.xcconfig in Resources */,
+				3FE06ACF29F3F6DA00F752AD /* Gutenberg-Shared.xcconfig in Resources */,
+				3FE06AD029F3F6DA00F752AD /* Project-Release.xcconfig in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3FE06ABB29F3F61300F752AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3FE06AB829F3F46B00F752AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FE06ACD29F3F6DA00F752AD /* Project-Debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		3FE06AB929F3F46B00F752AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FE06ACA29F3F6DA00F752AD /* Project-Release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		3FE06AC429F3F61300F752AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FE06AC829F3F6DA00F752AD /* Gutenberg-Debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		3FE06AC529F3F61300F752AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FE06ACC29F3F6DA00F752AD /* Gutenberg-Release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3FE06AB729F3F46B00F752AD /* Build configuration list for PBXProject "XCFrameworkScaffold" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3FE06AB829F3F46B00F752AD /* Debug */,
+				3FE06AB929F3F46B00F752AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3FE06AC629F3F61300F752AD /* Build configuration list for PBXNativeTarget "Gutenberg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3FE06AC429F3F61300F752AD /* Debug */,
+				3FE06AC529F3F61300F752AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3FE06AB429F3F46B00F752AD /* Project object */;
+}
