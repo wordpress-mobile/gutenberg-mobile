@@ -23,6 +23,7 @@ import {
 	PLAYBACK_SETTINGS,
 	PLAYBACK_BAR_COLOR_SETTINGS,
 	RATING_OPTIONS,
+	PRIVACY_OPTIONS,
 	ADDITIONAL_PRIVACY_AND_RATING_SETTINGS,
 } from './local-helpers/constants';
 import {
@@ -137,6 +138,26 @@ describe( "Update VideoPress block's settings", () => {
 			);
 		} );
 	} );
+
+	/*
+	 * PRIVACY SETTINGS
+	 * Loop through each of the possible privacy options and select each one
+	 */
+	PRIVACY_OPTIONS.forEach( ( option, index ) => {
+		// Skip the default setting, as it is already selected
+		if ( index === 0 ) return;
+
+		it( `should update Privacy and Rating section's privacy setting to ${ option }`, async () => {
+			await pressSettingInPicker(
+				screen,
+				'Privacy and Rating',
+				'Privacy',
+				PRIVACY_OPTIONS,
+				option
+			);
+		} );
+	} );
+
 	/*
 	 * PRIVACY AND RATING SETTINGS
 	 * Loop through the additional Privacy and Rating settings and toggle on/off

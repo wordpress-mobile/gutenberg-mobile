@@ -19,6 +19,8 @@ export const PLAYBACK_BAR_COLOR_SETTINGS = [ 'Dynamic color' ];
 
 export const RATING_OPTIONS = [ 'G', 'PG-13', 'R' ];
 
+export const PRIVACY_OPTIONS = [ 'Site default (Public)', 'Public', 'Private' ];
+
 export const ADDITIONAL_PRIVACY_AND_RATING_SETTINGS = [
 	'Allow download',
 	'Show video sharing menu',
