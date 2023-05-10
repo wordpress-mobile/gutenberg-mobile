@@ -81,6 +81,23 @@ describe( "Update VideoPress block's settings", () => {
 		changeTextOfTextInput( input, 'Hello world!' );
 	} );
 
+	/*
+	 * DESCRIPTION SETTING
+	 * Select and get the description input field before changing text
+	 */
+	it( `should update description`, async () => {
+		fireEvent.press( screen.getByText( 'Description' ) );
+
+		const allDescriptionInputs = screen.getAllByPlaceholderText(
+			'Add description'
+		);
+
+		// The BottomSheetControl's input field is accessed via the component's second placeholder
+		const input = allDescriptionInputs[ 1 ];
+
+		changeTextOfTextInput( input, "The video's new description!" );
+	} );
+
 	afterEach( async () => {
 		// Assert
 		expect( getEditorHtml() ).toMatchSnapshot();
