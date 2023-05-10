@@ -11,7 +11,7 @@ import {
 /**
  * Internal dependencies
  */
-import { VIDEOPRESS_BLOCK_HTML } from './helpers/constants';
+import { VIDEOPRESS_BLOCK_HTML } from './constants';
 
 export const initializeBlockWithHTML = async (
 	initialHtml = VIDEOPRESS_BLOCK_HTML
@@ -36,9 +36,9 @@ export const selectAndOpenBlockSettings = async ( screen ) => {
 /**
  * Presses a setting in a specified panel.
  *
- * @param {Object} screen   - The editor's screen.
- * @param {string} panel    - The panel containing the setting to be pressed.
- * @param {string} setting  - The setting to be pressed.
+ * @param {Object} screen  - The editor's screen.
+ * @param {string} panel   - The panel containing the setting to be pressed.
+ * @param {string} setting - The setting to be pressed.
  */
 export const pressSettingInPanel = async ( screen, panel, setting ) => {
 	const { getByText } = screen;
@@ -53,11 +53,11 @@ export const pressSettingInPanel = async ( screen, panel, setting ) => {
 /**
  * Presses a setting in a specified panel, triggers a picker, and selects an option from the sheet.
  *
- * @param {Object} screen       - The editor's screen.
- * @param {string} panel        - The panel containing the setting to be pressed.
- * @param {string} setting      - The setting to be pressed, which triggers the picker.
- * @param {string[]} options    - An array of all the options available in the picker.
- * @param {string} option       - The option to be selected from the picker.
+ * @param {Object}   screen   - The editor's screen.
+ * @param {string}   panel    - The panel containing the setting to be pressed.
+ * @param {string}   setting  - The setting to be pressed, which triggers the picker.
+ * @param {string[]} options  - An array of all the options available in the picker.
+ * @param {string}   option   - The option to be selected from the picker.
  */
 export const pressSettingInPicker = async (
 	screen,
