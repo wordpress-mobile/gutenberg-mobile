@@ -2,6 +2,7 @@
  * External dependencies
  */
 import {
+	act,
 	initializeEditor,
 	getBlock,
 	fireEvent,
@@ -46,5 +47,5 @@ export const pressSettingInPanel = async ( screen, panel, setting ) => {
 	fireEvent.press( getByText( panel ) );
 
 	// Toggle the specified setting
-	fireEvent.press( getByText( setting ) );
+	await act( () => fireEvent.press( getByText( setting ) ) );
 };
