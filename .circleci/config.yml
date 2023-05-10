@@ -427,6 +427,16 @@ workflows:
                 - trunk
                 - /^dependabot/submodules/.*/
                 - /^release.*/
+      - ios-device-checks:
+          name: Test iOS on Device - iPad (Manually triggered)
+          is-ipad: "-ipad"
+          requires: [ "Optional UI Tests", "Test iOS", "iOS Build" ]
+          filters:
+            branches:
+              ignore:
+                - trunk
+                - /^dependabot/submodules/.*/
+                - /^release.*/
       - android-device-checks:
           name: Test Android on Device - Full (Manually triggered)
           requires: [ "Optional UI Tests", "Test Android", "Android Native Unit Tests", "Android Build" ]
