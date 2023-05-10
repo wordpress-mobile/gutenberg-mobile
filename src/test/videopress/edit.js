@@ -109,6 +109,17 @@ describe( "Update VideoPress block's settings", () => {
 		} );
 	} );
 
+	/*
+	 * PLAYBACK BAR COLOR SETTINGS
+	 * Loop through each of the playback bar color setting
+	 * TODO: Select color options (if applicable)
+	 */
+	PLAYBACK_BAR_COLOR_SETTINGS.forEach( ( setting ) => {
+		it( `should update Playback Bar Color section's ${ setting } setting`, async () => {
+			await pressSettingInPanel( screen, 'Playback Bar Color', setting );
+		} );
+	} );
+
 	afterEach( async () => {
 		// Assert
 		expect( getEditorHtml() ).toMatchSnapshot();
