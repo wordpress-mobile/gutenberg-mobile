@@ -354,6 +354,9 @@ jobs:
       is-canary:
         type: string
         default: ""
+      is-ipad:
+        type: string
+        default: ""
     macos:
       xcode: "13.4.1"
     steps:
@@ -371,7 +374,7 @@ jobs:
     - run:
         name: Run Device Tests
         command: |
-          npm run device-tests<<parameters.is-canary>>
+          npm run device-tests<<parameters.is-canary>><<parameters.is-ipad>>
         no_output_timeout: 1200
         environment:
           JEST_JUNIT_OUTPUT_FILE: "reports/test-results/ios-test-results.xml"
@@ -436,6 +439,17 @@ workflows:
       # For `trunk`, Dependabot, and release branches we always run the full test suite.
       - ios-device-checks:
           name: Test iOS on Device - Full
+          post-to-slack: true
+          requires: [ "Test iOS", "iOS Build" ]
+          filters:
+            branches:
+              only:
+                - trunk
+                - /^dependabot/submodules/.*/
+                - /^release.*/
+      - ios-device-checks:
+          name: Test iOS on Device - iPad
+          is-ipad: "-ipad"
           post-to-slack: true
           requires: [ "Test iOS", "iOS Build" ]
           filters:
