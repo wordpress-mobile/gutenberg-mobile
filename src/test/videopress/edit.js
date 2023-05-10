@@ -65,8 +65,6 @@ describe( "Update VideoPress block's settings", () => {
 		screen = await initializeEditor( {
 			initialHtml: VIDEOPRESS_BLOCK_HTML,
 		} );
-
-		await selectAndOpenBlockSettings( screen );
 	} );
 
 	/*
@@ -74,6 +72,8 @@ describe( "Update VideoPress block's settings", () => {
 	 * Select and get the title input field before changing text
 	 */
 	it( `should update title`, async () => {
+		await selectAndOpenBlockSettings( screen );
+
 		fireEvent.press( screen.getByText( 'Title' ) );
 
 		const input = screen.getByDisplayValue( 'default-title-is-file-name' );
@@ -86,6 +86,8 @@ describe( "Update VideoPress block's settings", () => {
 	 * Select and get the description input field before changing text
 	 */
 	it( `should update description`, async () => {
+		await selectAndOpenBlockSettings( screen );
+
 		fireEvent.press( screen.getByText( 'Description' ) );
 
 		const allDescriptionInputs = screen.getAllByPlaceholderText(
@@ -104,6 +106,7 @@ describe( "Update VideoPress block's settings", () => {
 	 */
 	PLAYBACK_SETTINGS.forEach( ( setting ) => {
 		it( `should update Playback Settings section's ${ setting } setting`, async () => {
+			await selectAndOpenBlockSettings( screen );
 			await pressSettingInPanel( screen, 'Playback Settings', setting );
 		} );
 	} );
@@ -115,6 +118,7 @@ describe( "Update VideoPress block's settings", () => {
 	 */
 	PLAYBACK_BAR_COLOR_SETTINGS.forEach( ( setting ) => {
 		it( `should update Playback Bar Color section's ${ setting } setting`, async () => {
+			await selectAndOpenBlockSettings( screen );
 			await pressSettingInPanel( screen, 'Playback Bar Color', setting );
 		} );
 	} );
@@ -125,6 +129,7 @@ describe( "Update VideoPress block's settings", () => {
 	 */
 	ADDITIONAL_PRIVACY_AND_RATING_SETTINGS.forEach( ( setting ) => {
 		it( `should update Privacy and Rating section's ${ setting }`, async () => {
+			await selectAndOpenBlockSettings( screen );
 			await pressSettingInPanel( screen, 'Privacy and Rating', setting );
 		} );
 	} );
