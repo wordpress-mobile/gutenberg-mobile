@@ -25,6 +25,10 @@ import {
 	PRIVACY_OPTIONS,
 	ADDITIONAL_PRIVACY_AND_RATING_SETTINGS,
 } from './constants';
+import {
+	initializeBlockWithHTML,
+	selectAndOpenBlockSettings,
+} from './utils';
 
 setupCoreBlocks();
 
@@ -47,5 +51,19 @@ describe( 'VideoPress block', () => {
 
 		const expectedHtml = `<!-- wp:videopress/video /-->`;
 		expect( getEditorHtml() ).toBe( expectedHtml );
+	} );
+} );
+
+describe( "Update VideoPress block's settings", () => {
+	let screen;
+
+	beforeEach( async () => {
+		// Arrange
+		screen = await initializeBlockWithHTML();
+
+		await selectAndOpenBlockSettings( screen );
+	} );
+
+	afterEach( async () => {
 	} );
 } );
