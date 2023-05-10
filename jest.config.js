@@ -33,6 +33,7 @@ module.exports = {
 		'<rootDir>/gutenberg/',
 		'<rootDir>/jetpack/',
 		'/__device-tests__/',
+		'/local-helpers/',
 	],
 	testEnvironmentOptions: {
 		url: 'http://localhost/',
