@@ -5,7 +5,6 @@ import {
 	initializeEditor,
 	getBlock,
 	fireEvent,
-	setupPicker,
 	openBlockSettings,
 } from 'test/helpers';
 /**
