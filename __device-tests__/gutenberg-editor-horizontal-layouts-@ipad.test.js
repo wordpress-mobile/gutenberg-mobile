@@ -35,6 +35,9 @@ describe( 'Gutenberg Editor iPad Visual test for Horizontal layouts', () => {
 		await swipeUp( editorPage.driver );
 		await swipeUp( editorPage.driver );
 
+		// Wait for the scrollbar to hide
+		await editorPage.driver.sleep( 3000 );
+
 		// Visual test check
 		screenshot = await takeScreenshot();
 		expect( screenshot ).toMatchImageSnapshot();
@@ -55,7 +58,18 @@ describe( 'Gutenberg Editor iPad Visual test for Horizontal layouts', () => {
 			const columnsBlock = await editorPage.getBlockAtPosition(
 				blockNames.columns
 			);
+
 			await columnsBlock.click();
+
+			if ( i === 1 ) {
+				await editorPage.driver.sleep( 2000 );
+				// Navigate upwards in block hierarchy
+				await editorPage.driver
+					.elementByAccessibilityId( 'Navigate Up' )
+					.click()
+					.click();
+				await editorPage.driver.sleep( 2000 );
+			}
 			await editorPage.removeBlock();
 		}
 	} );
@@ -83,6 +97,9 @@ describe( 'Gutenberg Editor iPad Visual test for Horizontal layouts', () => {
 
 		await swipeUp( editorPage.driver );
 		await swipeUp( editorPage.driver );
+
+		// Wait for the scrollbar to hide
+		await editorPage.driver.sleep( 3000 );
 
 		// Visual test check
 		screenshot = await takeScreenshot();
