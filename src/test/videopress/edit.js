@@ -16,19 +16,22 @@ import {
 	registerJetpackBlocks,
 	setupJetpackEditor,
 } from '../../jetpack-editor-setup';
-
-const defaultProps = {
-	capabilities: {
-		videoPressBlock: true,
-	},
-};
+import {
+	DEFAULT_PROPS,
+	VIDEOPRESS_BLOCK_HTML,
+	PLAYBACK_SETTINGS,
+	PLAYBACK_BAR_COLOR_SETTINGS,
+	RATING_OPTIONS,
+	PRIVACY_OPTIONS,
+	ADDITIONAL_PRIVACY_AND_RATING_SETTINGS,
+} from './constants';
 
 setupCoreBlocks();
 
 beforeAll( () => {
 	// Register Jetpack blocks
 	setupJetpackEditor( { blogId: 1, isJetpackActive: true } );
-	registerJetpackBlocks( defaultProps );
+	registerJetpackBlocks( DEFAULT_PROPS );
 } );
 
 describe( 'VideoPress block', () => {
