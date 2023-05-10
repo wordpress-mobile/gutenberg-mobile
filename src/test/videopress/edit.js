@@ -20,12 +20,12 @@ import {
 } from '../../jetpack-editor-setup';
 import {
 	DEFAULT_PROPS,
+	VIDEOPRESS_BLOCK_HTML,
 	PLAYBACK_SETTINGS,
 	PLAYBACK_BAR_COLOR_SETTINGS,
 	ADDITIONAL_PRIVACY_AND_RATING_SETTINGS,
 } from './local-helpers/constants';
 import {
-	initializeBlockWithHTML,
 	selectAndOpenBlockSettings,
 	pressSettingInPanel,
 } from './local-helpers/utils';
@@ -62,7 +62,9 @@ describe( "Update VideoPress block's settings", () => {
 
 	beforeEach( async () => {
 		// Arrange
-		screen = await initializeBlockWithHTML();
+		screen = await initializeEditor( {
+			initialHtml: VIDEOPRESS_BLOCK_HTML,
+		} );
 
 		await selectAndOpenBlockSettings( screen );
 	} );
