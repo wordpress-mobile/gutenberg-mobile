@@ -32,3 +32,20 @@ export const selectAndOpenBlockSettings = async ( screen ) => {
 	return { ...screen, videoPressBlock };
 };
 
+/**
+ * Presses a setting in a specified panel.
+ *
+ * @param {object} screen 		- The editor's screen.
+ * @param {string} panel 		- The panel containing the setting to be pressed.
+ * @param {string} setting 		- The setting to be pressed.
+ */
+export const pressSettingInPanel = async ( screen, panel, setting ) => {
+	const { getByText, getByLabelText } = screen;
+
+	// Navigate to the specified settings panel
+	fireEvent.press( getByText( panel ) );
+
+	// Toggle the specified setting
+	fireEvent.press( getByText( setting ) );
+};
+

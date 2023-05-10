@@ -30,6 +30,7 @@ import {
 import {
 	initializeBlockWithHTML,
 	selectAndOpenBlockSettings,
+	pressSettingInPanel,
 } from './utils';
 
 setupCoreBlocks();
@@ -96,6 +97,16 @@ describe( "Update VideoPress block's settings", () => {
 		const input = allDescriptionInputs[ 1 ];
 
 		changeTextOfTextInput( input, "The video's new description!" );
+	} );
+
+	/*
+	 * PLAYBACK SETTINGS
+	 * Loop through each of the playback settings and toggle on/off
+	 */
+	PLAYBACK_SETTINGS.forEach( ( setting ) => {
+		it( `should update Playback Settings section's ${ setting } setting`, async () => {
+			await pressSettingInPanel( screen, 'Playback Settings', setting );
+		} );
 	} );
 
 	afterEach( async () => {
