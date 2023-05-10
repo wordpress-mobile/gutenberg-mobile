@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoPress block - Uploads adds video by inserting URL: video ready 1`] = `"<!-- wp:videopress/video {"title":"video-title","description":"video-description","id":1,"guid":"AbCdEfGh","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":false,"duration":1200} /-->"`;
+
+exports[`VideoPress block - Uploads cancel upload 1`] = `"<!-- wp:videopress/video /-->"`;
+
+exports[`VideoPress block - Uploads finishes pending uploads upon opening the editor 1`] = `"<!-- wp:videopress/video {"title":"video-title","description":"video-description","id":1,"guid":"AbCdEfGh","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":false,"duration":1200} /-->"`;
+
+exports[`VideoPress block - Uploads handles upload failure 1`] = `"<!-- wp:videopress/video {"id":1,"src":"file:///local-video-1.mp4"} /-->"`;
+
+exports[`VideoPress block - Uploads takes a video and uploads it: loading state 1`] = `"<!-- wp:videopress/video {"id":3,"src":"file:///local-video-3.mp4"} /-->"`;
+
+exports[`VideoPress block - Uploads takes a video and uploads it: video ready 1`] = `"<!-- wp:videopress/video {"title":"video-title","description":"video-description","id":1,"guid":"AbCdEfGh","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":false,"duration":1200} /-->"`;
+
+exports[`VideoPress block - Uploads uploads a video from device: loading state 1`] = `"<!-- wp:videopress/video {"id":1,"src":"file:///local-video-1.mp4"} /-->"`;
+
+exports[`VideoPress block - Uploads uploads a video from device: video ready 1`] = `"<!-- wp:videopress/video {"title":"video-title","description":"video-description","id":1,"guid":"AbCdEfGh","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":false,"duration":1200} /-->"`;
+
+exports[`VideoPress block - Uploads uploads a video from media library: video ready 1`] = `"<!-- wp:videopress/video {"title":"video-title","description":"video-description","id":1,"guid":"AbCdEfGh","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":false,"duration":1200} /-->"`;
