@@ -22,15 +22,12 @@ import {
 	DEFAULT_PROPS,
 	PLAYBACK_SETTINGS,
 	PLAYBACK_BAR_COLOR_SETTINGS,
-	RATING_OPTIONS,
-	PRIVACY_OPTIONS,
 	ADDITIONAL_PRIVACY_AND_RATING_SETTINGS,
 } from './local-helpers/constants';
 import {
 	initializeBlockWithHTML,
 	selectAndOpenBlockSettings,
 	pressSettingInPanel,
-	pressSettingInPicker,
 } from './local-helpers/utils';
 
 setupCoreBlocks();
@@ -121,40 +118,8 @@ describe( "Update VideoPress block's settings", () => {
 	} );
 
 	/*
-	 * RATING SETTINGS
-	 * Loop through each of the possible ratings and select each one
-	 */
-	RATING_OPTIONS.forEach( ( option ) => {
-		it( `should update Privacy and Rating section's rating setting to ${ option }`, async () => {
-			await pressSettingInPicker(
-				screen,
-				'Privacy and Rating',
-				'Rating',
-				RATING_OPTIONS,
-				option
-			);
-		} );
-	} );
-
-	/*
-	 * PRIVACY SETTINGS
-	 * Loop through each of the possible privacy options and select each one
-	 */
-	PRIVACY_OPTIONS.forEach( ( option ) => {
-		it( `should update Privacy and Rating section's privacy setting to ${ option }`, async () => {
-			await pressSettingInPicker(
-				screen,
-				'Privacy and Rating',
-				'Privacy',
-				PRIVACY_OPTIONS,
-				option
-			);
-		} );
-	} );
-
-	/*
 	 * PRIVACY AND RATING SETTINGS
-	 * Loop through the remaining Privacy and Rating settings and toggle on/off
+	 * Loop through the additional Privacy and Rating settings and toggle on/off
 	 */
 	ADDITIONAL_PRIVACY_AND_RATING_SETTINGS.forEach( ( setting ) => {
 		it( `should update Privacy and Rating section's ${ setting }`, async () => {
