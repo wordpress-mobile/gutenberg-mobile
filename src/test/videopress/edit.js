@@ -137,6 +137,22 @@ describe( "Update VideoPress block's settings", () => {
 		} );
 	} );
 
+	/*
+	 * PRIVACY SETTINGS
+	 * Loop through each of the possible privacy options and select each one
+	 */
+	PRIVACY_OPTIONS.forEach( ( option ) => {
+		it( `should update Privacy and Rating section's privacy setting to ${ option }`, async () => {
+			await pressSettingInPicker(
+				screen,
+				'Privacy and Rating',
+				'Privacy',
+				PRIVACY_OPTIONS,
+				option
+			);
+		} );
+	} );
+
 	afterEach( async () => {
 		// Assert
 		expect( getEditorHtml() ).toMatchSnapshot();
