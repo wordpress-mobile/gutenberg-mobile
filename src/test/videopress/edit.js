@@ -25,13 +25,13 @@ import {
 	RATING_OPTIONS,
 	PRIVACY_OPTIONS,
 	ADDITIONAL_PRIVACY_AND_RATING_SETTINGS,
-} from './constants';
+} from './local-helpers/constants';
 import {
 	initializeBlockWithHTML,
 	selectAndOpenBlockSettings,
 	pressSettingInPanel,
 	pressSettingInPicker,
-} from './utils';
+} from './local-helpers/utils';
 
 setupCoreBlocks();
 

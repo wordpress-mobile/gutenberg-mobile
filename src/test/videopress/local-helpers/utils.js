@@ -11,7 +11,7 @@ import {
 /**
  * Internal dependencies
  */
-import { VIDEOPRESS_BLOCK_HTML } from './constants';
+import { VIDEOPRESS_BLOCK_HTML } from './helpers/constants';
 
 export const initializeBlockWithHTML = async (
 	initialHtml = VIDEOPRESS_BLOCK_HTML
