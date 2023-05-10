@@ -7,6 +7,8 @@ import {
 	addBlock,
 	getBlock,
 	setupCoreBlocks,
+	fireEvent,
+	changeTextOfTextInput,
 } from 'test/helpers';
 
 /**
@@ -51,6 +53,9 @@ describe( 'VideoPress block', () => {
 
 		const expectedHtml = `<!-- wp:videopress/video /-->`;
 		expect( getEditorHtml() ).toBe( expectedHtml );
+
+		// Reset editor to avoid side effects from built-in timers in addBlock() function on iOS
+		await initializeEditor();
 	} );
 } );
 
@@ -64,6 +69,20 @@ describe( "Update VideoPress block's settings", () => {
 		await selectAndOpenBlockSettings( screen );
 	} );
 
+	/*
+	 * TITLE SETTING
+	 * Select and get the title input field before changing text
+	 */
+	it( `should update title`, async () => {
+		fireEvent.press( screen.getByText( 'Title' ) );
+
+		const input = screen.getByDisplayValue( 'default-title-is-file-name' );
+
+		changeTextOfTextInput( input, 'Hello world!' );
+	} );
+
 	afterEach( async () => {
+		// Assert
+		expect( getEditorHtml() ).toMatchSnapshot();
 	} );
 } );
