@@ -153,6 +153,16 @@ describe( "Update VideoPress block's settings", () => {
 		} );
 	} );
 
+	/*
+	 * PRIVACY AND RATING SETTINGS
+	 * Loop through the remaining Privacy and Rating settings and toggle on/off
+	 */
+	ADDITIONAL_PRIVACY_AND_RATING_SETTINGS.forEach( ( setting ) => {
+		it( `should update Privacy and Rating section's ${ setting }`, async () => {
+			await pressSettingInPanel( screen, 'Privacy and Rating', setting );
+		} );
+	} );
+
 	afterEach( async () => {
 		// Assert
 		expect( getEditorHtml() ).toMatchSnapshot();
