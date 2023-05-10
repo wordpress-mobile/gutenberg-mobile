@@ -83,5 +83,5 @@ export const pressSettingInPicker = async (
 		onPickerTriggered
 	);
 
-	await selectOption( option );
+	selectOption( option );
 };
