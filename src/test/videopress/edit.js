@@ -31,6 +31,7 @@ import {
 	initializeBlockWithHTML,
 	selectAndOpenBlockSettings,
 	pressSettingInPanel,
+	pressSettingInPicker,
 } from './utils';
 
 setupCoreBlocks();
@@ -117,6 +118,22 @@ describe( "Update VideoPress block's settings", () => {
 	PLAYBACK_BAR_COLOR_SETTINGS.forEach( ( setting ) => {
 		it( `should update Playback Bar Color section's ${ setting } setting`, async () => {
 			await pressSettingInPanel( screen, 'Playback Bar Color', setting );
+		} );
+	} );
+
+	/*
+	 * RATING SETTINGS
+	 * Loop through each of the possible ratings and select each one
+	 */
+	RATING_OPTIONS.forEach( ( option ) => {
+		it( `should update Privacy and Rating section's rating setting to ${ option }`, async () => {
+			await pressSettingInPicker(
+				screen,
+				'Privacy and Rating',
+				'Rating',
+				RATING_OPTIONS,
+				option
+			);
 		} );
 	} );
 
