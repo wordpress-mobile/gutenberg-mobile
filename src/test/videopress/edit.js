@@ -45,15 +45,14 @@ describe( 'VideoPress block', () => {
 		// Add block
 		await addBlock( screen, 'VideoPress' );
 
+		jest.runOnlyPendingTimers();
+
 		// Get block
 		const videoPressBlock = await getBlock( screen, 'VideoPress' );
 		expect( videoPressBlock ).toBeVisible();
 
 		const expectedHtml = `<!-- wp:videopress/video /-->`;
 		expect( getEditorHtml() ).toBe( expectedHtml );
-
-		// Reset editor to avoid side effects from built-in timers in addBlock() function on iOS
-		await initializeEditor();
 	} );
 } );
 
