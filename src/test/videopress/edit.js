@@ -20,7 +20,6 @@ import {
 } from '../../jetpack-editor-setup';
 import {
 	DEFAULT_PROPS,
-	VIDEOPRESS_BLOCK_HTML,
 	PLAYBACK_SETTINGS,
 	PLAYBACK_BAR_COLOR_SETTINGS,
 	RATING_OPTIONS,
