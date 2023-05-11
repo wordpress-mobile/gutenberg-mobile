@@ -2,7 +2,12 @@
  * Internal dependencies
  */
 const { blockNames } = editorPage;
-const { toggleOrientation, selectTextFromElement, setClipboard } = e2eUtils;
+const {
+	isAndroid,
+	toggleOrientation,
+	selectTextFromElement,
+	setClipboard,
+} = e2eUtils;
 import { takeScreenshot } from './utils';
 
 describe( 'Gutenberg Editor - Test Suite 4', () => {
@@ -184,6 +189,17 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			expect( screenshot ).toMatchImageSnapshot();
 
 			await buttonsBlock.click();
+
+			// On Android, the above `buttonsBlock.click()` happens to occur directly
+			// on the child block's rich text field. This results in the child block
+			// being selected instead of the buttons block. So, we navigate updwards.
+			if ( isAndroid() ) {
+				const navigateUpButton = await editorPage.waitForElementToBeDisplayedByXPath(
+					'//android.widget.Button[@content-desc="Navigate Up"]'
+				);
+				await navigateUpButton.click();
+			}
+
 			await editorPage.removeBlockAtPosition( blockNames.buttons );
 		} );
 
