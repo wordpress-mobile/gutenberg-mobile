@@ -125,10 +125,6 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 		it( 'Edit text styles', async () => {
 			await editorPage.addNewBlock( blockNames.buttons );
 
-			const buttonsBlock = await editorPage.getBlockAtPosition(
-				blockNames.buttons
-			);
-
 			const firstButtonTextInput = await editorPage.getButtonBlockTextInputAtPosition();
 			await editorPage.typeTextToTextBlock(
 				firstButtonTextInput,
@@ -188,17 +184,12 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			const screenshot = await takeScreenshot();
 			expect( screenshot ).toMatchImageSnapshot();
 
-			await buttonsBlock.click();
-
-			// On Android, the above `buttonsBlock.click()` happens to occur directly
-			// on the child block's rich text field. This results in the child block
-			// being selected instead of the buttons block. So, we navigate updwards.
-			if ( isAndroid() ) {
-				const navigateUpButton = await editorPage.waitForElementToBeDisplayedByXPath(
-					'//android.widget.Button[@content-desc="Navigate Up"]'
-				);
-				await navigateUpButton.click();
-			}
+			await firstButtonTextInput.click();
+			// Navigate upwards to select parent block
+			const navigateUpElement = await editorPage.waitForElementToBeDisplayedById(
+				'Navigate Up'
+			);
+			await navigateUpElement.click();
 
 			await editorPage.removeBlockAtPosition( blockNames.buttons );
 		} );
