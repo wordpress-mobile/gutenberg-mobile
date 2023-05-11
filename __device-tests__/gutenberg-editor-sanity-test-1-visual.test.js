@@ -231,6 +231,9 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 				.click()
 				.click();
 			await editorPage.waitForKeyboardToBeHidden();
+			// Android fails to display the keyboard at times, which can cause the
+			// above `waitForKeyboardToBeHidden` to finish prematurely.
+			await editorPage.driver.sleep( 1000 );
 
 			// Visual test check for nested content
 			screenshot = await takeScreenshot();
