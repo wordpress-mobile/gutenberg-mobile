@@ -9,6 +9,7 @@ import {
 	setupCoreBlocks,
 	fireEvent,
 	changeTextOfTextInput,
+	withFakeTimers,
 } from 'test/helpers';
 
 /**
@@ -45,7 +46,10 @@ describe( 'VideoPress block', () => {
 		// Add block
 		await addBlock( screen, 'VideoPress' );
 
-		jest.runOnlyPendingTimers();
+		// When the block is inserted, it automatically opens the media picker.
+		// On iOS, this picker is displayed using a timer, so we need to run it
+		// to allow any DOM update.
+		await withFakeTimers( () => jest.runOnlyPendingTimers() );
 
 		// Get block
 		const videoPressBlock = await getBlock( screen, 'VideoPress' );
