@@ -2,10 +2,6 @@
  * External dependencies
  */
 import { act, getBlock, fireEvent, openBlockSettings } from 'test/helpers';
-/**
- * Internal dependencies
- */
-import { VIDEOPRESS_BLOCK_HTML } from './constants';
 
 export const selectAndOpenBlockSettings = async ( screen ) => {
 	const videoPressBlock = await getBlock( screen, 'VideoPress' );
