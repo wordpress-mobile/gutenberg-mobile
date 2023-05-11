@@ -2,12 +2,7 @@
  * Internal dependencies
  */
 const { blockNames } = editorPage;
-const {
-	isAndroid,
-	toggleOrientation,
-	selectTextFromElement,
-	setClipboard,
-} = e2eUtils;
+const { toggleOrientation, selectTextFromElement, setClipboard } = e2eUtils;
 import { takeScreenshot } from './utils';
 
 describe( 'Gutenberg Editor - Test Suite 4', () => {
