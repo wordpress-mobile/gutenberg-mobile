@@ -17,10 +17,15 @@ export async function takeScreenshot(
 	options = { withoutKeyboard: false, heightPercentage: undefined }
 ) {
 	const { withoutKeyboard, heightPercentage } = options;
+	const iPadDevice = process.env.IPAD;
 	const orientation = await editorPage.driver.getOrientation();
-	const statusBarHeight = isAndroid() ? 100 : 94;
+	const statusBarHeightIOS = iPadDevice ? 48 : 94;
+	const statusBarHeight = isAndroid() ? 100 : statusBarHeightIOS;
 	const screenshot = await editorPage.driver.takeScreenshot();
-	const widthSize = orientation === 'PORTRAIT' ? 320 : 640;
+	const portraitWidthSize = iPadDevice ? 768 : 320;
+	const landscapeWidthSize = iPadDevice ? 1024 : 640;
+	const widthSize =
+		orientation === 'PORTRAIT' ? portraitWidthSize : landscapeWidthSize;
 
 	const base64Image = Buffer.from( screenshot, 'base64' );
 	const image = await jimp.read( base64Image );
