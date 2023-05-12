@@ -34,7 +34,7 @@
 		"jetpack/phone",
 		"jetpack/address"
 	],
-	"devOnly": [ "core/code", "jetpack/tiled-gallery", "videopress/video" ],
-	"iOSOnly": [],
+	"devOnly": [ "core/code", "jetpack/tiled-gallery" ],
+	"iOSOnly": [ "videopress/video" ],
 	"androidOnly": []
 }
