@@ -2,6 +2,34 @@ Unreleased
 ---
 * [**] [iOS] Fix dictation regression, in which typing/dictating at the same time caused content loss. [https://github.com/WordPress/gutenberg/pull/49452]
 
+1.95.0
+---
+* [**] Add fullscreen embed preview to Android [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5743]
+* [*] Fix crash when trying to convert to regular blocks an undefined/deleted reusable block [https://github.com/WordPress/gutenberg/pull/50475]
+* [**] Tapping on a nested block now gets focus directly instead of having to tap multiple times depending on the nesting levels. [https://github.com/WordPress/gutenberg/pull/50108]
+* [*] Use host app namespace in reusable block message [https://github.com/WordPress/gutenberg/pull/50478]
+
+1.94.0
+---
+* [***] Enable VideoPress block (only on iOS and Simple WPCOM sites) [#5692]
+* [*] Allow content that is pasted into the post title to populate the post body correctly [https://github.com/WordPress/gutenberg/pull/37169]
+
+1.93.1
+---
+* [**] Fix regression with the Color hook and ColorPanel [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5683]
+
+1.93.0
+---
+* [***] [iOS] Fixed iOS scroll jumping issue by refactoring KeyboardAwareFlatList improving writing flow and caret focus handling [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5533]
+
+1.92.1
+---
+* [*] Avoid empty Gallery block error [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5627]
+
+1.92.0
+---
+* No User facing changes *
+
 1.91.0
 ---
 * [*] Allow new block transformations for most blocks. [https://github.com/WordPress/gutenberg/pull/48792]

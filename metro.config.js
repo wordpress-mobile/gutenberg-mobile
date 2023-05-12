@@ -8,7 +8,7 @@ const gutenbergMetroConfigCopy = {
 	...gutenbergMetroConfig,
 	resolver: {
 		...gutenbergMetroConfig.resolver,
-		sourceExts: [ 'js', 'jsx', 'json', 'scss', 'sass', 'ts', 'tsx' ],
+		sourceExts: [ 'js', 'cjs', 'jsx', 'json', 'scss', 'sass', 'ts', 'tsx' ],
 		extraNodeModules,
 	},
 };

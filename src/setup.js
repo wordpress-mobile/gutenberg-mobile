@@ -42,6 +42,32 @@ const setupHooks = () => {
 			return editorProps;
 		}
 	);
+
+	// Hook to expand the supported endpoints of `api-fetch` library.
+	addFilter(
+		'native.supported_endpoints',
+		'gutenberg-mobile',
+		( endpoints ) => {
+			return {
+				...endpoints,
+				GET: [ ...endpoints.GET, /rest\/v1.1\/videos.*/i ],
+				POST: [
+					...endpoints.POST,
+					/wpcom\/v2\/(media)\/.*/i,
+					/wpcom\/v2\/videopress\/meta.*/i,
+				],
+			};
+		}
+	);
+
+	// Hook to expand the endpoints (of `api-fetch` library) that won't be cached on Android.
+	addFilter(
+		'native.disabled_caching_endpoints',
+		'gutenberg-mobile',
+		( endpoints ) => {
+			return [ ...endpoints, /rest\/v1.1\/videos.*/i ];
+		}
+	);
 };
 
 export default () => {

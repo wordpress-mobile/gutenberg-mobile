@@ -8,6 +8,7 @@ import { registerGutenberg } from '@wordpress/react-native-editor';
  */
 import { getTranslation as getJetpackTranslation } from './i18n-cache/jetpack';
 import { getTranslation as getLayoutGridTranslation } from './i18n-cache/layout-grid';
+import { getTranslation as getJetpackVideoPressTranslation } from './i18n-cache/jetpack-videopress-pkg';
 
 const pluginTranslations = [
 	{
@@ -17,6 +18,10 @@ const pluginTranslations = [
 	{
 		domain: 'layout-grid',
 		getTranslation: getLayoutGridTranslation,
+	},
+	{
+		domain: 'jetpack-videopress-pkg',
+		getTranslation: getJetpackVideoPressTranslation,
 	},
 ];
 

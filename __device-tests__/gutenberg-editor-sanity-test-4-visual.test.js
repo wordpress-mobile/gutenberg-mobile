@@ -120,10 +120,6 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 		it( 'Edit text styles', async () => {
 			await editorPage.addNewBlock( blockNames.buttons );
 
-			const buttonsBlock = await editorPage.getBlockAtPosition(
-				blockNames.buttons
-			);
-
 			const firstButtonTextInput = await editorPage.getButtonBlockTextInputAtPosition();
 			await editorPage.typeTextToTextBlock(
 				firstButtonTextInput,
@@ -183,7 +179,13 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			const screenshot = await takeScreenshot();
 			expect( screenshot ).toMatchImageSnapshot();
 
-			await buttonsBlock.click();
+			await firstButtonTextInput.click();
+			// Navigate upwards to select parent block
+			const navigateUpElement = await editorPage.waitForElementToBeDisplayedById(
+				'Navigate Up'
+			);
+			await navigateUpElement.click();
+
 			await editorPage.removeBlockAtPosition( blockNames.buttons );
 		} );
 

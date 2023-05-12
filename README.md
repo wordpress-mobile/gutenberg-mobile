@@ -13,8 +13,8 @@ For a developer experience closer to the one the project maintainers currently h
 * Node.js and npm (use nvm to install them)
 * [Android Studio](https://developer.android.com/studio/) to be able to compile the Android version of the app
 * [Xcode](https://developer.apple.com/xcode/) to be able to compile the iOS app
-* CocoaPods(`sudo gem install cocoapods`) needed to fetch React and third-party dependencies.
-* [Carthage](https://github.com/Carthage/Carthage#installing-carthage) for appium to be able run iOS UI tests
+* CocoaPods (`sudo gem install cocoapods`) needed to fetch React and third-party dependencies.
+* [Carthage](https://github.com/Carthage/Carthage#installing-carthage) for Appium to be able run iOS UI tests
 
 Depending on your setup, there may be a few configurations needed in Android Studio and Xcode. Please refer to [React Native's documentation](https://reactnative.dev/docs/environment-setup) for the latest requirements for each development environment.
 
@@ -122,13 +122,13 @@ This project is set up to use [jest](https://facebook.github.io/jest/) for tests
 
 ## UI Tests
 
-This repository uses Appium to run UI tests. The tests live in `__device-tests__` and are written using Appium to run tests against simulators and real devices. To run these you'll need to check off a few things: 
+This repository uses Appium to run UI tests. The tests live in `__device-tests__` and are written using Appium to run tests against simulators and real devices. To run these you'll need to check off a few things:
 
-* When running the tests, you'll need to ensure the Metro bundler (`npm run start`) is not running. 
-* [Appium CLI](https://appium.io/docs/en/about-appium/getting-started/) installed and available globally. We also recommend using [appium-doctor](https://github.com/appium/appium-doctor) to ensure all of Appium's dependencies are good to go. You don't have to worry about starting the server yourself, the tests handle starting the server on port 4723, just be sure that the port is free or feel free to change the port number in the test file. 
+* When running the tests, you'll need to ensure the Metro bundler (`npm run start`) is not running.
+* [Appium CLI](https://appium.io/docs/en/about-appium/getting-started/) installed and available globally. We also recommend using [appium-doctor](https://github.com/appium/appium-doctor) to ensure all of Appium's dependencies are good to go. You don't have to worry about starting the server yourself, the tests handle starting the server on port 4723, just be sure that the port is free or feel free to change the port number in the test file.
 * For iOS a simulator should automatically launch but for Android you'll need to have an emulator *with at least platform version 8.0* fired up and running.
 
-Then, to run the UI tests on iOS: 
+Then, to run the UI tests on iOS:
 
 `npm run test:e2e:ios:local`
 
@@ -142,7 +142,7 @@ To run a single test instead of the entire suite, use `npm run device-tests:loca
 
 `TEST_RN_PLATFORM=ios npm run device-tests:local gutenberg-editor-paragraph.test`
 
-Note: You might experience problems that seem to be related to the tests starting the Appium server, e.g. errors that say `Connection Refused`, `Connection Reset` or `The requested environment is not available`. For now, you can manually start the Appium server via [appium desktop](https://github.com/appium/appium-desktop) or the CLI, then change the port number in the tests while (optionally) commenting out related code in the `beforeAll` and `afterAll` block. 
+Note: You might experience problems that seem to be related to the tests starting the Appium server, e.g. errors that say `Connection Refused`, `Connection Reset` or `The requested environment is not available`. For now, you can manually start the Appium server via [Appium Inspector](https://github.com/appium/appium-inspector/) or the CLI, then change the port number in the tests while (optionally) commenting out related code in the `beforeAll` and `afterAll` block.
 
 For a more detailed outline of the UI tests and how to get started writing one, please visit the [UI Test documentation](https://github.com/WordPress/gutenberg/blob/HEAD/packages/react-native-editor/__device-tests__/README.md) and our [contributing guide](https://github.com/WordPress/gutenberg/blob/HEAD/packages/react-native-editor/__device-tests__/CONTRIBUTING.md).
 
@@ -203,10 +203,23 @@ These files are generated via the `i18n:update` NPM command, and like translatio
 
 ### How to add a new plugin
 1. Identify the i18n domain, which usually matches the plugin's name (i.e. `jetpack`).
-2. Identify the path to the plugin source code (i.e. `./jetpack/projects/plugins/jetpack/extensions`).
-3. Append the plugin's name to the arguments of `i18n:check-cache` NPM command.
-4. Append the plugin's name and source code path to the arguments of `i18n:update` NPM command.
-5. Add the i18n domain of the plugin and the callback for getting translation to the [editor initialization](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/src/index.js).
+2. Identify the GlotPress project slug (i.e. `wp-plugins/jetpack` for URL `https://translate.wordpress.org/projects/wp-plugins/jetpack/`)
+3. Identify the path to the plugin's source code (i.e. `./jetpack/projects/plugins/jetpack/extensions`).
+4. Append the plugin's name, GlotPress project slug, and plugin's source code to the arguments of `i18n:update` and `i18n:update:test` NPM commands.
+5. Append the plugin's name and GlotPress project slug to the arguments of `i18n:check-cache` NPM command.
+
+*Example:*
+```
+"scripts": {
+  ...
+  "i18n:check-cache": "... jetpack wp-plugins/jetpack",
+  "i18n:update": "... jetpack wp-plugins/jetpack ./jetpack/projects/plugins/jetpack/extensions",
+  "i18n:update:test": "... jetpack wp-plugins/jetpack ./jetpack/projects/plugins/jetpack/extensions",
+  ...
+}
+```
+
+6. Add the i18n domain of the plugin and the callback for getting translation to the [editor initialization](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/src/index.js).
 *Example:*
 ```
 import { getTranslation as getJetpackTranslation } from './i18n-translations/jetpack';
@@ -220,6 +233,8 @@ const pluginTranslations = [
 	...
 ];
 ```
+
+7. (Optional) In some cases, it's needed to build the source code in order to extract the used strings. Consider adding a command in [`bin/i18n-update.sh`](https://github.com/wordpress-mobile/gutenberg-mobile/blob/develop/bin/i18n-update.sh) file for this purpose (e.g. `./bin/run-jetpack-command.sh "-C projects/packages/videopress build"` to build VideoPress package)
 
 ### Caveats
 - Strings that are only used in the native version, and reference a [context](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/#disambiguation-by-context), won't be included in the localization strings files hence, they won't be translated. This is a limitation in the format of the localization strings files.
