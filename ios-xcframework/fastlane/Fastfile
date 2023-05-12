@@ -2,11 +2,32 @@
 
 default_platform :ios
 
+PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
+
 before_all do
   # Ensure we use the latest version of the toolkit
   check_for_toolkit_updates unless is_ci || ENV['FASTLANE_SKIP_TOOLKIT_UPDATE_CHECK']
 end
 
-lane :hello do
-  UI.message 'Hello, world!'
+lane :upload_xcframework_to_s3 do |options|
+  xcframework_zip_path = File.join(PROJECT_ROOT_FOLDER, 'xcframeworks/Gutenberg.zip')
+
+  unless File.exist? xcframework_zip_path
+    UI.user_error! "Could not find XCFramework ZIP to upload at #{xcframework_zip_path}"
+  end
+
+  name = options.fetch(:name, nil)
+
+  if name.nil?
+    name = "Gutenberg-#{last_git_commit[:commit_hash]}.zip"
+    UI.message "No name provide, will default to #{name}"
+  end
+
+  upload_to_s3(
+    bucket: 'a8c-apps-public-artifacts',
+    key: name,
+    file: xcframework_zip_path,
+    auto_prefix: false,
+    skip_if_exists: false
+  )
 end

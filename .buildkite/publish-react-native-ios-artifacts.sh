@@ -17,5 +17,8 @@ brew install xcbeautify
 echo "--- :xcode: Build XCFramework"
 ./build.sh
 
+echo "--- :s3: Uploading XCFramework to S3"
+bundle exec fastlane upload_xcframework_to_s3
+
 # Restore initial the location in the filesystem location
 cd ..
