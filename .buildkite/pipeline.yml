@@ -71,5 +71,8 @@ steps:
           depth: 1
       - docker#v3.9.0:
           image: node:14 # TODO read value from `.nvmrc`
-    command:
-      install_npm_packages
+    command: |
+      echo "--- :node: Node info"
+      echo "Node version: $(node --version)"
+      echo "--- :npm: Run npm ci"
+      npm ci --prefer-offline --no-audit
