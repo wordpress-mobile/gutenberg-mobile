@@ -63,7 +63,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 					.elementByAccessibilityId( 'Column Block. Row 1' )
 					.click();
 				const appenderButton = await editorPage.waitForElementToBeDisplayedByXPath(
-					'(//android.view.ViewGroup[@content-desc="block-list"])[2]/android.widget.Button'
+					'//android.widget.Button[@content-desc="Column Block. Row 1"]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button/android.view.ViewGroup/android.view.ViewGroup'
 				);
 				await appenderButton.click();
 			} else {
@@ -123,7 +123,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 					.elementByAccessibilityId( 'Column Block. Row 1' )
 					.click();
 				const appenderButton = await editorPage.waitForElementToBeDisplayedByXPath(
-					'(//android.view.ViewGroup[@content-desc="block-list"])[2]/android.widget.Button'
+					'//android.widget.Button[@content-desc="Column Block. Row 1"]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button/android.view.ViewGroup/android.view.ViewGroup'
 				);
 				await appenderButton.click();
 			} else {
@@ -197,7 +197,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 					.elementByAccessibilityId( 'Column Block. Row 1' )
 					.click();
 				const appenderButton = await editorPage.waitForElementToBeDisplayedByXPath(
-					'(//android.view.ViewGroup[@content-desc="block-list"])[2]/android.widget.Button'
+					'//android.widget.Button[@content-desc="Column Block. Row 1"]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button/android.view.ViewGroup/android.view.ViewGroup'
 				);
 				await appenderButton.click();
 			} else {
@@ -231,6 +231,9 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 				.click()
 				.click();
 			await editorPage.waitForKeyboardToBeHidden();
+			// Android fails to display the keyboard at times, which can cause the
+			// above `waitForKeyboardToBeHidden` to finish prematurely.
+			await editorPage.driver.sleep( 1000 );
 
 			// Visual test check for nested content
 			screenshot = await takeScreenshot();
