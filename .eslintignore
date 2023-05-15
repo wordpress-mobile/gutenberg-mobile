@@ -1,7 +1,8 @@
-; ignore the submodules
+# ignore the submodules
 gutenberg
 block-experiments
 bundle
 jetpack
 bin
-
+# ignore the iOS XCFramework scaffolding
+**/ios-xcframework
