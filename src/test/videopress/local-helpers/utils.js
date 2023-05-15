@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { act, getBlock, fireEvent, openBlockSettings } from 'test/helpers';
+import { act, getBlock, fireEvent, openBlockSettings, setupPicker } from 'test/helpers';
 
 export const selectAndOpenBlockSettings = async ( screen ) => {
 	const videoPressBlock = await getBlock( screen, 'VideoPress' );
