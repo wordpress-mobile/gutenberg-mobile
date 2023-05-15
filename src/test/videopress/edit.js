@@ -138,6 +138,7 @@ describe( "Update VideoPress block's settings", () => {
 		if ( index === 0 ) return;
 
 		it( `should update Privacy and Rating section's rating setting to ${ option }`, async () => {
+			await selectAndOpenBlockSettings( screen );
 			await pressSettingInPicker(
 				screen,
 				'Privacy and Rating',
@@ -157,6 +158,7 @@ describe( "Update VideoPress block's settings", () => {
 		if ( index === 0 ) return;
 
 		it( `should update Privacy and Rating section's privacy setting to ${ option }`, async () => {
+			await selectAndOpenBlockSettings( screen );
 			await pressSettingInPicker(
 				screen,
 				'Privacy and Rating',
