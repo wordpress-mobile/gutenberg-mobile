@@ -2,6 +2,12 @@
 
 exports[`Update VideoPress block's settings should update Playback Bar Color section's Dynamic color setting 1`] = `"<!-- wp:videopress/video {"title":"default-title-is-file-name","description":"","id":1,"guid":"AbCdEfGh","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":true,"duration":2803} /-->"`;
 
+exports[`Update VideoPress block's settings should update Playback Bar Color section's Loaded setting to Light green cyan 1`] = `"<!-- wp:videopress/video {"title":"default-title-is-file-name","description":"","seekbarLoadingColor":"#7bdcb5","useAverageColor":false,"id":1,"guid":"AbCdEfGh","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":true,"duration":2803} /-->"`;
+
+exports[`Update VideoPress block's settings should update Playback Bar Color section's Main setting to Luminous vivid amber 1`] = `"<!-- wp:videopress/video {"title":"default-title-is-file-name","description":"","seekbarColor":"#fcb900","useAverageColor":false,"id":1,"guid":"AbCdEfGh","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":true,"duration":2803} /-->"`;
+
+exports[`Update VideoPress block's settings should update Playback Bar Color section's Progress setting to Vivid purple 1`] = `"<!-- wp:videopress/video {"title":"default-title-is-file-name","description":"","seekbarPlayedColor":"#9b51e0","useAverageColor":false,"id":1,"guid":"AbCdEfGh","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":true,"duration":2803} /-->"`;
+
 exports[`Update VideoPress block's settings should update Playback Settings section's Autoplay setting 1`] = `"<!-- wp:videopress/video {"autoplay":true,"title":"default-title-is-file-name","description":"","useAverageColor":false,"id":1,"guid":"AbCdEfGh","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":true,"duration":2803} /-->"`;
 
 exports[`Update VideoPress block's settings should update Playback Settings section's Loop setting 1`] = `"<!-- wp:videopress/video {"title":"default-title-is-file-name","description":"","loop":true,"useAverageColor":false,"id":1,"guid":"AbCdEfGh","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":true,"duration":2803} /-->"`;
