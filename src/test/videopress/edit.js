@@ -9,6 +9,7 @@ import {
 	setupCoreBlocks,
 	fireEvent,
 	changeTextOfTextInput,
+	withFakeTimers,
 } from 'test/helpers';
 
 /**
@@ -20,6 +21,7 @@ import {
 } from '../../jetpack-editor-setup';
 import {
 	DEFAULT_PROPS,
+	VIDEOPRESS_BLOCK_HTML,
 	PLAYBACK_SETTINGS,
 	PLAYBACK_BAR_COLOR_SETTINGS,
 	RATING_OPTIONS,
@@ -27,7 +29,6 @@ import {
 	ADDITIONAL_PRIVACY_AND_RATING_SETTINGS,
 } from './local-helpers/constants';
 import {
-	initializeBlockWithHTML,
 	selectAndOpenBlockSettings,
 	pressSettingInPanel,
 	pressSettingInPicker,
@@ -48,15 +49,17 @@ describe( 'VideoPress block', () => {
 		// Add block
 		await addBlock( screen, 'VideoPress' );
 
+		// When the block is inserted, it automatically opens the media picker.
+		// On iOS, this picker is displayed using a timer, so we need to run it
+		// to allow any DOM update.
+		await withFakeTimers( () => jest.runOnlyPendingTimers() );
+
 		// Get block
 		const videoPressBlock = await getBlock( screen, 'VideoPress' );
 		expect( videoPressBlock ).toBeVisible();
 
 		const expectedHtml = `<!-- wp:videopress/video /-->`;
 		expect( getEditorHtml() ).toBe( expectedHtml );
-
-		// Reset editor to avoid side effects from built-in timers in addBlock() function on iOS
-		await initializeEditor();
 	} );
 } );
 
@@ -65,9 +68,9 @@ describe( "Update VideoPress block's settings", () => {
 
 	beforeEach( async () => {
 		// Arrange
-		screen = await initializeBlockWithHTML();
-
-		await selectAndOpenBlockSettings( screen );
+		screen = await initializeEditor( {
+			initialHtml: VIDEOPRESS_BLOCK_HTML,
+		} );
 	} );
 
 	/*
@@ -75,6 +78,8 @@ describe( "Update VideoPress block's settings", () => {
 	 * Select and get the title input field before changing text
 	 */
 	it( `should update title`, async () => {
+		await selectAndOpenBlockSettings( screen );
+
 		fireEvent.press( screen.getByText( 'Title' ) );
 
 		const input = screen.getByDisplayValue( 'default-title-is-file-name' );
@@ -87,6 +92,8 @@ describe( "Update VideoPress block's settings", () => {
 	 * Select and get the description input field before changing text
 	 */
 	it( `should update description`, async () => {
+		await selectAndOpenBlockSettings( screen );
+
 		fireEvent.press( screen.getByText( 'Description' ) );
 
 		const allDescriptionInputs = screen.getAllByPlaceholderText(
@@ -105,6 +112,7 @@ describe( "Update VideoPress block's settings", () => {
 	 */
 	PLAYBACK_SETTINGS.forEach( ( setting ) => {
 		it( `should update Playback Settings section's ${ setting } setting`, async () => {
+			await selectAndOpenBlockSettings( screen );
 			await pressSettingInPanel( screen, 'Playback Settings', setting );
 		} );
 	} );
@@ -116,6 +124,7 @@ describe( "Update VideoPress block's settings", () => {
 	 */
 	PLAYBACK_BAR_COLOR_SETTINGS.forEach( ( setting ) => {
 		it( `should update Playback Bar Color section's ${ setting } setting`, async () => {
+			await selectAndOpenBlockSettings( screen );
 			await pressSettingInPanel( screen, 'Playback Bar Color', setting );
 		} );
 	} );
@@ -164,6 +173,7 @@ describe( "Update VideoPress block's settings", () => {
 	 */
 	ADDITIONAL_PRIVACY_AND_RATING_SETTINGS.forEach( ( setting ) => {
 		it( `should update Privacy and Rating section's ${ setting }`, async () => {
+			await selectAndOpenBlockSettings( screen );
 			await pressSettingInPanel( screen, 'Privacy and Rating', setting );
 		} );
 	} );

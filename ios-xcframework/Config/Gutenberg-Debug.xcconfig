@@ -1,4 +1,5 @@
 #include "Gutenberg-Shared.xcconfig"
+#include "Pods/Target Support Files/Pods-Gutenberg/Pods-Gutenberg.debug.xcconfig"
 
 DEBUG_INFORMATION_FORMAT = dwarf
 ENABLE_TESTABILITY = YES

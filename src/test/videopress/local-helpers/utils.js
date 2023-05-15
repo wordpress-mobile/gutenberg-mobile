@@ -1,25 +1,7 @@
 /**
  * External dependencies
  */
-import {
-	initializeEditor,
-	getBlock,
-	fireEvent,
-	openBlockSettings,
-	setupPicker,
-} from 'test/helpers';
-/**
- * Internal dependencies
- */
-import { VIDEOPRESS_BLOCK_HTML } from './constants';
-
-export const initializeBlockWithHTML = async (
-	initialHtml = VIDEOPRESS_BLOCK_HTML
-) => {
-	const screen = await initializeEditor( { initialHtml } );
-
-	return { ...screen };
-};
+import { act, getBlock, fireEvent, openBlockSettings } from 'test/helpers';
 
 export const selectAndOpenBlockSettings = async ( screen ) => {
 	const videoPressBlock = await getBlock( screen, 'VideoPress' );
@@ -47,7 +29,7 @@ export const pressSettingInPanel = async ( screen, panel, setting ) => {
 	fireEvent.press( getByText( panel ) );
 
 	// Toggle the specified setting
-	fireEvent.press( getByText( setting ) );
+	await act( () => fireEvent.press( getByText( setting ) ) );
 };
 
 /**
