@@ -64,7 +64,8 @@ steps:
   #   env:
   #     IMAGE_ID: xcode-14.2
 
-  - label: WIP – Check Correctness
+  - label: ':npm: Validate dependencies'
+    key: validate-dependencies
     plugins:
       - automattic/a8c-ci-toolkit#2.15.1
       - peakon/git-shallow-clone#v0.0.1:
@@ -74,5 +75,5 @@ steps:
     command: |
       echo "--- :node: Node info"
       echo "Node version: $(node --version)"
-      echo "--- :npm: Run npm ci"
+      echo "--- :npm: npm ci"
       npm ci --prefer-offline --no-audit
