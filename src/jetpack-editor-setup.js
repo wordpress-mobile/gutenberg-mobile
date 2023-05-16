@@ -32,7 +32,7 @@ const supportedJetpackBlocks = {
 		available: __DEV__,
 	},
 	'videopress/video': {
-		available: Platform.select( { android: __DEV__, ios: true } ),
+		available: true,
 	},
 };
 
