@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+default_platform :ios
+
+before_all do
+  # Ensure we use the latest version of the toolkit
+  check_for_toolkit_updates unless is_ci || ENV['FASTLANE_SKIP_TOOLKIT_UPDATE_CHECK']
+end
+
+lane :hello do
+  UI.message 'Hello, world!'
+end
