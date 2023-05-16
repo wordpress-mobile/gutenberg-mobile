@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [***] Enable VideoPress block on Android (only available in Simple WPCOM sites) [#5780]
 
 1.95.0
 ---
