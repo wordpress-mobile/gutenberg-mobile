@@ -77,3 +77,27 @@ steps:
       echo "Node version: $(node --version)"
       echo "--- :npm: npm ci"
       npm ci --prefer-offline --no-audit
+
+  - group: ':android: Android Tests'
+    steps:
+      - label: 'Android Build'
+        key: 'android-build'
+        depends_on: 'validate-dependencies'
+        command: echo "test"
+
+      - label: 'Android JS Tests'
+        key: 'android-js-tests'
+        depends_on: 'android-build'
+        command: echo "test"
+
+  - group: ':ios: iOS Tests'
+    steps:
+      - label: 'iOS Build'
+        key: 'ios-build'
+        depends_on: 'validate-dependencies'
+        command: echo "test"
+
+      - label: 'iOS JS Tests'
+        key: 'ios-js-tests'
+        depends_on: 'ios-build'
+        command: echo "test"
