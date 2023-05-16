@@ -59,17 +59,10 @@ export const pressSettingInPicker = async (
 	// Navigate to the specified settings panel
 	fireEvent.press( getByText( panel ) );
 
-	// Select the specified setting to trigger picker
-	const pickerButtonPressed = async () => {
-		fireEvent.press( getByText( setting ) );
-	};
+	// Setup the picker and open picker
+	const { selectOption } = setupPicker( screen, options );
+	fireEvent.press( getByText( setting ) );
 
-	// Setup the picker and select option
-	const { selectOption } = setupPicker(
-		screen,
-		options,
-		pickerButtonPressed
-	);
-
-	await selectOption( option );
+	// Select the specified option from the picker
+	await act( () => selectOption( option ) );
 };
