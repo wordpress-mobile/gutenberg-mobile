@@ -6,6 +6,7 @@ default_platform :ios
 
 XCFRAMEWORK_PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
 XCFRAMEWORK_ARCHIVE_TYPE = 'tar.gz'
+XCFRAMEWORK_ARCHIVE_PATH = File.join(XCFRAMEWORK_PROJECT_ROOT_FOLDER, "build/xcframeworks/Gutenberg.#{XCFRAMEWORK_ARCHIVE_TYPE}")
 
 before_all do
   # Ensure we use the latest version of the toolkit
@@ -13,13 +14,11 @@ before_all do
 end
 
 lane :upload_xcframework_to_s3 do
-  xcframework_archive_path = File.join(XCFRAMEWORK_PROJECT_ROOT_FOLDER, "build/xcframeworks/Gutenberg.#{XCFRAMEWORK_ARCHIVE_TYPE}")
-
   unless File.exist? xcframework_archive_path
-    UI.user_error! "Could not find XCFramework archive to upload at #{xcframework_archive_path}"
+    UI.user_error! "Could not find XCFramework archive to upload at #{XCFRAMEWORK_ARCHIVE_PATH}"
   end
 
-  upload_xcframework_files_to_s3(archive_path: xcframework_archive_path, id: last_git_commit[:commit_hash])
+  upload_xcframework_files_to_s3(archive_path: XCFRAMEWORK_ARCHIVE_PATH, id: last_git_commit[:commit_hash])
 
   next unless is_ci
 
@@ -29,7 +28,19 @@ lane :upload_xcframework_to_s3 do
 
   # Tradeoff: We are "wasting" space on S3 by uploading the same archive under different name.
   # What we get in return is a 1-1 correspondency between archive and podspec, which keeps the setup simpler.
-  upload_xcframework_files_to_s3(archive_path: xcframework_archive_path, id: tag)
+  upload_xcframework_files_to_s3(archive_path: XCFRAMEWORK_ARCHIVE_PATH, id: tag)
+end
+
+lane :create_github_release do
+  create_release(
+    repository: 'wordpress-mobile/gutenberg-mobile',
+    version: "This is a test – id #{Time.now.to_i}",
+    # Passing nil here will result in no release description text on GitHub
+    release_notes_file_path: nil,
+    release_assets: XCFRAMEWORK_ARCHIVE_PATH.to_s,
+    # TODO: read from options, options.fetch(:beta_release, true)
+    prerelease: true
+  )
 end
 
 def upload_xcframework_files_to_s3(archive_path:, id:)
