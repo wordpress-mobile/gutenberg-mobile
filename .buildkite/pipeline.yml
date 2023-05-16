@@ -68,7 +68,7 @@ steps:
     artifact_paths:
       - ios-xcframework/build/xcframeworks/*.zip
     plugins:
-      - automattic/a8c-ci-toolkit#2.15.1
+      - automattic/a8c-ci-toolkit#2.16.0
       - peakon/git-shallow-clone#v0.0.1:
           depth: 1
     agents:
