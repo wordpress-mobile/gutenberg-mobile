@@ -20,5 +20,8 @@ echo "--- :xcode: Build XCFramework"
 echo "--- :s3: Uploading XCFramework to S3"
 bundle exec fastlane upload_xcframework_to_s3
 
+echo "--- :github: Creating GitHub release (Test)"
+bundle exec fastlane create_github_release
+
 # Restore initial the location in the filesystem location
 cd ..
