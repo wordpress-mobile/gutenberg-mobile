@@ -154,8 +154,10 @@
     <string name="gutenberg_native_edit_media" tools:ignore="UnusedResources">Edit media</string>
     <string name="gutenberg_native_edit_using_web_editor" tools:ignore="UnusedResources">Edit using web editor</string>
     <string name="gutenberg_native_edit_video" tools:ignore="UnusedResources">Edit video</string>
-    <string name="gutenberg_native_editing_reusable_blocks_is_not_yet_supported_on_wordpress_for_and" tools:ignore="UnusedResources">Editing reusable blocks is not yet supported on WordPress for Android</string>
-    <string name="gutenberg_native_editing_reusable_blocks_is_not_yet_supported_on_wordpress_for_ios" tools:ignore="UnusedResources">Editing reusable blocks is not yet supported on WordPress for iOS</string>
+    <!-- translators: %s: name of the host app (e.g. WordPress) -->
+    <string name="gutenberg_native_editing_reusable_blocks_is_not_yet_supported_on_s_for_android" tools:ignore="UnusedResources">Editing reusable blocks is not yet supported on %s for Android</string>
+    <!-- translators: %s: name of the host app (e.g. WordPress) -->
+    <string name="gutenberg_native_editing_reusable_blocks_is_not_yet_supported_on_s_for_ios" tools:ignore="UnusedResources">Editing reusable blocks is not yet supported on %s for iOS</string>
     <string name="gutenberg_native_embed_block_previews_are_coming_soon" tools:ignore="UnusedResources">Embed block previews are coming soon</string>
     <!-- translators: accessibility text. Empty Embed caption. -->
     <string name="gutenberg_native_embed_caption_empty" tools:ignore="UnusedResources">Embed caption. Empty</string>
