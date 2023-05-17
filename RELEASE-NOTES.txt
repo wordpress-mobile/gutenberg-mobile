@@ -1,5 +1,7 @@
 Unreleased
 ---
+* [*] Add disabled style to `Cell` component [https://github.com/WordPress/gutenberg/pull/50665]
+* [**] Disable details settings for not belonged VideoPress videos [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5782]
 
 1.95.0
 ---
