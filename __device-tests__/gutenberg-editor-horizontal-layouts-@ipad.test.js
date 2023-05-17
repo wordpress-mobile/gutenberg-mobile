@@ -52,24 +52,19 @@ describe( 'Gutenberg Editor iPad Visual test for Horizontal layouts', () => {
 			blockNames.cover
 		);
 		await coverBlock.click();
+
+		await editorPage.navigateUp();
+
 		await editorPage.removeBlock();
 
 		for ( let i = 3; i > 0; i-- ) {
 			const columnsBlock = await editorPage.getBlockAtPosition(
 				blockNames.columns
 			);
-
 			await columnsBlock.click();
 
-			if ( i === 1 ) {
-				await editorPage.driver.sleep( 2000 );
-				// Navigate upwards in block hierarchy
-				await editorPage.driver
-					.elementByAccessibilityId( 'Navigate Up' )
-					.click()
-					.click();
-				await editorPage.driver.sleep( 2000 );
-			}
+			await editorPage.navigateUp();
+
 			await editorPage.removeBlock();
 		}
 	} );
