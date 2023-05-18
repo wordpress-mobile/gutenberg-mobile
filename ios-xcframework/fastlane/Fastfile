@@ -10,16 +10,17 @@ before_all do
 end
 
 lane :upload_xcframework_to_s3 do |options|
-  xcframework_archive_path = File.join(PROJECT_ROOT_FOLDER, 'xcframeworks/Gutenberg.zip')
+  archive_type = 'tar.gz'
+  xcframework_archive_path = File.join(PROJECT_ROOT_FOLDER, "build/xcframeworks/Gutenberg.#{archive_type}")
 
   unless File.exist? xcframework_archive_path
-    UI.user_error! "Could not find XCFramework ZIP to upload at #{xcframework_archive_path}"
+    UI.user_error! "Could not find XCFramework archive to upload at #{xcframework_archive_path}"
   end
 
   name = options.fetch(:name, nil)
 
   if name.nil?
-    name = "Gutenberg-#{last_git_commit[:commit_hash]}.zip"
+    name = "Gutenberg-#{last_git_commit[:commit_hash]}.#{archive_type}"
     UI.message "No name provide, will default to #{name}"
   end
 

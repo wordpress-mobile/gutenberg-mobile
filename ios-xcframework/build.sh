@@ -97,15 +97,16 @@ do
     -output "$XCFRAMEWORKS_DIR/$CURRENT_FRAMEWORK_NAME.xcframework"
 done
 
-log 'compression' 'Zipping Gutenberg XCFrameworks'
-ZIP_PATH=$XCFRAMEWORKS_DIR/$MAIN_FRAMEWORK_NAME.zip
-zip -rq "$ZIP_PATH" \
-  $XCFRAMEWORKS_DIR/Aztec.xcframework \
-  $XCFRAMEWORKS_DIR/Gutenberg.xcframework \
-  $XCFRAMEWORKS_DIR/React.xcframework \
-  $XCFRAMEWORKS_DIR/RNTAztecView.xcframework \
-  $XCFRAMEWORKS_DIR/yoga.xcframework
-echo "Gutenberg XCFrameworks ZIP generated at $ZIP_PATH"
+log 'compression' 'Compressing Gutenberg XCFrameworks'
+ARCHIVE_PATH="$XCFRAMEWORKS_DIR/$MAIN_FRAMEWORK_NAME.tar.gz"
+tar -czf "$ARCHIVE_PATH" \
+  -C xcframeworks/ \
+  Aztec.xcframework \
+  Gutenberg.xcframework \
+  React.xcframework \
+  RNTAztecView.xcframework \
+  yoga.xcframework
+echo "Gutenberg XCFrameworks archive generated at $ARCHIVE_PATH"
 
 # In parallel to the project to ship Gutenberg as an XCFramework we are also
 # experimenting with adding React Native into other apps with an XCFramework.
