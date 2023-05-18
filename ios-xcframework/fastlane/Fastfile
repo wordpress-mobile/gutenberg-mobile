@@ -10,10 +10,10 @@ before_all do
 end
 
 lane :upload_xcframework_to_s3 do |options|
-  xcframework_zip_path = File.join(PROJECT_ROOT_FOLDER, 'xcframeworks/Gutenberg.zip')
+  xcframework_archive_path = File.join(PROJECT_ROOT_FOLDER, 'xcframeworks/Gutenberg.zip')
 
-  unless File.exist? xcframework_zip_path
-    UI.user_error! "Could not find XCFramework ZIP to upload at #{xcframework_zip_path}"
+  unless File.exist? xcframework_archive_path
+    UI.user_error! "Could not find XCFramework ZIP to upload at #{xcframework_archive_path}"
   end
 
   name = options.fetch(:name, nil)
@@ -26,7 +26,7 @@ lane :upload_xcframework_to_s3 do |options|
   upload_to_s3(
     bucket: 'a8c-apps-public-artifacts',
     key: name,
-    file: xcframework_zip_path,
+    file: xcframework_archive_path,
     auto_prefix: false,
     skip_if_exists: false
   )
