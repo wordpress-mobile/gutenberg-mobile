@@ -1,12 +1,13 @@
 Unreleased
 ---
 * [**] [iOS] Fix dictation regression, in which typing/dictating at the same time caused content loss. [https://github.com/WordPress/gutenberg/pull/49452]
+* [**] Tapping any type of nested block moves focus to the nested block directly, rather than requiring multiple taps to navigate down each nesting levels. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5781]
 
 1.95.0
 ---
 * [**] Add fullscreen embed preview to Android [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5743]
 * [*] Fix crash when trying to convert to regular blocks an undefined/deleted reusable block [https://github.com/WordPress/gutenberg/pull/50475]
-* [**] Tapping on a nested block now gets focus directly instead of having to tap multiple times depending on the nesting levels. [https://github.com/WordPress/gutenberg/pull/50108]
+* [**] Tapping on nested text blocks gets focus directly instead of having to tap multiple times depending on the nesting levels. [https://github.com/WordPress/gutenberg/pull/50108]
 * [*] Use host app namespace in reusable block message [https://github.com/WordPress/gutenberg/pull/50478]
 
 1.94.0
