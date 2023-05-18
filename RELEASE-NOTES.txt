@@ -1,6 +1,6 @@
 Unreleased
 ---
-* [**] Tapping on all nested blocks gets focus directly instead of having to tap multiple times depeding on the nesting levels. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5781]
+* [**] Tapping any type of nested block moves focus to the nested block directly, rather than requiring multiple taps to navigate down each nesting levels. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5781]
 
 1.95.0
 ---
