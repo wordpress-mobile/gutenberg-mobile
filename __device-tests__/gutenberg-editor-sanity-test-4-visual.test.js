@@ -181,10 +181,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			await firstButtonTextInput.click();
 			// Navigate upwards to select parent block
-			const navigateUpElement = await editorPage.waitForElementToBeDisplayedById(
-				'Navigate Up'
-			);
-			await navigateUpElement.click();
+			await editorPage.navigateUp();
 
 			await editorPage.removeBlockAtPosition( blockNames.buttons );
 		} );
