@@ -84,10 +84,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			// Wait for the modal to close
 			await editorPage.driver.sleep( 3000 );
 			// Navigate upwards in block hierarchy
-			await editorPage.driver
-				.elementByAccessibilityId( 'Navigate Up' )
-				.click()
-				.click();
+			await editorPage.moveBlockSelectionUp( { toRoot: true } );
 			await editorPage.driver.sleep( 1000 );
 
 			// Visual test check for portrait orientation
@@ -150,9 +147,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			expect( screenshot ).toMatchImageSnapshot();
 
 			// Navigate upwards in block hierarchy
-			await editorPage.driver
-				.elementByAccessibilityId( 'Navigate Up' )
-				.click();
+			await editorPage.moveBlockSelectionUp();
 			await editorPage.driver.sleep( 1000 );
 
 			// Visual test check for landscape orientation
@@ -163,9 +158,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			// Wait for the device to finish rotating
 			await editorPage.driver.sleep( 3000 );
 			// Navigate upwards in block hierarchy
-			await editorPage.driver
-				.elementByAccessibilityId( 'Navigate Up' )
-				.click();
+			await editorPage.moveBlockSelectionUp();
 			await editorPage.driver.sleep( 1000 );
 			await editorPage.removeBlock();
 		} );
@@ -226,10 +219,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			// Wait for the modal to close
 			await editorPage.driver.sleep( 3000 );
 			// Navigate upwards in block hierarchy
-			await editorPage.driver
-				.elementByAccessibilityId( 'Navigate Up' )
-				.click()
-				.click();
+			await editorPage.moveBlockSelectionUp( { toRoot: true } );
 			await editorPage.waitForKeyboardToBeHidden();
 			// Android fails to display the keyboard at times, which can cause the
 			// above `waitForKeyboardToBeHidden` to finish prematurely.
