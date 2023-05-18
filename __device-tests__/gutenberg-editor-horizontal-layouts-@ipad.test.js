@@ -63,7 +63,7 @@ describe( 'Gutenberg Editor iPad Visual test for Horizontal layouts', () => {
 			);
 			await columnsBlock.click();
 
-			await editorPage.navigateUp();
+			await editorPage.navigateUp( { recursive: true } );
 
 			await editorPage.removeBlock();
 		}

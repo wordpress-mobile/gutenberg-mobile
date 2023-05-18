@@ -84,7 +84,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			// Wait for the modal to close
 			await editorPage.driver.sleep( 3000 );
 			// Navigate upwards in block hierarchy
-			await editorPage.navigateUp();
+			await editorPage.navigateUp( { recursive: true } );
 			await editorPage.driver.sleep( 1000 );
 
 			// Visual test check for portrait orientation
@@ -219,7 +219,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			// Wait for the modal to close
 			await editorPage.driver.sleep( 3000 );
 			// Navigate upwards in block hierarchy
-			await editorPage.navigateUp();
+			await editorPage.navigateUp( { recursive: true } );
 			await editorPage.waitForKeyboardToBeHidden();
 			// Android fails to display the keyboard at times, which can cause the
 			// above `waitForKeyboardToBeHidden` to finish prematurely.
