@@ -66,6 +66,7 @@ steps:
     depends_on: js-bundles
     command: .buildkite/publish-react-native-ios-artifacts.sh
     artifact_paths:
+      - ios-xcframework/build/xcframeworks/*.tar.gz
       - ios-xcframework/build/xcframeworks/*.zip
     plugins:
       - automattic/a8c-ci-toolkit#2.16.0
