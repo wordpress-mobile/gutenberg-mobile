@@ -123,22 +123,24 @@ describe( "Update VideoPress block's settings", () => {
 		it( `should update Playback Bar Color section's ${ setting } setting${
 			color ? ` to ${ color }` : ''
 		}`, async () => {
-			await selectAndOpenBlockSettings( screen );
-			await pressSettingInPanel( screen, 'Playback Bar Color', setting );
-
-			if ( color ) {
-				// Select color
-				await fireEvent.press( screen.getByLabelText( color ) );
-
-				// setColor() uses a debounced function delaying attribute updates by 2000ms.
-				// It's necessary to account for this delay here. Ref: https://bit.ly/3MrEgKT
-				await act(
-					() =>
-						new Promise( ( resolve ) =>
-							setTimeout( resolve, 2000 )
-						)
+			// Fake timers are set before the `ColorPanel` is mounted to ensure that timers are mocked.
+			await withFakeTimers( async () => {
+				await selectAndOpenBlockSettings( screen );
+				await pressSettingInPanel(
+					screen,
+					'Playback Bar Color',
+					setting
 				);
-			}
+
+				if ( color ) {
+					// Select color
+					await fireEvent.press( screen.getByLabelText( color ) );
+
+					// `setColor()` in `ColorPanel` component uses a debounced function delaying attribute
+					// updates. It's necessary to account for this delay here. Ref: https://bit.ly/3MrEgKT
+					await act( () => jest.runOnlyPendingTimers() );
+				}
+			} );
 		} );
 	} );
 
