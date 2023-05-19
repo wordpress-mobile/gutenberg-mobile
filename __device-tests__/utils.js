@@ -66,3 +66,36 @@ export async function takeScreenshot(
 	const resizedImage = await image.resize( widthSize, jimp.AUTO );
 	return resizedImage.getBufferAsync( jimp.MIME_PNG );
 }
+
+/**
+ * Generates the appropriate URL to fetch the theme data based on the provided theme details.
+ *
+ * @param {Object}  theme                  Object containing details about the theme.
+ * @param {string}  theme.name             The name of the theme.
+ * @param {boolean} theme.isWordPressTheme Flag indicating whether the theme is a WordPress theme. Defaults to false.
+ * @return {string} The URL from which the theme data can be fetched.
+ */
+function getThemeLink( { name, isWordPressTheme = false } ) {
+	if ( isWordPressTheme ) {
+		return `https://raw.githubusercontent.com/WordPress/${ name }/trunk/theme.json`;
+	}
+
+	return `https://raw.githubusercontent.com/Automattic/themes/trunk/${ name }/theme.json`;
+}
+
+/**
+ * Fetches and processes the theme data from the provided theme details.
+ *
+ * @param {Object}  theme                  Object containing details about the theme.
+ * @param {string}  theme.name             The name of the theme.
+ * @param {boolean} theme.isWordPressTheme Flag indicating whether the theme is a WordPress theme. Defaults to false.
+ * @return {Promise<string>} A promise that resolves to a stringified JSON object containing the theme data.
+ * @throws Will throw an error if the fetch operation fails.
+ */
+export async function fetchTheme( theme ) {
+	const themeJSONLink = getThemeLink( theme );
+
+	return await fetch( themeJSONLink )
+		.then( ( response ) => response.json() )
+		.then( ( data ) => JSON.stringify( data ) );
+}
