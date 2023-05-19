@@ -48,7 +48,7 @@ describe( 'Block-based themes', () => {
 				e2eTestData.mediumText
 			);
 
-			const titleElement = await editorPage.getTitleElement();
+			let titleElement = await editorPage.getTitleElement();
 			await titleElement.click();
 			await editorPage.dismissKeyboard();
 
@@ -63,7 +63,7 @@ describe( 'Block-based themes', () => {
 			await paragraphBlock.click();
 			await editorPage.removeBlock();
 
-			// Add Heading blockº
+			// Add Heading block
 			await editorPage.addNewBlock( blockNames.heading );
 
 			const headingBlockElement = await editorPage.getTextBlockAtPosition(
@@ -74,16 +74,18 @@ describe( 'Block-based themes', () => {
 				e2eTestData.shortText
 			);
 
-			// Test Heading block level 1
-			await changeHeadingLevel( 1 );
+			// Level 2 is the default
+			titleElement = await editorPage.getTitleElement();
+			await titleElement.click();
+			await editorPage.dismissKeyboard();
 
 			// Visual test check
 			screenshot = await takeScreenshot();
 			expect( screenshot ).toMatchImageSnapshot();
 
-			// Test Heading block level 2
+			// Test Heading block level 1
 			await headingBlockElement.click();
-			await changeHeadingLevel( 2 );
+			await changeHeadingLevel( 1 );
 
 			// Visual test check
 			screenshot = await takeScreenshot();
@@ -181,7 +183,7 @@ describe( 'Block-based themes', () => {
 			await newFontSizeElement.click();
 
 			// Wait for new font to be re-rendered
-			await editorPage.driver.sleep( 2000 );
+			await editorPage.driver.sleep( 4000 );
 
 			await editorPage.dismissBottomSheet();
 
@@ -214,7 +216,7 @@ async function changeHeadingLevel( level ) {
 	await headingLevelButton.click();
 
 	// Wait for font to be re-rendered
-	await editorPage.driver.sleep( 2000 );
+	await editorPage.driver.sleep( 4000 );
 
 	const titleElement = await editorPage.getTitleElement( {
 		autoscroll: true,
@@ -233,5 +235,5 @@ async function selectListBlock() {
 	await listBlockElement.click();
 
 	editorPage.moveBlockSelectionUp();
-	await editorPage.driver.sleep( 2000 );
+	await editorPage.driver.sleep( 3000 );
 }
