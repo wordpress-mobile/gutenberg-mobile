@@ -24,6 +24,14 @@ exports[`Update VideoPress block's settings should update Privacy and Rating sec
 
 exports[`Update VideoPress block's settings should update Privacy and Rating section's Show video sharing menu 1`] = `"<!-- wp:videopress/video {"title":"default-title-is-file-name","description":"","useAverageColor":false,"id":1,"guid":"AbCdEfGh","privacySetting":2,"allowDownload":false,"displayEmbed":false,"rating":"G","isPrivate":true,"duration":2803} /-->"`;
 
+exports[`Update VideoPress block's settings should update Privacy and Rating section's privacy setting to Private 1`] = `"<!-- wp:videopress/video {"title":"default-title-is-file-name","description":"","useAverageColor":false,"id":1,"guid":"AbCdEfGh","allowDownload":false,"rating":"G","isPrivate":true,"duration":2803} /-->"`;
+
+exports[`Update VideoPress block's settings should update Privacy and Rating section's privacy setting to Public 1`] = `"<!-- wp:videopress/video {"title":"default-title-is-file-name","description":"","useAverageColor":false,"id":1,"guid":"AbCdEfGh","privacySetting":0,"allowDownload":false,"rating":"G","isPrivate":false,"duration":2803} /-->"`;
+
+exports[`Update VideoPress block's settings should update Privacy and Rating section's rating setting to PG-13 1`] = `"<!-- wp:videopress/video {"title":"default-title-is-file-name","description":"","useAverageColor":false,"id":1,"guid":"AbCdEfGh","privacySetting":2,"allowDownload":false,"rating":"PG-13","isPrivate":true,"duration":2803} /-->"`;
+
+exports[`Update VideoPress block's settings should update Privacy and Rating section's rating setting to R 1`] = `"<!-- wp:videopress/video {"title":"default-title-is-file-name","description":"","useAverageColor":false,"id":1,"guid":"AbCdEfGh","privacySetting":2,"allowDownload":false,"rating":"R-17","isPrivate":true,"duration":2803} /-->"`;
+
 exports[`Update VideoPress block's settings should update description 1`] = `"<!-- wp:videopress/video {"title":"default-title-is-file-name","description":"The video's new description!","useAverageColor":false,"id":1,"guid":"AbCdEfGh","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":true,"duration":2803} /-->"`;
 
 exports[`Update VideoPress block's settings should update title 1`] = `"<!-- wp:videopress/video {"title":"Hello world!","description":"","useAverageColor":false,"id":1,"guid":"AbCdEfGh","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":true,"duration":2803} /-->"`;
