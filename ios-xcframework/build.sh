@@ -105,20 +105,43 @@ log 'bulb' 'Work around "Gutenberg class ahead of Gutenberg module" issue'
 # See https://developer.apple.com/forums/thread/123253
 #
 # TODO: There has to be a RegEx that can do what this sequence does in one go. Something along the lines of s/(^|\s|\[)Gutenberg\.(?!self)/\1/g but that doesn't throw errors
-find ./xcframeworks -name "*.swiftinterface" -exec sed -i -e 's/Gutenberg\.self/PLACEHOLDER_TO_REVERT_SED/g' {} \;
-find ./xcframeworks -name "*.swiftinterface" -exec sed -i -e 's/ Gutenberg\./ /g' {} \;
-find ./xcframeworks -name "*.swiftinterface" -exec sed -i -e 's/\[Gutenberg\./[/g' {} \;
-find ./xcframeworks -name "*.swiftinterface" -exec sed -i -e 's/PLACEHOLDER_TO_REVERT_SED/Gutenberg.self/g' {} \;
+find $XCFRAMEWORKS_DIR -name "*.swiftinterface" -exec sed -i -e 's/Gutenberg\.self/PLACEHOLDER_TO_REVERT_SED/g' {} \;
+find $XCFRAMEWORKS_DIR -name "*.swiftinterface" -exec sed -i -e 's/ Gutenberg\./ /g' {} \;
+find $XCFRAMEWORKS_DIR -name "*.swiftinterface" -exec sed -i -e 's/\[Gutenberg\./[/g' {} \;
+find $XCFRAMEWORKS_DIR -name "*.swiftinterface" -exec sed -i -e 's/PLACEHOLDER_TO_REVERT_SED/Gutenberg.self/g' {} \;
 
 log 'compression' 'Compressing Gutenberg XCFrameworks'
+
+# For CocoaPods to find the XCFrameworks in the archive, it needs to have a certain folder structure.
+#
+# See for example what Firebase does,
+# https://github.com/CocoaPods/Specs/blob/master/Specs/e/2/1/FirebaseAnalytics/9.6.0/FirebaseAnalytics.podspec.json
+#
+# Archive/
+#   - Frameworks/
+#     - A.xcframework
+#     - B.xcframework
+#   - dummy.txt
+DUMMY_FILE_NAME='dummy.txt'
+echo "This is a work around for file flattening introduced by https://github.com/CocoaPods/CocoaPods/pull/728" > "$XCFRAMEWORKS_DIR/$DUMMY_FILE_NAME"
+
+ARCHIVE_FRAMEWORKS_DIR_NAME="Frameworks"
+ARCHIVE_FRAMEWORKS_PATH="$XCFRAMEWORKS_DIR/$ARCHIVE_FRAMEWORKS_DIR_NAME"
+
+mkdir -p "$ARCHIVE_FRAMEWORKS_PATH"
+
+cp -r "$XCFRAMEWORKS_DIR/Aztec.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
+cp -r "$XCFRAMEWORKS_DIR/Gutenberg.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
+cp -r "$XCFRAMEWORKS_DIR/React.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
+cp -r "$XCFRAMEWORKS_DIR/RNTAztecView.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
+cp -r "$XCFRAMEWORKS_DIR/yoga.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
+
 ARCHIVE_PATH="$XCFRAMEWORKS_DIR/$MAIN_FRAMEWORK_NAME.tar.gz"
-tar -czf "$ARCHIVE_PATH" \
-  -C xcframeworks/ \
-  Aztec.xcframework \
-  Gutenberg.xcframework \
-  React.xcframework \
-  RNTAztecView.xcframework \
-  yoga.xcframework
+
+tar -czf "$ARCHIVE_PATH" -C "$XCFRAMEWORKS_DIR" \
+  "$ARCHIVE_FRAMEWORKS_DIR_NAME" \
+  "$DUMMY_FILE_NAME"
+
 echo "Gutenberg XCFrameworks archive generated at $ARCHIVE_PATH"
 
 # In parallel to the project to ship Gutenberg as an XCFramework we are also
