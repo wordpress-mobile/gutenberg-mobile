@@ -3,6 +3,12 @@ CLANG_ANALYZER_NONNULL = YES
 CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE
 CLANG_CXX_LANGUAGE_STANDARD = gnu++20
 CLANG_ENABLE_MODULES = YES
+// If CLANG_ENABLE_MODULE_DEBUGGING is YES (or not specified, which defaults to YES), then CocoaPods says:
+//
+// Linking a static library that was built with -gmodules, but the module cache was not found.
+// Redistributable static libraries should never be built with module debugging enabled.
+// The debug experience will be degraded due to incomplete debug information.
+CLANG_ENABLE_MODULE_DEBUGGING = NO;
 CLANG_ENABLE_OBJC_ARC = YES
 CLANG_ENABLE_OBJC_WEAK = YES
 CLANG_WARN__DUPLICATE_METHOD_MATCH = YES
