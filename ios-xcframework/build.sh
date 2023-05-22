@@ -27,13 +27,11 @@ function log {
     MESSAGE=$2
   fi
 
-  set +u
-  if [[ -n "$BUILDKITE" ]]; then
+  if [[ -n "${BUILDKITE:-}" ]]; then
     echo "--- $PREFIX$MESSAGE"
   else
     echo "$MESSAGE"
   fi
-  set -u
 }
 
 DERIVED_DATA_PATH=./DerivedData
