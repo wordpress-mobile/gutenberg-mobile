@@ -34,6 +34,22 @@ function log {
   fi
 }
 
+function archive {
+  PLATFORM=$1
+
+  log "Archiving $SCHEME for $PLATFORM platform"
+
+  _xcodebuild archive \
+    -workspace "$WORKSPACE" \
+    -scheme "$SCHEME" \
+    -configuration Release \
+    -sdk "$PLATFORM" \
+    -archivePath "$ARCHIVES_ROOT/$PLATFORM.xcarchive" \
+    -derivedDataPath "$DERIVED_DATA_PATH" \
+    BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+    SKIP_INSTALL=NO
+}
+
 DERIVED_DATA_PATH=./DerivedData
 DESTINATION='generic/platform=iOS'
 
@@ -55,47 +71,28 @@ _xcodebuild clean build \
 # and https://github.com/traveloka/ios-rn-prebuilt
 
 ARCHIVES_ROOT=archives
-IOS_DEVICE_ARCHIVE_PATH="$ARCHIVES_ROOT/ios_devices.xcarchive"
-IOS_SIMULATOR_ARCHIVE_PATH="$ARCHIVES_ROOT/ios_simulators.xcarchive"
+
+PLATFORM_IOS=iphoneos
+PLATFORM_SIMULATOR=iphonesimulator
 
 FINAL_OUTPUT="$MAIN_FRAMEWORK_NAME.xcframework"
 
 rm -rf "$ARCHIVES_ROOT"
 rm -rf "$FINAL_OUTPUT"
 
-# 1. Archive for iOS
-log "Archiving $SCHEME for iOS"
+# 1. Generate archives (xcarchive) for iOS and Simulator
+archive $PLATFORM_IOS
+archive $PLATFORM_SIMULATOR
 
-_xcodebuild archive \
-  -workspace "$WORKSPACE" \
-  -scheme "$SCHEME" \
-  -configuration Release \
-  -sdk iphoneos \
-  -archivePath "$IOS_DEVICE_ARCHIVE_PATH" \
-  -derivedDataPath "$DERIVED_DATA_PATH" \
-  BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
-  SKIP_INSTALL=NO
-
-# 2. Archive for Simulator
-log "Archiving $SCHEME for Simulator"
-
-_xcodebuild archive \
-  -workspace "$WORKSPACE" \
-  -scheme "$SCHEME" \
-  -configuration Release \
-  -sdk iphonesimulator \
-  -archivePath "$IOS_SIMULATOR_ARCHIVE_PATH" \
-  -derivedDataPath "$DERIVED_DATA_PATH" \
-  BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
-  SKIP_INSTALL=NO
-
-# 3. Create XCFrameworks for every framework in the archives
+# 2. Create XCFrameworks for every framework in the archives
 XCFRAMEWORKS_DIR=xcframeworks
 
 rm -rf $XCFRAMEWORKS_DIR
 mkdir -p $XCFRAMEWORKS_DIR
 
-for FRAMEWORK in $(find $IOS_DEVICE_ARCHIVE_PATH/Products/Library/Frameworks -type d -name "*.framework");
+# Notice how we loop on $PLATFORM_IOS as a way to get the frameworks for both platforms.
+# We could use either platform to achieve the same result.
+for FRAMEWORK in $(find "$ARCHIVES_ROOT/$PLATFORM_IOS.xcarchive/Products/Library/Frameworks" -type d -name "*.framework");
 do
   CURRENT_FRAMEWORK_NAME=$(basename "$FRAMEWORK" .framework)
 
@@ -109,8 +106,8 @@ do
 
   _xcodebuild \
     -create-xcframework \
-    -framework "$IOS_DEVICE_ARCHIVE_PATH/$FRAMEWORK_RELATIVE_PATH" \
-    -framework "$IOS_SIMULATOR_ARCHIVE_PATH/$FRAMEWORK_RELATIVE_PATH" \
+    -framework "$ARCHIVES_ROOT/$PLATFORM_IOS.xcarchive/$FRAMEWORK_RELATIVE_PATH" \
+    -framework "$ARCHIVES_ROOT/$PLATFORM_SIMULATOR.xcarchive/$FRAMEWORK_RELATIVE_PATH" \
     -output "$XCFRAMEWORKS_DIR/$CURRENT_FRAMEWORK_NAME.xcframework"
 done
 
