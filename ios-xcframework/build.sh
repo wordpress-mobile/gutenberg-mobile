@@ -1,5 +1,11 @@
 #!/bin/bash -eu
 
+# Builds an archive with the XCFrameworks necessary to import Gutenberg in iOS apps.
+#
+# Special thanks to the work done in
+# https://hackernoon.com/cocoapod-as-xcframework-with-dependencies and
+# https://github.com/traveloka/ios-rn-prebuilt which informed this script.
+
 set -o pipefail
 
 # This wraps calling xcodebuild in a function that passes the output to
@@ -51,24 +57,12 @@ function archive {
 }
 
 DERIVED_DATA_PATH=./DerivedData
-DESTINATION='generic/platform=iOS'
 
 rm -rf $DERIVED_DATA_PATH
 
 MAIN_FRAMEWORK_NAME=Gutenberg
 WORKSPACE="./XCFrameworkScaffold.xcworkspace"
 SCHEME=$MAIN_FRAMEWORK_NAME
-
-log "Building $SCHEME..."
-
-_xcodebuild clean build \
-  -workspace $WORKSPACE \
-  -scheme $SCHEME \
-  -destination "$DESTINATION" \
-  -derivedDataPath "$DERIVED_DATA_PATH"
-
-# See https://hackernoon.com/cocoapod-as-xcframework-with-dependencies
-# and https://github.com/traveloka/ios-rn-prebuilt
 
 ARCHIVES_ROOT=archives
 
