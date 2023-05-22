@@ -82,7 +82,7 @@ log "Archiving $SCHEME for Simulator"
 _xcodebuild archive \
   -workspace "$WORKSPACE" \
   -scheme "$SCHEME" \
-  -configuration Debug \
+  -configuration Release \
   -sdk iphonesimulator \
   -archivePath "$IOS_SIMULATOR_ARCHIVE_PATH" \
   -derivedDataPath "$DERIVED_DATA_PATH" \
