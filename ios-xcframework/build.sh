@@ -112,13 +112,13 @@ do
 done
 
 log 'compression' 'Zipping Gutenberg XCFrameworks'
-ZIP_PATH=xcframeworks/Gutenberg.zip
+ZIP_PATH=$XCFRAMEWORKS_DIR/Gutenberg.zip
 zip -rq "$ZIP_PATH" \
-  xcframeworks/Aztec.xcframework \
-  xcframeworks/Gutenberg.xcframework \
-  xcframeworks/React.xcframework \
-  xcframeworks/RNTAztecView.xcframework \
-  xcframeworks/yoga.xcframework
+  $XCFRAMEWORKS_DIR/Aztec.xcframework \
+  $XCFRAMEWORKS_DIR/Gutenberg.xcframework \
+  $XCFRAMEWORKS_DIR/React.xcframework \
+  $XCFRAMEWORKS_DIR/RNTAztecView.xcframework \
+  $XCFRAMEWORKS_DIR/yoga.xcframework
 echo "Gutenberg XCFrameworks ZIP generated at $ZIP_PATH"
 
 # In parallel to the project to ship Gutenberg as an XCFramework we are also
@@ -133,10 +133,10 @@ echo "Gutenberg XCFrameworks ZIP generated at $ZIP_PATH"
 # the RN version and check against the storage medium to see if an archive for
 # that version is already available.
 log 'compression' 'Zipping React XCFrameworks'
-ZIP_PATH=xcframeworks/ReactNative.zip
-zip -rq "$ZIP_PATH" xcframeworks -x \
-  xcframeworks/Aztec.xcframework \
-  xcframeworks/Gutenberg.xcframework \
-  xcframeworks/RNTAztecView.xcframework \
-  xcframeworks/Pods_Gutenberg.xcframework
+ZIP_PATH=$XCFRAMEWORKS_DIR/ReactNative.zip
+zip -rq "$ZIP_PATH" $XCFRAMEWORKS_DIR -x \
+  $XCFRAMEWORKS_DIR/Aztec.xcframework \
+  $XCFRAMEWORKS_DIR/Gutenberg.xcframework \
+  $XCFRAMEWORKS_DIR/RNTAztecView.xcframework \
+  $XCFRAMEWORKS_DIR/Pods_Gutenberg.xcframework
 echo "React Native XCFrameworks ZIP generated at $ZIP_PATH"
