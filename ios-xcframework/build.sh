@@ -56,34 +56,26 @@ function archive {
     SKIP_INSTALL=NO
 }
 
-DERIVED_DATA_PATH=./DerivedData
+BUILD_DIR=./build
+DERIVED_DATA_PATH="$BUILD_DIR/derived_data"
+ARCHIVES_ROOT="$BUILD_DIR/archives"
+XCFRAMEWORKS_DIR="$BUILD_DIR/xcframeworks"
 
-rm -rf $DERIVED_DATA_PATH
+rm -rf $BUILD_DIR
 
 MAIN_FRAMEWORK_NAME=Gutenberg
 WORKSPACE="./XCFrameworkScaffold.xcworkspace"
 SCHEME=$MAIN_FRAMEWORK_NAME
 
-ARCHIVES_ROOT=archives
-
 PLATFORM_IOS=iphoneos
 PLATFORM_SIMULATOR=iphonesimulator
-
-FINAL_OUTPUT="$MAIN_FRAMEWORK_NAME.xcframework"
-
-rm -rf "$ARCHIVES_ROOT"
-rm -rf "$FINAL_OUTPUT"
 
 # 1. Generate archives (xcarchive) for iOS and Simulator
 archive $PLATFORM_IOS
 archive $PLATFORM_SIMULATOR
 
 # 2. Create XCFrameworks for every framework in the archives
-XCFRAMEWORKS_DIR=xcframeworks
-
-rm -rf $XCFRAMEWORKS_DIR
-mkdir -p $XCFRAMEWORKS_DIR
-
+#
 # Notice how we loop on $PLATFORM_IOS as a way to get the frameworks for both platforms.
 # We could use either platform to achieve the same result.
 for FRAMEWORK in $(find "$ARCHIVES_ROOT/$PLATFORM_IOS.xcarchive/Products/Library/Frameworks" -type d -name "*.framework");
@@ -106,7 +98,7 @@ do
 done
 
 log 'compression' 'Zipping Gutenberg XCFrameworks'
-ZIP_PATH=$XCFRAMEWORKS_DIR/Gutenberg.zip
+ZIP_PATH=$XCFRAMEWORKS_DIR/$MAIN_FRAMEWORK_NAME.zip
 zip -rq "$ZIP_PATH" \
   $XCFRAMEWORKS_DIR/Aztec.xcframework \
   $XCFRAMEWORKS_DIR/Gutenberg.xcframework \

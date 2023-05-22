@@ -7,6 +7,5 @@ Pods/
 # Ruby tooling
 vendor/bundle/
 
-# XCFramework build process
-archives
-xcframeworks
+# XCFramework build process intermediate and output artifacts
+build
