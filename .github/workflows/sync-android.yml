@@ -16,10 +16,3 @@ jobs:
         run: |
           npm run sync:android -- "--pr=$PR"
         if: ${{ github.event_name == 'pull_request' && github.event.label.name == 'sync:android' }}
-      - name: Create a WordPress-Android (WPA) PR containing changes from a Gutenberg Mobile (GBM) Tag.
-        env:
-          TAG: ${{ github.event.release.tag_name }}
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-        run: |
-          npm run sync:android -- "--tag=$TAG"
-        if: ${{ github.event_name == 'release' }}
