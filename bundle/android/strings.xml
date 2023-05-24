@@ -54,11 +54,15 @@
     <string name="gutenberg_native_block_cut" tools:ignore="UnusedResources">Block cut</string>
     <!-- translators: displayed right after the block is duplicated. -->
     <string name="gutenberg_native_block_duplicated" tools:ignore="UnusedResources">Block duplicated</string>
+    <!-- translators: displayed right after the block is grouped -->
+    <string name="gutenberg_native_block_grouped" tools:ignore="UnusedResources">Block grouped</string>
     <!-- translators: displayed right after the block is pasted. -->
     <string name="gutenberg_native_block_pasted" tools:ignore="UnusedResources">Block pasted</string>
     <!-- translators: displayed right after the block is removed. -->
     <string name="gutenberg_native_block_removed" tools:ignore="UnusedResources">Block removed</string>
     <string name="gutenberg_native_block_settings" tools:ignore="UnusedResources">Block settings</string>
+    <!-- translators: displayed right after the block is ungrouped. -->
+    <string name="gutenberg_native_block_ungrouped" tools:ignore="UnusedResources">Block ungrouped</string>
     <string name="gutenberg_native_blocks_allow_you_to_focus_on_writing_your_content_knowing_that_al" tools:ignore="UnusedResources">Blocks allow you to focus on writing your content, knowing that all the formatting tools you need are there to help you get your message across.</string>
     <string name="gutenberg_native_blocks_are_pieces_of_content_that_you_can_insert_rearrange_and_st" tools:ignore="UnusedResources">Blocks are pieces of content that you can insert, rearrange, and style without needing to know how to code. Blocks are an easy and modern way for you to create beautiful layouts.</string>
     <string name="gutenberg_native_blocks_menu" tools:ignore="UnusedResources">Blocks menu</string>
@@ -315,6 +319,8 @@ translators: Block name. %s: The localized block name -->
     <string name="gutenberg_native_s_has_url_set" tools:ignore="UnusedResources">%s has URL set</string>
     <!-- translators: Missing block alert title. %s: The localized block name -->
     <string name="gutenberg_native_s_is_not_fully_supported" tools:ignore="UnusedResources">\'%s\' is not fully-supported</string>
+    <!-- translators: %s: embed block variant's label e.g: "Twitter". -->
+    <string name="gutenberg_native_s_link" tools:ignore="UnusedResources">%s link</string>
     <!-- translators: %s: embed block variant's label e.g: "Twitter". -->
     <string name="gutenberg_native_s_previews_not_yet_available" tools:ignore="UnusedResources">%s previews not yet available</string>
     <!-- translators: %s: social link name e.g: "Instagram". -->
