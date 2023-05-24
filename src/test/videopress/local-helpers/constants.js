@@ -15,7 +15,12 @@ export const PLAYBACK_SETTINGS = [
 	'Preload Metadata',
 ];
 
-export const PLAYBACK_BAR_COLOR_SETTINGS = [ 'Dynamic color' ];
+export const PLAYBACK_BAR_COLOR_SETTINGS = [
+	{ setting: 'Dynamic color' },
+	{ setting: 'Main', color: 'Luminous vivid amber' },
+	{ setting: 'Loaded', color: 'Light green cyan' },
+	{ setting: 'Progress', color: 'Vivid purple' },
+];
 
 export const RATING_OPTIONS = [ 'G', 'PG-13', 'R' ];
 
