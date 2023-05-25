@@ -1,8 +1,12 @@
 #!/bin/bash -eu
 
-cd ./ios-xcframework
+
+echo "--- :arrow_down: Download iOS JS bundle"
+buildkite-agent artifact download bundle/ios/App.js .
 
 echo "--- :rubygems: Setting up Gems"
+cd ./ios-xcframework
+
 install_gems
 
 echo "--- :cocoapods: Setting up Pods"
