@@ -71,4 +71,4 @@ steps:
     agents:
       queue: mac
     env:
-      IMAGE_ID: xcode-14.2
+      IMAGE_ID: xcode-14.3
