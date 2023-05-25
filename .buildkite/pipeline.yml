@@ -23,6 +23,8 @@ steps:
             # Allow WP-CLI to be run as root, otherwise it throws an exception.
             # Reference: https://git.io/J9q2S
             - "WP_CLI_ALLOW_ROOT=true"
+      - peakon/git-shallow-clone#v0.0.1:
+          depth: 1
     command: |
         source /root/.bashrc
 
@@ -36,10 +38,13 @@ steps:
 
         npm run bundle:ios
         buildkite-agent artifact upload bundle/ios/App.js
+
   - label: "Build Android RN Aztec & Publish to S3"
     key: "publish-react-native-aztec-android"
     plugins:
       - *publish-android-artifacts-docker-container
+      - peakon/git-shallow-clone#v0.0.1:
+          depth: 1
     command: |
         .buildkite/publish-react-native-aztec-android-artifacts.sh
 
@@ -49,6 +54,8 @@ steps:
       - "publish-react-native-aztec-android"
     plugins:
       - *publish-android-artifacts-docker-container
+      - peakon/git-shallow-clone#v0.0.1:
+          depth: 1
     command: |
         .buildkite/publish-react-native-bridge-android-artifacts.sh
 
