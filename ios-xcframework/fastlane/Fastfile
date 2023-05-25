@@ -24,10 +24,25 @@ lane :upload_xcframework_to_s3 do |options|
     UI.message "No name provide, will default to #{name}"
   end
 
+  upload_xcframework_to_s3(path: xcframework_archive_path, name_on_s3: name)
+
+  next unless is_ci
+
+  tag = ENV.fetch('BUILDKITE_TAG', nil)
+
+  next if tag.nil? || tag.empty?
+
+  upload_xcframework_to_s3(
+    path: xcframework_archive_path,
+    name_on_s3: "Gutenberg-#{tag}.#{archive_type}"
+  )
+end
+
+def upload_xcframework_to_s3(path:, name_on_s3:)
   upload_to_s3(
     bucket: 'a8c-apps-public-artifacts',
-    key: name,
-    file: xcframework_archive_path,
+    key: name_on_s3,
+    file: path,
     auto_prefix: false,
     skip_if_exists: false
   )
