@@ -1,13 +1,16 @@
 x-common-params:
-  &publish-android-artifacts-docker-container
-  docker#v3.8.0:
-    image: "public.ecr.aws/automattic/android-build-image:v1.1.0"
-    propagate-environment: true
-    environment:
-      # DO NOT MANUALLY SET THESE VALUES!
-      # They are passed from the Buildkite agent to the Docker container
-      - "AWS_ACCESS_KEY"
-      - "AWS_SECRET_KEY"
+  - &publish-android-artifacts-docker-container
+      docker#v3.8.0:
+        image: "public.ecr.aws/automattic/android-build-image:v1.1.0"
+        propagate-environment: true
+        environment:
+          # DO NOT MANUALLY SET THESE VALUES!
+          # They are passed from the Buildkite agent to the Docker container
+          - "AWS_ACCESS_KEY"
+          - "AWS_SECRET_KEY"
+  - &git-shallow-clone
+      peakon/git-shallow-clone#v0.0.1:
+        depth: 1
 
 steps:
   - block: "Request trigger Android bundle and builds"
@@ -23,8 +26,7 @@ steps:
             # Allow WP-CLI to be run as root, otherwise it throws an exception.
             # Reference: https://git.io/J9q2S
             - "WP_CLI_ALLOW_ROOT=true"
-      - peakon/git-shallow-clone#v0.0.1:
-          depth: 1
+      - *git-shallow-clone
     command: |
         source /root/.bashrc
 
@@ -53,8 +55,7 @@ steps:
     key: "publish-react-native-aztec-android"
     plugins:
       - *publish-android-artifacts-docker-container
-      - peakon/git-shallow-clone#v0.0.1:
-          depth: 1
+      - *git-shallow-clone
     command: |
         .buildkite/publish-react-native-aztec-android-artifacts.sh
 
@@ -64,8 +65,7 @@ steps:
       - "publish-react-native-aztec-android"
     plugins:
       - *publish-android-artifacts-docker-container
-      - peakon/git-shallow-clone#v0.0.1:
-          depth: 1
+      - *git-shallow-clone
     command: |
         .buildkite/publish-react-native-bridge-android-artifacts.sh
 
@@ -76,8 +76,7 @@ steps:
       - ios-xcframework/build/xcframeworks/*.zip
     plugins:
       - automattic/a8c-ci-toolkit#2.15.1
-      - peakon/git-shallow-clone#v0.0.1:
-          depth: 1
+      - *git-shallow-clone
     agents:
       queue: mac
     env:
