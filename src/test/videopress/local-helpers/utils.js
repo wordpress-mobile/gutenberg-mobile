@@ -66,3 +66,16 @@ export const pressSettingInPicker = async (
 	// Select the specified option from the picker
 	await act( () => selectOption( option ) );
 };
+
+/**
+ * Sends a message event to a WebView.
+ *
+ * @param {*}      webView WebView test instance.
+ * @param {Object} message Message object.
+ */
+export const sendWebViewMessage = ( webView, message ) =>
+	fireEvent( webView, 'message', {
+		nativeEvent: {
+			data: JSON.stringify( message ),
+		},
+	} );
