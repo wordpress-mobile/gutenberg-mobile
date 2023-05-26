@@ -36,75 +36,18 @@ import {
 	registerJetpackBlocks,
 	setupJetpackEditor,
 } from '../../jetpack-editor-setup';
+import { generateFetchMocks, sendWebViewMessage } from './local-helpers/utils';
+import {
+	VIDEOPRESS_EMPTY_BLOCK_HTML,
+	MEDIA_OPTIONS,
+	VIDEOPRESS_GUID,
+} from './local-helpers/constants';
 
 jest.mock( '@wordpress/api-fetch' );
 jest.mock( 'react-native-prompt-android', () => jest.fn() );
 
-const initialHtml = '<!-- wp:videopress/video /-->';
-
-const MEDIA_OPTIONS = [
-	'Choose from device',
-	'Take a Video',
-	'WordPress Media Library',
-	'Insert from URL',
-];
-
-const VIDEOPRESS_GUID = 'AbCdEfGh';
-const FETCH_ITEMS = [
-	{
-		request: {
-			path: `/wpcom/v2/media/videopress-playback-jwt/${ VIDEOPRESS_GUID }`,
-			method: 'POST',
-			body: {},
-		},
-		response: {
-			metadata_token: 'videopress-token',
-		},
-	},
-	{
-		request: {
-			path: `/rest/v1.1/videos/${ VIDEOPRESS_GUID }`,
-			credentials: 'omit',
-			global: true,
-		},
-		response: {
-			description: 'video-description',
-			post_id: 1,
-			guid: VIDEOPRESS_GUID,
-			private_enabled_for_site: false,
-			title: 'video-title',
-			duration: 1200,
-			privacy_setting: 2,
-			original: `https://videos.files.wordpress.com/${ VIDEOPRESS_GUID }/video.mp4`,
-			allow_download: false,
-			display_embed: true,
-			poster: `https://videos.files.wordpress.com/${ VIDEOPRESS_GUID }/video.jpg`,
-			height: 270,
-			width: 480,
-			rating: 'G',
-			is_private: false,
-		},
-	},
-	{
-		request: {
-			path: `/oembed/1.0/proxy?url=https%3A%2F%2Fvideopress.com%2Fv%2F${ VIDEOPRESS_GUID }%3FresizeToParent%3Dtrue%26cover%3Dtrue%26preloadContent%3Dmetadata`,
-		},
-		response: {
-			height: 338,
-			provider_name: 'VideoPress',
-			html: `<iframe title='VideoPress Video Player' width='600' height='338' src='https://video.wordpress.com/embed/${ VIDEOPRESS_GUID }?cover=1&amp;preloadContent=metadata&amp;hd=1' frameborder='0' allowfullscreen data-resize-to-parent='true' allow='clipboard-write'></iframe>`,
-			width: 600,
-			type: 'video',
-		},
-	},
-];
-
-const sendWebViewMessage = ( webView, message ) =>
-	fireEvent( webView, 'message', {
-		nativeEvent: {
-			data: JSON.stringify( message ),
-		},
-	} );
+const initialHtml = VIDEOPRESS_EMPTY_BLOCK_HTML;
+const FETCH_ITEMS = generateFetchMocks();
 
 setupCoreBlocks();
 
@@ -430,7 +373,7 @@ describe( 'VideoPress block - Uploads', () => {
 		const block = await getBlock( screen, 'VideoPress' );
 		expect( block ).toBeVisible();
 
-		// Add video from WordPress media library
+		// Insert video from URL
 		fireEvent.press( getByText( 'ADD VIDEO' ) );
 		selectOption( 'Insert from URL' );
 		expect( prompt ).toHaveBeenCalled();
