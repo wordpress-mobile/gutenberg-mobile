@@ -10,6 +10,7 @@ import {
 	fireEvent,
 	changeTextOfTextInput,
 	withFakeTimers,
+	act,
 } from 'test/helpers';
 
 /**
@@ -119,13 +120,30 @@ describe( "Update VideoPress block's settings", () => {
 
 	/*
 	 * PLAYBACK BAR COLOR SETTINGS
-	 * Loop through each of the playback bar color setting
-	 * TODO: Select color options (if applicable)
+	 * Loop through each of the playback bar color settings and, if applicable, select a color
 	 */
-	PLAYBACK_BAR_COLOR_SETTINGS.forEach( ( setting ) => {
-		it( `should update Playback Bar Color section's ${ setting } setting`, async () => {
-			await selectAndOpenBlockSettings( screen );
-			await pressSettingInPanel( screen, 'Playback Bar Color', setting );
+	PLAYBACK_BAR_COLOR_SETTINGS.forEach( ( { setting, color } ) => {
+		it( `should update Playback Bar Color section's ${ setting } setting${
+			color ? ` to ${ color }` : ''
+		}`, async () => {
+			// Fake timers are set before the `ColorPanel` is mounted to ensure that timers are mocked.
+			await withFakeTimers( async () => {
+				await selectAndOpenBlockSettings( screen );
+				await pressSettingInPanel(
+					screen,
+					'Playback Bar Color',
+					setting
+				);
+
+				if ( color ) {
+					// Select color
+					await fireEvent.press( screen.getByLabelText( color ) );
+
+					// `setColor()` in `ColorPanel` component uses a debounced function delaying attribute
+					// updates. It's necessary to account for this delay here. Ref: https://bit.ly/3MrEgKT
+					await act( () => jest.runOnlyPendingTimers() );
+				}
+			} );
 		} );
 	} );
 
