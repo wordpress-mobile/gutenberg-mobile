@@ -71,6 +71,7 @@ steps:
         echo "--- :arrow_up: Upload iOS bundle artifact"
         buildkite-agent artifact upload bundle/ios/App.js
   - label: "Build Android RN Aztec & Publish to S3"
+    depends_on: unit-tests
     key: "publish-react-native-aztec-android"
     plugins:
       - *git-shallow-clone-plugin
