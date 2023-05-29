@@ -23,7 +23,24 @@ steps:
   - block: "Request trigger Android bundle and builds"
     branches: "dependabot/submodules/*"
 
+  - label: Lint and Unit Tests
+    key: unit-tests
+    plugins:
+      - *gb-mobile-docker-container
+    command: |
+      source /root/.bashrc
+
+      echo "--- :node: Setup Node environment"
+      nvm install && nvm use
+
+      echo "--- :npm: Install Node dependencies"
+      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+
+      echo "--- :node: Lint and Unit Tests"
+      ./bin/ci-checks-js.sh
+
   - label: "Build JS Bundles"
+    depends_on: "unit-tests"
     key: "js-bundles"
     plugins:
       - *git-shallow-clone-plugin
