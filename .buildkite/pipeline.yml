@@ -1,6 +1,14 @@
 x-common-params:
   - &git-shallow-clone-plugin
     automattic/git-shallow-clone#trunk
+  - &gb-mobile-docker-container
+    docker#v3.8.0:
+      image: "public.ecr.aws/automattic/gb-mobile-image:latest"
+      environment:
+        - "CI=true"
+        # Allow WP-CLI to be run as root, otherwise it throws an exception.
+        # Reference: https://git.io/J9q2S
+        - "WP_CLI_ALLOW_ROOT=true"
   - &publish-android-artifacts-docker-container
     docker#v3.8.0:
       image: "public.ecr.aws/automattic/android-build-image:v1.3.0"
@@ -19,13 +27,7 @@ steps:
     key: "js-bundles"
     plugins:
       - *git-shallow-clone-plugin
-      - docker#v3.8.0:
-          image: "public.ecr.aws/automattic/gb-mobile-image:latest"
-          environment:
-            - "CI=true"
-            # Allow WP-CLI to be run as root, otherwise it throws an exception.
-            # Reference: https://git.io/J9q2S
-            - "WP_CLI_ALLOW_ROOT=true"
+      - *gb-mobile-docker-container
     command: |
         source /root/.bashrc
 
