@@ -56,6 +56,11 @@ steps:
       buildkite-agent artifact download node_modules.tar.gz .
       tar --extract --gzip --file=node_modules.tar.gz
 
+      echo "--- :bug: Debug info"
+      ls .
+      echo "--- :bug: Debug info"
+      ls node_modules
+
       echo "--- :node: Lint and Unit Tests"
       ./bin/ci-checks-js.sh
     artifact_paths:
