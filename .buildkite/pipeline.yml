@@ -32,17 +32,36 @@ steps:
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
 
-      # Note that `npm ci` deletes node_modules and installs from scratch, for a deterministic CI build
-      echo "--- :npm: Build dependencies cache"
-      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress --cache ./vendor/.npm
+      # Note that `npm ci` deletes node_modules and installs from scratch, for a deterministic CI build.
+      # For that reason, we don't attempt to download them
+      echo "--- :npm: Build dependencies cache (gutenberg-mobile)"
+      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
-      echo "--- :npm: Upload node_modules"
+      echo "--- :bug: Check npm artifacts"
+      set -x
+      ls -a /root
+      ls -a /root/.npm
+      ls node_modules
+      ls src/i18n-cache
+      # On a macOS machine, this would be ~/Library/pnpm/store/v3
+      ls /root/.local/share/pnpm/store/v3
+      set +x
+
+      echo "--- :arrow_up: Upload node_modules"
       tar --create --gzip --file=node_modules.tar.gz --directory=. node_modules
       buildkite-agent artifact upload node_modules.tar.gz
 
-      echo "--- :arrow_up: Upload vendor/.npm cache"
-      tar --create --gzip --file=npm_cache.tar.gz --directory=./vendor .npm
+      echo "--- :arrow_up: Upload i18n-cache"
+      tar --create --gzip --file=i18n_cache.tar.gz --directory=. src/i18n-cache
+      buildkite-agent artifact upload i18n_cache.tar.gz
+
+      echo "--- :arrow_up: Upload .npm cache"
+      tar --create --gzip --file=npm_cache.tar.gz --directory=/root .npm
       buildkite-agent artifact upload npm_cache.tar.gz
+
+      echo "--- :arrow_up: Upload pnpm store"
+      tar --create --gzip --file=pnpm_cache.tar.gz --directory=/root .local/share/pnpm/store/v3
+      buildkite-agent artifact upload pnpm_cache.tar.gz
 
   - label: Lint and Unit Tests
     depends_on: build-npm
@@ -56,20 +75,33 @@ steps:
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
 
-      echo "--- :arrow_down: Download vendor/.npm cache"
+      echo "--- :arrow_down: Download .npm cache"
       buildkite-agent artifact download npm_cache.tar.gz .
-      mkdir -p vendor
-      tar --extract --gzip --file=npm_cache.tar.gz --directory=./vendor
+      tar --extract --gzip --file=npm_cache.tar.gz --directory=/root
+
+      echo "--- :arrow_down: Download src/i18n-cache"
+      buildkite-agent artifact download i18n_cache.tar.gz .
+      tar --extract --gzip --file=i18n_cache.tar.gz --directory=.
+
+      echo "--- :arrow_down: Download pnpm store"
+      buildkite-agent artifact download pnpm_cache.tar.gz .
+      tar --extract --gzip --file=pnpm_cache.tar.gz --directory=/root
+
+      echo "--- :bug: Check npm artifacts"
+      set -x
+      ls -a /root
+      ls -a /root/.npm
+      ls src/i18n-cache
+      # On a macOS machine, this would be ~/Library/pnpm/store/v3
+      ls /root/.local/share/pnpm/store/v3
+      set +x
 
       # echo "--- :npm: Download node_modules"
       # buildkite-agent artifact download node_modules.tar.gz .
       # tar --extract --gzip --file=node_modules.tar.gz
 
-      echo "--- :bug: Info ./vendor/.npm"
-      ls ./vendor/.npm
-
-      echo "--- :npm: Install dependencies using cache"
-      npm ci --prefer-offline --no-audit --no-progress --cache ./vendor/.npm
+      echo "--- :npm: Fast dependencies install"
+      npm install --prefer-offline --no-audit --no-progress
 
       echo "--- :bug: Info ./node_modules/rimraf"
       ls ./node_modules/rimraf
