@@ -41,7 +41,6 @@ steps:
       buildkite-agent artifact upload node_modules.tar.gz
 
       echo "--- :arrow_up: Upload vendor/.npm cache"
-      # TODO: Read location from npm itself?
       tar --create --gzip --file=npm_cache.tar.gz --directory=./vendor .npm
       buildkite-agent artifact upload npm_cache.tar.gz
 
@@ -66,8 +65,17 @@ steps:
       buildkite-agent artifact download node_modules.tar.gz .
       tar --extract --gzip --file=node_modules.tar.gz
 
-      echo "--- :bug: Debug info"
+      echo "--- :bug: Info ./vendor/.npm"
+      ls ./vendor/.npm
+
+      echo "--- :bug: Info ./node_modules"
+      ls ./node_modules
+
+      echo "--- :npm: Install dependencies using cache"
       npm install --prefer-offline --no-audit --no-progress --cache ./vendor/.npm
+
+      echo "--- :bug: Info ./node_modules/rimraf"
+      ls ./node_modules/rimraf
 
       echo "--- :node: Lint and Unit Tests"
       ./bin/ci-checks-js.sh
