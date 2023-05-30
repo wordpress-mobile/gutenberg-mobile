@@ -61,6 +61,9 @@ steps:
       echo "--- :bug: Debug info"
       ls node_modules
 
+      echo "--- :bug: Debug info"
+      npm install --prefer-offline --no-audit --no-progress
+
       echo "--- :node: Lint and Unit Tests"
       ./bin/ci-checks-js.sh
     artifact_paths:
