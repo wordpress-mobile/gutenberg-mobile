@@ -25,6 +25,7 @@ steps:
     key: build-npm
     plugins:
       - *gb-mobile-docker-container
+      - automattic/a8c-ci-toolkit#2.16.0
     command: |
       source /root/.bashrc
 
@@ -56,6 +57,7 @@ steps:
     key: unit-tests
     plugins:
       - *gb-mobile-docker-container
+      - automattic/a8c-ci-toolkit#2.16.0
     command: |
       source /root/.bashrc
 
