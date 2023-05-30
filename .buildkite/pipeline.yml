@@ -21,7 +21,28 @@ steps:
   - block: "Request trigger Android bundle and builds"
     branches: "dependabot/submodules/*"
 
+  - label: Build npm cache
+    key: build-npm
+    plugins:
+      - *gb-mobile-docker-container
+    command: |
+      source /root/.bashrc
+
+      echo "--- :node: Setup Node environment"
+      nvm install && nvm use
+
+      # TODO: Explore whether to use a remote cache based on package-lock.json
+      #
+      # Note that `npm ci` deletes node_modules and installs from scratch, for a deterministic CI build
+      echo "--- :npm: Build dependencies cache"
+      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+
+      echo "--- :npm: Upload cache"
+      tar --create --gzip --file=node_modules.tar.gz --directory=. node_modules
+      buildkite-agent artifact upload node_modules.tar.gz
+
   - label: Lint and Unit Tests
+    depends_on: build-npm
     key: unit-tests
     plugins:
       - *gb-mobile-docker-container
@@ -31,8 +52,9 @@ steps:
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
 
-      echo "--- :npm: Install Node dependencies"
-      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+      echo "--- :npm: Download cached dependencies"
+      buildkite-agent artifact download node_modules.tar.gz .
+      tar --extract --gzip --file=node_modules.tar.gz
 
       echo "--- :node: Lint and Unit Tests"
       ./bin/ci-checks-js.sh
@@ -50,8 +72,9 @@ steps:
         echo "--- :node: Setup Node environment"
         nvm install && nvm use
 
-        echo "--- :npm: Install Node dependencies"
-        npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+        echo "--- :npm: Download cached dependencies"
+        buildkite-agent artifact download node_modules.tar.gz .
+        tar --extract --gzip --file=node_modules.tar.gz
 
         echo "--- :package: Run bundle prep work"
         npm run prebundle:js
