@@ -32,15 +32,6 @@ steps:
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
 
-      echo "--- :down_arrow: Download ~/.npm cache, if available"
-      ARCHITECTURE=$(uname -m)
-      NODE_VERSION=$(node --version)
-      PACKAGE_HASH=$(hash_file package-lock.json)
-      CACHEKEY="$BUILDKITE_PIPELINE_SLUG-$ARCHITECTURE-node$NODE_VERSION-$PACKAGE_HASH"
-      restore_cache $CACHEKEY
-
-      # TODO: Explore whether to use a remote cache based on package-lock.json
-      #
       # Note that `npm ci` deletes node_modules and installs from scratch, for a deterministic CI build
       echo "--- :npm: Build dependencies cache"
       npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
@@ -50,7 +41,9 @@ steps:
       buildkite-agent artifact upload node_modules.tar.gz
 
       echo "--- :up_arrow: Upload ~/.npm cache"
-      save_cache $CACHEKEY ~/.npm
+      # TODO: Read location from npm itself?
+      tar --create --gzip --file=npm_cache.tar.gz --directory=~ .npm
+      buildkite-agent artifact upload npm_cache.tar.gz
 
   - label: Lint and Unit Tests
     depends_on: build-npm
@@ -67,12 +60,9 @@ steps:
       echo "--- :bug: Debug info"
       ls ~
 
-      echo "--- :down_arrow: Download ~/.npm cache, if available"
-      ARCHITECTURE=$(uname -m)
-      NODE_VERSION=$(node --version)
-      PACKAGE_HASH=$(hash_file package-lock.json)
-      CACHEKEY="$BUILDKITE_PIPELINE_SLUG-$ARCHITECTURE-node$NODE_VERSION-$PACKAGE_HASH"
-      restore_cache $CACHEKEY
+      echo "--- :down_arrow: Download ~/.npm cache"
+      buildkite-agent artifact download node_modules.tar.gz .
+      tar --extract --gzip --file=node_modules.tar.gz --directory=~
 
       echo "--- :npm: Download node_modules"
       buildkite-agent artifact download node_modules.tar.gz .
