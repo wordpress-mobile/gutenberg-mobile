@@ -39,7 +39,7 @@ steps:
       tar --create --gzip --file=node_modules.tar.gz --directory=. node_modules
       buildkite-agent artifact upload node_modules.tar.gz
 
-      echo "--- :up_arrow: Upload \$HOME/.npm cache"
+      echo "--- :arrow_up: Upload vendor/.npm cache"
       # TODO: Read location from npm itself?
       tar --create --gzip --file=npm_cache.tar.gz --directory=./vendor .npm
       buildkite-agent artifact upload npm_cache.tar.gz
@@ -55,7 +55,7 @@ steps:
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
 
-      echo "--- :down_arrow: Download \$HOME/.npm cache"
+      echo "--- :arrow_down: Download vendor/.npm cache"
       buildkite-agent artifact download npm_cache.tar.gz .
       mkdir -p vendor
       tar --extract --gzip --file=npm_cache.tar.gz --directory=./vendor
