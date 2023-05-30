@@ -38,6 +38,8 @@ steps:
 
       echo "--- :node: Lint and Unit Tests"
       ./bin/ci-checks-js.sh
+    artifact_paths:
+      - ./*-tests-out.log
 
   - label: "Build JS Bundles"
     depends_on: "unit-tests"
