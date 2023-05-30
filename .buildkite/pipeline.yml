@@ -40,9 +40,14 @@ steps:
       tar --create --gzip --file=node_modules.tar.gz --directory=. node_modules
       buildkite-agent artifact upload node_modules.tar.gz
 
+      echo "--- :bug: Debug info"
+      ls $$HOME
+      echo "--- :bug: Debug info"
+      ls /root
+
       echo "--- :up_arrow: Upload \$HOME/.npm cache"
       # TODO: Read location from npm itself?
-      tar --create --gzip --file=npm_cache.tar.gz --directory=$$HOME .npm
+      tar --create --gzip --file=npm_cache.tar.gz --directory=/root .npm
       buildkite-agent artifact upload npm_cache.tar.gz
 
   - label: Lint and Unit Tests
@@ -59,10 +64,12 @@ steps:
 
       echo "--- :bug: Debug info"
       ls $$HOME
+      echo "--- :bug: Debug info"
+      ls /root
 
       echo "--- :down_arrow: Download \$HOME/.npm cache"
       buildkite-agent artifact download npm_cache.tar.gz .
-      tar --extract --gzip --file=npm_cache.tar.gz --directory=$$HOME
+      tar --extract --gzip --file=npm_cache.tar.gz --directory=/root
 
       echo "--- :npm: Download node_modules"
       buildkite-agent artifact download node_modules.tar.gz .
@@ -72,6 +79,8 @@ steps:
       ls .
       echo "--- :bug: Debug info"
       ls $$HOME
+      echo "--- :bug: Debug info"
+      ls /root
       echo "--- :bug: Debug info"
       ls node_modules
 
