@@ -69,7 +69,7 @@ steps:
       ls ./vendor/.npm
 
       echo "--- :npm: Install dependencies using cache"
-      npm install --prefer-offline --no-audit --no-progress --cache ./vendor/.npm
+      npm ci --prefer-offline --no-audit --no-progress --cache ./vendor/.npm
 
       echo "--- :bug: Info ./node_modules/rimraf"
       ls ./node_modules/rimraf
