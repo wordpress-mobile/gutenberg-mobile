@@ -61,15 +61,12 @@ steps:
       mkdir -p vendor
       tar --extract --gzip --file=npm_cache.tar.gz --directory=./vendor
 
-      echo "--- :npm: Download node_modules"
-      buildkite-agent artifact download node_modules.tar.gz .
-      tar --extract --gzip --file=node_modules.tar.gz
+      # echo "--- :npm: Download node_modules"
+      # buildkite-agent artifact download node_modules.tar.gz .
+      # tar --extract --gzip --file=node_modules.tar.gz
 
       echo "--- :bug: Info ./vendor/.npm"
       ls ./vendor/.npm
-
-      echo "--- :bug: Info ./node_modules"
-      ls ./node_modules
 
       echo "--- :npm: Install dependencies using cache"
       npm install --prefer-offline --no-audit --no-progress --cache ./vendor/.npm
