@@ -721,3 +721,37 @@ export const NESTED_COLUMNS_CASE_2 = `<!-- wp:separator -->
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:cover --></div></div>
 <!-- /wp:cover -->`;
+
+export const NESTED_COLUMNS_3_LEVELS = `<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column {"width":"50%"} -->
+<div class="wp-block-column" style="flex-basis:50%"><!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column {"width":"50%"} -->
+<div class="wp-block-column" style="flex-basis:50%"><!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column {"width":"50%"} -->
+<div class="wp-block-column" style="flex-basis:50%"><!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column {"width":"50%"} -->
+<div class="wp-block-column" style="flex-basis:50%"></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"width":"50%"} -->
+<div class="wp-block-column" style="flex-basis:50%"></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"width":"50%"} -->
+<div class="wp-block-column" style="flex-basis:50%"></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"width":"50%"} -->
+<div class="wp-block-column" style="flex-basis:50%"></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"width":"50%"} -->
+<div class="wp-block-column" style="flex-basis:50%"></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->`;
