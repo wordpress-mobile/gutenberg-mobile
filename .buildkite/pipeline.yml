@@ -91,10 +91,10 @@ steps:
       ls -a /root
       ls -a /root/.npm
       ls node_modules
-      ls gutenberg/node_modules
-      ls src/i18n-cache
+      [[ -d gutenberg/node_modules ]] && ls gutenberg/node_modules || echo "--- :skull_and_crossbones: gutenberg/node_modules not present"
+      [[ -d src/i18n-cache ]] && ls src/i18n-cache || echo "--- :skull_and_crossbones: src/i18n-cache not present"
       # On a macOS machine, this would be ~/Library/pnpm/store/v3
-      ls /root/.local/share/pnpm/store/v3
+      [[ -d /root/.local/share/pnpm/store/v3 ]] && ls /root/.local/share/pnpm/store/v3 || echo "--- :skull_and_crossbones: /root/.local/share/pnpm/store/v3"
       set +x
 
       echo "--- :node: Lint"
@@ -125,9 +125,11 @@ steps:
       set -x
       ls -a /root
       ls -a /root/.npm
-      ls src/i18n-cache
+      ls node_modules
+      [[ -d gutenberg/node_modules ]] && ls gutenberg/node_modules || echo "--- :skull_and_crossbones: gutenberg/node_modules not present"
+      [[ -d src/i18n-cache ]] && ls src/i18n-cache || echo "--- :skull_and_crossbones: src/i18n-cache not present"
       # On a macOS machine, this would be ~/Library/pnpm/store/v3
-      ls /root/.local/share/pnpm/store/v3
+      [[ -d /root/.local/share/pnpm/store/v3 ]] && ls /root/.local/share/pnpm/store/v3 || echo "--- :skull_and_crossbones: /root/.local/share/pnpm/store/v3"
       set +x
 
       echo "--- :node: Unit Tests"
@@ -160,9 +162,11 @@ steps:
       set -x
       ls -a /root
       ls -a /root/.npm
-      ls src/i18n-cache
+      ls node_modules
+      [[ -d gutenberg/node_modules ]] && ls gutenberg/node_modules || echo "--- :skull_and_crossbones: gutenberg/node_modules not present"
+      [[ -d src/i18n-cache ]] && ls src/i18n-cache || echo "--- :skull_and_crossbones: src/i18n-cache not present"
       # On a macOS machine, this would be ~/Library/pnpm/store/v3
-      ls /root/.local/share/pnpm/store/v3
+      [[ -d /root/.local/share/pnpm/store/v3 ]] && ls /root/.local/share/pnpm/store/v3 || echo "--- :skull_and_crossbones: /root/.local/share/pnpm/store/v3"
       set +x
 
       echo "--- :node: Unit Tests"
