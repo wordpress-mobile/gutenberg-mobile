@@ -31,7 +31,7 @@ set +x
 # tar --extract --gzip --file=node_modules.tar.gz
 
 echo "--- :npm: Fast dependencies install (gutenbreg-mobile)"
-npm ci --prefer-offline --no-audit --no-progress --ignore-scripts
+npm ci --prefer-offline --no-audit --no-progress
 
 # echo "--- :npm: Fast dependencies install (gutenberg)"
 # npm ci --prefix gutenberg --prefer-offline --no-audit
