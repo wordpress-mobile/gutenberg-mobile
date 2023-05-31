@@ -100,8 +100,11 @@ steps:
       # buildkite-agent artifact download node_modules.tar.gz .
       # tar --extract --gzip --file=node_modules.tar.gz
 
-      echo "--- :npm: Fast dependencies install"
+      echo "--- :npm: Fast dependencies install (gutenbreg-mobile)"
       npm install --prefer-offline --no-audit --no-progress --ignore-scripts
+
+      echo "--- :npm: Fast dependencies install (gutenberg)"
+      npm install --prefix gutenberg --prefer-offline --no-audit
 
       echo "--- :bug: Info ./node_modules/rimraf"
       ls ./node_modules/rimraf
