@@ -21,8 +21,53 @@ steps:
   - block: "Request trigger Android bundle and builds"
     branches: "dependabot/submodules/*"
 
-  - label: Build npm cache
-    key: build-npm
+  # Taking a step back. Give up on caching up front and figure out which npm install combos each test needs...
+  #
+  # - label: Build npm cache
+  #   key: build-npm
+  #   plugins:
+  #     - *gb-mobile-docker-container
+  #     - automattic/git-shallow-clone
+  #   command: |
+  #     source /root/.bashrc
+
+  #     echo "--- :node: Setup Node environment"
+  #     nvm install && nvm use
+
+  #     # Note that `npm ci` deletes node_modules and installs from scratch, for a deterministic CI build.
+  #     # For that reason, we don't attempt to download them
+  #     echo "--- :npm: Build dependencies cache (gutenberg-mobile)"
+  #     npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+
+  #     echo "--- :bug: Check npm artifacts"
+  #     set -x
+  #     ls -a /root
+  #     ls -a /root/.npm
+  #     ls node_modules
+  #     ls src/i18n-cache
+  #     # On a macOS machine, this would be ~/Library/pnpm/store/v3
+  #     ls /root/.local/share/pnpm/store/v3
+  #     set +x
+
+  #     echo "--- :arrow_up: Upload node_modules"
+  #     tar --create --gzip --file=node_modules.tar.gz --directory=. node_modules
+  #     buildkite-agent artifact upload node_modules.tar.gz
+
+  #     echo "--- :arrow_up: Upload i18n-cache"
+  #     tar --create --gzip --file=i18n_cache.tar.gz --directory=. src/i18n-cache
+  #     buildkite-agent artifact upload i18n_cache.tar.gz
+
+  #     echo "--- :arrow_up: Upload .npm cache"
+  #     tar --create --gzip --file=npm_cache.tar.gz --directory=/root .npm
+  #     buildkite-agent artifact upload npm_cache.tar.gz
+
+  #     echo "--- :arrow_up: Upload pnpm store"
+  #     tar --create --gzip --file=pnpm_cache.tar.gz --directory=/root .local/share/pnpm/store/v3
+  #     buildkite-agent artifact upload pnpm_cache.tar.gz
+
+  - label: Lint
+    # depends_on: build-npm
+    key: lint
     plugins:
       - *gb-mobile-docker-container
       - automattic/git-shallow-clone
@@ -32,69 +77,56 @@ steps:
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
 
-      # Note that `npm ci` deletes node_modules and installs from scratch, for a deterministic CI build.
-      # For that reason, we don't attempt to download them
-      echo "--- :npm: Build dependencies cache (gutenberg-mobile)"
-      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
-
-      echo "--- :bug: Check npm artifacts"
-      set -x
-      ls -a /root
-      ls -a /root/.npm
-      ls node_modules
-      ls src/i18n-cache
-      # On a macOS machine, this would be ~/Library/pnpm/store/v3
-      ls /root/.local/share/pnpm/store/v3
-      set +x
-
-      echo "--- :arrow_up: Upload node_modules"
-      tar --create --gzip --file=node_modules.tar.gz --directory=. node_modules
-      buildkite-agent artifact upload node_modules.tar.gz
-
-      echo "--- :arrow_up: Upload i18n-cache"
-      tar --create --gzip --file=i18n_cache.tar.gz --directory=. src/i18n-cache
-      buildkite-agent artifact upload i18n_cache.tar.gz
-
-      echo "--- :arrow_up: Upload .npm cache"
-      tar --create --gzip --file=npm_cache.tar.gz --directory=/root .npm
-      buildkite-agent artifact upload npm_cache.tar.gz
-
-      echo "--- :arrow_up: Upload pnpm store"
-      tar --create --gzip --file=pnpm_cache.tar.gz --directory=/root .local/share/pnpm/store/v3
-      buildkite-agent artifact upload pnpm_cache.tar.gz
-
-  - label: Lint
-    depends_on: build-npm
-    key: lint
-    plugins:
-      - *gb-mobile-docker-container
-      - automattic/git-shallow-clone
-    command: |
-      source /root/.bashrc
-
-      .buildkite/bootstrap-cached-environment.sh
+      echo "--- :npm: Install dependencies (npm install)"
+      npm install --no-audit --no-progress
 
       echo "--- :node: Lint"
       CHECK_TESTS=false CHECK_CORRECTNESS=true ./bin/ci-checks-js.sh
 
-  - label: Unit Tests
+  - label: Android Unit Tests
     depends_on: build-npm
-    key: unit-tests
+    # key: unit-tests-android
     plugins:
       - *gb-mobile-docker-container
       - automattic/git-shallow-clone
     command: |
       source /root/.bashrc
 
-      .buildkite/bootstrap-cached-environment.sh
+      echo "--- :node: Setup Node environment"
+      nvm install && nvm use
+
+      echo "--- :npm: Install dependencies (npm ci)"
+      npm ci --prefer-offline --no-audit --no-progress
 
       echo "--- :node: Unit Tests"
-      CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
+      TEST_RN_PLATFORM=android CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
+    artifact_paths:
+      - ./*-tests-out.log
+
+  - label: iOS Unit Tests
+    # depends_on: build-npm
+    key: unit-tests-ios
+    plugins:
+      - *gb-mobile-docker-container
+      - automattic/git-shallow-clone
+    command: |
+      source /root/.bashrc
+
+      echo "--- :node: Setup Node environment"
+      nvm install && nvm use
+
+      echo "--- :npm: Install dependencies (npm ci)"
+      npm ci --prefer-offline --no-audit --no-progress
+
+      echo "--- :node: Unit Tests"
+      TEST_RN_PLATFORM=ios CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
     artifact_paths:
       - ./*-tests-out.log
 
   - label: "Build JS Bundles"
-    depends_on: "unit-tests"
+    depends_on:
+      - "unit-tests-android"
+      - "unit-tests-ios"
     key: "js-bundles"
     plugins:
       - *gb-mobile-docker-container
