@@ -6,15 +6,15 @@ echo "--- :node: Setup Node environment"
 nvm install && nvm use
 
 echo "--- :arrow_down: Download .npm cache"
-buildkite-agent artifact download npm_cache.tar.gz . --build 01886ff5-c327-460a-a8b1-3a09c06b0d90
+buildkite-agent artifact download npm_cache.tar.gz .
 tar --extract --gzip --file=npm_cache.tar.gz --directory=/root
 
 echo "--- :arrow_down: Download src/i18n-cache"
-buildkite-agent artifact download i18n_cache.tar.gz . --build 01886ff5-c327-460a-a8b1-3a09c06b0d90
+buildkite-agent artifact download i18n_cache.tar.gz .
 tar --extract --gzip --file=i18n_cache.tar.gz --directory=.
 
 echo "--- :arrow_down: Download pnpm store"
-buildkite-agent artifact download pnpm_cache.tar.gz . --build 01886ff5-c327-460a-a8b1-3a09c06b0d90
+buildkite-agent artifact download pnpm_cache.tar.gz .
 tar --extract --gzip --file=pnpm_cache.tar.gz --directory=/root
 
 echo "--- :bug: Check npm artifacts"
