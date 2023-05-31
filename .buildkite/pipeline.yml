@@ -64,7 +64,21 @@ steps:
       tar --create --gzip --file=pnpm_cache.tar.gz --directory=/root .local/share/pnpm/store/v3
       buildkite-agent artifact upload pnpm_cache.tar.gz
 
-  - label: Lint and Unit Tests
+  - label: Lint
+    depends_on: build-npm
+    key: lint
+    plugins:
+      - *gb-mobile-docker-container
+      - automattic/git-shallow-clone
+    command: |
+      source /root/.bashrc
+
+      .buildkite/bootstrap-cached-environment.sh
+
+      echo "--- :node: Lint"
+      CHECK_TESTS=false CHECK_CORRECTNESS=true ./bin/ci-checks-js.sh
+
+  - label: Unit Tests
     depends_on: build-npm
     key: unit-tests
     plugins:
@@ -73,45 +87,10 @@ steps:
     command: |
       source /root/.bashrc
 
-      echo "--- :node: Setup Node environment"
-      nvm install && nvm use
+      .buildkite/bootstrap-cached-environment.sh
 
-      echo "--- :arrow_down: Download .npm cache"
-      buildkite-agent artifact download npm_cache.tar.gz . --build 01886ef6-fdc4-465a-92e5-d4e3721bc459
-      tar --extract --gzip --file=npm_cache.tar.gz --directory=/root
-
-      echo "--- :arrow_down: Download src/i18n-cache"
-      buildkite-agent artifact download i18n_cache.tar.gz . --build 01886ef6-fdc4-465a-92e5-d4e3721bc459
-      tar --extract --gzip --file=i18n_cache.tar.gz --directory=.
-
-      echo "--- :arrow_down: Download pnpm store"
-      buildkite-agent artifact download pnpm_cache.tar.gz . --build 01886ef6-fdc4-465a-92e5-d4e3721bc459
-      tar --extract --gzip --file=pnpm_cache.tar.gz --directory=/root
-
-      echo "--- :bug: Check npm artifacts"
-      set -x
-      ls -a /root
-      ls -a /root/.npm
-      ls src/i18n-cache
-      # On a macOS machine, this would be ~/Library/pnpm/store/v3
-      ls /root/.local/share/pnpm/store/v3
-      set +x
-
-      # echo "--- :npm: Download node_modules"
-      # buildkite-agent artifact download node_modules.tar.gz .
-      # tar --extract --gzip --file=node_modules.tar.gz
-
-      echo "--- :npm: Fast dependencies install (gutenbreg-mobile)"
-      npm install --prefer-offline --no-audit --no-progress --ignore-scripts
-
-      echo "--- :npm: Fast dependencies install (gutenberg)"
-      npm install --prefix gutenberg --prefer-offline --no-audit
-
-      echo "--- :bug: Info ./node_modules/rimraf"
-      ls ./node_modules/rimraf
-
-      echo "--- :node: Lint and Unit Tests"
-      ./bin/ci-checks-js.sh
+      echo "--- :node: Lint"
+      CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
     artifact_paths:
       - ./*-tests-out.log
 
