@@ -33,11 +33,8 @@ set +x
 echo "--- :npm: Fast dependencies install (gutenbreg-mobile)"
 npm ci --prefer-offline --no-audit --no-progress --ignore-scripts
 
-echo "--- :npm: Fast dependencies install (gutenberg)"
-npm ci --prefix gutenberg --prefer-offline --no-audit
+# echo "--- :npm: Fast dependencies install (gutenberg)"
+# npm ci --prefix gutenberg --prefer-offline --no-audit
 
 echo "--- :bug: Info ./node_modules/rimraf"
 ls ./node_modules/rimraf
-
-echo "--- :node: Lint and Unit Tests"
-./bin/ci-checks-js.sh

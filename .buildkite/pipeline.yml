@@ -74,13 +74,7 @@ steps:
       .buildkite/bootstrap-cached-environment.sh
 
       echo "--- :node: Lint"
-      # For some reason, passing the args to the script doesn't work
-      # CHECK_TESTS=false CHECK_CORRECTNESS=true ./bin/ci-checks-js.sh
-      cd gutenberg
-      npm run build:packages
-      cd ..
-
-      npm run lint
+      CHECK_TESTS=false CHECK_CORRECTNESS=true ./bin/ci-checks-js.sh
 
   - label: Unit Tests
     # depends_on: build-npm
@@ -91,7 +85,7 @@ steps:
     command: |
       .buildkite/bootstrap-cached-environment.sh
 
-      echo "--- :node: Lint"
+      echo "--- :node: Unit Tests"
       CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
     artifact_paths:
       - ./*-tests-out.log
