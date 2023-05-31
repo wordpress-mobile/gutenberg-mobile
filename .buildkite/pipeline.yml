@@ -77,15 +77,35 @@ steps:
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
 
+      echo "--- :bug: Check npm artifacts"
+      set -x
+      ls -a /root
+      ls -a /root/.npm
+      ls src/i18n-cache
+      # On a macOS machine, this would be ~/Library/pnpm/store/v3
+      ls /root/.local/share/pnpm/store/v3
+      set +x
+
       echo "--- :npm: Install dependencies (npm install)"
       npm install --no-audit --no-progress
+
+      echo "--- :bug: Check npm artifacts"
+      set -x
+      ls -a /root
+      ls -a /root/.npm
+      ls node_modules
+      ls gutenberg/node_modules
+      ls src/i18n-cache
+      # On a macOS machine, this would be ~/Library/pnpm/store/v3
+      ls /root/.local/share/pnpm/store/v3
+      set +x
 
       echo "--- :node: Lint"
       CHECK_TESTS=false CHECK_CORRECTNESS=true ./bin/ci-checks-js.sh
 
   - label: Android Unit Tests
-    depends_on: build-npm
-    # key: unit-tests-android
+    # depends_on: build-npm
+    key: unit-tests-android
     plugins:
       - *gb-mobile-docker-container
       - automattic/git-shallow-clone
@@ -115,8 +135,26 @@ steps:
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
 
+      echo "--- :bug: Check npm artifacts"
+      set -x
+      ls -a /root
+      ls -a /root/.npm
+      ls src/i18n-cache
+      # On a macOS machine, this would be ~/Library/pnpm/store/v3
+      ls /root/.local/share/pnpm/store/v3
+      set +x
+
       echo "--- :npm: Install dependencies (npm ci)"
       npm ci --prefer-offline --no-audit --no-progress
+
+      echo "--- :bug: Check npm artifacts"
+      set -x
+      ls -a /root
+      ls -a /root/.npm
+      ls src/i18n-cache
+      # On a macOS machine, this would be ~/Library/pnpm/store/v3
+      ls /root/.local/share/pnpm/store/v3
+      set +x
 
       echo "--- :node: Unit Tests"
       TEST_RN_PLATFORM=ios CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
@@ -136,9 +174,10 @@ steps:
         echo "--- :node: Setup Node environment"
         nvm install && nvm use
 
-        echo "--- :npm: Download cached dependencies"
-        buildkite-agent artifact download node_modules.tar.gz .
-        tar --extract --gzip --file=node_modules.tar.gz
+        # echo "--- :npm: Download cached dependencies"
+        # buildkite-agent artifact download node_modules.tar.gz .
+        # tar --extract --gzip --file=node_modules.tar.gz
+        npm install
 
         echo "--- :package: Run bundle prep work"
         npm run prebundle:js
