@@ -70,6 +70,8 @@ steps:
       - *gb-mobile-docker-container
       - automattic/git-shallow-clone
     command: |
+      source /root/.bashrc
+
       .buildkite/bootstrap-cached-environment.sh
 
       echo "--- :node: Lint"
@@ -82,6 +84,8 @@ steps:
       - *gb-mobile-docker-container
       - automattic/git-shallow-clone
     command: |
+      source /root/.bashrc
+
       .buildkite/bootstrap-cached-environment.sh
 
       echo "--- :node: Unit Tests"

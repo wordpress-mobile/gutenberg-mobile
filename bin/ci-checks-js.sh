@@ -32,19 +32,19 @@ if [[ -z "${CHECK_CORRECTNESS:-}" ]] && [[ -z "${CHECK_TESTS:-}" ]] ; then
   CHECK_TESTS=true
 fi
 
-# if [ "$CHECK_CORRECTNESS" = true ] ; then
-#   echo "--- :mag: Check diff"
-#   checkDiff
+if [ "$CHECK_CORRECTNESS" = true ] ; then
+  echo "--- :mag: Check diff"
+  checkDiff
 
-#   echo "--- :eslint: Lint"
-#   # Need to build gutenberg packages before linting so that eslint-plugin-import can resolve those.
-#   # See https://github.com/WordPress/gutenberg/pull/22088 for more information.
-#   cd gutenberg
-#   npm run build:packages || pFail
-#   cd ..
+  echo "--- :eslint: Lint"
+  # Need to build gutenberg packages before linting so that eslint-plugin-import can resolve those.
+  # See https://github.com/WordPress/gutenberg/pull/22088 for more information.
+  cd gutenberg
+  npm run build:packages || pFail
+  cd ..
 
-#   npm run lint || pFail
-# fi
+  npm run lint || pFail
+fi
 
 # Notice we forward the tests output to a file.
 # That's because they generates 70k+ lines and we don't want to pollute the logs like that.
