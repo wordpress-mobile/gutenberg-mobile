@@ -1,6 +1,6 @@
 Unreleased
 ---
-
+* [*] [internal] Upgrade compile and target sdk version to Android API 33 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5789]
 
 1.96.0
 ---
