@@ -81,9 +81,6 @@ steps:
       set -x
       ls -a /root
       ls -a /root/.npm
-      ls src/i18n-cache
-      # On a macOS machine, this would be ~/Library/pnpm/store/v3
-      ls /root/.local/share/pnpm/store/v3
       set +x
 
       echo "--- :npm: Install dependencies (npm install)"
@@ -115,8 +112,23 @@ steps:
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
 
+      echo "--- :bug: Check npm artifacts"
+      set -x
+      ls -a /root
+      ls -a /root/.npm
+      set +x
+
       echo "--- :npm: Install dependencies (npm ci)"
       npm ci --prefer-offline --no-audit --no-progress
+
+      echo "--- :bug: Check npm artifacts"
+      set -x
+      ls -a /root
+      ls -a /root/.npm
+      ls src/i18n-cache
+      # On a macOS machine, this would be ~/Library/pnpm/store/v3
+      ls /root/.local/share/pnpm/store/v3
+      set +x
 
       echo "--- :node: Unit Tests"
       TEST_RN_PLATFORM=android CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
@@ -139,9 +151,6 @@ steps:
       set -x
       ls -a /root
       ls -a /root/.npm
-      ls src/i18n-cache
-      # On a macOS machine, this would be ~/Library/pnpm/store/v3
-      ls /root/.local/share/pnpm/store/v3
       set +x
 
       echo "--- :npm: Install dependencies (npm ci)"
