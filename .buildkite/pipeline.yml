@@ -101,7 +101,7 @@ steps:
       # tar --extract --gzip --file=node_modules.tar.gz
 
       echo "--- :npm: Fast dependencies install"
-      npm install --prefer-offline --no-audit --no-progress
+      npm install --prefer-offline --no-audit --no-progress --ignore-scripts
 
       echo "--- :bug: Info ./node_modules/rimraf"
       ls ./node_modules/rimraf
