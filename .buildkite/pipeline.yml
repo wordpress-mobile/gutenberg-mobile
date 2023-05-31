@@ -21,52 +21,29 @@ steps:
   - block: "Request trigger Android bundle and builds"
     branches: "dependabot/submodules/*"
 
-  # Taking a step back. Give up on caching up front and figure out which npm install combos each test needs...
-  #
-  # - label: Build npm cache
-  #   key: build-npm
-  #   plugins:
-  #     - *gb-mobile-docker-container
-  #     - automattic/git-shallow-clone
-  #   command: |
-  #     source /root/.bashrc
+  - label: Build npm cache
+    key: build-npm
+    plugins:
+      - *gb-mobile-docker-container
+      - automattic/git-shallow-clone
+    command: |
+      source /root/.bashrc
 
-  #     echo "--- :node: Setup Node environment"
-  #     nvm install && nvm use
+      echo "--- :node: Setup Node environment"
+      nvm install && nvm use
 
-  #     # Note that `npm ci` deletes node_modules and installs from scratch, for a deterministic CI build.
-  #     # For that reason, we don't attempt to download them
-  #     echo "--- :npm: Build dependencies cache (gutenberg-mobile)"
-  #     npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+      # Note that `npm ci` deletes node_modules and installs from scratch, for a deterministic CI build.
+      # For that reason, we don't attempt to download them
+      echo "--- :npm: Build global dependencies cache"
+      npm ci --unsafe-perm --no-audit --no-progress
 
-  #     echo "--- :bug: Check npm artifacts"
-  #     set -x
-  #     ls -a /root
-  #     ls -a /root/.npm
-  #     ls node_modules
-  #     ls src/i18n-cache
-  #     # On a macOS machine, this would be ~/Library/pnpm/store/v3
-  #     ls /root/.local/share/pnpm/store/v3
-  #     set +x
-
-  #     echo "--- :arrow_up: Upload node_modules"
-  #     tar --create --gzip --file=node_modules.tar.gz --directory=. node_modules
-  #     buildkite-agent artifact upload node_modules.tar.gz
-
-  #     echo "--- :arrow_up: Upload i18n-cache"
-  #     tar --create --gzip --file=i18n_cache.tar.gz --directory=. src/i18n-cache
-  #     buildkite-agent artifact upload i18n_cache.tar.gz
-
-  #     echo "--- :arrow_up: Upload .npm cache"
-  #     tar --create --gzip --file=npm_cache.tar.gz --directory=/root .npm
-  #     buildkite-agent artifact upload npm_cache.tar.gz
-
-  #     echo "--- :arrow_up: Upload pnpm store"
-  #     tar --create --gzip --file=pnpm_cache.tar.gz --directory=/root .local/share/pnpm/store/v3
-  #     buildkite-agent artifact upload pnpm_cache.tar.gz
+      echo "--- :arrow_up: Upload .npm cache"
+      # Could use --cache and store the cache in the project folder instead
+      tar --create --gzip --file=npm_cache.tar.gz --directory=/root .npm
+      buildkite-agent artifact upload npm_cache.tar.gz
 
   - label: Lint
-    # depends_on: build-npm
+    depends_on: build-npm
     key: lint
     plugins:
       - *gb-mobile-docker-container
@@ -76,6 +53,10 @@ steps:
 
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
+
+      echo "--- :arrow_down: Download .npm cache"
+      buildkite-agent artifact download npm_cache.tar.gz .
+      tar --extract --gzip --file=npm_cache.tar.gz --directory=/root
 
       echo "--- :bug: Check npm artifacts"
       set -x
@@ -101,7 +82,7 @@ steps:
       CHECK_TESTS=false CHECK_CORRECTNESS=true ./bin/ci-checks-js.sh
 
   - label: Android Unit Tests
-    # depends_on: build-npm
+    depends_on: build-npm
     key: unit-tests-android
     plugins:
       - *gb-mobile-docker-container
@@ -111,6 +92,10 @@ steps:
 
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
+
+      echo "--- :arrow_down: Download .npm cache"
+      buildkite-agent artifact download npm_cache.tar.gz .
+      tar --extract --gzip --file=npm_cache.tar.gz --directory=/root
 
       echo "--- :bug: Check npm artifacts"
       set -x
@@ -138,7 +123,7 @@ steps:
       - ./*-tests-out.log
 
   - label: iOS Unit Tests
-    # depends_on: build-npm
+    depends_on: build-npm
     key: unit-tests-ios
     plugins:
       - *gb-mobile-docker-container
@@ -148,6 +133,10 @@ steps:
 
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
+
+      echo "--- :arrow_down: Download .npm cache"
+      buildkite-agent artifact download npm_cache.tar.gz .
+      tar --extract --gzip --file=npm_cache.tar.gz --directory=/root
 
       echo "--- :bug: Check npm artifacts"
       set -x
@@ -186,6 +175,10 @@ steps:
 
         echo "--- :node: Setup Node environment"
         nvm install && nvm use
+
+        echo "--- :arrow_down: Download .npm cache"
+        buildkite-agent artifact download npm_cache.tar.gz .
+        tar --extract --gzip --file=npm_cache.tar.gz --directory=/root
 
         # echo "--- :npm: Download cached dependencies"
         # buildkite-agent artifact download node_modules.tar.gz .
