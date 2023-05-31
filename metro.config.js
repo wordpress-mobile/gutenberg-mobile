@@ -21,6 +21,9 @@ const nodeModulePaths = [
 const possibleModulePaths = ( name ) =>
 	nodeModulePaths.map( ( dir ) => path.join( process.cwd(), dir, name ) );
 
+// Exclude `ios-xcframework` folder to avoid conflicts with packages contained in Pods.
+gutenbergMetroConfigCopy.resolver.blockList = [ /ios-xcframework\/.*/ ];
+
 gutenbergMetroConfigCopy.resolver.resolveRequest = (
 	context,
 	moduleName,
