@@ -50,6 +50,15 @@ steps:
       tar --create --gzip --file=gutenberg_node_modules.tar.gz --directory=./gutenberg node_modules
       buildkite-agent artifact upload gutenberg_node_modules.tar.gz
 
+      echo "--- :arrow_up: Upload i18n cache"
+      tar --create --gzip --file=i18n_cache.tar.gz --directory=. src/i18n-cache
+      buildkite-agent artifact upload i18n_cache.tar.gz
+
+      echo "--- :arrow_up: Upload pnpm store"
+      # On a macOS machine, this would be ~/Library/pnpm/store/v3
+      tar --create --gzip --file=pnpm_store.tar.gz --directory=/root .local/share/pnpm/store/v3
+      buildkite-agent artifact upload pnpm_store.tar.gz
+
   - label: Lint
     depends_on: build-npm
     key: lint
@@ -84,6 +93,15 @@ steps:
       echo "--- :arrow_down: Download Gutenberg node_modules"
       buildkite-agent artifact download gutenberg_node_modules.tar.gz .
       tar --extract --gzip --file=gutenberg_node_modules.tar.gz --directory=./gutenberg
+
+      echo "--- :arrow_up: Download i18n cache"
+      buildkite-agent artifact download i18n_cache.tar.gz .
+      tar --extract --gzip --file=i18n_cache.tar.gz --directory=.
+
+      echo "--- :arrow_up: Download pnpm store"
+      # On a macOS machine, this would be ~/Library/pnpm/store/v3
+      buildkite-agent artifact download pnpm_store.tar.gz .
+      tar --extract --gzip --file=pnpm_store.tar.gz --directory=/root
 
       echo "--- :bug: Check npm artifacts (after downloading caches)"
       set -x
