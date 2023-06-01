@@ -60,6 +60,16 @@ beforeEach( () => {
 	dispatch( coreStore ).invalidateResolutionForStoreSelector(
 		'getEmbedPreview'
 	);
+
+	// Mock API responses for initial block.
+	setupApiFetch(
+		generateFetchMocks( {
+			guid: GUID_INITIAL_VIDEO,
+			metadata: {
+				title: 'Video to be replaced',
+			},
+		} )
+	);
 } );
 
 describe( 'VideoPress block - Replace', () => {
@@ -86,10 +96,7 @@ describe( 'VideoPress block - Replace', () => {
 
 	it( 'replaces with a local video', async () => {
 		const screen = await initializeEditor( {
-			initialHtml: generateBlockHTML( {
-				guid: GUID_INITIAL_VIDEO,
-				title: 'Video to be replaced',
-			} ),
+			initialHtml: generateBlockHTML( { guid: GUID_INITIAL_VIDEO } ),
 		} );
 		const { getByLabelText, getByTestId } = screen;
 
@@ -138,10 +145,7 @@ describe( 'VideoPress block - Replace', () => {
 
 	it( 'takes a new video', async () => {
 		const screen = await initializeEditor( {
-			initialHtml: generateBlockHTML( {
-				guid: GUID_INITIAL_VIDEO,
-				title: 'Video to be replaced',
-			} ),
+			initialHtml: generateBlockHTML( { guid: GUID_INITIAL_VIDEO } ),
 		} );
 		const { getByLabelText, getByTestId } = screen;
 
@@ -190,10 +194,7 @@ describe( 'VideoPress block - Replace', () => {
 
 	it( 'replaces with video from media library', async () => {
 		const screen = await initializeEditor( {
-			initialHtml: generateBlockHTML( {
-				guid: GUID_INITIAL_VIDEO,
-				title: 'Video to be replaced',
-			} ),
+			initialHtml: generateBlockHTML( { guid: GUID_INITIAL_VIDEO } ),
 		} );
 		const { getByLabelText, getByTestId } = screen;
 
@@ -237,10 +238,7 @@ describe( 'VideoPress block - Replace', () => {
 
 	it( 'replaces with new URL', async () => {
 		const screen = await initializeEditor( {
-			initialHtml: generateBlockHTML( {
-				guid: GUID_INITIAL_VIDEO,
-				title: 'Video to be replaced',
-			} ),
+			initialHtml: generateBlockHTML( { guid: GUID_INITIAL_VIDEO } ),
 		} );
 		const { getByLabelText, getByTestId } = screen;
 
@@ -285,22 +283,8 @@ describe( 'VideoPress block - Replace', () => {
 	} );
 
 	it( 'restores previous video when canceling a video replacement', async () => {
-		// Mock API responses for initial block. This will make the embed preview
-		// for the initial block to be cached.
-		setupApiFetch(
-			generateFetchMocks( {
-				guid: GUID_INITIAL_VIDEO,
-				metadata: {
-					title: 'Initial video',
-				},
-			} )
-		);
-
 		const screen = await initializeEditor( {
-			initialHtml: generateBlockHTML( {
-				guid: GUID_INITIAL_VIDEO,
-				title: 'Video to be replaced',
-			} ),
+			initialHtml: generateBlockHTML( { guid: GUID_INITIAL_VIDEO } ),
 		} );
 		const { getByLabelText, getByTestId } = screen;
 
