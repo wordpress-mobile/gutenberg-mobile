@@ -33,39 +33,13 @@ steps:
       nvm install && nvm use
 
       # Note that `npm ci` deletes node_modules and installs from scratch, for a deterministic CI build.
-      # For that reason, we don't attempt to download them
+      # For that reason, we don't attempt to download them but start from scratch.
+      #
+      # It's possible we could refine our approach and maybe check the various lockfiles to determine whether there are valid caches that we could download.
       echo "--- :npm: Build global dependencies cache"
       npm ci --unsafe-perm --no-audit --no-progress
 
-      echo "--- :arrow_up: Upload .npm cache"
-      # Could use --cache and store the cache in the project folder instead
-      tar --create --gzip --file=npm_cache.tar.gz --directory=/root .npm
-      buildkite-agent artifact upload npm_cache.tar.gz
-
-      echo "--- :arrow_up: Upload node_modules"
-      tar --create --gzip --file=node_modules.tar.gz --directory=. node_modules
-      buildkite-agent artifact upload node_modules.tar.gz
-
-      echo "--- :arrow_up: Upload Gutenberg node_modules"
-      tar --create --gzip --file=gutenberg_node_modules.tar.gz --directory=./gutenberg node_modules
-      buildkite-agent artifact upload gutenberg_node_modules.tar.gz
-
-      echo "--- :arrow_up: Upload Gutenberg components node_modules"
-      tar --create --gzip --file=gutenberg_components_node_modules.tar.gz --directory=./gutenberg/packages/components node_modules
-      buildkite-agent artifact upload gutenberg_components_node_modules.tar.gz
-
-      echo "--- :arrow_up: Upload Jetpack node_modules"
-      tar --create --gzip --file=jetpack_node_modules.tar.gz --directory=./jetpack node_modules
-      buildkite-agent artifact upload jetpack_node_modules.tar.gz
-
-      echo "--- :arrow_up: Upload i18n cache"
-      tar --create --gzip --file=i18n_cache.tar.gz --directory=. src/i18n-cache
-      buildkite-agent artifact upload i18n_cache.tar.gz
-
-      echo "--- :arrow_up: Upload pnpm store"
-      # On a macOS machine, this would be ~/Library/pnpm/store/v3
-      tar --create --gzip --file=pnpm_store.tar.gz --directory=/root .local/share/pnpm/store/v3
-      buildkite-agent artifact upload pnpm_store.tar.gz
+      node .buildkite/upload-caches.js
 
   - label: Lint
     depends_on: build-npm
@@ -92,34 +66,7 @@ steps:
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
 
-      echo "--- :arrow_down: Download .npm cache"
-      buildkite-agent artifact download npm_cache.tar.gz .
-      tar --extract --gzip --file=npm_cache.tar.gz --directory=/root
-
-      echo "--- :arrow_down: Download node_modules"
-      buildkite-agent artifact download node_modules.tar.gz .
-      tar --extract --gzip --file=node_modules.tar.gz --directory=.
-
-      echo "--- :arrow_down: Download Gutenberg node_modules"
-      buildkite-agent artifact download gutenberg_node_modules.tar.gz .
-      tar --extract --gzip --file=gutenberg_node_modules.tar.gz --directory=./gutenberg
-
-      echo "--- :arrow_up: Download Gutenberg components node_modules"
-      buildkite-agent artifact download gutenberg_components_node_modules.tar.gz .
-      tar --extract --gzip --file=gutenberg_components_node_modules.tar.gz --directory=./gutenberg/packages/components
-
-      echo "--- :arrow_down: Download Jetpack node_modules"
-      buildkite-agent artifact download jetpack_node_modules.tar.gz .
-      tar --extract --gzip --file=jetpack_node_modules.tar.gz --directory=./jetpack
-
-      echo "--- :arrow_up: Download i18n cache"
-      buildkite-agent artifact download i18n_cache.tar.gz .
-      tar --extract --gzip --file=i18n_cache.tar.gz --directory=.
-
-      echo "--- :arrow_up: Download pnpm store"
-      # On a macOS machine, this would be ~/Library/pnpm/store/v3
-      buildkite-agent artifact download pnpm_store.tar.gz .
-      tar --extract --gzip --file=pnpm_store.tar.gz --directory=/root
+      node .buildkite/download-caches.js
 
       echo "--- :bug: Check npm artifacts (after downloading caches)"
       set -x
