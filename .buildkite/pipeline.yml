@@ -50,6 +50,10 @@ steps:
       tar --create --gzip --file=gutenberg_node_modules.tar.gz --directory=./gutenberg node_modules
       buildkite-agent artifact upload gutenberg_node_modules.tar.gz
 
+      echo "--- :arrow_up: Upload Gutenberg components node_modules"
+      tar --create --gzip --file=gutenberg_components_node_modules.tar.gz --directory=./gutenberg/packages/components node_modules
+      buildkite-agent artifact upload gutenberg_components_node_modules.tar.gz
+
       echo "--- :arrow_up: Upload Jetpack node_modules"
       tar --create --gzip --file=jetpack_node_modules.tar.gz --directory=./jetpack node_modules
       buildkite-agent artifact upload jetpack_node_modules.tar.gz
@@ -76,6 +80,7 @@ steps:
       ls -a /root/.npm
       [[ -d node_modules ]] && ls node_modules || echo "--- :skull_and_crossbones: node_modules not present"
       [[ -d gutenberg/node_modules ]] && ls gutenberg/node_modules || echo "--- :skull_and_crossbones: gutenberg/node_modules not present"
+      [[ -d gutenberg/packages/components/node_modules ]] && ls gutenberg/packages/components/node_modules || echo "--- :skull_and_crossbones: gutenberg/packages/components/node_modules not present"
       [[ -d jetpack/node_modules ]] && ls jetpack/node_modules || echo "--- :skull_and_crossbones: jetpack/node_modules not present"
       [[ -d src/i18n-cache ]] && ls src/i18n-cache || echo "--- :skull_and_crossbones: src/i18n-cache not present"
       # On a macOS machine, this would be ~/Library/pnpm/store/v3
@@ -99,6 +104,10 @@ steps:
       buildkite-agent artifact download gutenberg_node_modules.tar.gz .
       tar --extract --gzip --file=gutenberg_node_modules.tar.gz --directory=./gutenberg
 
+      echo "--- :arrow_up: Download Gutenberg components node_modules"
+      buildkite-agent artifact download gutenberg_components_node_modules.tar.gz .
+      tar --extract --gzip --file=gutenberg_components_node_modules.tar.gz --directory=./gutenberg/packages/components
+
       echo "--- :arrow_down: Download Jetpack node_modules"
       buildkite-agent artifact download jetpack_node_modules.tar.gz .
       tar --extract --gzip --file=jetpack_node_modules.tar.gz --directory=./jetpack
@@ -119,6 +128,7 @@ steps:
       [[ -d node_modules ]] && ls node_modules || echo "--- :skull_and_crossbones: node_modules not present"
       [[ -d jetpack/node_modules ]] && ls jetpack/node_modules || echo "--- :skull_and_crossbones: jetpack/node_modules not present"
       [[ -d gutenberg/node_modules ]] && ls gutenberg/node_modules || echo "--- :skull_and_crossbones: gutenberg/node_modules not present"
+      [[ -d gutenberg/packages/components/node_modules ]] && ls gutenberg/packages/components/node_modules || echo "--- :skull_and_crossbones: gutenberg/packages/components/node_modules not present"
       [[ -d src/i18n-cache ]] && ls src/i18n-cache || echo "--- :skull_and_crossbones: src/i18n-cache not present"
       # On a macOS machine, this would be ~/Library/pnpm/store/v3
       [[ -d /root/.local/share/pnpm/store/v3 ]] && ls /root/.local/share/pnpm/store/v3 || echo "--- :skull_and_crossbones: /root/.local/share/pnpm/store/v3"
@@ -134,11 +144,11 @@ steps:
       [[ -d node_modules ]] && ls node_modules || echo "--- :skull_and_crossbones: node_modules not present"
       [[ -d jetpack/node_modules ]] && ls jetpack/node_modules || echo "--- :skull_and_crossbones: jetpack/node_modules not present"
       [[ -d gutenberg/node_modules ]] && ls gutenberg/node_modules || echo "--- :skull_and_crossbones: gutenberg/node_modules not present"
+      [[ -d gutenberg/packages/components/node_modules ]] && ls gutenberg/packages/components/node_modules || echo "--- :skull_and_crossbones: gutenberg/packages/components/node_modules not present"
       [[ -d src/i18n-cache ]] && ls src/i18n-cache || echo "--- :skull_and_crossbones: src/i18n-cache not present"
       # On a macOS machine, this would be ~/Library/pnpm/store/v3
       [[ -d /root/.local/share/pnpm/store/v3 ]] && ls /root/.local/share/pnpm/store/v3 || echo "--- :skull_and_crossbones: /root/.local/share/pnpm/store/v3"
       set +x
-
 
       echo "--- :node: Lint"
       CHECK_TESTS=false CHECK_CORRECTNESS=true ./bin/ci-checks-js.sh
