@@ -185,7 +185,7 @@ export const generateFetchMocks = ( {
 			},
 			response: {
 				description: 'video-description',
-				post_id: 1,
+				post_id: 34,
 				guid,
 				private_enabled_for_site: false,
 				title: 'video-title',
