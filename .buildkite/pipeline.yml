@@ -145,6 +145,7 @@ steps:
     key: "js-bundles"
     plugins:
       - *gb-mobile-docker-container
+      - automattic/git-shallow-clone
     command: |
         source /root/.bashrc
 
@@ -173,6 +174,7 @@ steps:
     key: "publish-react-native-aztec-android"
     plugins:
       - *publish-android-artifacts-docker-container
+      - automattic/git-shallow-clone
     command: |
         .buildkite/publish-react-native-aztec-android-artifacts.sh
 
@@ -181,6 +183,7 @@ steps:
       - "js-bundles"
       - "publish-react-native-aztec-android"
     plugins:
+      - automattic/git-shallow-clone
       - *publish-android-artifacts-docker-container
     command: |
         .buildkite/publish-react-native-bridge-android-artifacts.sh
