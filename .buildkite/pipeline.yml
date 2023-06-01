@@ -57,6 +57,17 @@ steps:
       - *gb-mobile-docker-container
       - automattic/git-shallow-clone
     command: |
+      echo "--- :bug: Check npm artifacts (fresh clone)"
+      set -x
+      ls -a /root
+      ls -a /root/.npm
+      [[ -d node_modules ]] && ls node_modules || echo "--- :skull_and_crossbones: node_modules not present"
+      [[ -d gutenberg/node_modules ]] && ls gutenberg/node_modules || echo "--- :skull_and_crossbones: gutenberg/node_modules not present"
+      [[ -d src/i18n-cache ]] && ls src/i18n-cache || echo "--- :skull_and_crossbones: src/i18n-cache not present"
+      # On a macOS machine, this would be ~/Library/pnpm/store/v3
+      [[ -d /root/.local/share/pnpm/store/v3 ]] && ls /root/.local/share/pnpm/store/v3 || echo "--- :skull_and_crossbones: /root/.local/share/pnpm/store/v3"
+      set +x
+
       source /root/.bashrc
 
       echo "--- :node: Setup Node environment"
@@ -74,25 +85,31 @@ steps:
       buildkite-agent artifact download gutenberg_node_modules.tar.gz .
       tar --extract --gzip --file=gutenberg_node_modules.tar.gz --directory=./gutenberg
 
-      echo "--- :bug: Check npm artifacts"
+      echo "--- :bug: Check npm artifacts (after downloading caches)"
       set -x
       ls -a /root
       ls -a /root/.npm
-      set +x
-
-      echo "--- :npm: Install dependencies (npm install)"
-      npm install --unsafe-perm --prefer-offline --no-audit --no-progress
-
-      echo "--- :bug: Check npm artifacts"
-      set -x
-      ls -a /root
-      ls -a /root/.npm
-      ls node_modules
+      [[ -d node_modules ]] && ls node_modules || echo "--- :skull_and_crossbones: node_modules not present"
       [[ -d gutenberg/node_modules ]] && ls gutenberg/node_modules || echo "--- :skull_and_crossbones: gutenberg/node_modules not present"
       [[ -d src/i18n-cache ]] && ls src/i18n-cache || echo "--- :skull_and_crossbones: src/i18n-cache not present"
       # On a macOS machine, this would be ~/Library/pnpm/store/v3
       [[ -d /root/.local/share/pnpm/store/v3 ]] && ls /root/.local/share/pnpm/store/v3 || echo "--- :skull_and_crossbones: /root/.local/share/pnpm/store/v3"
       set +x
+
+      echo "--- :npm: Install dependencies (npm install)"
+      npm install --unsafe-perm --prefer-offline --no-audit --no-progress
+
+      echo "--- :bug: Check npm artifacts (after npm install)"
+      set -x
+      ls -a /root
+      ls -a /root/.npm
+      [[ -d node_modules ]] && ls node_modules || echo "--- :skull_and_crossbones: node_modules not present"
+      [[ -d gutenberg/node_modules ]] && ls gutenberg/node_modules || echo "--- :skull_and_crossbones: gutenberg/node_modules not present"
+      [[ -d src/i18n-cache ]] && ls src/i18n-cache || echo "--- :skull_and_crossbones: src/i18n-cache not present"
+      # On a macOS machine, this would be ~/Library/pnpm/store/v3
+      [[ -d /root/.local/share/pnpm/store/v3 ]] && ls /root/.local/share/pnpm/store/v3 || echo "--- :skull_and_crossbones: /root/.local/share/pnpm/store/v3"
+      set +x
+
 
       echo "--- :node: Lint"
       CHECK_TESTS=false CHECK_CORRECTNESS=true ./bin/ci-checks-js.sh
