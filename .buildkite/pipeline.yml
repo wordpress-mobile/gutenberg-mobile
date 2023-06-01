@@ -81,9 +81,6 @@ steps:
       [[ -d /root/.local/share/pnpm/store/v3 ]] && ls /root/.local/share/pnpm/store/v3 || echo "--- :skull_and_crossbones: /root/.local/share/pnpm/store/v3"
       set +x
 
-      echo "--- :npm: Install dependencies (npm install) – SKIPPED 🤞"
-      # npm install --unsafe-perm --prefer-offline --no-audit --no-progress
-
       echo "--- :bug: Check npm artifacts (after npm install)"
       set -x
       ls -a /root
@@ -112,29 +109,7 @@ steps:
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
 
-      echo "--- :arrow_down: Download .npm cache"
-      buildkite-agent artifact download npm_cache.tar.gz .
-      tar --extract --gzip --file=npm_cache.tar.gz --directory=/root
-
-      echo "--- :bug: Check npm artifacts"
-      set -x
-      ls -a /root
-      ls -a /root/.npm
-      set +x
-
-      echo "--- :npm: Install dependencies (npm install)"
-      npm install --unsafe-perm --prefer-offline --no-audit --no-progress
-
-      echo "--- :bug: Check npm artifacts"
-      set -x
-      ls -a /root
-      ls -a /root/.npm
-      ls node_modules
-      [[ -d gutenberg/node_modules ]] && ls gutenberg/node_modules || echo "--- :skull_and_crossbones: gutenberg/node_modules not present"
-      [[ -d src/i18n-cache ]] && ls src/i18n-cache || echo "--- :skull_and_crossbones: src/i18n-cache not present"
-      # On a macOS machine, this would be ~/Library/pnpm/store/v3
-      [[ -d /root/.local/share/pnpm/store/v3 ]] && ls /root/.local/share/pnpm/store/v3 || echo "--- :skull_and_crossbones: /root/.local/share/pnpm/store/v3"
-      set +x
+      node .buildkite/download-caches.js
 
       echo "--- :node: Unit Tests"
       TEST_RN_PLATFORM=android CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
@@ -153,29 +128,8 @@ steps:
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
 
-      echo "--- :arrow_down: Download .npm cache"
-      buildkite-agent artifact download npm_cache.tar.gz .
-      tar --extract --gzip --file=npm_cache.tar.gz --directory=/root
 
-      echo "--- :bug: Check npm artifacts"
-      set -x
-      ls -a /root
-      ls -a /root/.npm
-      set +x
-
-      echo "--- :npm: Install dependencies (npm install)"
-      npm install --unsafe-perm --prefer-offline --no-audit --no-progress
-
-      echo "--- :bug: Check npm artifacts"
-      set -x
-      ls -a /root
-      ls -a /root/.npm
-      ls node_modules
-      [[ -d gutenberg/node_modules ]] && ls gutenberg/node_modules || echo "--- :skull_and_crossbones: gutenberg/node_modules not present"
-      [[ -d src/i18n-cache ]] && ls src/i18n-cache || echo "--- :skull_and_crossbones: src/i18n-cache not present"
-      # On a macOS machine, this would be ~/Library/pnpm/store/v3
-      [[ -d /root/.local/share/pnpm/store/v3 ]] && ls /root/.local/share/pnpm/store/v3 || echo "--- :skull_and_crossbones: /root/.local/share/pnpm/store/v3"
-      set +x
+      node .buildkite/download-caches.js
 
       echo "--- :node: Unit Tests"
       TEST_RN_PLATFORM=ios CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
@@ -184,8 +138,10 @@ steps:
 
   - label: "Build JS Bundles"
     depends_on:
-      - "unit-tests-android"
-      - "unit-tests-ios"
+      - build-npm
+      # Don't wait for tests while testing the setup
+      # - "unit-tests-android"
+      # - "unit-tests-ios"
     key: "js-bundles"
     plugins:
       - *gb-mobile-docker-container
@@ -195,14 +151,7 @@ steps:
         echo "--- :node: Setup Node environment"
         nvm install && nvm use
 
-        echo "--- :arrow_down: Download .npm cache"
-        buildkite-agent artifact download npm_cache.tar.gz .
-        tar --extract --gzip --file=npm_cache.tar.gz --directory=/root
-
-        # echo "--- :npm: Download cached dependencies"
-        # buildkite-agent artifact download node_modules.tar.gz .
-        # tar --extract --gzip --file=node_modules.tar.gz
-        npm install --unsafe-perm --prefer-offline --no-audit --no-progress
+        node .buildkite/download-caches.js
 
         echo "--- :package: Run bundle prep work"
         npm run prebundle:js
