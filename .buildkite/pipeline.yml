@@ -114,8 +114,8 @@ steps:
       [[ -d /root/.local/share/pnpm/store/v3 ]] && ls /root/.local/share/pnpm/store/v3 || echo "--- :skull_and_crossbones: /root/.local/share/pnpm/store/v3"
       set +x
 
-      echo "--- :npm: Install dependencies (npm install)"
-      npm install --unsafe-perm --prefer-offline --no-audit --no-progress
+      echo "--- :npm: Install dependencies (npm install) – SKIPPED 🤞"
+      # npm install --unsafe-perm --prefer-offline --no-audit --no-progress
 
       echo "--- :bug: Check npm artifacts (after npm install)"
       set -x
