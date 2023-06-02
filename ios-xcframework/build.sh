@@ -143,23 +143,3 @@ tar -czf "$ARCHIVE_PATH" -C "$XCFRAMEWORKS_DIR" \
   "$DUMMY_FILE_NAME"
 
 echo "Gutenberg XCFrameworks archive generated at $ARCHIVE_PATH"
-
-# In parallel to the project to ship Gutenberg as an XCFramework we are also
-# experimenting with adding React Native into other apps with an XCFramework.
-#
-# For convenience, we produce a ZIP with all the React Native XCFrameworks
-# here, even though it would be more efficient to have a dedicated project that
-# mirrors React Native and builds new one whenever a new version is released.
-#
-# In this current implementation, the approach is wasteful because we are
-# publishing the same ZIP every time. A possible imporvement would be to track
-# the RN version and check against the storage medium to see if an archive for
-# that version is already available.
-log 'compression' 'Zipping React XCFrameworks'
-ZIP_PATH=$XCFRAMEWORKS_DIR/ReactNative.zip
-zip -rq "$ZIP_PATH" $XCFRAMEWORKS_DIR -x \
-  $XCFRAMEWORKS_DIR/Aztec.xcframework \
-  $XCFRAMEWORKS_DIR/Gutenberg.xcframework \
-  $XCFRAMEWORKS_DIR/RNTAztecView.xcframework \
-  $XCFRAMEWORKS_DIR/Pods_Gutenberg.xcframework
-echo "React Native XCFrameworks ZIP generated at $ZIP_PATH"
