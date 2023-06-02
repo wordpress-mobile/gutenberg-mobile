@@ -39,12 +39,6 @@ steps:
       echo "--- :npm: Build global dependencies cache"
       npm ci --unsafe-perm --no-audit --no-progress
 
-      echo "--- :mag: What's going on inside Jetpack?"
-      set -x
-      ls -l jetpack/node_modules
-      ls -l jetpack/node_modules/.pnpm
-      set +x
-
       node .buildkite/upload-caches.js
 
   - label: Lint
@@ -54,51 +48,12 @@ steps:
       - *gb-mobile-docker-container
       - automattic/git-shallow-clone
     command: |
-      echo "--- :bug: Check npm artifacts (fresh clone)"
-      set -x
-      ls -a /root
-      ls -a /root/.npm
-      [[ -d node_modules ]] && ls node_modules || echo "--- :skull_and_crossbones: node_modules not present"
-      [[ -d gutenberg/node_modules ]] && ls gutenberg/node_modules || echo "--- :skull_and_crossbones: gutenberg/node_modules not present"
-      [[ -d gutenberg/packages/components/node_modules ]] && ls gutenberg/packages/components/node_modules || echo "--- :skull_and_crossbones: gutenberg/packages/components/node_modules not present"
-      [[ -d jetpack/node_modules ]] && ls jetpack/node_modules || echo "--- :skull_and_crossbones: jetpack/node_modules not present"
-      [[ -d src/i18n-cache ]] && ls src/i18n-cache || echo "--- :skull_and_crossbones: src/i18n-cache not present"
-      # On a macOS machine, this would be ~/Library/pnpm/store/v3
-      [[ -d /root/.local/share/pnpm/store/v3 ]] && ls /root/.local/share/pnpm/store/v3 || echo "--- :skull_and_crossbones: /root/.local/share/pnpm/store/v3"
-      set +x
-
       source /root/.bashrc
 
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
 
       node .buildkite/download-caches.js
-
-      echo "--- :bug: Check npm artifacts (after downloading caches)"
-      set -x
-      ls -a /root
-      ls -a /root/.npm
-      [[ -d node_modules ]] && ls node_modules || echo "--- :skull_and_crossbones: node_modules not present"
-      [[ -d jetpack/node_modules ]] && ls jetpack/node_modules || echo "--- :skull_and_crossbones: jetpack/node_modules not present"
-      [[ -d gutenberg/node_modules ]] && ls gutenberg/node_modules || echo "--- :skull_and_crossbones: gutenberg/node_modules not present"
-      [[ -d gutenberg/packages/components/node_modules ]] && ls gutenberg/packages/components/node_modules || echo "--- :skull_and_crossbones: gutenberg/packages/components/node_modules not present"
-      [[ -d src/i18n-cache ]] && ls src/i18n-cache || echo "--- :skull_and_crossbones: src/i18n-cache not present"
-      # On a macOS machine, this would be ~/Library/pnpm/store/v3
-      [[ -d /root/.local/share/pnpm/store/v3 ]] && ls /root/.local/share/pnpm/store/v3 || echo "--- :skull_and_crossbones: /root/.local/share/pnpm/store/v3"
-      set +x
-
-      echo "--- :bug: Check npm artifacts (after npm install)"
-      set -x
-      ls -a /root
-      ls -a /root/.npm
-      [[ -d node_modules ]] && ls node_modules || echo "--- :skull_and_crossbones: node_modules not present"
-      [[ -d jetpack/node_modules ]] && ls jetpack/node_modules || echo "--- :skull_and_crossbones: jetpack/node_modules not present"
-      [[ -d gutenberg/node_modules ]] && ls gutenberg/node_modules || echo "--- :skull_and_crossbones: gutenberg/node_modules not present"
-      [[ -d gutenberg/packages/components/node_modules ]] && ls gutenberg/packages/components/node_modules || echo "--- :skull_and_crossbones: gutenberg/packages/components/node_modules not present"
-      [[ -d src/i18n-cache ]] && ls src/i18n-cache || echo "--- :skull_and_crossbones: src/i18n-cache not present"
-      # On a macOS machine, this would be ~/Library/pnpm/store/v3
-      [[ -d /root/.local/share/pnpm/store/v3 ]] && ls /root/.local/share/pnpm/store/v3 || echo "--- :skull_and_crossbones: /root/.local/share/pnpm/store/v3"
-      set +x
 
       echo "--- :node: Lint"
       CHECK_TESTS=false CHECK_CORRECTNESS=true ./bin/ci-checks-js.sh
@@ -116,18 +71,6 @@ steps:
       nvm install && nvm use
 
       node .buildkite/download-caches.js
-
-      echo "--- :mag: What's going on inside Jetpack?"
-      set -x
-      ls -l jetpack/node_modules
-      ls -l jetpack/node_modules/.pnpm
-      set +x
-
-      echo "--- :pnpm: :jetpack: Setup pnpm symlinks - (SKIPPED AS A TEST)"
-      ./bin/run-jetpack-command.sh "install --ignore-scripts"
-
-      echo "--- :globe_with_meridians: Propagate i18n from local cache to submodules"
-      ./bin/i18n-check-cache.sh
 
       echo "--- :node: Unit Tests"
       TEST_RN_PLATFORM=android CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
@@ -147,12 +90,6 @@ steps:
       nvm install && nvm use
 
       node .buildkite/download-caches.js
-
-      echo "--- :pnpm: :jetpack: Setup pnpm symlinks"
-      ./bin/run-jetpack-command.sh "install --ignore-scripts"
-
-      echo "--- :globe_with_meridians: Propagate i18n from local cache to submodules"
-      ./bin/i18n-check-cache.sh
 
       echo "--- :node: Unit Tests"
       TEST_RN_PLATFORM=ios CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
@@ -176,12 +113,6 @@ steps:
         nvm install && nvm use
 
         node .buildkite/download-caches.js
-
-        echo "--- :pnpm: :jetpack: Setup pnpm symlinks"
-        ./bin/run-jetpack-command.sh "install --ignore-scripts"
-
-        echo "--- :globe_with_meridians: Propagate i18n from local cache to submodules"
-        ./bin/i18n-check-cache.sh
 
         echo "--- :package: Run bundle prep work"
         npm run prebundle:js

@@ -9,3 +9,13 @@ cachesToUpload.forEach(item => {
   console.log(execSync(`buildkite-agent artifact download ${item.archive_name} .`, { encoding: 'utf8' }));
   console.log(execSync(`tar --extract --gzip --file=${item.archive_name} --directory=${item.folder_to_archive_basedir} ${item.folder_to_archive}`, { encoding: 'utf8' }));
 });
+
+// Some of the cache data needs to be connected to the submodule projects.
+//
+// The npm postinstall hooks normally does that, but we obviously don't run it when using cached data.
+
+console.log("--- :pnpm: :jetpack: Setup pnpm symlinks");
+console.log(execSync("./bin/run-jetpack-command.sh 'install --ignore-scripts'"));
+
+console.log("--- :globe_with_meridians: Propagate i18n from local cache to submodules");
+console.log(execSync("./bin/i18n-check-cache.sh"));
