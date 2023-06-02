@@ -126,6 +126,9 @@ steps:
       echo "--- :pnpm: :jetpack: Setup pnpm symlinks - (SKIPPED AS A TEST)"
       ./bin/run-jetpack-command.sh "install --ignore-scripts"
 
+      echo "--- :globe_with_meridians: Propagate i18n from local cache to submodules"
+      ./bin/i18n-check-cache.sh
+
       echo "--- :node: Unit Tests"
       TEST_RN_PLATFORM=android CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
     artifact_paths:
@@ -147,6 +150,9 @@ steps:
 
       echo "--- :pnpm: :jetpack: Setup pnpm symlinks"
       ./bin/run-jetpack-command.sh "install --ignore-scripts"
+
+      echo "--- :globe_with_meridians: Propagate i18n from local cache to submodules"
+      ./bin/i18n-check-cache.sh
 
       echo "--- :node: Unit Tests"
       TEST_RN_PLATFORM=ios CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
