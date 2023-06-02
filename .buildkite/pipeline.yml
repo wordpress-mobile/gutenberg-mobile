@@ -123,7 +123,7 @@ steps:
       ls -l jetpack/node_modules/.pnpm
       set +x
 
-      echo "--- :pnpm: :jetpack: Maybe we need to creat all the pnpm symlinks?"
+      echo "--- :pnpm: :jetpack: Setup pnpm symlinks - (SKIPPED AS A TEST)"
       ./bin/run-jetpack-command.sh "install --ignore-scripts"
 
       echo "--- :node: Unit Tests"
@@ -143,8 +143,10 @@ steps:
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
 
-
       node .buildkite/download-caches.js
+
+      echo "--- :pnpm: :jetpack: Setup pnpm symlinks"
+      ./bin/run-jetpack-command.sh "install --ignore-scripts"
 
       echo "--- :node: Unit Tests"
       TEST_RN_PLATFORM=ios CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
@@ -168,6 +170,9 @@ steps:
         nvm install && nvm use
 
         node .buildkite/download-caches.js
+
+        echo "--- :pnpm: :jetpack: Setup pnpm symlinks"
+        ./bin/run-jetpack-command.sh "install --ignore-scripts"
 
         echo "--- :package: Run bundle prep work"
         npm run prebundle:js
