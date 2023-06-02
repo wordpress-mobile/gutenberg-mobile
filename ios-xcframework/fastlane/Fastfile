@@ -82,7 +82,7 @@ def upload_commit_podspec_to_s3(commit:)
     end
   PODSPEC
 
-  Dir.tmpdir do |tmp_dir|
+  Dir.mktmpdir do |tmp_dir|
     podspec_path = File.join(tmp_dir, 'podspec')
     File.open(podspec_path, 'w') do |file|
       file.write(podspec)
