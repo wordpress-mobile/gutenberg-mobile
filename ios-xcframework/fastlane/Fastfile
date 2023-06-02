@@ -88,6 +88,8 @@ def upload_commit_podspec_to_s3(commit:)
       file.write(podspec)
     end
 
+    puts "+++ :s3: Uploading to Gutenberg-#{commit}.podspec"
+
     upload_to_s3(
       bucket: 'a8c-apps-public-artifacts',
       key: "Gutenberg-#{commit}.podspec",
