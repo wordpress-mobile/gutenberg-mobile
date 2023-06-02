@@ -123,6 +123,9 @@ steps:
       ls -l jetpack/node_modules/.pnpm
       set +x
 
+      echo "--- :pnpm: :jetpack: Maybe we need to creat all the pnpm symlinks?"
+      ./bin/run-jetpack-command.sh "install --ignore-scripts"
+
       echo "--- :node: Unit Tests"
       TEST_RN_PLATFORM=android CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
     artifact_paths:
