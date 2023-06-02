@@ -11,27 +11,38 @@
     "folder_to_archive_basedir": ".",
     "archive_name": "node_modules_cache.tar.gz"
   },
-  { "display_name": "Gutenberg node modules",
+  {
+    "display_name": "Gutenberg node modules",
     "folder_to_archive": "node_modules",
     "folder_to_archive_basedir": "./gutenberg",
     "archive_name": "gutenberg_node_modules.tar.gz"
   },
-  { "display_name": "Gutenberg components node modules",
+  {
+    "display_name": "Gutenberg components node modules",
     "folder_to_archive": "node_modules",
     "folder_to_archive_basedir": "./gutenberg/packages/components",
     "archive_name": "gutenberg_components_node_modules.tar.gz"
   },
-  { "display_name": "Jetpack node modules",
+  {
+    "display_name": "Jetpack node modules",
     "folder_to_archive": "node_modules",
     "folder_to_archive_basedir": "./jetpack",
     "archive_name": "jetpack_node_modules.tar.gz"
   },
-  { "display_name": "i18n cache",
+  {
+    "display_name": "Jetpack js-tools node modules",
+    "folder_to_archive": "node_modules",
+    "folder_to_archive_basedir": "./jetpack/tools/js-tools",
+    "archive_name": "jetpack_tools_node_modules.tar.gz"
+  },
+  {
+    "display_name": "i18n cache",
     "folder_to_archive": "i18n-cache",
     "folder_to_archive_basedir": "./src",
     "archive_name": "i18n_cache.tar.gz"
   },
-  { "display_name": "pnpm cache",
+  {
+    "display_name": "pnpm cache",
     "folder_to_archive": ".local/share/pnpm/store/v3",
     "folder_to_archive_basedir": "/root",
     "archive_name": "pnpm_store.tar.gz"
