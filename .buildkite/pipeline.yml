@@ -41,8 +41,8 @@ steps:
 
       echo "--- :mag: What's going on inside Jetpack?"
       set -x
-      ls -a jetpack/node_modules
-      ls -a jetpack/node_modules/.pnpm
+      ls -l jetpack/node_modules
+      ls -l jetpack/node_modules/.pnpm
       set +x
 
       node .buildkite/upload-caches.js
@@ -119,8 +119,8 @@ steps:
 
       echo "--- :mag: What's going on inside Jetpack?"
       set -x
-      ls -a jetpack/node_modules
-      ls -a jetpack/node_modules/.pnpm
+      ls -l jetpack/node_modules
+      ls -l jetpack/node_modules/.pnpm
       set +x
 
       echo "--- :node: Unit Tests"
