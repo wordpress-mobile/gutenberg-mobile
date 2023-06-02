@@ -39,7 +39,7 @@ lane :upload_xcframework_to_s3 do |options|
 end
 
 lane :t do
-  upload_commit_podspec_to_s3(commit: 'a47f194103ad5bd4b970f756c0c8608f4d0fcb3b')
+  upload_commit_podspec_to_s3(commit: 'b24b84849081f4d3846f2c1a5868764283be5aad')
 end
 
 def upload_xcframework_to_s3(path:, name_on_s3:)
