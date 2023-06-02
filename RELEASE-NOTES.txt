@@ -3,6 +3,10 @@ Unreleased
 * [*] [internal] Upgrade compile and target sdk version to Android API 33 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5789]
 * [*] Display lock icon in disabled state of `Cell` component [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5798]
 
+1.96.1
+---
+* [**] Fix Android-only issue related to block toolbar not being displayed on some blocks in UBE [https://github.com/WordPress/gutenberg/pull/51131]
+
 1.96.0
 ---
 * [*] Add disabled style to `Cell` component [https://github.com/WordPress/gutenberg/pull/50665]
