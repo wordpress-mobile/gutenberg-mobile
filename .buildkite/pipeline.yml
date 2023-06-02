@@ -180,6 +180,9 @@ steps:
         echo "--- :pnpm: :jetpack: Setup pnpm symlinks"
         ./bin/run-jetpack-command.sh "install --ignore-scripts"
 
+        echo "--- :globe_with_meridians: Propagate i18n from local cache to submodules"
+        ./bin/i18n-check-cache.sh
+
         echo "--- :package: Run bundle prep work"
         npm run prebundle:js
 
