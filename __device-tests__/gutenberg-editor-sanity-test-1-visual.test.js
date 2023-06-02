@@ -10,6 +10,7 @@ const {
 	toggleDarkMode,
 	isEditorVisible,
 } = e2eUtils;
+import { NESTED_COLUMNS_3_LEVELS } from './test-editor-data';
 
 describe( 'Gutenberg Editor - Test Suite 1', () => {
 	describe( 'Columns block', () => {
@@ -294,6 +295,27 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			expect( screenshot ).toMatchImageSnapshot();
 
 			await editorPage.dismissBottomSheet();
+			await editorPage.removeBlock();
+		} );
+
+		it( 'allows deep nesting to at least 3 levels', async () => {
+			await editorPage.setHtmlContent( NESTED_COLUMNS_3_LEVELS );
+
+			// Wait for the block to be rendered
+			await editorPage.driver.sleep( 3000 );
+
+			// Visual test check
+			const screenshot = await takeScreenshot();
+			expect( screenshot ).toMatchImageSnapshot();
+
+			// Remove block
+			const columnsBlock = await editorPage.getBlockAtPosition(
+				blockNames.columns
+			);
+			await columnsBlock.click();
+
+			await editorPage.moveBlockSelectionUp( { toRoot: true } );
+
 			await editorPage.removeBlock();
 		} );
 	} );
