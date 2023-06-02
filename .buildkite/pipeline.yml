@@ -39,6 +39,12 @@ steps:
       echo "--- :npm: Build global dependencies cache"
       npm ci --unsafe-perm --no-audit --no-progress
 
+      echo "--- :mag: What's going on inside Jetpack?"
+      set -x
+      ls -a jetpack/node_modules
+      ls -a jetpack/node_modules/.pnpm
+      set +x
+
       node .buildkite/upload-caches.js
 
   - label: Lint
@@ -110,6 +116,12 @@ steps:
       nvm install && nvm use
 
       node .buildkite/download-caches.js
+
+      echo "--- :mag: What's going on inside Jetpack?"
+      set -x
+      ls -a jetpack/node_modules
+      ls -a jetpack/node_modules/.pnpm
+      set +x
 
       echo "--- :node: Unit Tests"
       TEST_RN_PLATFORM=android CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
