@@ -38,6 +38,10 @@ lane :upload_xcframework_to_s3 do |options|
   )
 end
 
+lane :t do
+  upload_commit_podspec_to_s3(commit: 'a47f194103ad5bd4b970f756c0c8608f4d0fcb3b')
+end
+
 def upload_xcframework_to_s3(path:, name_on_s3:)
   upload_to_s3(
     bucket: 'a8c-apps-public-artifacts',
@@ -46,4 +50,50 @@ def upload_xcframework_to_s3(path:, name_on_s3:)
     auto_prefix: false,
     skip_if_exists: false
   )
+end
+
+def upload_commit_podspec_to_s3(commit:)
+  # TODO: Read the proper podspec once support for the tag is available and replace the appropriate fields
+  podspec = <<~PODSPEC
+    # frozen_string_literal: true
+
+    Pod::Spec.new do |s|
+      s.name = 'Gutenberg'
+      s.version = '1.0.0' # The value here is irrelevant, but required
+      s.summary = 'A spec to help integrating the Gutenberg XCFramework'
+      s.homepage = 'https://apps.wordpress.com'
+      s.license = { type: 'GPL' }
+      s.authors = 'Automattic'
+
+      s.ios.deployment_target = '13.0' # TODO: Read from common source
+      s.swift_version = '5.0' # TODO: read from common source
+
+      s.requires_arc = true # TODO: Can this be omitted?
+
+      s.source = { http: "https://d2twmm2nzpx3bg.cloudfront.net/Gutenberg-#{commit}.tar.gz"  }
+
+      s.vendored_frameworks = [
+        'Frameworks/Aztec.xcframework',
+        'Frameworks/Gutenberg.xcframework',
+        'Frameworks/React.xcframework',
+        'Frameworks/RNTAztecView.xcframework',
+        'Frameworks/yoga.xcframework'
+      ]
+    end
+  PODSPEC
+
+  Dir.tmpdir do |tmp_dir|
+    podspec_path = File.join(tmp_dir, 'podspec')
+    File.open(podspec_path, 'w') do |file|
+      file.write(podspec)
+    end
+
+    upload_to_s3(
+      bucket: 'a8c-apps-public-artifacts',
+      key: "Gutenberg-#{commit}.podspec",
+      file: podspec_path,
+      auto_prefix: false,
+      skip_if_exists: false
+    )
+  end
 end
