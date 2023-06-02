@@ -29,6 +29,15 @@ gutenbergMetroConfigCopy.resolver.resolveRequest = (
 	moduleName,
 	platform
 ) => {
+	// Due to multiple React versions available in the project we force it to use the main one.
+	if ( moduleName === 'react' ) {
+		return metroResolver.resolve(
+			context,
+			path.join( __dirname, '/gutenberg/node_modules', moduleName ),
+			platform
+		);
+	}
+
 	// Add the module to the extra node modules object if the module is not on a local path.
 	if ( ! ( moduleName.startsWith( '.' ) || moduleName.startsWith( '/' ) ) ) {
 		const [ namespace, module = '' ] = moduleName.split( '/' );
