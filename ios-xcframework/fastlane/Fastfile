@@ -2,7 +2,9 @@
 
 default_platform :ios
 
-PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
+XCFRAMEWORK_PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
+
+S3_BUCKET = 'a8c-apps-public-artifacts'
 
 before_all do
   # Ensure we use the latest version of the toolkit
@@ -11,7 +13,7 @@ end
 
 lane :upload_xcframework_to_s3 do |options|
   archive_type = 'tar.gz'
-  xcframework_archive_path = File.join(PROJECT_ROOT_FOLDER, "build/xcframeworks/Gutenberg.#{archive_type}")
+  xcframework_archive_path = File.join(XCFRAMEWORK_PROJECT_ROOT_FOLDER, "build/xcframeworks/Gutenberg.#{archive_type}")
 
   unless File.exist? xcframework_archive_path
     UI.user_error! "Could not find XCFramework archive to upload at #{xcframework_archive_path}"
@@ -44,7 +46,7 @@ end
 
 def upload_xcframework_to_s3(path:, name_on_s3:)
   upload_to_s3(
-    bucket: 'a8c-apps-public-artifacts',
+    bucket: S3_BUCKET,
     key: name_on_s3,
     file: path,
     auto_prefix: false,
@@ -53,45 +55,26 @@ def upload_xcframework_to_s3(path:, name_on_s3:)
 end
 
 def upload_commit_podspec_to_s3(commit:)
-  # TODO: Read the proper podspec once support for the tag is available and replace the appropriate fields
-  podspec = <<~PODSPEC
-    # frozen_string_literal: true
+  ios_version = '13.0'
+  swift_version = '5.0'
+  gutenberg_package = JSON.parse(File.read(File.join(XCFRAMEWORK_PROJECT_ROOT_FOLDER, '..', 'package.json')))
+  version = gutenberg_package['version']
+  # This ought to be read from package.json, but there isn't one at the moment.
+  # license = GUTENBERG_PACKAGE['license']
+  license = 'GPL'
+  id = commit
+  context = binding
 
-    Pod::Spec.new do |s|
-      s.name = 'Gutenberg'
-      s.version = '1.0.0' # The value here is irrelevant, but required
-      s.summary = 'A spec to help integrating the Gutenberg XCFramework'
-      s.homepage = 'https://apps.wordpress.com'
-      s.license = { type: 'GPL' }
-      s.authors = 'Automattic'
-
-      s.ios.deployment_target = '13.0' # TODO: Read from common source
-      s.swift_version = '5.0' # TODO: read from common source
-
-      s.requires_arc = true # TODO: Can this be omitted?
-
-      s.source = { http: "https://d2twmm2nzpx3bg.cloudfront.net/Gutenberg-#{commit}.tar.gz"  }
-
-      s.vendored_frameworks = [
-        'Frameworks/Aztec.xcframework',
-        'Frameworks/Gutenberg.xcframework',
-        'Frameworks/React.xcframework',
-        'Frameworks/RNTAztecView.xcframework',
-        'Frameworks/yoga.xcframework'
-      ]
-    end
-  PODSPEC
+  podspec_erb = ERB.new(File.read(File.join(XCFRAMEWORK_PROJECT_ROOT_FOLDER, 'podspec.erb')))
 
   Dir.mktmpdir do |tmp_dir|
     podspec_path = File.join(tmp_dir, 'podspec')
     File.open(podspec_path, 'w') do |file|
-      file.write(podspec)
+      file.write(podspec_erb.result(context))
     end
 
-    puts "+++ :s3: Uploading to Gutenberg-#{commit}.podspec"
-
     upload_to_s3(
-      bucket: 'a8c-apps-public-artifacts',
+      bucket: S3_BUCKET,
       key: "Gutenberg-#{commit}.podspec",
       file: podspec_path,
       auto_prefix: false,
