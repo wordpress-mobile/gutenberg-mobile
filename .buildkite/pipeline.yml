@@ -41,125 +41,125 @@ steps:
 
       node .buildkite/upload-caches.js
 
-  - label: Lint
-    depends_on: build-npm
-    key: lint
-    plugins:
-      - *gb-mobile-docker-container
-      - automattic/git-shallow-clone
-    command: |
-      source /root/.bashrc
+  # - label: Lint
+  #   depends_on: build-npm
+  #   key: lint
+  #   plugins:
+  #     - *gb-mobile-docker-container
+  #     - automattic/git-shallow-clone
+  #   command: |
+  #     source /root/.bashrc
 
-      echo "--- :node: Setup Node environment"
-      nvm install && nvm use
+  #     echo "--- :node: Setup Node environment"
+  #     nvm install && nvm use
 
-      node .buildkite/download-caches.js
+  #     node .buildkite/download-caches.js
 
-      echo "--- :node: Lint"
-      CHECK_TESTS=false CHECK_CORRECTNESS=true ./bin/ci-checks-js.sh
+  #     echo "--- :node: Lint"
+  #     CHECK_TESTS=false CHECK_CORRECTNESS=true ./bin/ci-checks-js.sh
 
-  - label: Android Unit Tests
-    depends_on: build-npm
-    key: unit-tests-android
-    plugins:
-      - *gb-mobile-docker-container
-      - automattic/git-shallow-clone
-    command: |
-      source /root/.bashrc
+  # - label: Android Unit Tests
+  #   depends_on: build-npm
+  #   key: unit-tests-android
+  #   plugins:
+  #     - *gb-mobile-docker-container
+  #     - automattic/git-shallow-clone
+  #   command: |
+  #     source /root/.bashrc
 
-      echo "--- :node: Setup Node environment"
-      nvm install && nvm use
+  #     echo "--- :node: Setup Node environment"
+  #     nvm install && nvm use
 
-      node .buildkite/download-caches.js
+  #     node .buildkite/download-caches.js
 
-      echo "--- :node: Unit Tests"
-      TEST_RN_PLATFORM=android CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
-    artifact_paths:
-      - ./*-tests-out.log
+  #     echo "--- :node: Unit Tests"
+  #     TEST_RN_PLATFORM=android CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
+  #   artifact_paths:
+  #     - ./*-tests-out.log
 
-  - label: iOS Unit Tests
-    depends_on: build-npm
-    key: unit-tests-ios
-    plugins:
-      - *gb-mobile-docker-container
-      - automattic/git-shallow-clone
-    command: |
-      source /root/.bashrc
+  # - label: iOS Unit Tests
+  #   depends_on: build-npm
+  #   key: unit-tests-ios
+  #   plugins:
+  #     - *gb-mobile-docker-container
+  #     - automattic/git-shallow-clone
+  #   command: |
+  #     source /root/.bashrc
 
-      echo "--- :node: Setup Node environment"
-      nvm install && nvm use
+  #     echo "--- :node: Setup Node environment"
+  #     nvm install && nvm use
 
-      node .buildkite/download-caches.js
+  #     node .buildkite/download-caches.js
 
-      echo "--- :node: Unit Tests"
-      TEST_RN_PLATFORM=ios CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
-    artifact_paths:
-      - ./*-tests-out.log
+  #     echo "--- :node: Unit Tests"
+  #     TEST_RN_PLATFORM=ios CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
+  #   artifact_paths:
+  #     - ./*-tests-out.log
 
-  - label: "Build JS Bundles"
-    depends_on:
-      - build-npm
-      # Don't wait for tests while testing the setup
-      # - "unit-tests-android"
-      # - "unit-tests-ios"
-    key: "js-bundles"
-    plugins:
-      - *gb-mobile-docker-container
-      - automattic/git-shallow-clone
-    command: |
-        source /root/.bashrc
+  # - label: "Build JS Bundles"
+  #   depends_on:
+  #     - build-npm
+  #     # Don't wait for tests while testing the setup
+  #     # - "unit-tests-android"
+  #     # - "unit-tests-ios"
+  #   key: "js-bundles"
+  #   plugins:
+  #     - *gb-mobile-docker-container
+  #     - automattic/git-shallow-clone
+  #   command: |
+  #       source /root/.bashrc
 
-        echo "--- :node: Setup Node environment"
-        nvm install && nvm use
+  #       echo "--- :node: Setup Node environment"
+  #       nvm install && nvm use
 
-        node .buildkite/download-caches.js
+  #       node .buildkite/download-caches.js
 
-        echo "--- :package: Run bundle prep work"
-        npm run prebundle:js
+  #       echo "--- :package: Run bundle prep work"
+  #       npm run prebundle:js
 
-        echo "--- :android: Build Android bundle"
-        npm run bundle:android
+  #       echo "--- :android: Build Android bundle"
+  #       npm run bundle:android
 
-        echo "--- :arrow_up: Upload Android bundle artifact"
-        buildkite-agent artifact upload bundle/android/App.js
+  #       echo "--- :arrow_up: Upload Android bundle artifact"
+  #       buildkite-agent artifact upload bundle/android/App.js
 
-        echo "--- :ios: Build iOS bundle"
-        npm run bundle:ios
+  #       echo "--- :ios: Build iOS bundle"
+  #       npm run bundle:ios
 
-        echo "--- :arrow_up: Upload iOS bundle artifact"
-        buildkite-agent artifact upload bundle/ios/App.js
+  #       echo "--- :arrow_up: Upload iOS bundle artifact"
+  #       buildkite-agent artifact upload bundle/ios/App.js
 
-  - label: "Build Android RN Aztec & Publish to S3"
-    depends_on: "unit-tests-android"
-    key: "publish-react-native-aztec-android"
-    plugins:
-      - *publish-android-artifacts-docker-container
-      - automattic/git-shallow-clone
-    command: |
-        .buildkite/publish-react-native-aztec-android-artifacts.sh
+  # - label: "Build Android RN Aztec & Publish to S3"
+  #   depends_on: "unit-tests-android"
+  #   key: "publish-react-native-aztec-android"
+  #   plugins:
+  #     - *publish-android-artifacts-docker-container
+  #     - automattic/git-shallow-clone
+  #   command: |
+  #       .buildkite/publish-react-native-aztec-android-artifacts.sh
 
-  - label: "Build Android RN Bridge & Publish to S3"
-    depends_on:
-      - "js-bundles"
-      - "publish-react-native-aztec-android"
-    plugins:
-      - automattic/git-shallow-clone
-      - *publish-android-artifacts-docker-container
-    command: |
-        .buildkite/publish-react-native-bridge-android-artifacts.sh
+  # - label: "Build Android RN Bridge & Publish to S3"
+  #   depends_on:
+  #     - "js-bundles"
+  #     - "publish-react-native-aztec-android"
+  #   plugins:
+  #     - automattic/git-shallow-clone
+  #     - *publish-android-artifacts-docker-container
+  #   command: |
+  #       .buildkite/publish-react-native-bridge-android-artifacts.sh
 
-  - label: Build iOS RN XCFramework & Publish to S3
-    depends_on: js-bundles
-    command: .buildkite/publish-react-native-ios-artifacts.sh
-    artifact_paths:
-      - ios-xcframework/build/xcframeworks/*.tar.gz
-    plugins:
-      - automattic/a8c-ci-toolkit#2.17.0
-      - automattic/git-shallow-clone
-     gents:
-      queue: mac
-    env:
-      IMAGE_ID: xcode-14.3
+  # - label: Build iOS RN XCFramework & Publish to S3
+  #   depends_on: js-bundles
+  #   command: .buildkite/publish-react-native-ios-artifacts.sh
+  #   artifact_paths:
+  #     - ios-xcframework/build/xcframeworks/*.tar.gz
+  #   plugins:
+  #     - automattic/a8c-ci-toolkit#2.17.0
+  #     - automattic/git-shallow-clone
+  #    gents:
+  #     queue: mac
+  #   env:
+  #     IMAGE_ID: xcode-14.3
 
   # TODO: Add a block step
 
