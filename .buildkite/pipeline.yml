@@ -172,10 +172,17 @@ steps:
       echo "--- :node: Setup Node environment (brew install)"
       brew install nvm
 
-      echo "--- :node: Setup Node environment (source nvm)"
+      echo "--- :node: Setup Node environment (set NVM_DIR)"
       set -x
       mkdir -p "$$HOME/.nvm"
       export NVM_DIR="$$HOME/.nvm"
+      set +x
+
+      echo "+++ :bug: Echo NVM_DIR"
+      echo $$NVM_DIR
+
+      echo "--- :node: Setup Node environment (source nvm)"
+      set -x
       [ -s "$$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
       set +x
 
@@ -211,6 +218,9 @@ steps:
       # - unit-tests-android
     command: |
       source /root/.bashrc
+
+      echo "--- :node: Install NVM"
+      curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 
       echo "--- :node: Setup Node environment"
       nvm install && nvm use
