@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoPress block - Replace replaces with a local video: after replacing video 1`] = `"<!-- wp:videopress/video {"title":"Local video from device","description":"video-description","useAverageColor":false,"id":34,"guid":"NEWxGUID","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":false,"duration":1200} /-->"`;
+
+exports[`VideoPress block - Replace replaces with a local video: before replacing video 1`] = `"<!-- wp:videopress/video {"title":"Video to be replaced","description":"video-description","useAverageColor":false,"id":34,"guid":"OLDxGUID","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":false,"duration":1200} /-->"`;
+
+exports[`VideoPress block - Replace replaces with new URL: after replacing video 1`] = `"<!-- wp:videopress/video {"title":"Video from URL","description":"video-description","useAverageColor":false,"id":34,"guid":"NEWxGUID","src":"https://videopress.com/v/NEWxGUID","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":false,"duration":1200} /-->"`;
+
+exports[`VideoPress block - Replace replaces with new URL: before replacing video 1`] = `"<!-- wp:videopress/video {"title":"Video to be replaced","description":"video-description","useAverageColor":false,"id":34,"guid":"OLDxGUID","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":false,"duration":1200} /-->"`;
+
+exports[`VideoPress block - Replace replaces with video from media library: after replacing video 1`] = `"<!-- wp:videopress/video {"title":"Video from media library","description":"video-description","useAverageColor":false,"id":34,"guid":"NEWxGUID","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":false,"duration":1200} /-->"`;
+
+exports[`VideoPress block - Replace replaces with video from media library: before replacing video 1`] = `"<!-- wp:videopress/video {"title":"Video to be replaced","description":"video-description","useAverageColor":false,"id":34,"guid":"OLDxGUID","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":false,"duration":1200} /-->"`;
+
+exports[`VideoPress block - Replace restores previous video when canceling a video replacement: after canceling replacement 1`] = `"<!-- wp:videopress/video {"title":"Video to be replaced","description":"video-description","useAverageColor":false,"id":34,"guid":"OLDxGUID","src":"file:///local-video-1.mp4","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":false,"duration":1200} /-->"`;
+
+exports[`VideoPress block - Replace restores previous video when canceling a video replacement: before replacing video 1`] = `"<!-- wp:videopress/video {"title":"Video to be replaced","description":"video-description","useAverageColor":false,"id":34,"guid":"OLDxGUID","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":false,"duration":1200} /-->"`;
+
+exports[`VideoPress block - Replace takes a new video: after replacing video 1`] = `"<!-- wp:videopress/video {"title":"Recorded within the editor","description":"video-description","useAverageColor":false,"id":34,"guid":"NEWxGUID","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":false,"duration":1200} /-->"`;
+
+exports[`VideoPress block - Replace takes a new video: before replacing video 1`] = `"<!-- wp:videopress/video {"title":"Video to be replaced","description":"video-description","useAverageColor":false,"id":34,"guid":"OLDxGUID","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":false,"duration":1200} /-->"`;
