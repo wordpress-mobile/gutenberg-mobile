@@ -96,31 +96,6 @@ steps:
     artifact_paths:
       - ./*-tests-out.log
 
-  - label: Build and Test iOS .app
-    depends_on:
-      - build-npm
-      # Don't wait for tests while testing the setup
-      # - unit-tests-ios
-    command: |
-      # TODO: We'll want to cache this somehow
-      echo "--- :react: Build iOS app for testing"
-      npm run core test:e2e:build-app:ios
-
-      echo "--- :react: Build iOS bundle for testing"
-      npm run test:e2e:bundle:ios
-
-      echo "-- :saucelabs: Test on Saucelabs"
-      echo "TODO"
-    plugins:
-      - automattic/a8c-ci-toolkit#2.17.0
-      - automattic/git-shallow-clone
-    agents:
-      queue: mac
-    env:
-      IMAGE_ID: xcode-14.3
-      TEST_RN_PLATFORM: ios
-      TEST_ENV: sauce
-
   - label: "Build JS Bundles"
     depends_on:
       - build-npm
@@ -185,3 +160,54 @@ steps:
       queue: mac
     env:
       IMAGE_ID: xcode-14.3
+
+  # TODO: Add a block step
+
+  - label: Build and Test iOS .app
+    depends_on:
+      - build-npm
+      # Don't wait for tests while testing the setup
+      # - unit-tests-ios
+    command: |
+      echo "+++ :bug: Expecting this to fail because the caches were made on Linux"
+      node .buildkite/download-caches.js
+
+      # TODO: We'll want to cache this somehow
+      echo "--- :react: Build iOS bundle for testing"
+      npm run test:e2e:bundle:ios
+
+      echo "--- :react: Build iOS app for testing"
+      npm run core test:e2e:build-app:ios
+
+      echo "-- :saucelabs: Test on Saucelabs"
+      echo "TODO"
+    plugins:
+      - automattic/a8c-ci-toolkit#2.17.0
+      - automattic/git-shallow-clone
+    agents:
+      queue: mac
+    env:
+      IMAGE_ID: xcode-14.3
+      TEST_RN_PLATFORM: ios
+      TEST_ENV: sauce
+
+  - label: Build and Test Android .apk
+    depends_on:
+      - build-npm
+      # Don't wait for tests while testing the setup
+      # - unit-tests-android
+    command: |
+      node .buildkite/download-caches.js
+
+      # TODO: We'll want to cache this somehow
+      echo "--- :react: Build Android bundle for testing"
+      npm run test:e2e:bundle:android
+
+      echo "--- :react: Build Android app for testing"
+      npm run core test:e2e:build-app:android
+
+      echo "-- :saucelabs: Test on Saucelabs"
+      echo "TODO"
+    plugins:
+      - *gb-mobile-docker-container
+      - automattic/git-shallow-clone
