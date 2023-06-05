@@ -169,6 +169,13 @@ steps:
       # Don't wait for tests while testing the setup
       # - unit-tests-ios
     command: |
+      echo "--- :node: Setup Node environment"
+      brew install nvm
+      mkdir -p "$$HOME/.nvm"
+      export NVM_DIR="$$HOME/.nvm"
+      [ -s "$$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
+      nvm install && nvm use
+
       echo "+++ :bug: Expecting this to fail because the caches were made on Linux"
       node .buildkite/download-caches.js
 
@@ -197,6 +204,11 @@ steps:
       # Don't wait for tests while testing the setup
       # - unit-tests-android
     command: |
+      source /root/.bashrc
+
+      echo "--- :node: Setup Node environment"
+      nvm install && nvm use
+
       node .buildkite/download-caches.js
 
       # TODO: We'll want to cache this somehow
