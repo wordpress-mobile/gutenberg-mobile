@@ -2,7 +2,9 @@
 
 default_platform :ios
 
-PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
+XCFRAMEWORK_PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
+
+S3_BUCKET = 'a8c-apps-public-artifacts'
 
 before_all do
   # Ensure we use the latest version of the toolkit
@@ -11,7 +13,7 @@ end
 
 lane :upload_xcframework_to_s3 do |options|
   archive_type = 'tar.gz'
-  xcframework_archive_path = File.join(PROJECT_ROOT_FOLDER, "build/xcframeworks/Gutenberg.#{archive_type}")
+  xcframework_archive_path = File.join(XCFRAMEWORK_PROJECT_ROOT_FOLDER, "build/xcframeworks/Gutenberg.#{archive_type}")
 
   unless File.exist? xcframework_archive_path
     UI.user_error! "Could not find XCFramework archive to upload at #{xcframework_archive_path}"
@@ -25,6 +27,7 @@ lane :upload_xcframework_to_s3 do |options|
   end
 
   upload_xcframework_to_s3(path: xcframework_archive_path, name_on_s3: name)
+  upload_podspec_to_s3(id: last_git_commit[:commit_hash])
 
   next unless is_ci
 
@@ -40,10 +43,42 @@ end
 
 def upload_xcframework_to_s3(path:, name_on_s3:)
   upload_to_s3(
-    bucket: 'a8c-apps-public-artifacts',
+    bucket: S3_BUCKET,
     key: name_on_s3,
     file: path,
     auto_prefix: false,
     skip_if_exists: false
   )
 end
+
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/MethodLength
+def upload_podspec_to_s3(id:)
+  ios_version = '13.0'
+  swift_version = '5.0'
+  gutenberg_package = JSON.parse(File.read(File.join(XCFRAMEWORK_PROJECT_ROOT_FOLDER, '..', 'package.json')))
+  version = gutenberg_package['version']
+  # This ought to be read from package.json, but there isn't one at the moment.
+  # license = GUTENBERG_PACKAGE['license']
+  license = 'GPL'
+  context = binding
+
+  podspec_erb = ERB.new(File.read(File.join(XCFRAMEWORK_PROJECT_ROOT_FOLDER, 'podspec.erb')))
+
+  Dir.mktmpdir do |tmp_dir|
+    podspec_path = File.join(tmp_dir, 'podspec')
+    File.open(podspec_path, 'w') do |file|
+      file.write(podspec_erb.result(context))
+    end
+
+    upload_to_s3(
+      bucket: S3_BUCKET,
+      key: "Gutenberg-#{id}.podspec",
+      file: podspec_path,
+      auto_prefix: false,
+      skip_if_exists: false
+    )
+  end
+end
+# rubocop:enable Metrics/AbcSize
+# rubocop:enable Metrics/MethodLength
