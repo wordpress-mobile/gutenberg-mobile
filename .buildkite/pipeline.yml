@@ -227,5 +227,5 @@ steps:
       echo "-- :saucelabs: Test on Saucelabs"
       echo "TODO"
     plugins:
-      - *gb-mobile-docker-container
+      - *publish-android-artifacts-docker-container
       - automattic/git-shallow-clone
