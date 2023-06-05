@@ -169,11 +169,17 @@ steps:
       # Don't wait for tests while testing the setup
       # - unit-tests-ios
     command: |
-      echo "--- :node: Setup Node environment"
+      echo "--- :node: Setup Node environment (brew install)"
       brew install nvm
+
+      echo "--- :node: Setup Node environment (source nvm)"
+      set -x
       mkdir -p "$$HOME/.nvm"
       export NVM_DIR="$$HOME/.nvm"
       [ -s "$$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
+      set +x
+
+      echo "--- :node: Setup Node environment (nvm install)"
       nvm install && nvm use
 
       echo "+++ :bug: Expecting this to fail because the caches were made on Linux"
