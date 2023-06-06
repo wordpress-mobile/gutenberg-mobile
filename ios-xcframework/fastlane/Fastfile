@@ -56,7 +56,7 @@ end
 def upload_podspec_to_s3(id:)
   ios_version = '13.0'
   swift_version = '5.0'
-  gutenberg_package = JSON.parse(File.read(File.join(XCFRAMEWORK_PROJECT_ROOT_FOLDER, '..', 'package.json')))
+  gutenberg_package = JSON.parse(File.read(File.join(File.dirname(XCFRAMEWORK_PROJECT_ROOT_FOLDER), 'package.json')))
   version = gutenberg_package['version']
   # This ought to be read from package.json, but there isn't one at the moment.
   # license = GUTENBERG_PACKAGE['license']
