@@ -23,7 +23,7 @@ lane :upload_xcframework_to_s3 do |options|
 
   if name.nil?
     name = "Gutenberg-#{last_git_commit[:commit_hash]}.#{archive_type}"
-    UI.message "No name provide, will default to #{name}"
+    UI.message "No name provided, will default to #{name}"
   end
 
   upload_xcframework_to_s3(path: xcframework_archive_path, name_on_s3: name)
