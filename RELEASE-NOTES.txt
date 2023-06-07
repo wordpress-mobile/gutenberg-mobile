@@ -1,9 +1,9 @@
 Unreleased
 ---
 * [**] [iOS] Fix dictation regression, in which typing/dictating at the same time caused content loss. [https://github.com/WordPress/gutenberg/pull/49452]
-
 * [*] [internal] Upgrade compile and target sdk version to Android API 33 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5789]
 * [*] Display lock icon in disabled state of `Cell` component [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5798]
+* [*] Show "No title"/"No description" placeholder for not belonged videos in VideoPress block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5840]
 
 1.96.1
 ---
