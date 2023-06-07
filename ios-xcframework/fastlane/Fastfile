@@ -4,8 +4,6 @@ default_platform :ios
 
 XCFRAMEWORK_PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
 
-S3_BUCKET = 'a8c-apps-public-artifacts'
-
 before_all do
   # Ensure we use the latest version of the toolkit
   check_for_toolkit_updates unless is_ci || ENV['FASTLANE_SKIP_TOOLKIT_UPDATE_CHECK']
@@ -26,7 +24,7 @@ lane :upload_xcframework_to_s3 do |options|
     UI.message "No name provided, will default to #{name}"
   end
 
-  upload_xcframework_to_s3(path: xcframework_archive_path, name_on_s3: name)
+  upload_to_a8c_s3(file: xcframework_archive_path, name_on_s3: name)
   upload_podspec_to_s3(id: last_git_commit[:commit_hash])
 
   next unless is_ci
@@ -35,20 +33,7 @@ lane :upload_xcframework_to_s3 do |options|
 
   next if tag.nil? || tag.empty?
 
-  upload_xcframework_to_s3(
-    path: xcframework_archive_path,
-    name_on_s3: "Gutenberg-#{tag}.#{archive_type}"
-  )
-end
-
-def upload_xcframework_to_s3(path:, name_on_s3:)
-  upload_to_s3(
-    bucket: S3_BUCKET,
-    key: name_on_s3,
-    file: path,
-    auto_prefix: false,
-    skip_if_exists: false
-  )
+  upload_to_a8c_s3(file: xcframework_archive_path, name_on_s3: "Gutenberg-#{tag}.#{archive_type}")
 end
 
 # rubocop:disable Metrics/AbcSize
@@ -71,14 +56,18 @@ def upload_podspec_to_s3(id:)
       file.write(podspec_erb.result(context))
     end
 
-    upload_to_s3(
-      bucket: S3_BUCKET,
-      key: "Gutenberg-#{id}.podspec",
-      file: podspec_path,
-      auto_prefix: false,
-      skip_if_exists: false
-    )
+    upload_to_a8c_s3(file: podspec_path, name_on_s3: "Gutenberg-#{id}.podspec")
   end
 end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/MethodLength
+
+def upload_to_a8c_s3(file:, name_on_s3:, skip_if_exists: false)
+  upload_to_s3(
+    bucket: 'a8c-apps-public-artifacts',
+    key: name_on_s3,
+    file: file,
+    auto_prefix: false,
+    skip_if_exists: skip_if_exists
+  )
+end
