@@ -36,6 +36,9 @@ const supportedJetpackBlocks = {
 	'videopress/video': {
 		available: true,
 	},
+	'ai-assistant': {
+		available: __DEV__,
+	},
 };
 
 const setJetpackData = ( {
