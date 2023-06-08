@@ -6,7 +6,7 @@ if [[ ! -f "$APP_JS_PATH" ]]; then
   cat <<- ERROR
 error: Could not find required $APP_JS_PATH.
 
-Please run the following command to generate the file before running this script:
+Please run the following command to generate the file before building this project:
 
   npm install && npm run bundle:ios
 ERROR
