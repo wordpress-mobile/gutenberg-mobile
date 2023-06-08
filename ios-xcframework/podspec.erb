@@ -6,12 +6,14 @@ Pod::Spec.new do |s|
   s.homepage = 'https://github.com/wordpress-mobile/gutenberg-mobile'
   s.authors = 'Automattic'
 
-  s.version = '<%= version %>'
+  s.version = '<%= JSON.parse(File.read(File.join(File.dirname(File.dirname(File.expand_path(__dir__))), 'package.json')))['version'] %>'
 
-  s.license = { type: '<%= license %>' }
+  <%# This ought to be read from package.json, but there isn't one at the moment. %>
+  s.license = { type: 'GPL2' }
 
-  s.ios.deployment_target = '<%= ios_version %>'
-  s.swift_version = '<%= swift_version %>'
+  <%# TODO: These should be read from shared configuration files %>
+  s.ios.deployment_target = '13.0'
+  s.swift_version = '5.0'
 
   s.source = {
     http: "https://cdn.a8c-ci.services/gutenberg-mobile/Gutenberg-<%= id %>.tar.gz"
