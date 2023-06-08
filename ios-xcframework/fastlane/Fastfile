@@ -43,10 +43,7 @@ def upload_podspec_to_s3(id:)
 
   Dir.mktmpdir do |tmp_dir|
     podspec_path = File.join(tmp_dir, 'podspec')
-    File.open(podspec_path, 'w') do |file|
-      file.write(podspec_erb.result(context))
-    end
-
+    File.write(podspec_path, podspec_erb.result(context))
     upload_to_a8c_s3(file: podspec_path, name_on_s3: "Gutenberg-#{id}.podspec")
   end
 end
