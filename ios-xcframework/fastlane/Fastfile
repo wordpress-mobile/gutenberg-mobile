@@ -36,16 +36,7 @@ lane :upload_xcframework_to_s3 do |options|
   upload_to_a8c_s3(file: xcframework_archive_path, name_on_s3: "Gutenberg-#{tag}.#{archive_type}")
 end
 
-# rubocop:disable Metrics/AbcSize
-# rubocop:disable Metrics/MethodLength
 def upload_podspec_to_s3(id:)
-  ios_version = '13.0'
-  swift_version = '5.0'
-  gutenberg_package = JSON.parse(File.read(File.join(File.dirname(XCFRAMEWORK_PROJECT_ROOT_FOLDER), 'package.json')))
-  version = gutenberg_package['version']
-  # This ought to be read from package.json, but there isn't one at the moment.
-  # license = GUTENBERG_PACKAGE['license']
-  license = 'GPL'
   context = binding
 
   podspec_erb = ERB.new(File.read(File.join(XCFRAMEWORK_PROJECT_ROOT_FOLDER, 'podspec.erb')))
@@ -59,8 +50,6 @@ def upload_podspec_to_s3(id:)
     upload_to_a8c_s3(file: podspec_path, name_on_s3: "Gutenberg-#{id}.podspec")
   end
 end
-# rubocop:enable Metrics/AbcSize
-# rubocop:enable Metrics/MethodLength
 
 def upload_to_a8c_s3(file:, name_on_s3:, prefix: 'gutenberg-mobile', skip_if_exists: false)
   upload_to_s3(
