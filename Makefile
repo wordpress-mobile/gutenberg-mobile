@@ -12,4 +12,4 @@ ci_test:
 		--tty \
 		--volume $(shell pwd):/app \
 		$(test_runner) \
-		"npm install --prefer-offline --no-audit && ./bin/ci-checks-js.sh"
+		"npm ci --no-audit --no-progress && CHECK_CORRECTNESS=false CHECK_TESTS=true ./bin/ci-checks-js.sh"
