@@ -250,7 +250,9 @@ translators: %s: Select control button label e.g. "Button width" -->
     <string name="gutenberg_native_no_application_can_handle_this_request_please_install_a_web_brows" tools:ignore="UnusedResources">No application can handle this request. Please install a Web browser.</string>
     <string name="gutenberg_native_no_blocks_found" tools:ignore="UnusedResources">No blocks found</string>
     <string name="gutenberg_native_no_custom_placeholder_set" tools:ignore="UnusedResources">No custom placeholder set</string>
+    <string name="gutenberg_native_no_description" tools:ignore="UnusedResources">No description</string>
     <string name="gutenberg_native_no_preview_available" tools:ignore="UnusedResources">No preview available</string>
+    <string name="gutenberg_native_no_title" tools:ignore="UnusedResources">No title</string>
     <string name="gutenberg_native_note_column_layout_may_vary_between_themes_and_screen_sizes" tools:ignore="UnusedResources">Note: Column layout may vary between themes and screen sizes</string>
     <string name="gutenberg_native_note_layout_may_vary_between_themes_and_screen_sizes" tools:ignore="UnusedResources">Note: Layout may vary between themes and screen sizes</string>
     <string name="gutenberg_native_note_you_must_allow_wordpress_com_login_to_edit_this_block_in_the" tools:ignore="UnusedResources">Note: You must allow WordPress.com login to edit this block in the mobile editor.</string>
