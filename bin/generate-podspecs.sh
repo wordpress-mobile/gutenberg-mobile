@@ -45,7 +45,7 @@ if [[ $PROMPT_RESPONSE_2 != "y" ]]; then
     exit 1
 fi
 
-mkdir $DEST
+mkdir "$DEST"
 
 NODE_MODULES_DIR="gutenberg/node_modules"
 
