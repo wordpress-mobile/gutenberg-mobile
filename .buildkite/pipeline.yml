@@ -165,77 +165,78 @@ steps:
 
   - label: Build and Test iOS .app
     depends_on:
-      - build-npm
+      # - build-npm
       # Don't wait for tests while testing the setup
       # - unit-tests-ios
     command: |
-      echo "--- :node: Setup Node environment (brew install)"
-      brew install nvm
+      make ci_build && make ci_test
+      # echo "--- :node: Setup Node environment (brew install)"
+      # brew install nvm
 
-      echo "--- :node: Setup Node environment (set NVM_DIR)"
-      set -x
-      mkdir -p "$$HOME/.nvm"
-      export NVM_DIR="$$HOME/.nvm"
-      set +x
+      # echo "--- :node: Setup Node environment (set NVM_DIR)"
+      # set -x
+      # mkdir -p "$$HOME/.nvm"
+      # export NVM_DIR="$$HOME/.nvm"
+      # set +x
 
-      echo "+++ :bug: Echo NVM_DIR"
-      echo $$NVM_DIR
+      # echo "+++ :bug: Echo NVM_DIR"
+      # echo $$NVM_DIR
 
-      echo "--- :node: Setup Node environment (source nvm)"
-      set -x
-      [ -s "$$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
-      set +x
+      # echo "--- :node: Setup Node environment (source nvm)"
+      # set -x
+      # [ -s "$$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
+      # set +x
 
-      echo "--- :node: Setup Node environment (nvm install)"
-      nvm install && nvm use
+      # echo "--- :node: Setup Node environment (nvm install)"
+      # nvm install && nvm use
 
-      echo "+++ :bug: Expecting this to fail because the caches were made on Linux"
-      node .buildkite/download-caches.js
+      # echo "+++ :bug: Expecting this to fail because the caches were made on Linux"
+      # node .buildkite/download-caches.js
 
-      # TODO: We'll want to cache this somehow
-      echo "--- :react: Build iOS bundle for testing"
-      npm run test:e2e:bundle:ios
+      # # TODO: We'll want to cache this somehow
+      # echo "--- :react: Build iOS bundle for testing"
+      # npm run test:e2e:bundle:ios
 
-      echo "--- :react: Build iOS app for testing"
-      npm run core test:e2e:build-app:ios
+      # echo "--- :react: Build iOS app for testing"
+      # npm run core test:e2e:build-app:ios
 
-      echo "-- :saucelabs: Test on Saucelabs"
-      echo "TODO"
+      # echo "-- :saucelabs: Test on Saucelabs"
+      # echo "TODO"
     plugins:
       - automattic/a8c-ci-toolkit#2.17.0
       - automattic/git-shallow-clone
-    agents:
-      queue: mac
+    # agents:
+    #   queue: mac
     env:
       IMAGE_ID: xcode-14.3
       TEST_RN_PLATFORM: ios
       TEST_ENV: sauce
 
-  - label: Build and Test Android .apk
-    depends_on:
-      - build-npm
-      # Don't wait for tests while testing the setup
-      # - unit-tests-android
-    command: |
-      source /root/.bashrc
+  # - label: Build and Test Android .apk
+  #   depends_on:
+  #     - build-npm
+  #     # Don't wait for tests while testing the setup
+  #     # - unit-tests-android
+  #   command: |
+  #     source /root/.bashrc
 
-      echo "--- :node: Install NVM"
-      curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+  #     echo "--- :node: Install NVM"
+  #     curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 
-      echo "--- :node: Setup Node environment"
-      nvm install && nvm use
+  #     echo "--- :node: Setup Node environment"
+  #     nvm install && nvm use
 
-      node .buildkite/download-caches.js
+  #     node .buildkite/download-caches.js
 
-      # TODO: We'll want to cache this somehow
-      echo "--- :react: Build Android bundle for testing"
-      npm run test:e2e:bundle:android
+  #     # TODO: We'll want to cache this somehow
+  #     echo "--- :react: Build Android bundle for testing"
+  #     npm run test:e2e:bundle:android
 
-      echo "--- :react: Build Android app for testing"
-      npm run core test:e2e:build-app:android
+  #     echo "--- :react: Build Android app for testing"
+  #     npm run core test:e2e:build-app:android
 
-      echo "-- :saucelabs: Test on Saucelabs"
-      echo "TODO"
-    plugins:
-      - *publish-android-artifacts-docker-container
-      - automattic/git-shallow-clone
+  #     echo "-- :saucelabs: Test on Saucelabs"
+  #     echo "TODO"
+  #   plugins:
+  #     - *publish-android-artifacts-docker-container
+  #     - automattic/git-shallow-clone
