@@ -28,11 +28,8 @@ steps:
     command: |
       echo "--- :docker: Build Docker image"
       make ci_build_docker_image
-
       echo "--- :npm: Build global dependencies cache"
       make ci_build_dependencies
-
-      node .buildkite/upload-caches.js
 
   - label: Lint
     depends_on: build-npm
@@ -42,9 +39,6 @@ steps:
     command: |
       echo "--- :docker: Build Docker image"
       make ci_build_docker_image
-
-      node .buildkite/download-caches.js
-
       echo "--- :node: Lint"
       make ci_lint
 
@@ -56,9 +50,6 @@ steps:
     command: |
       echo "--- :docker: Build Docker image"
       make ci_build_docker_image
-
-      node .buildkite/download-caches.js
-
       echo "--- :node: Unit Tests"
       make ci_unit_tests_android
     artifact_paths:
@@ -72,9 +63,6 @@ steps:
     command: |
       echo "--- :docker: Build Docker image"
       make ci_build_docker_image
-
-      node .buildkite/download-caches.js
-
       echo "--- :node: Unit Tests"
       make ci_unit_tests_ios
     artifact_paths:

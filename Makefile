@@ -17,7 +17,7 @@ ci_build_dependencies:
 		--tty \
 		--volume $(shell pwd):/app \
 		$(test_runner) \
-		"npm ci --no-audit --no-progress --unsafe-perm"
+		"npm ci --no-audit --no-progress --unsafe-perm && node .buildkite/upload-caches.js"
 
 ci_lint:
 	docker run \
@@ -25,7 +25,7 @@ ci_lint:
 		--tty \
 		--volume $(shell pwd):/app \
 		$(test_runner) \
-		"CHECK_CORRECTNESS=true CHECK_TESTS=false ./bin/ci-checks-js.sh"
+		"node .buildkite/download-caches.js && CHECK_CORRECTNESS=true CHECK_TESTS=false ./bin/ci-checks-js.sh"
 
 ci_unit_tests_android:
 	docker run \
@@ -33,7 +33,7 @@ ci_unit_tests_android:
 		--tty \
 		--volume $(shell pwd):/app \
 		$(test_runner) \
-		"CHECK_CORRECTNESS=false CHECK_TESTS=true TEST_RN_PLATFORM=android ./bin/ci-checks-js.sh"
+		"node .buildkite/download-caches.js && CHECK_CORRECTNESS=false CHECK_TESTS=true TEST_RN_PLATFORM=android ./bin/ci-checks-js.sh"
 
 ci_unit_tests_ios:
 	docker run \
@@ -41,4 +41,4 @@ ci_unit_tests_ios:
 		--tty \
 		--volume $(shell pwd):/app \
 		$(test_runner) \
-		"CHECK_CORRECTNESS=false CHECK_TESTS=true TEST_RN_PLATFORM=ios ./bin/ci-checks-js.sh"
+		"node .buildkite/download-caches.js && CHECK_CORRECTNESS=false CHECK_TESTS=true TEST_RN_PLATFORM=ios ./bin/ci-checks-js.sh"
