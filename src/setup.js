@@ -59,6 +59,9 @@ const setupHooks = () => {
 					...endpoints.POST,
 					/wpcom\/v2\/(media)\/.*/i,
 					/wpcom\/v2\/videopress\/meta.*/i,
+					// AI token endpoints
+					/jetpack\/v4\/jetpack-ai-jwt\?.*/i, // I haven't tried this one ...
+					/wpcom\/v2\/jetpack-openai-query\/jwt\?.*/i,
 				],
 			};
 		}
