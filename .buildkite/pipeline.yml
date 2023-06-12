@@ -24,77 +24,49 @@ steps:
   - label: Build npm cache
     key: build-npm
     plugins:
-      - *gb-mobile-docker-container
       - automattic/git-shallow-clone
     command: |
-      source /root/.bashrc
-
-      echo "--- :node: Setup Node environment"
-      nvm install && nvm use
-
-      # Note that `npm ci` deletes node_modules and installs from scratch, for a deterministic CI build.
-      # For that reason, we don't attempt to download them but start from scratch.
-      #
-      # It's possible we could refine our approach and maybe check the various lockfiles to determine whether there are valid caches that we could download.
       echo "--- :npm: Build global dependencies cache"
-      npm ci --unsafe-perm --no-audit --no-progress
+      make ci_build_docker_image && make ci_build_dependencies
 
       node .buildkite/upload-caches.js
 
-  # - label: Lint
-  #   depends_on: build-npm
-  #   key: lint
-  #   plugins:
-  #     - *gb-mobile-docker-container
-  #     - automattic/git-shallow-clone
-  #   command: |
-  #     source /root/.bashrc
+  - label: Lint
+    depends_on: build-npm
+    key: lint
+    plugins:
+      - automattic/git-shallow-clone
+    command: |
+      node .buildkite/download-caches.js
 
-  #     echo "--- :node: Setup Node environment"
-  #     nvm install && nvm use
+      echo "--- :node: Lint"
+      make ci_build_docker_image && make ci_lint
 
-  #     node .buildkite/download-caches.js
+  - label: Android Unit Tests
+    depends_on: build-npm
+    key: unit-tests-android
+    plugins:
+      - automattic/git-shallow-clone
+    command: |
+      node .buildkite/download-caches.js
 
-  #     echo "--- :node: Lint"
-  #     CHECK_TESTS=false CHECK_CORRECTNESS=true ./bin/ci-checks-js.sh
+      echo "--- :node: Unit Tests"
+      make ci_build_docker_image && make ci_unit_tests_android
+    artifact_paths:
+      - ./*-tests-out.log
 
-  # - label: Android Unit Tests
-  #   depends_on: build-npm
-  #   key: unit-tests-android
-  #   plugins:
-  #     - *gb-mobile-docker-container
-  #     - automattic/git-shallow-clone
-  #   command: |
-  #     source /root/.bashrc
+  - label: iOS Unit Tests
+    depends_on: build-npm
+    key: unit-tests-ios
+    plugins:
+      - automattic/git-shallow-clone
+    command: |
+      node .buildkite/download-caches.js
 
-  #     echo "--- :node: Setup Node environment"
-  #     nvm install && nvm use
-
-  #     node .buildkite/download-caches.js
-
-  #     echo "--- :node: Unit Tests"
-  #     TEST_RN_PLATFORM=android CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
-  #   artifact_paths:
-  #     - ./*-tests-out.log
-
-  # - label: iOS Unit Tests
-  #   depends_on: build-npm
-  #   key: unit-tests-ios
-  #   plugins:
-  #     - *gb-mobile-docker-container
-  #     - automattic/git-shallow-clone
-  #   command: |
-  #     source /root/.bashrc
-
-  #     echo "--- :node: Setup Node environment"
-  #     nvm install && nvm use
-
-  #     node .buildkite/download-caches.js
-
-  #     echo "--- :node: Unit Tests"
-  #     TEST_RN_PLATFORM=ios CHECK_TESTS=true CHECK_CORRECTNESS=false ./bin/ci-checks-js.sh
-  #   artifact_paths:
-  #     - ./*-tests-out.log
+      echo "--- :node: Unit Tests"
+      make ci_build_docker_image && make ci_unit_tests_ios
+    artifact_paths:
+      - ./*-tests-out.log
 
   # - label: "Build JS Bundles"
   #   depends_on:
