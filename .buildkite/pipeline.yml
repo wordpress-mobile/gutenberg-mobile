@@ -26,8 +26,11 @@ steps:
     plugins:
       - automattic/git-shallow-clone
     command: |
+      echo "--- :docker: Build Docker image"
+      make ci_build_docker_image
+
       echo "--- :npm: Build global dependencies cache"
-      make ci_build_docker_image && make ci_build_dependencies
+      make ci_build_dependencies
 
       node .buildkite/upload-caches.js
 
@@ -37,10 +40,13 @@ steps:
     plugins:
       - automattic/git-shallow-clone
     command: |
+      echo "--- :docker: Build Docker image"
+      make ci_build_docker_image
+
       node .buildkite/download-caches.js
 
       echo "--- :node: Lint"
-      make ci_build_docker_image && make ci_lint
+      make ci_lint
 
   - label: Android Unit Tests
     depends_on: build-npm
@@ -48,10 +54,13 @@ steps:
     plugins:
       - automattic/git-shallow-clone
     command: |
+      echo "--- :docker: Build Docker image"
+      make ci_build_docker_image
+
       node .buildkite/download-caches.js
 
       echo "--- :node: Unit Tests"
-      make ci_build_docker_image && make ci_unit_tests_android
+      make ci_unit_tests_android
     artifact_paths:
       - ./*-tests-out.log
 
@@ -61,10 +70,13 @@ steps:
     plugins:
       - automattic/git-shallow-clone
     command: |
+      echo "--- :docker: Build Docker image"
+      make ci_build_docker_image
+
       node .buildkite/download-caches.js
 
       echo "--- :node: Unit Tests"
-      make ci_build_docker_image && make ci_unit_tests_ios
+      make ci_unit_tests_ios
     artifact_paths:
       - ./*-tests-out.log
 
@@ -133,56 +145,7 @@ steps:
   #   env:
   #     IMAGE_ID: xcode-14.3
 
-  # TODO: Add a block step
-
-  - label: Build and Test iOS .app
-    depends_on:
-      # - build-npm
-      # Don't wait for tests while testing the setup
-      # - unit-tests-ios
-    command: |
-      make ci_build && make ci_test
-      # echo "--- :node: Setup Node environment (brew install)"
-      # brew install nvm
-
-      # echo "--- :node: Setup Node environment (set NVM_DIR)"
-      # set -x
-      # mkdir -p "$$HOME/.nvm"
-      # export NVM_DIR="$$HOME/.nvm"
-      # set +x
-
-      # echo "+++ :bug: Echo NVM_DIR"
-      # echo $$NVM_DIR
-
-      # echo "--- :node: Setup Node environment (source nvm)"
-      # set -x
-      # [ -s "$$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
-      # set +x
-
-      # echo "--- :node: Setup Node environment (nvm install)"
-      # nvm install && nvm use
-
-      # echo "+++ :bug: Expecting this to fail because the caches were made on Linux"
-      # node .buildkite/download-caches.js
-
-      # # TODO: We'll want to cache this somehow
-      # echo "--- :react: Build iOS bundle for testing"
-      # npm run test:e2e:bundle:ios
-
-      # echo "--- :react: Build iOS app for testing"
-      # npm run core test:e2e:build-app:ios
-
-      # echo "-- :saucelabs: Test on Saucelabs"
-      # echo "TODO"
-    plugins:
-      - automattic/a8c-ci-toolkit#2.17.0
-      - automattic/git-shallow-clone
-    # agents:
-    #   queue: mac
-    env:
-      IMAGE_ID: xcode-14.3
-      TEST_RN_PLATFORM: ios
-      TEST_ENV: sauce
+  # TODO: Add a block step for UI tests
 
   # - label: Build and Test Android .apk
   #   depends_on:
