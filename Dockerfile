@@ -1,3 +1,5 @@
+# TODO: Once stable, this should all go into the base image
+#
 # Base image at https://github.com/wordpress-mobile/docker-gb-mobile-image
 FROM public.ecr.aws/automattic/gb-mobile-image as gutenberg-test-runner
 
