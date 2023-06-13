@@ -6,6 +6,7 @@ const cachesToUpload = JSON.parse(jsonContent);
 
 cachesToUpload.forEach(item => {
   console.log(execSync(`echo "--- :arrow_up: Upload ${item.display_name} cache"`, { encoding: 'utf8' }));
-  let archive_path = `${item.folder_to_archive_basedir}/${item.folder_to_archive}`
-  console.log(execSync(`save_cache ${archive_path} $(hash_directory ${archive_path})`, { encoding: 'utf8' }));
+  // cd into the basedir for the folder to archive because of the folder structure the cache archive use and the fact that not all folders are in the project tree
+  console.log(execSync(`cd ${item.folder_to_archive_basedir}`, { encoding: 'utf8' }));
+  console.log(execSync(`save_cache ${item.folder_to_archive} $(hash_directory ${item.folder_to_archive})`, { encoding: 'utf8' }));
 });

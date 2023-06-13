@@ -6,7 +6,9 @@ const cachesToUpload = JSON.parse(jsonContent);
 
 cachesToUpload.forEach(item => {
   console.log(execSync(`echo "--- :arrow_down: Download ${item.display_name}"`, { encoding: 'utf8' }));
-  console.log(execSync(`restore_cache $(hash_directory ${item.folder_to_archive_basedir}/${folder_to_archive}`, { encoding: 'utf8' }));
+  // cd into the basedir for the folder to archive because of the folder structure the cache archive use and the fact that not all folders are in the project tree
+  console.log(execSync(`cd ${item.folder_to_archive_basedir}`, { encoding: 'utf8' }));
+  console.log(execSync(`restore_cache $(hash_directory ${item.folder_to_archive})`, { encoding: 'utf8' }));
 });
 
 // Some of the cache data needs to be connected to the submodule projects.
