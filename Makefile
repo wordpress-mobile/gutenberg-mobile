@@ -16,6 +16,7 @@ ci_build_dependencies:
 		--interactive \
 		--tty \
 		--volume $(shell pwd):/app \
+		--env BUILDKITE_PLUGIN_BASH_CACHE_BUCKET=$$BUILDKITE_PLUGIN_BASH_CACHE_BUCKET \
 		$(test_runner) \
 		"npm ci --no-audit --no-progress --unsafe-perm && node .buildkite/upload-caches.js"
 
