@@ -21,7 +21,6 @@ jq -c '.[]' .buildkite/caches.json | while read -r item; do
 
   pushd "$folder_to_archive_basedir"
   key=$(compute_cache_key "$folder_to_archive_basedir" "$folder_to_archive")
-  # Force only for one run
-  save_cache "$folder_to_archive" "$key" true
+  save_cache "$folder_to_archive" "$key"
   popd
 done
