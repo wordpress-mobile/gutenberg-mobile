@@ -71,7 +71,9 @@ end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/MethodLength
 
-def upload_to_a8c_s3(file:, name_on_s3:, prefix: 'gutenberg-mobile', skip_if_exists: false)
+# Notice skip_if_exists is true by default.
+# CI might run on the same commit twice, once for the commit and once for the tag, and we don't want to fail the build on the second run.
+def upload_to_a8c_s3(file:, name_on_s3:, prefix: 'gutenberg-mobile', skip_if_exists: true)
   upload_to_s3(
     bucket: 'a8c-apps-public-artifacts',
     key: "#{prefix}/#{name_on_s3}",
