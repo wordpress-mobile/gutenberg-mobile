@@ -3,3 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'cocoapods', '~> 1.12'
+# Let the release-toolkit drive which Fastlane version to use.
+# See also https://github.com/wordpress-mobile/release-toolkit/issues/482
+gem 'fastlane'
+gem 'fastlane-plugin-wpmreleasetoolkit', '~> 8.0'
