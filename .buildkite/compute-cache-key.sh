@@ -10,7 +10,7 @@ compute_cache_key() {
   local folder_to_archive_basedir="$1"
   local folder_to_archive="$2"
 
-  local key="$CACHE_KEY_ROOT-${folder_to_archive_basedir//\//-}-$folder_to_archive"
+  local key="$CACHE_KEY_ROOT-${folder_to_archive_basedir//\//-}-${folder_to_archive//\//-}"
 
   echo "$key"
 }
