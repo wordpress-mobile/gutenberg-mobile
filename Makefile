@@ -18,6 +18,8 @@ ci_build_dependencies:
 		--volume $(shell pwd):/app \
 		--env BUILDKITE_PLUGIN_BASH_CACHE_BUCKET=$$BUILDKITE_PLUGIN_BASH_CACHE_BUCKET \
 		--env CACHE_BUCKET_NAME=$$CACHE_BUCKET_NAME \
+		--env AWS_SECRET_KEY=$$AWS_SECRET_KEY \
+		--env AWS_ACCESS_KEY=$$AWS_ACCESS_KEY \
 		$(test_runner) \
 		"npm ci --no-audit --no-progress --unsafe-perm && node .buildkite/upload-caches.js"
 
