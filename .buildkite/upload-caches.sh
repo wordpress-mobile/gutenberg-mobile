@@ -11,6 +11,7 @@ jq -c '.[]' .buildkite/caches.json | while read -r item; do
   echo "--- :arrow_up: Upload $display_name cache"
   pushd "$folder_to_archive_basedir"
   hash=$(hash_directory "$folder_to_archive")
-  save_cache "$folder_to_archive" "$hash"
+  # Force only for one run
+  save_cache "$folder_to_archive" "$hash" true
   popd
 done
