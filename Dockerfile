@@ -17,3 +17,12 @@ RUN npm install -g npm@6
 RUN git clone https://github.com/Automattic/a8c-ci-toolkit-buildkite-plugin /ci-toolkit
 # Add ci-toolkit to the PATH
 RUN echo 'export PATH="$PATH:/ci-toolkit/bin"' >> ~/.bashrc
+
+# Install AWS CLI
+RUN apt-get update && apt-get install -y unzip
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscli.zip" && \
+    unzip awscli.zip && \
+    ./aws/install
+
+# Install jq
+RUN apt-get update && apt-get install -y jq
