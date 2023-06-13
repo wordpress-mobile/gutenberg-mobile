@@ -9,6 +9,9 @@ docker_run_env = --env BUILDKITE_PLUGIN_BASH_CACHE_BUCKET=$$BUILDKITE_PLUGIN_BAS
 
 docker_run = docker run $(docker_run_opts) $(docker_run_env) $(test_runner)
 
+download_caches_cmd = .buildkite/download-caches.sh
+upload_caches_cmd = .buildkite/upload-caches.sh
+
 ci_build_docker_image:
 	docker build \
 		--target $(test_runner) \
@@ -21,13 +24,13 @@ ci_build_docker_image:
 # - https://github.com/npm/npm/issues/3497#issue-14876484
 # - https://buildkite.com/automattic/gutenberg-mobile/builds/6101#0188a503-600b-4839-913f-2b13254a92d4/243-422
 ci_build_dependencies:
-	$(docker_run) "npm ci --no-audit --no-progress --unsafe-perm && node .buildkite/upload-caches.js"
+	$(docker_run) "npm ci --no-audit --no-progress --unsafe-perm && $(upload_caches_cmd)"
 
 ci_lint:
-	$(docker_run) "node .buildkite/download-caches.js && CHECK_CORRECTNESS=true CHECK_TESTS=false ./bin/ci-checks-js.sh"
+	$(docker_run) "$(download_caches_cmd) && CHECK_CORRECTNESS=true CHECK_TESTS=false ./bin/ci-checks-js.sh"
 
 ci_unit_tests_android:
-	$(docker_run) "node .buildkite/download-caches.js && CHECK_CORRECTNESS=false CHECK_TESTS=true TEST_RN_PLATFORM=android ./bin/ci-checks-js.sh"
+	$(docker_run) "$(download_caches_cmd) && CHECK_CORRECTNESS=false CHECK_TESTS=true TEST_RN_PLATFORM=android ./bin/ci-checks-js.sh"
 
 ci_unit_tests_ios:
-	$(docker_run) "node .buildkite/download-caches.js && CHECK_CORRECTNESS=false CHECK_TESTS=true TEST_RN_PLATFORM=ios ./bin/ci-checks-js.sh"
+	$(docker_run) "$(download_caches_cmd) && CHECK_CORRECTNESS=false CHECK_TESTS=true TEST_RN_PLATFORM=ios ./bin/ci-checks-js.sh"
