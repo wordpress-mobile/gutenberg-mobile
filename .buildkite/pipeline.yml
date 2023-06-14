@@ -118,6 +118,24 @@ steps:
     env:
       IMAGE_ID: xcode-14.3
 
+  - label: Build and Test Android Editor
+    depends_on: 'build-npm'
+    plugins:
+      - *publish-android-artifacts-docker-container
+      - automattic/git-shallow-clone
+    command: |
+      .buildkite/download-dependencies.sh
+      cd gutenberg/packages/react-native-editor/android && ./gradlew testDebug
+
+  - label: Build and Test Android Bridge
+    depends_on: 'build-npm'
+    plugins:
+      - *publish-android-artifacts-docker-container
+      - automattic/git-shallow-clone
+    command: |
+      .buildkite/download-dependencies.sh
+      cd gutenberg/packages/react-native-bridge/android && ./gradlew test
+
   # TODO: Add a block step for UI tests
 
   # - label: Build and Test Android .apk
