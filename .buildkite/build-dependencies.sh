@@ -17,11 +17,13 @@ sample_folder_to_archive=$(echo "$sample_cache_item" | jq -r '.folder_to_archive
 sample_key=$(compute_cache_key "$sample_folder_to_archive_basedir" "$sample_folder_to_archive")
 
 if aws s3api head-object --bucket "$CACHE_BUCKET_NAME" --key "$sample_key" > /dev/null 2>&1; then
+  echo '--- :white_check_mark: Found cached dependencies. Moving on...'
   echo 'Dependencies for the current state of the projects packages have already been cached.'
   echo "Cache key: $sample_key"
   echo ''
   echo 'Will not run npm ci.'
 else
+  echo '--- :package: No cached dependencies found. Building them...'
   # Build dependencies with clean install, for deterministic builds.
 	npm ci --no-audit --no-progress --unsafe-perm
   # Upload to our cache system
