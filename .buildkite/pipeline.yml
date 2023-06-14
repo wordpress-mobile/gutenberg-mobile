@@ -28,7 +28,7 @@ steps:
     command: |
       echo "--- :docker: Build Docker image"
       make ci_build_docker_image
-      echo "--- :npm: Build global dependencies cache"
+      echo "--- :npm: Build node dependencies if needed"
       make ci_build_dependencies
 
   - label: Lint

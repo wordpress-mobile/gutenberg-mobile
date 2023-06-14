@@ -23,7 +23,7 @@ if aws s3api head-object --bucket "$CACHE_BUCKET_NAME" --key "$sample_key" > /de
   echo ''
   echo 'Will not run npm ci.'
 else
-  echo '--- :package: No cached dependencies found. Building them...'
+  echo '--- :npm: No cached dependencies found. Building them...'
   # Build dependencies with clean install, for deterministic builds.
 	npm ci --no-audit --no-progress --unsafe-perm
   # Upload to our cache system
