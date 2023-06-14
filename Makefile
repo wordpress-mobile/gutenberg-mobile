@@ -1,4 +1,5 @@
 test_runner = gutenberg-test-runner
+android_editor_test_runner = android-editor-test-runner
 
 docker_run_opts = --interactive --tty --volume $(shell pwd):/app
 
@@ -17,6 +18,12 @@ ci_build_docker_image:
 	docker build \
 		--target $(test_runner) \
 		--tag $(test_runner) \
+		.
+
+ci_build_docker_android_editor_image:
+	docker build \
+		--target $(android_editor_test_runner) \
+		--tag $(android_editor_test_runner) \
 		.
 
 # Without --unsafe-perm, the postinstall hook will fail to run.
