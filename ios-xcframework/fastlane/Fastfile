@@ -12,22 +12,14 @@ before_all do
   check_for_toolkit_updates unless is_ci || ENV['FASTLANE_SKIP_TOOLKIT_UPDATE_CHECK']
 end
 
-lane :upload_xcframework_to_s3 do |options|
+lane :upload_xcframework_to_s3 do
   xcframework_archive_path = File.join(XCFRAMEWORK_PROJECT_ROOT_FOLDER, "build/xcframeworks/Gutenberg.#{XCFRAMEWORK_ARCHIVE_TYPE}")
 
   unless File.exist? xcframework_archive_path
     UI.user_error! "Could not find XCFramework archive to upload at #{xcframework_archive_path}"
   end
 
-  name = options.fetch(:name, nil)
-
-  if name.nil?
-    name = archive_name(id: last_git_commit[:commit_hash])
-    UI.message "No name provided, will default to #{name}"
-  end
-
-  upload_to_a8c_s3(file: xcframework_archive_path, name_on_s3: name)
-  upload_podspec_to_s3(archive_id: last_git_commit[:commit_hash])
+  upload_xcframework_files_to_s3(archive_path: xcframework_archive_path, id: last_git_commit[:commit_hash])
 
   next unless is_ci
 
@@ -37,8 +29,12 @@ lane :upload_xcframework_to_s3 do |options|
 
   # Tradeoff: We are "wasting" space on S3 by uploading the same archive under different name.
   # What we get in return is a 1-1 correspondency between archive and podspec, which keeps the setup simpler.
-  upload_to_a8c_s3(file: xcframework_archive_path, name_on_s3: archive_name(id: tag))
-  upload_podspec_to_s3(archive_id: tag)
+  upload_xcframework_files_to_s3(archive_path: xcframework_archive_path, id: tag)
+end
+
+def upload_xcframework_files_to_s3(archive_path:, id:)
+  upload_to_a8c_s3(file: archive_path, name_on_s3: archive_name(id: id))
+  upload_podspec_to_s3(archive_id: id)
 end
 
 # rubocop:disable Metrics/AbcSize
