@@ -63,6 +63,7 @@ steps:
         .buildkite/publish-react-native-bridge-android-artifacts.sh
 
   - label: Build iOS RN XCFramework & Publish to S3
+    key: ios-xcframework
     depends_on: js-bundles
     command: .buildkite/publish-react-native-ios-artifacts.sh
     artifact_paths:
@@ -75,3 +76,15 @@ steps:
       queue: mac
     env:
       IMAGE_ID: xcode-14.3
+
+  - label: Create GitHub release draft
+    depends_on: ios-xcframework
+    command: .buildkite/create-github-release-draft.sh
+    plugins:
+      - automattic/a8c-ci-toolkit#2.16.0
+    # TODO: Move on leaner hardware
+    agents:
+      queue: mac
+    env:
+      IMAGE_ID: xcode-14.3
+    if: build.tag != null
