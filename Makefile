@@ -35,3 +35,6 @@ ci_unit_tests_android:
 
 ci_unit_tests_ios:
 	$(docker_run) "$(download_caches_cmd) && CHECK_CORRECTNESS=false CHECK_TESTS=true TEST_RN_PLATFORM=ios ./bin/ci-checks-js.sh"
+
+ci_build_js_bundles:
+	$(docker_run) ".buildkite/build-js-bundles.sh"
