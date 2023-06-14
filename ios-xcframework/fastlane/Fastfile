@@ -35,13 +35,15 @@ lane :upload_xcframework_to_s3 do |options|
 
   next if tag.nil? || tag.empty?
 
-  # Upload a dedicated podspec identified by the tag but pointing to the archive made for the commit, to avoid storing a duplicate archive for the tag.
-  upload_podspec_to_s3(archive_id: last_git_commit[:commit_hash], url_id: tag)
+  # Tradeoff: We are "wasting" space on S3 by uploading the same archive under different name.
+  # What we get in return is a 1-1 correspondency between archive and podspec, which keeps the setup simpler.
+  upload_to_a8c_s3(file: xcframework_archive_path, name_on_s3: tag)
+  upload_podspec_to_s3(archive_id: tag)
 end
 
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Metrics/MethodLength
-def upload_podspec_to_s3(archive_id:, url_id: nil)
+def upload_podspec_to_s3(archive_id:)
   xcconfig = Xcodeproj::Config.new(
     File.join(XCFRAMEWORK_PROJECT_ROOT_FOLDER, 'Config', 'Gutenberg-Shared.xcconfig')
   ).to_hash
@@ -60,19 +62,18 @@ def upload_podspec_to_s3(archive_id:, url_id: nil)
 
   podspec_erb = ERB.new(File.read(File.join(XCFRAMEWORK_PROJECT_ROOT_FOLDER, 'podspec.erb')))
 
-  s3_id = url_id.nil? ? archive_id : url_id
-
   Dir.mktmpdir do |tmp_dir|
     podspec_path = File.join(tmp_dir, 'podspec')
     File.write(podspec_path, podspec_erb.result(context))
-    upload_to_a8c_s3(file: podspec_path, name_on_s3: "Gutenberg-#{s3_id}.podspec")
+    upload_to_a8c_s3(file: podspec_path, name_on_s3: "Gutenberg-#{archive_id}.podspec")
   end
 end
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/MethodLength
 
 # Notice skip_if_exists is true by default.
-# CI might run on the same commit twice, once for the commit and once for the tag, and we don't want to fail the build on the second run.
+# CI might run on the same commit twice, once for the commit and once for the tag.
+# We don't want to fail on the second run.
 def upload_to_a8c_s3(file:, name_on_s3:, prefix: 'gutenberg-mobile', skip_if_exists: true)
   upload_to_s3(
     bucket: 'a8c-apps-public-artifacts',
