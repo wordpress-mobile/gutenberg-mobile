@@ -1,6 +1,9 @@
 Unreleased
 ---
 
+0.52.0
+---
+
 1.97.0
 ---
 * [**] [iOS] Fix dictation regression, in which typing/dictating at the same time caused content loss. [https://github.com/WordPress/gutenberg/pull/49452]
