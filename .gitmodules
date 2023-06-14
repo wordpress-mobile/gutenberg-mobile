@@ -8,5 +8,5 @@
 	shallow = true
 [submodule "block-experiments"]
 	path = block-experiments
-	url = ../../jhnstn/block-experiments.git
+	url = ../../Automattic/block-experiments.git
 	shallow = true
