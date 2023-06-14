@@ -7,7 +7,7 @@ WORKDIR /app
 
 ENTRYPOINT ["/bin/bash", "--login", "-c"]
 
-# Ensure the Node and npm version are the ones expected by Gutenberg
+# Ensure the Node and npm version are the ones expected by the project
 COPY .nvmrc .nvmrc.host
 RUN nvm install $(cat .nvmrc.host)
 # Notice the old version of npm.
