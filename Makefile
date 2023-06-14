@@ -25,7 +25,7 @@ ci_build_docker_image:
 # - https://github.com/npm/npm/issues/3497#issue-14876484
 # - https://buildkite.com/automattic/gutenberg-mobile/builds/6101#0188a503-600b-4839-913f-2b13254a92d4/243-422
 ci_build_dependencies:
-	$(docker_run) "npm ci --no-audit --no-progress --unsafe-perm && $(upload_caches_cmd)"
+	$(docker_run) ".buildkite/build-dependencies.sh"
 
 ci_lint:
 	$(docker_run) "$(download_caches_cmd) && CHECK_CORRECTNESS=true CHECK_TESTS=false ./bin/ci-checks-js.sh"
