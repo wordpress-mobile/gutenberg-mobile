@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [**] Fix crash when using the delete key to remove a single button [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5855]
 
 1.97.0
 ---
