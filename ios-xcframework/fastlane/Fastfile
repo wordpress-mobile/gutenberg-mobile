@@ -33,7 +33,7 @@ lane :upload_xcframework_to_s3 do
 end
 
 def upload_xcframework_files_to_s3(archive_path:, id:)
-  upload_to_a8c_s3(file: archive_path, name_on_s3: archive_name(id: id))
+  upload_to_a8c_s3(file: archive_path, name_on_s3: "Gutenberg-#{id}.#{XCFRAMEWORK_ARCHIVE_TYPE}")
   upload_podspec_to_s3(archive_id: id)
 end
 
@@ -78,8 +78,4 @@ def upload_to_a8c_s3(file:, name_on_s3:, prefix: 'gutenberg-mobile', skip_if_exi
     auto_prefix: false,
     skip_if_exists: skip_if_exists
   )
-end
-
-def archive_name(id:)
-  "Gutenberg-#{id}.#{XCFRAMEWORK_ARCHIVE_TYPE}"
 end
