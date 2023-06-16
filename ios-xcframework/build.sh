@@ -97,32 +97,49 @@ do
     -output "$XCFRAMEWORKS_DIR/$CURRENT_FRAMEWORK_NAME.xcframework"
 done
 
-log 'compression' 'Zipping Gutenberg XCFrameworks'
-ZIP_PATH=$XCFRAMEWORKS_DIR/$MAIN_FRAMEWORK_NAME.zip
-zip -rq "$ZIP_PATH" \
-  $XCFRAMEWORKS_DIR/Aztec.xcframework \
-  $XCFRAMEWORKS_DIR/Gutenberg.xcframework \
-  $XCFRAMEWORKS_DIR/React.xcframework \
-  $XCFRAMEWORKS_DIR/RNTAztecView.xcframework \
-  $XCFRAMEWORKS_DIR/yoga.xcframework
-echo "Gutenberg XCFrameworks ZIP generated at $ZIP_PATH"
+log 'bulb' 'Work around "Gutenberg class ahead of Gutenberg module" issue'
+# We generate a Gutenberg framework with a Gutenberg class in it.
+# This results in some types in the swiftinterface being defined as Gutenberg.Gutenberg.Type which cannot be resolved.
+# There is no fix, but we can work around it by post-processing the interface and flattening the namespace where appropriate.
+#
+# See https://developer.apple.com/forums/thread/123253
+#
+# TODO: There has to be a RegEx that can do what this sequence does in one go. Something along the lines of s/(^|\s|\[)Gutenberg\.(?!self)/\1/g but that doesn't throw errors
+find $XCFRAMEWORKS_DIR -name "*.swiftinterface" -exec sed -i -e 's/Gutenberg\.self/PLACEHOLDER_TO_REVERT_SED/g' {} \;
+find $XCFRAMEWORKS_DIR -name "*.swiftinterface" -exec sed -i -e 's/ Gutenberg\./ /g' {} \;
+find $XCFRAMEWORKS_DIR -name "*.swiftinterface" -exec sed -i -e 's/\[Gutenberg\./[/g' {} \;
+find $XCFRAMEWORKS_DIR -name "*.swiftinterface" -exec sed -i -e 's/PLACEHOLDER_TO_REVERT_SED/Gutenberg.self/g' {} \;
 
-# In parallel to the project to ship Gutenberg as an XCFramework we are also
-# experimenting with adding React Native into other apps with an XCFramework.
+log 'compression' 'Compressing Gutenberg XCFrameworks'
+
+# For CocoaPods to find the XCFrameworks in the archive, it needs to have a certain folder structure.
 #
-# For convenience, we produce a ZIP with all the React Native XCFrameworks
-# here, even though it would be more efficient to have a dedicated project that
-# mirrors React Native and builds new one whenever a new version is released.
+# See for example what Firebase does,
+# https://github.com/CocoaPods/Specs/blob/master/Specs/e/2/1/FirebaseAnalytics/9.6.0/FirebaseAnalytics.podspec.json
 #
-# In this current implementation, the approach is wasteful because we are
-# publishing the same ZIP every time. A possible imporvement would be to track
-# the RN version and check against the storage medium to see if an archive for
-# that version is already available.
-log 'compression' 'Zipping React XCFrameworks'
-ZIP_PATH=$XCFRAMEWORKS_DIR/ReactNative.zip
-zip -rq "$ZIP_PATH" $XCFRAMEWORKS_DIR -x \
-  $XCFRAMEWORKS_DIR/Aztec.xcframework \
-  $XCFRAMEWORKS_DIR/Gutenberg.xcframework \
-  $XCFRAMEWORKS_DIR/RNTAztecView.xcframework \
-  $XCFRAMEWORKS_DIR/Pods_Gutenberg.xcframework
-echo "React Native XCFrameworks ZIP generated at $ZIP_PATH"
+# Archive/
+#   - Frameworks/
+#     - A.xcframework
+#     - B.xcframework
+#   - dummy.txt
+DUMMY_FILE_NAME='dummy.txt'
+echo "This is a work around for file flattening introduced by https://github.com/CocoaPods/CocoaPods/pull/728" > "$XCFRAMEWORKS_DIR/$DUMMY_FILE_NAME"
+
+ARCHIVE_FRAMEWORKS_DIR_NAME="Frameworks"
+ARCHIVE_FRAMEWORKS_PATH="$XCFRAMEWORKS_DIR/$ARCHIVE_FRAMEWORKS_DIR_NAME"
+
+mkdir -p "$ARCHIVE_FRAMEWORKS_PATH"
+
+cp -r "$XCFRAMEWORKS_DIR/Aztec.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
+cp -r "$XCFRAMEWORKS_DIR/Gutenberg.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
+cp -r "$XCFRAMEWORKS_DIR/React.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
+cp -r "$XCFRAMEWORKS_DIR/RNTAztecView.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
+cp -r "$XCFRAMEWORKS_DIR/yoga.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
+
+ARCHIVE_PATH="$XCFRAMEWORKS_DIR/$MAIN_FRAMEWORK_NAME.tar.gz"
+
+tar -czf "$ARCHIVE_PATH" -C "$XCFRAMEWORKS_DIR" \
+  "$ARCHIVE_FRAMEWORKS_DIR_NAME" \
+  "$DUMMY_FILE_NAME"
+
+echo "Gutenberg XCFrameworks archive generated at $ARCHIVE_PATH"

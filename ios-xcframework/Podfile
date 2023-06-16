@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'xcodeproj'
+
 # Note that the pods in this array might seem unused if you look for
 # `import` statements in this codebase. However, make sure to also check
 # whether they are used in the gutenberg-mobile and Gutenberg projects.
@@ -65,8 +67,9 @@ def gutenberg_dependencies
   end
 end
 
-# It would be good to read this from a location that is shared with the Gutenberg framework project
-APP_IOS_DEPLOYMENT_TARGET = Gem::Version.new('13.0')
+VERSION_XCCONFIG_PATH = File.join(File.expand_path(__dir__), 'Config', 'Gutenberg-Shared.xcconfig')
+IOS_VERSION_KEY = 'IPHONEOS_DEPLOYMENT_TARGET'
+APP_IOS_DEPLOYMENT_TARGET = Gem::Version.new(Xcodeproj::Config.new(VERSION_XCCONFIG_PATH).to_hash[IOS_VERSION_KEY])
 
 platform :ios, APP_IOS_DEPLOYMENT_TARGET.version
 
@@ -87,11 +90,8 @@ post_install do |installer|
     next unless target.name != 'RCT-Folly'
 
     target.build_configurations.each do |configuration|
-      ios_deployment_target_key = 'IPHONEOS_DEPLOYMENT_TARGET'
-      pod_ios_deployment_target = Gem::Version.new(configuration.build_settings[ios_deployment_target_key])
-      if pod_ios_deployment_target <= APP_IOS_DEPLOYMENT_TARGET
-        configuration.build_settings.delete(ios_deployment_target_key)
-      end
+      pod_ios_deployment_target = Gem::Version.new(configuration.build_settings[IOS_VERSION_KEY])
+      configuration.build_settings.delete(IOS_VERSION_KEY) if pod_ios_deployment_target <= APP_IOS_DEPLOYMENT_TARGET
     end
   end
 end

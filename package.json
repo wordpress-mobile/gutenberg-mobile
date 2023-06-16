@@ -1,6 +1,6 @@
 {
 	"name": "gutenberg-mobile",
-	"version": "1.96.1",
+	"version": "1.97.0",
 	"private": true,
 	"config": {
 		"jsfiles": "./*.js src/*.js src/**/*.js src/**/**/*.js",
@@ -69,7 +69,7 @@
 		"i18n:check-cache": "./bin/i18n-check-cache.sh jetpack wp-plugins/jetpack layout-grid wp-plugins/layout-grid jetpack-videopress-pkg wp-plugins/jetpack",
 		"i18n:update": "./bin/i18n-update.sh jetpack wp-plugins/jetpack ./jetpack/projects/plugins/jetpack/extensions layout-grid wp-plugins/layout-grid ./block-experiments/blocks/layout-grid jetpack-videopress-pkg wp-plugins/jetpack ./jetpack/projects/packages/videopress",
 		"i18n:update:test": "./bin/i18n-update.sh --path i18n-test jetpack wp-plugins/jetpack ./jetpack/projects/plugins/jetpack/extensions layout-grid wp-plugins/layout-grid ./block-experiments/blocks/layout-grid jetpack-videopress-pkg wp-plugins/jetpack ./jetpack/projects/packages/videopress",
-		"bundle": "npm run clean; npm run bundle:js",
+		"bundle": "npm run clean && npm run bundle:js",
 		"prebundle:js": "npm run i18n:update",
 		"bundle:js": "npm run bundle:android && npm run bundle:ios",
 		"bundle:android": "npm run bundle:android:text && npm run bundle:android:bytecode",

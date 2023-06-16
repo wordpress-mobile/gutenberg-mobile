@@ -11,6 +11,8 @@ import {
 	changeTextOfTextInput,
 	withFakeTimers,
 	act,
+	within,
+	typeInRichText,
 } from 'test/helpers';
 
 /**
@@ -61,6 +63,29 @@ describe( 'VideoPress block', () => {
 
 		const expectedHtml = `<!-- wp:videopress/video /-->`;
 		expect( getEditorHtml() ).toBe( expectedHtml );
+	} );
+
+	it( 'sets caption', async () => {
+		const screen = await initializeEditor( {
+			initialHtml: VIDEOPRESS_BLOCK_HTML,
+		} );
+		const { getByLabelText } = screen;
+
+		// Select block
+		const videoPressBlock = await getBlock( screen, 'VideoPress' );
+		expect( videoPressBlock ).toBeVisible();
+		fireEvent.press( videoPressBlock );
+
+		// Set caption
+		const captionField = within(
+			getByLabelText( /Video caption. Empty/ )
+		).getByPlaceholderText( 'Add caption' );
+		typeInRichText(
+			captionField,
+			'<strong>Bold</strong> <em>italic</em> <s>strikethrough</s> VideoPress caption'
+		);
+
+		expect( getEditorHtml() ).toMatchSnapshot();
 	} );
 } );
 
