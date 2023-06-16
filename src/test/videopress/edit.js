@@ -13,6 +13,8 @@ import {
 	act,
 	within,
 	typeInRichText,
+	setupApiFetch,
+	generateFetchMocks,
 } from 'test/helpers';
 
 /**
@@ -37,12 +39,20 @@ import {
 	pressSettingInPicker,
 } from './local-helpers/utils';
 
+const FETCH_ITEMS = generateFetchMocks();
+
 setupCoreBlocks();
 
 beforeAll( () => {
 	// Register Jetpack blocks
-	setupJetpackEditor( { blogId: 1, isJetpackActive: true } );
+	setupJetpackEditor( {
+		blogId: 1,
+		isJetpackActive: true,
+	} );
 	registerJetpackBlocks( DEFAULT_PROPS );
+
+	// Mock request reponses
+	setupApiFetch( FETCH_ITEMS );
 } );
 
 describe( 'VideoPress block', () => {
