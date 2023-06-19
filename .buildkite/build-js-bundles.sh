@@ -18,7 +18,7 @@ sample_key=$(compute_cache_key "$sample_folder_to_archive_basedir" "$sample_fold
 
 if aws s3api head-object --bucket "$CACHE_BUCKET_NAME" --key "$sample_key" > /dev/null 2>&1; then
   echo '--- :white_check_mark: Found cached dependencies. Downloading them...'
-  ./buildkite/download-caches.sh
+  .buildkite/download-caches.sh
 else
   echo '--- :npm: No cached dependencies found. Building them...'
   # Build dependencies with clean install, for deterministic builds.
