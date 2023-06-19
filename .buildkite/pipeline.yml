@@ -15,7 +15,7 @@ steps:
 
   - label: "Build JS Bundles"
     key: "js-bundles"
-    command: make ci_build_js_bundles
+    command: make ci_build_docker_image && make ci_build_js_bundles
     env:
       WP_CLI_ALLOW_ROOT: true
     artifact_paths:
