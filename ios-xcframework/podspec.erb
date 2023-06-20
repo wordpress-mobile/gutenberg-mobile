@@ -1,0 +1,27 @@
+# frozen_string_literal: true
+
+Pod::Spec.new do |s|
+  s.name = 'Gutenberg'
+  s.summary = 'Printing since 1440'
+  s.homepage = 'https://github.com/wordpress-mobile/gutenberg-mobile'
+  s.authors = 'Automattic'
+
+  s.version = '<%= version %>'
+
+  s.license = { type: '<%= license %>' }
+
+  s.ios.deployment_target = '<%= ios_version %>'
+  s.swift_version = '<%= swift_version %>'
+
+  s.source = {
+    http: "https://cdn.a8c-ci.services/gutenberg-mobile/Gutenberg-<%= archive_id %>.tar.gz"
+  }
+
+  s.vendored_frameworks = [
+    'Frameworks/Aztec.xcframework',
+    'Frameworks/Gutenberg.xcframework',
+    'Frameworks/React.xcframework',
+    'Frameworks/RNTAztecView.xcframework',
+    'Frameworks/yoga.xcframework'
+  ]
+end
