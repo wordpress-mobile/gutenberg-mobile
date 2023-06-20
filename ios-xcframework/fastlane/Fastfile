@@ -13,7 +13,7 @@ before_all do
   check_for_toolkit_updates unless is_ci || ENV['FASTLANE_SKIP_TOOLKIT_UPDATE_CHECK']
 end
 
-lane :upload_xcframework_to_s3 do
+lane :upload_xcframework_to_s3 do |options|
   unless File.exist? xcframework_archive_path
     UI.user_error! "Could not find XCFramework archive to upload at #{XCFRAMEWORK_ARCHIVE_PATH}"
   end
@@ -29,9 +29,18 @@ lane :upload_xcframework_to_s3 do
   # Tradeoff: We are "wasting" space on S3 by uploading the same archive under different name.
   # What we get in return is a 1-1 correspondency between archive and podspec, which keeps the setup simpler.
   upload_xcframework_files_to_s3(archive_path: XCFRAMEWORK_ARCHIVE_PATH, id: tag)
+
+  # Create a draft GitHub release for the tag and upload the archive.
+  # It's a bit of a stretch to do this in the upload lane, but it's convenient.
+  # Future iterations might want a dedicated CI step that collects all binaries, not just the iOS ones.
+  next unless options.fetch(:create_github_release, true)
+
+  create_github_release
 end
 
 lane :create_github_release do
+  puts ':github: Creating GitHub release draft' if is_ci
+
   create_release(
     repository: 'wordpress-mobile/gutenberg-mobile',
     version: "This is a test – id #{Time.now.to_i}",

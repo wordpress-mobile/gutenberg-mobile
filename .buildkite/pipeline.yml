@@ -76,15 +76,3 @@ steps:
       queue: mac
     env:
       IMAGE_ID: xcode-14.3
-
-  - label: Create GitHub release draft
-    depends_on: ios-xcframework
-    command: .buildkite/create-github-release-draft.sh
-    plugins:
-      - automattic/a8c-ci-toolkit#2.16.0
-    # TODO: Move on leaner hardware
-    agents:
-      queue: mac
-    env:
-      IMAGE_ID: xcode-14.3
-    if: build.tag != null
