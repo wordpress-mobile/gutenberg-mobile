@@ -3,6 +3,12 @@ CLANG_ANALYZER_NONNULL = YES
 CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE
 CLANG_CXX_LANGUAGE_STANDARD = gnu++20
 CLANG_ENABLE_MODULES = YES
+// If CLANG_ENABLE_MODULE_DEBUGGING is YES (or not specified, which defaults to YES), then CocoaPods says:
+//
+// Linking a static library that was built with -gmodules, but the module cache was not found.
+// Redistributable static libraries should never be built with module debugging enabled.
+// The debug experience will be degraded due to incomplete debug information.
+CLANG_ENABLE_MODULE_DEBUGGING = NO;
 CLANG_ENABLE_OBJC_ARC = YES
 CLANG_ENABLE_OBJC_WEAK = YES
 CLANG_WARN__DUPLICATE_METHOD_MATCH = YES
@@ -59,7 +65,7 @@ INSTALL_PATH = $(LOCAL_LIBRARY_DIR)/Frameworks
 // Code will load on this and later versions of iOS. Framework APIs that are unavailable
 // in earlier versions will be weak-linked; your code should check for null function
 // pointers or specific system versions before calling newer APIs.
-IPHONEOS_DEPLOYMENT_TARGET = 16.4
+IPHONEOS_DEPLOYMENT_TARGET = 14.0
 LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @loader_path/Frameworks
 // Marketing Version
 //
@@ -81,3 +87,12 @@ SWIFT_VERSION = 5.0
 TARGETED_DEVICE_FAMILY = 1,2
 VERSION_INFO_PREFIX =
 VERSIONING_SYSTEM = apple-generic
+// This should be unnecessary because the script that builds the project should set it.
+//
+// But I'm getting the following error after switching from Xcode 14.3 to 14.3.1:
+//
+// > Failed to build module 'Gutenberg'; this SDK is not supported by the compiler
+// > (the SDK is built with 'Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)',
+// > while this compiler is 'Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)').
+// > Please select a toolchain which matches the SDK.
+BUILD_LIBRARY_FOR_DISTRIBUTION = YES

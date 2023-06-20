@@ -1,0 +1,82 @@
+# frozen_string_literal: true
+
+require 'xcodeproj'
+
+default_platform :ios
+
+XCFRAMEWORK_PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
+XCFRAMEWORK_ARCHIVE_TYPE = 'tar.gz'
+
+before_all do
+  # Ensure we use the latest version of the toolkit
+  check_for_toolkit_updates unless is_ci || ENV['FASTLANE_SKIP_TOOLKIT_UPDATE_CHECK']
+end
+
+lane :upload_xcframework_to_s3 do
+  xcframework_archive_path = File.join(XCFRAMEWORK_PROJECT_ROOT_FOLDER, "build/xcframeworks/Gutenberg.#{XCFRAMEWORK_ARCHIVE_TYPE}")
+
+  unless File.exist? xcframework_archive_path
+    UI.user_error! "Could not find XCFramework archive to upload at #{xcframework_archive_path}"
+  end
+
+  upload_xcframework_files_to_s3(archive_path: xcframework_archive_path, id: last_git_commit[:commit_hash])
+
+  next unless is_ci
+
+  tag = ENV.fetch('BUILDKITE_TAG', nil)
+
+  next if tag.nil? || tag.empty?
+
+  # Tradeoff: We are "wasting" space on S3 by uploading the same archive under different name.
+  # What we get in return is a 1-1 correspondency between archive and podspec, which keeps the setup simpler.
+  upload_xcframework_files_to_s3(archive_path: xcframework_archive_path, id: tag)
+end
+
+def upload_xcframework_files_to_s3(archive_path:, id:)
+  upload_to_a8c_s3(file: archive_path, name_on_s3: "Gutenberg-#{id}.#{XCFRAMEWORK_ARCHIVE_TYPE}")
+  upload_podspec_to_s3(archive_id: id)
+end
+
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/MethodLength
+def upload_podspec_to_s3(archive_id:)
+  xcconfig = Xcodeproj::Config.new(
+    File.join(XCFRAMEWORK_PROJECT_ROOT_FOLDER, 'Config', 'Gutenberg-Shared.xcconfig')
+  ).to_hash
+
+  ios_version = xcconfig['IPHONEOS_DEPLOYMENT_TARGET']
+  swift_version = xcconfig['SWIFT_VERSION']
+
+  gutenberg_package = JSON.parse(File.read(File.join(File.dirname(XCFRAMEWORK_PROJECT_ROOT_FOLDER), 'package.json')))
+
+  version = gutenberg_package['version']
+  # This ought to be read from package.json, but there isn't one at the moment.
+  # license = GUTENBERG_PACKAGE['license']
+  license = 'GPL-2'
+
+  context = binding
+
+  podspec_erb = ERB.new(File.read(File.join(XCFRAMEWORK_PROJECT_ROOT_FOLDER, 'podspec.erb')))
+
+  Dir.mktmpdir do |tmp_dir|
+    podspec_path = File.join(tmp_dir, 'podspec')
+    File.write(podspec_path, podspec_erb.result(context))
+    upload_to_a8c_s3(file: podspec_path, name_on_s3: "Gutenberg-#{archive_id}.podspec")
+  end
+end
+# rubocop:enable Metrics/AbcSize
+# rubocop:enable Metrics/MethodLength
+
+# Notice skip_if_exists is true by default.
+# CI might run on the same commit twice, once for the commit and once for the tag.
+# We don't want to fail on the second run.
+def upload_to_a8c_s3(file:, name_on_s3:, prefix: 'gutenberg-mobile', skip_if_exists: true)
+  upload_to_s3(
+    bucket: 'a8c-apps-public-artifacts',
+    key: "#{prefix}/#{name_on_s3}",
+    file: file,
+    auto_prefix: false,
+    # TODO: Replace with `if_exists: :replace` once the feature is implemented in https://github.com/wordpress-mobile/release-toolkit/pull/495
+    skip_if_exists: skip_if_exists
+  )
+end
