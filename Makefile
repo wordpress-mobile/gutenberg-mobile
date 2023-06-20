@@ -20,4 +20,4 @@ ci_build_docker_image:
 		.
 
 ci_build_js_bundles:
-	$(docker_run) ".buildkite/build-js-bundles.sh"
+	$(docker_run) "echo 999999 | tee -a /proc/sys/fs/inotify/max_user_watches && .buildkite/build-js-bundles.sh"
