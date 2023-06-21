@@ -10,6 +10,7 @@ Unreleased
 ---
 * [**] Fix crash when using the delete key to remove a single button [https://github.com/WordPress/gutenberg/pull/51435]
 * [*] Ensure text input field is not editable when Bottom sheet cell is disabled [https://github.com/WordPress/gutenberg/pull/51567]
+* [*] Rename "Reusable blocks" to "Synced patterns", aligning with the web editor. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5885]
 
 1.97.0
 ---
