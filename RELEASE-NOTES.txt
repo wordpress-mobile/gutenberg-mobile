@@ -1,6 +1,12 @@
 Unreleased
 ---
 * [**] Fix crash when using the delete key to remove a single button [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5855]
+* [*] Image block - Fix issue where in some cases the image doesn't display the right aspect ratio [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5869]
+
+1.97.1
+---
+* [**] Fix crash when using the delete key to remove a single button [https://github.com/WordPress/gutenberg/pull/51435]
+* [*] Ensure text input field is not editable when Bottom sheet cell is disabled [https://github.com/WordPress/gutenberg/pull/51567]
 
 1.97.0
 ---
