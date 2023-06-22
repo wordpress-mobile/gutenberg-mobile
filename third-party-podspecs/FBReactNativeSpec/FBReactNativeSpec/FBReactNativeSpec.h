@@ -99,6 +99,8 @@ namespace JS {
                             onError:(RCTResponseSenderBlock)onError;
 - (void)getCurrentReduceMotionState:(RCTResponseSenderBlock)onSuccess
                             onError:(RCTResponseSenderBlock)onError;
+- (void)getCurrentPrefersCrossFadeTransitionsState:(RCTResponseSenderBlock)onSuccess
+                                           onError:(RCTResponseSenderBlock)onError;
 - (void)getCurrentReduceTransparencyState:(RCTResponseSenderBlock)onSuccess
                                   onError:(RCTResponseSenderBlock)onError;
 - (void)getCurrentVoiceOverState:(RCTResponseSenderBlock)onSuccess
@@ -198,7 +200,9 @@ namespace JS {
       NSString *defaultValue() const;
       NSString *cancelButtonKey() const;
       NSString *destructiveButtonKey() const;
+      NSString *preferredButtonKey() const;
       NSString *keyboardType() const;
+      NSString *userInterfaceStyle() const;
 
       Args(NSDictionary *const v) : _v(v) {}
     private:
@@ -284,6 +288,7 @@ saveValueCallback:(RCTResponseSenderBlock)saveValueCallback;
                     animatedNodeTag:(double)animatedNodeTag;
 - (void)addListener:(NSString *)eventName;
 - (void)removeListeners:(double)count;
+- (void)queueAndExecuteBatchedOperations:(NSArray *)operationsAndArgs;
 
 @end
 namespace facebook {
@@ -354,6 +359,7 @@ saveValueCallback:(RCTResponseSenderBlock)saveValueCallback;
                     animatedNodeTag:(double)animatedNodeTag;
 - (void)addListener:(NSString *)eventName;
 - (void)removeListeners:(double)count;
+- (void)queueAndExecuteBatchedOperations:(NSArray *)operationsAndArgs;
 
 @end
 namespace facebook {
@@ -449,58 +455,6 @@ namespace facebook {
     class JSI_EXPORT NativeAppearanceSpecJSI : public ObjCTurboModule {
     public:
       NativeAppearanceSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
-
-@protocol NativeAsyncLocalStorageSpec <RCTBridgeModule, RCTTurboModule>
-
-- (void)multiGet:(NSArray *)keys
-        callback:(RCTResponseSenderBlock)callback;
-- (void)multiSet:(NSArray *)kvPairs
-        callback:(RCTResponseSenderBlock)callback;
-- (void)multiMerge:(NSArray *)kvPairs
-          callback:(RCTResponseSenderBlock)callback;
-- (void)multiRemove:(NSArray *)keys
-           callback:(RCTResponseSenderBlock)callback;
-- (void)clear:(RCTResponseSenderBlock)callback;
-- (void)getAllKeys:(RCTResponseSenderBlock)callback;
-
-@end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeAsyncLocalStorage'
-     */
-    class JSI_EXPORT NativeAsyncLocalStorageSpecJSI : public ObjCTurboModule {
-    public:
-      NativeAsyncLocalStorageSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
-
-@protocol NativeAsyncSQLiteDBStorageSpec <RCTBridgeModule, RCTTurboModule>
-
-- (void)multiGet:(NSArray *)keys
-        callback:(RCTResponseSenderBlock)callback;
-- (void)multiSet:(NSArray *)kvPairs
-        callback:(RCTResponseSenderBlock)callback;
-- (void)multiMerge:(NSArray *)kvPairs
-          callback:(RCTResponseSenderBlock)callback;
-- (void)multiRemove:(NSArray *)keys
-           callback:(RCTResponseSenderBlock)callback;
-- (void)clear:(RCTResponseSenderBlock)callback;
-- (void)getAllKeys:(RCTResponseSenderBlock)callback;
-
-@end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeAsyncSQLiteDBStorage'
-     */
-    class JSI_EXPORT NativeAsyncSQLiteDBStorageSpecJSI : public ObjCTurboModule {
-    public:
-      NativeAsyncSQLiteDBStorageSpecJSI(const ObjCTurboModule::InitParams &params);
     };
   } // namespace react
 } // namespace facebook
@@ -1150,63 +1104,6 @@ namespace facebook {
     };
   } // namespace react
 } // namespace facebook
-namespace JS {
-  namespace NativeImagePickerIOS {
-    struct SpecOpenCameraDialogConfig {
-      bool unmirrorFrontFacingCamera() const;
-      bool videoMode() const;
-
-      SpecOpenCameraDialogConfig(NSDictionary *const v) : _v(v) {}
-    private:
-      NSDictionary *_v;
-    };
-  }
-}
-
-@interface RCTCxxConvert (NativeImagePickerIOS_SpecOpenCameraDialogConfig)
-+ (RCTManagedPointer *)JS_NativeImagePickerIOS_SpecOpenCameraDialogConfig:(id)json;
-@end
-namespace JS {
-  namespace NativeImagePickerIOS {
-    struct SpecOpenSelectDialogConfig {
-      bool showImages() const;
-      bool showVideos() const;
-
-      SpecOpenSelectDialogConfig(NSDictionary *const v) : _v(v) {}
-    private:
-      NSDictionary *_v;
-    };
-  }
-}
-
-@interface RCTCxxConvert (NativeImagePickerIOS_SpecOpenSelectDialogConfig)
-+ (RCTManagedPointer *)JS_NativeImagePickerIOS_SpecOpenSelectDialogConfig:(id)json;
-@end
-@protocol NativeImagePickerIOSSpec <RCTBridgeModule, RCTTurboModule>
-
-- (void)canRecordVideos:(RCTResponseSenderBlock)callback;
-- (void)canUseCamera:(RCTResponseSenderBlock)callback;
-- (void)openCameraDialog:(JS::NativeImagePickerIOS::SpecOpenCameraDialogConfig &)config
-         successCallback:(RCTResponseSenderBlock)successCallback
-          cancelCallback:(RCTResponseSenderBlock)cancelCallback;
-- (void)openSelectDialog:(JS::NativeImagePickerIOS::SpecOpenSelectDialogConfig &)config
-         successCallback:(RCTResponseSenderBlock)successCallback
-          cancelCallback:(RCTResponseSenderBlock)cancelCallback;
-- (void)clearAllPendingVideos;
-- (void)removePendingVideo:(NSString *)url;
-
-@end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeImagePickerIOS'
-     */
-    class JSI_EXPORT NativeImagePickerIOSSpecJSI : public ObjCTurboModule {
-    public:
-      NativeImagePickerIOSSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
 
 @protocol NativeImageStoreIOSSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -1266,54 +1163,6 @@ namespace facebook {
     class JSI_EXPORT NativeJSCSamplingProfilerSpecJSI : public ObjCTurboModule {
     public:
       NativeJSCSamplingProfilerSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
-namespace JS {
-  namespace NativeJSDevSupport {
-    struct Constants {
-
-      struct Builder {
-        struct Input {
-          RCTRequired<double> ERROR_CODE_EXCEPTION;
-          RCTRequired<double> ERROR_CODE_VIEW_NOT_FOUND;
-        };
-
-        /** Initialize with a set of values */
-        Builder(const Input i);
-        /** Initialize with an existing Constants */
-        Builder(Constants i);
-        /** Builds the object. Generally used only by the infrastructure. */
-        NSDictionary *buildUnsafeRawValue() const { return _factory(); };
-      private:
-        NSDictionary *(^_factory)(void);
-      };
-
-      static Constants fromUnsafeRawValue(NSDictionary *const v) { return {v}; }
-      NSDictionary *unsafeRawValue() const { return _v; }
-    private:
-      Constants(NSDictionary *const v) : _v(v) {}
-      NSDictionary *_v;
-    };
-  }
-}
-@protocol NativeJSDevSupportSpec <RCTBridgeModule, RCTTurboModule>
-
-- (void)onSuccess:(NSString *)data;
-- (void)onFailure:(double)errorCode
-            error:(NSString *)error;
-- (facebook::react::ModuleConstants<JS::NativeJSDevSupport::Constants::Builder>)constantsToExport;
-- (facebook::react::ModuleConstants<JS::NativeJSDevSupport::Constants::Builder>)getConstants;
-
-@end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeJSDevSupport'
-     */
-    class JSI_EXPORT NativeJSDevSupportSpecJSI : public ObjCTurboModule {
-    public:
-      NativeJSDevSupportSpecJSI(const ObjCTurboModule::InitParams &params);
     };
   } // namespace react
 } // namespace facebook
@@ -2112,9 +1961,19 @@ inline NSString *JS::NativeAlertManager::Args::destructiveButtonKey() const
   id const p = _v[@"destructiveButtonKey"];
   return RCTBridgingToOptionalString(p);
 }
+inline NSString *JS::NativeAlertManager::Args::preferredButtonKey() const
+{
+  id const p = _v[@"preferredButtonKey"];
+  return RCTBridgingToOptionalString(p);
+}
 inline NSString *JS::NativeAlertManager::Args::keyboardType() const
 {
   id const p = _v[@"keyboardType"];
+  return RCTBridgingToOptionalString(p);
+}
+inline NSString *JS::NativeAlertManager::Args::userInterfaceStyle() const
+{
+  id const p = _v[@"userInterfaceStyle"];
   return RCTBridgingToOptionalString(p);
 }
 inline facebook::react::LazyVector<NSString *> JS::NativeAnimatedModule::EventMapping::nativeEventPath() const
@@ -2147,8 +2006,6 @@ inline JS::NativeAppState::Constants::Builder::Builder(const Input i) : _factory
 inline JS::NativeAppState::Constants::Builder::Builder(Constants i) : _factory(^{
   return i.unsafeRawValue();
 }) {}
-
-
 
 inline JS::NativeBlobModule::Constants::Builder::Builder(const Input i) : _factory(^{
   NSMutableDictionary *d = [NSMutableDictionary new];
@@ -2372,40 +2229,9 @@ inline std::optional<bool> JS::NativeImageEditor::Options::allowExternalStorage(
   return RCTBridgingToOptionalBool(p);
 }
 
-inline bool JS::NativeImagePickerIOS::SpecOpenCameraDialogConfig::unmirrorFrontFacingCamera() const
-{
-  id const p = _v[@"unmirrorFrontFacingCamera"];
-  return RCTBridgingToBool(p);
-}
-inline bool JS::NativeImagePickerIOS::SpecOpenCameraDialogConfig::videoMode() const
-{
-  id const p = _v[@"videoMode"];
-  return RCTBridgingToBool(p);
-}
-inline bool JS::NativeImagePickerIOS::SpecOpenSelectDialogConfig::showImages() const
-{
-  id const p = _v[@"showImages"];
-  return RCTBridgingToBool(p);
-}
-inline bool JS::NativeImagePickerIOS::SpecOpenSelectDialogConfig::showVideos() const
-{
-  id const p = _v[@"showVideos"];
-  return RCTBridgingToBool(p);
-}
 
 
 
-inline JS::NativeJSDevSupport::Constants::Builder::Builder(const Input i) : _factory(^{
-  NSMutableDictionary *d = [NSMutableDictionary new];
-  auto ERROR_CODE_EXCEPTION = i.ERROR_CODE_EXCEPTION.get();
-  d[@"ERROR_CODE_EXCEPTION"] = @(ERROR_CODE_EXCEPTION);
-  auto ERROR_CODE_VIEW_NOT_FOUND = i.ERROR_CODE_VIEW_NOT_FOUND.get();
-  d[@"ERROR_CODE_VIEW_NOT_FOUND"] = @(ERROR_CODE_VIEW_NOT_FOUND);
-  return d;
-}) {}
-inline JS::NativeJSDevSupport::Constants::Builder::Builder(Constants i) : _factory(^{
-  return i.unsafeRawValue();
-}) {}
 
 
 

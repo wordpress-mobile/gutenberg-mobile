@@ -95,6 +95,10 @@ namespace facebook {
       return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "getCurrentReduceMotionState", @selector(getCurrentReduceMotionState:onError:), args, count);
     }
 
+    static facebook::jsi::Value __hostFunction_NativeAccessibilityManagerSpecJSI_getCurrentPrefersCrossFadeTransitionsState(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
+      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "getCurrentPrefersCrossFadeTransitionsState", @selector(getCurrentPrefersCrossFadeTransitionsState:onError:), args, count);
+    }
+
     static facebook::jsi::Value __hostFunction_NativeAccessibilityManagerSpecJSI_getCurrentReduceTransparencyState(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
       return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "getCurrentReduceTransparencyState", @selector(getCurrentReduceTransparencyState:onError:), args, count);
     }
@@ -132,6 +136,9 @@ namespace facebook {
         
         
         methodMap_["getCurrentReduceMotionState"] = MethodMetadata {2, __hostFunction_NativeAccessibilityManagerSpecJSI_getCurrentReduceMotionState};
+        
+        
+        methodMap_["getCurrentPrefersCrossFadeTransitionsState"] = MethodMetadata {2, __hostFunction_NativeAccessibilityManagerSpecJSI_getCurrentPrefersCrossFadeTransitionsState};
         
         
         methodMap_["getCurrentReduceTransparencyState"] = MethodMetadata {2, __hostFunction_NativeAccessibilityManagerSpecJSI_getCurrentReduceTransparencyState};
@@ -317,6 +324,10 @@ namespace facebook {
       return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "removeListeners", @selector(removeListeners:), args, count);
     }
 
+    static facebook::jsi::Value __hostFunction_NativeAnimatedModuleSpecJSI_queueAndExecuteBatchedOperations(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
+      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "queueAndExecuteBatchedOperations", @selector(queueAndExecuteBatchedOperations:), args, count);
+    }
+
     NativeAnimatedModuleSpecJSI::NativeAnimatedModuleSpecJSI(const ObjCTurboModule::InitParams &params)
       : ObjCTurboModule(params) {
         
@@ -387,6 +398,9 @@ namespace facebook {
         
         
         methodMap_["removeListeners"] = MethodMetadata {1, __hostFunction_NativeAnimatedModuleSpecJSI_removeListeners};
+        
+        
+        methodMap_["queueAndExecuteBatchedOperations"] = MethodMetadata {1, __hostFunction_NativeAnimatedModuleSpecJSI_queueAndExecuteBatchedOperations};
         
     }
   } // namespace react
@@ -492,6 +506,10 @@ namespace facebook {
       return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "removeListeners", @selector(removeListeners:), args, count);
     }
 
+    static facebook::jsi::Value __hostFunction_NativeAnimatedTurboModuleSpecJSI_queueAndExecuteBatchedOperations(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
+      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "queueAndExecuteBatchedOperations", @selector(queueAndExecuteBatchedOperations:), args, count);
+    }
+
     NativeAnimatedTurboModuleSpecJSI::NativeAnimatedTurboModuleSpecJSI(const ObjCTurboModule::InitParams &params)
       : ObjCTurboModule(params) {
         
@@ -562,6 +580,9 @@ namespace facebook {
         
         
         methodMap_["removeListeners"] = MethodMetadata {1, __hostFunction_NativeAnimatedTurboModuleSpecJSI_removeListeners};
+        
+        
+        methodMap_["queueAndExecuteBatchedOperations"] = MethodMetadata {1, __hostFunction_NativeAnimatedTurboModuleSpecJSI_queueAndExecuteBatchedOperations};
         
     }
   } // namespace react
@@ -652,108 +673,6 @@ namespace facebook {
         
         
         methodMap_["removeListeners"] = MethodMetadata {1, __hostFunction_NativeAppearanceSpecJSI_removeListeners};
-        
-    }
-  } // namespace react
-} // namespace facebook
-
-namespace facebook {
-  namespace react {
-    
-    static facebook::jsi::Value __hostFunction_NativeAsyncLocalStorageSpecJSI_multiGet(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "multiGet", @selector(multiGet:callback:), args, count);
-    }
-
-    static facebook::jsi::Value __hostFunction_NativeAsyncLocalStorageSpecJSI_multiSet(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "multiSet", @selector(multiSet:callback:), args, count);
-    }
-
-    static facebook::jsi::Value __hostFunction_NativeAsyncLocalStorageSpecJSI_multiMerge(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "multiMerge", @selector(multiMerge:callback:), args, count);
-    }
-
-    static facebook::jsi::Value __hostFunction_NativeAsyncLocalStorageSpecJSI_multiRemove(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "multiRemove", @selector(multiRemove:callback:), args, count);
-    }
-
-    static facebook::jsi::Value __hostFunction_NativeAsyncLocalStorageSpecJSI_clear(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "clear", @selector(clear:), args, count);
-    }
-
-    static facebook::jsi::Value __hostFunction_NativeAsyncLocalStorageSpecJSI_getAllKeys(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "getAllKeys", @selector(getAllKeys:), args, count);
-    }
-
-    NativeAsyncLocalStorageSpecJSI::NativeAsyncLocalStorageSpecJSI(const ObjCTurboModule::InitParams &params)
-      : ObjCTurboModule(params) {
-        
-        methodMap_["multiGet"] = MethodMetadata {2, __hostFunction_NativeAsyncLocalStorageSpecJSI_multiGet};
-        
-        
-        methodMap_["multiSet"] = MethodMetadata {2, __hostFunction_NativeAsyncLocalStorageSpecJSI_multiSet};
-        
-        
-        methodMap_["multiMerge"] = MethodMetadata {2, __hostFunction_NativeAsyncLocalStorageSpecJSI_multiMerge};
-        
-        
-        methodMap_["multiRemove"] = MethodMetadata {2, __hostFunction_NativeAsyncLocalStorageSpecJSI_multiRemove};
-        
-        
-        methodMap_["clear"] = MethodMetadata {1, __hostFunction_NativeAsyncLocalStorageSpecJSI_clear};
-        
-        
-        methodMap_["getAllKeys"] = MethodMetadata {1, __hostFunction_NativeAsyncLocalStorageSpecJSI_getAllKeys};
-        
-    }
-  } // namespace react
-} // namespace facebook
-
-namespace facebook {
-  namespace react {
-    
-    static facebook::jsi::Value __hostFunction_NativeAsyncSQLiteDBStorageSpecJSI_multiGet(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "multiGet", @selector(multiGet:callback:), args, count);
-    }
-
-    static facebook::jsi::Value __hostFunction_NativeAsyncSQLiteDBStorageSpecJSI_multiSet(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "multiSet", @selector(multiSet:callback:), args, count);
-    }
-
-    static facebook::jsi::Value __hostFunction_NativeAsyncSQLiteDBStorageSpecJSI_multiMerge(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "multiMerge", @selector(multiMerge:callback:), args, count);
-    }
-
-    static facebook::jsi::Value __hostFunction_NativeAsyncSQLiteDBStorageSpecJSI_multiRemove(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "multiRemove", @selector(multiRemove:callback:), args, count);
-    }
-
-    static facebook::jsi::Value __hostFunction_NativeAsyncSQLiteDBStorageSpecJSI_clear(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "clear", @selector(clear:), args, count);
-    }
-
-    static facebook::jsi::Value __hostFunction_NativeAsyncSQLiteDBStorageSpecJSI_getAllKeys(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "getAllKeys", @selector(getAllKeys:), args, count);
-    }
-
-    NativeAsyncSQLiteDBStorageSpecJSI::NativeAsyncSQLiteDBStorageSpecJSI(const ObjCTurboModule::InitParams &params)
-      : ObjCTurboModule(params) {
-        
-        methodMap_["multiGet"] = MethodMetadata {2, __hostFunction_NativeAsyncSQLiteDBStorageSpecJSI_multiGet};
-        
-        
-        methodMap_["multiSet"] = MethodMetadata {2, __hostFunction_NativeAsyncSQLiteDBStorageSpecJSI_multiSet};
-        
-        
-        methodMap_["multiMerge"] = MethodMetadata {2, __hostFunction_NativeAsyncSQLiteDBStorageSpecJSI_multiMerge};
-        
-        
-        methodMap_["multiRemove"] = MethodMetadata {2, __hostFunction_NativeAsyncSQLiteDBStorageSpecJSI_multiRemove};
-        
-        
-        methodMap_["clear"] = MethodMetadata {1, __hostFunction_NativeAsyncSQLiteDBStorageSpecJSI_clear};
-        
-        
-        methodMap_["getAllKeys"] = MethodMetadata {1, __hostFunction_NativeAsyncSQLiteDBStorageSpecJSI_getAllKeys};
         
     }
   } // namespace react
@@ -1333,68 +1252,6 @@ namespace facebook {
     }
   } // namespace react
 } // namespace facebook
-@implementation RCTCxxConvert (NativeImagePickerIOS_SpecOpenCameraDialogConfig)
-+ (RCTManagedPointer *)JS_NativeImagePickerIOS_SpecOpenCameraDialogConfig:(id)json
-{
-  return facebook::react::managedPointer<JS::NativeImagePickerIOS::SpecOpenCameraDialogConfig>(json);
-}
-@end
-@implementation RCTCxxConvert (NativeImagePickerIOS_SpecOpenSelectDialogConfig)
-+ (RCTManagedPointer *)JS_NativeImagePickerIOS_SpecOpenSelectDialogConfig:(id)json
-{
-  return facebook::react::managedPointer<JS::NativeImagePickerIOS::SpecOpenSelectDialogConfig>(json);
-}
-@end
-namespace facebook {
-  namespace react {
-    
-    static facebook::jsi::Value __hostFunction_NativeImagePickerIOSSpecJSI_canRecordVideos(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "canRecordVideos", @selector(canRecordVideos:), args, count);
-    }
-
-    static facebook::jsi::Value __hostFunction_NativeImagePickerIOSSpecJSI_canUseCamera(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "canUseCamera", @selector(canUseCamera:), args, count);
-    }
-
-    static facebook::jsi::Value __hostFunction_NativeImagePickerIOSSpecJSI_openCameraDialog(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "openCameraDialog", @selector(openCameraDialog:successCallback:cancelCallback:), args, count);
-    }
-
-    static facebook::jsi::Value __hostFunction_NativeImagePickerIOSSpecJSI_openSelectDialog(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "openSelectDialog", @selector(openSelectDialog:successCallback:cancelCallback:), args, count);
-    }
-
-    static facebook::jsi::Value __hostFunction_NativeImagePickerIOSSpecJSI_clearAllPendingVideos(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "clearAllPendingVideos", @selector(clearAllPendingVideos), args, count);
-    }
-
-    static facebook::jsi::Value __hostFunction_NativeImagePickerIOSSpecJSI_removePendingVideo(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "removePendingVideo", @selector(removePendingVideo:), args, count);
-    }
-
-    NativeImagePickerIOSSpecJSI::NativeImagePickerIOSSpecJSI(const ObjCTurboModule::InitParams &params)
-      : ObjCTurboModule(params) {
-        
-        methodMap_["canRecordVideos"] = MethodMetadata {1, __hostFunction_NativeImagePickerIOSSpecJSI_canRecordVideos};
-        
-        
-        methodMap_["canUseCamera"] = MethodMetadata {1, __hostFunction_NativeImagePickerIOSSpecJSI_canUseCamera};
-        
-        
-        methodMap_["openCameraDialog"] = MethodMetadata {3, __hostFunction_NativeImagePickerIOSSpecJSI_openCameraDialog};
-        setMethodArgConversionSelector(@"openCameraDialog", 0, @"JS_NativeImagePickerIOS_SpecOpenCameraDialogConfig:");
-        
-        methodMap_["openSelectDialog"] = MethodMetadata {3, __hostFunction_NativeImagePickerIOSSpecJSI_openSelectDialog};
-        setMethodArgConversionSelector(@"openSelectDialog", 0, @"JS_NativeImagePickerIOS_SpecOpenSelectDialogConfig:");
-        
-        methodMap_["clearAllPendingVideos"] = MethodMetadata {0, __hostFunction_NativeImagePickerIOSSpecJSI_clearAllPendingVideos};
-        
-        
-        methodMap_["removePendingVideo"] = MethodMetadata {1, __hostFunction_NativeImagePickerIOSSpecJSI_removePendingVideo};
-        
-    }
-  } // namespace react
-} // namespace facebook
 
 namespace facebook {
   namespace react {
@@ -1460,36 +1317,6 @@ namespace facebook {
       : ObjCTurboModule(params) {
         
         methodMap_["operationComplete"] = MethodMetadata {3, __hostFunction_NativeJSCSamplingProfilerSpecJSI_operationComplete};
-        
-    }
-  } // namespace react
-} // namespace facebook
-
-namespace facebook {
-  namespace react {
-    
-    static facebook::jsi::Value __hostFunction_NativeJSDevSupportSpecJSI_onSuccess(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "onSuccess", @selector(onSuccess:), args, count);
-    }
-
-    static facebook::jsi::Value __hostFunction_NativeJSDevSupportSpecJSI_onFailure(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "onFailure", @selector(onFailure:error:), args, count);
-    }
-
-    static facebook::jsi::Value __hostFunction_NativeJSDevSupportSpecJSI_getConstants(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
-      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, ObjectKind, "getConstants", @selector(getConstants), args, count);
-    }
-
-    NativeJSDevSupportSpecJSI::NativeJSDevSupportSpecJSI(const ObjCTurboModule::InitParams &params)
-      : ObjCTurboModule(params) {
-        
-        methodMap_["onSuccess"] = MethodMetadata {1, __hostFunction_NativeJSDevSupportSpecJSI_onSuccess};
-        
-        
-        methodMap_["onFailure"] = MethodMetadata {2, __hostFunction_NativeJSDevSupportSpecJSI_onFailure};
-        
-        
-        methodMap_["getConstants"] = MethodMetadata {0, __hostFunction_NativeJSDevSupportSpecJSI_getConstants};
         
     }
   } // namespace react

@@ -1,6 +1,6 @@
 {
   "name": "RCT-Folly",
-  "version": "2021.06.28.00-v2",
+  "version": "2021.07.22.00",
   "license": {
     "type": "Apache License, Version 2.0"
   },
@@ -9,7 +9,7 @@
   "authors": "Facebook",
   "source": {
     "git": "https://github.com/facebook/folly.git",
-    "tag": "v2021.06.28.00"
+    "tag": "v2021.07.22.00"
   },
   "module_name": "folly",
   "header_mappings_dir": ".",
@@ -86,8 +86,7 @@
   },
   "default_subspecs": "Default",
   "platforms": {
-    "ios": "9.0",
-    "tvos": "9.0"
+    "ios": "9.0"
   },
   "subspecs": [
     {
