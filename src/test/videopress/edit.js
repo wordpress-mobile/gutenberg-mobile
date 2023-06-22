@@ -122,12 +122,7 @@ describe( "Update VideoPress block's settings", () => {
 
 		fireEvent.press( screen.getByText( 'Description' ) );
 
-		const allDescriptionInputs = screen.getAllByPlaceholderText(
-			'Add description'
-		);
-
-		// The BottomSheetControl's input field is accessed via the component's second placeholder
-		const input = allDescriptionInputs[ 1 ];
+		const input = screen.getByPlaceholderText( 'Add description' );
 
 		changeTextOfTextInput( input, "The video's new description!" );
 	} );
