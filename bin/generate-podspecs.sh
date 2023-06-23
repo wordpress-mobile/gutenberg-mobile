@@ -17,8 +17,8 @@ function warn_missing_tag_commit() {
 }
 
 # Change to the expected directory.
-cd "$( dirname "$0" )"
-cd ..
+pushd "$( dirname "$0" )" > /dev/null
+popd > /dev/null
 WD=$(pwd)
 echo "Working directory: $WD"
 
@@ -96,7 +96,7 @@ done
 
 # Generate the React Native podspecs
 # Change to the React Native directory to get relative paths for the RN podspecs
-cd "$NODE_MODULES_DIR/react-native"
+pushd "$NODE_MODULES_DIR/react-native" > /dev/null
 
 RN_DIR="./"
 SCRIPTS_PATH="./scripts/"
@@ -196,8 +196,9 @@ do
         mv "$TMP_FBReactNativeSpec" "$DEST/FBReactNativeSpec/FBReactNativeSpec.podspec.json"
     fi
 done
+popd > /dev/null
 
 echo 'Updating XCFramework Podfile.lock with these changes'
-pushd ios-xcframework
+pushd ios-xcframework > /dev/null
 bundle exec pod update
-popd
+popd > /dev/null
