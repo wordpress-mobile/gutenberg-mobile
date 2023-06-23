@@ -198,7 +198,9 @@ do
 done
 popd > /dev/null
 
-echo 'Updating XCFramework Podfile.lock with these changes'
-pushd ios-xcframework > /dev/null
-bundle exec pod update
-popd > /dev/null
+if [[ "$COMMIT_HASH" != "0" ]]; then
+    echo 'Updating XCFramework Podfile.lock with these changes'
+    pushd ios-xcframework > /dev/null
+    bundle exec pod update
+    popd > /dev/null
+fi
