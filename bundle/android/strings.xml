@@ -297,6 +297,7 @@ translators: %s: Select control button label e.g. "Button width" -->
     <string name="gutenberg_native_replace_image_or_video" tools:ignore="UnusedResources">Replace image or video</string>
     <string name="gutenberg_native_replace_video" tools:ignore="UnusedResources">Replace video</string>
     <string name="gutenberg_native_retry" tools:ignore="UnusedResources">Retry</string>
+    <string name="gutenberg_native_reusable" tools:ignore="UnusedResources">Reusable</string>
     <string name="gutenberg_native_rich_text_editing" tools:ignore="UnusedResources">Rich text editing</string>
     <!-- translators: %s: Block name e.g. "Image block"
 translators: Block name. %s: The localized block name -->
