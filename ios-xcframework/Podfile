@@ -52,7 +52,8 @@ DEPENDENCIES = %w[
   RNCClipboard
   RNFastImage
   React-Codegen
-  React-bridging
+  React-jsc
+  React-hermes
 ].freeze
 
 def gutenberg_dependencies
