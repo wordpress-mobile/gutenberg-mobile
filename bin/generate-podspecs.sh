@@ -199,7 +199,7 @@ done
 popd > /dev/null
 
 # We are required to run this script twice to capture the correct target.
-# 0 is the value set on the first running this script to generate the podspecs.
+# 0 is the value set during the first script run to generate the podspecs.
 if [[ "$COMMIT_HASH" != "0" ]]; then
     echo 'Updating XCFramework Podfile.lock with these changes'
     pushd ios-xcframework > /dev/null
