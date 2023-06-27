@@ -2,40 +2,18 @@
 
 require 'xcodeproj'
 
+REACT_NATIVE_PATH = '../gutenberg/node_modules/react-native'
+require_relative File.join(REACT_NATIVE_PATH, 'scripts', 'react_native_pods')
+
 # Note that the pods in this array might seem unused if you look for
 # `import` statements in this codebase. However, make sure to also check
 # whether they are used in the gutenberg-mobile and Gutenberg projects.
 #
+# Also notice that these are not all the dependencies the project uses.
+# Later in the config, we call use_react_native! which fetches more.
+#
 # See https://github.com/wordpress-mobile/gutenberg-mobile/issues/5025
 DEPENDENCIES = %w[
-  FBLazyVector
-  React
-  ReactCommon
-  RCTRequired
-  RCTTypeSafety
-  React-Core
-  React-CoreModules
-  React-RCTActionSheet
-  React-RCTAnimation
-  React-RCTBlob
-  React-RCTImage
-  React-RCTLinking
-  React-RCTNetwork
-  React-RCTSettings
-  React-RCTText
-  React-RCTVibration
-  React-callinvoker
-  React-cxxreact
-  React-jsinspector
-  React-jsi
-  React-jsiexecutor
-  React-logger
-  React-perflogger
-  React-runtimeexecutor
-  boost
-  Yoga
-  RCT-Folly
-  glog
   react-native-safe-area
   react-native-safe-area-context
   react-native-video
@@ -51,17 +29,11 @@ DEPENDENCIES = %w[
   RNCMaskedView
   RNCClipboard
   RNFastImage
-  React-Codegen
   React-jsc
-  React-hermes
 ].freeze
 
 def gutenberg_dependencies
   podspec_prefix = '..'
-
-  # FBReactNativeSpec needs special treatment because of react-native-codegen code generation
-  pod 'FBReactNativeSpec',
-      podspec: "#{podspec_prefix}/third-party-podspecs/FBReactNativeSpec/FBReactNativeSpec.podspec.json"
 
   # Use a custom RNReanimated version while we coordinate a fix upstream
   DEPENDENCIES.reject { |d| d == 'RNReanimated' }.each do |pod_name|
@@ -77,9 +49,13 @@ APP_IOS_DEPLOYMENT_TARGET = Gem::Version.new(Xcodeproj::Config.new(VERSION_XCCON
 
 platform :ios, APP_IOS_DEPLOYMENT_TARGET.version
 
-target 'Gutenberg' do
-  use_frameworks! linkage: :static
+# It's important to call use_frameworks! before use_react_native!
+#
+# See https://github.com/facebook/react-native/issues/36120#issuecomment-1425892304
+use_frameworks! linkage: :static
+use_react_native! path: REACT_NATIVE_PATH
 
+target 'Gutenberg' do
   pod 'RNTAztecView', path: '..'
   gutenberg_dependencies
 end
