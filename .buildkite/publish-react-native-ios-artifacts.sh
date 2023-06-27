@@ -3,6 +3,16 @@
 echo "--- :arrow_down: Download iOS JS bundle"
 buildkite-agent artifact download bundle/ios/App.js .
 
+echo '--- :node: Setup node_modules for RNReanimated'
+brew install nvm
+
+export NVM_DIR="$HOME/.nvm"
+[[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ]] && . "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
+
+nvm install "$(cat .nvmrc)"
+
+npm ci
+
 echo "--- :rubygems: Setting up Gems"
 cd ./ios-xcframework
 
