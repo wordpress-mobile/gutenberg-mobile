@@ -67,6 +67,8 @@ pre_install do
 end
 
 post_install do |installer|
+  react_native_post_install(installer, REACT_NATIVE_PATH)
+
   installer.pods_project.targets.each do |target|
     # Let Pods targets inherit deployment target from the app
     # See https://github.com/CocoaPods/CocoaPods/issues/4859
