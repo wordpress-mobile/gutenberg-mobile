@@ -1,8 +1,7 @@
 #!/bin/bash -eu
 
-# HACK
-# echo "--- :arrow_down: Download iOS JS bundle"
-# buildkite-agent artifact download bundle/ios/App.js .
+echo "--- :arrow_down: Download iOS JS bundle"
+buildkite-agent artifact download bundle/ios/App.js .
 
 echo '--- :node: Setup node_modules for RNReanimated'
 echo '--- :node: 1. Install nvm'
