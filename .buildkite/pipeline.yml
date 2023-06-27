@@ -63,7 +63,8 @@ steps:
         .buildkite/publish-react-native-bridge-android-artifacts.sh
 
   - label: Build iOS RN XCFramework & Publish to S3
-    depends_on: js-bundles
+    # HACK
+    # depends_on: js-bundles
     command: .buildkite/publish-react-native-ios-artifacts.sh
     artifact_paths:
       - ios-xcframework/build/xcframeworks/*.tar.gz
