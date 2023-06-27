@@ -87,6 +87,7 @@ end
 pre_install do
   # This is required to workaround an issue with RNReanimated after upgrading to version 2.17.0
   ENV['REACT_NATIVE_NODE_MODULES_DIR'] = File.join(Dir.pwd, '..', 'gutenberg', 'node_modules')
+  puts "Set REACT_NATIVE_NODE_MODULES_DIR env var for RNReanimated to #{ENV['REACT_NATIVE_NODE_MODULES_DIR']}"
 end
 
 post_install do |installer|
