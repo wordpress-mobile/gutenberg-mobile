@@ -63,9 +63,12 @@ def gutenberg_dependencies
   pod 'FBReactNativeSpec',
       podspec: "#{podspec_prefix}/third-party-podspecs/FBReactNativeSpec/FBReactNativeSpec.podspec.json"
 
-  DEPENDENCIES.each do |pod_name|
+  # Use a custom RNReanimated version while we coordinate a fix upstream
+  DEPENDENCIES.reject { |d| d == 'RNReanimated' }.each do |pod_name|
     pod pod_name, podspec: "#{podspec_prefix}/third-party-podspecs/#{pod_name}.podspec.json"
   end
+
+  pod 'RNReanimated', git: 'https://github.com/wordpress-mobile/react-native-reanimated', branch: 'mokagio/fix-custom-node_modules-bypass-multiple-versions-check-2.17.0'
 end
 
 VERSION_XCCONFIG_PATH = File.join(File.expand_path(__dir__), 'Config', 'Gutenberg-Shared.xcconfig')
@@ -79,6 +82,11 @@ target 'Gutenberg' do
 
   pod 'RNTAztecView', path: '..'
   gutenberg_dependencies
+end
+
+pre_install do
+  # This is required to workaround an issue with RNReanimated after upgrading to version 2.17.0
+  ENV['REACT_NATIVE_NODE_MODULES_DIR'] = File.join(Dir.pwd, '..', 'gutenberg', 'node_modules')
 end
 
 post_install do |installer|
