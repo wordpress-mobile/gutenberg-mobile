@@ -344,6 +344,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3FE06ACD29F3F6DA00F752AD /* Project-Debug.xcconfig */;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../gutenberg/node_modules/react-native";
 			};
 			name = Debug;
 		};
@@ -351,6 +354,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3FE06ACA29F3F6DA00F752AD /* Project-Release.xcconfig */;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../gutenberg/node_modules/react-native";
 			};
 			name = Release;
 		};
