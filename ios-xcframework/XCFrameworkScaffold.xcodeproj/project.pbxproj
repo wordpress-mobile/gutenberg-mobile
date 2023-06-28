@@ -25,6 +25,8 @@
 		3F12364D29F6B21300AF54A4 /* editor-behavior-overrides.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F12364429F6B21300AF54A4 /* editor-behavior-overrides.js */; };
 		3F12364E29F6B21300AF54A4 /* local-storage-overrides.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F12364529F6B21300AF54A4 /* local-storage-overrides.json */; };
 		3F12365029F6B23300AF54A4 /* supported-blocks.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F12364F29F6B23300AF54A4 /* supported-blocks.json */; };
+		3F28CEB12A4C3EAD00B79686 /* hermes.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F28CEB02A4C3EAD00B79686 /* hermes.xcframework */; };
+		3F28CEB22A4C3EAD00B79686 /* hermes.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F28CEB02A4C3EAD00B79686 /* hermes.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3FA0C5812A1C8C9700600A9A /* App.js in Resources */ = {isa = PBXBuildFile; fileRef = 3FA0C5802A1C8C9700600A9A /* App.js */; };
 		3FE06AC329F3F61300F752AD /* Gutenberg.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE06AC229F3F61300F752AD /* Gutenberg.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3FE06ACE29F3F6DA00F752AD /* Gutenberg-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06AC829F3F6DA00F752AD /* Gutenberg-Debug.xcconfig */; };
@@ -35,6 +37,20 @@
 		3FE06AD329F3F6DA00F752AD /* Project-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06ACD29F3F6DA00F752AD /* Project-Debug.xcconfig */; };
 		612F325D13E652BF476ED672 /* Pods_Gutenberg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 432C8665181F3EC336B71D6C /* Pods_Gutenberg.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3F28CEB32A4C3EAD00B79686 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3F28CEB22A4C3EAD00B79686 /* hermes.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3F1235FB29F680F900AF54A4 /* GutenbergBridgeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GutenbergBridgeDelegate.swift; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergBridgeDelegate.swift"; sourceTree = "<group>"; };
@@ -55,6 +71,7 @@
 		3F12364429F6B21300AF54A4 /* editor-behavior-overrides.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "editor-behavior-overrides.js"; path = "../../../gutenberg/packages/react-native-bridge/common/gutenberg-web-single-block/editor-behavior-overrides.js"; sourceTree = "<group>"; };
 		3F12364529F6B21300AF54A4 /* local-storage-overrides.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "local-storage-overrides.json"; path = "../../../gutenberg/packages/react-native-bridge/common/gutenberg-web-single-block/local-storage-overrides.json"; sourceTree = "<group>"; };
 		3F12364F29F6B23300AF54A4 /* supported-blocks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "supported-blocks.json"; path = "../../../src/block-support/supported-blocks.json"; sourceTree = "<group>"; };
+		3F28CEB02A4C3EAD00B79686 /* hermes.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = hermes.xcframework; path = "Pods/hermes-engine/destroot/Library/Frameworks/universal/hermes.xcframework"; sourceTree = "<group>"; };
 		3FA0C5802A1C8C9700600A9A /* App.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = App.js; path = ../../../bundle/ios/App.js; sourceTree = "<group>"; };
 		3FE06ABF29F3F61300F752AD /* Gutenberg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Gutenberg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE06AC229F3F61300F752AD /* Gutenberg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Gutenberg.h; sourceTree = "<group>"; };
@@ -75,6 +92,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				612F325D13E652BF476ED672 /* Pods_Gutenberg.framework in Frameworks */,
+				3F28CEB12A4C3EAD00B79686 /* hermes.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +169,7 @@
 		4FCF797BAE1CB2036BB60C7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F28CEB02A4C3EAD00B79686 /* hermes.xcframework */,
 				432C8665181F3EC336B71D6C /* Pods_Gutenberg.framework */,
 			);
 			name = Frameworks;
@@ -190,6 +209,7 @@
 				3FE06ABC29F3F61300F752AD /* Frameworks */,
 				3FE06ABD29F3F61300F752AD /* Resources */,
 				33E2599260A73CF1DC26925F /* [CP] Copy Pods Resources */,
+				3F28CEB32A4C3EAD00B79686 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
