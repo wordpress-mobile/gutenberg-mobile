@@ -5,6 +5,11 @@ require 'xcodeproj'
 REACT_NATIVE_PATH = '../gutenberg/node_modules/react-native'
 require_relative File.join(REACT_NATIVE_PATH, 'scripts', 'react_native_pods')
 
+# TODO: If this experiment works, add explanation for why we might want to disable Hermes
+HERMES_ENABLED = ENV.fetch('HERMES_ENABLED', false)
+
+puts "[Gutenberg] Installing pods with Hermes #{HERMES_ENABLED ? 'enabled' : 'disabled'}"
+
 # Note that the pods in this array might seem unused if you look for
 # `import` statements in this codebase. However, make sure to also check
 # whether they are used in the gutenberg-mobile and Gutenberg projects.
@@ -35,8 +40,15 @@ DEPENDENCIES = %w[
 def gutenberg_dependencies
   podspec_prefix = '..'
 
+  computed_dependencies = DEPENDENCIES.dup
+
   # Use a custom RNReanimated version while we coordinate a fix upstream
-  DEPENDENCIES.reject { |d| d == 'RNReanimated' }.each do |pod_name|
+  computed_dependencies.delete('RNReanimated')
+
+  computed_dependencies.delete('React-jsc') unless HERMES_ENABLED
+
+  # Use a custom RNReanimated version while we coordinate a fix upstream
+  computed_dependencies.each do |pod_name|
     pod pod_name, podspec: "#{podspec_prefix}/third-party-podspecs/#{pod_name}.podspec.json"
   end
 
@@ -53,7 +65,7 @@ platform :ios, APP_IOS_DEPLOYMENT_TARGET.version
 #
 # See https://github.com/facebook/react-native/issues/36120#issuecomment-1425892304
 use_frameworks! linkage: :static
-use_react_native! path: REACT_NATIVE_PATH
+use_react_native! path: REACT_NATIVE_PATH, hermes_enabled: HERMES_ENABLED
 
 target 'Gutenberg' do
   pod 'RNTAztecView', path: '..'
