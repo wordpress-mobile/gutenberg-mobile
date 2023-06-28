@@ -65,7 +65,10 @@ INSTALL_PATH = $(LOCAL_LIBRARY_DIR)/Frameworks
 // Code will load on this and later versions of iOS. Framework APIs that are unavailable
 // in earlier versions will be weak-linked; your code should check for null function
 // pointers or specific system versions before calling newer APIs.
-IPHONEOS_DEPLOYMENT_TARGET = 14.0
+//
+// At the moment, this needs to be the same value as what's used by the consumer (Jetpack and WordPress iOS)
+// See https://github.com/wordpress-mobile/WordPress-iOS/commit/eadad98d81c8970144707d8967f8c9f06a6ada38#commitcomment-119894859
+IPHONEOS_DEPLOYMENT_TARGET = 15.0
 LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @loader_path/Frameworks
 // Marketing Version
 //
