@@ -126,7 +126,7 @@ export const expectShowMediaOptions = ( screen, { title, options } ) => {
  * Generates the block settings related to privacy
  * based on video and site privacy.
  *
- * @param {Object} options
+ * @param {Object}  options
  * @param {boolean} [options.isVideoPrivate] True if the video is private. If not defined, it will use site's privacy.
  * @param {boolean} [options.isSitePrivate]  True if the site is private.
  */
@@ -148,7 +148,7 @@ const generatePrivacySettings = ( {
 	}
 	return {
 		privacySetting: isVideoPrivate ? 1 : 0,
-		isPrivate,
+		isPrivate: isVideoPrivate,
 	};
 };
 
