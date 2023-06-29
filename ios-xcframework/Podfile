@@ -92,7 +92,7 @@ post_install do |installer|
     #
     # Exclude RCT-Folly as it requires explicit deployment target
     # See https://git.io/JPb73
-    next unless target.name != 'RCT-Folly'
+    next if target.name == 'RCT-Folly'
 
     target.build_configurations.each do |configuration|
       pod_ios_deployment_target = Gem::Version.new(configuration.build_settings[IOS_VERSION_KEY])
