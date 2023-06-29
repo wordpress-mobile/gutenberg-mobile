@@ -81,7 +81,6 @@ MTL_FAST_MATH = YES
 PRODUCT_BUNDLE_IDENTIFIER = org.wordpress.Gutenberg
 PRODUCT_NAME = $(TARGET_NAME:c99extidentifier)
 SDKROOT = iphoneos
-SKIP_INSTALL = YES
 SWIFT_EMIT_LOC_STRINGS = YES
 // Swift Language Version
 //
@@ -90,7 +89,7 @@ SWIFT_VERSION = 5.0
 TARGETED_DEVICE_FAMILY = 1,2
 VERSION_INFO_PREFIX =
 VERSIONING_SYSTEM = apple-generic
-// This should be unnecessary because the script that builds the project should set it.
+// These should be unnecessary because the script that builds the project should set it.
 //
 // But I'm getting the following error after switching from Xcode 14.3 to 14.3.1:
 //
@@ -98,4 +97,7 @@ VERSIONING_SYSTEM = apple-generic
 // > (the SDK is built with 'Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)',
 // > while this compiler is 'Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)').
 // > Please select a toolchain which matches the SDK.
+//
+// See also https://github.com/facebook/facebook-ios-sdk/issues/2180#issuecomment-1485846511
 BUILD_LIBRARY_FOR_DISTRIBUTION = YES
+SKIP_INSTALL = NO
