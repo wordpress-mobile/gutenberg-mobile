@@ -147,7 +147,7 @@ const generatePrivacySettings = ( {
 		};
 	}
 	return {
-		privacySetting: isPrivate ? 1 : 0,
+		privacySetting: isVideoPrivate ? 1 : 0,
 		isPrivate,
 	};
 };
