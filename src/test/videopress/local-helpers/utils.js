@@ -123,47 +123,84 @@ export const expectShowMediaOptions = ( screen, { title, options } ) => {
 };
 
 /**
+ * Generates the block settings related to privacy
+ * based on video and site privacy.
+ *
+ * @param {Object}  options
+ * @param {boolean} [options.isVideoPrivate] True if the video is private. If not defined, it will use site's privacy.
+ * @param {boolean} [options.isSitePrivate]  True if the site is private.
+ */
+const generatePrivacySettings = ( {
+	isVideoPrivate,
+	isSitePrivate = false,
+} = {} ) => {
+	// If video privacy is not set, it will use the site privacy.
+	//
+	// Privacy setting options are:
+	// 0 = Public
+	// 1 = Private
+	// 2 = Site default
+	if ( typeof isVideoPrivate === 'undefined' ) {
+		return {
+			privacySetting: 2,
+			isPrivate: isSitePrivate,
+		};
+	}
+	return {
+		privacySetting: isVideoPrivate ? 1 : 0,
+		isPrivate: isVideoPrivate,
+	};
+};
+
+/**
  * Generates the HTML of the VideoPress block.
  *
- * @param {Object} options
- * @param {string} [options.guid]        VideoPress GUID.
- * @param {string} [options.title]       Title of the video.
- * @param {string} [options.description] Description of the video.
- * @param {string} [options.isPrivate]   True if the video is private.
+ * @param {Object}  options
+ * @param {string}  [options.guid]           VideoPress GUID.
+ * @param {string}  [options.title]          Title of the video.
+ * @param {string}  [options.description]    Description of the video.
+ * @param {boolean} [options.isVideoPrivate] True if the video is private.
+ * @param {boolean} [options.isSitePrivate]  True if the site is private.
  */
 export const generateBlockHTML = ( {
 	guid = VIDEOPRESS_GUID,
-	title = 'default-title-is-file-name',
-	description = '',
-	isPrivate,
+	title = 'video-title',
+	description = 'video-description',
+	isVideoPrivate,
+	isSitePrivate = false,
 } = {} ) => {
-	let privacySetting = 2; // Site default
-	if ( typeof isPrivate !== 'undefined' ) {
-		privacySetting = isPrivate ? 1 : 0;
-	}
-	return `<!-- wp:videopress/video {"title":"${ title }","description":"${ description }","useAverageColor":false,"id":1,"guid":"${ guid }","privacySetting":${ privacySetting },"allowDownload":false,"rating":"G","isPrivate":${ !! isPrivate },"duration":2803} /-->`;
+	const { privacySetting, isPrivate } = generatePrivacySettings( {
+		isVideoPrivate,
+		isSitePrivate,
+	} );
+	return `<!-- wp:videopress/video {"title":"${ title }","description":"${ description }","useAverageColor":false,"id":1,"guid":"${ guid }","privacySetting":${ privacySetting },"allowDownload":false,"rating":"G","isPrivate":${ isPrivate },"duration":2803} /-->`;
 };
 
 /**
  * Generates the fetch mocks to be used in `setupApiFetch` helper.
  *
- * @param {Object} options
- * @param {string} [options.guid]      VideoPress GUID.
- * @param {string} [options.token]     Token of the video (only needed when the video is private).
- * @param {string} [options.metadata]  Metadata to be used in the response for the request
- *                                     of VideoPress metadata.
- * @param {string} [options.isPrivate] True if the video is private.
+ * @param {Object}  options
+ * @param {string}  [options.guid]           VideoPress GUID.
+ * @param {string}  [options.token]          Token of the video (only needed when the video is private).
+ * @param {string}  [options.metadata]       Metadata to be used in the response for the request of VideoPress metadata.
+ * @param {boolean} [options.isVideoPrivate] True if the video is private.
+ * @param {boolean} [options.isSitePrivate]  True if the site is private.
+ * @param {boolean} [options.belongsToSite]  True if the video belongs to the site.
  */
 export const generateFetchMocks = ( {
 	guid = VIDEOPRESS_GUID,
 	token = 'videopress-token',
 	metadata = {},
-	isPrivate,
+	isVideoPrivate,
+	isSitePrivate,
+	belongsToSite = true,
 } = {} ) => {
-	let privacySetting = 2; // Site default
-	if ( typeof isPrivate !== 'undefined' ) {
-		privacySetting = isPrivate ? 1 : 0;
-	}
+	const { privacySetting, isPrivate } = generatePrivacySettings( {
+		isVideoPrivate,
+		isSitePrivate,
+	} );
+	// eslint-disable-next-line camelcase
+	const postID = metadata?.post_id ?? 34;
 	return [
 		{
 			request: {
@@ -185,7 +222,7 @@ export const generateFetchMocks = ( {
 			},
 			response: {
 				description: 'video-description',
-				post_id: 34,
+				post_id: postID,
 				guid,
 				private_enabled_for_site: false,
 				title: 'video-title',
@@ -198,7 +235,7 @@ export const generateFetchMocks = ( {
 				height: 270,
 				width: 480,
 				rating: 'G',
-				is_private: !! isPrivate,
+				is_private: isPrivate,
 				...metadata,
 			},
 		},
@@ -212,6 +249,15 @@ export const generateFetchMocks = ( {
 				html: `<iframe title='VideoPress Video Player' width='600' height='338' src='https://video.wordpress.com/embed/${ guid }?cover=1&amp;preloadContent=metadata&amp;hd=1' frameborder='0' allowfullscreen data-resize-to-parent='true' allow='clipboard-write'></iframe>`,
 				width: 600,
 				type: 'video',
+			},
+		},
+		{
+			request: {
+				path: `/wpcom/v2/videopress/${ guid }/check-ownership/${ postID }`,
+				method: 'GET',
+			},
+			response: {
+				'video-belong-to-site': belongsToSite,
 			},
 		},
 	];
