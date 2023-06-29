@@ -88,6 +88,11 @@ do
   # framework build process
   FRAMEWORK_RELATIVE_PATH="Products/Library/Frameworks/$CURRENT_FRAMEWORK_NAME.framework"
 
+  if [[ $CURRENT_FRAMEWORK_NAME = 'hermes' ]]; then
+    log 'no_good' "Skipping creating XCFramework for $CURRENT_FRAMEWORK_NAME"
+    continue
+  fi
+
   log 'package' "Creating XCFramework for $CURRENT_FRAMEWORK_NAME"
 
   _xcodebuild \
