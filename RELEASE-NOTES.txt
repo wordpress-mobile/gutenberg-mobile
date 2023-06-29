@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [*] Rename "Reusable blocks" to "Synced patterns", aligning with the web editor. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5885]
 
 1.98.0
 ---
