@@ -127,8 +127,8 @@ export const expectShowMediaOptions = ( screen, { title, options } ) => {
  * based on video and site privacy.
  *
  * @param {Object} options
- * @param {string} [options.isVideoPrivate] True if the video is private. If not defined, it will use site's privacy.
- * @param {string} [options.isSitePrivate]  True if the site is private.
+ * @param {boolean} [options.isVideoPrivate] True if the video is private. If not defined, it will use site's privacy.
+ * @param {boolean} [options.isSitePrivate]  True if the site is private.
  */
 const generatePrivacySettings = ( {
 	isVideoPrivate,
