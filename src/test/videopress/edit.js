@@ -43,8 +43,6 @@ const VIDEO_TITLE = 'default-title-is-file-name';
 const FETCH_MOCKS_METADATA = {
 	title: VIDEO_TITLE,
 	description: '',
-	post_id: 1,
-	duration: 2803,
 };
 
 setupCoreBlocks();
