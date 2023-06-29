@@ -87,6 +87,30 @@ post_install do |installer|
   react_native_post_install(installer, REACT_NATIVE_PATH)
 
   installer.pods_project.targets.each do |target|
+    # Work around issue with embedding the Hermes XCFramework
+    #
+    # See https://github.com/facebook/react-native/issues/35863
+    if HERMES_ENABLED && target.name == 'hermes-engine'
+      installer.pods_project.files.each do |fileref|
+        next unless fileref.path.end_with? 'hermes.xcframework'
+
+        plist_buddy = '/usr/libexec/PlistBuddy'
+
+        raise "[Gutenberg] Could not find PlistBuddy at #{plist_buddy}." unless File.exist?(plist_buddy)
+
+        hermes_plist_file = "#{fileref.real_path}/Info.plist"
+
+        # Patch Hermes to remove the debug symbols entry from the Info.plist (as it's not shipped with it)
+        # This might be removed once Hermes starts to ship with Debug symbols or we remove our
+        # direct dependency from the Main iOS target on "hermes.xcframework"
+        Open3.capture3(plist_buddy, '-c', 'Delete :AvailableLibraries:0:DebugSymbolsPath', hermes_plist_file)
+        Open3.capture3(plist_buddy, '-c', 'Delete :AvailableLibraries:1:DebugSymbolsPath', hermes_plist_file)
+        Open3.capture3(plist_buddy, '-c', 'Delete :AvailableLibraries:2:DebugSymbolsPath', hermes_plist_file)
+
+        puts '[Gutenberg] Removed Hermes dSYMs references from its XCFramework'
+      end
+    end
+
     # Let Pods targets inherit deployment target from the app
     # See https://github.com/CocoaPods/CocoaPods/issues/4859
     #
