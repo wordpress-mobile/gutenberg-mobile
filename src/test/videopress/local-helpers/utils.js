@@ -186,6 +186,7 @@ export const generateBlockHTML = ( {
  * @param {string}  [options.isPrivate]      True if the video is private.
  * @param {boolean} [options.isVideoPrivate] True if the video is private.
  * @param {boolean} [options.isSitePrivate]  True if the site is private.
+ * @param {boolean} [options.belongsToSite]  True if the video belongs to the site.
  */
 export const generateFetchMocks = ( {
 	guid = VIDEOPRESS_GUID,
@@ -193,11 +194,13 @@ export const generateFetchMocks = ( {
 	metadata = {},
 	isVideoPrivate,
 	isSitePrivate,
+	belongsToSite = true,
 } = {} ) => {
 	const { privacySetting, isPrivate } = generatePrivacySettings( {
 		isVideoPrivate,
 		isSitePrivate,
 	} );
+	const postID = metadata?.post_id ?? 34;
 	return [
 		{
 			request: {
@@ -219,7 +222,7 @@ export const generateFetchMocks = ( {
 			},
 			response: {
 				description: 'video-description',
-				post_id: 34,
+				post_id: postID,
 				guid,
 				private_enabled_for_site: false,
 				title: 'video-title',
@@ -246,6 +249,15 @@ export const generateFetchMocks = ( {
 				html: `<iframe title='VideoPress Video Player' width='600' height='338' src='https://video.wordpress.com/embed/${ guid }?cover=1&amp;preloadContent=metadata&amp;hd=1' frameborder='0' allowfullscreen data-resize-to-parent='true' allow='clipboard-write'></iframe>`,
 				width: 600,
 				type: 'video',
+			},
+		},
+		{
+			request: {
+				path: `/wpcom/v2/videopress/${ guid }/check-ownership/${ postID }`,
+				method: 'GET',
+			},
+			response: {
+				'video-belong-to-site': belongsToSite,
 			},
 		},
 	];
