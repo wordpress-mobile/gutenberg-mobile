@@ -40,6 +40,12 @@ import {
 } from './local-helpers/utils';
 
 const VIDEO_TITLE = 'default-title-is-file-name';
+const FETCH_MOCKS_METADATA = {
+	title: VIDEO_TITLE,
+	description: '',
+	post_id: 1,
+	duration: 2803,
+};
 
 setupCoreBlocks();
 
@@ -50,12 +56,16 @@ beforeAll( () => {
 		isJetpackActive: true,
 	} );
 	registerJetpackBlocks( DEFAULT_PROPS );
-
-	// Mock request reponses
-	setupApiFetch( generateFetchMocks() );
 } );
 
 describe( 'VideoPress block', () => {
+	beforeAll( () => {
+		// Mock request reponses
+		setupApiFetch(
+			generateFetchMocks( { metadata: FETCH_MOCKS_METADATA } )
+		);
+	} );
+
 	it( 'should successfully insert the VideoPress block into the editor', async () => {
 		const screen = await initializeEditor();
 
@@ -101,6 +111,16 @@ describe( 'VideoPress block', () => {
 
 describe( "Update VideoPress block's settings", () => {
 	let screen;
+
+	beforeAll( () => {
+		// Mock request reponses
+		setupApiFetch(
+			generateFetchMocks( {
+				isSitePrivate: true,
+				metadata: FETCH_MOCKS_METADATA,
+			} )
+		);
+	} );
 
 	beforeEach( async () => {
 		// Arrange
