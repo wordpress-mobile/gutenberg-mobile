@@ -5,8 +5,10 @@ require 'xcodeproj'
 REACT_NATIVE_PATH = '../gutenberg/node_modules/react-native'
 require_relative File.join(REACT_NATIVE_PATH, 'scripts', 'react_native_pods')
 
-# TODO: If this experiment works, add explanation for why we might want to disable Hermes
-HERMES_ENABLED = ENV.fetch('HERMES_ENABLED', false)
+# We are still trying to decide whether to adopt Hermes or not.
+#
+# This switch allows us to switch between approaches on the go.
+HERMES_ENABLED = ENV.fetch('HERMES_ENABLED', true)
 
 puts "[Gutenberg] Installing pods with Hermes #{HERMES_ENABLED ? 'enabled' : 'disabled'}"
 
