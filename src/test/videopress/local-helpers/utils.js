@@ -183,7 +183,6 @@ export const generateBlockHTML = ( {
  * @param {string}  [options.guid]           VideoPress GUID.
  * @param {string}  [options.token]          Token of the video (only needed when the video is private).
  * @param {string}  [options.metadata]       Metadata to be used in the response for the request of VideoPress metadata.
- * @param {string}  [options.isPrivate]      True if the video is private.
  * @param {boolean} [options.isVideoPrivate] True if the video is private.
  * @param {boolean} [options.isSitePrivate]  True if the site is private.
  * @param {boolean} [options.belongsToSite]  True if the video belongs to the site.
@@ -200,6 +199,7 @@ export const generateFetchMocks = ( {
 		isVideoPrivate,
 		isSitePrivate,
 	} );
+	// eslint-disable-next-line camelcase
 	const postID = metadata?.post_id ?? 34;
 	return [
 		{
