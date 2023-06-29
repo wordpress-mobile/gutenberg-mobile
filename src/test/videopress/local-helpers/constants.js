@@ -5,7 +5,6 @@ export const DEFAULT_PROPS = {
 };
 
 export const VIDEOPRESS_EMPTY_BLOCK_HTML = '<!-- wp:videopress/video /-->';
-export const VIDEOPRESS_BLOCK_HTML = `<!-- wp:videopress/video {"title":"default-title-is-file-name","description":"","useAverageColor":false,"id":1,"guid":"AbCdEfGh","privacySetting":2,"allowDownload":false,"rating":"G","isPrivate":true,"duration":2803} /-->`;
 
 export const PLAYBACK_SETTINGS = [
 	'Autoplay',

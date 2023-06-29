@@ -25,7 +25,6 @@ import {
 } from '../../jetpack-editor-setup';
 import {
 	DEFAULT_PROPS,
-	VIDEOPRESS_BLOCK_HTML,
 	PLAYBACK_SETTINGS,
 	PLAYBACK_BAR_COLOR_SETTINGS,
 	RATING_OPTIONS,
@@ -37,7 +36,10 @@ import {
 	pressSettingInPanel,
 	pressSettingInPicker,
 	generateFetchMocks,
+	generateBlockHTML,
 } from './local-helpers/utils';
+
+const VIDEO_TITLE = 'default-title-is-file-name';
 
 setupCoreBlocks();
 
@@ -75,7 +77,7 @@ describe( 'VideoPress block', () => {
 
 	it( 'sets caption', async () => {
 		const screen = await initializeEditor( {
-			initialHtml: VIDEOPRESS_BLOCK_HTML,
+			initialHtml: generateBlockHTML(),
 		} );
 		const { getByLabelText } = screen;
 
@@ -103,7 +105,11 @@ describe( "Update VideoPress block's settings", () => {
 	beforeEach( async () => {
 		// Arrange
 		screen = await initializeEditor( {
-			initialHtml: VIDEOPRESS_BLOCK_HTML,
+			initialHtml: generateBlockHTML( {
+				title: VIDEO_TITLE,
+				description: '',
+				isSitePrivate: true,
+			} ),
 		} );
 	} );
 
@@ -116,7 +122,7 @@ describe( "Update VideoPress block's settings", () => {
 
 		fireEvent.press( screen.getByText( 'Title' ) );
 
-		const input = screen.getByDisplayValue( 'default-title-is-file-name' );
+		const input = screen.getByDisplayValue( VIDEO_TITLE );
 
 		changeTextOfTextInput( input, 'Hello world!' );
 	} );

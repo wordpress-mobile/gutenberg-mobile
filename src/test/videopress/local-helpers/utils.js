@@ -164,8 +164,8 @@ const generatePrivacySettings = ( {
  */
 export const generateBlockHTML = ( {
 	guid = VIDEOPRESS_GUID,
-	title = 'default-title-is-file-name',
-	description = '',
+	title = 'video-title',
+	description = 'video-description',
 	isVideoPrivate,
 	isSitePrivate = false,
 } = {} ) => {
