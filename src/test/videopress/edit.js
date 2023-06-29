@@ -14,7 +14,6 @@ import {
 	within,
 	typeInRichText,
 	setupApiFetch,
-	generateFetchMocks,
 } from 'test/helpers';
 
 /**
@@ -37,9 +36,8 @@ import {
 	selectAndOpenBlockSettings,
 	pressSettingInPanel,
 	pressSettingInPicker,
+	generateFetchMocks,
 } from './local-helpers/utils';
-
-const FETCH_ITEMS = generateFetchMocks();
 
 setupCoreBlocks();
 
@@ -52,7 +50,7 @@ beforeAll( () => {
 	registerJetpackBlocks( DEFAULT_PROPS );
 
 	// Mock request reponses
-	setupApiFetch( FETCH_ITEMS );
+	setupApiFetch( generateFetchMocks() );
 } );
 
 describe( 'VideoPress block', () => {

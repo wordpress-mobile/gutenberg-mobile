@@ -13,7 +13,7 @@
 	"devDependencies": {
 		"@babel/core": "^7.20.0",
 		"@babel/runtime": "^7.20.0",
-		"@react-native-community/cli": "^8.0.0",
+		"@react-native-community/cli": "^10.0.0",
 		"@typescript-eslint/eslint-plugin": "^4.31.0",
 		"@wordpress/babel-preset-default": "file:gutenberg/packages/babel-preset-default",
 		"@wordpress/eslint-plugin": "file:gutenberg/packages/eslint-plugin",
@@ -30,7 +30,7 @@
 		"enzyme-adapter-react-16": "^1.11.2",
 		"enzyme-to-json": "^3.3.5",
 		"equivalent-key-map": "^0.2.0",
-		"eslint": "^6.8.0",
+		"eslint": "^8.19.0",
 		"eslint-plugin-eslint-comments": "3.1.2",
 		"eslint-plugin-import": "2.18.2",
 		"eslint-plugin-jest": "27.2.1",
