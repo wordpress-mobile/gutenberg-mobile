@@ -123,47 +123,81 @@ export const expectShowMediaOptions = ( screen, { title, options } ) => {
 };
 
 /**
- * Generates the HTML of the VideoPress block.
+ * Generates the block settings related to privacy
+ * based on video and site privacy.
  *
  * @param {Object} options
- * @param {string} [options.guid]        VideoPress GUID.
- * @param {string} [options.title]       Title of the video.
- * @param {string} [options.description] Description of the video.
- * @param {string} [options.isPrivate]   True if the video is private.
+ * @param {string} [options.isVideoPrivate] True if the video is private. If not defined, it will use site's privacy.
+ * @param {string} [options.isSitePrivate]  True if the site is private.
+ */
+const generatePrivacySettings = ( {
+	isVideoPrivate,
+	isSitePrivate = false,
+} = {} ) => {
+	// If video privacy is not set, it will use the site privacy.
+	//
+	// Privacy setting options are:
+	// 0 = Public
+	// 1 = Private
+	// 2 = Site default
+	if ( typeof isVideoPrivate === 'undefined' ) {
+		return {
+			privacySetting: 2,
+			isPrivate: isSitePrivate,
+		};
+	}
+	return {
+		privacySetting: isPrivate ? 1 : 0,
+		isPrivate,
+	};
+};
+
+/**
+ * Generates the HTML of the VideoPress block.
+ *
+ * @param {Object}  options
+ * @param {string}  [options.guid]           VideoPress GUID.
+ * @param {string}  [options.title]          Title of the video.
+ * @param {string}  [options.description]    Description of the video.
+ * @param {boolean} [options.isVideoPrivate] True if the video is private.
+ * @param {boolean} [options.isSitePrivate]  True if the site is private.
  */
 export const generateBlockHTML = ( {
 	guid = VIDEOPRESS_GUID,
 	title = 'default-title-is-file-name',
 	description = '',
-	isPrivate,
+	isVideoPrivate,
+	isSitePrivate = false,
 } = {} ) => {
-	let privacySetting = 2; // Site default
-	if ( typeof isPrivate !== 'undefined' ) {
-		privacySetting = isPrivate ? 1 : 0;
-	}
-	return `<!-- wp:videopress/video {"title":"${ title }","description":"${ description }","useAverageColor":false,"id":1,"guid":"${ guid }","privacySetting":${ privacySetting },"allowDownload":false,"rating":"G","isPrivate":${ !! isPrivate },"duration":2803} /-->`;
+	const { privacySetting, isPrivate } = generatePrivacySettings( {
+		isVideoPrivate,
+		isSitePrivate,
+	} );
+	return `<!-- wp:videopress/video {"title":"${ title }","description":"${ description }","useAverageColor":false,"id":1,"guid":"${ guid }","privacySetting":${ privacySetting },"allowDownload":false,"rating":"G","isPrivate":${ isPrivate },"duration":2803} /-->`;
 };
 
 /**
  * Generates the fetch mocks to be used in `setupApiFetch` helper.
  *
- * @param {Object} options
- * @param {string} [options.guid]      VideoPress GUID.
- * @param {string} [options.token]     Token of the video (only needed when the video is private).
- * @param {string} [options.metadata]  Metadata to be used in the response for the request
- *                                     of VideoPress metadata.
- * @param {string} [options.isPrivate] True if the video is private.
+ * @param {Object}  options
+ * @param {string}  [options.guid]           VideoPress GUID.
+ * @param {string}  [options.token]          Token of the video (only needed when the video is private).
+ * @param {string}  [options.metadata]       Metadata to be used in the response for the request of VideoPress metadata.
+ * @param {string}  [options.isPrivate]      True if the video is private.
+ * @param {boolean} [options.isVideoPrivate] True if the video is private.
+ * @param {boolean} [options.isSitePrivate]  True if the site is private.
  */
 export const generateFetchMocks = ( {
 	guid = VIDEOPRESS_GUID,
 	token = 'videopress-token',
 	metadata = {},
-	isPrivate,
+	isVideoPrivate,
+	isSitePrivate,
 } = {} ) => {
-	let privacySetting = 2; // Site default
-	if ( typeof isPrivate !== 'undefined' ) {
-		privacySetting = isPrivate ? 1 : 0;
-	}
+	const { privacySetting, isPrivate } = generatePrivacySettings( {
+		isVideoPrivate,
+		isSitePrivate,
+	} );
 	return [
 		{
 			request: {
@@ -198,7 +232,7 @@ export const generateFetchMocks = ( {
 				height: 270,
 				width: 480,
 				rating: 'G',
-				is_private: !! isPrivate,
+				is_private: isPrivate,
 				...metadata,
 			},
 		},
