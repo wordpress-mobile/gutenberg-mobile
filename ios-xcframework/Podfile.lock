@@ -553,13 +553,13 @@ EXTERNAL SOURCES:
     :podspec: "../third-party-podspecs/Yoga.podspec.json"
 
 SPEC CHECKSUMS:
-  boost: 2620f4ade8792907c9915249a2db358a16b8a9ab
+  boost: 32a63928ef0a5bf8b60f6b930c8864113fa28779
   BVLinearGradient: 9168d5f3bdb636b9bd861bf9fbe747f77e835065
   DoubleConversion: e22e0762848812a87afd67ffda3998d9ef29170c
   FBLazyVector: 16fdf30fcbc7177c6a4bdf35ef47225577eb9636
   FBReactNativeSpec: 03365206a695e76184146098efecb19a07f98ffc
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  glog: b79f1d619c846ed2fa24f37b85837973d3160c9f
+  glog: 741689bdd65551bc8fb59d633e55c34293030d3e
   libwebp: f62cb61d0a484ba548448a4bd52aabf150ff6eef
   RCT-Folly: b60af04f04d86a9f9c3317ba253365c4bd30ac5f
   RCTRequired: f29d295ee209e2ac38b0aede22af2079ba814983
@@ -605,7 +605,7 @@ SPEC CHECKSUMS:
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
-  Yoga: 44c155e5a6f7098e677090f86741ecd914117b17
+  Yoga: 5e12f4deb20582f86f6323e1cdff25f07afc87f6
 
 PODFILE CHECKSUM: da84738e90bae7212efb2f691d7fedb55bed4c7d
 
