@@ -13,7 +13,7 @@
 	"devDependencies": {
 		"@babel/core": "^7.20.0",
 		"@babel/runtime": "^7.20.0",
-		"@react-native-community/cli": "^8.0.0",
+		"@react-native-community/cli": "^10.0.0",
 		"@typescript-eslint/eslint-plugin": "^4.31.0",
 		"@wordpress/babel-preset-default": "file:gutenberg/packages/babel-preset-default",
 		"@wordpress/eslint-plugin": "file:gutenberg/packages/eslint-plugin",
