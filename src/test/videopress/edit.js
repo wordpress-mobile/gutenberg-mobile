@@ -25,7 +25,6 @@ import {
 } from '../../jetpack-editor-setup';
 import {
 	DEFAULT_PROPS,
-	VIDEOPRESS_BLOCK_HTML,
 	PLAYBACK_SETTINGS,
 	PLAYBACK_BAR_COLOR_SETTINGS,
 	RATING_OPTIONS,
@@ -37,7 +36,14 @@ import {
 	pressSettingInPanel,
 	pressSettingInPicker,
 	generateFetchMocks,
+	generateBlockHTML,
 } from './local-helpers/utils';
+
+const VIDEO_TITLE = 'default-title-is-file-name';
+const FETCH_MOCKS_METADATA = {
+	title: VIDEO_TITLE,
+	description: '',
+};
 
 setupCoreBlocks();
 
@@ -48,12 +54,16 @@ beforeAll( () => {
 		isJetpackActive: true,
 	} );
 	registerJetpackBlocks( DEFAULT_PROPS );
-
-	// Mock request reponses
-	setupApiFetch( generateFetchMocks() );
 } );
 
 describe( 'VideoPress block', () => {
+	beforeAll( () => {
+		// Mock request reponses
+		setupApiFetch(
+			generateFetchMocks( { metadata: FETCH_MOCKS_METADATA } )
+		);
+	} );
+
 	it( 'should successfully insert the VideoPress block into the editor', async () => {
 		const screen = await initializeEditor();
 
@@ -75,7 +85,7 @@ describe( 'VideoPress block', () => {
 
 	it( 'sets caption', async () => {
 		const screen = await initializeEditor( {
-			initialHtml: VIDEOPRESS_BLOCK_HTML,
+			initialHtml: generateBlockHTML(),
 		} );
 		const { getByLabelText } = screen;
 
@@ -100,10 +110,24 @@ describe( 'VideoPress block', () => {
 describe( "Update VideoPress block's settings", () => {
 	let screen;
 
+	beforeAll( () => {
+		// Mock request reponses
+		setupApiFetch(
+			generateFetchMocks( {
+				isSitePrivate: true,
+				metadata: FETCH_MOCKS_METADATA,
+			} )
+		);
+	} );
+
 	beforeEach( async () => {
 		// Arrange
 		screen = await initializeEditor( {
-			initialHtml: VIDEOPRESS_BLOCK_HTML,
+			initialHtml: generateBlockHTML( {
+				title: VIDEO_TITLE,
+				description: '',
+				isSitePrivate: true,
+			} ),
 		} );
 	} );
 
@@ -116,7 +140,7 @@ describe( "Update VideoPress block's settings", () => {
 
 		fireEvent.press( screen.getByText( 'Title' ) );
 
-		const input = screen.getByDisplayValue( 'default-title-is-file-name' );
+		const input = screen.getByDisplayValue( VIDEO_TITLE );
 
 		changeTextOfTextInput( input, 'Hello world!' );
 	} );
@@ -130,12 +154,7 @@ describe( "Update VideoPress block's settings", () => {
 
 		fireEvent.press( screen.getByText( 'Description' ) );
 
-		const allDescriptionInputs = screen.getAllByPlaceholderText(
-			'Add description'
-		);
-
-		// The BottomSheetControl's input field is accessed via the component's second placeholder
-		const input = allDescriptionInputs[ 1 ];
+		const input = screen.getByPlaceholderText( 'Add description' );
 
 		changeTextOfTextInput( input, "The video's new description!" );
 	} );
