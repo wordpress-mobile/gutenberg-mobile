@@ -5,6 +5,9 @@ react_native_version = gutenbergPackage['devDependencies']['react-native']
 # Extract the tagged version if package.json points to a tag
 react_native_version = react_native_version.split("#v").last if react_native_version.include? "#v"
 
+version_xcconfig_path = File.join(File.expand_path(__dir__),  'ios-xcframework','Config', 'Gutenberg-Shared.xcconfig')
+app_ios_deployment_target = Gem::Version.new(Xcodeproj::Config.new(version_xcconfig_path).to_hash['IPHONEOS_DEPLOYMENT_TARGET']).to_s
+
 Pod::Spec.new do |s|
   s.name             = 'Gutenberg'
   s.version          = gutenbergMobilePackage['version']
@@ -12,7 +15,7 @@ Pod::Spec.new do |s|
   s.homepage     = 'https://github.com/wordpress-mobile/gutenberg-mobile'
   s.license      = gutenbergMobilePackage['license']
   s.authors          = 'Automattic'
-  s.platform     = :ios, '13.0'
+  s.platform     = :ios, app_ios_deployment_target
   s.source       = { :git => 'https://github.com/wordpress-mobile/gutenberg-mobile.git', :submodules => true }
   s.source_files = 'gutenberg/packages/react-native-bridge/ios/**/*.{h,m,swift}'
   s.requires_arc = true
