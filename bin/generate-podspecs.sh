@@ -105,6 +105,7 @@ CODEGEN_NPM_PATH="../react-native-codegen"
 PACKAGE_JSON_PATH="./package.json"
 SRCS_DIR=${SRCS_DIR:-$(cd "./Libraries" && pwd)}
 RN_VERSION=$(cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g')
+HERMES_ENABLED="false"
 
 RN_PODSPECS=$(find * -type f -name "*.podspec" -not -name "React-rncore.podspec" -not -path "third-party-podspecs/*" -not -path "*Fabric*" -print)
 TMP_DEST=$(mktemp -d)
@@ -180,7 +181,7 @@ do
         sed -i '' -e "s/:git => ''/:git => 'https:\/\/github.com\/facebook\/react-native.git', :tag => 'v$RN_VERSION'/" "$REACT_NATIVE_CODEGEN_UTILS_MODIFIED_PATH"
         sed -i '' -e 's/return spec/print JSON.pretty_generate(spec)/' "$REACT_NATIVE_CODEGEN_UTILS_MODIFIED_PATH"
         # Run get_react_codegen_spec and generate React-Codegen.podspec.json
-        ruby -r "./scripts/cocoapods/codegen_utils_modified.rb" -e "CodegenUtils.new.get_react_codegen_spec('$PACKAGE_JSON_PATH')" > "$DEST/React-Codegen.podspec.json"
+        ruby -r "./scripts/cocoapods/codegen_utils_modified.rb" -e "CodegenUtils.new.get_react_codegen_spec('$PACKAGE_JSON_PATH', hermes_enabled:$HERMES_ENABLED)" > "$DEST/React-Codegen.podspec.json"
         TMP_ReactCodeGenSpec=$(mktemp)
         jq '.source_files = "third-party-podspecs/FBReactNativeSpec/**/*.{c,h,m,mm,cpp}"' "$DEST/React-Codegen.podspec.json" > "$TMP_ReactCodeGenSpec"
         mv "$TMP_ReactCodeGenSpec" "$DEST/React-Codegen.podspec.json"
