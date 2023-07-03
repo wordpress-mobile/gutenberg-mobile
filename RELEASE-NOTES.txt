@@ -1,5 +1,20 @@
 Unreleased
 ---
+* [*] Rename "Reusable blocks" to "Synced patterns", aligning with the web editor. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5885]
+
+1.98.1
+---
+* [*] fix: Display heading level dropdown icons and labels [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5911]
+
+1.98.0
+---
+* [*] Image block - Fix issue where in some cases the image doesn't display the right aspect ratio [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5869]
+* [*] Fix cursor positioning when dictating text on iOS [https://github.com/WordPress/gutenberg/issues/51227]
+
+1.97.1
+---
+* [**] Fix crash when using the delete key to remove a single button [https://github.com/WordPress/gutenberg/pull/51435]
+* [*] Ensure text input field is not editable when Bottom sheet cell is disabled [https://github.com/WordPress/gutenberg/pull/51567]
 
 1.97.0
 ---
