@@ -1,7 +1,12 @@
 #!/bin/bash -eu
 
 echo "--- :arrow_down: Download iOS JS bundle"
-buildkite-agent artifact download bundle/ios/App.js .
+# buildkite-agent artifact download bundle/ios/App.js .
+#
+# Debug – Bypassing build step and re-using previously built artifact
+buildkite-agent artifact download bundle/ios/App.js . \
+  --build 01891ac3-f25f-403f-9eb6-01347448c3d3 \
+  --step 01891ac4-37fb-4760-b6bd-90222f1be3c1
 
 echo '--- :node: Setup node_modules for RNReanimated'
 echo '--- :node: 1. Install nvm'
