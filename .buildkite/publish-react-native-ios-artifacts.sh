@@ -24,6 +24,7 @@ cd ./ios-xcframework
 install_gems
 
 echo "--- :cocoapods: Setting up Pods"
+export HERMES_ENABLED='false'
 install_cocoapods
 
 echo "--- 🚧 Install xcbeautify formatter while not on the VM image"
