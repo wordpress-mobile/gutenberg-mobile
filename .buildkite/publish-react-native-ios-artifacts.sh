@@ -32,6 +32,7 @@ echo "--- :cocoapods: Setting up Pods"
 # This should already be set by the Podfile and seems to work locally, but somethog does not work in CI.
 # See https://buildkite.com/automattic/gutenberg-mobile/builds/6327#0188fad1-932d-4a37-9d84-811937d8af18/435-455
 export REACT_NATIVE_NODE_MODULES_DIR="$PWD/../gutenberg/node_modules"
+export HERMES_ENABLED='false'
 install_cocoapods
 
 echo "--- 🚧 Install xcbeautify formatter while not on the VM image"
