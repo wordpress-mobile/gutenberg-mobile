@@ -28,6 +28,6 @@
     "React-jsi": [],
     "ReactCommon/turbomodule/bridging": [],
     "ReactCommon/turbomodule/core": [],
-    "hermes-engine": []
+    "React-jsc": []
   }
 }

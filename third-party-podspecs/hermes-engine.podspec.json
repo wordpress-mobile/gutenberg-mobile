@@ -7,8 +7,7 @@
   "license": "MIT",
   "authors": "Facebook",
   "source": {
-    "http": "https://repo1.maven.org/maven2/com/facebook/react/react-native-artifacts/0.71.11/react-native-artifacts-0.71.11-hermes-ios-debug.tar.gz",
-    "tag": "v0.71.11"
+    "http": "https://repo1.maven.org/maven2/com/facebook/react/react-native-artifacts/0.71.11/react-native-artifacts-0.71.11-hermes-ios-debug.tar.gz"
   },
   "platforms": {
     "osx": "10.13",
