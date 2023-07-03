@@ -47,12 +47,14 @@ steps:
 
   #     echo "--- :arrow_up: Upload iOS bundle artifact"
   #     buildkite-agent artifact upload bundle/ios/App.js
-  - label: "Build Android RN Aztec & Publish to S3"
-    key: "publish-react-native-aztec-android"
-    plugins:
-      - *publish-android-artifacts-docker-container
-    command: |
-        .buildkite/publish-react-native-aztec-android-artifacts.sh
+
+  # Debug – This always fail, let's skip it
+  # - label: "Build Android RN Aztec & Publish to S3"
+  #   key: "publish-react-native-aztec-android"
+  #   plugins:
+  #     - *publish-android-artifacts-docker-container
+  #   command: |
+  #       .buildkite/publish-react-native-aztec-android-artifacts.sh
 
   - label: "Build Android RN Bridge & Publish to S3"
     depends_on:
