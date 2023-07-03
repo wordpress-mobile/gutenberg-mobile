@@ -13,39 +13,40 @@ steps:
   - block: "Request trigger Android bundle and builds"
     branches: "dependabot/submodules/*"
 
-  - label: "Build JS Bundles"
-    key: "js-bundles"
-    plugins:
-      - docker#v3.8.0:
-          image: "public.ecr.aws/automattic/gb-mobile-image:latest"
-          environment:
-            - "CI=true"
-            # Allow WP-CLI to be run as root, otherwise it throws an exception.
-            # Reference: https://git.io/J9q2S
-            - "WP_CLI_ALLOW_ROOT=true"
-    command: |
-        source /root/.bashrc
+  # Debug – Skipping for faster feedback
+  # - label: "Build JS Bundles"
+  #   key: "js-bundles"
+  #   plugins:
+  #     - docker#v3.8.0:
+  #         image: "public.ecr.aws/automattic/gb-mobile-image:latest"
+  #         environment:
+  #           - "CI=true"
+  #           # Allow WP-CLI to be run as root, otherwise it throws an exception.
+  #           # Reference: https://git.io/J9q2S
+  #           - "WP_CLI_ALLOW_ROOT=true"
+  #   command: |
+  #       source /root/.bashrc
 
-        echo "--- :node: Setup Node environment"
-        nvm install && nvm use
+  #       echo "--- :node: Setup Node environment"
+  #       nvm install && nvm use
 
-        echo "--- :npm: Install Node dependencies"
-        npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+  #       echo "--- :npm: Install Node dependencies"
+  #       npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
-        echo "--- :package: Run bundle prep work"
-        npm run prebundle:js
+  #       echo "--- :package: Run bundle prep work"
+  #       npm run prebundle:js
 
-        echo "--- :android: Build Android bundle"
-        npm run bundle:android
+  #       echo "--- :android: Build Android bundle"
+  #       npm run bundle:android
 
-        echo "--- :arrow_up: Upload Android bundle artifact"
-        buildkite-agent artifact upload bundle/android/App.js
+  #       echo "--- :arrow_up: Upload Android bundle artifact"
+  #       buildkite-agent artifact upload bundle/android/App.js
 
-        echo "--- :ios: Build iOS bundle"
-        npm run bundle:ios
+  #       echo "--- :ios: Build iOS bundle"
+  #       npm run bundle:ios
 
-        echo "--- :arrow_up: Upload iOS bundle artifact"
-        buildkite-agent artifact upload bundle/ios/App.js
+  #     echo "--- :arrow_up: Upload iOS bundle artifact"
+  #     buildkite-agent artifact upload bundle/ios/App.js
   - label: "Build Android RN Aztec & Publish to S3"
     key: "publish-react-native-aztec-android"
     plugins:
@@ -63,15 +64,16 @@ steps:
         .buildkite/publish-react-native-bridge-android-artifacts.sh
 
   - label: Build iOS RN XCFramework & Publish to S3
-    depends_on: js-bundles
+    # Debug – Skipping build dependency for faster feedback
+    # depends_on: js-bundles
     command: .buildkite/publish-react-native-ios-artifacts.sh
     artifact_paths:
       - ios-xcframework/build/xcframeworks/*.tar.gz
     plugins:
-      - automattic/a8c-ci-toolkit#2.16.0
+      - automattic/a8c-ci-toolkit#2.18.0
       - peakon/git-shallow-clone#v0.0.1:
           depth: 1
     agents:
       queue: mac
     env:
-      IMAGE_ID: xcode-14.3.1
+      IMAGE_ID: xcode-14.3

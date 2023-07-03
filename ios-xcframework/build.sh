@@ -51,9 +51,7 @@ function archive {
     -configuration Release \
     -sdk "$PLATFORM" \
     -archivePath "$ARCHIVES_ROOT/$PLATFORM.xcarchive" \
-    -derivedDataPath "$DERIVED_DATA_PATH" \
-    BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
-    SKIP_INSTALL=NO
+    -derivedDataPath "$DERIVED_DATA_PATH"
 }
 
 BUILD_DIR=./build
