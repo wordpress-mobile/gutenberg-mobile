@@ -272,6 +272,7 @@ private func dummy() {
     _ = NSLocalizedString("Replace image or video", comment: "")
     _ = NSLocalizedString("Replace video", comment: "")
     _ = NSLocalizedString("Retry", comment: "")
+    _ = NSLocalizedString("Reusable", comment: "")
     _ = NSLocalizedString("Rich text editing", comment: "")
     _ = NSLocalizedString("Scrollable block menu closed.", comment: "")
     _ = NSLocalizedString("Scrollable block menu opened. Select a block.", comment: "")

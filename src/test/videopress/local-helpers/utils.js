@@ -46,6 +46,8 @@ export const pressSettingInPanel = async ( screen, panel, setting ) => {
 	fireEvent.press( getByText( panel ) );
 
 	// Toggle the specified setting
+	// TODO: Determine the cause of state updates and explicitly wait for them,
+	// instead of wrapping firEvent in act.
 	await act( () => fireEvent.press( getByText( setting ) ) );
 };
 

@@ -124,9 +124,20 @@ This project is set up to use [jest](https://facebook.github.io/jest/) for tests
 
 This repository uses Appium to run UI tests. The tests live in `__device-tests__` and are written using Appium to run tests against simulators and real devices. To run these you'll need to check off a few things:
 
+### Set up
+
 * When running the tests, you'll need to ensure the Metro bundler (`npm run start`) is not running.
 * [Appium CLI](https://appium.io/docs/en/about-appium/getting-started/) installed and available globally. We also recommend using [appium-doctor](https://github.com/appium/appium-doctor) to ensure all of Appium's dependencies are good to go. You don't have to worry about starting the server yourself, the tests handle starting the server on port 4723, just be sure that the port is free or feel free to change the port number in the test file.
-* For iOS a simulator should automatically launch but for Android you'll need to have an emulator *with at least platform version 8.0* fired up and running.
+* For iOS a simulator should automatically launch but for Android you'll need to have an emulator fired up and running. The emulators must match the devices in Gutenberg's [caps.js](https://github.com/WordPress/gutenberg/blob/trunk/packages/react-native-editor/__device-tests__/helpers/caps.js) file.
+  * iOS: __iPhone 13, iOS 15.4__
+  * Android: __Google Pixel 3 XL GoogleAPI Emulator, Android 11__ _(Note: when creating the Pixel 3 XL emulator, ensure that "Enable Device Frame" is unchecked on the Verify Configuration screen.)_
+    
+
+  <img width="512" alt="Device Tests" src="https://github.com/wordpress-mobile/gutenberg-mobile/assets/643285/19c223cc-96d6-4c5a-98f1-a463bb98e927">
+
+  
+
+### Running the tests
 
 Then, to run the UI tests on iOS:
 
