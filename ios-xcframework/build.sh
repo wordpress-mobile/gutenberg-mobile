@@ -61,7 +61,10 @@ DERIVED_DATA_PATH="$BUILD_DIR/derived_data"
 ARCHIVES_ROOT="$BUILD_DIR/archives"
 XCFRAMEWORKS_DIR="$BUILD_DIR/xcframeworks"
 
-rm -rf $BUILD_DIR
+# Note: Do not delete the whole $BUILD_DIR because the React Native code generation process uses it, too.
+rm -rf $DERIVED_DATA_PATH
+rm -rf $ARCHIVES_ROOT
+rm -rf $XCFRAMEWORKS_DIR
 
 MAIN_FRAMEWORK_NAME=Gutenberg
 WORKSPACE="./XCFrameworkScaffold.xcworkspace"
