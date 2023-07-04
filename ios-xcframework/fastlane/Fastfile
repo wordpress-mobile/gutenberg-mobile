@@ -23,7 +23,9 @@ lane :upload_xcframework_to_s3 do
 
   next unless is_ci
 
-  tag = ENV.fetch('BUILDKITE_TAG', nil)
+  # HACK – Bypass checks to force publishing a build for v1.98.1
+  # tag = ENV.fetch('BUILDKITE_TAG', nil)
+  tag = 'v1.98.1'
 
   next if tag.nil? || tag.empty?
 
