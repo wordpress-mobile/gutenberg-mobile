@@ -1,6 +1,6 @@
 {
   "name": "RNCClipboard",
-  "version": "1.9.0",
+  "version": "1.11.2",
   "summary": "React Native Clipboard API for macOS, iOS, Android, and Windows",
   "license": "MIT",
   "authors": "M.Haris Baig <harisbaig100@gmail.com>",
@@ -11,7 +11,7 @@
   },
   "source": {
     "git": "https://github.com/react-native-clipboard/clipboard",
-    "tag": "v1.9.0"
+    "tag": "v1.11.2"
   },
   "ios": {
     "source_files": "ios/**/*.{h,m,mm}"
