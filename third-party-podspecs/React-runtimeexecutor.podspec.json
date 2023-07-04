@@ -1,6 +1,6 @@
 {
   "name": "React-runtimeexecutor",
-  "version": "0.69.4",
+  "version": "0.71.11",
   "summary": "-",
   "homepage": "https://reactnative.dev/",
   "license": "MIT",
@@ -10,13 +10,13 @@
   },
   "source": {
     "git": "https://github.com/facebook/react-native.git",
-    "tag": "v0.69.4"
+    "tag": "v0.71.11"
   },
   "source_files": "**/*.{cpp,h}",
   "header_dir": "ReactCommon",
   "dependencies": {
     "React-jsi": [
-      "0.69.4"
+      "0.71.11"
     ]
   },
   "prepare_command": "TMP_DIR=$(mktemp -d); mv * $TMP_DIR; cp -R \"$TMP_DIR/ReactCommon/runtimeexecutor\"/* . && true",

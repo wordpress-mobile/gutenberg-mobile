@@ -102,8 +102,10 @@ RN_DIR="./"
 SCRIPTS_PATH="./scripts/"
 CODEGEN_REPO_PATH="../packages/react-native-codegen"
 CODEGEN_NPM_PATH="../react-native-codegen"
+PACKAGE_JSON_PATH="./package.json"
 SRCS_DIR=${SRCS_DIR:-$(cd "./Libraries" && pwd)}
 RN_VERSION=$(cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g')
+HERMES_ENABLED="false"
 
 RN_PODSPECS=$(find * -type f -name "*.podspec" -not -name "React-rncore.podspec" -not -path "third-party-podspecs/*" -not -path "*Fabric*" -print)
 TMP_DEST=$(mktemp -d)
@@ -161,23 +163,30 @@ do
         fi
 
         # Generate React-Codegen
-        # A copy of react_native_pods is done to modify the content within get_react_codegen_spec
+        # A copy of codegen_utils.rb is done to modify the content within get_react_codegen_spec
         # this enables getting the schema for React-Codegen in runtime by printing the content.
         echo "Generating React-Codegen"
-        REACT_NATIVE_PODS_PATH="$SCRIPTS_PATH/react_native_pods.rb"
-        REACT_NATIVE_PODS_MODIFIED_PATH="$SCRIPTS_PATH/react_native_pods_modified.rb"
-        # Making a temp copy of react_native_pods.rb
-        cp $REACT_NATIVE_PODS_PATH $REACT_NATIVE_PODS_MODIFIED_PATH
+        REACT_NATIVE_CODEGEN_UTILS_PATH="$SCRIPTS_PATH/cocoapods/codegen_utils.rb"
+        REACT_NATIVE_CODEGEN_UTILS_MODIFIED_PATH="$SCRIPTS_PATH/cocoapods/codegen_utils_modified.rb"
+        # Making a temp copy of codegen_utils.rb
+        cp $REACT_NATIVE_CODEGEN_UTILS_PATH $REACT_NATIVE_CODEGEN_UTILS_MODIFIED_PATH
+        # Manually add the min_ios_version_supported variable to the CodegenUtils class
+        # The modified script won't be able to detect min_ios_version_supported otherwise
+        echo "
+        def min_ios_version_supported
+        '12.4'
+        end
+        " >> "$REACT_NATIVE_CODEGEN_UTILS_MODIFIED_PATH"
         # Modify the get_react_codegen_spec method to return the result using print and JSON.pretty
-        sed -i '' -e "s/:git => ''/:git => 'https:\/\/github.com\/facebook\/react-native.git', :tag => 'v$RN_VERSION'/" "$REACT_NATIVE_PODS_MODIFIED_PATH"
-        sed -i '' -e 's/return spec/print JSON.pretty_generate(spec)/' "$REACT_NATIVE_PODS_MODIFIED_PATH"
+        sed -i '' -e "s/:git => ''/:git => 'https:\/\/github.com\/facebook\/react-native.git', :tag => 'v$RN_VERSION'/" "$REACT_NATIVE_CODEGEN_UTILS_MODIFIED_PATH"
+        sed -i '' -e 's/return spec/print JSON.pretty_generate(spec)/' "$REACT_NATIVE_CODEGEN_UTILS_MODIFIED_PATH"
         # Run get_react_codegen_spec and generate React-Codegen.podspec.json
-        ruby -r "./scripts/react_native_pods_modified.rb" -e "get_react_codegen_spec" > "$DEST/React-Codegen.podspec.json"
+        ruby -r "./scripts/cocoapods/codegen_utils_modified.rb" -e "CodegenUtils.new.get_react_codegen_spec('$PACKAGE_JSON_PATH', hermes_enabled:$HERMES_ENABLED)" > "$DEST/React-Codegen.podspec.json"
         TMP_ReactCodeGenSpec=$(mktemp)
         jq '.source_files = "third-party-podspecs/FBReactNativeSpec/**/*.{c,h,m,mm,cpp}"' "$DEST/React-Codegen.podspec.json" > "$TMP_ReactCodeGenSpec"
         mv "$TMP_ReactCodeGenSpec" "$DEST/React-Codegen.podspec.json"
-        # Remove temp copy of react_native_pods.rb
-        rm $REACT_NATIVE_PODS_MODIFIED_PATH
+        # Remove temp copy of codegen_utils.rb
+        rm $REACT_NATIVE_CODEGEN_UTILS_MODIFIED_PATH
 
         echo "Generating schema from Flow types"
         "$NODE_BINARY" "$CODEGEN_PATH/lib/cli/combine/combine-js-to-schema-cli.js" "$SCHEMA_FILE" "$SRCS_DIR"
