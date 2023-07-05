@@ -490,7 +490,7 @@ DEPENDENCIES:
   - RNCMaskedView (from `../third-party-podspecs/RNCMaskedView.podspec.json`)
   - RNFastImage (from `../third-party-podspecs/RNFastImage.podspec.json`)
   - RNGestureHandler (from `../third-party-podspecs/RNGestureHandler.podspec.json`)
-  - RNReanimated (from `https://github.com/wordpress-mobile/react-native-reanimated`, branch `mokagio/fix-custom-node_modules-bypass-multiple-versions-check-2.17.0`)
+  - RNReanimated (from `https://github.com/wordpress-mobile/react-native-reanimated`, branch `wp-fork-2.17.0`)
   - RNScreens (from `../third-party-podspecs/RNScreens.podspec.json`)
   - RNSVG (from `../third-party-podspecs/RNSVG.podspec.json`)
   - RNTAztecView (from `..`)
@@ -599,7 +599,7 @@ EXTERNAL SOURCES:
   RNGestureHandler:
     :podspec: "../third-party-podspecs/RNGestureHandler.podspec.json"
   RNReanimated:
-    :branch: mokagio/fix-custom-node_modules-bypass-multiple-versions-check-2.17.0
+    :branch: wp-fork-2.17.0
     :git: https://github.com/wordpress-mobile/react-native-reanimated
   RNScreens:
     :podspec: "../third-party-podspecs/RNScreens.podspec.json"
@@ -612,7 +612,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   RNReanimated:
-    :commit: c6571c8da7a0e077dde84e9851aeb26db950fb35
+    :commit: 310ff71ea469f7cf8458d1dd7c3b1988a3d2e802
     :git: https://github.com/wordpress-mobile/react-native-reanimated
 
 SPEC CHECKSUMS:
@@ -674,6 +674,6 @@ SPEC CHECKSUMS:
   WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
   Yoga: f7decafdc5e8c125e6fa0da38a687e35238420fa
 
-PODFILE CHECKSUM: 547d0de2f33bcfaf1ef30a9f70a04790c53fe0d6
+PODFILE CHECKSUM: a8dafa1cc910bd501726c27e1574de887526d588
 
 COCOAPODS: 1.12.1
