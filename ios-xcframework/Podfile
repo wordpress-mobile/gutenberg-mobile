@@ -120,14 +120,4 @@ post_install do |installer|
       configuration.build_settings.delete(IOS_VERSION_KEY) if pod_ios_deployment_target <= APP_IOS_DEPLOYMENT_TARGET
     end
   end
-
-  # This is to work around FBReactNativeSpec not finding Node.
-  #
-  # gutenberg-mobile/ios-xcframework/Pods/../../gutenberg/node_modules/react-native/React/FBReactNativeSpec/../../scripts/xcode/with-environment.sh: line 35: .xcode.env: command not found
-  # [...]
-  # [Warning] You need to configure your node path in the  environment.  You can set it up quickly by running:  echo 'export NODE_BINARY=' > .xcode.env  in the ios folder. This is needed by React Native to work correctly. [...]
-  #
-  node_path = `command -v node`.strip
-  `echo 'export NODE_BINARY=#{node_path}' > .xcode.env`
-  puts "[Gutenberg] Generated .xcode.env file with NODE_BINARY=#{node_path}. You can override that value by creating a .xcode.env.local version."
 end
