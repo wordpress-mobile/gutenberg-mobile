@@ -49,11 +49,17 @@ def gutenberg_dependencies
 
   computed_dependencies.delete('React-jsc') unless HERMES_ENABLED
 
-  # Use a custom RNReanimated version while we coordinate a fix upstream
   computed_dependencies.each do |pod_name|
     pod pod_name, podspec: "#{podspec_prefix}/third-party-podspecs/#{pod_name}.podspec.json"
   end
 
+  # This is required to workaround an issue with RNReanimated after upgrading to version 2.17.0.
+  rn_node_modules = File.join(Dir.pwd, '..', 'gutenberg', 'node_modules')
+  raise "Could not find node modules at given path #{rn_node_modules}" unless File.exist? rn_node_modules
+  ENV['REACT_NATIVE_NODE_MODULES_DIR'] = rn_node_modules
+  puts "[Gutenberg] Set REACT_NATIVE_NODE_MODULES_DIR env var for RNReanimated to #{rn_node_modules}"
+
+  # Use a custom RNReanimated version while we coordinate a fix upstream
   pod 'RNReanimated', git: 'https://github.com/wordpress-mobile/react-native-reanimated', branch: 'mokagio/fix-custom-node_modules-bypass-multiple-versions-check-2.17.0'
 end
 
@@ -72,17 +78,6 @@ use_react_native! path: REACT_NATIVE_PATH, hermes_enabled: HERMES_ENABLED
 target 'Gutenberg' do
   pod 'RNTAztecView', path: '..'
   gutenberg_dependencies
-end
-
-pre_install do
-  # This is required to workaround an issue with RNReanimated after upgrading to version 2.17.0
-  rn_node_modules = File.join(Dir.pwd, '..', 'gutenberg', 'node_modules')
-
-  raise "Could not find node modules at given path #{rn_node_modules}" unless File.exist? rn_node_modules
-
-  ENV['REACT_NATIVE_NODE_MODULES_DIR'] = rn_node_modules
-
-  puts "[Gutenberg] Set REACT_NATIVE_NODE_MODULES_DIR env var for RNReanimated to #{rn_node_modules}"
 end
 
 post_install do |installer|
