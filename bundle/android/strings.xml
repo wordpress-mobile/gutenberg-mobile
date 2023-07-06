@@ -35,8 +35,8 @@
     <string name="gutenberg_native_add_video" tools:ignore="UnusedResources">ADD VIDEO</string>
     <string name="gutenberg_native_address_settings" tools:ignore="UnusedResources">Address Settings</string>
     <string name="gutenberg_native_alt_text" tools:ignore="UnusedResources">Alt Text</string>
-    <string name="gutenberg_native_alternatively_you_can_detach_and_edit_these_blocks_separately_by" tools:ignore="UnusedResources">Alternatively, you can detach and edit these blocks separately by tapping “Convert to regular blocks”.</string>
-    <string name="gutenberg_native_alternatively_you_can_detach_and_edit_this_block_separately_by_ta" tools:ignore="UnusedResources">Alternatively, you can detach and edit this block separately by tapping “Convert to regular block”.</string>
+    <string name="gutenberg_native_alternatively_you_can_detach_and_edit_these_blocks_separately_by" tools:ignore="UnusedResources">Alternatively, you can detach and edit these blocks separately by tapping “Detach patterns”.</string>
+    <string name="gutenberg_native_alternatively_you_can_detach_and_edit_this_block_separately_by_ta" tools:ignore="UnusedResources">Alternatively, you can detach and edit this block separately by tapping “Detach pattern”.</string>
     <string name="gutenberg_native_an_unknown_error_occurred_please_try_again" tools:ignore="UnusedResources">An unknown error occurred. Please try again.</string>
     <string name="gutenberg_native_applies_the_setting" tools:ignore="UnusedResources">Applies the setting</string>
     <string name="gutenberg_native_arrange_your_content_into_columns_add_call_to_action_buttons_and" tools:ignore="UnusedResources">Arrange your content into columns, add Call to Action buttons, and overlay images with text.</string>
@@ -159,9 +159,9 @@
     <string name="gutenberg_native_edit_using_web_editor" tools:ignore="UnusedResources">Edit using web editor</string>
     <string name="gutenberg_native_edit_video" tools:ignore="UnusedResources">Edit video</string>
     <!-- translators: %s: name of the host app (e.g. WordPress) -->
-    <string name="gutenberg_native_editing_reusable_blocks_is_not_yet_supported_on_s_for_android" tools:ignore="UnusedResources">Editing reusable blocks is not yet supported on %s for Android</string>
+    <string name="gutenberg_native_editing_synced_patterns_is_not_yet_supported_on_s_for_android" tools:ignore="UnusedResources">Editing synced patterns is not yet supported on %s for Android</string>
     <!-- translators: %s: name of the host app (e.g. WordPress) -->
-    <string name="gutenberg_native_editing_reusable_blocks_is_not_yet_supported_on_s_for_ios" tools:ignore="UnusedResources">Editing reusable blocks is not yet supported on %s for iOS</string>
+    <string name="gutenberg_native_editing_synced_patterns_is_not_yet_supported_on_s_for_ios" tools:ignore="UnusedResources">Editing synced patterns is not yet supported on %s for iOS</string>
     <string name="gutenberg_native_embed_block_previews_are_coming_soon" tools:ignore="UnusedResources">Embed block previews are coming soon</string>
     <!-- translators: accessibility text. Empty Embed caption. -->
     <string name="gutenberg_native_embed_caption_empty" tools:ignore="UnusedResources">Embed caption. Empty</string>
@@ -209,6 +209,7 @@
     <string name="gutenberg_native_line_height" tools:ignore="UnusedResources">Line Height</string>
     <string name="gutenberg_native_link_inserted" tools:ignore="UnusedResources">Link inserted</string>
     <string name="gutenberg_native_link_rel" tools:ignore="UnusedResources">Link Rel</string>
+    <string name="gutenberg_native_link_settings" tools:ignore="UnusedResources">Link Settings</string>
     <string name="gutenberg_native_link_text" tools:ignore="UnusedResources">Link text</string>
     <string name="gutenberg_native_link_to" tools:ignore="UnusedResources">Link To</string>
     <string name="gutenberg_native_loading" tools:ignore="UnusedResources">Loading</string>
@@ -297,7 +298,6 @@ translators: %s: Select control button label e.g. "Button width" -->
     <string name="gutenberg_native_replace_image_or_video" tools:ignore="UnusedResources">Replace image or video</string>
     <string name="gutenberg_native_replace_video" tools:ignore="UnusedResources">Replace video</string>
     <string name="gutenberg_native_retry" tools:ignore="UnusedResources">Retry</string>
-    <string name="gutenberg_native_reusable" tools:ignore="UnusedResources">Reusable</string>
     <string name="gutenberg_native_rich_text_editing" tools:ignore="UnusedResources">Rich text editing</string>
     <!-- translators: %s: Block name e.g. "Image block"
 translators: Block name. %s: The localized block name -->
@@ -310,10 +310,8 @@ translators: Block name. %s: The localized block name -->
     <string name="gutenberg_native_s_block_options" tools:ignore="UnusedResources">%s block options</string>
     <!-- translators: accessibility text for blocks with invalid content. %d: localized block title -->
     <string name="gutenberg_native_s_block_this_block_has_invalid_content" tools:ignore="UnusedResources">%s block. This block has invalid content</string>
-    <!-- translators: %s: name of the reusable block -->
-    <string name="gutenberg_native_s_converted_to_regular_block" tools:ignore="UnusedResources">%s converted to regular block</string>
-    <!-- translators: %s: name of the reusable block -->
-    <string name="gutenberg_native_s_converted_to_regular_blocks" tools:ignore="UnusedResources">%s converted to regular blocks</string>
+    <!-- translators: %s: name of the synced block -->
+    <string name="gutenberg_native_s_detached" tools:ignore="UnusedResources">%s detached</string>
     <!-- translators: %s: embed block variant's label e.g: "Twitter". -->
     <string name="gutenberg_native_s_embed_block_previews_are_coming_soon" tools:ignore="UnusedResources">%s embed block previews are coming soon</string>
     <!-- translators: %s: social link name e.g: "Instagram". -->
