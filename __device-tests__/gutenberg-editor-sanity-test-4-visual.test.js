@@ -61,7 +61,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			expect( screenshot ).toMatchImageSnapshot();
 
 			await buttonsBlock.click();
-			await editorPage.removeBlockAtPosition( blockNames.buttons );
+			await editorPage.removeBlock();
 		} );
 
 		it( 'Render gradient background color', async () => {
@@ -83,7 +83,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			expect( screenshot ).toMatchImageSnapshot();
 
 			await buttonsBlock.click();
-			await editorPage.removeBlockAtPosition( blockNames.buttons );
+			await editorPage.removeBlock();
 		} );
 
 		it( 'Check if selection / caret color matches font color', async () => {
@@ -114,7 +114,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			await buttonBlockTextInput.click();
 
-			await editorPage.removeBlockAtPosition( blockNames.button );
+			await editorPage.removeBlock();
 		} );
 
 		it( 'Edit text styles', async () => {
@@ -183,7 +183,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			// Navigate upwards to select parent block
 			await editorPage.moveBlockSelectionUp();
 
-			await editorPage.removeBlockAtPosition( blockNames.buttons );
+			await editorPage.removeBlock();
 		} );
 	} );
 } );

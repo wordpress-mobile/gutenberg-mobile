@@ -36,8 +36,8 @@ export async function takeScreenshot(
 		const toolbarElement = await editorPage.getToolbar();
 
 		if ( toolbarElement.length !== 0 ) {
-			const toolbarSize = await toolbarElement[ 0 ].getSize();
-			const toolbarLocation = await toolbarElement[ 0 ].getLocation();
+			const toolbarSize = await toolbarElement.getSize();
+			const toolbarLocation = await toolbarElement.getLocation();
 			const offset =
 				windowSize.height - ( toolbarLocation.y + toolbarSize.height );
 			const imageHeight = isAndroid()
