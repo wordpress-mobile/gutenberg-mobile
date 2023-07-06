@@ -2,40 +2,25 @@
 
 require 'xcodeproj'
 
+REACT_NATIVE_PATH = '../gutenberg/node_modules/react-native'
+require_relative File.join(REACT_NATIVE_PATH, 'scripts', 'react_native_pods')
+
+# We are still trying to decide whether to adopt Hermes or not.
+#
+# This switch allows us to switch between approaches on the go.
+HERMES_ENABLED = ENV.fetch('HERMES_ENABLED', true)
+
+puts "[Gutenberg] Installing pods with Hermes #{HERMES_ENABLED ? 'enabled' : 'disabled'}"
+
 # Note that the pods in this array might seem unused if you look for
 # `import` statements in this codebase. However, make sure to also check
 # whether they are used in the gutenberg-mobile and Gutenberg projects.
 #
+# Also notice that these are not all the dependencies the project uses.
+# Later in the config, we call use_react_native! which fetches more.
+#
 # See https://github.com/wordpress-mobile/gutenberg-mobile/issues/5025
 DEPENDENCIES = %w[
-  FBLazyVector
-  React
-  ReactCommon
-  RCTRequired
-  RCTTypeSafety
-  React-Core
-  React-CoreModules
-  React-RCTActionSheet
-  React-RCTAnimation
-  React-RCTBlob
-  React-RCTImage
-  React-RCTLinking
-  React-RCTNetwork
-  React-RCTSettings
-  React-RCTText
-  React-RCTVibration
-  React-callinvoker
-  React-cxxreact
-  React-jsinspector
-  React-jsi
-  React-jsiexecutor
-  React-logger
-  React-perflogger
-  React-runtimeexecutor
-  boost
-  Yoga
-  RCT-Folly
-  glog
   react-native-safe-area
   react-native-safe-area-context
   react-native-video
@@ -51,21 +36,31 @@ DEPENDENCIES = %w[
   RNCMaskedView
   RNCClipboard
   RNFastImage
-  React-Codegen
   React-jsc
-  React-hermes
 ].freeze
 
 def gutenberg_dependencies
   podspec_prefix = '..'
 
-  # FBReactNativeSpec needs special treatment because of react-native-codegen code generation
-  pod 'FBReactNativeSpec',
-      podspec: "#{podspec_prefix}/third-party-podspecs/FBReactNativeSpec/FBReactNativeSpec.podspec.json"
+  computed_dependencies = DEPENDENCIES.dup
 
-  DEPENDENCIES.each do |pod_name|
+  # Use a custom RNReanimated version while we coordinate a fix upstream
+  computed_dependencies.delete('RNReanimated')
+
+  computed_dependencies.delete('React-jsc') unless HERMES_ENABLED
+
+  computed_dependencies.each do |pod_name|
     pod pod_name, podspec: "#{podspec_prefix}/third-party-podspecs/#{pod_name}.podspec.json"
   end
+
+  # This is required to workaround an issue with RNReanimated after upgrading to version 2.17.0
+  rn_node_modules = File.join(Dir.pwd, '..', 'gutenberg', 'node_modules')
+  raise "Could not find node modules at given path #{rn_node_modules}" unless File.exist? rn_node_modules
+  ENV['REACT_NATIVE_NODE_MODULES_DIR'] = rn_node_modules
+  puts "[Gutenberg] Set REACT_NATIVE_NODE_MODULES_DIR env var for RNReanimated to #{rn_node_modules}"
+
+  # Use a custom RNReanimated version while we coordinate a fix upstream
+  pod 'RNReanimated', git: 'https://github.com/wordpress-mobile/react-native-reanimated', branch: 'wp-fork-2.17.0'
 end
 
 VERSION_XCCONFIG_PATH = File.join(File.expand_path(__dir__), 'Config', 'Gutenberg-Shared.xcconfig')
@@ -74,21 +69,51 @@ APP_IOS_DEPLOYMENT_TARGET = Gem::Version.new(Xcodeproj::Config.new(VERSION_XCCON
 
 platform :ios, APP_IOS_DEPLOYMENT_TARGET.version
 
-target 'Gutenberg' do
-  use_frameworks! linkage: :static
+# It's important to call use_frameworks! before use_react_native!
+#
+# See https://github.com/facebook/react-native/issues/36120#issuecomment-1425892304
+use_frameworks! linkage: :static
+use_react_native! path: REACT_NATIVE_PATH, hermes_enabled: HERMES_ENABLED
 
+target 'Gutenberg' do
   pod 'RNTAztecView', path: '..'
   gutenberg_dependencies
 end
 
 post_install do |installer|
+  react_native_post_install(installer, REACT_NATIVE_PATH)
+
   installer.pods_project.targets.each do |target|
+    # Work around issue with embedding the Hermes XCFramework
+    #
+    # See https://github.com/facebook/react-native/issues/35863
+    if HERMES_ENABLED && target.name == 'hermes-engine'
+      installer.pods_project.files.each do |fileref|
+        next unless fileref.path.end_with? 'hermes.xcframework'
+
+        plist_buddy = '/usr/libexec/PlistBuddy'
+
+        raise "[Gutenberg] Could not find PlistBuddy at #{plist_buddy}." unless File.exist?(plist_buddy)
+
+        hermes_plist_file = "#{fileref.real_path}/Info.plist"
+
+        # Patch Hermes to remove the debug symbols entry from the Info.plist (as it's not shipped with it)
+        # This might be removed once Hermes starts to ship with Debug symbols or we remove our
+        # direct dependency from the Main iOS target on "hermes.xcframework"
+        Open3.capture3(plist_buddy, '-c', 'Delete :AvailableLibraries:0:DebugSymbolsPath', hermes_plist_file)
+        Open3.capture3(plist_buddy, '-c', 'Delete :AvailableLibraries:1:DebugSymbolsPath', hermes_plist_file)
+        Open3.capture3(plist_buddy, '-c', 'Delete :AvailableLibraries:2:DebugSymbolsPath', hermes_plist_file)
+
+        puts '[Gutenberg] Removed Hermes dSYMs references from its XCFramework'
+      end
+    end
+
     # Let Pods targets inherit deployment target from the app
     # See https://github.com/CocoaPods/CocoaPods/issues/4859
     #
     # Exclude RCT-Folly as it requires explicit deployment target
     # See https://git.io/JPb73
-    next unless target.name != 'RCT-Folly'
+    next if target.name == 'RCT-Folly'
 
     target.build_configurations.each do |configuration|
       pod_ios_deployment_target = Gem::Version.new(configuration.build_settings[IOS_VERSION_KEY])
