@@ -179,7 +179,11 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			const screenshot = await takeScreenshot();
 			expect( screenshot ).toMatchImageSnapshot();
 
-			await firstButtonTextInput.click();
+			const buttonsBlock = await editorPage.getBlockAtPosition(
+				blockNames.buttons
+			);
+			buttonsBlock.click();
+
 			// Navigate upwards to select parent block
 			await editorPage.moveBlockSelectionUp();
 

@@ -64,7 +64,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 					.elementByAccessibilityId( 'Column Block. Row 1' )
 					.click();
 				const appenderButton = await editorPage.waitForElementToBeDisplayedByXPath(
-					'//android.widget.Button[@content-desc="Column Block. Row 1"]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button/android.view.ViewGroup/android.view.ViewGroup'
+					'//android.widget.Button[@content-desc="Column Block. Row 1"]/android.view.ViewGroup[1]/android.view.ViewGroup/android.widget.Button/android.view.ViewGroup/android.view.ViewGroup'
 				);
 				await appenderButton.click();
 			} else {
@@ -121,7 +121,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 					.elementByAccessibilityId( 'Column Block. Row 1' )
 					.click();
 				const appenderButton = await editorPage.waitForElementToBeDisplayedByXPath(
-					'//android.widget.Button[@content-desc="Column Block. Row 1"]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button/android.view.ViewGroup/android.view.ViewGroup'
+					'//android.widget.Button[@content-desc="Column Block. Row 1"]/android.view.ViewGroup[1]/android.view.ViewGroup/android.widget.Button/android.view.ViewGroup/android.view.ViewGroup'
 				);
 				await appenderButton.click();
 			} else {
@@ -191,7 +191,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 					.elementByAccessibilityId( 'Column Block. Row 1' )
 					.click();
 				const appenderButton = await editorPage.waitForElementToBeDisplayedByXPath(
-					'//android.widget.Button[@content-desc="Column Block. Row 1"]/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.Button/android.view.ViewGroup/android.view.ViewGroup'
+					'//android.widget.Button[@content-desc="Column Block. Row 1"]/android.view.ViewGroup[1]/android.view.ViewGroup/android.widget.Button/android.view.ViewGroup/android.view.ViewGroup'
 				);
 				await appenderButton.click();
 			} else {
