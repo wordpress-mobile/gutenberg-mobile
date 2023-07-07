@@ -46,6 +46,9 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 				blockNames.columns
 			);
 			await columnsBlock.click();
+
+			// Navigate upwards in block hierarchy
+			await editorPage.moveBlockSelectionUp( { toRoot: true } );
 			await editorPage.removeBlock();
 		} );
 
