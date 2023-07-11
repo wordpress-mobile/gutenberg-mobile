@@ -15,7 +15,7 @@ mkdir -p "$NVM_DIR"
 echo '--- :node: 3. Install node version from .nvmrc'
 nvm install "$(cat .nvmrc)" && nvm use
 
-echo '--- :node: 4. nmp ci'
+echo '--- :node: 4. npm ci'
 npm ci
 
 echo "--- :rubygems: Setting up Gems"
