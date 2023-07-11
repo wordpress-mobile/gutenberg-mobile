@@ -27,7 +27,6 @@
 		3F12365029F6B23300AF54A4 /* supported-blocks.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F12364F29F6B23300AF54A4 /* supported-blocks.json */; };
 		3FA0C5812A1C8C9700600A9A /* App.js in Resources */ = {isa = PBXBuildFile; fileRef = 3FA0C5802A1C8C9700600A9A /* App.js */; };
 		3FC7862B2A53047D00A0DDAF /* hermes.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC7862A2A53047D00A0DDAF /* hermes.xcframework */; };
-		3FC7862C2A53047D00A0DDAF /* hermes.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC7862A2A53047D00A0DDAF /* hermes.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3FE06AC329F3F61300F752AD /* Gutenberg.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE06AC229F3F61300F752AD /* Gutenberg.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3FE06ACE29F3F6DA00F752AD /* Gutenberg-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06AC829F3F6DA00F752AD /* Gutenberg-Debug.xcconfig */; };
 		3FE06ACF29F3F6DA00F752AD /* Gutenberg-Shared.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06AC929F3F6DA00F752AD /* Gutenberg-Shared.xcconfig */; };
@@ -37,20 +36,6 @@
 		3FE06AD329F3F6DA00F752AD /* Project-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06ACD29F3F6DA00F752AD /* Project-Debug.xcconfig */; };
 		612F325D13E652BF476ED672 /* Pods_Gutenberg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 432C8665181F3EC336B71D6C /* Pods_Gutenberg.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		3FC7862D2A53047D00A0DDAF /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				3FC7862C2A53047D00A0DDAF /* hermes.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3F1235FB29F680F900AF54A4 /* GutenbergBridgeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GutenbergBridgeDelegate.swift; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergBridgeDelegate.swift"; sourceTree = "<group>"; };
@@ -209,7 +194,6 @@
 				3FE06ABC29F3F61300F752AD /* Frameworks */,
 				3FE06ABD29F3F61300F752AD /* Resources */,
 				33E2599260A73CF1DC26925F /* [CP] Copy Pods Resources */,
-				3FC7862D2A53047D00A0DDAF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
