@@ -1,5 +1,9 @@
 Unreleased
 ---
+* [**] Add media inserter buttons to editor toolbar [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5900]
+* [**] Update native BlockOutline component styles to remove blue border from blocks [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5833]
+* [**] Move the undo/redo buttons to the navigation bar [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5889]
+* [**] Update Editor block inserter button styles and default text input placeholder/selection styles [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5941]
 
 1.99.1
 ---

@@ -13,7 +13,7 @@ describe( 'Gutenberg Editor Visual test for Gallery Block', () => {
 		const screenshot = await takeScreenshot();
 		expect( screenshot ).toMatchImageSnapshot();
 
-		await editorPage.removeBlockAtPosition( blockNames.gallery );
+		await editorPage.removeBlock();
 	} );
 
 	it( 'should be able to render a gallery correctly', async () => {
