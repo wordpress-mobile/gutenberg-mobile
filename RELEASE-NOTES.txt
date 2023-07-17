@@ -6,6 +6,10 @@ Unreleased
 * [**] Update Editor block inserter button styles and default text input placeholder/selection styles [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5941]
 * [**] Update Editor toolbar icons and colors [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5940]
 
+1.99.1
+---
+* [**] Fix crash related to removing a block under certain conditions [https://github.com/WordPress/gutenberg/pull/52595]
+
 1.99.0
 ---
 * [*] Rename "Reusable blocks" to "Synced patterns", aligning with the web editor. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5885]
