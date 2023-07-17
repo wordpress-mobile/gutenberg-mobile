@@ -32,9 +32,6 @@ steps:
         echo "--- :npm: Install Node dependencies"
         npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
-        echo "--- :package: Run bundle prep work"
-        npm run prebundle:js
-
         echo "--- :android: Build Android bundle"
         npm run bundle:android
 
