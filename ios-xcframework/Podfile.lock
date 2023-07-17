@@ -612,7 +612,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   RNReanimated:
-    :commit: 9172a88e9e8be931582b58b0b91c363122781713
+    :commit: 310ff71ea469f7cf8458d1dd7c3b1988a3d2e802
     :git: https://github.com/wordpress-mobile/react-native-reanimated
 
 SPEC CHECKSUMS:
@@ -665,7 +665,7 @@ SPEC CHECKSUMS:
   RNCMaskedView: 94f0f1558fae47042743b31916d5fff39266644b
   RNFastImage: 9407b5abc43452149a2f628107c64a7d11aa2948
   RNGestureHandler: 40fd57eb7f1affcfbc6bd2039bb6946412de360b
-  RNReanimated: 6bfd1c768023b5ba1d78a20fdc53c96dcd564fe6
+  RNReanimated: 21e1e71d7f1ac9f2fa11df37c06a8ec52ed06232
   RNScreens: e3ffdd78ff5afe8ec82c2566ee2410857ed5ce75
   RNSVG: 29dd0ac32d83774d4b0953ae92a5cd8205a782d7
   RNTAztecView: 0cf287757e0879ea9e87e6628851c24f798ba809
