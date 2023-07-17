@@ -7,7 +7,6 @@ import { initialHtmlGutenberg } from '@wordpress/react-native-editor';
 /**
  * Internal dependencies
  */
-import correctTextFontWeight from './text-font-weight-correct';
 import initialHtml from './initial-html';
 import initAnalytics from './analytics';
 
@@ -15,7 +14,6 @@ const setupHooks = () => {
 	// Hook triggered before the editor is rendered
 	addAction( 'native.pre-render', 'gutenberg-mobile', () => {
 		require( './strings-overrides' );
-		correctTextFontWeight();
 	} );
 
 	addFilter(
