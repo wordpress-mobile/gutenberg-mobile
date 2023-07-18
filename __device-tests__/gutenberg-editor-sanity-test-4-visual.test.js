@@ -2,43 +2,85 @@
  * Internal dependencies
  */
 const { blockNames } = editorPage;
-const { toggleOrientation, selectTextFromElement } = e2eUtils;
+const {
+	toggleOrientation,
+	selectTextFromElement,
+	toggleDarkMode,
+	isAndroid,
+	isEditorVisible,
+} = e2eUtils;
 import { takeScreenshot } from './utils';
 
 describe( 'Gutenberg Editor - Test Suite 4', () => {
-	it( 'Spacer block - Spacer in horizontal layout works as expected', async () => {
-		await editorPage.addNewBlock( blockNames.spacer );
+	describe( 'Spacer block', () => {
+		it( 'Spacer in horizontal layout works as expected', async () => {
+			await editorPage.addNewBlock( blockNames.spacer );
 
-		await toggleOrientation( editorPage.driver );
+			await toggleOrientation( editorPage.driver );
 
-		// Wait for the device to finish rotating
-		await editorPage.driver.sleep( 3000 );
+			// Wait for the device to finish rotating
+			await editorPage.driver.sleep( 3000 );
 
-		// Visual test check for selected state
-		let screenshot = await takeScreenshot();
-		expect( screenshot ).toMatchImageSnapshot();
+			// Visual test check for selected state
+			let screenshot = await takeScreenshot();
+			expect( screenshot ).toMatchImageSnapshot();
 
-		const titleElement = await editorPage.getTitleElement( {
-			autoscroll: true,
+			const titleElement = await editorPage.getTitleElement( {
+				autoscroll: true,
+			} );
+			await titleElement.click();
+
+			await editorPage.dismissKeyboard();
+
+			// Visual test check for unselected state
+			screenshot = await takeScreenshot();
+			expect( screenshot ).toMatchImageSnapshot();
+
+			await toggleOrientation( editorPage.driver );
+
+			// Wait for the device to finish rotating
+			await editorPage.driver.sleep( 3000 );
+
+			const spaceBlock = await editorPage.getBlockAtPosition(
+				blockNames.spacer
+			);
+			await spaceBlock.click();
+			await editorPage.removeBlock();
 		} );
-		await titleElement.click();
 
-		await editorPage.dismissKeyboard();
+		it( 'Check if in DarkMode all components gets proper colors', async () => {
+			// Toggling dark mode
+			await toggleDarkMode( editorPage.driver, true );
+			// The Android editor requires a restart to apply dark mode
+			if ( isAndroid() ) {
+				await editorPage.driver.resetApp();
+				await isEditorVisible( editorPage.driver );
+			}
 
-		// Visual test check for unselected state
-		screenshot = await takeScreenshot();
-		expect( screenshot ).toMatchImageSnapshot();
+			// Add Spacer block
+			await editorPage.addNewBlock( blockNames.spacer );
+			const spacerBlock = await editorPage.getBlockAtPosition(
+				blockNames.spacer
+			);
 
-		await toggleOrientation( editorPage.driver );
+			// Open and wait for block settings
+			await editorPage.openBlockSettings();
+			await editorPage.driver.sleep( 500 );
 
-		// Wait for the device to finish rotating
-		await editorPage.driver.sleep( 3000 );
+			// Visual test check
+			const screenshot = await takeScreenshot();
+			expect( screenshot ).toMatchImageSnapshot();
 
-		const spaceBlock = await editorPage.getBlockAtPosition(
-			blockNames.spacer
-		);
-		await spaceBlock.click();
-		await editorPage.removeBlock();
+			// Clean up test
+			await editorPage.dismissBottomSheet();
+			await editorPage.removeBlock();
+			await toggleDarkMode( editorPage.driver, false );
+			// The Android editor requires a restart to apply dark mode
+			if ( isAndroid() ) {
+				await editorPage.driver.resetApp();
+				await isEditorVisible( editorPage.driver );
+			}
+		} );
 	} );
 
 	describe( 'Buttons block', () => {
@@ -188,6 +230,93 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.moveBlockSelectionUp();
 
 			await editorPage.removeBlock();
+		} );
+
+		it( 'Check if in DarkMode all components gets proper colors', async () => {
+			// Toggling dark mode
+			await toggleDarkMode( editorPage.driver, true );
+			// The Android editor requires a restart to apply dark mode
+			if ( isAndroid() ) {
+				await editorPage.driver.resetApp();
+				await isEditorVisible( editorPage.driver );
+			}
+
+			// Add Buttons block
+			await editorPage.addNewBlock( blockNames.buttons );
+			const buttonTextInput = await editorPage.getButtonBlockTextInputAtPosition();
+			await editorPage.typeTextToTextBlock(
+				buttonTextInput,
+				e2eTestData.shortButtonText
+			);
+
+			// Open and wait for block settings
+			await editorPage.openBlockSettings();
+			await editorPage.driver.sleep( 500 );
+
+			// Visual test check
+			const screenshot = await takeScreenshot();
+			expect( screenshot ).toMatchImageSnapshot();
+
+			// Clean up test
+			await editorPage.dismissBottomSheet();
+			await editorPage.moveBlockSelectionUp();
+			await editorPage.removeBlock();
+			await toggleDarkMode( editorPage.driver, false );
+			// The Android editor requires a restart to apply dark mode
+			if ( isAndroid() ) {
+				await editorPage.driver.resetApp();
+				await isEditorVisible( editorPage.driver );
+			}
+		} );
+	} );
+
+	describe( 'Group block', () => {
+		it( 'Check if in DarkMode all components gets proper colors', async () => {
+			// Toggling dark mode
+			await toggleDarkMode( editorPage.driver, true );
+			// The Android editor requires a restart to apply dark mode
+			if ( isAndroid() ) {
+				await editorPage.driver.resetApp();
+				await isEditorVisible( editorPage.driver );
+			}
+
+			// Add Group block
+			await editorPage.addNewBlock( blockNames.group );
+			const groupBlock = await editorPage.getBlockAtPosition(
+				blockNames.group
+			);
+
+			// Insert a Paragraph block into Group block
+			await editorPage.addBlockUsingAppender(
+				groupBlock,
+				blockNames.paragraph
+			);
+			const paragraphBlock = await editorPage.getTextBlockAtPosition(
+				blockNames.paragraph
+			);
+			await editorPage.typeTextToTextBlock(
+				paragraphBlock,
+				e2eTestData.shortText
+			);
+
+			// Select parent Group block
+			await editorPage.moveBlockSelectionUp( {
+				toRoot: true,
+			} );
+
+			// Visual test check
+			const screenshot = await takeScreenshot();
+			expect( screenshot ).toMatchImageSnapshot();
+
+			// Clean up test
+			await editorPage.dismissBottomSheet();
+			await editorPage.removeBlock();
+			await toggleDarkMode( editorPage.driver, false );
+			// The Android editor requires a restart to apply dark mode
+			if ( isAndroid() ) {
+				await editorPage.driver.resetApp();
+				await isEditorVisible( editorPage.driver );
+			}
 		} );
 	} );
 } );
