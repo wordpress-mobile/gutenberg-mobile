@@ -13,27 +13,10 @@ before_all do
 end
 
 lane :upload_xcframework_to_s3 do
-  xcframework_archive_path = File.join(XCFRAMEWORK_PROJECT_ROOT_FOLDER, "build/xcframeworks/Gutenberg.#{XCFRAMEWORK_ARCHIVE_TYPE}")
-
-  unless File.exist? xcframework_archive_path
-    UI.user_error! "Could not find XCFramework archive to upload at #{xcframework_archive_path}"
-  end
-
-  upload_xcframework_files_to_s3(archive_path: xcframework_archive_path, id: last_git_commit[:commit_hash])
-
-  next unless is_ci
-
-  tag = ENV.fetch('BUILDKITE_TAG', nil)
-
-  next if tag.nil? || tag.empty?
-
-  # Tradeoff: We are "wasting" space on S3 by uploading the same archive under different name.
-  # What we get in return is a 1-1 correspondency between archive and podspec, which keeps the setup simpler.
-  upload_xcframework_files_to_s3(archive_path: xcframework_archive_path, id: tag)
+  upload_xcframework_files_to_s3(archive_path: '', id: 'dea1737b1a9c47396d906e6bd265d5586b7947ca')
 end
 
 def upload_xcframework_files_to_s3(archive_path:, id:)
-  upload_to_a8c_s3(file: archive_path, name_on_s3: "Gutenberg-#{id}.#{XCFRAMEWORK_ARCHIVE_TYPE}")
   upload_podspec_to_s3(archive_id: id)
 end
 
@@ -70,13 +53,12 @@ end
 # Notice skip_if_exists is true by default.
 # CI might run on the same commit twice, once for the commit and once for the tag.
 # We don't want to fail on the second run.
-def upload_to_a8c_s3(file:, name_on_s3:, prefix: 'gutenberg-mobile', skip_if_exists: true)
+def upload_to_a8c_s3(file:, name_on_s3:, prefix: 'gutenberg-mobile')
   upload_to_s3(
     bucket: 'a8c-apps-public-artifacts',
     key: "#{prefix}/#{name_on_s3}",
     file: file,
     auto_prefix: false,
-    # TODO: Replace with `if_exists: :replace` once the feature is implemented in https://github.com/wordpress-mobile/release-toolkit/pull/495
-    skip_if_exists: skip_if_exists
+    if_exists: :replace
   )
 end
