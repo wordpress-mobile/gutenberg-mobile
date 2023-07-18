@@ -74,10 +74,12 @@ function getBlockObject( block ) {
  *
  * @param {Array}          originalBlockIds ids or blocks that are being replaced
  * @param {Object | Array} blocks           block instance object or an array of such objects
+ * @param {Array}          args             additional insertBlocks data e.g. metadata containing inserter method.
  * @return {void}
  */
-const trackBlockReplacement = ( originalBlockIds, blocks ) => {
-	const insert_method = getBlockInserterUsed( originalBlockIds );
+const trackBlockReplacement = ( originalBlockIds, blocks, ...args ) => {
+	const metaData = args?.[ 3 ] ?? {};
+	const insert_method = getBlockInserterUsed( originalBlockIds, metaData );
 
 	trackBlocksHandler( blocks, 'editor_block_inserted', ( { name } ) => ( {
 		block_name: name,
