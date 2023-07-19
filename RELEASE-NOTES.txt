@@ -1,6 +1,7 @@
 Unreleased
 ---
 * [*] Rename "Reusable blocks" to "Synced patterns", aligning with the web editor. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5885]
+* [**] Upgrade React Native to 0.71.11 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5874]
 
 1.98.1
 ---
