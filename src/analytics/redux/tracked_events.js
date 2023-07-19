@@ -81,10 +81,14 @@ const trackBlockReplacement = ( originalBlockIds, blocks, ...args ) => {
 	const metaData = args?.[ 3 ] ?? {};
 	const insert_method = getBlockInserterUsed( originalBlockIds, metaData );
 
-	trackBlocksHandler( blocks, 'editor_block_inserted', ( { name } ) => ( {
-		block_name: name,
-		insert_method,
-	} ) );
+	// To avoid tracking block insertions when replacing a block, we only track replacements
+	// when the slash inserter is used.
+	if ( insert_method === INSERTERS.SLASH_INSERTER ) {
+		trackBlocksHandler( blocks, 'editor_block_inserted', ( { name } ) => ( {
+			block_name: name,
+			insert_method,
+		} ) );
+	}
 };
 
 /**
