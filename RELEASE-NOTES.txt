@@ -6,6 +6,7 @@ Unreleased
 * [**] Update Editor block inserter button styles and default text input placeholder/selection styles [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5941]
 * [**] Update Editor toolbar icons and colors [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5940]
 * [**] Upgrade React Native to 0.71.11 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5874]
+* [**] Update media placeholders and block outline [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5969]
 
 1.99.1
 ---
