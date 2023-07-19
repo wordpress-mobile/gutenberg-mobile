@@ -72,14 +72,23 @@ function getBlockObject( block ) {
 /**
  * Track block replacement.
  *
- * @param {Array}          originalBlockIds ids or blocks that are being replaced
- * @param {Object | Array} blocks           block instance object or an array of such objects
- * @param {Array}          args             additional insertBlocks data e.g. metadata containing inserter method.
+ * @param {Array}          originalBlockIds ID(s) or blocks that are being replaced
+ * @param {Object | Array} blocks           Block instance object or an array of such objects
+ * @param {number}         indexToSelect    Index of replacement block to select.
+ * @param {0|-1|null}      initialPosition  Index of caret after in the selected block after the operation.
+ * @param {?Object}        meta             Optional Meta values to be passed to the action object.
+ *
  * @return {void}
  */
-const trackBlockReplacement = ( originalBlockIds, blocks, ...args ) => {
-	const metaData = args?.[ 3 ] ?? {};
-	const insert_method = getBlockInserterUsed( originalBlockIds, metaData );
+const trackBlockReplacement = (
+	originalBlockIds,
+	blocks,
+	indexToSelect,
+	// eslint-disable-next-line no-unused-vars
+	initialPosition = 0,
+	meta = {}
+) => {
+	const insert_method = getBlockInserterUsed( originalBlockIds, meta );
 
 	// To avoid tracking block insertions when replacing a block, we only track replacements
 	// when the slash inserter is used.
@@ -94,13 +103,22 @@ const trackBlockReplacement = ( originalBlockIds, blocks, ...args ) => {
 /**
  * Track block insertion.
  *
- * @param {Object | Array} blocks block instance object or an array of such objects
- * @param {Array}          args   additional insertBlocks data e.g. metadata containing inserter method.
+ * @param {Object | Array} blocks          Block instance object or an array of such objects
+ * @param {?number}        index           Index at which block should be inserted.
+ * @param {?string}        rootClientId    Optional root client ID of block list on which to insert.
+ * @param {?boolean}       updateSelection If true block selection will be updated. If false, block selection will not change. Defaults to true.
+ * @param {?Object}        meta            Optional Meta values to be passed to the action object.
+ *
  * @return {void}
  */
-function trackBlockInsertion( blocks, ...args ) {
-	const metaData = args?.[ 3 ] ?? {};
-	const insert_method = getBlockInserterUsed( [], metaData );
+function trackBlockInsertion(
+	blocks,
+	index,
+	rootClientId,
+	updateSelection,
+	meta = {}
+) {
+	const insert_method = getBlockInserterUsed( [], meta );
 
 	trackBlocksHandler( blocks, 'editor_block_inserted', ( { name } ) => ( {
 		block_name: name,
