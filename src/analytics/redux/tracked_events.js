@@ -197,8 +197,6 @@ function handleBlockMovedByPosition( clientIds, toIndex ) {
 export const trackedEvents = {
 	'core/block-editor': {
 		insertBlock: trackBlockInsertion,
-		insertBlocks: trackBlockInsertion,
-		replaceBlock: trackBlockReplacement,
 		replaceBlocks: trackBlockReplacement,
 		moveBlocksUp( clientIds ) {
 			trackBlockMoved( clientIds, 'move_arrows_up' );
