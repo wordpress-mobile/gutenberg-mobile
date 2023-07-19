@@ -150,7 +150,8 @@ cp -r "$XCFRAMEWORKS_DIR/Gutenberg.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
 cp -r "$XCFRAMEWORKS_DIR/React.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
 cp -r "$XCFRAMEWORKS_DIR/RNTAztecView.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
 cp -r "$XCFRAMEWORKS_DIR/yoga.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
-cp -r "$HERMES_XCFRAMEWORK" "$ARCHIVE_FRAMEWORKS_PATH"
+# We don't want the Catalyst slice because 1) it's huge and 2) we don't need it at the moment
+rsync -a "$HERMES_XCFRAMEWORK" "$ARCHIVE_FRAMEWORKS_PATH" --exclude '*-maccatalyst'
 
 ARCHIVE_PATH="$XCFRAMEWORKS_DIR/$MAIN_FRAMEWORK_NAME.tar.gz"
 
