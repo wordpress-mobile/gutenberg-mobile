@@ -84,8 +84,7 @@ const trackBlockReplacement = (
 	originalBlockIds,
 	blocks,
 	indexToSelect,
-	// eslint-disable-next-line no-unused-vars
-	initialPosition = 0,
+	initialPosition,
 	meta = {}
 ) => {
 	const insert_method = getBlockInserterUsed( originalBlockIds, meta );
@@ -103,24 +102,12 @@ const trackBlockReplacement = (
 /**
  * Track block insertion.
  *
- * @param {Object | Array} blocks          Block instance object or an array of such objects
- * @param {?number}        index           Index at which block should be inserted.
- * @param {?string}        rootClientId    Optional root client ID of block list on which to insert.
- * @param {?boolean}       updateSelection If true block selection will be updated. If false, block selection will not change. Defaults to true.
- * @param {0|-1|null}      initialPosition Initial focus position. Setting it to null prevent focusing the inserted block.
- * @param {?Object}        meta            Optional Meta values to be passed to the action object.
+ * @param {Object | Array} blocks Block instance object or an array of such objects
+ * @param {?Object}        meta   Optional Meta values to be passed to the action object.
  *
  * @return {void}
  */
-function trackBlockInsertion(
-	blocks,
-	index,
-	rootClientId,
-	updateSelection,
-	// eslint-disable-next-line no-unused-vars
-	initialPosition = 0,
-	meta = {}
-) {
+function trackBlockInsertion( blocks, meta = {} ) {
 	const insert_method = getBlockInserterUsed( [], meta );
 
 	trackBlocksHandler( blocks, 'editor_block_inserted', ( { name } ) => ( {
@@ -222,14 +209,7 @@ function handleBlockMovedByPosition( clientIds, toIndex ) {
 export const trackedEvents = {
 	'core/block-editor': {
 		insertBlock( blocks, index, rootClientId, updateSelection, meta ) {
-			trackBlockInsertion(
-				blocks,
-				index,
-				rootClientId,
-				updateSelection,
-				undefined,
-				meta
-			);
+			trackBlockInsertion( blocks, meta );
 		},
 		insertBlocks(
 			blocks,
@@ -239,14 +219,7 @@ export const trackedEvents = {
 			initialPosition,
 			meta
 		) {
-			trackBlockInsertion(
-				blocks,
-				index,
-				rootClientId,
-				updateSelection,
-				initialPosition,
-				meta
-			);
+			trackBlockInsertion( blocks, meta );
 		},
 		replaceBlock: trackBlockReplacement,
 		replaceBlocks: trackBlockReplacement,
