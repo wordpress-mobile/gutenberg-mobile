@@ -16,7 +16,7 @@ const blockExperiments = [ 'jetpack/layout-grid' ];
 const setupHooks = () => {
 	// Hook triggered after the editor is rendered
 	addAction(
-		'native.render',
+		'native.post-register-core-blocks',
 		'gutenberg-mobile-block-experiments',
 		( props ) => {
 			const capabilities = props.capabilities ?? {};
