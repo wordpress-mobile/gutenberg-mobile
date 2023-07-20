@@ -56,6 +56,13 @@ function archive {
     SKIP_INSTALL=NO
 }
 
+# Fail early if the expected Hermes XCFramework that should be bundled with React Native cannot be found
+HERMES_XCFRAMEWORK=./Pods/hermes-engine/destroot/Library/Frameworks/universal/hermes.xcframework
+if [ ! -d $HERMES_XCFRAMEWORK ]; then
+  log 'fail' "Could not file required Hermes XCFramework at path: $HERMES_XCFRAMEWORK"
+  exit 1
+fi
+
 BUILD_DIR=./build
 DERIVED_DATA_PATH="$BUILD_DIR/derived_data"
 ARCHIVES_ROOT="$BUILD_DIR/archives"
@@ -92,7 +99,7 @@ do
   FRAMEWORK_RELATIVE_PATH="Products/Library/Frameworks/$CURRENT_FRAMEWORK_NAME.framework"
 
   if [[ $CURRENT_FRAMEWORK_NAME = 'hermes' ]]; then
-    log 'no_good' "Skipping creating XCFramework for $CURRENT_FRAMEWORK_NAME"
+    log 'no_good' "Skipping creating XCFramework for $CURRENT_FRAMEWORK_NAME, we'll use the one bundled with React Native"
     continue
   fi
 
@@ -143,6 +150,8 @@ cp -r "$XCFRAMEWORKS_DIR/Gutenberg.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
 cp -r "$XCFRAMEWORKS_DIR/React.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
 cp -r "$XCFRAMEWORKS_DIR/RNTAztecView.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
 cp -r "$XCFRAMEWORKS_DIR/yoga.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
+# We don't want the Catalyst slice because 1) it's huge and 2) we don't need it at the moment
+rsync -a "$HERMES_XCFRAMEWORK" "$ARCHIVE_FRAMEWORKS_PATH" --exclude '*-maccatalyst'
 
 ARCHIVE_PATH="$XCFRAMEWORKS_DIR/$MAIN_FRAMEWORK_NAME.tar.gz"
 
