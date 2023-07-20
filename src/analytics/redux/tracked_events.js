@@ -14,7 +14,7 @@ const INSERTERS = {
 /**
  * Guess which inserter was used to insert/replace blocks.
  *
- * @param {string[]|string} originalBlockIds ids or blocks that are being replaced
+ * @param {string[]|string} originalBlockIds ID(s) of block(s) that are being replaced
  * @param {Object}          metaData         Meta data of the inserted block
  * @return {string | undefined} Insertion source or undefined value
  */
@@ -72,13 +72,12 @@ function getBlockObject( block ) {
 /**
  * Track block replacement.
  *
- * @param {Array}          originalBlockIds ID(s) or blocks that are being replaced
+ * @param {Array}          originalBlockIds ID(s) of blocks that are being replaced
  * @param {Object | Array} blocks           Block instance object or an array of such objects
  * @param {number}         indexToSelect    Index of replacement block to select.
  * @param {0|-1|null}      initialPosition  Index of caret after in the selected block after the operation.
  * @param {?Object}        meta             Optional Meta values to be passed to the action object.
  *
- * @return {void}
  */
 const trackBlockReplacement = (
 	originalBlockIds,
@@ -105,7 +104,6 @@ const trackBlockReplacement = (
  * @param {Object | Array} blocks Block instance object or an array of such objects
  * @param {?Object}        meta   Optional Meta values to be passed to the action object.
  *
- * @return {void}
  */
 function trackBlockInsertion( blocks, meta = {} ) {
 	const insert_method = getBlockInserterUsed( [], meta );
