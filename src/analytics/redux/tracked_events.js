@@ -5,6 +5,56 @@
 import { select } from '@wordpress/data';
 import { sendEventToHost } from '@wordpress/react-native-bridge';
 
+const INSERTERS = {
+	HEADER_INSERTER: 'header-inserter',
+	SLASH_INSERTER: 'slash-inserter',
+	QUICK_INSERTER: 'quick-inserter',
+};
+
+/**
+ * Guess which inserter was used to insert/replace blocks.
+ *
+ * @param {string[]|string} originalBlockIds ID(s) of block(s) that are being replaced
+ * @param {Object}          metaData         Meta data of the inserted block
+ * @return {string | undefined} Insertion source or undefined value
+ */
+const getBlockInserterUsed = ( originalBlockIds = [], metaData ) => {
+	const { inserterMethod, source } = metaData || {};
+	const clientIds = Array.isArray( originalBlockIds )
+		? originalBlockIds
+		: [ originalBlockIds ];
+
+	if ( source === 'inserter_menu' && ! inserterMethod ) {
+		return INSERTERS.HEADER_INSERTER;
+	}
+
+	if (
+		source === 'inserter_menu' &&
+		inserterMethod === INSERTERS.QUICK_INSERTER
+	) {
+		return INSERTERS.QUICK_INSERTER;
+	}
+
+	// Inserting a block using a slash command is always a block replacement of
+	// a paragraph block. Checks the block contents to see if it starts with '/'.
+	// This check must go _after_ the block switcher check because it's possible
+	// for the user to type something like "/abc" that matches no block type and
+	// then use the block switcher, and the following tests would incorrectly capture
+	// that case too.
+	if (
+		clientIds.length === 1 &&
+		select( 'core/block-editor' ).getBlockName( clientIds[ 0 ] ) ===
+			'core/paragraph' &&
+		select( 'core/block-editor' )
+			.getBlockAttributes( clientIds[ 0 ] )
+			.content.startsWith( '/' )
+	) {
+		return INSERTERS.SLASH_INSERTER;
+	}
+
+	return undefined;
+};
+
 /**
  * Retrieves a block object. If the block is not an object,
  * it tries to retrieve the block from the store.
@@ -17,6 +67,51 @@ function getBlockObject( block ) {
 		return block;
 	}
 	return select( 'core/block-editor' ).getBlock( block ) || {};
+}
+
+/**
+ * Track block replacement.
+ *
+ * @param {Array}          originalBlockIds ID(s) of blocks that are being replaced
+ * @param {Object | Array} blocks           Block instance object or an array of such objects
+ * @param {number}         indexToSelect    Index of replacement block to select.
+ * @param {0|-1|null}      initialPosition  Index of caret after in the selected block after the operation.
+ * @param {?Object}        meta             Optional Meta values to be passed to the action object.
+ *
+ */
+const trackBlockReplacement = (
+	originalBlockIds,
+	blocks,
+	indexToSelect,
+	initialPosition,
+	meta = {}
+) => {
+	const insert_method = getBlockInserterUsed( originalBlockIds, meta );
+
+	// To avoid tracking block insertions when replacing a block, we only track replacements
+	// when the slash inserter is used.
+	if ( insert_method === INSERTERS.SLASH_INSERTER ) {
+		trackBlocksHandler( blocks, 'editor_block_inserted', ( { name } ) => ( {
+			block_name: name,
+			insert_method,
+		} ) );
+	}
+};
+
+/**
+ * Track block insertion.
+ *
+ * @param {Object | Array} blocks Block instance object or an array of such objects
+ * @param {?Object}        meta   Optional Meta values to be passed to the action object.
+ *
+ */
+function trackBlockInsertion( blocks, meta = {} ) {
+	const insert_method = getBlockInserterUsed( [], meta );
+
+	trackBlocksHandler( blocks, 'editor_block_inserted', ( { name } ) => ( {
+		block_name: name,
+		insert_method,
+	} ) );
 }
 
 /**
@@ -111,20 +206,21 @@ function handleBlockMovedByPosition( clientIds, toIndex ) {
 
 export const trackedEvents = {
 	'core/block-editor': {
-		insertBlock( blocks ) {
-			trackBlocksHandler(
-				blocks,
-				'editor_block_inserted',
-				( { name } ) => ( { block_name: name } )
-			);
+		insertBlock( blocks, index, rootClientId, updateSelection, meta ) {
+			trackBlockInsertion( blocks, meta );
 		},
-		insertBlocks( blocks ) {
-			trackBlocksHandler(
-				blocks,
-				'editor_block_inserted',
-				( { name } ) => ( { block_name: name } )
-			);
+		insertBlocks(
+			blocks,
+			index,
+			rootClientId,
+			updateSelection,
+			initialPosition,
+			meta
+		) {
+			trackBlockInsertion( blocks, meta );
 		},
+		replaceBlock: trackBlockReplacement,
+		replaceBlocks: trackBlockReplacement,
 		moveBlocksUp( clientIds ) {
 			trackBlockMoved( clientIds, 'move_arrows_up' );
 		},

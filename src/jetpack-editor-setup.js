@@ -147,9 +147,13 @@ const setupHooks = () => {
 	} );
 
 	// Hook triggered after the editor is rendered
-	addAction( 'native.render', 'gutenberg-mobile-jetpack', ( props ) => {
-		registerJetpackBlocks( props );
-	} );
+	addAction(
+		'native.post-register-core-blocks',
+		'gutenberg-mobile-jetpack',
+		( props ) => {
+			registerJetpackBlocks( props );
+		}
+	);
 };
 
 const setupStringsOverrides = () => {
