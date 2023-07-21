@@ -19,7 +19,6 @@
     <string name="gutenberg_native_add_image" tools:ignore="UnusedResources">ADD IMAGE</string>
     <string name="gutenberg_native_add_image_or_video" tools:ignore="UnusedResources">ADD IMAGE OR VIDEO</string>
     <string name="gutenberg_native_add_image_or_video_b7b3d22b" tools:ignore="UnusedResources">Add image or video</string>
-    <string name="gutenberg_native_add_link" tools:ignore="UnusedResources">ADD LINK</string>
     <string name="gutenberg_native_add_link_text" tools:ignore="UnusedResources">Add link text</string>
     <!-- translators: %s: social link name e.g: "Instagram". -->
     <string name="gutenberg_native_add_link_to_s" tools:ignore="UnusedResources">Add link to %s</string>
@@ -133,7 +132,6 @@
     <string name="gutenberg_native_double_tap_to_open_bottom_sheet_with_available_options" tools:ignore="UnusedResources">Double tap to open Bottom Sheet with available options</string>
     <string name="gutenberg_native_double_tap_to_preview_page" tools:ignore="UnusedResources">Double tap to preview page.</string>
     <string name="gutenberg_native_double_tap_to_preview_post" tools:ignore="UnusedResources">Double tap to preview post.</string>
-    <string name="gutenberg_native_double_tap_to_redo_last_change" tools:ignore="UnusedResources">Double tap to redo last change</string>
     <string name="gutenberg_native_double_tap_to_select" tools:ignore="UnusedResources">Double tap to select</string>
     <string name="gutenberg_native_double_tap_to_select_a_video" tools:ignore="UnusedResources">Double tap to select a video</string>
     <string name="gutenberg_native_double_tap_to_select_an_audio_file" tools:ignore="UnusedResources">Double tap to select an audio file</string>
@@ -144,7 +142,6 @@
     <string name="gutenberg_native_double_tap_to_select_the_option" tools:ignore="UnusedResources">Double tap to select the option</string>
     <!-- translators: accessibility text (hint for switches) -->
     <string name="gutenberg_native_double_tap_to_toggle_setting" tools:ignore="UnusedResources">Double tap to toggle setting</string>
-    <string name="gutenberg_native_double_tap_to_undo_last_change" tools:ignore="UnusedResources">Double tap to undo last change</string>
     <string name="gutenberg_native_double_tap_to_view_embed_options" tools:ignore="UnusedResources">Double tap to view embed options.</string>
     <string name="gutenberg_native_drag_drop" tools:ignore="UnusedResources">Drag &amp; drop</string>
     <string name="gutenberg_native_drag_drop_makes_rearranging_blocks_a_breeze_press_and_hold_on_a_b" tools:ignore="UnusedResources">Drag &amp; drop makes rearranging blocks a breeze. Press and hold on a block, then drag it to its new location and release.</string>
@@ -199,8 +196,12 @@
     <!-- translators: accessibility text. %s: image caption. -->
     <string name="gutenberg_native_image_caption_s" tools:ignore="UnusedResources">Image caption. %s</string>
     <string name="gutenberg_native_image_file_not_found" tools:ignore="UnusedResources">Image file not found.</string>
+    <string name="gutenberg_native_insert_audio_block" tools:ignore="UnusedResources">Insert Audio Block</string>
     <string name="gutenberg_native_insert_crosspost" tools:ignore="UnusedResources">Insert crosspost</string>
+    <string name="gutenberg_native_insert_gallery_block" tools:ignore="UnusedResources">Insert Gallery Block</string>
+    <string name="gutenberg_native_insert_image_block" tools:ignore="UnusedResources">Insert Image Block</string>
     <string name="gutenberg_native_insert_mention" tools:ignore="UnusedResources">Insert mention</string>
+    <string name="gutenberg_native_insert_video_block" tools:ignore="UnusedResources">Insert Video Block</string>
     <string name="gutenberg_native_inside" tools:ignore="UnusedResources">Inside</string>
     <string name="gutenberg_native_invalid_url" tools:ignore="UnusedResources">Invalid URL.</string>
     <string name="gutenberg_native_invalid_url_audio_file_not_found" tools:ignore="UnusedResources">Invalid URL. Audio file not found.</string>
