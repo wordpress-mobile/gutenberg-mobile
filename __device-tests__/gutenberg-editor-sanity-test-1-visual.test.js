@@ -13,7 +13,7 @@ const {
 import { NESTED_COLUMNS_3_LEVELS } from './test-editor-data';
 
 const ANDROID_COLUMN_APPENDER_BUTTON_XPATH =
-	'//android.widget.Button[@content-desc="Column Block. Row 1"]/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.Button';
+	'//android.widget.Button[@content-desc="Column Block. Row 1"]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.Button';
 
 describe( 'Gutenberg Editor - Test Suite 1', () => {
 	describe( 'Columns block', () => {
@@ -49,6 +49,9 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 				blockNames.columns
 			);
 			await columnsBlock.click();
+
+			await editorPage.moveBlockSelectionUp( { toRoot: true } );
+
 			await editorPage.removeBlock();
 		} );
 
