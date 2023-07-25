@@ -160,8 +160,7 @@ commands:
 parameters:
   android-docker-image:
     type: string
-    # Hash points to previous version with node 12. When everything works with node 14 it can be removed
-    default: "circleci/android:api-29-node@sha256:71d61d6c21b29948d57120f476a83cc322a280979bce355c5a0ad771293ca380"
+    default: "cimg/android:2023.07-node"
   linux-machine-image:
     type: string
     # Latest supported ubuntu image from https://circleci.com/docs/2.0/configuration-reference/#available-machine-images
