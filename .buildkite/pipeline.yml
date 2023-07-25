@@ -1,7 +1,7 @@
 x-common-params:
   &publish-android-artifacts-docker-container
   docker#v3.8.0:
-    image: "public.ecr.aws/automattic/android-build-image:v1.1.0"
+    image: "public.ecr.aws/automattic/android-build-image:v1.3.0"
     propagate-environment: true
     environment:
       # DO NOT MANUALLY SET THESE VALUES!
