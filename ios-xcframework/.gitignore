@@ -13,3 +13,7 @@ fastlane/report.xml
 
 # XCFramework build process intermediate and output artifacts
 build
+
+# This file takes precedence over .xcode.env.
+# Developers can use it to set a custom value without having to update .xcode.env after every `pod install`
+.xcode.env.local

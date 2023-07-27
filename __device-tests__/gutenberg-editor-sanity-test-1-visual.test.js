@@ -12,6 +12,9 @@ const {
 } = e2eUtils;
 import { NESTED_COLUMNS_3_LEVELS } from './test-editor-data';
 
+const ANDROID_COLUMN_APPENDER_BUTTON_XPATH =
+	'//android.widget.Button[@content-desc="Column Block. Row 1"]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.Button';
+
 describe( 'Gutenberg Editor - Test Suite 1', () => {
 	describe( 'Columns block', () => {
 		it( 'displays placeholders when unselected', async () => {
@@ -47,8 +50,8 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			);
 			await columnsBlock.click();
 
-			// Navigate upwards in block hierarchy
 			await editorPage.moveBlockSelectionUp( { toRoot: true } );
+
 			await editorPage.removeBlock();
 		} );
 
@@ -67,7 +70,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 					.elementByAccessibilityId( 'Column Block. Row 1' )
 					.click();
 				const appenderButton = await editorPage.waitForElementToBeDisplayedByXPath(
-					'//android.widget.Button[@content-desc="Column Block. Row 1"]/android.view.ViewGroup[1]/android.view.ViewGroup/android.widget.Button/android.view.ViewGroup/android.view.ViewGroup'
+					ANDROID_COLUMN_APPENDER_BUTTON_XPATH
 				);
 				await appenderButton.click();
 			} else {
@@ -124,7 +127,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 					.elementByAccessibilityId( 'Column Block. Row 1' )
 					.click();
 				const appenderButton = await editorPage.waitForElementToBeDisplayedByXPath(
-					'//android.widget.Button[@content-desc="Column Block. Row 1"]/android.view.ViewGroup[1]/android.view.ViewGroup/android.widget.Button/android.view.ViewGroup/android.view.ViewGroup'
+					ANDROID_COLUMN_APPENDER_BUTTON_XPATH
 				);
 				await appenderButton.click();
 			} else {
@@ -194,7 +197,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 					.elementByAccessibilityId( 'Column Block. Row 1' )
 					.click();
 				const appenderButton = await editorPage.waitForElementToBeDisplayedByXPath(
-					'//android.widget.Button[@content-desc="Column Block. Row 1"]/android.view.ViewGroup[1]/android.view.ViewGroup/android.widget.Button/android.view.ViewGroup/android.view.ViewGroup'
+					ANDROID_COLUMN_APPENDER_BUTTON_XPATH
 				);
 				await appenderButton.click();
 			} else {
@@ -252,9 +255,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
 
-			const cellId = isAndroid()
-				? 'Column 1. Width is 50 Percent (%)., double-tap to change unit'
-				: 'Column 1. Width is 50 Percent (%).';
+			const cellId = 'Column 1. Width is 50 Percent (%).';
 			const cell = await editorPage.driver.elementByAccessibilityId(
 				cellId
 			);

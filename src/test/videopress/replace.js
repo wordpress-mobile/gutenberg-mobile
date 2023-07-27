@@ -50,8 +50,13 @@ setupCoreBlocks();
 
 beforeAll( () => {
 	// Register VideoPress block
-	setupJetpackEditor( { blogId: 1, isJetpackActive: true } );
-	registerJetpackBlocks( { capabilities: { videoPressBlock: true } } );
+	setupJetpackEditor( {
+		blogId: 1,
+		isJetpackActive: true,
+	} );
+	registerJetpackBlocks( {
+		capabilities: { videoPressBlock: true },
+	} );
 } );
 
 beforeEach( () => {
@@ -74,6 +79,9 @@ beforeEach( () => {
 
 describe( 'VideoPress block - Replace', () => {
 	it( 'displays media options picker when replacing the video', async () => {
+		// Mock API responses for default VideoPress GUID
+		setupApiFetch( generateFetchMocks() );
+
 		const screen = await initializeEditor( {
 			initialHtml: generateBlockHTML(),
 		} );
@@ -327,6 +335,15 @@ describe( 'VideoPress block - Replace', () => {
 		const uploadingVideoView = getByTestId( 'videopress-uploading-video' );
 		expect( uploadingVideoView ).toBeVisible();
 
+		// Restores mocks for API requests of initial video
+		setupApiFetch(
+			generateFetchMocks( {
+				guid: GUID_INITIAL_VIDEO,
+				metadata: {
+					title: 'Video to be replaced',
+				},
+			} )
+		);
 		// Cancel upload
 		fireEvent.press( uploadingVideoView );
 		expect( requestImageUploadCancelDialog ).toHaveBeenCalledWith(
