@@ -9,8 +9,6 @@ const {
 	isAndroid,
 	isEditorVisible,
 	waitForVisible,
-	longPressMiddleOfElement,
-	tapSelectAllAboveElement,
 } = e2eUtils;
 import { takeScreenshot } from './utils';
 
