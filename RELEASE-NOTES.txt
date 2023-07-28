@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [**] Upgrade React Native to 0.71.11 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5874]
 
 1.100.1
 ---

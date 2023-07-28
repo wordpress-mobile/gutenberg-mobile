@@ -56,6 +56,9 @@ module.exports = {
 		'test/helpers$': '<rootDir>/' + configPath + '/helpers.js',
 		jetpackConfig:
 			'<rootDir>/jetpack/tools/js-tools/jest/jest-jetpack-config.js',
+		// Workaround for Jest not having ESM support yet
+		// Reference: https://t.ly/9ap_
+		uuid: require.resolve( 'uuid' ),
 	},
 	haste: {
 		defaultPlatform: rnPlatform,
