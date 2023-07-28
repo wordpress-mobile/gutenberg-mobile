@@ -1,6 +1,6 @@
 {
 	"name": "gutenberg-mobile",
-	"version": "1.99.1",
+	"version": "1.100.1",
 	"private": true,
 	"config": {
 		"jsfiles": "./*.js src/*.js src/**/*.js src/**/**/*.js",
@@ -11,9 +11,9 @@
 		"npm": ">=6.9.0 <7"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.14.3",
-		"@babel/runtime": "^7.14.0",
-		"@react-native-community/cli": "^8.0.0",
+		"@babel/core": "^7.20.0",
+		"@babel/runtime": "^7.20.0",
+		"@react-native-community/cli": "^10.0.0",
 		"@typescript-eslint/eslint-plugin": "^4.31.0",
 		"@wordpress/babel-preset-default": "file:gutenberg/packages/babel-preset-default",
 		"@wordpress/eslint-plugin": "file:gutenberg/packages/eslint-plugin",
@@ -44,8 +44,8 @@
 		"jest-jasmine2": "29.5.0",
 		"jest-junit": "^13.0.0",
 		"jimp": "^0.22.1",
-		"metro-react-native-babel-preset": "^0.70.3",
-		"metro-resolver": "^0.70.3",
+		"metro-react-native-babel-preset": "^0.73.10",
+		"metro-resolver": "^0.73.10",
 		"node-fetch": "^2.3.0",
 		"patch-package": "^6.2.2",
 		"prettier": "npm:wp-prettier@1.19.1",
@@ -75,7 +75,9 @@
 		"bundle:android": "npm run bundle:android:text && npm run bundle:android:bytecode",
 		"bundle:android:text": "mkdir -p bundle/android && npm run rn-bundle -- --platform android --dev false --entry-file ./index.js --assets-dest ./bundle/android --bundle-output ./bundle/android/App.text.js --sourcemap-output ./bundle/android/App.text.js.map",
 		"bundle:android:bytecode": "./gutenberg/node_modules/react-native/sdks/hermesc/`node -e \"const platform=require('os').platform();console.log(platform === 'darwin' ? 'osx-bin' : (platform === 'linux' ? 'linux64-bin' : (platform === 'win32' ? 'win64-bin' : 'unsupported-os')));\"`/hermesc -emit-binary -O -out bundle/android/App.js bundle/android/App.text.js -output-source-map",
-		"bundle:ios": "mkdir -p bundle/ios && npm run rn-bundle -- --platform ios --dev false --entry-file ./index.js --assets-dest ./bundle/ios --bundle-output ./bundle/ios/App.js --sourcemap-output ./bundle/ios/App.js.map",
+		"bundle:ios": "npm run bundle:ios:text && npm run bundle:ios:bytecode",
+		"bundle:ios:text": "mkdir -p bundle/ios && npm run rn-bundle -- --platform ios --dev false --entry-file ./index.js --assets-dest ./bundle/ios --bundle-output ./bundle/ios/App.text.js --sourcemap-output ./bundle/ios/App.text.js.map",
+		"bundle:ios:bytecode": "./gutenberg/node_modules/react-native/sdks/hermesc/`node -e \"const platform=require('os').platform();console.log(platform === 'darwin' ? 'osx-bin' : (platform === 'linux' ? 'linux64-bin' : (platform === 'win32' ? 'win64-bin' : 'unsupported-os')));\"`/hermesc -emit-binary -O -out bundle/ios/App.js bundle/ios/App.text.js -output-source-map",
 		"prewpandroid": "rm -Rf $TMPDIR/gbmobile-wpandroidfakernroot && mkdir $TMPDIR/gbmobile-wpandroidfakernroot && ln -s $(cd \"$(dirname \"../../../\")\"; pwd) $TMPDIR/gbmobile-wpandroidfakernroot/android",
 		"wpandroid": "cd gutenberg && react-native run-android --root $TMPDIR/gbmobile-wpandroidfakernroot --variant wasabiDebug --appIdSuffix beta --appFolder WordPress --main-activity=ui.WPLaunchActivity",
 		"test": "cross-env NODE_ENV=test jest --verbose --config ./jest.config.js",

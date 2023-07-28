@@ -13,6 +13,7 @@ import {
 	act,
 	within,
 	typeInRichText,
+	setupApiFetch,
 } from 'test/helpers';
 
 /**
@@ -24,7 +25,6 @@ import {
 } from '../../jetpack-editor-setup';
 import {
 	DEFAULT_PROPS,
-	VIDEOPRESS_BLOCK_HTML,
 	PLAYBACK_SETTINGS,
 	PLAYBACK_BAR_COLOR_SETTINGS,
 	RATING_OPTIONS,
@@ -35,17 +35,35 @@ import {
 	selectAndOpenBlockSettings,
 	pressSettingInPanel,
 	pressSettingInPicker,
+	generateFetchMocks,
+	generateBlockHTML,
 } from './local-helpers/utils';
+
+const VIDEO_TITLE = 'default-title-is-file-name';
+const FETCH_MOCKS_METADATA = {
+	title: VIDEO_TITLE,
+	description: '',
+};
 
 setupCoreBlocks();
 
 beforeAll( () => {
 	// Register Jetpack blocks
-	setupJetpackEditor( { blogId: 1, isJetpackActive: true } );
+	setupJetpackEditor( {
+		blogId: 1,
+		isJetpackActive: true,
+	} );
 	registerJetpackBlocks( DEFAULT_PROPS );
 } );
 
 describe( 'VideoPress block', () => {
+	beforeAll( () => {
+		// Mock request reponses
+		setupApiFetch(
+			generateFetchMocks( { metadata: FETCH_MOCKS_METADATA } )
+		);
+	} );
+
 	it( 'should successfully insert the VideoPress block into the editor', async () => {
 		const screen = await initializeEditor();
 
@@ -67,7 +85,7 @@ describe( 'VideoPress block', () => {
 
 	it( 'sets caption', async () => {
 		const screen = await initializeEditor( {
-			initialHtml: VIDEOPRESS_BLOCK_HTML,
+			initialHtml: generateBlockHTML(),
 		} );
 		const { getByLabelText } = screen;
 
@@ -92,10 +110,24 @@ describe( 'VideoPress block', () => {
 describe( "Update VideoPress block's settings", () => {
 	let screen;
 
+	beforeAll( () => {
+		// Mock request reponses
+		setupApiFetch(
+			generateFetchMocks( {
+				isSitePrivate: true,
+				metadata: FETCH_MOCKS_METADATA,
+			} )
+		);
+	} );
+
 	beforeEach( async () => {
 		// Arrange
 		screen = await initializeEditor( {
-			initialHtml: VIDEOPRESS_BLOCK_HTML,
+			initialHtml: generateBlockHTML( {
+				title: VIDEO_TITLE,
+				description: '',
+				isSitePrivate: true,
+			} ),
 		} );
 	} );
 
@@ -108,7 +140,7 @@ describe( "Update VideoPress block's settings", () => {
 
 		fireEvent.press( screen.getByText( 'Title' ) );
 
-		const input = screen.getByDisplayValue( 'default-title-is-file-name' );
+		const input = screen.getByDisplayValue( VIDEO_TITLE );
 
 		changeTextOfTextInput( input, 'Hello world!' );
 	} );

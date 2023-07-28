@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		37C35AC6E85098069B531D1A /* Pods_Gutenberg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67571AEF3E1EAAB8FFD85506 /* Pods_Gutenberg.framework */; };
 		3F1235FE29F680F900AF54A4 /* GutenbergBridgeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1235FB29F680F900AF54A4 /* GutenbergBridgeDelegate.swift */; };
 		3F1235FF29F680F900AF54A4 /* GutenbergBridgeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1235FC29F680F900AF54A4 /* GutenbergBridgeDataSource.swift */; };
 		3F12360029F680F900AF54A4 /* Gutenberg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1235FD29F680F900AF54A4 /* Gutenberg.swift */; };
@@ -27,6 +26,7 @@
 		3F12364E29F6B21300AF54A4 /* local-storage-overrides.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F12364529F6B21300AF54A4 /* local-storage-overrides.json */; };
 		3F12365029F6B23300AF54A4 /* supported-blocks.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F12364F29F6B23300AF54A4 /* supported-blocks.json */; };
 		3FA0C5812A1C8C9700600A9A /* App.js in Resources */ = {isa = PBXBuildFile; fileRef = 3FA0C5802A1C8C9700600A9A /* App.js */; };
+		3FC7862B2A53047D00A0DDAF /* hermes.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC7862A2A53047D00A0DDAF /* hermes.xcframework */; };
 		3FE06AC329F3F61300F752AD /* Gutenberg.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE06AC229F3F61300F752AD /* Gutenberg.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3FE06ACE29F3F6DA00F752AD /* Gutenberg-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06AC829F3F6DA00F752AD /* Gutenberg-Debug.xcconfig */; };
 		3FE06ACF29F3F6DA00F752AD /* Gutenberg-Shared.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06AC929F3F6DA00F752AD /* Gutenberg-Shared.xcconfig */; };
@@ -34,6 +34,7 @@
 		3FE06AD129F3F6DA00F752AD /* Project-Shared.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06ACB29F3F6DA00F752AD /* Project-Shared.xcconfig */; };
 		3FE06AD229F3F6DA00F752AD /* Gutenberg-Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06ACC29F3F6DA00F752AD /* Gutenberg-Release.xcconfig */; };
 		3FE06AD329F3F6DA00F752AD /* Project-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06ACD29F3F6DA00F752AD /* Project-Debug.xcconfig */; };
+		612F325D13E652BF476ED672 /* Pods_Gutenberg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 432C8665181F3EC336B71D6C /* Pods_Gutenberg.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		3F12364529F6B21300AF54A4 /* local-storage-overrides.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "local-storage-overrides.json"; path = "../../../gutenberg/packages/react-native-bridge/common/gutenberg-web-single-block/local-storage-overrides.json"; sourceTree = "<group>"; };
 		3F12364F29F6B23300AF54A4 /* supported-blocks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "supported-blocks.json"; path = "../../../src/block-support/supported-blocks.json"; sourceTree = "<group>"; };
 		3FA0C5802A1C8C9700600A9A /* App.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = App.js; path = ../../../bundle/ios/App.js; sourceTree = "<group>"; };
+		3FC7862A2A53047D00A0DDAF /* hermes.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = hermes.xcframework; path = "Pods/hermes-engine/destroot/Library/Frameworks/universal/hermes.xcframework"; sourceTree = "<group>"; };
 		3FE06ABF29F3F61300F752AD /* Gutenberg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Gutenberg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE06AC229F3F61300F752AD /* Gutenberg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Gutenberg.h; sourceTree = "<group>"; };
 		3FE06AC829F3F6DA00F752AD /* Gutenberg-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Gutenberg-Debug.xcconfig"; sourceTree = "<group>"; };
@@ -64,9 +66,9 @@
 		3FE06ACB29F3F6DA00F752AD /* Project-Shared.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Project-Shared.xcconfig"; sourceTree = "<group>"; };
 		3FE06ACC29F3F6DA00F752AD /* Gutenberg-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Gutenberg-Release.xcconfig"; sourceTree = "<group>"; };
 		3FE06ACD29F3F6DA00F752AD /* Project-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Project-Debug.xcconfig"; sourceTree = "<group>"; };
-		67571AEF3E1EAAB8FFD85506 /* Pods_Gutenberg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gutenberg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		97298C7C1A69315DB3985157 /* Pods-Gutenberg.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gutenberg.debug.xcconfig"; path = "Target Support Files/Pods-Gutenberg/Pods-Gutenberg.debug.xcconfig"; sourceTree = "<group>"; };
-		E4E0EAFA0A6F7CA86A2F471E /* Pods-Gutenberg.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gutenberg.release.xcconfig"; path = "Target Support Files/Pods-Gutenberg/Pods-Gutenberg.release.xcconfig"; sourceTree = "<group>"; };
+		40573892DD96031C0844CB3A /* Pods-Gutenberg.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gutenberg.release.xcconfig"; path = "Target Support Files/Pods-Gutenberg/Pods-Gutenberg.release.xcconfig"; sourceTree = "<group>"; };
+		432C8665181F3EC336B71D6C /* Pods_Gutenberg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gutenberg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		49A1374B8A1825983C190B38 /* Pods-Gutenberg.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gutenberg.debug.xcconfig"; path = "Target Support Files/Pods-Gutenberg/Pods-Gutenberg.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,21 +76,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37C35AC6E85098069B531D1A /* Pods_Gutenberg.framework in Frameworks */,
+				612F325D13E652BF476ED672 /* Pods_Gutenberg.framework in Frameworks */,
+				3FC7862B2A53047D00A0DDAF /* hermes.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		38B97089D116CC931E842BD5 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				67571AEF3E1EAAB8FFD85506 /* Pods_Gutenberg.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		3F12363C29F6B1E900AF54A4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,7 +109,7 @@
 				3FE06AC129F3F61300F752AD /* Gutenberg */,
 				3FE06AC029F3F61300F752AD /* Products */,
 				E205127207234C97CE5B38E0 /* Pods */,
-				38B97089D116CC931E842BD5 /* Frameworks */,
+				4FCF797BAE1CB2036BB60C7B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -156,11 +151,20 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
+		4FCF797BAE1CB2036BB60C7B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3FC7862A2A53047D00A0DDAF /* hermes.xcframework */,
+				432C8665181F3EC336B71D6C /* Pods_Gutenberg.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E205127207234C97CE5B38E0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				97298C7C1A69315DB3985157 /* Pods-Gutenberg.debug.xcconfig */,
-				E4E0EAFA0A6F7CA86A2F471E /* Pods-Gutenberg.release.xcconfig */,
+				49A1374B8A1825983C190B38 /* Pods-Gutenberg.debug.xcconfig */,
+				40573892DD96031C0844CB3A /* Pods-Gutenberg.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -183,13 +187,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3FE06AC629F3F61300F752AD /* Build configuration list for PBXNativeTarget "Gutenberg" */;
 			buildPhases = (
-				382C996831D2A17EE58BE2EB /* [CP] Check Pods Manifest.lock */,
+				5DA264C12005B59AC528A3D3 /* [CP] Check Pods Manifest.lock */,
 				3FA0C5822A1CC63B00600A9A /* Check App.js */,
 				3FE06ABA29F3F61300F752AD /* Headers */,
 				3FE06ABB29F3F61300F752AD /* Sources */,
 				3FE06ABC29F3F61300F752AD /* Frameworks */,
 				3FE06ABD29F3F61300F752AD /* Resources */,
-				4A6E50FD2E25C3887EB44ED7 /* [CP] Copy Pods Resources */,
+				33E2599260A73CF1DC26925F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -261,26 +265,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		382C996831D2A17EE58BE2EB /* [CP] Check Pods Manifest.lock */ = {
+		33E2599260A73CF1DC26925F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Gutenberg/Pods-Gutenberg-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Gutenberg-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-Gutenberg/Pods-Gutenberg-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gutenberg/Pods-Gutenberg-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3FA0C5822A1CC63B00600A9A /* Check App.js */ = {
@@ -302,21 +301,26 @@
 			shellPath = /bin/sh;
 			shellScript = "\"$SRCROOT/BuildPhases/check_app_js.sh\"\n";
 		};
-		4A6E50FD2E25C3887EB44ED7 /* [CP] Copy Pods Resources */ = {
+		5DA264C12005B59AC528A3D3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Gutenberg/Pods-Gutenberg-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Gutenberg/Pods-Gutenberg-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Gutenberg-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gutenberg/Pods-Gutenberg-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -344,6 +348,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3FE06ACD29F3F6DA00F752AD /* Project-Debug.xcconfig */;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../gutenberg/node_modules/react-native";
 			};
 			name = Debug;
 		};
@@ -351,6 +358,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3FE06ACA29F3F6DA00F752AD /* Project-Release.xcconfig */;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../gutenberg/node_modules/react-native";
 			};
 			name = Release;
 		};
