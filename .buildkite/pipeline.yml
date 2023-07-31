@@ -69,8 +69,7 @@ steps:
       - ios-xcframework/build/xcframeworks/*.tar.gz
     plugins:
       - automattic/a8c-ci-toolkit#2.16.0
-      - peakon/git-shallow-clone#v0.0.1:
-          depth: 1
+      - automattic/git-shallow-clone#trunk
     agents:
       queue: mac
     env:
