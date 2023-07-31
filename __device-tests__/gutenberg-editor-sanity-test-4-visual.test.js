@@ -275,21 +275,21 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			// Add nested structure
 			await editorPage.setHtmlContent( e2eTestData.groupNestedStructure );
 
-			// Tap on the bottom-most block in hierarchy to check that navigation
+			// Tap on one of the bottom-most blocks in hierarchy to check that navigation
 			// down works according to deepest-descendent-first approach.
-			const textXPath = isAndroid()
-				? `//android.widget.Button[@content-desc="${ blockNames.paragraph } Block. Row 1. Level ${ GROUP_NESTED_STRUCTURE_LEVELS }"]//android.widget.EditText`
-				: `(//*[@name="${ blockNames.paragraph } Block. Row 1. Level ${ GROUP_NESTED_STRUCTURE_LEVELS }"])[last()]`;
-			const mostBottomtText = await waitForVisible(
+			//
+			// The query differs between platforms:
+			// - Android: Find a Spacer block matching a button element by index.
+			// - iOS: Find a Spacer block by hierarchy, in this case, a block that is nested
+			// 	 on an element with the label "Level N".
+			const mostBottomSpacerXPath = isAndroid()
+				? `(//android.widget.Button[@content-desc="Spacer Block. Row 2"])[${ GROUP_NESTED_STRUCTURE_LEVELS }]`
+				: `(//*[contains(@name, "Level ${ GROUP_NESTED_STRUCTURE_LEVELS } ${ blockNames.spacer } Block")])[last()]/*[@name="${ blockNames.spacer } Block. Row 2"]`;
+			const mostBottomSpacer = await waitForVisible(
 				editorPage.driver,
-				textXPath
+				mostBottomSpacerXPath
 			);
-			await mostBottomtText.click();
-
-			// On Android, click text again to highlight which level is selected
-			if ( isAndroid() ) {
-				await mostBottomtText.click();
-			}
+			await mostBottomSpacer.click();
 
 			await editorPage.driver.sleep( 250 );
 
@@ -317,25 +317,20 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.setHtmlContent( e2eTestData.groupNestedStructure );
 
 			const tapOnLevel = async ( level ) => {
-				const textXPath = isAndroid()
-					? `//android.widget.Button[@content-desc="${ blockNames.paragraph } Block. Row 1. Level ${ level }"]//android.widget.EditText`
-					: `(//*[@name="${ blockNames.paragraph } Block. Row 1. Level ${ level }"])[last()]`;
-				const textElement = await waitForVisible(
+				const spacerXPath = isAndroid()
+					? `(//android.widget.Button[@content-desc="Spacer Block. Row 2"])[${ level }]`
+					: `(//*[contains(@name, "Level ${ level } ${ blockNames.spacer } Block")])[last()]/*[@name="${ blockNames.spacer } Block. Row 2"]`;
+				const block = await waitForVisible(
 					editorPage.driver,
-					textXPath
+					spacerXPath
 				);
-				await textElement.click();
+				await block.click();
 
-				// On Android, click text again to highlight which level is selected
-				if ( isAndroid() ) {
-					await textElement.click();
-				}
+				await editorPage.driver.sleep( 250 );
 
 				// Visual test check
 				const screenshot = await takeScreenshot();
 				expect( screenshot ).toMatchImageSnapshot();
-
-				await textElement.click();
 			};
 
 			// Navigate up by tapping on the paragraph block of each level
