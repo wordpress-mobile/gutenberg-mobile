@@ -271,80 +271,81 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 	} );
 
 	describe( 'Group block', () => {
-		describe( 'Nested structure navigation', () => {
-			beforeAll( async () => {
-				await editorPage.setHtmlContent(
-					e2eTestData.groupNestedStructure
-				);
-			} );
+		it( 'navigates nested structure', async () => {
+			// Add nested structure
+			await editorPage.setHtmlContent( e2eTestData.groupNestedStructure );
 
-			afterAll( async () => {
-				await editorPage.moveBlockSelectionUp( {
-					toRoot: true,
-				} );
-				await editorPage.removeBlock();
-			} );
+			// Tap on the bottom-most block in hierarchy to check that navigation
+			// down works according to deepest-descendent-first approach.
+			const textXPath = isAndroid()
+				? `//android.widget.Button[@content-desc="${ blockNames.paragraph } Block. Row 1. Level ${ GROUP_NESTED_STRUCTURE_LEVELS }"]//android.widget.EditText`
+				: `(//*[@name="${ blockNames.paragraph } Block. Row 1. Level ${ GROUP_NESTED_STRUCTURE_LEVELS }"])[last()]`;
+			const mostBottomtText = await waitForVisible(
+				editorPage.driver,
+				textXPath
+			);
+			await mostBottomtText.click();
 
-			it( 'Navigation down works according to parent-first approach', async () => {
-				// Tap on the bottom-most block in hierarchy
+			// On Android, click text again to highlight which level is selected
+			if ( isAndroid() ) {
+				await mostBottomtText.click();
+			}
+
+			// Visual test check
+			let screenshot = await takeScreenshot();
+			expect( screenshot ).toMatchImageSnapshot();
+
+			// Navigate up
+			for ( let i = 1; i <= GROUP_NESTED_STRUCTURE_LEVELS; i++ ) {
+				await editorPage.moveBlockSelectionUp();
+
+				await editorPage.driver.sleep( 250 );
+
+				// Visual test check
+				screenshot = await takeScreenshot();
+				expect( screenshot ).toMatchImageSnapshot();
+			}
+
+			// Clean up test
+			await editorPage.removeBlock();
+		} );
+
+		it( 'Cross navigation between blocks works as expected', async () => {
+			// Add nested structure
+			await editorPage.setHtmlContent( e2eTestData.groupNestedStructure );
+
+			const tapOnLevel = async ( level ) => {
 				const textXPath = isAndroid()
-					? `//android.widget.Button[@content-desc="${ blockNames.paragraph } Block. Row 1. Level ${ GROUP_NESTED_STRUCTURE_LEVELS }"]//android.widget.EditText`
-					: `(//*[@name="${ blockNames.paragraph } Block. Row 1. Level ${ GROUP_NESTED_STRUCTURE_LEVELS }"])[last()]`;
-				const mostBottomtText = await waitForVisible(
+					? `//android.widget.Button[@content-desc="${ blockNames.paragraph } Block. Row 1. Level ${ level }"]//android.widget.EditText`
+					: `(//*[@name="${ blockNames.paragraph } Block. Row 1. Level ${ level }"])[last()]`;
+				const textElement = await waitForVisible(
 					editorPage.driver,
 					textXPath
 				);
-				await mostBottomtText.click();
+				await textElement.click();
 
-				// On Android, click text again to highlight which level is selected.
+				// On Android, click text again to highlight which level is selected
 				if ( isAndroid() ) {
-					await mostBottomtText.click();
+					await textElement.click();
 				}
 
 				// Visual test check
 				const screenshot = await takeScreenshot();
 				expect( screenshot ).toMatchImageSnapshot();
+
+				await textElement.click();
+			};
+
+			// Navigate up by tapping on the paragraph block of each level
+			for ( let i = GROUP_NESTED_STRUCTURE_LEVELS; i >= 1; i-- ) {
+				await tapOnLevel( i );
+			}
+
+			// Clean up test
+			await editorPage.moveBlockSelectionUp( {
+				toRoot: true,
 			} );
-
-			it( 'Navigation up button works as expected', async () => {
-				for ( let i = 1; i <= GROUP_NESTED_STRUCTURE_LEVELS; i++ ) {
-					await editorPage.moveBlockSelectionUp();
-
-					await editorPage.driver.sleep( 250 );
-
-					// Visual test check
-					const screenshot = await takeScreenshot();
-					expect( screenshot ).toMatchImageSnapshot();
-				}
-			} );
-
-			it( 'Cross navigation between blocks works as expected', async () => {
-				const tapOnLevel = async ( level ) => {
-					const textXPath = isAndroid()
-						? `//android.widget.Button[@content-desc="${ blockNames.paragraph } Block. Row 1. Level ${ level }"]//android.widget.EditText`
-						: `(//*[@name="${ blockNames.paragraph } Block. Row 1. Level ${ level }"])[last()]`;
-					const textElement = await waitForVisible(
-						editorPage.driver,
-						textXPath
-					);
-					await textElement.click();
-
-					// On Android, click text again to highlight which level is selected.
-					if ( isAndroid() ) {
-						await textElement.click();
-					}
-
-					// Visual test check
-					const screenshot = await takeScreenshot();
-					expect( screenshot ).toMatchImageSnapshot();
-
-					await textElement.click();
-				};
-
-				for ( let i = GROUP_NESTED_STRUCTURE_LEVELS; i >= 1; i-- ) {
-					await tapOnLevel( i );
-				}
-			} );
+			await editorPage.removeBlock();
 		} );
 
 		it( 'Check if in DarkMode all components gets proper colors', async () => {
