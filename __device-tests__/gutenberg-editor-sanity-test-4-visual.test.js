@@ -291,6 +291,8 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 				await mostBottomtText.click();
 			}
 
+			await editorPage.driver.sleep( 250 );
+
 			// Visual test check
 			let screenshot = await takeScreenshot();
 			expect( screenshot ).toMatchImageSnapshot();
