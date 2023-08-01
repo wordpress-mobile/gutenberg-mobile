@@ -1,13 +1,15 @@
 x-common-params:
-  &publish-android-artifacts-docker-container
-  docker#v3.8.0:
-    image: "public.ecr.aws/automattic/android-build-image:v1.3.0"
-    propagate-environment: true
-    environment:
-      # DO NOT MANUALLY SET THESE VALUES!
-      # They are passed from the Buildkite agent to the Docker container
-      - "AWS_ACCESS_KEY"
-      - "AWS_SECRET_KEY"
+  - &git-shallow-clone-plugin
+    automattic/git-shallow-clone#trunk
+  - &publish-android-artifacts-docker-container
+    docker#v3.8.0:
+      image: "public.ecr.aws/automattic/android-build-image:v1.3.0"
+      propagate-environment: true
+      environment:
+        # DO NOT MANUALLY SET THESE VALUES!
+        # They are passed from the Buildkite agent to the Docker container
+        - "AWS_ACCESS_KEY"
+        - "AWS_SECRET_KEY"
 
 steps:
   - block: "Request trigger Android bundle and builds"
@@ -69,7 +71,7 @@ steps:
       - ios-xcframework/build/xcframeworks/*.tar.gz
     plugins:
       - automattic/a8c-ci-toolkit#2.16.0
-      - automattic/git-shallow-clone#trunk
+      - *git-shallow-clone-plugin
     agents:
       queue: mac
     env:
