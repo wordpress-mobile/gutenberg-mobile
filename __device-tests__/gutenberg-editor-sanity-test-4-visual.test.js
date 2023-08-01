@@ -291,7 +291,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			);
 			await mostBottomSpacer.click();
 
-			await editorPage.driver.sleep( 250 );
+			await editorPage.driver.sleep( 500 );
 
 			// Visual test check
 			let screenshot = await takeScreenshot();
@@ -326,7 +326,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 				);
 				await block.click();
 
-				await editorPage.driver.sleep( 250 );
+				await editorPage.driver.sleep( 500 );
 
 				// Visual test check
 				const screenshot = await takeScreenshot();
