@@ -77,7 +77,7 @@ commands:
 
             SSH_CONFIG_DIR="$HOME/.ssh"
             echo "Using SSH Config Dir '$SSH_CONFIG_DIR'"
-            git --version 
+            git --version
 
             mkdir -p "$SSH_CONFIG_DIR"
             chmod 0700 "$SSH_CONFIG_DIR"
@@ -167,45 +167,6 @@ parameters:
     default: "ubuntu-2004:2022.10.1"
 
 jobs:
-  checks:
-    parameters:
-      platform:
-        type: string
-        default: ""
-      check-tests:
-        type: boolean
-        default: false
-      check-correctness:
-        type: boolean
-        default: false
-    machine:
-      image: << pipeline.parameters.linux-machine-image >>
-    steps:
-      - checkout-shallow
-      - checkout-submodules
-      - install-node-version
-      - when:
-          condition: <<parameters.check-correctness>>
-          steps:
-            - npm-install-full
-      - unless:
-          condition: <<parameters.check-correctness>>
-          steps:
-            - npm-install
-      - add-jest-reporter-dir
-      - run:
-          name: Set Environment Variables
-          command: |
-            echo 'export CHECK_CORRECTNESS=<<parameters.check-correctness>>' >> $BASH_ENV
-            echo 'export CHECK_TESTS=<<parameters.check-tests>>' >> $BASH_ENV
-            echo 'export TEST_RN_PLATFORM=<<parameters.platform>>' >> $BASH_ENV
-      - run:
-          name: Run Checks
-          command: bin/ci-checks-js.sh
-          environment:
-            JEST_JUNIT_OUTPUT_FILE: "reports/test-results/android-test-results.xml"
-      - store_test_results:
-          path: ./reports/test-results
   android-build:
     machine:
       image: << pipeline.parameters.linux-machine-image >>
@@ -383,17 +344,6 @@ jobs:
 workflows:
   gutenberg-mobile:
     jobs:
-      - checks:
-          name: Check Correctness
-          check-correctness: true
-      - checks:
-          name: Test iOS
-          platform: ios
-          check-tests: true
-      - checks:
-          name: Test Android
-          platform: android
-          check-tests: true
       - ios-build:
           name: iOS Build
       - android-build:
@@ -401,11 +351,11 @@ workflows:
       - ios-device-checks:
           name: Test iOS on Device - Canaries
           is-canary: "-canary"
-          requires: [ "Test iOS", "iOS Build" ]
+          requires: [ "iOS Build" ]
       - android-device-checks:
           name: Test Android on Device - Canaries
           is-canary: "-canary"
-          requires: [ "Test Android", "Android Native Unit Tests", "Android Build" ]
+          requires: [ "Android Native Unit Tests", "Android Build" ]
       - android-native-unit-tests:
           name: Android Native Unit Tests
       # For regular branches the full test suite is optional.
@@ -419,7 +369,7 @@ workflows:
                 - /^release.*/
       - ios-device-checks:
           name: Test iOS on Device - Full (Manually triggered)
-          requires: [ "Optional UI Tests", "Test iOS", "iOS Build" ]
+          requires: [ "Optional UI Tests", "iOS Build" ]
           filters:
             branches:
               ignore:
@@ -429,7 +379,7 @@ workflows:
       - ios-device-checks:
           name: Test iOS on Device - iPad (Manually triggered)
           is-ipad: "-ipad"
-          requires: [ "Optional UI Tests", "Test iOS", "iOS Build" ]
+          requires: [ "Optional UI Tests", "iOS Build" ]
           filters:
             branches:
               ignore:
@@ -438,7 +388,7 @@ workflows:
                 - /^release.*/
       - android-device-checks:
           name: Test Android on Device - Full (Manually triggered)
-          requires: [ "Optional UI Tests", "Test Android", "Android Native Unit Tests", "Android Build" ]
+          requires: [ "Optional UI Tests", "Android Native Unit Tests", "Android Build" ]
           filters:
             branches:
               ignore:
@@ -449,7 +399,7 @@ workflows:
       - ios-device-checks:
           name: Test iOS on Device - Full
           post-to-slack: true
-          requires: [ "Test iOS", "iOS Build" ]
+          requires: [ "iOS Build" ]
           filters:
             branches:
               only:
@@ -460,7 +410,7 @@ workflows:
           name: Test iOS on Device - iPad
           is-ipad: "-ipad"
           post-to-slack: true
-          requires: [ "Test iOS", "iOS Build" ]
+          requires: [ "iOS Build" ]
           filters:
             branches:
               only:
@@ -470,10 +420,10 @@ workflows:
       - android-device-checks:
           name: Test Android on Device - Full
           post-to-slack: true
-          requires: [ "Test Android", "Android Native Unit Tests", "Android Build" ]
+          requires: [ "Android Native Unit Tests", "Android Build" ]
           filters:
             branches:
-              only: 
+              only:
                 - trunk
                 - /^dependabot/submodules/.*/
                 - /^release.*/
