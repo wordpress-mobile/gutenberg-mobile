@@ -73,7 +73,7 @@ steps:
     artifact_paths:
       - ios-xcframework/build/xcframeworks/*.tar.gz
     plugins:
-      - automattic/a8c-ci-toolkit#2.16.0
+      - automattic/a8c-ci-toolkit#2.18.2
       - *git-shallow-clone-plugin
     agents:
       queue: mac
