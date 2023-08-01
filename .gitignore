@@ -112,7 +112,7 @@ buck-out/
 #
 # These are generated only via `bin/ci-checks-js.sh`, so unlikely to appear on a dev machine.
 # Still, it's worth ignoring just to avoid these getting committed by accident while testing the CI workflow locally.
-*-test-out.log
+/logs/*
 
 # e2e output log
 appium-out.log

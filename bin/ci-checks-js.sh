@@ -48,13 +48,15 @@ fi
 
 # Notice we forward the tests output to a file.
 # That's because they generates 70k+ lines and we don't want to pollute the logs like that.
+LOGS_DIR=./logs
+mkdir -p $LOGS_DIR
 if [ "$CHECK_TESTS" = true ] ; then
   # we'll run the tests twice (once for each platform) if the platform env var is not set
   if [[ -z "${TEST_RN_PLATFORM:-}" ]] ; then
     echo "--- :microscope: :android: Unit tests"
-    TEST_RN_PLATFORM=android npm run test --maxWorkers=4 > android-tests-out.log || pFail
+    TEST_RN_PLATFORM=android npm run test --maxWorkers=4 > "$LOGS_DIR/android-tests-out.log" || pFail
     echo "--- :microscope: :ios: Unit tests"
-    TEST_RN_PLATFORM=ios npm run test --maxWorkers=4 > ios-tests-out.log || pFail
+    TEST_RN_PLATFORM=ios npm run test --maxWorkers=4 > "$LOGS_DIR/ios-tests-out.log" || pFail
   else
     echo "--- :microscope: :$TEST_RN_PLATFORM: Unit tests"
     npm run test --maxWorkers=4 > "$TEST_RN_PLATFORM-tests-out.log" || pFail
