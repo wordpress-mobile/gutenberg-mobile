@@ -38,8 +38,11 @@ steps:
 
       echo "--- :node: Lint and Unit Tests"
       ./bin/ci-checks-js.sh
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
     artifact_paths:
       - ./logs/*.log
+      - ./reports/test-results/*.xml
 
   - label: "Build JS Bundles"
     depends_on: "unit-tests"
