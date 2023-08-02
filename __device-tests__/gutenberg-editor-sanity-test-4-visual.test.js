@@ -131,18 +131,9 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 		it( 'should have its selection / caret with the same color as the font', async () => {
 			await editorPage.setHtmlContent( buttonCustomColors );
 
-			const buttonsBlock = await editorPage.getBlockAtPosition(
-				blockNames.buttons
-			);
-			await buttonsBlock.click();
-
-			const buttonBlock = await editorPage.getBlockAtPosition(
-				blockNames.button
-			);
-			await buttonBlock.click();
-
 			// Get button's block TextInput
 			const buttonBlockTextInput = await editorPage.getButtonBlockTextInputAtPosition();
+			await buttonBlockTextInput.click();
 			await selectTextFromElement(
 				editorPage.driver,
 				buttonBlockTextInput
