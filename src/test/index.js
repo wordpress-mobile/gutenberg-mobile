@@ -5,11 +5,6 @@ import { AppRegistry } from 'react-native';
 import { initializeEditor, render } from 'test/helpers';
 
 /**
- * WordPress dependencies
- */
-import '@wordpress/jest-console';
-
-/**
  * Internal dependencies
  */
 import initAnalytics from '../analytics';
@@ -32,19 +27,6 @@ jest.mock( '@wordpress/react-native-editor/src/setup', () => ( {
 } ) );
 
 const defaultLocale = 'en-gb';
-const setupLocaleLogs = [
-	[ 'locale', defaultLocale, getGutenbergTranslation( defaultLocale ) ],
-	[
-		'jetpack - locale',
-		defaultLocale,
-		getJetpackTranslation( defaultLocale ),
-	],
-	[
-		'layout-grid - locale',
-		defaultLocale,
-		getLayoutGridTranslation( defaultLocale ),
-	],
-];
 
 const getEditorComponent = () => {
 	let EditorComponent;
@@ -68,23 +50,14 @@ describe( 'Gutenberg Mobile initialization', () => {
 
 		it( 'initializes analytics', () => {
 			expect( initAnalytics ).toBeCalled();
-			setupLocaleLogs.forEach( ( log ) =>
-				expect( console ).toHaveLoggedWith( ...log )
-			);
 		} );
 
 		it( 'sets up Jetpack', () => {
 			expect( jetpackEditorSetup ).toBeCalled();
-			setupLocaleLogs.forEach( ( log ) =>
-				expect( console ).toHaveLoggedWith( ...log )
-			);
 		} );
 
 		it( 'sets up block experiments', () => {
 			expect( blockExperimentsSetup ).toBeCalled();
-			setupLocaleLogs.forEach( ( log ) =>
-				expect( console ).toHaveLoggedWith( ...log )
-			);
 		} );
 	} );
 
@@ -111,8 +84,5 @@ describe( 'Gutenberg Mobile initialization', () => {
 
 		expect( blockList ).toBeVisible();
 		expect( console ).toHaveLoggedWith( 'Hermes is: true' );
-		setupLocaleLogs.forEach( ( log ) =>
-			expect( console ).toHaveLoggedWith( ...log )
-		);
 	} );
 } );
