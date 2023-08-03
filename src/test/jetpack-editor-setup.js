@@ -90,6 +90,16 @@ describe( 'Jetpack blocks', () => {
 	it( 'should register Jetpack blocks if Jetpack is active', () => {
 		setupJetpackEditor( defaultJetpackData );
 		const blocksAPI = registerJetpackBlocksIsolated( defaultProps );
+		expect( console ).toHaveLoggedWith(
+			'Block jetpack/contact-info registered.'
+		);
+		expect( console ).toHaveLoggedWith( 'Block jetpack/story registered.' );
+		expect( console ).toHaveLoggedWith(
+			'Block jetpack/tiled-gallery registered.'
+		);
+		expect( console ).toHaveLoggedWith(
+			'Block videopress/video registered.'
+		);
 
 		const registeredBlocks = blocksAPI
 			.getBlockTypes()
@@ -119,6 +129,16 @@ describe( 'Jetpack blocks', () => {
 				videoPressBlock: true,
 			},
 		} );
+		expect( console ).toHaveLoggedWith(
+			'Block jetpack/contact-info registered.'
+		);
+		expect( console ).toHaveLoggedWith( 'Block jetpack/story registered.' );
+		expect( console ).toHaveLoggedWith(
+			'Block jetpack/tiled-gallery registered.'
+		);
+		expect( console ).toHaveLoggedWith(
+			'Block videopress/video registered.'
+		);
 
 		const hiddenBlockTypes = select( 'core/preferences' ).get(
 			'core/edit-post',

@@ -20,7 +20,6 @@ const transpiledPackageNames = glob(
 ).map( ( fileName ) => fileName.split( '/' )[ 3 ] );
 
 module.exports = {
-	verbose: true,
 	rootDir: '.',
 	// Automatically clear mock calls and instances between every test
 	clearMocks: true,
