@@ -11,9 +11,6 @@ import initAnalytics from '../analytics';
 import jetpackEditorSetup from '../jetpack-editor-setup';
 import blockExperimentsSetup from '../block-experiments-setup';
 import registerGutenbergMobile from '../';
-import { getTranslation as getGutenbergTranslation } from '../i18n-cache/gutenberg';
-import { getTranslation as getJetpackTranslation } from '../i18n-cache/jetpack';
-import { getTranslation as getLayoutGridTranslation } from '../i18n-cache/layout-grid';
 
 jest.mock( 'react-native/Libraries/ReactNative/AppRegistry' );
 jest.mock( '../analytics' );
