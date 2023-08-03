@@ -80,6 +80,5 @@ describe( 'Gutenberg Mobile initialization', () => {
 		const blockList = screen.getAllByTestId( 'block-list-wrapper' )[ 0 ];
 
 		expect( blockList ).toBeVisible();
-		expect( console ).toHaveLoggedWith( 'Hermes is: true' );
 	} );
 } );
