@@ -1,5 +1,8 @@
 Unreleased
 ---
+* [**] Upgrade React Native to 0.71.11 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5874]
+* [*] Upgrade Gradle to 8.2.1 & AGP to 8.1.0 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5989]
+* [**] Fix iOS Focus loop for RichText components [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6009]
 
 1.100.2
 ---

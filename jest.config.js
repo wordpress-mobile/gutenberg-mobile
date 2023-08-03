@@ -20,7 +20,6 @@ const transpiledPackageNames = glob(
 ).map( ( fileName ) => fileName.split( '/' )[ 3 ] );
 
 module.exports = {
-	verbose: true,
 	rootDir: '.',
 	// Automatically clear mock calls and instances between every test
 	clearMocks: true,
@@ -56,6 +55,9 @@ module.exports = {
 		'test/helpers$': '<rootDir>/' + configPath + '/helpers.js',
 		jetpackConfig:
 			'<rootDir>/jetpack/tools/js-tools/jest/jest-jetpack-config.js',
+		// Workaround for Jest not having ESM support yet
+		// Reference: https://t.ly/9ap_
+		uuid: require.resolve( 'uuid' ),
 	},
 	haste: {
 		defaultPlatform: rnPlatform,
