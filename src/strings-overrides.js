@@ -10,6 +10,8 @@ addFilter(
 	'native.missing_block_detail',
 	'native/missing_block',
 	( defaultValue ) => {
+		test.a++;
+
 		const { capabilities } = select( blockEditorStore ).getSettings();
 		const isUnsupportedBlockEditorSupported =
 			capabilities?.unsupportedBlockEditor === true;
