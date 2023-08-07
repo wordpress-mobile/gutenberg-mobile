@@ -11,13 +11,25 @@ const { isAndroid } = e2eUtils;
  * @param {Object}  options                    Options
  * @param {boolean} [options.withoutKeyboard]  Prevents showing the keyboard in the screenshot.
  * @param {number}  [options.heightPercentage] Specify a custom height in percentage.
+ * @param {Object}  [options.crop]             Specify values to crop the screenshot.
+ * @param {number}  [options.offset.x]         X offset to crop.
+ * @param {number}  [options.offset.y]         Y offset to crop.
+ * @param {number}  [options.offset.width]     Width offset to crop.
+ * @param {number}  [options.offset.height]    Height offset to crop.
  * @return {Buffer} Sreenshot image.
  */
 export async function takeScreenshot(
-	options = { withoutKeyboard: false, heightPercentage: undefined }
+	options = {
+		withoutKeyboard: false,
+		heightPercentage: undefined,
+		crop: undefined,
+	}
 ) {
-	const { withoutKeyboard, heightPercentage } = options;
 	const iPadDevice = process.env.IPAD;
+	const { withoutKeyboard, heightPercentage, crop } = options;
+	const sessionCapabilities = await editorPage.driver.sessionCapabilities();
+	const { pixelRatio } = sessionCapabilities;
+
 	const orientation = await editorPage.driver.getOrientation();
 	const isPortrait = orientation === 'PORTRAIT';
 	const statusBarHeightIPhone = isPortrait ? 94 : 0;
@@ -31,37 +43,60 @@ export async function takeScreenshot(
 	const base64Image = Buffer.from( screenshot, 'base64' );
 	const image = await jimp.read( base64Image );
 
+	const windowSize = await editorPage.driver.getWindowSize();
+	const imageWidth = image.getWidth();
+	const imageHeight = isAndroid() ? windowSize.height : image.getHeight();
+
+	// We use this variable to store the final image size after applying cropping actions
+	const finalSize = {
+		x: crop?.x ?? 0,
+		y: crop?.y ?? 0,
+		width: crop?.width ?? imageWidth,
+		height: crop?.height ?? imageHeight,
+	};
+
+	// Remove the status bar
+	if ( finalSize.y < statusBarHeight ) {
+		const statusBarOffset = statusBarHeight - finalSize.y;
+		finalSize.y += statusBarOffset;
+		finalSize.height -= statusBarOffset;
+	}
+
 	// Remove keyboard (optional) to avoid issues like languages, keyboard position buttons, etc.
 	if ( withoutKeyboard ) {
-		const windowSize = await editorPage.driver.getWindowSize();
 		const toolbarElement = await editorPage.getToolbar();
 
 		if ( toolbarElement.length !== 0 ) {
-			const toolbarSize = await toolbarElement.getSize();
 			const toolbarLocation = await toolbarElement.getLocation();
-			const offset =
-				windowSize.height - ( toolbarLocation.y + toolbarSize.height );
-			const imageHeight = isAndroid()
-				? windowSize.height
-				: image.getHeight();
-			const newHeight = ( imageHeight * offset ) / windowSize.height;
+			const toolbarSize = await toolbarElement.getSize();
+			// Location and size value are in pixels on iOS, we need to
+			// convert them to device coordinates.
+			if ( ! isAndroid() ) {
+				toolbarLocation.y *= pixelRatio;
+				toolbarSize.height *= pixelRatio;
+			}
 
-			image.crop( 0, 0, image.getWidth(), imageHeight - newHeight );
+			finalSize.height = Math.min(
+				finalSize.height,
+				toolbarLocation.y + toolbarSize.height - statusBarHeight
+			);
 		}
 	}
 
 	// Custom height in percentage
 	if ( heightPercentage ) {
-		const height = ( heightPercentage * image.getHeight() ) / 100;
-		image.crop( 0, 0, image.getWidth(), height );
+		finalSize.height = Math.min(
+			finalSize.height,
+			( heightPercentage * imageHeight ) / 100
+		);
 	}
 
-	// Remove status bar
+	// Crop image
 	image.crop(
-		0,
-		statusBarHeight,
-		image.getWidth(),
-		image.getHeight() - statusBarHeight
+		Math.max( 0, finalSize.x ),
+		Math.max( 0, finalSize.y ),
+		Math.min( imageWidth, finalSize.width ),
+		Math.min( imageHeight, finalSize.height )
 	);
 
 	const resizedImage = await image.resize( widthSize, jimp.AUTO );
