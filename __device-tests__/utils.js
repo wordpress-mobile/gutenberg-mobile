@@ -6,6 +6,47 @@ import jimp from 'jimp';
 const { isAndroid } = e2eUtils;
 
 /**
+ * Helper to take a screenshot of an element.
+ *
+ * @param {*}      element           Element instance.
+ * @param {Object} options           Options
+ * @param {number} [options.padding] Padding offset to apply to the screenshot.
+ * @return {Buffer} Sreenshot image.
+ */
+export async function takeScreenshotByElement( element, { padding } = {} ) {
+	const sessionCapabilities = await editorPage.driver.sessionCapabilities();
+	const { pixelRatio } = sessionCapabilities;
+
+	const location = await element.getLocation();
+	const size = await element.getSize();
+	const crop = {
+		x: location.x,
+		y: location.y,
+		width: size.width,
+		height: size.height,
+	};
+	// Location and size value are in pixels on iOS, we need to
+	// convert them to device coordinates.
+	if ( ! isAndroid() ) {
+		crop.x *= pixelRatio;
+		crop.y *= pixelRatio;
+		crop.width *= pixelRatio;
+		crop.height *= pixelRatio;
+	}
+	if ( padding ) {
+		// The padding value is in pixels, so we need to convert
+		// it to device coordinates.
+		padding *= pixelRatio;
+
+		crop.x -= padding;
+		crop.y -= padding;
+		crop.width += padding * 2;
+		crop.height += padding * 2;
+	}
+	return takeScreenshot( { crop } );
+}
+
+/**
  * Helper to take a screenshot and manipulate it.
  *
  * @param {Object}  options                    Options
