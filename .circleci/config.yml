@@ -13,7 +13,7 @@ commands:
           name: NPM Install
           command: |
             echo "Node version: $(node --version)"
-            npm ci --prefer-offline --no-audit
+            npm ci --prefer-offline --no-audit --logLevel=verbose
       - save_cache:
           name: Save NPM Cache
           key: npm-install-cache-{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
