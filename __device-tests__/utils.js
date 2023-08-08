@@ -84,9 +84,8 @@ export async function takeScreenshot(
 	const base64Image = Buffer.from( screenshot, 'base64' );
 	const image = await jimp.read( base64Image );
 
-	const windowSize = await editorPage.driver.getWindowSize();
 	const imageWidth = image.getWidth();
-	const imageHeight = isAndroid() ? windowSize.height : image.getHeight();
+	const imageHeight = image.getHeight();
 
 	// We use this variable to store the final image size after applying cropping actions
 	const finalSize = {
