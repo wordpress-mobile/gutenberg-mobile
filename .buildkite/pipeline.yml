@@ -61,4 +61,6 @@ steps:
       set +x
 
       echo "--- :npm"
-      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress --logLevel=verbose
+      # npm ci --unsafe-perm --prefer-offline --no-audit --no-progress --logLevel=verbose
+      # This is the same command that CircleCI uses
+      npm ci --prefer-offline --no-audit --logLevel=verbose
