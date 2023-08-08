@@ -197,6 +197,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await titleElement.click();
 
 			await editorPage.dismissKeyboard();
+			await editorPage.driver.sleep( 500 );
 
 			// Visual test check for unselected state
 			const screenshot = await takeScreenshot();

@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-const { isAndroid, toggleDarkMode, isEditorVisible } = e2eUtils;
+const { isAndroid, toggleDarkMode } = e2eUtils;
 import { takeScreenshot } from './utils';
 
 describe( 'Gutenberg Editor Visual test for Unsupported Block', () => {
@@ -10,10 +10,12 @@ describe( 'Gutenberg Editor Visual test for Unsupported Block', () => {
 			initialData: e2eTestData.unsupportedBlockHtml,
 		} );
 
-		let unsupportedBlock = await editorPage.getBlockAtPosition(
+		const unsupportedBlock = await editorPage.getBlockAtPosition(
 			editorPage.blockNames.unsupported
 		);
 		await unsupportedBlock.click();
+		// Wait for the block to be selected
+		await editorPage.driver.sleep( 500 );
 
 		// Visual test check
 		let screenshot = await takeScreenshot();
@@ -37,7 +39,7 @@ describe( 'Gutenberg Editor Visual test for Unsupported Block', () => {
 			initialData: e2eTestData.unsupportedBlockHtml,
 		} );
 
-		let unsupportedBlock = await editorPage.getBlockAtPosition(
+		const unsupportedBlock = await editorPage.getBlockAtPosition(
 			editorPage.blockNames.unsupported
 		);
 		await unsupportedBlock.click();
