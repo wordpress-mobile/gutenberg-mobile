@@ -30,6 +30,9 @@ steps:
     command: |
       source /root/.bashrc
 
+      echo "--- :node: Setup Node environment"
+      nvm install && nvm use
+
       echo "+++ 🔎 "
       set -x
       npm config get
@@ -43,6 +46,18 @@ steps:
       echo "+++ 🔎 "
       set -x
       npm config get cache
+      set +x
+
+      echo "+++ 🔎 "
+      set -x
+      ls /root/.npm
+      du -sh /root/.npm
+      set +x
+
+      echo "+++ 🔎 "
+      set -x
+      ls /.local/share/pnpm/store/v3
+      du -sh /.local/share/pnpm/store/v3
       set +x
 
       echo "--- :npm"
