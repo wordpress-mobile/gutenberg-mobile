@@ -13,7 +13,6 @@ describe( 'Gutenberg Editor iPad Visual test for Horizontal layouts', () => {
 		await editorPage.initializeEditor( {
 			initialData: NESTED_COLUMNS_CASE_1,
 		} );
-		await editorPage.setHtmlContent( NESTED_COLUMNS_CASE_1 );
 
 		// Wait for images to load
 		await editorPage.driver.sleep( 4000 );
