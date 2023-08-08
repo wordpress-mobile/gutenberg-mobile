@@ -56,8 +56,8 @@ steps:
 
       echo "+++ 🔎 "
       set -x
-      ls /.local/share/pnpm/store/v3
-      du -sh /.local/share/pnpm/store/v3
+      ls /root/.local/share/pnpm/store/v3
+      du -sh /root/.local/share/pnpm/store/v3
       set +x
 
       echo "--- :npm"
