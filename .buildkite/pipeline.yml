@@ -34,7 +34,7 @@ steps:
       nvm install && nvm use
 
       echo "--- :npm: Install Node dependencies"
-      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+      npm ci --prefer-offline --no-audit --no-progress
 
       echo "--- :node: Lint and Unit Tests"
       ./bin/ci-checks-js.sh
@@ -57,7 +57,7 @@ steps:
         nvm install && nvm use
 
         echo "--- :npm: Install Node dependencies"
-        npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+        npm ci --prefer-offline --no-audit --no-progress
 
         echo "--- :package: Run bundle prep work"
         npm run prebundle:js
