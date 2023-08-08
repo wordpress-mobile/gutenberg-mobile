@@ -39,3 +39,11 @@ steps:
       set -x
       whoami
       set +x
+
+      echo "+++ 🔎 "
+      set -x
+      npm config get cache
+      set +x
+
+      echo "--- :npm"
+      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress --logLevel=verbose
