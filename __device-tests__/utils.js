@@ -53,10 +53,10 @@ export async function takeScreenshotByElement( element, { padding } = {} ) {
  * @param {boolean} [options.withoutKeyboard]  Prevents showing the keyboard in the screenshot.
  * @param {number}  [options.heightPercentage] Specify a custom height in percentage.
  * @param {Object}  [options.crop]             Specify values to crop the screenshot.
- * @param {number}  [options.offset.x]         X offset to crop.
- * @param {number}  [options.offset.y]         Y offset to crop.
- * @param {number}  [options.offset.width]     Width offset to crop.
- * @param {number}  [options.offset.height]    Height offset to crop.
+ * @param {number}  [options.crop.x]           X offset to crop.
+ * @param {number}  [options.crop.y]           Y offset to crop.
+ * @param {number}  [options.crop.width]       Width offset to crop.
+ * @param {number}  [options.crop.height]      Height offset to crop.
  * @return {Buffer} Sreenshot image.
  */
 export async function takeScreenshot(
