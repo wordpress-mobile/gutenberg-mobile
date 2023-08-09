@@ -49,25 +49,25 @@ export async function takeScreenshotByElement( element, { padding } = {} ) {
 /**
  * Helper to take a screenshot and manipulate it.
  *
- * @param {Object}  options                    Options
- * @param {boolean} [options.withoutKeyboard]  Prevents showing the keyboard in the screenshot.
- * @param {number}  [options.heightPercentage] Specify a custom height in percentage.
- * @param {Object}  [options.crop]             Specify values to crop the screenshot.
- * @param {number}  [options.crop.x]           X offset to crop.
- * @param {number}  [options.crop.y]           Y offset to crop.
- * @param {number}  [options.crop.width]       Width offset to crop.
- * @param {number}  [options.crop.height]      Height offset to crop.
+ * @typedef {Object} CropScreenshot
+ *
+ * @property {number}         x                          X offset, in pixels.
+ * @property {number}         y                          Y offset, in pixels.
+ * @property {number}         width                      Width, in pixels.
+ * @property {number}         height                     Height, in pixels.
+ *
+ * @param    {Object}         options                    Options
+ * @param    {boolean}        [options.withoutKeyboard]  Prevents showing the keyboard in the screenshot.
+ * @param    {number}         [options.heightPercentage] Specify a custom height in percentage.
+ * @param    {CropScreenshot} [options.crop]             Specify values to crop the screenshot.
  * @return {Buffer} Sreenshot image.
  */
-export async function takeScreenshot(
-	options = {
-		withoutKeyboard: false,
-		heightPercentage: undefined,
-		crop: undefined,
-	}
-) {
+export async function takeScreenshot( {
+	withoutKeyboard,
+	heightPercentage,
+	crop,
+} = {} ) {
 	const iPadDevice = process.env.IPAD;
-	const { withoutKeyboard, heightPercentage, crop } = options;
 	const sessionCapabilities = await editorPage.driver.sessionCapabilities();
 	const { pixelRatio } = sessionCapabilities;
 
