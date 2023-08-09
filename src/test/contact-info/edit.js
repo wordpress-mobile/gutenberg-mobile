@@ -42,8 +42,8 @@ describe( 'Contact Info block', () => {
 
 		// Get block
 		const block = await getBlock( screen, 'Contact Info' );
-		expect( block ).toBeVisible();
 
+		expect( block ).toBeVisible();
 		expect( getEditorHtml() ).toMatchSnapshot();
 	} );
 } );
