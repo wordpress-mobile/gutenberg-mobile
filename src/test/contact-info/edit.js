@@ -7,6 +7,7 @@ import {
 	addBlock,
 	getBlock,
 	setupCoreBlocks,
+	screen,
 } from 'test/helpers';
 
 /**
@@ -34,7 +35,7 @@ beforeAll( () => {
 
 describe( 'Contact Info block', () => {
 	it( 'should successfully insert the block into the editor', async () => {
-		const screen = await initializeEditor();
+		await initializeEditor();
 
 		// Add block
 		await addBlock( screen, 'Contact Info' );
