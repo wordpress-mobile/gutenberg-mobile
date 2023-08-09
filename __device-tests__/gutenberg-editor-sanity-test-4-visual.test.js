@@ -10,7 +10,7 @@ const {
 	isEditorVisible,
 	waitForVisible,
 } = e2eUtils;
-import { takeScreenshot } from './utils';
+import { takeScreenshot, takeScreenshotByElement } from './utils';
 
 const GROUP_NESTED_STRUCTURE_LEVELS = 3;
 
@@ -131,6 +131,10 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 		it( 'should have its selection / caret with the same color as the font', async () => {
 			await editorPage.setHtmlContent( buttonCustomColors );
 
+			const buttonsBlock = await editorPage.getBlockAtPosition(
+				blockNames.buttons
+			);
+
 			// Get button's block TextInput
 			const buttonBlockTextInput = await editorPage.getButtonBlockTextInputAtPosition();
 			await buttonBlockTextInput.click();
@@ -143,9 +147,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.driver.sleep( 500 );
 
 			// Visual test check
-			const screenshot = await takeScreenshot( {
-				withoutKeyboard: true,
-			} );
+			const screenshot = await takeScreenshotByElement( buttonsBlock );
 			expect( screenshot ).toMatchImageSnapshot();
 
 			await buttonBlockTextInput.click();
