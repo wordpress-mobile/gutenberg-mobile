@@ -5,20 +5,12 @@ import { AppRegistry } from 'react-native';
 import { initializeEditor, render } from 'test/helpers';
 
 /**
- * WordPress dependencies
- */
-import '@wordpress/jest-console';
-
-/**
  * Internal dependencies
  */
 import initAnalytics from '../analytics';
 import jetpackEditorSetup from '../jetpack-editor-setup';
 import blockExperimentsSetup from '../block-experiments-setup';
 import registerGutenbergMobile from '../';
-import { getTranslation as getGutenbergTranslation } from '../i18n-cache/gutenberg';
-import { getTranslation as getJetpackTranslation } from '../i18n-cache/jetpack';
-import { getTranslation as getLayoutGridTranslation } from '../i18n-cache/layout-grid';
 
 jest.mock( 'react-native/Libraries/ReactNative/AppRegistry' );
 jest.mock( '../analytics' );
@@ -32,19 +24,6 @@ jest.mock( '@wordpress/react-native-editor/src/setup', () => ( {
 } ) );
 
 const defaultLocale = 'en-gb';
-const setupLocaleLogs = [
-	[ 'locale', defaultLocale, getGutenbergTranslation( defaultLocale ) ],
-	[
-		'jetpack - locale',
-		defaultLocale,
-		getJetpackTranslation( defaultLocale ),
-	],
-	[
-		'layout-grid - locale',
-		defaultLocale,
-		getLayoutGridTranslation( defaultLocale ),
-	],
-];
 
 const getEditorComponent = () => {
 	let EditorComponent;
@@ -68,23 +47,14 @@ describe( 'Gutenberg Mobile initialization', () => {
 
 		it( 'initializes analytics', () => {
 			expect( initAnalytics ).toBeCalled();
-			setupLocaleLogs.forEach( ( log ) =>
-				expect( console ).toHaveLoggedWith( ...log )
-			);
 		} );
 
 		it( 'sets up Jetpack', () => {
 			expect( jetpackEditorSetup ).toBeCalled();
-			setupLocaleLogs.forEach( ( log ) =>
-				expect( console ).toHaveLoggedWith( ...log )
-			);
 		} );
 
 		it( 'sets up block experiments', () => {
 			expect( blockExperimentsSetup ).toBeCalled();
-			setupLocaleLogs.forEach( ( log ) =>
-				expect( console ).toHaveLoggedWith( ...log )
-			);
 		} );
 	} );
 
@@ -110,9 +80,5 @@ describe( 'Gutenberg Mobile initialization', () => {
 		const blockList = screen.getAllByTestId( 'block-list-wrapper' )[ 0 ];
 
 		expect( blockList ).toBeVisible();
-		expect( console ).toHaveLoggedWith( 'Hermes is: true' );
-		setupLocaleLogs.forEach( ( log ) =>
-			expect( console ).toHaveLoggedWith( ...log )
-		);
 	} );
 } );

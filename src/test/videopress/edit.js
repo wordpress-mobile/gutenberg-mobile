@@ -174,7 +174,7 @@ describe( "Update VideoPress block's settings", () => {
 	 * PLAYBACK BAR COLOR SETTINGS
 	 * Loop through each of the playback bar color settings and, if applicable, select a color
 	 */
-	PLAYBACK_BAR_COLOR_SETTINGS.forEach( ( { setting, color } ) => {
+	PLAYBACK_BAR_COLOR_SETTINGS.forEach( ( { setting, color }, index ) => {
 		it( `should update Playback Bar Color section's ${ setting } setting${
 			color ? ` to ${ color }` : ''
 		}`, async () => {
@@ -186,6 +186,10 @@ describe( "Update VideoPress block's settings", () => {
 					'Playback Bar Color',
 					setting
 				);
+				// TODO(jest-console): Fix the warning and remove the expect below.
+				if ( index === 1 ) {
+					expect( console ).toHaveWarned();
+				}
 
 				if ( color ) {
 					// Select color

@@ -1,13 +1,15 @@
 x-common-params:
-  &publish-android-artifacts-docker-container
-  docker#v3.8.0:
-    image: "public.ecr.aws/automattic/android-build-image:v1.3.0"
-    propagate-environment: true
-    environment:
-      # DO NOT MANUALLY SET THESE VALUES!
-      # They are passed from the Buildkite agent to the Docker container
-      - "AWS_ACCESS_KEY"
-      - "AWS_SECRET_KEY"
+  - &git-shallow-clone-plugin
+    automattic/git-shallow-clone#trunk
+  - &publish-android-artifacts-docker-container
+    docker#v3.8.0:
+      image: "public.ecr.aws/automattic/android-build-image:v1.3.0"
+      propagate-environment: true
+      environment:
+        # DO NOT MANUALLY SET THESE VALUES!
+        # They are passed from the Buildkite agent to the Docker container
+        - "AWS_ACCESS_KEY"
+        - "AWS_SECRET_KEY"
 
 steps:
   - block: "Request trigger Android bundle and builds"
@@ -16,6 +18,7 @@ steps:
   - label: "Build JS Bundles"
     key: "js-bundles"
     plugins:
+      - *git-shallow-clone-plugin
       - docker#v3.8.0:
           image: "public.ecr.aws/automattic/gb-mobile-image:latest"
           environment:
@@ -32,8 +35,12 @@ steps:
         echo "--- :npm: Install Node dependencies"
         npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
-        echo "--- :package: Run bundle prep work"
-        npm run prebundle:js
+        if [[ -z "$BUILDKITE_TAG" ]]; then
+          echo "--- :package: Skip bundle prep work"
+        else
+          echo "--- :package: Run bundle prep work"
+          npm run prebundle:js
+        fi
 
         echo "--- :android: Build Android bundle"
         npm run bundle:android
@@ -41,14 +48,27 @@ steps:
         echo "--- :arrow_up: Upload Android bundle artifact"
         buildkite-agent artifact upload bundle/android/App.js
 
+        if [[ -n "$BUILDKITE_TAG" ]]; then
+          echo "--- :arrow_up: Upload Android source map"
+          node gutenberg/node_modules/react-native/scripts/compose-source-maps.js bundle/android/App.text.js.map bundle/android/App.js.map -o bundle/android/App.composed.js.map
+          buildkite-agent artifact upload bundle/android/App.composed.js.map
+        fi
+
         echo "--- :ios: Build iOS bundle"
         npm run bundle:ios
 
         echo "--- :arrow_up: Upload iOS bundle artifact"
         buildkite-agent artifact upload bundle/ios/App.js
+
+        if [[ -n "$BUILDKITE_TAG" ]]; then
+          echo "--- :arrow_up: Upload iOS source map"
+          node gutenberg/node_modules/react-native/scripts/compose-source-maps.js bundle/ios/App.text.js.map bundle/ios/App.js.map -o bundle/ios/App.composed.js.map
+          buildkite-agent artifact upload bundle/ios/App.composed.js.map
+        fi
   - label: "Build Android RN Aztec & Publish to S3"
     key: "publish-react-native-aztec-android"
     plugins:
+      - *git-shallow-clone-plugin
       - *publish-android-artifacts-docker-container
     command: |
         .buildkite/publish-react-native-aztec-android-artifacts.sh
@@ -58,6 +78,7 @@ steps:
       - "js-bundles"
       - "publish-react-native-aztec-android"
     plugins:
+      - *git-shallow-clone-plugin
       - *publish-android-artifacts-docker-container
     command: |
         .buildkite/publish-react-native-bridge-android-artifacts.sh
@@ -68,9 +89,8 @@ steps:
     artifact_paths:
       - ios-xcframework/build/xcframeworks/*.tar.gz
     plugins:
-      - automattic/a8c-ci-toolkit#2.16.0
-      - peakon/git-shallow-clone#v0.0.1:
-          depth: 1
+      - automattic/a8c-ci-toolkit#2.18.2
+      - *git-shallow-clone-plugin
     agents:
       queue: mac
     env:

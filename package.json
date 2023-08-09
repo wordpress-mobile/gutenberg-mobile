@@ -1,14 +1,14 @@
 {
 	"name": "gutenberg-mobile",
-	"version": "1.100.1",
+	"version": "1.101.0",
 	"private": true,
 	"config": {
 		"jsfiles": "./*.js src/*.js src/**/*.js src/**/**/*.js",
 		"scssfiles": "src/*.scss src/**/*.scss"
 	},
 	"engines": {
-		"node": ">=8.0.0 <9.0.0 || >=10.0.0",
-		"npm": ">=6.9.0 <7"
+		"node": ">=16.0.0",
+		"npm": ">=8 <9"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.20.0",
@@ -80,13 +80,13 @@
 		"bundle:ios:bytecode": "./gutenberg/node_modules/react-native/sdks/hermesc/`node -e \"const platform=require('os').platform();console.log(platform === 'darwin' ? 'osx-bin' : (platform === 'linux' ? 'linux64-bin' : (platform === 'win32' ? 'win64-bin' : 'unsupported-os')));\"`/hermesc -emit-binary -O -out bundle/ios/App.js bundle/ios/App.text.js -output-source-map",
 		"prewpandroid": "rm -Rf $TMPDIR/gbmobile-wpandroidfakernroot && mkdir $TMPDIR/gbmobile-wpandroidfakernroot && ln -s $(cd \"$(dirname \"../../../\")\"; pwd) $TMPDIR/gbmobile-wpandroidfakernroot/android",
 		"wpandroid": "cd gutenberg && react-native run-android --root $TMPDIR/gbmobile-wpandroidfakernroot --variant wasabiDebug --appIdSuffix beta --appFolder WordPress --main-activity=ui.WPLaunchActivity",
-		"test": "cross-env NODE_ENV=test jest --verbose --config ./jest.config.js",
-		"test:update": "cross-env NODE_ENV=test jest --verbose --config ./jest.config.js --updateSnapshot",
+		"test": "cross-env NODE_ENV=test jest --config ./jest.config.js",
+		"test:update": "cross-env NODE_ENV=test jest --config ./jest.config.js --updateSnapshot",
 		"test:debug": "cross-env NODE_ENV=test node --inspect-brk node_modules/.bin/jest --runInBand --verbose --config jest.config.js",
-		"device-tests": "cross-env NODE_ENV=test jest --maxWorkers=2 --testPathIgnorePatterns='canary|gutenberg-editor-rendering|ipad' --verbose --config jest_ui.config.js",
-		"device-tests-canary": "cross-env NODE_ENV=test jest --maxWorkers=2 --testPathPattern=@canary --verbose --config jest_ui.config.js",
-		"device-tests-ipad": "cross-env NODE_ENV=test IPAD=true jest --maxWorkers=2 --testPathPattern=@ipad --verbose --config jest_ui.config.js",
-		"device-tests:local": "IOS_APP_PATH='./gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app' WDA_PATH='./gutenberg/packages/react-native-editor/ios/build/WDA' ANDROID_APP_PATH='./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk' NODE_ENV=test jest --maxWorkers=2 --detectOpenHandles --verbose --config jest_ui.config.js",
+		"device-tests": "cross-env NODE_ENV=test jest --maxWorkers=2 --testPathIgnorePatterns='canary|gutenberg-editor-rendering|ipad' --config jest_ui.config.js",
+		"device-tests-canary": "cross-env NODE_ENV=test jest --maxWorkers=2 --testPathPattern=@canary --config jest_ui.config.js",
+		"device-tests-ipad": "cross-env NODE_ENV=test IPAD=true jest --maxWorkers=2 --testPathPattern=@ipad --config jest_ui.config.js",
+		"device-tests:local": "IOS_APP_PATH='./gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app' WDA_PATH='./gutenberg/packages/react-native-editor/ios/build/WDA' ANDROID_APP_PATH='./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk' NODE_ENV=test jest --maxWorkers=2 --detectOpenHandles --config jest_ui.config.js",
 		"device-tests:debug": "IOS_APP_PATH='./gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app' WDA_PATH='./gutenberg/packages/react-native-editor/ios/build/WDA' ANDROID_APP_PATH='./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk' cross-env NODE_ENV=test node $NODE_DEBUG_OPTION --inspect-brk node_modules/jest/bin/jest --runInBand --detectOpenHandles --verbose --config jest_ui.config.js",
 		"test:e2e:bundle:android": "npm run test:e2e:bundle:android:text && npm run test:e2e:bundle:android:bytecode",
 		"test:e2e:bundle:android:text": "mkdir -p gutenberg/packages/react-native-editor/android/app/src/main/assets && npm run rn-bundle -- --reset-cache --platform android --dev false --minify false --entry-file index.js --bundle-output gutenberg/packages/react-native-editor/android/app/src/main/assets/index.android.text.bundle --assets-dest gutenberg/packages/react-native-editor/android/app/src/main/res",
