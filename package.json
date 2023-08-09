@@ -43,6 +43,7 @@
 		"jest-image-snapshot": "^6.1.0",
 		"jest-jasmine2": "29.5.0",
 		"jest-junit": "^13.0.0",
+		"jest-watch-typeahead": "2.2.2",
 		"jimp": "^0.22.1",
 		"metro-react-native-babel-preset": "^0.73.10",
 		"metro-resolver": "^0.73.10",
