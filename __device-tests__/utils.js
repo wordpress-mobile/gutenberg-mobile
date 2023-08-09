@@ -51,22 +51,17 @@ export async function takeScreenshotByElement( element, { padding } = {} ) {
  *
  * @typedef {Object} CropScreenshot
  *
- * @property {number}         x                          X offset, in pixels.
- * @property {number}         y                          Y offset, in pixels.
- * @property {number}         width                      Width, in pixels.
- * @property {number}         height                     Height, in pixels.
+ * @property {number}         x                         X offset, in pixels.
+ * @property {number}         y                         Y offset, in pixels.
+ * @property {number}         width                     Width, in pixels.
+ * @property {number}         height                    Height, in pixels.
  *
- * @param    {Object}         options                    Options
- * @param    {boolean}        [options.withoutKeyboard]  Prevents showing the keyboard in the screenshot.
- * @param    {number}         [options.heightPercentage] Specify a custom height in percentage.
- * @param    {CropScreenshot} [options.crop]             Specify values to crop the screenshot.
+ * @param    {Object}         options                   Options
+ * @param    {boolean}        [options.withoutKeyboard] Prevents showing the keyboard in the screenshot.
+ * @param    {CropScreenshot} [options.crop]            Specify values to crop the screenshot.
  * @return {Buffer} Sreenshot image.
  */
-export async function takeScreenshot( {
-	withoutKeyboard,
-	heightPercentage,
-	crop,
-} = {} ) {
+export async function takeScreenshot( { withoutKeyboard, crop } = {} ) {
 	const iPadDevice = process.env.IPAD;
 	const sessionCapabilities = await editorPage.driver.sessionCapabilities();
 	const { pixelRatio } = sessionCapabilities;
@@ -121,14 +116,6 @@ export async function takeScreenshot( {
 				toolbarLocation.y + toolbarSize.height - statusBarHeight
 			);
 		}
-	}
-
-	// Custom height in percentage
-	if ( heightPercentage ) {
-		finalSize.height = Math.min(
-			finalSize.height,
-			( heightPercentage * imageHeight ) / 100
-		);
 	}
 
 	// Crop image
