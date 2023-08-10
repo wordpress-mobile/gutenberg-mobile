@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Contact Info block should successfully insert the block into the editor 1`] = `
+"<!-- wp:jetpack/contact-info -->
+<div class="wp-block-jetpack-contact-info"><!-- wp:jetpack/email /-->
+
+<!-- wp:jetpack/phone /-->
+
+<!-- wp:jetpack/address /--></div>
+<!-- /wp:jetpack/contact-info -->"
+`;
