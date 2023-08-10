@@ -1,6 +1,9 @@
 x-common-params:
-  - &git-shallow-clone-plugin
-    automattic/git-shallow-clone#trunk
+  - &git-cache-plugin
+    automattic/git-s3-cache#1.1.4:
+      # Ensure these settings match what's defined in cache-builder.yml
+      bucket: a8c-repo-mirrors
+      repo: automattic/gutenber-mobile/
   - &publish-android-artifacts-docker-container
     docker#v3.8.0:
       image: "public.ecr.aws/automattic/android-build-image:v1.3.0"
@@ -18,7 +21,7 @@ steps:
   - label: "Build JS Bundles"
     key: "js-bundles"
     plugins:
-      - *git-shallow-clone-plugin
+      - *git-cache-plugin
       - docker#v3.8.0:
           image: "public.ecr.aws/automattic/gb-mobile-image:latest"
           environment:
@@ -68,7 +71,7 @@ steps:
   - label: "Build Android RN Aztec & Publish to S3"
     key: "publish-react-native-aztec-android"
     plugins:
-      - *git-shallow-clone-plugin
+      - *git-cache-plugin
       - *publish-android-artifacts-docker-container
     command: |
         .buildkite/publish-react-native-aztec-android-artifacts.sh
@@ -78,7 +81,7 @@ steps:
       - "js-bundles"
       - "publish-react-native-aztec-android"
     plugins:
-      - *git-shallow-clone-plugin
+      - *git-cache-plugin
       - *publish-android-artifacts-docker-container
     command: |
         .buildkite/publish-react-native-bridge-android-artifacts.sh
@@ -90,7 +93,7 @@ steps:
       - ios-xcframework/build/xcframeworks/*.tar.gz
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
-      - *git-shallow-clone-plugin
+      - *git-cache-plugin
     agents:
       queue: mac
     env:
