@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/buildkite/pipeline-schema/main/schema.json
+---
 # This pipeline runs via Buildkite's scheduled jobs feature.
 #
 # It's meant to rebuild various CI caches on a periodic async basis, so as
