@@ -20,7 +20,6 @@ const transpiledPackageNames = glob(
 ).map( ( fileName ) => fileName.split( '/' )[ 3 ] );
 
 module.exports = {
-	verbose: true,
 	rootDir: '.',
 	// Automatically clear mock calls and instances between every test
 	clearMocks: true,
@@ -75,4 +74,8 @@ module.exports = {
 		'node_modules/(?!(simple-html-tokenizer|@react-native-community|(jest-)?react-native|@react-native|react-clone-referenced-element|is-plain-obj))',
 	],
 	reporters: [ 'default', 'jest-junit' ],
+	watchPlugins: [
+		'jest-watch-typeahead/filename',
+		'jest-watch-typeahead/testname',
+	],
 };

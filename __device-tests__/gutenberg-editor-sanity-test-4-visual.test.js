@@ -9,13 +9,13 @@ const {
 	isAndroid,
 	waitForVisible,
 } = e2eUtils;
-import { takeScreenshot } from './utils';
+import { takeScreenshot, takeScreenshotByElement } from './utils';
 
 const GROUP_NESTED_STRUCTURE_LEVELS = 3;
 
 describe( 'Gutenberg Editor - Test Suite 4', () => {
 	describe( 'Spacer block', () => {
-		it( 'Spacer in horizontal layout works as expected', async () => {
+		it( 'should render proper alignment and spacing in landscape orientation', async () => {
 			await editorPage.initializeEditor();
 			await editorPage.addNewBlock( blockNames.spacer );
 
@@ -45,7 +45,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.driver.sleep( 3000 );
 		} );
 
-		it( 'Check if in DarkMode all components gets proper colors', async () => {
+		it( 'should render dark mode colors', async () => {
 			// Toggling dark mode
 			await toggleDarkMode( editorPage.driver, true );
 
@@ -74,7 +74,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->`;
 
-		it( 'Render custom text and background color', async () => {
+		it( 'should render custom text and background color', async () => {
 			await editorPage.initializeEditor( {
 				initialData: buttonCustomColors,
 			} );
@@ -89,7 +89,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			expect( screenshot ).toMatchImageSnapshot();
 		} );
 
-		it( 'Render gradient background color', async () => {
+		it( 'should render gradient background color', async () => {
 			const testData = `<!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"gradient":"luminous-dusk"} -->
 <div class="wp-block-button"><a class="wp-block-button__link has-luminous-dusk-gradient-background has-background wp-element-button">Button</a></div>
@@ -110,36 +110,32 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			expect( screenshot ).toMatchImageSnapshot();
 		} );
 
-		it( 'Check if selection / caret color matches font color', async () => {
+		it( 'should have its selection / caret with the same color as the font', async () => {
 			await editorPage.initializeEditor( {
 				initialData: buttonCustomColors,
 			} );
 
-			const buttonsBlock = await editorPage.getBlockAtPosition(
-				blockNames.buttons
-			);
-			await buttonsBlock.click();
-
 			const buttonBlock = await editorPage.getBlockAtPosition(
 				blockNames.button
 			);
-			await buttonBlock.click();
 
 			// Get button's block TextInput
 			const buttonBlockTextInput = await editorPage.getButtonBlockTextInputAtPosition();
+			await buttonBlockTextInput.click();
 			await selectTextFromElement(
 				editorPage.driver,
 				buttonBlockTextInput
 			);
 
+			// Wait for text context menu animation
+			await editorPage.driver.sleep( 500 );
+
 			// Visual test check
-			const screenshot = await takeScreenshot( {
-				withoutKeyboard: true,
-			} );
+			const screenshot = await takeScreenshotByElement( buttonBlock );
 			expect( screenshot ).toMatchImageSnapshot();
 		} );
 
-		it( 'Edit text styles', async () => {
+		it( 'should allow edit text styles', async () => {
 			await editorPage.initializeEditor();
 			await editorPage.addNewBlock( blockNames.buttons );
 
@@ -204,7 +200,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			expect( screenshot ).toMatchImageSnapshot();
 		} );
 
-		it( 'Check if in DarkMode all components gets proper colors', async () => {
+		it( 'should render dark mode colors', async () => {
 			// Toggling dark mode
 			await toggleDarkMode( editorPage.driver, true );
 
@@ -232,7 +228,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 	} );
 
 	describe( 'Group block', () => {
-		it( 'navigates nested structure', async () => {
+		it( 'should traverse up and down nested blocks', async () => {
 			// Add nested structure
 			await editorPage.initializeEditor( {
 				initialData: e2eTestData.groupNestedStructure,
@@ -272,7 +268,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			}
 		} );
 
-		it( 'Cross navigation between blocks works as expected', async () => {
+		it( 'should navigate between nested blocks', async () => {
 			// Add nested structure
 			await editorPage.initializeEditor( {
 				initialData: e2eTestData.groupNestedStructure,
@@ -301,7 +297,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			}
 		} );
 
-		it( 'Check if in DarkMode all components gets proper colors', async () => {
+		it( 'should render dark mode colors', async () => {
 			// Toggling dark mode
 			await toggleDarkMode( editorPage.driver, true );
 
