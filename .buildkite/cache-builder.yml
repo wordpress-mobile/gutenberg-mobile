@@ -5,7 +5,7 @@
 # It's meant to rebuild various CI caches on a periodic async basis, so as
 # not to waste time on every CI job updating the cache.
 
-common_params:
+x-common-params:
   - &common_plugins
     - automattic/a8c-ci-toolkit#2.18.2
     - automattic/git-s3-cache#1.1.4:
