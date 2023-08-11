@@ -7,7 +7,6 @@ const {
 	selectTextFromElement,
 	toggleDarkMode,
 	isAndroid,
-	isEditorVisible,
 	waitForVisible,
 } = e2eUtils;
 import { takeScreenshot, takeScreenshotByElement } from './utils';
@@ -17,6 +16,7 @@ const GROUP_NESTED_STRUCTURE_LEVELS = 3;
 describe( 'Gutenberg Editor - Test Suite 4', () => {
 	describe( 'Spacer block', () => {
 		it( 'should render proper alignment and spacing in landscape orientation', async () => {
+			await editorPage.initializeEditor();
 			await editorPage.addNewBlock( blockNames.spacer );
 
 			await toggleOrientation( editorPage.driver );
@@ -43,22 +43,13 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Wait for the device to finish rotating
 			await editorPage.driver.sleep( 3000 );
-
-			const spaceBlock = await editorPage.getBlockAtPosition(
-				blockNames.spacer
-			);
-			await spaceBlock.click();
-			await editorPage.removeBlock();
 		} );
 
 		it( 'should render dark mode colors', async () => {
 			// Toggling dark mode
 			await toggleDarkMode( editorPage.driver, true );
-			// The Android editor requires a restart to apply dark mode
-			if ( isAndroid() ) {
-				await editorPage.driver.resetApp();
-				await isEditorVisible( editorPage.driver );
-			}
+
+			await editorPage.initializeEditor();
 
 			// Add Spacer block
 			await editorPage.addNewBlock( blockNames.spacer );
@@ -72,14 +63,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			expect( screenshot ).toMatchImageSnapshot();
 
 			// Clean up test
-			await editorPage.dismissBottomSheet();
-			await editorPage.removeBlock();
 			await toggleDarkMode( editorPage.driver, false );
-			// The Android editor requires a restart to apply dark mode
-			if ( isAndroid() ) {
-				await editorPage.driver.resetApp();
-				await isEditorVisible( editorPage.driver );
-			}
 		} );
 	} );
 
@@ -91,7 +75,9 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 <!-- /wp:buttons -->`;
 
 		it( 'should render custom text and background color', async () => {
-			await editorPage.setHtmlContent( buttonCustomColors );
+			await editorPage.initializeEditor( {
+				initialData: buttonCustomColors,
+			} );
 
 			const buttonsBlock = await editorPage.getBlockAtPosition(
 				blockNames.buttons
@@ -101,9 +87,6 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			// Visual test check
 			const screenshot = await takeScreenshot();
 			expect( screenshot ).toMatchImageSnapshot();
-
-			await buttonsBlock.click();
-			await editorPage.removeBlock();
 		} );
 
 		it( 'should render gradient background color', async () => {
@@ -113,7 +96,9 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->`;
 
-			await editorPage.setHtmlContent( testData );
+			await editorPage.initializeEditor( {
+				initialData: testData,
+			} );
 
 			const buttonsBlock = await editorPage.getBlockAtPosition(
 				blockNames.buttons
@@ -123,13 +108,12 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			// Visual test check
 			const screenshot = await takeScreenshot();
 			expect( screenshot ).toMatchImageSnapshot();
-
-			await buttonsBlock.click();
-			await editorPage.removeBlock();
 		} );
 
 		it( 'should have its selection / caret with the same color as the font', async () => {
-			await editorPage.setHtmlContent( buttonCustomColors );
+			await editorPage.initializeEditor( {
+				initialData: buttonCustomColors,
+			} );
 
 			const buttonBlock = await editorPage.getBlockAtPosition(
 				blockNames.button
@@ -149,13 +133,10 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			// Visual test check
 			const screenshot = await takeScreenshotByElement( buttonBlock );
 			expect( screenshot ).toMatchImageSnapshot();
-
-			await buttonBlockTextInput.click();
-
-			await editorPage.removeBlock();
 		} );
 
 		it( 'should allow edit text styles', async () => {
+			await editorPage.initializeEditor();
 			await editorPage.addNewBlock( blockNames.buttons );
 
 			const firstButtonTextInput = await editorPage.getButtonBlockTextInputAtPosition();
@@ -212,30 +193,18 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await titleElement.click();
 
 			await editorPage.dismissKeyboard();
+			await editorPage.driver.sleep( 500 );
 
 			// Visual test check for unselected state
 			const screenshot = await takeScreenshot();
 			expect( screenshot ).toMatchImageSnapshot();
-
-			const buttonsBlock = await editorPage.getBlockAtPosition(
-				blockNames.buttons
-			);
-			buttonsBlock.click();
-
-			// Navigate upwards to select parent block
-			await editorPage.moveBlockSelectionUp();
-
-			await editorPage.removeBlock();
 		} );
 
 		it( 'should render dark mode colors', async () => {
 			// Toggling dark mode
 			await toggleDarkMode( editorPage.driver, true );
-			// The Android editor requires a restart to apply dark mode
-			if ( isAndroid() ) {
-				await editorPage.driver.resetApp();
-				await isEditorVisible( editorPage.driver );
-			}
+
+			await editorPage.initializeEditor();
 
 			// Add Buttons block
 			await editorPage.addNewBlock( blockNames.buttons );
@@ -254,22 +223,16 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			expect( screenshot ).toMatchImageSnapshot();
 
 			// Clean up test
-			await editorPage.dismissBottomSheet();
-			await editorPage.moveBlockSelectionUp();
-			await editorPage.removeBlock();
 			await toggleDarkMode( editorPage.driver, false );
-			// The Android editor requires a restart to apply dark mode
-			if ( isAndroid() ) {
-				await editorPage.driver.resetApp();
-				await isEditorVisible( editorPage.driver );
-			}
 		} );
 	} );
 
 	describe( 'Group block', () => {
 		it( 'should traverse up and down nested blocks', async () => {
 			// Add nested structure
-			await editorPage.setHtmlContent( e2eTestData.groupNestedStructure );
+			await editorPage.initializeEditor( {
+				initialData: e2eTestData.groupNestedStructure,
+			} );
 
 			// Tap on one of the bottom-most blocks in hierarchy to check that navigation
 			// down works according to deepest-descendent-first approach.
@@ -303,14 +266,13 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 				screenshot = await takeScreenshot();
 				expect( screenshot ).toMatchImageSnapshot();
 			}
-
-			// Clean up test
-			await editorPage.removeBlock();
 		} );
 
 		it( 'should navigate between nested blocks', async () => {
 			// Add nested structure
-			await editorPage.setHtmlContent( e2eTestData.groupNestedStructure );
+			await editorPage.initializeEditor( {
+				initialData: e2eTestData.groupNestedStructure,
+			} );
 
 			const tapOnLevel = async ( level ) => {
 				const spacerXPath = isAndroid()
@@ -333,22 +295,13 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			for ( let i = GROUP_NESTED_STRUCTURE_LEVELS; i >= 1; i-- ) {
 				await tapOnLevel( i );
 			}
-
-			// Clean up test
-			await editorPage.moveBlockSelectionUp( {
-				toRoot: true,
-			} );
-			await editorPage.removeBlock();
 		} );
 
 		it( 'should render dark mode colors', async () => {
 			// Toggling dark mode
 			await toggleDarkMode( editorPage.driver, true );
-			// The Android editor requires a restart to apply dark mode
-			if ( isAndroid() ) {
-				await editorPage.driver.resetApp();
-				await isEditorVisible( editorPage.driver );
-			}
+
+			await editorPage.initializeEditor();
 
 			// Add Group block
 			await editorPage.addNewBlock( blockNames.group );
@@ -379,14 +332,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			expect( screenshot ).toMatchImageSnapshot();
 
 			// Clean up test
-			await editorPage.dismissBottomSheet();
-			await editorPage.removeBlock();
 			await toggleDarkMode( editorPage.driver, false );
-			// The Android editor requires a restart to apply dark mode
-			if ( isAndroid() ) {
-				await editorPage.driver.resetApp();
-				await isEditorVisible( editorPage.driver );
-			}
 		} );
 	} );
 } );
