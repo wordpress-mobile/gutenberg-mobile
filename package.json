@@ -7,8 +7,8 @@
 		"scssfiles": "src/*.scss src/**/*.scss"
 	},
 	"engines": {
-		"node": ">=8.0.0 <9.0.0 || >=10.0.0",
-		"npm": ">=6.9.0 <7"
+		"node": ">=16.0.0",
+		"npm": ">=8 <9"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.20.0",
@@ -43,6 +43,7 @@
 		"jest-image-snapshot": "^6.1.0",
 		"jest-jasmine2": "29.5.0",
 		"jest-junit": "^13.0.0",
+		"jest-watch-typeahead": "2.2.2",
 		"jimp": "^0.22.1",
 		"metro-react-native-babel-preset": "^0.73.10",
 		"metro-resolver": "^0.73.10",
