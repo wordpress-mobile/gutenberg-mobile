@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [*] Remove third-party dependency on react-native-hsv-color-picker [https://github.com/WordPress/gutenberg/pull/53329]
 
 1.101.0
 ---
