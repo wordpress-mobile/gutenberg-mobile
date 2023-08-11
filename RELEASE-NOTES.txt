@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [*] Add outline around selected Social Link block [https://github.com/WordPress/gutenberg/pull/53377]
 
 1.101.0
 ---
