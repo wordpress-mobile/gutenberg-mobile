@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F42308D2A8A7E1E0008D329 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 2F42308C2A8A7E1E0008D329 /* images */; };
 		3F1235FE29F680F900AF54A4 /* GutenbergBridgeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1235FB29F680F900AF54A4 /* GutenbergBridgeDelegate.swift */; };
 		3F1235FF29F680F900AF54A4 /* GutenbergBridgeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1235FC29F680F900AF54A4 /* GutenbergBridgeDataSource.swift */; };
 		3F12360029F680F900AF54A4 /* Gutenberg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1235FD29F680F900AF54A4 /* Gutenberg.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F42308C2A8A7E1E0008D329 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = "../gutenberg/packages/editor/src/components/editor-help/images"; sourceTree = "<group>"; };
 		3F1235FB29F680F900AF54A4 /* GutenbergBridgeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GutenbergBridgeDelegate.swift; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergBridgeDelegate.swift"; sourceTree = "<group>"; };
 		3F1235FC29F680F900AF54A4 /* GutenbergBridgeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GutenbergBridgeDataSource.swift; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergBridgeDataSource.swift"; sourceTree = "<group>"; };
 		3F1235FD29F680F900AF54A4 /* Gutenberg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gutenberg.swift; path = "../../gutenberg/packages/react-native-bridge/ios/Gutenberg.swift"; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 		3FE06AB329F3F46B00F752AD = {
 			isa = PBXGroup;
 			children = (
+				2F42308C2A8A7E1E0008D329 /* images */,
 				3FE06AC729F3F6DA00F752AD /* Config */,
 				3FE06AC129F3F61300F752AD /* Gutenberg */,
 				3FE06AC029F3F61300F752AD /* Products */,
@@ -242,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F42308D2A8A7E1E0008D329 /* images in Resources */,
 				3FE06AD329F3F6DA00F752AD /* Project-Debug.xcconfig in Resources */,
 				3F12364E29F6B21300AF54A4 /* local-storage-overrides.json in Resources */,
 				3FE06ACE29F3F6DA00F752AD /* Gutenberg-Debug.xcconfig in Resources */,
