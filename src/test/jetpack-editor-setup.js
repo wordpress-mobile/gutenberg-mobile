@@ -36,6 +36,7 @@ const defaultProps = {
 };
 const jetpackBlocks = [
 	'jetpack/contact-info',
+	'jetpack/paywall',
 	'jetpack/story',
 	'jetpack/tiled-gallery',
 	'videopress/video',
@@ -73,6 +74,7 @@ describe( 'Jetpack blocks', () => {
 		const expectedJetpackData = {
 			available_blocks: {
 				'contact-info': { available: true },
+				paywall: { available: true },
 				story: { available: true },
 				'tiled-gallery': { available: true },
 				'videopress/video': { available: true },
@@ -92,6 +94,9 @@ describe( 'Jetpack blocks', () => {
 		const blocksAPI = registerJetpackBlocksIsolated( defaultProps );
 		expect( console ).toHaveLoggedWith(
 			'Block jetpack/contact-info registered.'
+		);
+		expect( console ).toHaveLoggedWith(
+			'Block jetpack/paywall registered.'
 		);
 		expect( console ).toHaveLoggedWith( 'Block jetpack/story registered.' );
 		expect( console ).toHaveLoggedWith(
@@ -125,12 +130,16 @@ describe( 'Jetpack blocks', () => {
 			capabilities: {
 				mediaFilesCollectionBlock: true,
 				contactInfoBlock: false,
+				paywallBlock: true,
 				tiledGalleryBlock: true,
 				videoPressBlock: true,
 			},
 		} );
 		expect( console ).toHaveLoggedWith(
 			'Block jetpack/contact-info registered.'
+		);
+		expect( console ).toHaveLoggedWith(
+			'Block jetpack/paywall registered.'
 		);
 		expect( console ).toHaveLoggedWith( 'Block jetpack/story registered.' );
 		expect( console ).toHaveLoggedWith(

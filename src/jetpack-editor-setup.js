@@ -24,6 +24,9 @@ const supportedJetpackBlocks = {
 	'contact-info': {
 		available: true,
 	},
+	paywall: {
+		available: __DEV__,
+	},
 	story: {
 		available: true,
 	},
@@ -89,6 +92,7 @@ export function registerJetpackBlocks( { capabilities } ) {
 		'jetpack/tiled-gallery'
 	);
 	hideBlockByCapability( capabilities.videoPressBlock, 'videopress/video' );
+	hideBlockByCapability( capabilities.paywallBlock, 'jetpack/paywall' );
 
 	// Register Jetpack blocks
 	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );
