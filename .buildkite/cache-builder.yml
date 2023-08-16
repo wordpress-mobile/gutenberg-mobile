@@ -10,7 +10,7 @@ x-common-params:
     - automattic/a8c-ci-toolkit#2.18.2
     - automattic/git-s3-cache#1.1.4:
         bucket: a8c-repo-mirrors
-        repo: automattic/gutenber-mobile/
+        repo: automattic/gutenberg-mobile/
 
 steps:
   # Build the Git Repo cache
