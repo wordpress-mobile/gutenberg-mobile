@@ -3,7 +3,7 @@ x-common-params:
     automattic/git-s3-cache#1.1.4:
       # Ensure these settings match what's defined in cache-builder.yml
       bucket: a8c-repo-mirrors
-      repo: automattic/gutenber-mobile/
+      repo: automattic/gutenberg-mobile/
   - &publish-android-artifacts-docker-container
     docker#v3.8.0:
       image: "public.ecr.aws/automattic/android-build-image:v1.3.0"
