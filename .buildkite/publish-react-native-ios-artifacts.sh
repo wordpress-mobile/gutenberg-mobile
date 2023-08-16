@@ -2,6 +2,8 @@
 
 echo "--- :arrow_down: Download iOS JS bundle"
 buildkite-agent artifact download bundle/ios/App.js .
+buildkite-agent artifact download ios-assets.tar.gz .
+tar -xzvf assets.tar.gz -C ios-xcframework/Gutenberg/Resources/
 
 echo '--- :node: Setup node_modules for RNReanimated'
 echo '--- :node: 1. Install nvm'
