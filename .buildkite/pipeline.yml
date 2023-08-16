@@ -63,7 +63,7 @@ steps:
         echo "--- :arrow_up: Upload iOS bundle artifact"
         buildkite-agent artifact upload bundle/ios/App.js
         tar -czvf ios-assets.tar.gz -C ios-xcframework/Gutenberg/Resources assets/
-        buildkite-agent artifact upload ios-assets
+        buildkite-agent artifact upload ios-assets.tar.gz
 
         if [[ -n "$BUILDKITE_TAG" ]]; then
           echo "--- :arrow_up: Upload iOS source map"
