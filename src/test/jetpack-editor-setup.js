@@ -153,7 +153,10 @@ describe( 'Jetpack blocks', () => {
 			'core/edit-post',
 			'hiddenBlockTypes'
 		);
-		expect( hiddenBlockTypes ).toEqual( [ 'jetpack/contact-info' ] );
+		expect( hiddenBlockTypes ).toEqual( [
+			'jetpack/paywall',
+			'jetpack/contact-info',
+		] );
 	} );
 
 	it( "should not register Jetpack blocks if 'onlyCoreBlocks' capbility is on", () => {
