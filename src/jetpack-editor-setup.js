@@ -92,7 +92,8 @@ export function registerJetpackBlocks( { capabilities } ) {
 		'jetpack/tiled-gallery'
 	);
 	hideBlockByCapability( capabilities.videoPressBlock, 'videopress/video' );
-	hideBlockByCapability( capabilities.paywallBlock, 'jetpack/paywall' );
+	// Limit support to rendering the Paywall block, not inserting it.
+	dispatch( editPostStore ).hideBlockTypes( [ 'jetpack/paywall' ] );
 
 	// Register Jetpack blocks
 	require( '../jetpack/projects/plugins/jetpack/extensions/editor' );
