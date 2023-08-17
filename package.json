@@ -104,6 +104,7 @@
 		"lint": "eslint . --ext .js",
 		"lint:fix": "npm run lint -- --fix",
 		"xcframework:setup": "./bin/xcframework-setup",
+		"xcframework:build": "npm run xcframework:setup && pushd ./ios-xcframework && ./build.sh && popd",
 		"version": "npm run bundle && git add -A bundle"
 	},
 	"dependencies": {}
