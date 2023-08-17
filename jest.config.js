@@ -74,4 +74,8 @@ module.exports = {
 		'node_modules/(?!(simple-html-tokenizer|@react-native-community|(jest-)?react-native|@react-native|react-clone-referenced-element|is-plain-obj))',
 	],
 	reporters: [ 'default', 'jest-junit' ],
+	watchPlugins: [
+		'jest-watch-typeahead/filename',
+		'jest-watch-typeahead/testname',
+	],
 };

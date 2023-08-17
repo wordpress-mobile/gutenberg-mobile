@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/buildkite/pipeline-schema/main/schema.json
+---
+# This pipeline runs via Buildkite's scheduled jobs feature.
+#
+# It's meant to rebuild various CI caches on a periodic async basis, so as
+# not to waste time on every CI job updating the cache.
+
+x-common-params:
+  - &common_plugins
+    - automattic/a8c-ci-toolkit#2.18.2
+    - automattic/git-s3-cache#1.1.4:
+        bucket: a8c-repo-mirrors
+        repo: automattic/gutenberg-mobile/
+
+steps:
+  # Build the Git Repo cache
+  #
+  # Because this repo is so large, we periodically create a Git Mirror and copy it to S3,
+  # from where it can be fetched by agents more quickly than from GitHub, and so that
+  # agents then have less new commits to `git pull` by using that cache as starting point
+  - label: ':git: Rebuild git cache'
+    command: cache_repo a8c-repo-mirrors
+    plugins: *common_plugins
+    agents:
+      queue: default
