@@ -103,6 +103,7 @@
 		"clean:i18n": "rm -rf src/i18n-cache && npm run i18n:check-cache",
 		"lint": "eslint . --ext .js",
 		"lint:fix": "npm run lint -- --fix",
+		"xcframework:setup": "./bin/xcframework-setup",
 		"version": "npm run bundle && git add -A bundle"
 	},
 	"dependencies": {}

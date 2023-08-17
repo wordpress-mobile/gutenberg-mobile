@@ -1,0 +1,14 @@
+#!/bin/bash -eu
+
+pushd ios-xcframework || exit 1
+
+# The React Native setup process generates files as part of running CocoaPods.
+# Sometimes, having existing generated files results in build issues later on.
+# Therefore, it's best to remove them.
+rm -rf build/generated
+
+bundle install
+
+bundle exec pod install
+
+popd || exit 1
