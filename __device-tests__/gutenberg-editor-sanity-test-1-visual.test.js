@@ -3,13 +3,7 @@
  */
 const { blockNames } = editorPage;
 import { takeScreenshot } from './utils';
-const {
-	toggleOrientation,
-	isAndroid,
-	swipeFromTo,
-	toggleDarkMode,
-	isEditorVisible,
-} = e2eUtils;
+const { toggleOrientation, isAndroid, swipeFromTo, toggleDarkMode } = e2eUtils;
 import { NESTED_COLUMNS_3_LEVELS } from './test-editor-data';
 
 const ANDROID_COLUMN_APPENDER_BUTTON_XPATH =
@@ -18,6 +12,7 @@ const ANDROID_COLUMN_APPENDER_BUTTON_XPATH =
 describe( 'Gutenberg Editor - Test Suite 1', () => {
 	describe( 'Columns block', () => {
 		it( 'displays placeholders when unselected', async () => {
+			await editorPage.initializeEditor();
 			await editorPage.addNewBlock( blockNames.columns );
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
@@ -45,17 +40,10 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			await toggleOrientation( editorPage.driver );
 			// Wait for the device to finish rotating
 			await editorPage.driver.sleep( 3000 );
-			const columnsBlock = await editorPage.getBlockAtPosition(
-				blockNames.columns
-			);
-			await columnsBlock.click();
-
-			await editorPage.moveBlockSelectionUp( { toRoot: true } );
-
-			await editorPage.removeBlock();
 		} );
 
 		it( 'displays correctly in portrait and landscape orientations', async () => {
+			await editorPage.initializeEditor();
 			await editorPage.addNewBlock( blockNames.columns );
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
@@ -109,10 +97,10 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			await toggleOrientation( editorPage.driver );
 			// Wait for the device to finish rotating
 			await editorPage.driver.sleep( 3000 );
-			await editorPage.removeBlock();
 		} );
 
 		it( 'mover buttons display in the correct positions', async () => {
+			await editorPage.initializeEditor();
 			await editorPage.addNewBlock( blockNames.columns );
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
@@ -164,20 +152,11 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			await toggleOrientation( editorPage.driver );
 			// Wait for the device to finish rotating
 			await editorPage.driver.sleep( 3000 );
-			// Navigate upwards in block hierarchy
-			await editorPage.moveBlockSelectionUp();
-			await editorPage.driver.sleep( 1000 );
-			await editorPage.removeBlock();
 		} );
 
 		it( 'displays with correct colors with dark mode enabled', async () => {
 			await toggleDarkMode( editorPage.driver, true );
-
-			// The Android editor requires a restart to apply dark mode
-			if ( isAndroid() ) {
-				await editorPage.driver.resetApp();
-				await isEditorVisible( editorPage.driver );
-			}
+			await editorPage.initializeEditor();
 
 			await editorPage.addNewBlock( blockNames.columns );
 			// Wait for the modal to open
@@ -236,17 +215,11 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			screenshot = await takeScreenshot();
 			expect( screenshot ).toMatchImageSnapshot();
 
-			await editorPage.removeBlock();
 			await toggleDarkMode( editorPage.driver, false );
-
-			// The Android editor requires a restart to apply dark mode
-			if ( isAndroid() ) {
-				await editorPage.driver.resetApp();
-				await isEditorVisible( editorPage.driver );
-			}
 		} );
 
 		it( 'sliders display proportionate fill level previews', async () => {
+			await editorPage.initializeEditor();
 			await editorPage.addNewBlock( blockNames.columns );
 			// Wait for the modal to open
 			await editorPage.driver.sleep( 3000 );
@@ -297,13 +270,12 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			// Visual test check for adjusted columns
 			const screenshot = await takeScreenshot();
 			expect( screenshot ).toMatchImageSnapshot();
-
-			await editorPage.dismissBottomSheet();
-			await editorPage.removeBlock();
 		} );
 
 		it( 'allows deep nesting to at least 3 levels', async () => {
-			await editorPage.setHtmlContent( NESTED_COLUMNS_3_LEVELS );
+			await editorPage.initializeEditor( {
+				initialData: NESTED_COLUMNS_3_LEVELS,
+			} );
 
 			// Wait for the block to be rendered
 			await editorPage.driver.sleep( 3000 );
@@ -311,16 +283,6 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			// Visual test check
 			const screenshot = await takeScreenshot();
 			expect( screenshot ).toMatchImageSnapshot();
-
-			// Remove block
-			const columnsBlock = await editorPage.getBlockAtPosition(
-				blockNames.columns
-			);
-			await columnsBlock.click();
-
-			await editorPage.moveBlockSelectionUp( { toRoot: true } );
-
-			await editorPage.removeBlock();
 		} );
 	} );
 } );
