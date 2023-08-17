@@ -46,6 +46,8 @@ steps:
 
         echo "--- :arrow_up: Upload iOS bundle artifact"
         buildkite-agent artifact upload bundle/ios/App.js
+        tar -czvf ios-assets.tar.gz -C ios-xcframework/Gutenberg/Resources assets/
+        buildkite-agent artifact upload ios-assets.tar.gz
   - label: "Build Android RN Aztec & Publish to S3"
     key: "publish-react-native-aztec-android"
     plugins:
