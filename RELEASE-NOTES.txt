@@ -3,8 +3,8 @@ Unreleased
 
 1.102.0
 ---
-* [*] Add outline around selected Social Link block [https://github.com/WordPress/gutenberg/pull/53377]
-* [**] Fixed images not rendering in Help section on iOS [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6067]
+* [**] Add outline around selected Social Link block [https://github.com/WordPress/gutenberg/pull/53377]
+* [*] Display custom color value in mobile Cover Block color picker [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5852]
 * [**] Fixes font customization not getting updated on iOS [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6036]
 
 1.101.1
