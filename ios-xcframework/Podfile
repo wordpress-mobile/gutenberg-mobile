@@ -18,22 +18,22 @@ puts "[Gutenberg] Installing pods with Hermes #{HERMES_ENABLED ? 'enabled' : 'di
 #
 # See https://github.com/wordpress-mobile/gutenberg-mobile/issues/5025
 DEPENDENCIES = %w[
+  BVLinearGradient
+  RNCClipboard
+  RNCMaskedView
+  RNFastImage
+  RNGestureHandler
+  RNReanimated
+  RNSVG
+  RNScreens
+  React-jsc
+  react-native-blur
+  react-native-get-random-values
   react-native-safe-area
   react-native-safe-area-context
+  react-native-slider
   react-native-video
   react-native-webview
-  RNSVG
-  react-native-slider
-  BVLinearGradient
-  react-native-get-random-values
-  react-native-blur
-  RNScreens
-  RNReanimated
-  RNGestureHandler
-  RNCMaskedView
-  RNCClipboard
-  RNFastImage
-  React-jsc
 ].freeze
 
 def gutenberg_dependencies
