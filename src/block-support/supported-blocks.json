@@ -31,11 +31,12 @@
 		"core/block",
 		"jetpack/contact-info",
 		"jetpack/email",
+		"jetpack/paywall",
 		"jetpack/phone",
 		"jetpack/address",
 		"videopress/video"
 	],
-	"devOnly": [ "core/code", "jetpack/paywall", "jetpack/tiled-gallery" ],
+	"devOnly": [ "core/code", "jetpack/tiled-gallery" ],
 	"iOSOnly": [],
 	"androidOnly": []
 }

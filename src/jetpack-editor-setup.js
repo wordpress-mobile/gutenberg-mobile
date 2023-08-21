@@ -25,7 +25,7 @@ const supportedJetpackBlocks = {
 		available: true,
 	},
 	paywall: {
-		available: __DEV__,
+		available: true,
 	},
 	story: {
 		available: true,
