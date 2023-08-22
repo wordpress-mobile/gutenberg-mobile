@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [*] Search Control - Prevent calling TextInput's methods when undefined [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6090]
 
 1.102.0
 ---
