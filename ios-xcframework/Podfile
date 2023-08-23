@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'json'
 require 'xcodeproj'
 
 REACT_NATIVE_PATH = '../gutenberg/node_modules/react-native'
@@ -25,7 +26,9 @@ def gutenberg_dependencies
   podspec_extension = '.podspec.json'
 
   Dir["../third-party-podspecs/*#{podspec_extension}"].each do |podspec_path|
-    pod_name = File.basename(podspec_path, podspec_extension)
+    pod_name = JSON.parse(File.read(podspec_path))['name']
+
+    raise "Could not find pod name in JSON spec at #{podspec_path}" unless pod_name
 
     # Skip the standard RNReanimated podspec because we use a custom version
     # while working on an upstream fix
