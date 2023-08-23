@@ -35,7 +35,8 @@ CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE
 CLANG_WARN_UNREACHABLE_CODE = YES
 CODE_SIGN_STYLE = Automatic
 COPY_PHASE_STRIP = NO
-CURRENT_PROJECT_VERSION = 1
+// See "[Gutenberg] Set version number" build phase which sets this at build time
+CURRENT_PROJECT_VERSION = 0
 DEFINES_MODULE = YES
 DYLIB_COMPATIBILITY_VERSION = 1
 DYLIB_CURRENT_VERSION = 1
@@ -74,7 +75,9 @@ LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @loader_path/
 //
 // This setting defines the user-visible version of the project. The value corresponds to
 // the `CFBundleShortVersionString` key in your app's Info.plist.
-MARKETING_VERSION = 1.0
+//
+// See "[Gutenberg] Set version number" build phase which sets this at build time
+MARKETING_VERSION = 0.0
 MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = gnu11 gnu++20
 MODULE_VERIFIER_SUPPORTED_LANGUAGES = objective-c objective-c++
 MTL_FAST_MATH = YES

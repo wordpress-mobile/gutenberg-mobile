@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'json'
+
+# get the path to the parent folder using Dir methods
+package_name = 'package.json'
+path_to_package_json = File.join(File.dirname(File.dirname(File.dirname(File.absolute_path(__FILE__)))), package_name)
+
+unless File.exist?(path_to_package_json)
+  $stderr.puts "error: #{path_to_package_json} does not exist"
+  exit 1
+end
+
+package_hash = JSON.parse(File.read(path_to_package_json))
+
+unless package_hash
+  $stderr.puts "error: Failed to read JSON from #{path_to_package_json}"
+  exit 1
+end
+
+version = package_hash['version']
+
+unless version
+  $stderr.puts "error: #{package_name} does not contain a version key"
+  exit 1
+end
+
+puts version

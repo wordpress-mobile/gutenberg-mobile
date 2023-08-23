@@ -197,6 +197,7 @@
 				3FE06ABC29F3F61300F752AD /* Frameworks */,
 				3FE06ABD29F3F61300F752AD /* Resources */,
 				33E2599260A73CF1DC26925F /* [CP] Copy Pods Resources */,
+				3F0B19312A95C1600012C731 /* [Gutenberg] Set version number */,
 			);
 			buildRules = (
 			);
@@ -285,6 +286,25 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gutenberg/Pods-Gutenberg-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		3F0B19312A95C1600012C731 /* [Gutenberg] Set version number */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[Gutenberg] Set version number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$SRCROOT/BuildPhases/set_current_project_version.sh\"\n";
 		};
 		3FA0C5822A1CC63B00600A9A /* [Gutenberg] Check App.js */ = {
 			isa = PBXShellScriptBuildPhase;
