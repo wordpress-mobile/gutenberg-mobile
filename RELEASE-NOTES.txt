@@ -2,6 +2,10 @@ Unreleased
 ---
 * [**] Fixes font customization not getting updated on iOS [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6036]
 
+1.101.2
+---
+* [**] Fix Voice Over and assistive keyboards [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6102]
+
 1.101.1
 ---
 * [**] Fixed images not rendering in Help section on iOS [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6067]
