@@ -29,7 +29,7 @@ describe( 'Paywall block', () => {
 		} );
 
 		expect(
-			screen.getByText( 'Exclusive content below this line' )
+			screen.getByText( 'Subscriber-only content below' )
 		).toBeVisible();
 	} );
 } );
