@@ -1,5 +1,13 @@
 Unreleased
 ---
+* [*] Remove third-party dependency on react-native-hsv-color-picker [https://github.com/WordPress/gutenberg/pull/53329]
+* [*] Search Control - Prevent calling TextInput's methods when undefined [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6090]
+* [**] Add basic support to view, relocate, and remove the Jetpack Paywall block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6076]
+
+1.102.0
+---
+* [**] Add outline around selected Social Link block [https://github.com/WordPress/gutenberg/pull/53377]
+* [*] Display custom color value in mobile Cover Block color picker [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5852]
 * [**] Fixes font customization not getting updated on iOS [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6036]
 
 1.101.2
@@ -18,6 +26,10 @@ Unreleased
 * [**] Upgrade React Native to 0.71.11 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5874]
 * [*] Upgrade Gradle to 8.2.1 & AGP to 8.1.0 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5989]
 * [*] Fix Gallery block selection when adding media [https://github.com/WordPress/gutenberg/pull/53127]
+
+1.100.2
+---
+* [**] Fix iOS Focus loop for RichText components [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6009]
 
 1.100.1
 ---

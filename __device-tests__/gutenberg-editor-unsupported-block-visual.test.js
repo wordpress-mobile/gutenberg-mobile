@@ -1,17 +1,21 @@
 /**
  * Internal dependencies
  */
-const { isAndroid, toggleDarkMode, isEditorVisible } = e2eUtils;
+const { isAndroid, toggleDarkMode } = e2eUtils;
 import { takeScreenshot } from './utils';
 
 describe( 'Gutenberg Editor Visual test for Unsupported Block', () => {
 	it( 'should show the empty placeholder for the selected/unselected state', async () => {
-		await editorPage.setHtmlContent( e2eTestData.unsupportedBlockHtml );
+		await editorPage.initializeEditor( {
+			initialData: e2eTestData.unsupportedBlockHtml,
+		} );
 
-		let unsupportedBlock = await editorPage.getBlockAtPosition(
+		const unsupportedBlock = await editorPage.getBlockAtPosition(
 			editorPage.blockNames.unsupported
 		);
 		await unsupportedBlock.click();
+		// Wait for the block to be selected
+		await editorPage.driver.sleep( 500 );
 
 		// Visual test check
 		let screenshot = await takeScreenshot();
@@ -26,26 +30,16 @@ describe( 'Gutenberg Editor Visual test for Unsupported Block', () => {
 		// Visual test check
 		screenshot = await takeScreenshot();
 		expect( screenshot ).toMatchImageSnapshot();
-
-		unsupportedBlock = await editorPage.getBlockAtPosition(
-			editorPage.blockNames.unsupported
-		);
-		await unsupportedBlock.click();
-		await editorPage.removeBlock();
 	} );
 
 	it( 'should show the empty placeholder for the selected/unselected state in dark mode', async () => {
 		await toggleDarkMode( editorPage.driver, true );
 
-		// The Android editor requires a restart to apply dark mode
-		if ( isAndroid() ) {
-			await editorPage.driver.resetApp();
-			await isEditorVisible( editorPage.driver );
-		}
+		await editorPage.initializeEditor( {
+			initialData: e2eTestData.unsupportedBlockHtml,
+		} );
 
-		await editorPage.setHtmlContent( e2eTestData.unsupportedBlockHtml );
-
-		let unsupportedBlock = await editorPage.getBlockAtPosition(
+		const unsupportedBlock = await editorPage.getBlockAtPosition(
 			editorPage.blockNames.unsupported
 		);
 		await unsupportedBlock.click();
@@ -64,23 +58,13 @@ describe( 'Gutenberg Editor Visual test for Unsupported Block', () => {
 		screenshot = await takeScreenshot();
 		expect( screenshot ).toMatchImageSnapshot();
 
-		unsupportedBlock = await editorPage.getBlockAtPosition(
-			editorPage.blockNames.unsupported
-		);
-		await unsupportedBlock.click();
-		await editorPage.removeBlock();
-
 		await toggleDarkMode( editorPage.driver, false );
-
-		// The Android editor requires a restart to apply dark mode
-		if ( isAndroid() ) {
-			await editorPage.driver.resetApp();
-			await isEditorVisible( editorPage.driver );
-		}
 	} );
 
 	it( 'should be able to open the unsupported block web view editor', async () => {
-		await editorPage.setHtmlContent( e2eTestData.unsupportedBlockHtml );
+		await editorPage.initializeEditor( {
+			initialData: e2eTestData.unsupportedBlockHtml,
+		} );
 
 		const unsupportedBlock = await editorPage.getBlockAtPosition(
 			editorPage.blockNames.unsupported
