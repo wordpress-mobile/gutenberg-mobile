@@ -4,6 +4,10 @@ Unreleased
 * [*] Search Control - Prevent calling TextInput's methods when undefined [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6090]
 * [**] Add basic support to view, relocate, and remove the Jetpack Paywall block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6076]
 
+1.102.1
+---
+* [**] Fix Voice Over and assistive keyboards [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6102]
+
 1.102.0
 ---
 * [**] Add outline around selected Social Link block [https://github.com/WordPress/gutenberg/pull/53377]
