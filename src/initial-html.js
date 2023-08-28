@@ -1,4 +1,6 @@
 export default `
+<!-- wp:jetpack/paywall /-->
+
 <!-- wp:jetpack/contact-info -->
 <div class="wp-block-jetpack-contact-info"><!-- wp:jetpack/email {"email":"me@wordpress.org"} -->
 <div class="wp-block-jetpack-email"><a href="mailto:me@wordpress.org">me@wordpress.org</a></div>
