@@ -6,6 +6,7 @@ import { takeScreenshot } from './utils';
 
 describe( 'Gutenberg Editor Visual test for Group Block', () => {
 	it( 'should show the empty placeholder for the unselected state', async () => {
+		await editorPage.initializeEditor();
 		await editorPage.addNewBlock( blockNames.group );
 
 		// Select title to unfocus the block
