@@ -2,8 +2,16 @@
  * Internal dependencies
  */
 const { blockNames } = editorPage;
-import { takeScreenshot } from './utils';
-const { toggleOrientation, isAndroid, swipeFromTo, toggleDarkMode } = e2eUtils;
+import { takeScreenshot, takeScreenshotByElement } from './utils';
+const {
+	clickIfClickable,
+	toggleOrientation,
+	isAndroid,
+	swipeFromTo,
+	toggleDarkMode,
+	typeString,
+	waitForVisible,
+} = e2eUtils;
 import { NESTED_COLUMNS_3_LEVELS } from './test-editor-data';
 
 const ANDROID_COLUMN_APPENDER_BUTTON_XPATH =
@@ -282,6 +290,45 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 
 			// Visual test check
 			const screenshot = await takeScreenshot();
+			expect( screenshot ).toMatchImageSnapshot();
+		} );
+	} );
+
+	describe( 'Social Icons block', () => {
+		it( 'should display active icon colors', async () => {
+			await editorPage.initializeEditor();
+
+			await editorPage.addNewBlock( blockNames.socialIcons );
+			const twitterIconXpath = isAndroid()
+				? '//android.widget.Button[@content-desc="Twitter social icon"]'
+				: '//XCUIElementTypeButton[@name="Twitter social icon"]';
+			await clickIfClickable( editorPage.driver, twitterIconXpath );
+			await editorPage.toggleFormatting( 'Add link to Twitter' );
+			const uRLFieldXpath = isAndroid()
+				? '//android.widget.Button[@content-desc="URL. Empty"]/android.view.ViewGroup[1]/android.widget.EditText'
+				: '//XCUIElementTypeOther[@name="Add URL"]/XCUIElementTypeTextField';
+			const uRLField = await waitForVisible(
+				editorPage.driver,
+				uRLFieldXpath
+			);
+			await typeString(
+				editorPage.driver,
+				uRLField,
+				'https://twitter.com/WordPress'
+			);
+			await editorPage.dismissBottomSheet();
+			// Wait for the modal to close
+			await editorPage.driver.sleep( 3000 );
+			const socialLinksBlockXpath = isAndroid()
+				? '//android.widget.Button[@content-desc="Social Icons Block. Row 1"]'
+				: '(//XCUIElementTypeOther[@name="Social Icons Block. Row 1"])[1]';
+			const socialLinksBlock = await editorPage.driver.elementByXPath(
+				socialLinksBlockXpath
+			);
+
+			const screenshot = await takeScreenshotByElement(
+				socialLinksBlock
+			);
 			expect( screenshot ).toMatchImageSnapshot();
 		} );
 	} );
