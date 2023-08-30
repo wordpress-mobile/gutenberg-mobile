@@ -216,9 +216,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Open and wait for block settings
 			await editorPage.openBlockSettings();
-			// On Android, wait extra time before taking the screenshot
-			// to let the bottom sheet's scrollbar fade out.
-			await editorPage.driver.sleep( isAndroid() ? 2000 : 500 );
+			await editorPage.driver.sleep( 500 );
 
 			// Visual test check
 			const screenshot = await takeScreenshot();
