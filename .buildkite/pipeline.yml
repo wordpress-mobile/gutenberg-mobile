@@ -25,6 +25,12 @@ x-common-params:
 steps:
   - label: iOS Build
     command: |
+      # This build failed because the git-s3-cache plugin didn't checkout the repo due to finding the env var set
+      # https://buildkite.com/automattic/gutenberg-mobile/builds/7033#018a447e-aca5-4b07-ba2d-3ea961873d8d
+      echo '+++ :bug: Check IS_VM_HOST value'
+      echo $IS_VM_HOST
+      echo $$IS_VM_HOST
+
       echo '--- :npm: Setup Node dependencies'
       npm ci
 
