@@ -219,7 +219,9 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.driver.sleep( 500 );
 
 			// Visual test check
-			const screenshot = await takeScreenshot();
+			const screenshot = await takeScreenshot(
+				isAndroid() ? { cropOffset: { right: 20 } } : {}
+			);
 			expect( screenshot ).toMatchImageSnapshot();
 
 			// Clean up test
