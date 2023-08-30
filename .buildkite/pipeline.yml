@@ -1,4 +1,12 @@
 x-common-params:
+  - &gb-mobile-docker-container
+    docker#v3.8.0:
+      image: "public.ecr.aws/automattic/gb-mobile-image:latest"
+      environment:
+        - "CI=true"
+        # Allow WP-CLI to be run as root, otherwise it throws an exception.
+        # Reference: https://git.io/J9q2S
+        - "WP_CLI_ALLOW_ROOT=true"
   - &git-cache-plugin
     automattic/git-s3-cache#1.1.4:
       # Ensure these settings match what's defined in cache-builder.yml
@@ -18,17 +26,33 @@ steps:
   - block: "Request trigger Android bundle and builds"
     branches: "dependabot/submodules/*"
 
+  - label: Lint and Unit Tests
+    key: unit-tests
+    plugins:
+      - *gb-mobile-docker-container
+    command: |
+      source /root/.bashrc
+
+      echo "--- :node: Setup Node environment"
+      nvm install && nvm use
+
+      echo "--- :npm: Install Node dependencies"
+      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+
+      echo "--- :node: Lint and Unit Tests"
+      ./bin/ci-checks-js.sh
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
+    artifact_paths:
+      - ./logs/*.log
+      - ./reports/test-results/*.xml
+
   - label: "Build JS Bundles"
+    depends_on: "unit-tests"
     key: "js-bundles"
     plugins:
+      - *gb-mobile-docker-container
       - *git-cache-plugin
-      - docker#v3.8.0:
-          image: "public.ecr.aws/automattic/gb-mobile-image:latest"
-          environment:
-            - "CI=true"
-            # Allow WP-CLI to be run as root, otherwise it throws an exception.
-            # Reference: https://git.io/J9q2S
-            - "WP_CLI_ALLOW_ROOT=true"
     command: |
         source /root/.bashrc
 
@@ -71,6 +95,7 @@ steps:
           buildkite-agent artifact upload bundle/ios/App.composed.js.map
         fi
   - label: "Build Android RN Aztec & Publish to S3"
+    depends_on: unit-tests
     key: "publish-react-native-aztec-android"
     plugins:
       - *git-cache-plugin
