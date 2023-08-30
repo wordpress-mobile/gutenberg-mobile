@@ -30,6 +30,9 @@ steps:
 
       echo '--- :react: Build iOS app for E2E testing'
       npm run core test:e2e:build-app:ios
+
+      echo '--- :react: Build iOS bundle for E2E testing'
+      npm run test:e2e:bundle:ios
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - automattic/nvm#0.1.0
