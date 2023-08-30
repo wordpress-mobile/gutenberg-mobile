@@ -51,17 +51,29 @@ export async function takeScreenshotByElement( element, { padding } = {} ) {
  *
  * @typedef {Object} CropScreenshot
  *
- * @property {number}         x                         X offset, in pixels.
- * @property {number}         y                         Y offset, in pixels.
- * @property {number}         width                     Width, in pixels.
- * @property {number}         height                    Height, in pixels.
+ * @property {number}               x                         X offset, in pixels.
+ * @property {number}               y                         Y offset, in pixels.
+ * @property {number}               width                     Width, in pixels.
+ * @property {number}               height                    Height, in pixels.
  *
- * @param    {Object}         options                   Options
- * @param    {boolean}        [options.withoutKeyboard] Prevents showing the keyboard in the screenshot.
- * @param    {CropScreenshot} [options.crop]            Specify values to crop the screenshot.
+ * @typedef {Object} CropOffsetScreenshot
+ *
+ * @property {number}               left                      Left offset to apply to the crop values, in pixels.
+ * @property {number}               top                       Top offset to apply to the crop values, in pixels.
+ * @property {number}               right                     Right offset to apply to the crop values, in pixels.
+ * @property {number}               bottom                    Bottom offset to apply to the crop values, in pixels.
+ *
+ * @param    {Object}               options                   Options
+ * @param    {boolean}              [options.withoutKeyboard] Prevents showing the keyboard in the screenshot.
+ * @param    {CropScreenshot}       [options.crop]            Specify values to crop the screenshot.
+ * @param    {CropOffsetScreenshot} [options.cropOffset]      Specify offset values to apply to cropping.
  * @return {Buffer} Sreenshot image.
  */
-export async function takeScreenshot( { withoutKeyboard, crop } = {} ) {
+export async function takeScreenshot( {
+	withoutKeyboard,
+	crop,
+	cropOffset,
+} = {} ) {
 	const iPadDevice = process.env.IPAD;
 	const sessionCapabilities = await editorPage.driver.sessionCapabilities();
 	const { pixelRatio } = sessionCapabilities;
@@ -89,6 +101,15 @@ export async function takeScreenshot( { withoutKeyboard, crop } = {} ) {
 		width: crop?.width ?? imageWidth,
 		height: crop?.height ?? imageHeight,
 	};
+
+	// Apply crop offset
+	if ( cropOffset ) {
+		const { left = 0, top = 0, right = 0, bottom = 0 } = cropOffset;
+		finalSize.x += left;
+		finalSize.y += top;
+		finalSize.width -= left + right;
+		finalSize.height -= top + bottom;
+	}
 
 	// Remove the status bar
 	if ( finalSize.y < statusBarHeight ) {
