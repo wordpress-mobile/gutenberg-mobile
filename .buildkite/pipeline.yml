@@ -28,7 +28,7 @@ steps:
       npm ci
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
-      - automattic/nvm#v0.1.0
+      - automattic/nvm#0.1.0
       - *git-cache-plugin
     agents:
       queue: mac
