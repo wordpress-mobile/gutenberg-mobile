@@ -34,7 +34,7 @@ npm run core test:e2e:build-app:ios
 echo '--- :react: Build iOS bundle for E2E testing'
 npm run test:e2e:bundle:ios
 
-echo '--- :zip: Prepare artifact for SauceLab upload'
+echo '--- :compression: Prepare artifact for SauceLab upload'
 WORK_DIR=$(pwd) \
   && pushd ./gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator \
   && zip -r "$WORK_DIR/gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip" GutenbergDemo.app \
