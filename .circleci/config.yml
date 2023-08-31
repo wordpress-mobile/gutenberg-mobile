@@ -77,7 +77,7 @@ commands:
 
             SSH_CONFIG_DIR="$HOME/.ssh"
             echo "Using SSH Config Dir '$SSH_CONFIG_DIR'"
-            git --version
+            git --version 
 
             mkdir -p "$SSH_CONFIG_DIR"
             chmod 0700 "$SSH_CONFIG_DIR"
@@ -312,13 +312,7 @@ jobs:
         - dependencies-v6-
     - run:
         name: Build (if needed)
-        # Debug experiment – Always run to see what happens in CircleCI
-        #
-        # This is to understand why the Buildkite build failed to code-sign when, evidentely, it works here
-        # https://buildkite.com/automattic/gutenberg-mobile/builds/7039#018a4555-02d8-4ce3-b463-b876b3e7a658
-        #
-        # command: test -e gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app || npm run core test:e2e:build-app:ios
-        command: npm run core test:e2e:build-app:ios
+        command: test -e gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app || npm run core test:e2e:build-app:ios
     - save_cache:
         name: Save Dependencies Cache
         key: dependencies-v6-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}-{{ checksum "gutenberg/package-lock.json" }}
@@ -479,7 +473,7 @@ workflows:
           requires: [ "Test Android", "Android Native Unit Tests", "Android Build" ]
           filters:
             branches:
-              only:
+              only: 
                 - trunk
                 - /^dependabot/submodules/.*/
                 - /^release.*/
