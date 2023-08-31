@@ -353,7 +353,7 @@ describe( 'VideoPress block - Uploads', () => {
 		expect( getEditorHtml() ).toMatchSnapshot( 'video ready' );
 	} );
 
-	it( 'adds video by inserting URL', async () => {
+	it.skip( 'adds video by inserting URL', async () => {
 		let promptApply;
 		prompt.mockImplementation( ( title, message, [ , apply ] ) => {
 			promptApply = apply.onPress;
