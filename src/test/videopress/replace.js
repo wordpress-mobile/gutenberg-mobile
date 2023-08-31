@@ -242,7 +242,7 @@ describe( 'VideoPress block - Replace', () => {
 		expect( getEditorHtml() ).toMatchSnapshot( 'after replacing video' );
 	} );
 
-	it.skip( 'replaces with new URL', async () => {
+	it( 'replaces with new URL', async () => {
 		const screen = await initializeEditor( {
 			initialHtml: generateBlockHTML( { guid: GUID_INITIAL_VIDEO } ),
 		} );
