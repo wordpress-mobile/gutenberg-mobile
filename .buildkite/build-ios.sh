@@ -26,13 +26,13 @@ echo '--- :ruby: Install react-native-editor Ruby version'
 rbenv install --skip-existing "$(cat gutenberg/packages/react-native-editor/ios/.ruby-version)"
 
 echo '--- :ios: Set env var for iOS E2E testing'
-set +x
+set -x
 export TEST_RN_PLATFORM=ios
 export TEST_ENV=sauce
 # Set a destination different from the hardcoded one which only works in the
 # older Xcode-setup used by CircleCI
 export RN_EDITOR_E2E_IOS_DESTINATION='platform=iOS Simulator,name=iPhone 13,OS=16.4'
-set -x
+set +x
 
 echo '--- :react: Build iOS app for E2E testing'
 npm run core test:e2e:build-app:ios
