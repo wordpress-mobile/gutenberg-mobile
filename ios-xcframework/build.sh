@@ -43,15 +43,18 @@ function log {
 function archive {
   PLATFORM=$1
 
-  log "Archiving $SCHEME for $PLATFORM platform"
+  log "Archiving $SCHEME for $PLATFORM platform, setting version to $VERSION"
 
-  _xcodebuild archive \
+  _xcodebuild \
     -workspace "$WORKSPACE" \
     -scheme "$SCHEME" \
     -configuration Release \
     -sdk "$PLATFORM" \
     -archivePath "$ARCHIVES_ROOT/$PLATFORM.xcarchive" \
     -derivedDataPath "$DERIVED_DATA_PATH" \
+    archive \
+    MARKETING_VERSION="$VERSION" \
+    CURRENT_PROJECT_VERSION="$VERSION" \
     BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
     SKIP_INSTALL=NO
 }
@@ -62,6 +65,9 @@ if [ ! -d $HERMES_XCFRAMEWORK ]; then
   log 'fail' "Could not file required Hermes XCFramework at path: $HERMES_XCFRAMEWORK"
   exit 1
 fi
+
+# Fail early if cannot fetch version
+VERSION=$(./bin/get_gutenberg_version)
 
 BUILD_DIR=./build
 DERIVED_DATA_PATH="$BUILD_DIR/derived_data"

@@ -35,7 +35,7 @@ CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE
 CLANG_WARN_UNREACHABLE_CODE = YES
 CODE_SIGN_STYLE = Automatic
 COPY_PHASE_STRIP = NO
-// See "[Gutenberg] Set version number" build phase which sets this at build time
+// The automation building the XCFramework through this scaffolding project is reponsible for setting this to match the gutenberg-mobile version.
 CURRENT_PROJECT_VERSION = 0
 DEFINES_MODULE = YES
 DYLIB_COMPATIBILITY_VERSION = 1
@@ -76,7 +76,7 @@ LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @loader_path/
 // This setting defines the user-visible version of the project. The value corresponds to
 // the `CFBundleShortVersionString` key in your app's Info.plist.
 //
-// See "[Gutenberg] Set version number" build phase which sets this at build time
+// The automation building the XCFramework through this scaffolding project is reponsible for setting this to match the gutenberg-mobile version.
 MARKETING_VERSION = 0.0
 MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = gnu11 gnu++20
 MODULE_VERIFIER_SUPPORTED_LANGUAGES = objective-c objective-c++
