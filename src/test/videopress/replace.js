@@ -4,7 +4,6 @@
 import { dispatch } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import { requestImageUploadCancelDialog } from '@wordpress/react-native-bridge';
-import prompt from 'react-native-prompt-android';
 
 /**
  * External dependencies
@@ -41,7 +40,6 @@ import {
 import { MEDIA_OPTIONS } from './local-helpers/constants';
 
 jest.mock( '@wordpress/api-fetch' );
-jest.mock( 'react-native-prompt-android', () => jest.fn() );
 
 const GUID_INITIAL_VIDEO = 'OLDxGUID';
 const GUID_REPLACE_VIDEO = 'NEWxGUID';

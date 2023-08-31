@@ -27,7 +27,6 @@ import {
 	setupApiFetch,
 } from 'test/helpers';
 import { ActionSheetIOS } from 'react-native';
-import prompt from 'react-native-prompt-android';
 
 /**
  * Internal dependencies
@@ -44,7 +43,6 @@ import {
 } from './local-helpers/constants';
 
 jest.mock( '@wordpress/api-fetch' );
-jest.mock( 'react-native-prompt-android', () => jest.fn() );
 
 const initialHtml = VIDEOPRESS_EMPTY_BLOCK_HTML;
 const FETCH_ITEMS = generateFetchMocks();
