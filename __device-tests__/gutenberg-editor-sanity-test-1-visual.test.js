@@ -331,5 +331,54 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			);
 			expect( screenshot ).toMatchImageSnapshot();
 		} );
+
+		it( 'should display the block outline of a block inserted from the appender', async () => {
+			await editorPage.initializeEditor();
+
+			await editorPage.addNewBlock( blockNames.socialIcons );
+
+			const appenderButton = isAndroid()
+				? await editorPage.waitForElementToBeDisplayedByXPath(
+						`//android.widget.Button[@resource-id="appender-button"]`
+				  )
+				: await this.waitForElementToBeDisplayedById(
+						'appender-button'
+				  );
+			await appenderButton.click();
+
+			const amazonBlockXPath = isAndroid()
+				? '//android.widget.Button[@content-desc="Amazon block"]'
+				: '//XCUIElementTypeButton[@name="Amazon block"]';
+
+			await clickIfClickable( editorPage.driver, amazonBlockXPath );
+
+			const uRLFieldXpath = isAndroid()
+				? '//android.widget.Button[@content-desc="URL. Empty"]/android.view.ViewGroup[1]/android.widget.EditText'
+				: '//XCUIElementTypeOther[@name="Add URL"]/XCUIElementTypeTextField';
+			const uRLField = await waitForVisible(
+				editorPage.driver,
+				uRLFieldXpath
+			);
+			await typeString(
+				editorPage.driver,
+				uRLField,
+				'https://amazon.com'
+			);
+			await editorPage.dismissBottomSheet();
+			// Wait for the modal to close
+			await editorPage.driver.sleep( 3000 );
+
+			const socialLinksBlockXpath = isAndroid()
+				? '//android.widget.Button[@content-desc="Social Icons Block. Row 1"]'
+				: '(//XCUIElementTypeOther[@name="Social Icons Block. Row 1"])[1]';
+			const socialLinksBlock = await editorPage.driver.elementByXPath(
+				socialLinksBlockXpath
+			);
+
+			const screenshot = await takeScreenshotByElement(
+				socialLinksBlock
+			);
+			expect( screenshot ).toMatchImageSnapshot();
+		} );
 	} );
 } );
