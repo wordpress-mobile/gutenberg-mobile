@@ -9,7 +9,6 @@ import { requestImageUploadCancelDialog } from '@wordpress/react-native-bridge';
  * External dependencies
  */
 import {
-	act,
 	dismissModal,
 	fireEvent,
 	getBlock,
@@ -20,7 +19,6 @@ import {
 	setupMediaPicker,
 	setupPicker,
 	setupApiFetch,
-	waitForElementToBeRemoved,
 } from 'test/helpers';
 
 /**

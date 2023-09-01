@@ -14,7 +14,6 @@ import {
  * External dependencies
  */
 import {
-	act,
 	dismissModal,
 	fireEvent,
 	getBlock,
@@ -26,7 +25,6 @@ import {
 	within,
 	setupPicker,
 	setupApiFetch,
-	waitForElementToBeRemoved,
 } from 'test/helpers';
 import { ActionSheetIOS } from 'react-native';
 
