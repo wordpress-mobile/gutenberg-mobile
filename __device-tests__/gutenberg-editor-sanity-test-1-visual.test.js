@@ -342,7 +342,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 				? await editorPage.waitForElementToBeDisplayedByXPath(
 						`//android.widget.Button[@resource-id="appender-button"]`
 				  )
-				: await this.waitForElementToBeDisplayedById(
+				: await editorPage.waitForElementToBeDisplayedById(
 						'appender-button'
 				  );
 			await appenderButton.click();
