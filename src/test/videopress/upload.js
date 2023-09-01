@@ -15,6 +15,7 @@ import {
  */
 import {
 	act,
+	dismissModal,
 	fireEvent,
 	getBlock,
 	getEditorHtml,
@@ -25,6 +26,7 @@ import {
 	within,
 	setupPicker,
 	setupApiFetch,
+	waitForElementToBeRemoved,
 } from 'test/helpers';
 import { ActionSheetIOS } from 'react-native';
 
@@ -354,15 +356,15 @@ describe( 'VideoPress block - Uploads', () => {
 	} );
 
 	it( 'adds video by inserting URL', async () => {
-		let promptApply;
-		prompt.mockImplementation( ( title, message, [ , apply ] ) => {
-			promptApply = apply.onPress;
-		} );
-
 		const screen = await initializeEditor( {
 			initialHtml,
 		} );
-		const { getByText, getByTestId } = screen;
+		const {
+			getByText,
+			getByTestId,
+			getByPlaceholderText,
+			findByTestId,
+		} = screen;
 		const { selectOption } = setupPicker( screen, MEDIA_OPTIONS );
 		// Clear previous calls to `apiFetch`
 		apiFetch.mockClear();
@@ -374,12 +376,22 @@ describe( 'VideoPress block - Uploads', () => {
 		// Insert video from URL
 		fireEvent.press( getByText( 'Add video' ) );
 		selectOption( 'Insert from URL' );
-		expect( prompt ).toHaveBeenCalled();
-
-		// Mock prompt dialog
-		await act( () =>
-			promptApply( `https://videopress.com/v/${ VIDEOPRESS_GUID }` )
+		fireEvent.changeText(
+			getByPlaceholderText( 'Type a URL' ),
+			`https://videopress.com/v/${ VIDEOPRESS_GUID }`
 		);
+		dismissModal( getByTestId( 'bottom-sheet' ) );
+
+		// Check loading overlay is displayed before the player is ready
+		expect( within( block ).getByText( 'Loading' ) ).toBeVisible();
+
+		// Notify the player is ready
+		const player = await findByTestId( 'videopress-player' );
+		sendWebViewMessage( player, {
+			type: 'message',
+			event: 'videopress_ready',
+		} );
+		expect( player ).toBeVisible();
 
 		// Requests:
 		//  - Token request
@@ -389,17 +401,6 @@ describe( 'VideoPress block - Uploads', () => {
 		FETCH_ITEMS.forEach( ( fetch ) =>
 			expect( apiFetch ).toHaveBeenCalledWith( fetch.request )
 		);
-
-		// Check loading overlay is displayed before the player is ready
-		expect( within( block ).getByText( 'Loading' ) ).toBeVisible();
-
-		// Notify the player is ready
-		const player = getByTestId( 'videopress-player' );
-		sendWebViewMessage( player, {
-			type: 'message',
-			event: 'videopress_ready',
-		} );
-		expect( player ).toBeVisible();
 
 		// At this point the player should be showing the conversion state.
 		// Hence, let's notify the loaded state.

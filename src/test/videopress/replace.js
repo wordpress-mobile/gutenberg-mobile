@@ -10,6 +10,7 @@ import { requestImageUploadCancelDialog } from '@wordpress/react-native-bridge';
  */
 import {
 	act,
+	dismissModal,
 	fireEvent,
 	getBlock,
 	getEditorHtml,
@@ -19,6 +20,7 @@ import {
 	setupMediaPicker,
 	setupPicker,
 	setupApiFetch,
+	waitForElementToBeRemoved,
 } from 'test/helpers';
 
 /**
@@ -36,6 +38,7 @@ import {
 	generateRemoteMedia,
 	generateLocalMedia,
 	generateLibraryMedia,
+	sendWebViewMessage,
 } from './local-helpers/utils';
 import { MEDIA_OPTIONS } from './local-helpers/constants';
 
@@ -246,7 +249,12 @@ describe( 'VideoPress block - Replace', () => {
 		const screen = await initializeEditor( {
 			initialHtml: generateBlockHTML( { guid: GUID_INITIAL_VIDEO } ),
 		} );
-		const { getByLabelText, getByTestId } = screen;
+		const {
+			getByLabelText,
+			getByTestId,
+			getByPlaceholderText,
+			findByTestId,
+		} = screen;
 
 		// Block is visible
 		const block = await getBlock( screen, 'VideoPress' );
@@ -268,21 +276,20 @@ describe( 'VideoPress block - Replace', () => {
 			} )
 		);
 
-		// Mock prompt dialog
-		let promptApply;
-		prompt.mockImplementation( ( title, message, [ , apply ] ) => {
-			promptApply = apply.onPress;
-		} );
-
 		// Replace video
 		fireEvent.press( getByLabelText( 'Edit video' ) );
 
 		// Insert video from URL
 		selectOption( 'Insert from URL' );
-		expect( prompt ).toHaveBeenCalled();
-		await act( () =>
-			promptApply( `https://videopress.com/v/${ GUID_REPLACE_VIDEO }` )
+		fireEvent.changeText(
+			getByPlaceholderText( 'Type a URL' ),
+			`https://videopress.com/v/${ GUID_REPLACE_VIDEO }`
 		);
+		dismissModal( getByTestId( 'bottom-sheet' ) );
+		sendWebViewMessage( await findByTestId( 'videopress-player' ), {
+			type: 'message',
+			event: 'videopress_ready',
+		} );
 
 		expect( getByTestId( 'videopress-player' ) ).toBeVisible();
 		expect( getEditorHtml() ).toMatchSnapshot( 'after replacing video' );
