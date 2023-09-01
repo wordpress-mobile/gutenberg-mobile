@@ -30,6 +30,11 @@ export JEST_JUNIT_OUTPUT_FILE="reports/test-results/ios-test-results.xml"
 # Set a destination different from the hardcoded one which only works in the
 # older Xcode-setup used by CircleCI
 export RN_EDITOR_E2E_IOS_DESTINATION='platform=iOS Simulator,name=iPhone 13,OS=16.4'
+# This is implicitly required by the E2E tests, but I don't know here
+#
+# See the way this build failed:
+# https://buildkite.com/automattic/gutenberg-mobile/builds/7081#018a4f1c-848f-4df2-b9e2-670983a7a458
+export SAUCE_FILENAME=${BUILDKITE_BRANCH//[\/]/-}
 set +x
 
 # TODO: Skipping to see if they're not necessary
