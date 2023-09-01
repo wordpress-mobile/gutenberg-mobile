@@ -219,9 +219,19 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.driver.sleep( 500 );
 
 			// Visual test check
-			const screenshot = await takeScreenshot(
-				isAndroid() ? { cropOffset: { right: 20 } } : {}
-			);
+			let screenshot;
+			if ( isAndroid() ) {
+				// On Android, we take the screenshot using the block list element
+				// in order to crop some pixels using the padding argument.
+				const editorScreen = await editorPage.waitForElementToBeDisplayedByXPath(
+					'//android.widget.FrameLayout[@resource-id="android:id/content"]'
+				);
+				screenshot = await takeScreenshotByElement( editorScreen, {
+					padding: { right: -10 },
+				} );
+			} else {
+				screenshot = await takeScreenshot();
+			}
 			expect( screenshot ).toMatchImageSnapshot();
 
 			// Clean up test
