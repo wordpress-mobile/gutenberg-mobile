@@ -34,7 +34,8 @@ export RN_EDITOR_E2E_IOS_DESTINATION='platform=iOS Simulator,name=iPhone 13,OS=1
 #
 # See the way this build failed:
 # https://buildkite.com/automattic/gutenberg-mobile/builds/7081#018a4f1c-848f-4df2-b9e2-670983a7a458
-export SAUCE_FILENAME=${BUILDKITE_BRANCH//[\/]/-}
+# export SAUCE_FILENAME=${BUILDKITE_BRANCH//[\/]/-}
+export CIRCLE_BRANCH=${BUILDKITE_BRANCH}
 set +x
 
 # TODO: Skipping to see if they're not necessary
