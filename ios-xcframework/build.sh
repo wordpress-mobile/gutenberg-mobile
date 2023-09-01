@@ -67,7 +67,17 @@ if [ ! -d $HERMES_XCFRAMEWORK ]; then
 fi
 
 # Fail early if cannot fetch version
-VERSION=$(./bin/get_gutenberg_version)
+if ! command -v jq &> /dev/null; then
+  log 'fail' "jq command not found, please install it with brew install jq."
+  exit 1
+fi
+
+GUTENBERG_MOBILE_PACKAGE_PATH='../package.json'
+if [ ! -f $GUTENBERG_MOBILE_PACKAGE_PATH ]; then
+  log 'fail' "Could not find Gutenberg Mobile package.json at path: $GUTENBERG_MOBILE_PACKAGE_PATH"
+  exit 1
+fi
+VERSION=$(jq -e -r .version $GUTENBERG_MOBILE_PACKAGE_PATH)
 
 BUILD_DIR=./build
 DERIVED_DATA_PATH="$BUILD_DIR/derived_data"
