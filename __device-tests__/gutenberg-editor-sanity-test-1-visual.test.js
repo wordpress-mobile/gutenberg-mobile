@@ -327,7 +327,8 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			);
 
 			const screenshot = await takeScreenshotByElement(
-				socialLinksBlock
+				socialLinksBlock,
+				{ padding: 7 }
 			);
 			expect( screenshot ).toMatchImageSnapshot();
 		} );
