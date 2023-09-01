@@ -25,13 +25,27 @@ x-common-params:
     IMAGE_ID: xcode-14.3.1
 
 steps:
-  - label: iOS Build
-    command: .buildkite/build-ios.sh
+  # - label: ':saucelabs: iOS Build and SauceLabs'
+  #   key: ios-build-and-saucelabs
+  #   command: .buildkite/build-ios.sh
+  #   plugins:
+  #     - automattic/a8c-ci-toolkit#2.18.2
+  #     # - automattic/nvm#0.1.0
+  #     - *git-cache-plugin
+  #   artifact_paths:
+  #     - ./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
+  #   agents:
+  #     queue: mac
+  #   env: *xcode_agent_env
+
+  - label: Test iOS on Device – Canary Pages
+    # depends_on: ios-build-and-saucelabs
+    command: .buildkite/test-ios.sh
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
-      # - automattic/nvm#0.1.0
       - *git-cache-plugin
     artifact_paths:
+      - reports/test-results/ios-test-results.xml
       - ./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
     agents:
       queue: mac
