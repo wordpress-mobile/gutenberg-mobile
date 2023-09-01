@@ -38,7 +38,23 @@ steps:
   #     queue: mac
   #   env: *xcode_agent_env
 
+  # Verified this works
+  # https://buildkite.com/automattic/gutenberg-mobile/builds/7083#_
   - label: Test iOS on Device – Canary Pages
+    # depends_on: ios-build-and-saucelabs
+    command: .buildkite/test-ios.sh --canary
+    plugins:
+      - automattic/a8c-ci-toolkit#2.18.2
+      - *git-cache-plugin
+    artifact_paths:
+      - reports/test-results/ios-test-results.xml
+    agents:
+      queue: mac
+    env: *xcode_agent_env
+
+  # TODO: add block step & conditional
+
+  - label: Test iOS on Device – Full iPhone
     # depends_on: ios-build-and-saucelabs
     command: .buildkite/test-ios.sh
     plugins:
@@ -46,7 +62,18 @@ steps:
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
-      - ./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
+    agents:
+      queue: mac
+    env: *xcode_agent_env
+
+  - label: Test iOS on Device – Full iPad
+    # depends_on: ios-build-and-saucelabs
+    command: .buildkite/test-ios.sh --ipad
+    plugins:
+      - automattic/a8c-ci-toolkit#2.18.2
+      - *git-cache-plugin
+    artifact_paths:
+      - reports/test-results/ios-test-results.xml
     agents:
       queue: mac
     env: *xcode_agent_env
