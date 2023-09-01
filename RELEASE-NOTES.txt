@@ -8,6 +8,7 @@ Unreleased
 * [**] Add basic support to view, relocate, and remove the Jetpack Paywall block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6076]
 * [*] Columns block - Fix transforming into a Group block crash [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6129]
 * [**] Add block outline to all Social Link blocks when selected [https://github.com/WordPress/gutenberg/pull/54011]
+* [*] Fix the obscurred "Insert from URL" input for media blocks when using a device in landscape orientation. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6143]
 
 1.102.1
 ---
