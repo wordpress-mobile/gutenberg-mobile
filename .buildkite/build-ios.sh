@@ -21,10 +21,6 @@ nvm install "$(cat .nvmrc)" && nvm use
 echo '--- :node: 4. nmp ci'
 npm ci
 
-# TODO: It would be best if rbenv did this automatically, no?
-echo '--- :ruby: Install react-native-editor Ruby version'
-rbenv install --skip-existing "$(cat gutenberg/packages/react-native-editor/ios/.ruby-version)"
-
 echo '--- :ios: Set env var for iOS E2E testing'
 set -x
 export TEST_RN_PLATFORM=ios
