@@ -1,8 +1,9 @@
 #!/bin/bash -eu
 
 MODE="iphone"
-while [ "$1" != "" ]; do
-    case $1 in
+INPUT="${1-}"
+while [ "$INPUT" != "" ]; do
+    case $INPUT in
         --canary )
             MODE="canary"
             ;;
@@ -15,6 +16,7 @@ while [ "$1" != "" ]; do
             ;;
     esac
     shift
+    INPUT="${1-}"
 done
 
 # This is what I would have liked to do thanks to the nvm plugin
