@@ -52,7 +52,9 @@ steps:
       queue: mac
     env: *xcode_agent_env
 
-  # TODO: add block step & conditional
+  # TODO: Make conditional based on branch, as per CircleCI configs
+  - block: "Full UI Tests"
+    prompt: "Run full UI tests suites?"
 
   - label: Test iOS on Device – Full iPhone
     # depends_on: ios-build-and-saucelabs
