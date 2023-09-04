@@ -8,6 +8,7 @@ import { initialHtmlGutenberg } from '@wordpress/react-native-editor';
  * Internal dependencies
  */
 import initialHtml from './initial-html';
+import initialHtmlLocal from './initial-html-local';
 import initAnalytics from './analytics';
 
 const setupHooks = () => {
@@ -29,6 +30,7 @@ const setupHooks = () => {
 
 				if ( initialData === undefined ) {
 					initialData = initialHtml + initialHtmlGutenberg;
+					// initialData = initialHtmlLocal;
 				}
 
 				return {
