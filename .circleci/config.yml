@@ -22,30 +22,6 @@ commands:
             - src/i18n-cache
             - ~/.local/share/pnpm/store/v3
             - ~/Library/pnpm/store/v3
-  npm-install-full:
-    parameters:
-      additional-flags:
-        type: string
-        default: ""
-    steps:
-      - restore_cache:
-          name: Restore NPM Cache
-          keys:
-            - npm-install-full-cache-{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "gutenberg/package-lock.json" }}
-            - npm-install-full-cache-{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-
-      - run:
-          name: NPM Install Full
-          command: |
-            echo "Node version: $(node --version)"
-            npm install --no-audit
-      - save_cache:
-          name: Save NPM Cache
-          key: npm-install-full-cache-{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "gutenberg/package-lock.json" }}
-          paths:
-            - ~/.npm
-            - src/i18n-cache
-            - ~/.local/share/pnpm/store/v3
-            - ~/Library/pnpm/store/v3
   npm-install-e2e-tests:
     parameters:
     steps:
