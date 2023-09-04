@@ -46,6 +46,9 @@ steps:
     artifact_paths:
       - ./logs/*.log
       - ./reports/test-results/*.xml
+    notify:
+      - github_commit_status:
+          context: Lint and Unit Tests
 
   - label: "Build JS Bundles"
     depends_on: "unit-tests"
