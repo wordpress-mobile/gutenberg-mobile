@@ -344,41 +344,6 @@ jobs:
         key: ios-build-cache-{{ checksum "ios-checksums.txt" }}
         paths:
           - gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app
-  ios-device-checks:
-    parameters:
-      post-to-slack:
-        description: Post to Slack when tests fail. SLACK_WEBHOOK ENV variable must be set.
-        type: boolean
-        default: false
-      is-canary:
-        type: string
-        default: ""
-      is-ipad:
-        type: string
-        default: ""
-    macos:
-      xcode: "13.4.1"
-    steps:
-    - checkout-shallow
-    - checkout-submodules
-    - install-node-version
-    - npm-install-e2e-tests
-    - add-jest-reporter-dir
-    - add-jest-snapshot-dir
-    - run:
-        name: Set Environment Variables
-        command: |
-          echo 'export TEST_RN_PLATFORM=ios' >> $BASH_ENV
-          echo 'export TEST_ENV=sauce' >> $BASH_ENV
-    - run:
-        name: Run Device Tests
-        command: |
-          npm run device-tests<<parameters.is-canary>><<parameters.is-ipad>>
-        no_output_timeout: 1200
-        environment:
-          JEST_JUNIT_OUTPUT_FILE: "reports/test-results/ios-test-results.xml"
-    - store_test_results:
-        path: ./reports/test-results
 
 workflows:
   gutenberg-mobile:
