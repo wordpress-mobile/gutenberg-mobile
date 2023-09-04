@@ -60,7 +60,7 @@ set +x
 # TODO: Skipping to see if they're not necessary
 # Update: they don't seem to be necessary.
 # See https://buildkite.com/automattic/gutenberg-mobile/builds/7083#_
-echo '--- :file-folder: Make folders for E2E testing reports'
+echo '--- :file_folder: Make folders for E2E testing reports'
 set -x
 # mkdir __device-tests__/image-snapshots/diff
 # mkdir reports
