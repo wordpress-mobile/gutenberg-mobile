@@ -8,6 +8,7 @@ import { initialHtmlGutenberg } from '@wordpress/react-native-editor';
  * Internal dependencies
  */
 import initialHtml from './initial-html';
+// eslint-disable-next-line no-unused-vars
 import initialHtmlLocal from './initial-html-local';
 import initAnalytics from './analytics';
 
