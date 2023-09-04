@@ -38,6 +38,8 @@ steps:
   #     queue: mac
   #   env: *xcode_agent_env
 
+  # TODO: Notify failures via Slack!
+
   # Verified this works
   # https://buildkite.com/automattic/gutenberg-mobile/builds/7083#_
   - label: Test iOS on Device – Canary Pages
