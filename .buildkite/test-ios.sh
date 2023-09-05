@@ -68,12 +68,30 @@ set -x
 set +x
 
 if [ "$MODE" == 'canary' ]; then
-    echo '--- :saucelabs: Test iOS Canary Pages'
-    npm run device-tests-canary
+    SECTION='--- :saucelabs: Test iOS Canary Pages'
+    TESTS_CMD='device-tests-canary'
 elif [ "$MODE" == "ipad" ]; then
-    echo '--- :saucelabs: Test iOS iPad'
-    npm run device-tests-ipad
+    SECTION='--- :saucelabs: Test iOS iPad'
+    TESTS_CMD='device-tests-ipad'
 else
-    echo '--- :saucelabs: Test iOS iPhone'
-    npm run device-tests
+    SECTION='--- :saucelabs: Test iOS iPhone'
+    TESTS_CMD='device-tests'
+fi
+
+set +e
+echo "$SECTION"
+npm run "$TESTS_CMD"
+TESTS_EXIT_CODE=$?
+set -e
+
+REPORT_SECTION_NAME='🚦 Report Tests Status'
+if [[ $TESTS_EXIT_CODE -eq 0 ]]; then
+    echo "--- $REPORT_SECTION_NAME"
+    echo "npm run $TESTS_CMD passed. 🎉"
+else
+    echo "+++ $REPORT_SECTION_NAME"
+    echo "npm run $TESTS_CMD failed."
+    echo "For more details about the failed tests, check the Buildkite annotation, the logs under the '$SECTION' section and the tests results in the artifacts tab."
+
+    annotate_test_fauilures "$JEST_JUNIT_OUTPUT_FILE" --slack "build-and-ship"
 fi
