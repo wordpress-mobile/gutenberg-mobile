@@ -8,9 +8,16 @@ const { isAndroid } = e2eUtils;
 /**
  * Helper to take a screenshot of an element.
  *
- * @param {*}      element           Element instance.
- * @param {Object} options           Options
- * @param {number} [options.padding] Padding offset to apply to the screenshot.
+ * @typedef {Object} PaddingScreenshot
+ *
+ * @property {number}                     top               Padding to apply to the top side, in pixels.
+ * @property {number}                     right             Padding to apply to the right side, in pixels.
+ * @property {number}                     bottom            Padding to apply to the bottom side, in pixels.
+ * @property {number}                     left              Padding to apply to the left side, in pixels.
+ *
+ * @param    {*}                          element           Element instance.
+ * @param    {Object}                     options           Options
+ * @param    {number | PaddingScreenshot} [options.padding] Padding offset to apply to the screenshot. It accepts negative values.
  * @return {Buffer} Sreenshot image.
  */
 export async function takeScreenshotByElement( element, { padding } = {} ) {
@@ -33,16 +40,37 @@ export async function takeScreenshotByElement( element, { padding } = {} ) {
 		crop.width *= pixelRatio;
 		crop.height *= pixelRatio;
 	}
-	if ( padding ) {
-		// The padding value is in pixels, so we need to convert
-		// it to device coordinates.
-		padding *= pixelRatio;
 
-		crop.x -= padding;
-		crop.y -= padding;
-		crop.width += padding * 2;
-		crop.height += padding * 2;
+	if ( padding ) {
+		if ( typeof padding === 'object' ) {
+			let { top = 0, right = 0, bottom = 0, left = 0 } = padding;
+			// The padding value is in pixels, so we need to convert
+			// it to device coordinates.
+			top *= pixelRatio;
+			right *= pixelRatio;
+			bottom *= pixelRatio;
+			left *= pixelRatio;
+
+			crop.x -= left;
+			crop.y -= top;
+			crop.width += left + right;
+			crop.height += top + bottom;
+		} else if ( Number.isInteger( padding ) ) {
+			// The padding value is in pixels, so we need to convert
+			// it to device coordinates.
+			padding *= pixelRatio;
+
+			crop.x -= padding;
+			crop.y -= padding;
+			crop.width += padding * 2;
+			crop.height += padding * 2;
+		} else {
+			throw new Error(
+				'Padding argument needs to be a number or object.'
+			);
+		}
 	}
+
 	return takeScreenshot( { crop } );
 }
 

@@ -43,15 +43,18 @@ function log {
 function archive {
   PLATFORM=$1
 
-  log "Archiving $SCHEME for $PLATFORM platform"
+  log "Archiving $SCHEME for $PLATFORM platform, setting version to $VERSION"
 
-  _xcodebuild archive \
+  _xcodebuild \
     -workspace "$WORKSPACE" \
     -scheme "$SCHEME" \
     -configuration Release \
     -sdk "$PLATFORM" \
     -archivePath "$ARCHIVES_ROOT/$PLATFORM.xcarchive" \
     -derivedDataPath "$DERIVED_DATA_PATH" \
+    archive \
+    MARKETING_VERSION="$VERSION" \
+    CURRENT_PROJECT_VERSION="$VERSION" \
     BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
     SKIP_INSTALL=NO
 }
@@ -62,6 +65,19 @@ if [ ! -d $HERMES_XCFRAMEWORK ]; then
   log 'fail' "Could not file required Hermes XCFramework at path: $HERMES_XCFRAMEWORK"
   exit 1
 fi
+
+# Fail early if cannot fetch version
+if ! command -v jq &> /dev/null; then
+  log 'fail' "jq command not found, please install it with brew install jq."
+  exit 1
+fi
+
+GUTENBERG_MOBILE_PACKAGE_PATH='../package.json'
+if [ ! -f $GUTENBERG_MOBILE_PACKAGE_PATH ]; then
+  log 'fail' "Could not find Gutenberg Mobile package.json at path: $GUTENBERG_MOBILE_PACKAGE_PATH"
+  exit 1
+fi
+VERSION=$(jq -e -r .version $GUTENBERG_MOBILE_PACKAGE_PATH)
 
 BUILD_DIR=./build
 DERIVED_DATA_PATH="$BUILD_DIR/derived_data"
