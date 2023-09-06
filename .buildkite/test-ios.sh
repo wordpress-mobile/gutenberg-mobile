@@ -94,4 +94,5 @@ else
     echo "For more details about the failed tests, check the Buildkite annotation, the logs under the '$SECTION' section and the tests results in the artifacts tab."
 
     annotate_test_failures "$JEST_JUNIT_OUTPUT_FILE" --slack "build-and-ship"
+    exit $TESTS_EXIT_CODE
 fi
