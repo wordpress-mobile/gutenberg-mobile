@@ -24,9 +24,9 @@ x-common-params:
   - &xcode_agent_env
     IMAGE_ID: xcode-14.3.1
   - &is_branch_for_full_ui_tests
-    build.branch !~ /^mokagio\//
-  - &is_branch_for_quick_ui_tests
     build.branch =~ /^mokagio\//
+  - &is_branch_for_quick_ui_tests
+    build.branch !~ /^mokagio\//
 
 steps:
   - label: ':saucelabs: iOS Build and SauceLabs'
