@@ -27,7 +27,7 @@ export TEST_RN_PLATFORM=ios
 export TEST_ENV=sauce
 # Set a destination different from the hardcoded one which only works in the
 # older Xcode-setup used by CircleCI
-export RN_EDITOR_E2E_IOS_DESTINATION='platform=iOS Simulator,name=iPhone 13,OS=16.4'
+export RN_EDITOR_E2E_IOS_DESTINATION='platform=iOS Simulator,name=iPhone 14,OS=16.4'
 set +x
 
 echo '--- :react: Build iOS app for E2E testing'
