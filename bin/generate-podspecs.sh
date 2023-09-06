@@ -50,8 +50,7 @@ mkdir "$DEST"
 NODE_MODULES_DIR="gutenberg/node_modules"
 
 # Generate the external (non-RN podspecs)
-EXTERNAL_PODSPECS=$(find "$NODE_MODULES_DIR/react-native/third-party-podspecs" \
-                         "$NODE_MODULES_DIR/@react-native-community/blur" \
+EXTERNAL_PODSPECS=$(find "$NODE_MODULES_DIR/@react-native-community/blur" \
                          "$NODE_MODULES_DIR/@react-native-masked-view/masked-view" \
                          "$NODE_MODULES_DIR/@react-native-community/slider" \
                          "$NODE_MODULES_DIR/@react-native-clipboard/clipboard" \
@@ -114,7 +113,14 @@ do
     pod=$(basename "$podspec" .podspec)
     path=$(dirname "$podspec")
 
+    # The only one we need is React-jsc, all the others can be skipped.
+    if [[ $pod != 'React-jsc' ]]; then
+      echo "Skipping copying React Native $pod podspec..."
+      continue
+    fi
+
     echo "Generating podspec for $pod with path $path"
+
     pod ipc spec "$podspec" > "$TMP_DEST/$pod.podspec.json"
     # Removes message [Codegen] Found at the beginning of the file
     sed -i '' -e '/\[Codegen\] Found/d' "$TMP_DEST/$pod.podspec.json"
@@ -132,77 +138,6 @@ do
 
     # As a last step check if podspec has a "tag" or "commit" field in "source"
     warn_missing_tag_commit
-
-    # FBReactNativeSpec needs special treatment because of react-native-codegen code generation
-    if [[ "$pod" == "FBReactNativeSpec" ]]; then
-        echo "   ==> Patching $pod podspec"
-        # First move it to its own folder
-        mkdir -p "$DEST/FBReactNativeSpec"
-        mv "$DEST/FBReactNativeSpec.podspec.json" "$DEST/FBReactNativeSpec"
-
-        # Then we generate FBReactNativeSpec-generated.mm and FBReactNativeSpec.h files.
-        # They are normally generated during compile time using a Script Phase in FBReactNativeSpec added via the `use_react_native_codegen` function.
-        # This script is inside node_modules/react-native/scripts folder. Since we don't have the node_modules when compiling WPiOS,
-        # we're calling the script here manually to generate these files ahead of time.
-        SCHEMA_FILE="$TMP_DEST/schema.json"
-        NODE_BINARY="${NODE_BINARY:-$(command -v node || true)}"
-
-        if [ -d "$CODEGEN_REPO_PATH" ]; then
-            CODEGEN_PATH=$(cd "$CODEGEN_REPO_PATH" && pwd)
-        elif [ -d "$CODEGEN_NPM_PATH" ]; then
-            CODEGEN_PATH=$(cd "$CODEGEN_NPM_PATH" && pwd)
-        else
-            echo "Error: Could not determine react-native-codegen location. Try running 'yarn install' or 'npm install' in your project root." 1>&2
-            exit 1
-        fi
-
-        if [ ! -d "$CODEGEN_PATH/lib" ]; then
-            describe "Building react-native-codegen package"
-            bash "$CODEGEN_PATH/scripts/oss/build.sh"
-        fi
-
-        # Generate React-Codegen
-        # A copy of codegen_utils.rb is done to modify the content within get_react_codegen_spec
-        # this enables getting the schema for React-Codegen in runtime by printing the content.
-        echo "Generating React-Codegen"
-        REACT_NATIVE_CODEGEN_UTILS_PATH="$SCRIPTS_PATH/cocoapods/codegen_utils.rb"
-        REACT_NATIVE_CODEGEN_UTILS_MODIFIED_PATH="$SCRIPTS_PATH/cocoapods/codegen_utils_modified.rb"
-        # Making a temp copy of codegen_utils.rb
-        cp $REACT_NATIVE_CODEGEN_UTILS_PATH $REACT_NATIVE_CODEGEN_UTILS_MODIFIED_PATH
-        # Manually add the min_ios_version_supported variable to the CodegenUtils class
-        # The modified script won't be able to detect min_ios_version_supported otherwise
-        echo "
-        def min_ios_version_supported
-        '12.4'
-        end
-        " >> "$REACT_NATIVE_CODEGEN_UTILS_MODIFIED_PATH"
-        # Modify the get_react_codegen_spec method to return the result using print and JSON.pretty
-        sed -i '' -e "s/:git => ''/:git => 'https:\/\/github.com\/facebook\/react-native.git', :tag => 'v$RN_VERSION'/" "$REACT_NATIVE_CODEGEN_UTILS_MODIFIED_PATH"
-        sed -i '' -e 's/return spec/print JSON.pretty_generate(spec)/' "$REACT_NATIVE_CODEGEN_UTILS_MODIFIED_PATH"
-        # Run get_react_codegen_spec and generate React-Codegen.podspec.json
-        ruby -r "./scripts/cocoapods/codegen_utils_modified.rb" -e "CodegenUtils.new.get_react_codegen_spec('$PACKAGE_JSON_PATH', hermes_enabled:$HERMES_ENABLED)" > "$DEST/React-Codegen.podspec.json"
-        TMP_ReactCodeGenSpec=$(mktemp)
-        jq '.source_files = "third-party-podspecs/FBReactNativeSpec/**/*.{c,h,m,mm,cpp}"' "$DEST/React-Codegen.podspec.json" > "$TMP_ReactCodeGenSpec"
-        mv "$TMP_ReactCodeGenSpec" "$DEST/React-Codegen.podspec.json"
-        # Remove temp copy of codegen_utils.rb
-        rm $REACT_NATIVE_CODEGEN_UTILS_MODIFIED_PATH
-
-        echo "Generating schema from Flow types"
-        "$NODE_BINARY" "$CODEGEN_PATH/lib/cli/combine/combine-js-to-schema-cli.js" "$SCHEMA_FILE" "$SRCS_DIR"
-
-        echo "Generating native code from schema (iOS)"
-        "$NODE_BINARY" "./scripts/generate-specs-cli.js" -p "ios" -s "$SCHEMA_FILE" -o "$DEST/FBReactNativeSpec"
-
-        # Removing unneeded files
-        find "$DEST/FBReactNativeSpec" -type f -not -name "FBReactNativeSpec.podspec.json" -not -name "FBReactNativeSpec-generated.mm" -not -name "FBReactNativeSpec.h" -not -name "FBReactNativeSpec.h" -delete
-
-        # Removing 'script_phases' that shouldn't be needed anymore.
-        # Removing 'prepare_command' that includes additional steps to create intermediate folders to keep generated files which won't be needed.
-        # Removing 'source.tag' as we'll use a commit hash from gutenberg-mobile instead.
-        TMP_FBReactNativeSpec=$(mktemp)
-        jq --arg COMMIT_HASH "$COMMIT_HASH" 'del(.script_phases) | del(.prepare_command) | del(.source.tag) | .source.git = "https://github.com/wordpress-mobile/gutenberg-mobile.git" | .source.commit = $COMMIT_HASH | .source.submodules = "true" | .source_files = "third-party-podspecs/FBReactNativeSpec/**/*.{c,h,m,mm,cpp}"' "$DEST/FBReactNativeSpec/FBReactNativeSpec.podspec.json" > "$TMP_FBReactNativeSpec"
-        mv "$TMP_FBReactNativeSpec" "$DEST/FBReactNativeSpec/FBReactNativeSpec.podspec.json"
-    fi
 done
 popd > /dev/null
 
