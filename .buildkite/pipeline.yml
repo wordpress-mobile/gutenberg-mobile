@@ -23,6 +23,10 @@ x-common-params:
         - 'AWS_SECRET_KEY'
   - &xcode_agent_env
     IMAGE_ID: xcode-14.3.1
+  - &is_branch_for_full_ui_tests
+    build.branch !~ /^mokagio\//
+  - &is_branch_for_quick_ui_tests
+    build.branch =~ /^mokagio\//
 
 steps:
   - label: ':saucelabs: iOS Build and SauceLabs'
@@ -61,14 +65,14 @@ steps:
     # See https://buildkite.com/automattic/gutenberg-mobile/builds/7133
     depends_on: ios-build-and-saucelabs
     # Show on branches other than trunk, release/*, and dependabot/submodules
-    if: build.branch !~ /^mokagio\//
+    if: *is_branch_for_quick_ui_tests
 
   - label: Test iOS on Device – Full iPhone
     command: .buildkite/test-ios.sh
     depends_on:
       - ios-build-and-saucelabs
       - run-full-ui-test
-    if: build.branch !~ /^mokagio\//
+    if: *is_branch_for_quick_ui_tests
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
@@ -83,7 +87,7 @@ steps:
     command: .buildkite/test-ios.sh
     depends_on:
       - ios-build-and-saucelabs
-    if: build.branch =~ /^mokagio\//
+    if: *is_branch_for_full_ui_tests
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
@@ -99,7 +103,7 @@ steps:
     depends_on:
       - ios-build-and-saucelabs
       - run-full-ui-test
-    if: build.branch !~ /^mokagio\//
+    if: *is_branch_for_quick_ui_tests
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
@@ -114,7 +118,7 @@ steps:
     command: .buildkite/test-ios.sh --ipad
     depends_on:
       - ios-build-and-saucelabs
-    if: build.branch =~ /^mokagio\//
+    if: *is_branch_for_full_ui_tests
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
