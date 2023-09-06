@@ -60,12 +60,15 @@ steps:
     # The dependency needs to be here. If it's in the steps after this, they'll ignore the block.
     # See https://buildkite.com/automattic/gutenberg-mobile/builds/7133
     depends_on: ios-build-and-saucelabs
+    # Show on branches other than trunk, release/*, and dependabot/submodules
+    if: build.branch !~ /^mokagio\//
 
   - label: Test iOS on Device – Full iPhone
     command: .buildkite/test-ios.sh
     depends_on:
       - ios-build-and-saucelabs
       - run-full-ui-test
+    if: build.branch !~ /^mokagio\//
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
@@ -75,11 +78,43 @@ steps:
       queue: mac
     env: *xcode_agent_env
 
+  # Same step as above, but will always run in trunk, release/, and dependabot/submodules branches
+  - label: Test iOS on Device – Full iPhone
+    command: .buildkite/test-ios.sh
+    depends_on:
+      - ios-build-and-saucelabs
+    if: build.branch =~ /^mokagio\//
+    plugins:
+      - automattic/a8c-ci-toolkit#2.18.2
+      - *git-cache-plugin
+    artifact_paths:
+      - reports/test-results/ios-test-results.xml
+    agents:
+      queue: mac
+    env: *xcode_agent_env
+
+
   - label: Test iOS on Device – Full iPad
     command: .buildkite/test-ios.sh --ipad
     depends_on:
       - ios-build-and-saucelabs
       - run-full-ui-test
+    if: build.branch !~ /^mokagio\//
+    plugins:
+      - automattic/a8c-ci-toolkit#2.18.2
+      - *git-cache-plugin
+    artifact_paths:
+      - reports/test-results/ios-test-results.xml
+    agents:
+      queue: mac
+    env: *xcode_agent_env
+
+  # Same step as above, but will always run in trunk, release/, and dependabot/submodules branches
+  - label: Test iOS on Device – Full iPad
+    command: .buildkite/test-ios.sh --ipad
+    depends_on:
+      - ios-build-and-saucelabs
+    if: build.branch =~ /^mokagio\//
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
