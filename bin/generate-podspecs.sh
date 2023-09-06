@@ -22,7 +22,7 @@ popd > /dev/null
 WD=$(pwd)
 echo "Working directory: $WD"
 
-# Check for cocoapods & jq
+# Check for CocoaPods and jq
 command -v pod > /dev/null || ( echo Cocoapods is required to generate podspecs; exit 1 )
 command -v jq > /dev/null || ( echo jq is required to generate podspecs; exit 1 )
 
@@ -98,7 +98,6 @@ done
 # Change to the React Native directory to get relative paths for the RN podspecs
 pushd "$NODE_MODULES_DIR/react-native" > /dev/null
 
-RN_DIR="./"
 SCRIPTS_PATH="./scripts/"
 CODEGEN_REPO_PATH="../packages/react-native-codegen"
 CODEGEN_NPM_PATH="../react-native-codegen"
