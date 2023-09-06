@@ -62,6 +62,7 @@ steps:
 
   - label: Test iOS on Device – Full iPhone
     command: .buildkite/test-ios.sh
+    depends_on: ios-build-and-saucelabs
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
@@ -73,6 +74,7 @@ steps:
 
   - label: Test iOS on Device – Full iPad
     command: .buildkite/test-ios.sh --ipad
+    depends_on: ios-build-and-saucelabs
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
