@@ -1,6 +1,10 @@
 Unreleased
 ---
 
+1.103.1
+---
+* [**] Fix long-press gestures not working in RichText component [Android] [https://github.com/WordPress/gutenberg/pull/54213]
+
 1.103.0
 ---
 * [*] Remove third-party dependency on react-native-hsv-color-picker [https://github.com/WordPress/gutenberg/pull/53329]
