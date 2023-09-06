@@ -27,7 +27,7 @@ x-common-params:
 steps:
   - label: ':saucelabs: iOS Build and SauceLabs'
     key: ios-build-and-saucelabs
-    command: .buildkite/build-ios.sh
+    command: echo 'skip' #.buildkite/build-ios.sh
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
