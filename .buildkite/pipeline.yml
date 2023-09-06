@@ -55,6 +55,7 @@ steps:
 
   # TODO: Make conditional based on branch, as per CircleCI configs
   - block: "Full UI Tests"
+    key: run-full-ui-test
     prompt: "Run full UI tests suites?"
     # The dependency needs to be here. If it's in the steps after this, they'll ignore the block.
     # See https://buildkite.com/automattic/gutenberg-mobile/builds/7133
@@ -62,7 +63,9 @@ steps:
 
   - label: Test iOS on Device – Full iPhone
     command: .buildkite/test-ios.sh
-    depends_on: ios-build-and-saucelabs
+    depends_on:
+      - ios-build-and-saucelabs
+      - run-full-ui-test
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
@@ -74,7 +77,9 @@ steps:
 
   - label: Test iOS on Device – Full iPad
     command: .buildkite/test-ios.sh --ipad
-    depends_on: ios-build-and-saucelabs
+    depends_on:
+      - ios-build-and-saucelabs
+      - run-full-ui-test
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
