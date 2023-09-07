@@ -4,13 +4,12 @@
 import { dispatch } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import { requestImageUploadCancelDialog } from '@wordpress/react-native-bridge';
-import prompt from 'react-native-prompt-android';
 
 /**
  * External dependencies
  */
 import {
-	act,
+	dismissModal,
 	fireEvent,
 	getBlock,
 	getEditorHtml,
@@ -37,11 +36,11 @@ import {
 	generateRemoteMedia,
 	generateLocalMedia,
 	generateLibraryMedia,
+	sendWebViewMessage,
 } from './local-helpers/utils';
 import { MEDIA_OPTIONS } from './local-helpers/constants';
 
 jest.mock( '@wordpress/api-fetch' );
-jest.mock( 'react-native-prompt-android', () => jest.fn() );
 
 const GUID_INITIAL_VIDEO = 'OLDxGUID';
 const GUID_REPLACE_VIDEO = 'NEWxGUID';
@@ -248,7 +247,12 @@ describe( 'VideoPress block - Replace', () => {
 		const screen = await initializeEditor( {
 			initialHtml: generateBlockHTML( { guid: GUID_INITIAL_VIDEO } ),
 		} );
-		const { getByLabelText, getByTestId } = screen;
+		const {
+			getByLabelText,
+			getByTestId,
+			getByPlaceholderText,
+			findByTestId,
+		} = screen;
 
 		// Block is visible
 		const block = await getBlock( screen, 'VideoPress' );
@@ -270,21 +274,20 @@ describe( 'VideoPress block - Replace', () => {
 			} )
 		);
 
-		// Mock prompt dialog
-		let promptApply;
-		prompt.mockImplementation( ( title, message, [ , apply ] ) => {
-			promptApply = apply.onPress;
-		} );
-
 		// Replace video
 		fireEvent.press( getByLabelText( 'Edit video' ) );
 
 		// Insert video from URL
 		selectOption( 'Insert from URL' );
-		expect( prompt ).toHaveBeenCalled();
-		await act( () =>
-			promptApply( `https://videopress.com/v/${ GUID_REPLACE_VIDEO }` )
+		fireEvent.changeText(
+			getByPlaceholderText( 'Type a URL' ),
+			`https://videopress.com/v/${ GUID_REPLACE_VIDEO }`
 		);
+		dismissModal( getByTestId( 'bottom-sheet' ) );
+		sendWebViewMessage( await findByTestId( 'videopress-player' ), {
+			type: 'message',
+			event: 'videopress_ready',
+		} );
 
 		expect( getByTestId( 'videopress-player' ) ).toBeVisible();
 		expect( getEditorHtml() ).toMatchSnapshot( 'after replacing video' );
