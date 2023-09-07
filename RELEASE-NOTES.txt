@@ -2,6 +2,10 @@ Unreleased
 ---
 * [*] Fix the obscurred "Insert from URL" input for media blocks when using a device in landscape orientation. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6143]
 
+1.103.1
+---
+* [**] Fix long-press gestures not working in RichText component [Android] [https://github.com/WordPress/gutenberg/pull/54213]
+
 1.103.0
 ---
 * [*] Remove third-party dependency on react-native-hsv-color-picker [https://github.com/WordPress/gutenberg/pull/53329]
