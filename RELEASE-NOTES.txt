@@ -1,12 +1,28 @@
 Unreleased
 ---
+* [*] Fix the obscurred "Insert from URL" input for media blocks when using a device in landscape orientation. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6143]
+
+1.103.0
+---
+* [*] Remove third-party dependency on react-native-hsv-color-picker [https://github.com/WordPress/gutenberg/pull/53329]
 * [*] Search Control - Prevent calling TextInput's methods when undefined [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6090]
+* [**] Add basic support to view, relocate, and remove the Jetpack Paywall block. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6076]
+* [*] Columns block - Fix transforming into a Group block crash [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6129]
+* [**] Add block outline to all Social Link blocks when selected [https://github.com/WordPress/gutenberg/pull/54011]
+
+1.102.1
+---
+* [**] Fix Voice Over and assistive keyboards [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6102]
 
 1.102.0
 ---
 * [**] Add outline around selected Social Link block [https://github.com/WordPress/gutenberg/pull/53377]
 * [*] Display custom color value in mobile Cover Block color picker [https://github.com/wordpress-mobile/gutenberg-mobile/pull/5852]
 * [**] Fixes font customization not getting updated on iOS [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6036]
+
+1.101.2
+---
+* [**] Fix Voice Over and assistive keyboards [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6102]
 
 1.101.1
 ---

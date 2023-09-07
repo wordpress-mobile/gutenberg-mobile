@@ -191,7 +191,7 @@
 			buildConfigurationList = 3FE06AC629F3F61300F752AD /* Build configuration list for PBXNativeTarget "Gutenberg" */;
 			buildPhases = (
 				5DA264C12005B59AC528A3D3 /* [CP] Check Pods Manifest.lock */,
-				3FA0C5822A1CC63B00600A9A /* Check App.js */,
+				3FA0C5822A1CC63B00600A9A /* [Gutenberg] Check App.js */,
 				3FE06ABA29F3F61300F752AD /* Headers */,
 				3FE06ABB29F3F61300F752AD /* Sources */,
 				3FE06ABC29F3F61300F752AD /* Frameworks */,
@@ -286,7 +286,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gutenberg/Pods-Gutenberg-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3FA0C5822A1CC63B00600A9A /* Check App.js */ = {
+		3FA0C5822A1CC63B00600A9A /* [Gutenberg] Check App.js */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -296,7 +296,7 @@
 			);
 			inputPaths = (
 			);
-			name = "Check App.js";
+			name = "[Gutenberg] Check App.js";
 			outputFileListPaths = (
 			);
 			outputPaths = (
