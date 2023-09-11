@@ -31,7 +31,7 @@ mkdir -p "$NVM_DIR"
 echo '--- :node: 3. Install node version from .nvmrc'
 nvm install "$(cat .nvmrc)" && nvm use
 
-echo '--- :node: 4. nmp ci (for E2E testing)'
+echo '--- :node: 4. npm ci (for E2E testing)'
 npm ci --prefer-offline --no-audit --ignore-scripts
 npm ci --prefix gutenberg --prefer-offline --no-audit
 
