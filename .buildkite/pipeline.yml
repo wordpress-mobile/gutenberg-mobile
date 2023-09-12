@@ -21,6 +21,7 @@ x-common-params:
         # They are passed from the Buildkite agent to the Docker container
         - 'AWS_ACCESS_KEY'
         - 'AWS_SECRET_KEY'
+  - &nvm-plugin automattic/nvm#76721870
   - &xcode_agent_env
     IMAGE_ID: xcode-14.3.1
   - &is_branch_for_full_ui_tests
@@ -131,6 +132,7 @@ steps:
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
+      - *nvm-plugin
     agents:
       queue: mac
     env:
@@ -142,6 +144,7 @@ steps:
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
+      - *nvm-plugin
     artifact_paths:
       - ./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
     agents:
@@ -154,6 +157,7 @@ steps:
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
+      - *nvm-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
     agents:
