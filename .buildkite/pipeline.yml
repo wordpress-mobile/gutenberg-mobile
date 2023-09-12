@@ -110,8 +110,7 @@ steps:
     plugins:
       - *git-cache-plugin
       - *publish-android-artifacts-docker-container
-    command: |
-        .buildkite/publish-react-native-aztec-android-artifacts.sh
+    command: .buildkite/commands/publish-react-native-aztec-android-artifacts.sh
 
   - label: "Build Android RN Bridge & Publish to S3"
     depends_on:
@@ -120,12 +119,11 @@ steps:
     plugins:
       - *git-cache-plugin
       - *publish-android-artifacts-docker-container
-    command: |
-        .buildkite/publish-react-native-bridge-android-artifacts.sh
+    command: .buildkite/commands/publish-react-native-bridge-android-artifacts.sh
 
   - label: Build iOS RN XCFramework & Publish to S3
     depends_on: js-bundles
-    command: .buildkite/publish-react-native-ios-artifacts.sh
+    command: .buildkite/commands/publish-react-native-ios-artifacts.sh
     artifact_paths:
       - ios-xcframework/build/xcframeworks/*.tar.gz
     plugins:
@@ -138,7 +136,7 @@ steps:
 
   - label: iOS Build and SauceLabs
     key: ios-build-and-saucelabs
-    command: .buildkite/build-ios.sh
+    command: .buildkite/commands/build-ios.sh
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
@@ -150,7 +148,7 @@ steps:
 
   - label: Test iOS on Device – Canary Pages
     depends_on: ios-build-and-saucelabs
-    command: .buildkite/test-ios.sh --canary
+    command: .buildkite/commands/test-ios.sh --canary
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
@@ -176,7 +174,7 @@ steps:
     depends_on:
       - ios-build-and-saucelabs
       - run-full-ui-test
-    command: .buildkite/test-ios.sh
+    command: .buildkite/commands/test-ios.sh
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
@@ -192,7 +190,7 @@ steps:
     if: *is_branch_for_full_ui_tests
     depends_on:
       - ios-build-and-saucelabs
-    command: .buildkite/test-ios.sh
+    command: .buildkite/commands/test-ios.sh
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
@@ -208,7 +206,7 @@ steps:
     depends_on:
       - ios-build-and-saucelabs
       - run-full-ui-test
-    command: .buildkite/test-ios.sh --ipad
+    command: .buildkite/commands/test-ios.sh --ipad
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
@@ -223,7 +221,7 @@ steps:
     if: *is_branch_for_full_ui_tests
     depends_on:
       - ios-build-and-saucelabs
-    command: .buildkite/test-ios.sh --ipad
+    command: .buildkite/commands/test-ios.sh --ipad
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
