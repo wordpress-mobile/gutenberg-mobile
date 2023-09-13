@@ -36,3 +36,5 @@ curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" \
   --form 'payload=@"./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk"' \
   --form "name=Gutenberg-$SAUCE_FILENAME.apk" \
   --form 'description="Gutenberg"'
+# This is just so the curl output doesn't concatenate with the next line in the CI logs
+echo ''
