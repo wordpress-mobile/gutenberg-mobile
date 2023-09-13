@@ -3,6 +3,8 @@
 source /root/.bashrc
 
 echo '--- :node: Setup Node environment'
+# TODO: The NVM setup should be something for the Docker image to do
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 nvm install && nvm use
 
 echo '--- :npm: Install Node dependencies'
