@@ -21,6 +21,8 @@ x-common-params:
         # They are passed from the Buildkite agent to the Docker container
         - 'AWS_ACCESS_KEY'
         - 'AWS_SECRET_KEY'
+  - &nvm_plugin
+    automattic/nvm#0.2.0
   - &xcode_agent_env
     IMAGE_ID: xcode-14.3.1
   - &is_branch_for_full_ui_tests
@@ -139,7 +141,7 @@ steps:
     command: .buildkite/commands/build-ios.sh
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
-      - automattic/nvm#0.2.0
+      - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
       - ./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
@@ -152,7 +154,7 @@ steps:
     command: .buildkite/commands/test-ios.sh --canary
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
-      - automattic/nvm#0.2.0
+      - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
@@ -179,7 +181,7 @@ steps:
     command: .buildkite/commands/test-ios.sh
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
-      - automattic/nvm#0.2.0
+      - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
@@ -196,7 +198,7 @@ steps:
     command: .buildkite/commands/test-ios.sh
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
-      - automattic/nvm#0.2.0
+      - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
@@ -213,7 +215,7 @@ steps:
     command: .buildkite/commands/test-ios.sh --ipad
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
-      - automattic/nvm#0.2.0
+      - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
@@ -229,7 +231,7 @@ steps:
     command: .buildkite/commands/test-ios.sh --ipad
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
-      - automattic/nvm#0.2.0
+      - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
