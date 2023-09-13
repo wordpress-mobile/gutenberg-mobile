@@ -159,7 +159,7 @@ steps:
 
   - label: Test iOS on Device – Canary Pages
     depends_on: ios-build-and-saucelabs
-    command: .buildkite/commands/test-ios.sh --canary
+    command: .buildkite/commands/test-e2e-ios.sh --canary
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
@@ -185,7 +185,7 @@ steps:
     depends_on:
       - ios-build-and-saucelabs
       - run-full-ui-test
-    command: .buildkite/commands/test-ios.sh
+    command: .buildkite/commands/test-e2e-ios.sh
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
@@ -201,7 +201,7 @@ steps:
     if: *is_branch_for_full_ui_tests
     depends_on:
       - ios-build-and-saucelabs
-    command: .buildkite/commands/test-ios.sh
+    command: .buildkite/commands/test-e2e-ios.sh
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
@@ -217,7 +217,7 @@ steps:
     depends_on:
       - ios-build-and-saucelabs
       - run-full-ui-test
-    command: .buildkite/commands/test-ios.sh --ipad
+    command: .buildkite/commands/test-e2e-ios.sh --ipad
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin
@@ -232,7 +232,7 @@ steps:
     if: *is_branch_for_full_ui_tests
     depends_on:
       - ios-build-and-saucelabs
-    command: .buildkite/commands/test-ios.sh --ipad
+    command: .buildkite/commands/test-e2e-ios.sh --ipad
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
       - *git-cache-plugin

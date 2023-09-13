@@ -43,7 +43,7 @@ steps:
     plugins:
       - *publish-android-artifacts-docker-container
       - *git-cache-plugin
-    command: .buildkite/commands/test-android.sh --canary
+    command: .buildkite/commands/test-e2e-android.sh --canary
     artifact_paths:
       - reports/test-results/android-test-results.xml
     notify:
