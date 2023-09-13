@@ -139,6 +139,7 @@ steps:
     command: .buildkite/commands/build-ios.sh
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
+      - automattic/nvm#0.2.0
       - *git-cache-plugin
     artifact_paths:
       - ./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
@@ -151,6 +152,7 @@ steps:
     command: .buildkite/commands/test-ios.sh --canary
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
+      - automattic/nvm#0.2.0
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
@@ -177,6 +179,7 @@ steps:
     command: .buildkite/commands/test-ios.sh
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
+      - automattic/nvm#0.2.0
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
@@ -193,6 +196,7 @@ steps:
     command: .buildkite/commands/test-ios.sh
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
+      - automattic/nvm#0.2.0
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
@@ -209,6 +213,7 @@ steps:
     command: .buildkite/commands/test-ios.sh --ipad
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
+      - automattic/nvm#0.2.0
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
@@ -224,6 +229,7 @@ steps:
     command: .buildkite/commands/test-ios.sh --ipad
     plugins:
       - automattic/a8c-ci-toolkit#2.18.2
+      - automattic/nvm#0.2.0
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
