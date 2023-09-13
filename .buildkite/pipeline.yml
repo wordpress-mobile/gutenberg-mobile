@@ -31,6 +31,13 @@ x-common-params:
     build.branch != 'trunk' && build.branch !~ /^release.*/ && build.branch !~ /^dependabot\/submodules.*/
 
 steps:
+  - label: Android packages unit tests
+    key: android-packages-unit-tests
+    plugins:
+      - *publish-android-artifacts-docker-container
+      - *git-cache-plugin
+    command: .buildkite/commands/test-unit-android.sh
+
   - label: Android Build and Sauce Labs
     key: android-build-and-saucelabs
     plugins:
