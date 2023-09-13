@@ -7,10 +7,6 @@ x-common-params:
         # Allow WP-CLI to be run as root, otherwise it throws an exception.
         # Reference: https://git.io/J9q2S
         - 'WP_CLI_ALLOW_ROOT=true'
-        # DO NOT MANUALLY SET THESE VALUES!
-        # They are passed from the Buildkite agent to the Docker container
-        - 'SAUCE_USERNAME'
-        - 'SAUCE_ACCESS_KEY'
   - &git-cache-plugin
     automattic/git-s3-cache#1.1.4:
       # Ensure these settings match what's defined in cache-builder.yml
@@ -25,6 +21,8 @@ x-common-params:
         # They are passed from the Buildkite agent to the Docker container
         - 'AWS_ACCESS_KEY'
         - 'AWS_SECRET_KEY'
+        - 'SAUCE_USERNAME'
+        - 'SAUCE_ACCESS_KEY'
   - &xcode_agent_env
     IMAGE_ID: xcode-14.3.1
   - &is_branch_for_full_ui_tests
@@ -36,6 +34,6 @@ steps:
   - label: Android Build and Sauce Labs
     key: android-build-and-saucelabs
     plugins:
-      - *gb-mobile-docker-container
+      - *publish-android-artifacts-docker-container
       - *git-cache-plugin
     command: .buildkite/commands/build-android.sh
