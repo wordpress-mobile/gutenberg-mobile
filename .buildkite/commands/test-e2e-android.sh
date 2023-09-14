@@ -30,6 +30,9 @@ nvm install "$(cat jetpack/.nvmrc)"
 nvm use
 
 echo '--- :npm: Install Node dependencies'
+# Need to bump the memory to avoid running out of it. Example failure:
+# https://buildkite.com/automattic/gutenberg-mobile/builds/7265#018a925c-4223-49f1-8a03-c4471d8e7fa3
+export NODE_OPTIONS=--max-old-space-size=4096
 npm ci --prefer-offline --no-audit --ignore-scripts
 npm ci --prefix gutenberg --prefer-offline --no-audit
 
