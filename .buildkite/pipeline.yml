@@ -132,6 +132,7 @@ steps:
       - ios-xcframework/build/xcframeworks/*.tar.gz
     plugins:
       - *ci_toolkit_plugin
+      - *nvm_plugin
       - *git-cache-plugin
     agents:
       queue: mac
