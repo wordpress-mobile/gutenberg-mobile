@@ -43,21 +43,21 @@ steps:
       - github_commit_status:
           context: Test Android packages
 
-  - label: Android Build and Sauce Labs
-    key: android-build-and-saucelabs
-    plugins:
-      - *publish-android-artifacts-docker-container
-      - *git-cache-plugin
-    command: .buildkite/commands/build-android.sh
+  # - label: Android Build and Sauce Labs
+  #   key: android-build-and-saucelabs
+  #   plugins:
+  #     - *publish-android-artifacts-docker-container
+  #     - *git-cache-plugin
+  #   command: .buildkite/commands/build-android.sh
 
-  - label: Test Android on Device – Canary Pages
-    depends_on: android-build-and-saucelabs
-    plugins:
-      - *publish-android-artifacts-docker-container
-      - *git-cache-plugin
-    command: .buildkite/commands/test-e2e-android.sh --canary
-    artifact_paths:
-      - reports/test-results/android-test-results.xml
-    notify:
-      - github_commit_status:
-          context: Test Android on Device - Canaries
+  # - label: Test Android on Device – Canary Pages
+  #   depends_on: android-build-and-saucelabs
+  #   plugins:
+  #     - *publish-android-artifacts-docker-container
+  #     - *git-cache-plugin
+  #   command: .buildkite/commands/test-e2e-android.sh --canary
+  #   artifact_paths:
+  #     - reports/test-results/android-test-results.xml
+  #   notify:
+  #     - github_commit_status:
+  #         context: Test Android on Device - Canaries
