@@ -37,6 +37,8 @@ steps:
       - *publish-android-artifacts-docker-container
       - *git-cache-plugin
     command: .buildkite/commands/test-unit-android.sh
+    artifact_paths:
+      - react-native-bridge/build/test-results/test*/*.xml
     notify:
       - github_commit_status:
           context: Test Android packages
