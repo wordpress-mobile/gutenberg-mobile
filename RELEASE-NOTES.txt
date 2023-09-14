@@ -1,6 +1,10 @@
 Unreleased
 ---
 
+1.103.3
+---
+* [*] Bump `WordPress-Aztec-iOS` version to `1.19.9` [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6202]
+
 1.103.2
 ---
 * [*] Fix issue with missing characters in Add Media placeholder button [https://github.com/WordPress/gutenberg/pull/54281]
