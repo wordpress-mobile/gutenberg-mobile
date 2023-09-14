@@ -39,8 +39,11 @@ npm ci --prefix gutenberg --prefer-offline --no-audit
 echo '--- :android: Set env var for Android E2E testing'
 set -x
 export TEST_RN_PLATFORM=android
-export JEST_JUNIT_OUTPUT_FILE="reports/test-results/android-test-results.xml"
 export TEST_ENV=sauce
+export JEST_JUNIT_OUTPUT_FILE="reports/test-results/android-test-results.xml"
+# This is a relic of the CircleCI setup.
+# It should be removed once the migration to Buildkite is completed.
+export CIRCLE_BRANCH=${BUILDKITE_BRANCH}
 set +x
 
 if [ "$MODE" == 'canary' ]; then
