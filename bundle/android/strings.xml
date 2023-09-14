@@ -348,6 +348,9 @@ translators: %s: Select control option value e.g: "Auto, 25%". -->
     <string name="gutenberg_native_slash_inserter_results" tools:ignore="UnusedResources">Slash inserter results</string>
     <string name="gutenberg_native_some_blocks_have_additional_settings_tap_the_settings_icon_on_the" tools:ignore="UnusedResources">Some blocks have additional settings. Tap the settings icon on the bottom right of the block to view more options.</string>
     <string name="gutenberg_native_start_writing" tools:ignore="UnusedResources">Start writing…</string>
+    <string name="gutenberg_native_take_a_photo" tools:ignore="UnusedResources">Take a Photo</string>
+    <string name="gutenberg_native_take_a_photo_or_video" tools:ignore="UnusedResources">Take a Photo or Video</string>
+    <string name="gutenberg_native_take_a_video" tools:ignore="UnusedResources">Take a Video</string>
     <string name="gutenberg_native_tap_here_to_show_help" tools:ignore="UnusedResources">Tap here to show help</string>
     <string name="gutenberg_native_tap_to_hide_the_keyboard" tools:ignore="UnusedResources">Tap to hide the keyboard</string>
     <string name="gutenberg_native_text_color" tools:ignore="UnusedResources">Text color</string>
@@ -386,6 +389,7 @@ translators: %s: Select control option value e.g: "Auto, 25%". -->
     <string name="gutenberg_native_what_is_a_block" tools:ignore="UnusedResources">What is a block?</string>
     <string name="gutenberg_native_what_is_alt_text" tools:ignore="UnusedResources">What is alt text?</string>
     <string name="gutenberg_native_width_settings" tools:ignore="UnusedResources">Width Settings</string>
+    <string name="gutenberg_native_wordpress_media_library" tools:ignore="UnusedResources">WordPress Media Library</string>
     <string name="gutenberg_native_x_axis_position" tools:ignore="UnusedResources">X-Axis Position</string>
     <string name="gutenberg_native_y_axis_position" tools:ignore="UnusedResources">Y-Axis Position</string>
     <string name="gutenberg_native_you_can_also_rearrange_blocks_by_tapping_a_block_and_then_tapping" tools:ignore="UnusedResources">You can also rearrange blocks by tapping a block and then tapping the up and down arrows that appear on the bottom left side of the block to move it up or down.</string>
