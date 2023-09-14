@@ -37,6 +37,9 @@ steps:
       - *publish-android-artifacts-docker-container
       - *git-cache-plugin
     command: .buildkite/commands/test-unit-android.sh
+    notify:
+      - github_commit_status:
+          context: Test Android packages
 
   - label: Android Build and Sauce Labs
     key: android-build-and-saucelabs
