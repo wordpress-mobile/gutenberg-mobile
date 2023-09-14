@@ -23,6 +23,8 @@ x-common-params:
         - 'AWS_SECRET_KEY'
   - &nvm_plugin
     automattic/nvm#5e32ba05632164c68b0c8bec52c41dd344068fb2
+  - &ci_toolkit_plugin
+    automattic/a8c-ci-toolkit#2.18.2
   - &xcode_agent_env
     IMAGE_ID: xcode-14.3.1
   - &is_branch_for_full_ui_tests
@@ -129,7 +131,7 @@ steps:
     artifact_paths:
       - ios-xcframework/build/xcframeworks/*.tar.gz
     plugins:
-      - automattic/a8c-ci-toolkit#2.18.2
+      - *ci_toolkit_plugin
       - *git-cache-plugin
     agents:
       queue: mac
@@ -139,7 +141,7 @@ steps:
     key: ios-build-and-saucelabs
     command: .buildkite/commands/build-ios.sh
     plugins:
-      - automattic/a8c-ci-toolkit#2.18.2
+      - *ci_toolkit_plugin
       - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
@@ -152,7 +154,7 @@ steps:
     depends_on: ios-build-and-saucelabs
     command: .buildkite/commands/test-ios.sh --canary
     plugins:
-      - automattic/a8c-ci-toolkit#2.18.2
+      - *ci_toolkit_plugin
       - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
@@ -179,7 +181,7 @@ steps:
       - run-full-ui-test
     command: .buildkite/commands/test-ios.sh
     plugins:
-      - automattic/a8c-ci-toolkit#2.18.2
+      - *ci_toolkit_plugin
       - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
@@ -196,7 +198,7 @@ steps:
       - ios-build-and-saucelabs
     command: .buildkite/commands/test-ios.sh
     plugins:
-      - automattic/a8c-ci-toolkit#2.18.2
+      - *ci_toolkit_plugin
       - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
@@ -213,7 +215,7 @@ steps:
       - run-full-ui-test
     command: .buildkite/commands/test-ios.sh --ipad
     plugins:
-      - automattic/a8c-ci-toolkit#2.18.2
+      - *ci_toolkit_plugin
       - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
@@ -229,7 +231,7 @@ steps:
       - ios-build-and-saucelabs
     command: .buildkite/commands/test-ios.sh --ipad
     plugins:
-      - automattic/a8c-ci-toolkit#2.18.2
+      - *ci_toolkit_plugin
       - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
