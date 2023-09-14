@@ -51,7 +51,9 @@ steps:
   #   command: .buildkite/commands/build-android.sh
 
   # - label: Test Android on Device – Canary Pages
-  #   depends_on: android-build-and-saucelabs
+  #   depends_on:
+  #     - android-packages-unit-tests
+  #     - android-build-and-saucelabs
   #   plugins:
   #     - *publish-android-artifacts-docker-container
   #     - *git-cache-plugin
