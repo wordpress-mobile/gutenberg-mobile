@@ -22,7 +22,7 @@ x-common-params:
         - 'AWS_ACCESS_KEY'
         - 'AWS_SECRET_KEY'
   - &nvm_plugin
-    automattic/nvm#5e32ba05632164c68b0c8bec52c41dd344068fb2
+    automattic/nvm#0.2.1
   - &ci_toolkit_plugin
     automattic/a8c-ci-toolkit#2.18.2
   - &xcode_agent_env
