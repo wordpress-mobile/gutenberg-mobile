@@ -260,11 +260,6 @@ PODS:
     - React-jsiexecutor (= 0.71.11)
     - React-jsinspector (= 0.71.11)
     - React-perflogger (= 0.71.11)
-  - React-jsc (0.71.11):
-    - React-jsc/Fabric (= 0.71.11)
-    - React-jsi (= 0.71.11)
-  - React-jsc/Fabric (0.71.11):
-    - React-jsi (= 0.71.11)
   - React-jsi (0.71.11):
     - boost (= 1.76.0)
     - DoubleConversion
@@ -461,7 +456,6 @@ DEPENDENCIES:
   - React-CoreModules (from `../gutenberg/node_modules/react-native/React/CoreModules`)
   - React-cxxreact (from `../gutenberg/node_modules/react-native/ReactCommon/cxxreact`)
   - React-hermes (from `../gutenberg/node_modules/react-native/ReactCommon/hermes`)
-  - React-jsc (from `../third-party-podspecs/React-jsc.podspec.json`)
   - React-jsi (from `../gutenberg/node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../gutenberg/node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../gutenberg/node_modules/react-native/ReactCommon/jsinspector`)
@@ -540,8 +534,6 @@ EXTERNAL SOURCES:
     :path: "../gutenberg/node_modules/react-native/ReactCommon/cxxreact"
   React-hermes:
     :path: "../gutenberg/node_modules/react-native/ReactCommon/hermes"
-  React-jsc:
-    :podspec: "../third-party-podspecs/React-jsc.podspec.json"
   React-jsi:
     :path: "../gutenberg/node_modules/react-native/ReactCommon/jsi"
   React-jsiexecutor:
@@ -636,7 +628,6 @@ SPEC CHECKSUMS:
   React-CoreModules: ffd19b082fc36b9b463fedf30955138b5426c053
   React-cxxreact: 8b3dd87e3b8ea96dd4ad5c7bac8f31f1cc3da97f
   React-hermes: be95942c3f47fc032da1387360413f00dae0ea68
-  React-jsc: 711d76870c4cdb8a0dc2dbaaf6d5898f278f8a6b
   React-jsi: 9978e2a64c2a4371b40e109f4ef30a33deaa9bcb
   React-jsiexecutor: 18b5b33c5f2687a784a61bc8176611b73524ae77
   React-jsinspector: b6ed4cb3ffa27a041cd440300503dc512b761450
@@ -674,6 +665,6 @@ SPEC CHECKSUMS:
   WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
   Yoga: f7decafdc5e8c125e6fa0da38a687e35238420fa
 
-PODFILE CHECKSUM: f0e6aef8704c365fd09c8b348797d1d4ad51b1a6
+PODFILE CHECKSUM: eed59291e8f65f4e532304d8e4091728b1906889
 
 COCOAPODS: 1.12.1

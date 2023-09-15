@@ -39,8 +39,17 @@ def gutenberg_dependencies
       next
     end
 
-    # Skip React-jsc unless using Hermes
-    next if pod_name == 'React-jsc' && HERMES_ENABLED == false
+    # Skip React-jsc when using Hermes
+    #
+    # Context: React native supports different JavaScript engines.
+    # Hermes is the recommended engine, but we always have the option to switch back to JavaScriptCore (JSC).
+    # Of course, if we use one we don't need to add the other.
+    #
+    # See also:
+    #
+    # - https://github.com/facebook/react-native/tree/598b7ed690d908c408adea970d26382c834f5ead/packages/react-native/ReactCommon/jsc
+    # - https://reactnative.dev/docs/hermes
+    next if pod_name == 'React-jsc' && HERMES_ENABLED == true
 
     pod pod_name, podspec: podspec_path
   end
