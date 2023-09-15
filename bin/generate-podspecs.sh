@@ -107,7 +107,6 @@ CODEGEN_NPM_PATH="../react-native-codegen"
 PACKAGE_JSON_PATH="./package.json"
 SRCS_DIR=${SRCS_DIR:-$(cd "./Libraries" && pwd)}
 RN_VERSION=$(cat ./package.json | grep -m 1 version | sed 's/[^0-9.]//g')
-HERMES_ENABLED="true"
 
 RN_PODSPECS=$(find * -type f -name "*.podspec" -not -name "React-rncore.podspec" -not -path "third-party-podspecs/*" -not -path "*Fabric*" -print)
 TMP_DEST=$(mktemp -d)
