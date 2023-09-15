@@ -23,9 +23,7 @@ def setup_rnreanimated_pod_from_fork
 end
 
 def gutenberg_dependencies
-  podspec_extension = '.podspec.json'
-
-  Dir["../third-party-podspecs/*#{podspec_extension}"].each do |podspec_path|
+  Dir['../third-party-podspecs/*.podspec.json'].each do |podspec_path|
     pod_name = JSON.parse(File.read(podspec_path))['name']
 
     raise "Could not find pod name in JSON spec at #{podspec_path}" unless pod_name
