@@ -424,16 +424,16 @@ PODS:
     - React-RCTImage
   - RNSVG (13.9.0):
     - React-Core
-  - RNTAztecView (1.103.0):
+  - RNTAztecView (1.103.2):
     - React-Core
-    - WordPress-Aztec-iOS (~> 1.19.8)
+    - WordPress-Aztec-iOS (~> 1.19)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
   - SDWebImageWebPCoder (0.8.5):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
-  - WordPress-Aztec-iOS (1.19.8)
+  - WordPress-Aztec-iOS (1.19.9)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -487,7 +487,7 @@ DEPENDENCIES:
   - RNReanimated (from `https://github.com/wordpress-mobile/react-native-reanimated`, branch `wp-fork-2.17.0`)
   - RNScreens (from `../third-party-podspecs/RNScreens.podspec.json`)
   - RNSVG (from `../third-party-podspecs/RNSVG.podspec.json`)
-  - RNTAztecView (from `..`)
+  - RNTAztecView (from `../gutenberg/packages/react-native-aztec`)
   - Yoga (from `../gutenberg/node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -598,7 +598,7 @@ EXTERNAL SOURCES:
   RNSVG:
     :podspec: "../third-party-podspecs/RNSVG.podspec.json"
   RNTAztecView:
-    :path: ".."
+    :path: "../gutenberg/packages/react-native-aztec"
   Yoga:
     :path: "../gutenberg/node_modules/react-native/ReactCommon/yoga"
 
@@ -659,12 +659,12 @@ SPEC CHECKSUMS:
   RNReanimated: 21e1e71d7f1ac9f2fa11df37c06a8ec52ed06232
   RNScreens: e3ffdd78ff5afe8ec82c2566ee2410857ed5ce75
   RNSVG: 29dd0ac32d83774d4b0953ae92a5cd8205a782d7
-  RNTAztecView: acfe038f0384d2cf86f47999e9010b6ab5c03ade
+  RNTAztecView: 034d50f19e7505e591daf7da80a1495488467c0d
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
-  WordPress-Aztec-iOS: 7d11d598f14c82c727c08b56bd35fbeb7dafb504
+  WordPress-Aztec-iOS: fbebd569c61baa252b3f5058c0a2a9a6ada686bb
   Yoga: f7decafdc5e8c125e6fa0da38a687e35238420fa
 
-PODFILE CHECKSUM: a240fb0d100c639b9b0bcedab219f9b0b51fbf0a
+PODFILE CHECKSUM: e9562063718a2c990efeba80fc1f8ab6b8e008ac
 
 COCOAPODS: 1.12.1

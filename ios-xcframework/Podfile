@@ -3,7 +3,8 @@
 require 'json'
 require 'xcodeproj'
 
-REACT_NATIVE_PATH = '../gutenberg/node_modules/react-native'
+GUTENBERG_PATH = '../gutenberg'
+REACT_NATIVE_PATH = File.join(GUTENBERG_PATH, 'node_modules', 'react-native')
 require_relative File.join(REACT_NATIVE_PATH, 'scripts', 'react_native_pods')
 
 HERMES_ENABLED = ENV.fetch('HERMES_ENABLED', true)
@@ -66,7 +67,7 @@ use_frameworks! linkage: :static
 use_react_native! path: REACT_NATIVE_PATH, hermes_enabled: HERMES_ENABLED
 
 target 'Gutenberg' do
-  pod 'RNTAztecView', path: '..'
+  pod 'RNTAztecView', path: File.join(GUTENBERG_PATH, 'packages', 'react-native-aztec')
   gutenberg_dependencies
 end
 
