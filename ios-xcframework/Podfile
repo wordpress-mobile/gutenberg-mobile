@@ -1,63 +1,57 @@
 # frozen_string_literal: true
 
+require 'json'
 require 'xcodeproj'
 
-REACT_NATIVE_PATH = '../gutenberg/node_modules/react-native'
+GUTENBERG_PATH = '../gutenberg'
+REACT_NATIVE_PATH = File.join(GUTENBERG_PATH, 'node_modules', 'react-native')
 require_relative File.join(REACT_NATIVE_PATH, 'scripts', 'react_native_pods')
 
 HERMES_ENABLED = ENV.fetch('HERMES_ENABLED', true)
 
 puts "[Gutenberg] Installing pods with Hermes #{HERMES_ENABLED ? 'enabled' : 'disabled'}"
 
-# Note that the pods in this array might seem unused if you look for
-# `import` statements in this codebase. However, make sure to also check
-# whether they are used in the gutenberg-mobile and Gutenberg projects.
-#
-# Also notice that these are not all the dependencies the project uses.
-# Later in the config, we call use_react_native! which fetches more.
-#
-# See https://github.com/wordpress-mobile/gutenberg-mobile/issues/5025
-DEPENDENCIES = %w[
-  react-native-safe-area
-  react-native-safe-area-context
-  react-native-video
-  react-native-webview
-  RNSVG
-  react-native-slider
-  BVLinearGradient
-  react-native-get-random-values
-  react-native-blur
-  RNScreens
-  RNReanimated
-  RNGestureHandler
-  RNCMaskedView
-  RNCClipboard
-  RNFastImage
-  React-jsc
-].freeze
-
-def gutenberg_dependencies
-  podspec_prefix = '..'
-
-  computed_dependencies = DEPENDENCIES.dup
-
-  # Use a custom RNReanimated version while we coordinate a fix upstream
-  computed_dependencies.delete('RNReanimated')
-
-  computed_dependencies.delete('React-jsc') unless HERMES_ENABLED
-
-  computed_dependencies.each do |pod_name|
-    pod pod_name, podspec: "#{podspec_prefix}/third-party-podspecs/#{pod_name}.podspec.json"
-  end
-
+def setup_rnreanimated_pod_from_fork
   # This is required to workaround an issue with RNReanimated after upgrading to version 2.17.0
   rn_node_modules = File.join(Dir.pwd, '..', 'gutenberg', 'node_modules')
   raise "Could not find node modules at given path #{rn_node_modules}" unless File.exist? rn_node_modules
+
   ENV['REACT_NATIVE_NODE_MODULES_DIR'] = rn_node_modules
   puts "[Gutenberg] Set REACT_NATIVE_NODE_MODULES_DIR env var for RNReanimated to #{rn_node_modules}"
 
   # Use a custom RNReanimated version while we coordinate a fix upstream
   pod 'RNReanimated', git: 'https://github.com/wordpress-mobile/react-native-reanimated', branch: 'wp-fork-2.17.0'
+end
+
+def gutenberg_dependencies
+  Dir['../third-party-podspecs/*.podspec.json'].each do |podspec_path|
+    pod_name = JSON.parse(File.read(podspec_path))['name']
+
+    raise "Could not find pod name in JSON spec at #{podspec_path}" unless pod_name
+
+    # Skip the standard RNReanimated podspec because we use a custom version
+    # while working on an upstream fix
+    #
+    # https://github.com/software-mansion/react-native-reanimated/pull/4684
+    if pod_name == 'RNReanimated'
+      setup_rnreanimated_pod_from_fork
+      next
+    end
+
+    # Skip React-jsc when using Hermes
+    #
+    # Context: React native supports different JavaScript engines.
+    # Hermes is the recommended engine, but we always have the option to switch back to JavaScriptCore (JSC).
+    # Of course, if we use one we don't need to add the other.
+    #
+    # See also:
+    #
+    # - https://github.com/facebook/react-native/tree/598b7ed690d908c408adea970d26382c834f5ead/packages/react-native/ReactCommon/jsc
+    # - https://reactnative.dev/docs/hermes
+    next if pod_name == 'React-jsc' && HERMES_ENABLED == true
+
+    pod pod_name, podspec: podspec_path
+  end
 end
 
 VERSION_XCCONFIG_PATH = File.join(File.expand_path(__dir__), 'Config', 'Gutenberg-Shared.xcconfig')
@@ -73,7 +67,7 @@ use_frameworks! linkage: :static
 use_react_native! path: REACT_NATIVE_PATH, hermes_enabled: HERMES_ENABLED
 
 target 'Gutenberg' do
-  pod 'RNTAztecView', path: '..'
+  pod 'RNTAztecView', path: File.join(GUTENBERG_PATH, 'packages', 'react-native-aztec')
   gutenberg_dependencies
 end
 

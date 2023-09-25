@@ -21,6 +21,10 @@ x-common-params:
         # They are passed from the Buildkite agent to the Docker container
         - 'AWS_ACCESS_KEY'
         - 'AWS_SECRET_KEY'
+  - &nvm_plugin
+    automattic/nvm#0.2.1
+  - &ci_toolkit_plugin
+    automattic/a8c-ci-toolkit#2.18.2
   - &xcode_agent_env
     IMAGE_ID: xcode-14.3.1
   - &is_branch_for_full_ui_tests
@@ -110,8 +114,7 @@ steps:
     plugins:
       - *git-cache-plugin
       - *publish-android-artifacts-docker-container
-    command: |
-        .buildkite/publish-react-native-aztec-android-artifacts.sh
+    command: .buildkite/commands/publish-react-native-aztec-android-artifacts.sh
 
   - label: "Build Android RN Bridge & Publish to S3"
     depends_on:
@@ -120,27 +123,27 @@ steps:
     plugins:
       - *git-cache-plugin
       - *publish-android-artifacts-docker-container
-    command: |
-        .buildkite/publish-react-native-bridge-android-artifacts.sh
+    command: .buildkite/commands/publish-react-native-bridge-android-artifacts.sh
 
   - label: Build iOS RN XCFramework & Publish to S3
     depends_on: js-bundles
-    command: .buildkite/publish-react-native-ios-artifacts.sh
+    command: .buildkite/commands/publish-react-native-ios-artifacts.sh
     artifact_paths:
       - ios-xcframework/build/xcframeworks/*.tar.gz
     plugins:
-      - automattic/a8c-ci-toolkit#2.18.2
+      - *ci_toolkit_plugin
+      - *nvm_plugin
       - *git-cache-plugin
     agents:
       queue: mac
-    env:
-      IMAGE_ID: xcode-14.3.1
+    env: *xcode_agent_env
 
-  - label: iOS Build and SauceLabs
+  - label: iOS Build and Sauce Labs
     key: ios-build-and-saucelabs
-    command: .buildkite/build-ios.sh
+    command: .buildkite/commands/build-ios.sh
     plugins:
-      - automattic/a8c-ci-toolkit#2.18.2
+      - *ci_toolkit_plugin
+      - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
       - ./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
@@ -150,9 +153,10 @@ steps:
 
   - label: Test iOS on Device – Canary Pages
     depends_on: ios-build-and-saucelabs
-    command: .buildkite/test-ios.sh --canary
+    command: .buildkite/commands/test-ios.sh --canary
     plugins:
-      - automattic/a8c-ci-toolkit#2.18.2
+      - *ci_toolkit_plugin
+      - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
@@ -176,9 +180,10 @@ steps:
     depends_on:
       - ios-build-and-saucelabs
       - run-full-ui-test
-    command: .buildkite/test-ios.sh
+    command: .buildkite/commands/test-ios.sh
     plugins:
-      - automattic/a8c-ci-toolkit#2.18.2
+      - *ci_toolkit_plugin
+      - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
@@ -192,9 +197,10 @@ steps:
     if: *is_branch_for_full_ui_tests
     depends_on:
       - ios-build-and-saucelabs
-    command: .buildkite/test-ios.sh
+    command: .buildkite/commands/test-ios.sh
     plugins:
-      - automattic/a8c-ci-toolkit#2.18.2
+      - *ci_toolkit_plugin
+      - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
@@ -208,9 +214,10 @@ steps:
     depends_on:
       - ios-build-and-saucelabs
       - run-full-ui-test
-    command: .buildkite/test-ios.sh --ipad
+    command: .buildkite/commands/test-ios.sh --ipad
     plugins:
-      - automattic/a8c-ci-toolkit#2.18.2
+      - *ci_toolkit_plugin
+      - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
@@ -223,9 +230,10 @@ steps:
     if: *is_branch_for_full_ui_tests
     depends_on:
       - ios-build-and-saucelabs
-    command: .buildkite/test-ios.sh --ipad
+    command: .buildkite/commands/test-ios.sh --ipad
     plugins:
-      - automattic/a8c-ci-toolkit#2.18.2
+      - *ci_toolkit_plugin
+      - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml

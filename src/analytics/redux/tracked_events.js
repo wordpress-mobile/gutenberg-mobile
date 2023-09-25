@@ -233,9 +233,8 @@ export const trackedEvents = {
 			_toRootClientId,
 			toIndex
 		) {
-			const isDraggingBlock = select(
-				'core/block-editor'
-			).isDraggingBlocks();
+			const isDraggingBlock =
+				select( 'core/block-editor' ).isDraggingBlocks();
 
 			if ( isDraggingBlock ) {
 				trackBlockMoved( clientIds, 'drag_and_drop' );
