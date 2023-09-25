@@ -116,10 +116,8 @@ describe( 'VideoPress block - Replace', () => {
 
 		// Setup pickers and media upload
 		const { notifySucceedState } = setupMediaUpload();
-		const {
-			expectMediaPickerCall,
-			mediaPickerCallback,
-		} = setupMediaPicker();
+		const { expectMediaPickerCall, mediaPickerCallback } =
+			setupMediaPicker();
 		const { selectOption } = setupPicker( screen, MEDIA_OPTIONS );
 
 		// Mock API responses for new block
@@ -165,10 +163,8 @@ describe( 'VideoPress block - Replace', () => {
 
 		// Setup pickers and media upload
 		const { notifySucceedState } = setupMediaUpload();
-		const {
-			expectMediaPickerCall,
-			mediaPickerCallback,
-		} = setupMediaPicker();
+		const { expectMediaPickerCall, mediaPickerCallback } =
+			setupMediaPicker();
 		const { selectOption } = setupPicker( screen, MEDIA_OPTIONS );
 
 		// Mock API responses for new block
@@ -213,10 +209,8 @@ describe( 'VideoPress block - Replace', () => {
 		expect( getEditorHtml() ).toMatchSnapshot( 'before replacing video' );
 
 		// Setup pickers
-		const {
-			expectMediaPickerCall,
-			mediaPickerCallback,
-		} = setupMediaPicker();
+		const { expectMediaPickerCall, mediaPickerCallback } =
+			setupMediaPicker();
 		const { selectOption } = setupPicker( screen, MEDIA_OPTIONS );
 
 		// Mock API responses for new block
@@ -308,10 +302,8 @@ describe( 'VideoPress block - Replace', () => {
 
 		// Setup pickers and media upload
 		const { notifyUploadingState, notifyResetState } = setupMediaUpload();
-		const {
-			expectMediaPickerCall,
-			mediaPickerCallback,
-		} = setupMediaPicker();
+		const { expectMediaPickerCall, mediaPickerCallback } =
+			setupMediaPicker();
 		const { selectOption } = setupPicker( screen, MEDIA_OPTIONS );
 
 		// Mock API responses for new block

@@ -120,7 +120,8 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			);
 
 			// Get button's block TextInput
-			const buttonBlockTextInput = await editorPage.getButtonBlockTextInputAtPosition();
+			const buttonBlockTextInput =
+				await editorPage.getButtonBlockTextInputAtPosition();
 			await buttonBlockTextInput.click();
 			await selectTextFromElement(
 				editorPage.driver,
@@ -139,7 +140,8 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.initializeEditor();
 			await editorPage.addNewBlock( blockNames.buttons );
 
-			const firstButtonTextInput = await editorPage.getButtonBlockTextInputAtPosition();
+			const firstButtonTextInput =
+				await editorPage.getButtonBlockTextInputAtPosition();
 			await editorPage.typeTextToTextBlock(
 				firstButtonTextInput,
 				e2eTestData.listItem2
@@ -154,9 +156,8 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Add a second button block
 			await editorPage.addButtonWithInlineAppender( 2 );
-			const secondButtonTextInput = await editorPage.getButtonBlockTextInputAtPosition(
-				2
-			);
+			const secondButtonTextInput =
+				await editorPage.getButtonBlockTextInputAtPosition( 2 );
 			await editorPage.typeTextToTextBlock(
 				secondButtonTextInput,
 				e2eTestData.listItem2
@@ -171,9 +172,8 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Add a third button block
 			await editorPage.addButtonWithInlineAppender( 3 );
-			const thirdButtonTextInput = await editorPage.getButtonBlockTextInputAtPosition(
-				3
-			);
+			const thirdButtonTextInput =
+				await editorPage.getButtonBlockTextInputAtPosition( 3 );
 			await editorPage.typeTextToTextBlock(
 				thirdButtonTextInput,
 				e2eTestData.listItem2
@@ -208,7 +208,8 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Add Buttons block
 			await editorPage.addNewBlock( blockNames.buttons );
-			const buttonTextInput = await editorPage.getButtonBlockTextInputAtPosition();
+			const buttonTextInput =
+				await editorPage.getButtonBlockTextInputAtPosition();
 			await editorPage.typeTextToTextBlock(
 				buttonTextInput,
 				e2eTestData.shortButtonText
@@ -223,9 +224,10 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			if ( isAndroid() ) {
 				// On Android, we take the screenshot using the block list element
 				// in order to crop some pixels using the padding argument.
-				const editorScreen = await editorPage.waitForElementToBeDisplayedByXPath(
-					'//android.widget.FrameLayout[@resource-id="android:id/content"]'
-				);
+				const editorScreen =
+					await editorPage.waitForElementToBeDisplayedByXPath(
+						'//android.widget.FrameLayout[@resource-id="android:id/content"]'
+					);
 				screenshot = await takeScreenshotByElement( editorScreen, {
 					padding: { right: -10 },
 				} );
