@@ -260,11 +260,6 @@ PODS:
     - React-jsiexecutor (= 0.71.11)
     - React-jsinspector (= 0.71.11)
     - React-perflogger (= 0.71.11)
-  - React-jsc (0.71.11):
-    - React-jsc/Fabric (= 0.71.11)
-    - React-jsi (= 0.71.11)
-  - React-jsc/Fabric (0.71.11):
-    - React-jsi (= 0.71.11)
   - React-jsi (0.71.11):
     - boost (= 1.76.0)
     - DoubleConversion
@@ -429,9 +424,9 @@ PODS:
     - React-RCTImage
   - RNSVG (13.9.0):
     - React-Core
-  - RNTAztecView (1.103.3):
+  - RNTAztecView (1.104.0):
     - React-Core
-    - WordPress-Aztec-iOS (~> 1.19.9)
+    - WordPress-Aztec-iOS (= 1.19.9)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
@@ -461,7 +456,6 @@ DEPENDENCIES:
   - React-CoreModules (from `../gutenberg/node_modules/react-native/React/CoreModules`)
   - React-cxxreact (from `../gutenberg/node_modules/react-native/ReactCommon/cxxreact`)
   - React-hermes (from `../gutenberg/node_modules/react-native/ReactCommon/hermes`)
-  - React-jsc (from `../third-party-podspecs/React-jsc.podspec.json`)
   - React-jsi (from `../gutenberg/node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../gutenberg/node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../gutenberg/node_modules/react-native/ReactCommon/jsinspector`)
@@ -540,8 +534,6 @@ EXTERNAL SOURCES:
     :path: "../gutenberg/node_modules/react-native/ReactCommon/cxxreact"
   React-hermes:
     :path: "../gutenberg/node_modules/react-native/ReactCommon/hermes"
-  React-jsc:
-    :podspec: "../third-party-podspecs/React-jsc.podspec.json"
   React-jsi:
     :path: "../gutenberg/node_modules/react-native/ReactCommon/jsi"
   React-jsiexecutor:
@@ -636,7 +628,6 @@ SPEC CHECKSUMS:
   React-CoreModules: ffd19b082fc36b9b463fedf30955138b5426c053
   React-cxxreact: 8b3dd87e3b8ea96dd4ad5c7bac8f31f1cc3da97f
   React-hermes: be95942c3f47fc032da1387360413f00dae0ea68
-  React-jsc: 711d76870c4cdb8a0dc2dbaaf6d5898f278f8a6b
   React-jsi: 9978e2a64c2a4371b40e109f4ef30a33deaa9bcb
   React-jsiexecutor: 18b5b33c5f2687a784a61bc8176611b73524ae77
   React-jsinspector: b6ed4cb3ffa27a041cd440300503dc512b761450
@@ -668,12 +659,12 @@ SPEC CHECKSUMS:
   RNReanimated: 21e1e71d7f1ac9f2fa11df37c06a8ec52ed06232
   RNScreens: e3ffdd78ff5afe8ec82c2566ee2410857ed5ce75
   RNSVG: 29dd0ac32d83774d4b0953ae92a5cd8205a782d7
-  RNTAztecView: e040a6aa70f30017fa97a7e901ca2a3881b170ec
+  RNTAztecView: dfbe69cb1448f08b29846616fbb79d79f21968b3
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   WordPress-Aztec-iOS: fbebd569c61baa252b3f5058c0a2a9a6ada686bb
   Yoga: f7decafdc5e8c125e6fa0da38a687e35238420fa
 
-PODFILE CHECKSUM: 2523902ce6070e39dd8ec3dee9afd7d928bf4b66
+PODFILE CHECKSUM: e9562063718a2c990efeba80fc1f8ab6b8e008ac
 
 COCOAPODS: 1.12.1

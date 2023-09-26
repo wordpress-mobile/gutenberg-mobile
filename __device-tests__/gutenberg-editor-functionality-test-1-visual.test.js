@@ -65,9 +65,10 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 				await editorPage.driver
 					.elementByAccessibilityId( 'Column Block. Row 1' )
 					.click();
-				const appenderButton = await editorPage.waitForElementToBeDisplayedByXPath(
-					ANDROID_COLUMN_APPENDER_BUTTON_XPATH
-				);
+				const appenderButton =
+					await editorPage.waitForElementToBeDisplayedByXPath(
+						ANDROID_COLUMN_APPENDER_BUTTON_XPATH
+					);
 				await appenderButton.click();
 			} else {
 				await editorPage.driver
@@ -122,9 +123,10 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 				await editorPage.driver
 					.elementByAccessibilityId( 'Column Block. Row 1' )
 					.click();
-				const appenderButton = await editorPage.waitForElementToBeDisplayedByXPath(
-					ANDROID_COLUMN_APPENDER_BUTTON_XPATH
-				);
+				const appenderButton =
+					await editorPage.waitForElementToBeDisplayedByXPath(
+						ANDROID_COLUMN_APPENDER_BUTTON_XPATH
+					);
 				await appenderButton.click();
 			} else {
 				await editorPage.driver
@@ -183,9 +185,10 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 				await editorPage.driver
 					.elementByAccessibilityId( 'Column Block. Row 1' )
 					.click();
-				const appenderButton = await editorPage.waitForElementToBeDisplayedByXPath(
-					ANDROID_COLUMN_APPENDER_BUTTON_XPATH
-				);
+				const appenderButton =
+					await editorPage.waitForElementToBeDisplayedByXPath(
+						ANDROID_COLUMN_APPENDER_BUTTON_XPATH
+					);
 				await appenderButton.click();
 			} else {
 				await editorPage.driver
@@ -237,9 +240,8 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			await editorPage.driver.sleep( 3000 );
 
 			const cellId = 'Column 1. Width is 50 Percent (%).';
-			const cell = await editorPage.driver.elementByAccessibilityId(
-				cellId
-			);
+			const cell =
+				await editorPage.driver.elementByAccessibilityId( cellId );
 			const cellSize = await cell.getSize();
 			const cellLocation = await cell.getLocation();
 			const scrollOffset = isAndroid() ? 350 : 100;
