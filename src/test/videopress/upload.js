@@ -74,13 +74,10 @@ beforeEach( () => {
 describe( 'VideoPress block - Uploads', () => {
 	it( 'displays media options picker when selecting the block', async () => {
 		// Initialize with an empty gallery
-		const {
-			getByLabelText,
-			getByText,
-			getByTestId,
-		} = await initializeEditor( {
-			initialHtml,
-		} );
+		const { getByLabelText, getByText, getByTestId } =
+			await initializeEditor( {
+				initialHtml,
+			} );
 
 		fireEvent.press( getByText( 'Add video' ) );
 
@@ -123,10 +120,8 @@ describe( 'VideoPress block - Uploads', () => {
 		};
 
 		const { notifyUploadingState, notifySucceedState } = setupMediaUpload();
-		const {
-			expectMediaPickerCall,
-			mediaPickerCallback,
-		} = setupMediaPicker();
+		const { expectMediaPickerCall, mediaPickerCallback } =
+			setupMediaPicker();
 
 		const screen = await initializeEditor( {
 			initialHtml,
@@ -209,10 +204,8 @@ describe( 'VideoPress block - Uploads', () => {
 				videopressGUID: VIDEOPRESS_GUID,
 			},
 		};
-		const {
-			expectMediaPickerCall,
-			mediaPickerCallback,
-		} = setupMediaPicker();
+		const { expectMediaPickerCall, mediaPickerCallback } =
+			setupMediaPicker();
 
 		const screen = await initializeEditor( {
 			initialHtml,
@@ -276,10 +269,8 @@ describe( 'VideoPress block - Uploads', () => {
 		};
 
 		const { notifyUploadingState, notifySucceedState } = setupMediaUpload();
-		const {
-			expectMediaPickerCall,
-			mediaPickerCallback,
-		} = setupMediaPicker();
+		const { expectMediaPickerCall, mediaPickerCallback } =
+			setupMediaPicker();
 
 		const screen = await initializeEditor( {
 			initialHtml,
@@ -357,12 +348,8 @@ describe( 'VideoPress block - Uploads', () => {
 		const screen = await initializeEditor( {
 			initialHtml,
 		} );
-		const {
-			getByText,
-			getByTestId,
-			getByPlaceholderText,
-			findByTestId,
-		} = screen;
+		const { getByText, getByTestId, getByPlaceholderText, findByTestId } =
+			screen;
 		const { selectOption } = setupPicker( screen, MEDIA_OPTIONS );
 		// Clear previous calls to `apiFetch`
 		apiFetch.mockClear();
@@ -495,10 +482,8 @@ describe( 'VideoPress block - Uploads', () => {
 		};
 
 		const { notifyUploadingState, notifyFailedState } = setupMediaUpload();
-		const {
-			expectMediaPickerCall,
-			mediaPickerCallback,
-		} = setupMediaPicker();
+		const { expectMediaPickerCall, mediaPickerCallback } =
+			setupMediaPicker();
 
 		const screen = await initializeEditor( {
 			initialHtml,
@@ -545,10 +530,8 @@ describe( 'VideoPress block - Uploads', () => {
 		};
 
 		const { notifyUploadingState, notifyResetState } = setupMediaUpload();
-		const {
-			expectMediaPickerCall,
-			mediaPickerCallback,
-		} = setupMediaPicker();
+		const { expectMediaPickerCall, mediaPickerCallback } =
+			setupMediaPicker();
 
 		const screen = await initializeEditor( {
 			initialHtml,

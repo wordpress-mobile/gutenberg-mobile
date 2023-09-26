@@ -1,6 +1,14 @@
 Unreleased
 ---
+
+1.104.0
+---
 * [*] Fix the obscurred "Insert from URL" input for media blocks when using a device in landscape orientation. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6143]
+* [**] Updated placeholder text colors for block-based themes [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6182]
+
+1.103.3
+---
+* [*] Bump `WordPress-Aztec-iOS` version to `1.19.9` [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6202]
 
 1.103.2
 ---

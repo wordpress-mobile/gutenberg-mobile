@@ -83,7 +83,8 @@ describe( 'Gutenberg Editor Visual test for Unsupported Block', () => {
 
 		// Disabled for now on Android see https://github.com/wordpress-mobile/gutenberg-mobile/issues/5321
 		if ( ! isAndroid() ) {
-			const editButton = await editorPage.getUnsupportedBlockBottomSheetEditButton();
+			const editButton =
+				await editorPage.getUnsupportedBlockBottomSheetEditButton();
 			await editButton.click();
 
 			const webView = await editorPage.getUnsupportedBlockWebView();
