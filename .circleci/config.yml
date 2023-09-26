@@ -13,7 +13,7 @@ commands:
           name: NPM Install
           command: |
             echo "Node version: $(node --version)"
-            npm ci --prefer-offline --no-audit
+            npm ci --no-audit
       - save_cache:
           name: Save NPM Cache
           key: npm-install-cache-{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
@@ -34,8 +34,8 @@ commands:
           name: NPM Install (E2E Tests)
           command: |
             echo "Node version: $(node --version)"
-            npm ci --prefer-offline --no-audit --ignore-scripts
-            npm ci --prefix gutenberg --prefer-offline --no-audit
+            npm ci --no-audit --ignore-scripts
+            npm ci --prefix gutenberg --no-audit
   checkout-shallow:
     steps:
       - run:
