@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [*] Limit inner blocks nesting depth to avoid call stack size exceeded crash [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6191]
 
 1.104.0
 ---
