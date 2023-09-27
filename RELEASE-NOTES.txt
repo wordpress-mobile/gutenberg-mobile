@@ -2,6 +2,7 @@ Unreleased
 ---
 * [*] Prevent crashes when setting an invalid media URL for Video or Audio blocks [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6235]
 * [*] Limit inner blocks nesting depth to avoid call stack size exceeded crash [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6191]
+* [**] Fallback to Twitter provider when embedding X URLs [https://github.com/WordPress/gutenberg/pull/54876]
 
 1.104.0
 ---
