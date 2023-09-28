@@ -161,9 +161,9 @@ export async function takeScreenshot( { withoutKeyboard, crop } = {} ) {
 /**
  * Generates the appropriate URL to fetch the theme data based on the provided theme details.
  *
- * @param {Object}  theme                  Object containing details about the theme.
- * @param {string}  theme.name             The name of the theme.
- * @param {boolean} theme.isWordPressTheme Flag indicating whether the theme is a WordPress theme. Defaults to false.
+ * @param {Object}  theme                    Object containing details about the theme.
+ * @param {string}  theme.name               The name of the theme.
+ * @param {boolean} [theme.isWordPressTheme] Flag indicating whether the theme is a WordPress theme. Defaults to false.
  * @return {string} The URL from which the theme data can be fetched.
  */
 function getThemeLink( { name, isWordPressTheme = false } ) {
@@ -177,9 +177,9 @@ function getThemeLink( { name, isWordPressTheme = false } ) {
 /**
  * Fetches and processes the theme data from the provided theme details.
  *
- * @param {Object}  theme                  Object containing details about the theme.
- * @param {string}  theme.name             The name of the theme.
- * @param {boolean} theme.isWordPressTheme Flag indicating whether the theme is a WordPress theme. Defaults to false.
+ * @param {Object}  theme                    Object containing details about the theme.
+ * @param {string}  theme.name               The name of the theme.
+ * @param {boolean} [theme.isWordPressTheme] Flag indicating whether the theme is a WordPress theme. Defaults to false.
  * @return {Promise<Object>} A promise that resolves to a stringified JSON object containing the theme data.
  * @throws Will throw an error if the fetch operation fails.
  */
