@@ -186,7 +186,7 @@ function getThemeLink( { name, isWordPressTheme = false } ) {
 export async function fetchTheme( theme ) {
 	const themeJSONLink = getThemeLink( theme );
 
-	return await fetch( themeJSONLink )
+	return fetch( themeJSONLink )
 		.then( ( response ) => response.json() )
 		.then( ( data ) => {
 			const rawFeatures = data?.settings;
