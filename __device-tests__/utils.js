@@ -5,6 +5,25 @@ import jimp from 'jimp';
 
 const { isAndroid } = e2eUtils;
 
+const SUPPORTED_GLOBAL_STYLES_BLOCKS = [
+	'core/paragraph',
+	'core/button',
+	'core/quote',
+	'core/pullquote',
+	'core/quote',
+	'core/search',
+];
+const SUPPORTED_GLOBAL_STYLES_ELEMENTS = [
+	'h1',
+	'h2',
+	'h3',
+	'h4',
+	'h5',
+	'h6',
+	'link',
+	'button',
+];
+
 /**
  * Helper to take a screenshot of an element.
  *
@@ -191,24 +210,6 @@ export async function fetchTheme( theme ) {
 		.then( ( data ) => {
 			const rawFeatures = data?.settings;
 			const rawStyles = data?.styles;
-			const supportedBlocks = [
-				'core/paragraph',
-				'core/button',
-				'core/quote',
-				'core/pullquote',
-				'core/quote',
-				'core/search',
-			];
-			const supportedElements = [
-				'h1',
-				'h2',
-				'h3',
-				'h4',
-				'h5',
-				'h6',
-				'link',
-				'button',
-			];
 
 			if ( rawFeatures?.color?.palette ) {
 				rawFeatures.color.palette = {
@@ -221,7 +222,7 @@ export async function fetchTheme( theme ) {
 				};
 			}
 
-			// We filter the supported features because of limitations in sending this data
+			// We filter the supported global styles featues due to limitations in sending this data
 			// during app launch on Android.
 			const filteredRawFeatures = {
 				color: rawFeatures?.color,
@@ -232,18 +233,21 @@ export async function fetchTheme( theme ) {
 			const filteredRawStyles = {
 				color: rawStyles?.color,
 				typography: rawStyles?.typography,
-				blocks: supportedBlocks.reduce( ( acc, key ) => {
+				blocks: SUPPORTED_GLOBAL_STYLES_BLOCKS.reduce( ( acc, key ) => {
 					if ( rawStyles?.blocks?.[ key ] ) {
 						acc[ key ] = rawStyles.blocks[ key ];
 					}
 					return acc;
 				}, {} ),
-				elements: supportedElements.reduce( ( acc, key ) => {
-					if ( rawStyles?.elements?.[ key ] ) {
-						acc[ key ] = rawStyles.elements[ key ];
-					}
-					return acc;
-				}, {} ),
+				elements: SUPPORTED_GLOBAL_STYLES_ELEMENTS.reduce(
+					( acc, key ) => {
+						if ( rawStyles?.elements?.[ key ] ) {
+							acc[ key ] = rawStyles.elements[ key ];
+						}
+						return acc;
+					},
+					{}
+				),
 			};
 
 			return {
