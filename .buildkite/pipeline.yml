@@ -39,19 +39,19 @@ steps:
   - label: Lint and Unit Tests
     key: unit-tests
     plugins:
-      - *gb-mobile-docker-container
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+      - *git-cache-plugin
     command: |
-      source /root/.bashrc
-
-      echo "--- :node: Setup Node environment"
-      nvm install && nvm use
-
       echo "--- :npm: Install Node dependencies"
       npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
       echo "--- :node: Lint and Unit Tests"
       ./bin/ci-checks-js.sh
+    agents:
+      queue: mac
     env:
+      <<: *xcode_agent_env
       JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
     artifact_paths:
       - ./logs/*.log
