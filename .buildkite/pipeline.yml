@@ -36,7 +36,26 @@ steps:
   - block: "Request trigger Android bundle and builds"
     branches: "dependabot/submodules/*"
 
-  - label: Lint and Unit Tests
+  - label: Lint
+    key: lint
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+      - *git-cache-plugin
+    command: |
+      echo "--- :npm: Install Node dependencies"
+      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+
+      echo "--- :node: Lint"
+      CHECK_CORRECTNESS=true CHECK_TESTS=false ./bin/ci-checks-js.sh
+    agents:
+      queue: mac
+    env: *xcode_agent_env
+    notify:
+      - github_commit_status:
+          context: Lint
+
+  - label: Unit Tests
     key: unit-tests
     plugins:
       - *ci_toolkit_plugin
@@ -47,7 +66,7 @@ steps:
       npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
       echo "--- :node: Lint and Unit Tests"
-      ./bin/ci-checks-js.sh
+      CHECK_CORRECTNESS=false CHECK_TESTS=true ./bin/ci-checks-js.sh
     agents:
       queue: mac
     env:
@@ -56,6 +75,7 @@ steps:
     artifact_paths:
       - ./logs/*.log
       - ./reports/test-results/*.xml
+    # FIXME: Will need to update the GitHub setup again for the reporting and required checks
     notify:
       - github_commit_status:
           context: Lint and Unit Tests
