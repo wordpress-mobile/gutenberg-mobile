@@ -56,8 +56,8 @@ steps:
       - github_commit_status:
           context: Lint
 
-  - label: Unit Tests
-    key: unit-tests
+  - label: Android Unit Tests
+    key: android-unit-tests
     plugins:
       - *gb-mobile-docker-container
       - *ci_toolkit_plugin
@@ -70,9 +70,29 @@ steps:
       echo "--- :npm: Install Node dependencies"
       npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
-      CHECK_CORRECTNESS=false CHECK_TESTS=true ./bin/ci-checks-js.sh
+      CHECK_CORRECTNESS=false CHECK_TESTS=true TEST_RN_PLATFORM=android ./bin/ci-checks-js.sh
     env:
       JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
+    artifact_paths:
+      - ./logs/*.log
+      - ./reports/test-results/*.xml
+    notify:
+      - github_commit_status:
+          context: Android Unit Tests
+
+  - label: iOS Unit Tests
+    key: ios-unit-tests
+    plugins:
+      - *gb-mobile-docker-container
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+      - *git-cache-plugin
+    command: |
+      echo "--- :npm: Install Node dependencies"
+      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+
+      echo "--- :node: Lint and Unit Tests"
+      CHECK_CORRECTNESS=false CHECK_TESTS=true TEST_RN_PLATFORM=ios ./bin/ci-checks-js.sh
     artifact_paths:
       - ./logs/*.log
       - ./reports/test-results/*.xml
@@ -82,7 +102,9 @@ steps:
           context: Lint and Unit Tests
 
   - label: "Build JS Bundles"
-    depends_on: "unit-tests"
+    depends_on:
+      - android-unit-tests
+      - ios-unit-tests
     key: "js-bundles"
     plugins:
       - *gb-mobile-docker-container
@@ -130,7 +152,7 @@ steps:
         fi
 
   - label: "Build Android RN Aztec & Publish to S3"
-    depends_on: unit-tests
+    depends_on: android-unit-tests
     key: "publish-react-native-aztec-android"
     plugins:
       - *git-cache-plugin
