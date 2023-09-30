@@ -42,12 +42,7 @@ steps:
       - *ci_toolkit_plugin
       - *nvm_plugin
       - *git-cache-plugin
-    command: |
-      echo "--- :npm: Install Node dependencies"
-      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
-
-      echo "--- :node: Lint"
-      CHECK_CORRECTNESS=true CHECK_TESTS=false ./bin/ci-checks-js.sh
+    command: .buildkite/commands/lint.sh
     agents:
       queue: mac
     env: *xcode_agent_env
@@ -61,12 +56,7 @@ steps:
       - *ci_toolkit_plugin
       - *nvm_plugin
       - *git-cache-plugin
-    command: |
-      echo "--- :npm: Install Node dependencies"
-      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
-
-      echo "--- :node: Lint and Unit Tests"
-      CHECK_CORRECTNESS=false CHECK_TESTS=true TEST_RN_PLATFORM=android ./bin/ci-checks-js.sh
+    command: .buildkite/commands/unit-tests-android.sh
     agents:
       queue: mac
     env:
@@ -85,12 +75,7 @@ steps:
       - *ci_toolkit_plugin
       - *nvm_plugin
       - *git-cache-plugin
-    command: |
-      echo "--- :npm: Install Node dependencies"
-      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
-
-      echo "--- :node: Lint and Unit Tests"
-      CHECK_CORRECTNESS=false CHECK_TESTS=true TEST_RN_PLATFORM=ios ./bin/ci-checks-js.sh
+    command: .buildkite/commands/unit-tests-ios.sh
     agents:
       queue: mac
     env: *xcode_agent_env
