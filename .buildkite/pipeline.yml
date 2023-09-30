@@ -44,14 +44,7 @@ steps:
       echo "--- :docker: Additional Docker image setup"
       source /root/.bashrc
 
-      echo "--- :npm: Install Node dependencies"
-      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
-
-      echo "--- :node: Lint"
-      CHECK_CORRECTNESS=true CHECK_TESTS=false ./bin/ci-checks-js.sh
-    agents:
-      queue: mac
-    env: *xcode_agent_env
+      .buildkite/commands/lint.sh
     notify:
       - github_commit_status:
           context: Lint
@@ -67,10 +60,7 @@ steps:
       echo "--- :docker: Additional Docker image setup"
       source /root/.bashrc
 
-      echo "--- :npm: Install Node dependencies"
-      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
-
-      CHECK_CORRECTNESS=false CHECK_TESTS=true TEST_RN_PLATFORM=android ./bin/ci-checks-js.sh
+      .buildkite/commands/unit-tests-android.sh
     env:
       JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
     artifact_paths:
@@ -88,11 +78,10 @@ steps:
       - *nvm_plugin
       - *git-cache-plugin
     command: |
-      echo "--- :npm: Install Node dependencies"
-      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+      echo "--- :docker: Additional Docker image setup"
+      source /root/.bashrc
 
-      echo "--- :node: Lint and Unit Tests"
-      CHECK_CORRECTNESS=false CHECK_TESTS=true TEST_RN_PLATFORM=ios ./bin/ci-checks-js.sh
+      .buildkite/commands/unit-tests-ios.sh
     artifact_paths:
       - ./logs/*.log
       - ./reports/test-results/*.xml
