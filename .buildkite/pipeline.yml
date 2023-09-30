@@ -36,8 +36,20 @@ steps:
   - block: "Request trigger Android bundle and builds"
     branches: "dependabot/submodules/*"
 
+  - label: Build Mac Cache
+    key: cache
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+      - *git-cache-plugin
+    command: .buildkite/commands/build-cache.sh
+    agents:
+      queue: mac
+    env: *xcode_agent_env
+
   - label: Lint
     key: lint
+    depends_on: cache
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
