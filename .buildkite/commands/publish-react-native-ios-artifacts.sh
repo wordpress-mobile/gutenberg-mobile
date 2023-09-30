@@ -7,7 +7,7 @@ mkdir -p ios-xcframework/Gutenberg/Resources
 tar -xzvf ios-assets.tar.gz -C ios-xcframework/Gutenberg/Resources/
 
 echo '--- :node: Setup node_modules for RNReanimated'
-npm ci
+npm ci --unsafe-perm --prefer-offline --no-audit
 
 echo "--- :rubygems: Setting up Gems"
 cd ./ios-xcframework
