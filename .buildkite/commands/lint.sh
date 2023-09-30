@@ -5,6 +5,8 @@ NPM_CACHE_ARCHIVE="npm_home.tar.gz"
 buildkite-agent artifact download "$NPM_CACHE_ARCHIVE" .
 tar -xzf "$NPM_CACHE_ARCHIVE" -C "$HOME"
 
+ls -la "$HOME"
+
 echo "--- :npm: Install Node dependencies"
 npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
