@@ -74,11 +74,17 @@ steps:
 
   - label: Android Unit Tests
     key: android-unit-tests
+    depends_on: cache
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
       - *git-cache-plugin
     command: |
+      echo "--- :arrow_down Download npm cache"
+      NPM_CACHE_ARCHIVE=npm_home.tar.gz
+      buildkite-agent artifact download "$$NPM_CACHE_ARCHIVE" .
+      tar -xzf "$NPM_CACHE_ARCHIVE" -C "$$HOME"
+
       echo "--- :npm: Install Node dependencies"
       npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
@@ -98,11 +104,15 @@ steps:
 
   - label: iOS Unit Tests
     key: ios-unit-tests
+    depends_on: cache
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
       - *git-cache-plugin
     command: |
+      echo "--- :arrow_down Download npm cache (fake)"
+      echo "No downalod here to see the difference against the Android one"
+
       echo "--- :npm: Install Node dependencies"
       npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
