@@ -33,9 +33,6 @@ x-common-params:
     build.branch != 'trunk' && build.branch !~ /^release.*/ && build.branch !~ /^dependabot\/submodules.*/
 
 steps:
-  - block: "Request trigger Android bundle and builds"
-    branches: "dependabot/submodules/*"
-
   - label: Lint and Unit Tests
     key: unit-tests
     plugins:
