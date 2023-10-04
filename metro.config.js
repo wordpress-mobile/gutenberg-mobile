@@ -52,9 +52,8 @@ gutenbergMetroConfigCopy.resolver.resolveRequest = (
 					paths: [ path.dirname( context.originModulePath ) ],
 				} );
 
-				const innerNodeModules = filePath.match(
-					/.*node_modules/
-				)?.[ 0 ];
+				const innerNodeModules =
+					filePath.match( /.*node_modules/ )?.[ 0 ];
 
 				extraNodeModulePath =
 					innerNodeModules && path.join( innerNodeModules, name );

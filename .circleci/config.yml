@@ -13,7 +13,7 @@ commands:
           name: NPM Install
           command: |
             echo "Node version: $(node --version)"
-            npm ci --prefer-offline --no-audit
+            npm ci --no-audit
       - save_cache:
           name: Save NPM Cache
           key: npm-install-cache-{{ .Environment.CACHE_TRIGGER_VERSION }}-{{ arch }}-{{ checksum "package-lock.json" }}
@@ -34,8 +34,8 @@ commands:
           name: NPM Install (E2E Tests)
           command: |
             echo "Node version: $(node --version)"
-            npm ci --prefer-offline --no-audit --ignore-scripts
-            npm ci --prefix gutenberg --prefer-offline --no-audit
+            npm ci --no-audit --ignore-scripts
+            npm ci --prefix gutenberg --no-audit
   checkout-shallow:
     steps:
       - run:
@@ -220,114 +220,12 @@ jobs:
       - run:
           name: Run Android native-bridge unit tests
           command: cd gutenberg/packages/react-native-bridge/android && ./gradlew test
-  ios-build:
-    macos:
-      xcode: "13.4.1"
-    steps:
-    - checkout-shallow
-    - checkout-submodules
-    - install-node-version
-    - npm-install
-    - run:
-        name: Set Environment Variables
-        command: |
-          echo 'export TEST_RN_PLATFORM=ios' >> $BASH_ENV
-          echo 'export TEST_ENV=sauce' >> $BASH_ENV
-    - run:
-        name: Prepare build cache key
-        command: find gutenberg/package-lock.json gutenberg/packages/react-native-editor/ios gutenberg/packages/react-native-aztec/ios gutenberg/packages/react-native-bridge/ios -type f -print0 | sort -z | xargs -0 shasum | tee ios-checksums.txt
-    - restore_cache:
-        name: Restore Build Cache
-        keys:
-          - ios-build-cache-{{ checksum "ios-checksums.txt" }}
-    - restore_cache:
-        name: Restore Dependencies Cache
-        keys:
-        - dependencies-v6-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}-{{ checksum "gutenberg/package-lock.json" }}
-        - dependencies-v6-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}
-        - dependencies-v6-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}
-        - dependencies-v6-
-    - run:
-        name: Build (if needed)
-        command: test -e gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app || npm run core test:e2e:build-app:ios
-    - save_cache:
-        name: Save Dependencies Cache
-        key: dependencies-v6-{{ checksum "gutenberg/packages/react-native-editor/ios/Gemfile.lock" }}-{{ checksum "gutenberg/packages/react-native-editor/ios/Podfile.lock" }}-{{ checksum "gutenberg/package-lock.json" }}
-        paths:
-        - gutenberg/packages/react-native-editor/ios/Pods
-        - ~/Library/Caches/CocoaPods
-        - ~/.cocoapods/repos/trunk
-        - gutenberg/packages/react-native-editor/ios/vendor
-    - run:
-        name: Bundle iOS
-        command: npm run test:e2e:bundle:ios
-    - run:
-        name: Generate .app file for testing
-        command: WORK_DIR=$(pwd) && cd ./gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator && zip -r $WORK_DIR/gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip GutenbergDemo.app
-    - run:
-        name: Upload .app to sauce labs
-        command: |
-          source bin/sauce-pre-upload.sh
-          curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" --location \
-          --request POST 'https://api.us-west-1.saucelabs.com/v1/storage/upload' \
-          --form 'payload=@"./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip"' \
-          --form "name=Gutenberg-$SAUCE_FILENAME.app.zip" \
-          --form 'description="Gutenberg"'
-    - run:
-        name: Prepare build cache
-        command: rm gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app/main.jsbundle
-    - save_cache:
-        name: Save Build Cache
-        key: ios-build-cache-{{ checksum "ios-checksums.txt" }}
-        paths:
-          - gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app
-  ios-device-checks:
-    parameters:
-      post-to-slack:
-        description: Post to Slack when tests fail. SLACK_WEBHOOK ENV variable must be set.
-        type: boolean
-        default: false
-      is-canary:
-        type: string
-        default: ""
-      is-ipad:
-        type: string
-        default: ""
-    macos:
-      xcode: "13.4.1"
-    steps:
-    - checkout-shallow
-    - checkout-submodules
-    - install-node-version
-    - npm-install-e2e-tests
-    - add-jest-reporter-dir
-    - add-jest-snapshot-dir
-    - run:
-        name: Set Environment Variables
-        command: |
-          echo 'export TEST_RN_PLATFORM=ios' >> $BASH_ENV
-          echo 'export TEST_ENV=sauce' >> $BASH_ENV
-    - run:
-        name: Run Device Tests
-        command: |
-          npm run device-tests<<parameters.is-canary>><<parameters.is-ipad>>
-        no_output_timeout: 1200
-        environment:
-          JEST_JUNIT_OUTPUT_FILE: "reports/test-results/ios-test-results.xml"
-    - store_test_results:
-        path: ./reports/test-results
 
 workflows:
   gutenberg-mobile:
     jobs:
-      - ios-build:
-          name: iOS Build
       - android-build:
           name: Android Build
-      - ios-device-checks:
-          name: Test iOS on Device - Canaries
-          is-canary: "-canary"
-          requires: [ "iOS Build" ]
       - android-device-checks:
           name: Test Android on Device - Canaries
           is-canary: "-canary"
@@ -337,25 +235,6 @@ workflows:
       # For regular branches the full test suite is optional.
       - Optional UI Tests:
           type: approval
-          filters:
-            branches:
-              ignore:
-                - trunk
-                - /^dependabot/submodules/.*/
-                - /^release.*/
-      - ios-device-checks:
-          name: Test iOS on Device - Full (Manually triggered)
-          requires: [ "Optional UI Tests", "iOS Build" ]
-          filters:
-            branches:
-              ignore:
-                - trunk
-                - /^dependabot/submodules/.*/
-                - /^release.*/
-      - ios-device-checks:
-          name: Test iOS on Device - iPad (Manually triggered)
-          is-ipad: "-ipad"
-          requires: [ "Optional UI Tests", "iOS Build" ]
           filters:
             branches:
               ignore:
@@ -372,27 +251,6 @@ workflows:
                 - /^dependabot/submodules/.*/
                 - /^release.*/
       # For `trunk`, Dependabot, and release branches we always run the full test suite.
-      - ios-device-checks:
-          name: Test iOS on Device - Full
-          post-to-slack: true
-          requires: [ "iOS Build" ]
-          filters:
-            branches:
-              only:
-                - trunk
-                - /^dependabot/submodules/.*/
-                - /^release.*/
-      - ios-device-checks:
-          name: Test iOS on Device - iPad
-          is-ipad: "-ipad"
-          post-to-slack: true
-          requires: [ "iOS Build" ]
-          filters:
-            branches:
-              only:
-                - trunk
-                - /^dependabot/submodules/.*/
-                - /^release.*/
       - android-device-checks:
           name: Test Android on Device - Full
           post-to-slack: true

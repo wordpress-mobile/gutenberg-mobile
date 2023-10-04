@@ -5,6 +5,25 @@ import jimp from 'jimp';
 
 const { isAndroid } = e2eUtils;
 
+const SUPPORTED_GLOBAL_STYLES_BLOCKS = [
+	'core/paragraph',
+	'core/button',
+	'core/quote',
+	'core/pullquote',
+	'core/quote',
+	'core/search',
+];
+const SUPPORTED_GLOBAL_STYLES_ELEMENTS = [
+	'h1',
+	'h2',
+	'h3',
+	'h4',
+	'h5',
+	'h6',
+	'link',
+	'button',
+];
+
 /**
  * Helper to take a screenshot of an element.
  *
@@ -156,4 +175,84 @@ export async function takeScreenshot( { withoutKeyboard, crop } = {} ) {
 
 	const resizedImage = await image.resize( widthSize, jimp.AUTO );
 	return resizedImage.getBufferAsync( jimp.MIME_PNG );
+}
+
+/**
+ * Generates the appropriate URL to fetch the theme data based on the provided theme details.
+ *
+ * @param {Object}  theme                    Object containing details about the theme.
+ * @param {string}  theme.name               The name of the theme.
+ * @param {boolean} [theme.isWordPressTheme] Flag indicating whether the theme is a WordPress theme. Defaults to false.
+ * @return {string} The URL from which the theme data can be fetched.
+ */
+function getThemeLink( { name, isWordPressTheme = false } ) {
+	if ( isWordPressTheme ) {
+		return `https://raw.githubusercontent.com/WordPress/${ name }/trunk/theme.json`;
+	}
+
+	return `https://raw.githubusercontent.com/Automattic/themes/trunk/${ name }/theme.json`;
+}
+
+/**
+ * Fetches and processes the theme data from the provided theme details.
+ *
+ * @param {Object}  theme                    Object containing details about the theme.
+ * @param {string}  theme.name               The name of the theme.
+ * @param {boolean} [theme.isWordPressTheme] Flag indicating whether the theme is a WordPress theme. Defaults to false.
+ * @return {Promise<Object>} A promise that resolves to a stringified JSON object containing the theme data.
+ * @throws Will throw an error if the fetch operation fails.
+ */
+export async function fetchTheme( theme ) {
+	const themeJSONLink = getThemeLink( theme );
+
+	return fetch( themeJSONLink )
+		.then( ( response ) => response.json() )
+		.then( ( data ) => {
+			const rawFeatures = data?.settings;
+			const rawStyles = data?.styles;
+
+			if ( rawFeatures?.color?.palette ) {
+				rawFeatures.color.palette = {
+					theme: rawFeatures.color.palette,
+				};
+			}
+			if ( rawFeatures.typography.fontSizes ) {
+				rawFeatures.typography.fontSizes = {
+					theme: rawFeatures.typography.fontSizes,
+				};
+			}
+
+			// We filter the supported global styles featues due to limitations in sending this data
+			// during app launch on Android.
+			const filteredRawFeatures = {
+				color: rawFeatures?.color,
+				typography: {
+					fontSizes: rawFeatures?.typography?.fontSizes,
+				},
+			};
+			const filteredRawStyles = {
+				color: rawStyles?.color,
+				typography: rawStyles?.typography,
+				blocks: SUPPORTED_GLOBAL_STYLES_BLOCKS.reduce( ( acc, key ) => {
+					if ( rawStyles?.blocks?.[ key ] ) {
+						acc[ key ] = rawStyles.blocks[ key ];
+					}
+					return acc;
+				}, {} ),
+				elements: SUPPORTED_GLOBAL_STYLES_ELEMENTS.reduce(
+					( acc, key ) => {
+						if ( rawStyles?.elements?.[ key ] ) {
+							acc[ key ] = rawStyles.elements[ key ];
+						}
+						return acc;
+					},
+					{}
+				),
+			};
+
+			return {
+				rawFeatures: JSON.stringify( filteredRawFeatures ),
+				rawStyles: JSON.stringify( filteredRawStyles ),
+			};
+		} );
 }
