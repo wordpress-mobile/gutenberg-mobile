@@ -172,6 +172,9 @@ steps:
 
   - label: iOS Build and Sauce Labs
     key: ios-build-and-saucelabs
+    depends_on:
+      - lint
+      - unit-tests-ios
     command: .buildkite/commands/build-ios.sh
     plugins:
       - *ci_toolkit_plugin
