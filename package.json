@@ -85,7 +85,7 @@
 		"test:update": "cross-env NODE_ENV=test jest --config ./jest.config.js --updateSnapshot",
 		"test:debug": "cross-env NODE_ENV=test node --inspect-brk node_modules/.bin/jest --runInBand --verbose --config jest.config.js",
 		"device-tests": "cross-env NODE_ENV=test jest --maxWorkers=2 --testPathIgnorePatterns='canary|gutenberg-editor-rendering|ipad' --config jest_ui.config.js",
-		"device-tests-canary": "cross-env NODE_ENV=test jest --maxWorkers=2 --testPathPattern=@canary --config jest_ui.config.js",
+		"device-tests-canary": "cross-env NODE_ENV=test jest --maxWorkers=2 --testPathPattern=gutenberg-editor-rendering --config jest_ui.config.js",
 		"device-tests-ipad": "cross-env NODE_ENV=test IPAD=true jest --maxWorkers=2 --testPathPattern=@ipad --config jest_ui.config.js",
 		"device-tests:local": "IOS_APP_PATH='./gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app' WDA_PATH='./gutenberg/packages/react-native-editor/ios/build/WDA' ANDROID_APP_PATH='./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk' NODE_ENV=test jest --maxWorkers=2 --detectOpenHandles --config jest_ui.config.js",
 		"device-tests:debug": "IOS_APP_PATH='./gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app' WDA_PATH='./gutenberg/packages/react-native-editor/ios/build/WDA' ANDROID_APP_PATH='./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk' cross-env NODE_ENV=test node $NODE_DEBUG_OPTION --inspect-brk node_modules/jest/bin/jest --runInBand --detectOpenHandles --verbose --config jest_ui.config.js",
