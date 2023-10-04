@@ -89,6 +89,7 @@ steps:
 
   - label: "Build JS Bundles"
     depends_on:
+      - lint
       - android-unit-tests
       - ios-unit-tests
     key: "js-bundles"
@@ -138,7 +139,9 @@ steps:
         fi
 
   - label: "Build Android RN Aztec & Publish to S3"
-    depends_on: android-unit-tests
+    depends_on:
+      - lint
+      - android-unit-tests
     key: "publish-react-native-aztec-android"
     plugins:
       - *git-cache-plugin
