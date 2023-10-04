@@ -85,10 +85,9 @@ steps:
     artifact_paths:
       - ./logs/*.log
       - ./reports/test-results/*.xml
-    # FIXME: Will need to update the GitHub setup again for the reporting and required checks
     notify:
       - github_commit_status:
-          context: Lint and Unit Tests
+          context: iOS Unit Tests
 
   - label: "Build JS Bundles"
     depends_on:
