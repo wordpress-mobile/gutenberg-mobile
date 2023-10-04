@@ -14,13 +14,14 @@ function pFail() {
 
 function checkDiff() {
   set +e
-  diff=$(git diff)
+  LOCKFILE='package-lock.json'
+  diff=$(git diff -- "$LOCKFILE")
   set -e
   if [[ $? != 0 ]]; then
     pFail
   elif [[ $diff ]]; then
     echo "$diff"
-    pFail "package-lock.json has changed. Please run npm install and commit the diff"
+    pFail "$LOCKFILE has changed. Please run npm install and commit the diff"
   else
     pOk
   fi
