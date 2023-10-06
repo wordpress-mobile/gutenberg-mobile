@@ -72,6 +72,17 @@ steps:
       - github_commit_status:
           context: Android Unit Tests
 
+  - label: React Native Editor Tests Android
+    command: |
+      npm ci --prefer-offline --no-audit
+      cd gutenberg/packages/react-native-editor/android
+      ./gradlew testDebug
+    plugins:
+      - *git-cache-plugin
+      - *nvm_plugin
+    agents:
+      queue: android
+
   - label: iOS Unit Tests
     key: ios-unit-tests
     plugins:
