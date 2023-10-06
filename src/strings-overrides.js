@@ -36,26 +36,6 @@ addFilter(
 	}
 );
 
-addFilter(
-	'native.missing_block_action_button',
-	'native/missing_block',
-	( defaultValue ) => {
-		const { capabilities } = select( blockEditorStore ).getSettings();
-		const isUnsupportedBlockEditorSupported =
-			capabilities?.unsupportedBlockEditor === true;
-		const canEnableUnsupportedBlockEditor =
-			capabilities?.canEnableUnsupportedBlockEditor === true;
-
-		const shouldOverwriteButtonTitle =
-			isUnsupportedBlockEditorSupported === false &&
-			canEnableUnsupportedBlockEditor;
-
-		return shouldOverwriteButtonTitle
-			? __( 'Open Jetpack Security settings' )
-			: defaultValue;
-	}
-);
-
 // Add extra note to `UnsupportedBlockDetails` description to explain how to enable UBE, in case
 // it's available but disabled due to Jetpack settings.
 addFilter(
