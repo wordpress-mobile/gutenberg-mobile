@@ -21,14 +21,9 @@ addFilter(
 		);
 
 		if (
-			isUnsupportedBlockEditorSupported === false &&
+			isUnsupportedBlockEditorSupported ||
 			canEnableUnsupportedBlockEditor
 		) {
-			const note = __(
-				'Note: You must allow WordPress.com login to edit this block in the mobile editor.'
-			);
-			return unsupportedBlocksExplanation + '\n\n' + note; // Translations can not have characters like '\n', so we add the new lines manually.
-		} else if ( isUnsupportedBlockEditorSupported ) {
 			return unsupportedBlocksExplanation;
 		}
 
