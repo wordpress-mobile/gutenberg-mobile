@@ -9,7 +9,8 @@ import {
 } from '@wordpress/blocks';
 import { select } from '@wordpress/data';
 import { registerCoreBlocks } from '@wordpress/block-library';
-import { removeAllFilters } from '@wordpress/hooks';
+import { applyFilters, removeAllFilters } from '@wordpress/hooks';
+import { initializeEditor } from 'test/helpers';
 
 /**
  * Internal dependencies
@@ -17,7 +18,7 @@ import { removeAllFilters } from '@wordpress/hooks';
 import getJetpackData, {
 	JETPACK_DATA_PATH,
 } from '../../jetpack/projects/js-packages/shared-extension-utils/src/get-jetpack-data';
-import {
+import setupJetpackEditorHooks, {
 	registerJetpackBlocks,
 	registerJetpackEmbedVariations,
 	setupJetpackEditor,
@@ -172,6 +173,35 @@ describe( 'Jetpack blocks', () => {
 			.getBlockTypes()
 			.map( ( block ) => block.name );
 		expect( registeredBlocks ).toEqual( [] );
+	} );
+
+	it( 'sets `null` value in unsupported block details of Missing block when only core blocks are available', async () => {
+		setupJetpackEditorHooks();
+		await initializeEditor( {
+			capabilities: {
+				// Force only core blocks
+				onlyCoreBlocks: true,
+			},
+		} );
+
+		const defaultText = 'default-text';
+		const tryOverrideString = ( blockName ) =>
+			applyFilters(
+				'native.missing_block_detail',
+				defaultText,
+				blockName
+			);
+
+		// The following Jetpack blocks are not available, hence the string won't be overridden.
+		expect( tryOverrideString( 'contact-info' ) ).toBe( defaultText );
+		expect( tryOverrideString( 'video' ) ).toBe( defaultText );
+		expect( tryOverrideString( 'non-existing-jetpack-block' ) ).toBe(
+			defaultText
+		);
+
+		// The following blocks are available, hence the string will be overridden with `null` value.
+		expect( tryOverrideString( 'jetpack/contact-info' ) ).toBeNull();
+		expect( tryOverrideString( 'videopress/video' ) ).toBeNull();
 	} );
 
 	describe( 'Jetpack embed variations', () => {

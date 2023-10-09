@@ -170,15 +170,12 @@ const setupStringsOverrides = () => {
 			const onlyCoreBlocks = capabilities?.onlyCoreBlocks === true;
 
 			const jetpackBlockNames = Object.keys( supportedJetpackBlocks ).map(
-				( name ) => `jetpack/${ name }`
+				( name ) =>
+					// Add `jetpack` prefix if the block name doesn't contain a prefix.
+					/^(\w|-)+$/.test( name ) ? `jetpack/${ name }` : name
 			);
 
-			const videoPressBlock = blockName === 'videopress/video';
-
-			if (
-				onlyCoreBlocks &&
-				( jetpackBlockNames.includes( blockName ) || videoPressBlock )
-			) {
+			if ( onlyCoreBlocks && jetpackBlockNames.includes( blockName ) ) {
 				return null;
 			}
 			return defaultValue;
