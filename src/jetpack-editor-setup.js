@@ -169,13 +169,16 @@ const setupStringsOverrides = () => {
 			const { capabilities } = select( blockEditorStore ).getSettings();
 			const onlyCoreBlocks = capabilities?.onlyCoreBlocks === true;
 
-			const jetpackBlockNames = Object.keys( supportedJetpackBlocks ).map(
-				( name ) =>
-					// Add `jetpack` prefix if the block name doesn't contain a prefix.
-					/^(\w|-)+$/.test( name ) ? `jetpack/${ name }` : name
+			const namespacedBlockNames = Object.keys(
+				supportedJetpackBlocks
+			).map( ( name ) =>
+				/^(\w|-)+$/.test( name ) ? `jetpack/${ name }` : name
 			);
 
-			if ( onlyCoreBlocks && jetpackBlockNames.includes( blockName ) ) {
+			if (
+				onlyCoreBlocks &&
+				namespacedBlockNames.includes( blockName )
+			) {
 				return null;
 			}
 			return defaultValue;
