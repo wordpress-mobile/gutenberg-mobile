@@ -169,16 +169,15 @@ const setupStringsOverrides = () => {
 			const { capabilities } = select( blockEditorStore ).getSettings();
 			const onlyCoreBlocks = capabilities?.onlyCoreBlocks === true;
 
-			const jetpackBlockNames = Object.keys( supportedJetpackBlocks ).map(
-				( name ) => `jetpack/${ name }`
+			const namespacedBlockNames = Object.keys(
+				supportedJetpackBlocks
+			).map( ( name ) =>
+				/^(\w|-)+$/.test( name ) ? `jetpack/${ name }` : name
 			);
-
-			const videoPressBlock = blockName === 'videopress/video';
 
 			if (
 				onlyCoreBlocks &&
-				jetpackBlockNames.includes( blockName ) &&
-				videoPressBlock
+				namespacedBlockNames.includes( blockName )
 			) {
 				return null;
 			}
