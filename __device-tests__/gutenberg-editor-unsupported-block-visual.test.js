@@ -43,6 +43,8 @@ describe( 'Gutenberg Editor Visual test for Unsupported Block', () => {
 			editorPage.blockNames.unsupported
 		);
 		await unsupportedBlock.click();
+		// Wait for the block to be selected
+		await editorPage.driver.pause( 1000 );
 
 		// Visual test check
 		let screenshot = await takeScreenshot();
