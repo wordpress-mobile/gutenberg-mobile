@@ -15,7 +15,7 @@ describe( 'Gutenberg Editor iPad Visual test for Horizontal layouts', () => {
 		} );
 
 		// Wait for images to load
-		await editorPage.driver.sleep( 4000 );
+		await editorPage.driver.pause( 4000 );
 
 		// Select title to unfocus the block
 		const titleElement = await editorPage.getTitleElement();
@@ -30,14 +30,14 @@ describe( 'Gutenberg Editor iPad Visual test for Horizontal layouts', () => {
 		// Switch to landscape
 		await toggleOrientation( editorPage.driver );
 		// Wait for the device to finish rotating
-		await editorPage.driver.sleep( 3000 );
+		await editorPage.driver.pause( 3000 );
 
 		await swipeUp( editorPage.driver );
 		await swipeUp( editorPage.driver );
 		await swipeUp( editorPage.driver );
 
 		// Wait for the scrollbar to hide
-		await editorPage.driver.sleep( 3000 );
+		await editorPage.driver.pause( 3000 );
 
 		// Visual test check
 		screenshot = await takeScreenshot();
@@ -46,7 +46,7 @@ describe( 'Gutenberg Editor iPad Visual test for Horizontal layouts', () => {
 		// Switch to portrait
 		await toggleOrientation( editorPage.driver );
 		// Wait for the device to finish rotating
-		await editorPage.driver.sleep( 3000 );
+		await editorPage.driver.pause( 3000 );
 	} );
 
 	it( 'should show the right columns placeholders and alignments case 2', async () => {
@@ -55,7 +55,7 @@ describe( 'Gutenberg Editor iPad Visual test for Horizontal layouts', () => {
 		} );
 
 		// Wait for images to load
-		await editorPage.driver.sleep( 4000 );
+		await editorPage.driver.pause( 4000 );
 
 		// Select title to unfocus the block
 		const titleElement = await editorPage.getTitleElement();
@@ -70,13 +70,13 @@ describe( 'Gutenberg Editor iPad Visual test for Horizontal layouts', () => {
 		// Switch to landscape
 		await toggleOrientation( editorPage.driver );
 		// Wait for the device to finish rotating
-		await editorPage.driver.sleep( 3000 );
+		await editorPage.driver.pause( 3000 );
 
 		await swipeUp( editorPage.driver );
 		await swipeUp( editorPage.driver );
 
 		// Wait for the scrollbar to hide
-		await editorPage.driver.sleep( 3000 );
+		await editorPage.driver.pause( 3000 );
 
 		// Visual test check
 		screenshot = await takeScreenshot();
@@ -85,6 +85,6 @@ describe( 'Gutenberg Editor iPad Visual test for Horizontal layouts', () => {
 		// Switch to portrait
 		await toggleOrientation( editorPage.driver );
 		// Wait for the device to finish rotating
-		await editorPage.driver.sleep( 3000 );
+		await editorPage.driver.pause( 3000 );
 	} );
 } );
