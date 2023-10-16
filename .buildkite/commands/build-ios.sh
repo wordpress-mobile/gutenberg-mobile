@@ -16,7 +16,7 @@ echo '--- :react: Build iOS app for E2E testing'
 npm run core test:e2e:build-app:ios
 
 echo '--- :react: Build iOS bundle for E2E testing'
-npm run core test:e2e:bundle:ios
+npm run test:e2e:bundle:ios
 
 echo '--- :compression: Prepare artifact for SauceLabs upload'
 WORK_DIR=$(pwd) \
