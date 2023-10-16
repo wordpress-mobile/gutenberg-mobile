@@ -40,7 +40,7 @@ const SUPPORTED_GLOBAL_STYLES_ELEMENTS = [
  * @return {Buffer} Sreenshot image.
  */
 export async function takeScreenshotByElement( element, { padding } = {} ) {
-	const pixelRatio = editorPage.driver.capabilities.devicePixelRatio;
+	const pixelRatio = editorPage.driver.capabilities.pixelRatio;
 
 	const location = await element.getLocation();
 	const size = await element.getSize();
@@ -109,7 +109,7 @@ export async function takeScreenshotByElement( element, { padding } = {} ) {
  */
 export async function takeScreenshot( { withoutKeyboard, crop } = {} ) {
 	const iPadDevice = process.env.IPAD;
-	const pixelRatio = editorPage.driver.capabilities.devicePixelRatio;
+	const pixelRatio = editorPage.driver.capabilities.pixelRatio;
 
 	const orientation = await editorPage.driver.getOrientation();
 	const isPortrait = orientation === 'PORTRAIT';
