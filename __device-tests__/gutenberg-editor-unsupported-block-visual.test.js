@@ -15,7 +15,7 @@ describe( 'Gutenberg Editor Visual test for Unsupported Block', () => {
 		);
 		await unsupportedBlock.click();
 		// Wait for the block to be selected
-		await editorPage.driver.sleep( 500 );
+		await editorPage.driver.pause( 500 );
 
 		// Visual test check
 		let screenshot = await takeScreenshot();
@@ -43,6 +43,8 @@ describe( 'Gutenberg Editor Visual test for Unsupported Block', () => {
 			editorPage.blockNames.unsupported
 		);
 		await unsupportedBlock.click();
+		// Wait for the block to be selected
+		await editorPage.driver.pause( 1000 );
 
 		// Visual test check
 		let screenshot = await takeScreenshot();
@@ -75,7 +77,7 @@ describe( 'Gutenberg Editor Visual test for Unsupported Block', () => {
 		await helpButton.click();
 
 		// Wait for the modal to show
-		await editorPage.driver.sleep( 3000 );
+		await editorPage.driver.pause( 3000 );
 
 		// Visual test check
 		const screenshot = await takeScreenshot();
