@@ -62,19 +62,18 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 
 			// Click the block appender within the first column
 			if ( isAndroid() ) {
-				await editorPage.driver
-					.elementByAccessibilityId( 'Column Block. Row 1' )
-					.click();
+				await editorPage.driver.$( '~Column Block. Row 1' ).click();
 				const appenderButton =
 					await editorPage.waitForElementToBeDisplayedByXPath(
 						ANDROID_COLUMN_APPENDER_BUTTON_XPATH
 					);
 				await appenderButton.click();
 			} else {
-				await editorPage.driver
-					.elementByAccessibilityId( 'Column Block. Row 1' )
-					.click()
-					.click();
+				const firstColum = await editorPage.driver.$(
+					'~Column Block. Row 1'
+				);
+				await firstColum.click();
+				await firstColum.click();
 			}
 
 			await editorPage.addNewBlock( blockNames.columns, {
@@ -120,19 +119,18 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 
 			// Click the block appender within the first column
 			if ( isAndroid() ) {
-				await editorPage.driver
-					.elementByAccessibilityId( 'Column Block. Row 1' )
-					.click();
+				await editorPage.driver.$( '~Column Block. Row 1' ).click();
 				const appenderButton =
 					await editorPage.waitForElementToBeDisplayedByXPath(
 						ANDROID_COLUMN_APPENDER_BUTTON_XPATH
 					);
 				await appenderButton.click();
 			} else {
-				await editorPage.driver
-					.elementByAccessibilityId( 'Column Block. Row 1' )
-					.click()
-					.click();
+				const firstColum = await editorPage.driver.$(
+					'~Column Block. Row 1'
+				);
+				await firstColum.click();
+				await firstColum.click();
 			}
 
 			await editorPage.addNewBlock( blockNames.columns, {
@@ -182,19 +180,18 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 
 			// Click the block appender within the first column
 			if ( isAndroid() ) {
-				await editorPage.driver
-					.elementByAccessibilityId( 'Column Block. Row 1' )
-					.click();
+				await editorPage.driver.$( '~Column Block. Row 1' ).click();
 				const appenderButton =
 					await editorPage.waitForElementToBeDisplayedByXPath(
 						ANDROID_COLUMN_APPENDER_BUTTON_XPATH
 					);
 				await appenderButton.click();
 			} else {
-				await editorPage.driver
-					.elementByAccessibilityId( 'Column Block. Row 1' )
-					.click()
-					.click();
+				const firstColum = await editorPage.driver.$(
+					'~Column Block. Row 1'
+				);
+				await firstColum.click();
+				await firstColum.click();
 			}
 
 			// Append a Preformatted block
@@ -239,9 +236,8 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			// Wait for the modal to open
 			await editorPage.driver.pause( 3000 );
 
-			const cellId = 'Column 1. Width is 50 Percent (%).';
-			const cell =
-				await editorPage.driver.elementByAccessibilityId( cellId );
+			const cellId = '~Column 1. Width is 50 Percent (%).';
+			const cell = await editorPage.driver.$( cellId );
 			const cellSize = await cell.getSize();
 			const cellLocation = await cell.getLocation();
 			const scrollOffset = isAndroid() ? 350 : 100;
@@ -324,7 +320,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			const socialLinksBlockXpath = isAndroid()
 				? '//android.widget.Button[@content-desc="Social Icons Block. Row 1"]'
 				: '(//XCUIElementTypeOther[@name="Social Icons Block. Row 1"])[1]';
-			const socialLinksBlock = await editorPage.driver.elementByXPath(
+			const socialLinksBlock = await editorPage.driver.$(
 				socialLinksBlockXpath
 			);
 
@@ -374,7 +370,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			const socialLinksBlockXpath = isAndroid()
 				? '//android.widget.Button[@content-desc="Social Icons Block. Row 1"]'
 				: '(//XCUIElementTypeOther[@name="Social Icons Block. Row 1"])[1]';
-			const socialLinksBlock = await editorPage.driver.elementByXPath(
+			const socialLinksBlock = await editorPage.driver.$(
 				socialLinksBlockXpath
 			);
 
