@@ -275,6 +275,9 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 				1000
 			);
 
+			// Wait for the scrollbars to hide
+			await editorPage.driver.pause( 3000 );
+
 			// Visual test check for adjusted columns
 			const screenshot = await takeScreenshot();
 			expect( screenshot ).toMatchImageSnapshot();
