@@ -115,10 +115,6 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 				initialData: buttonCustomColors,
 			} );
 
-			const buttonBlock = await editorPage.getBlockAtPosition(
-				blockNames.button
-			);
-
 			// Get button's block TextInput
 			const buttonBlockTextInput =
 				await editorPage.getButtonBlockTextInputAtPosition();
@@ -132,7 +128,10 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await editorPage.driver.pause( 500 );
 
 			// Visual test check
-			const screenshot = await takeScreenshotByElement( buttonBlock );
+			const screenshot = await takeScreenshotByElement(
+				buttonBlockTextInput,
+				{ padding: 10 }
+			);
 			expect( screenshot ).toMatchImageSnapshot();
 		} );
 
