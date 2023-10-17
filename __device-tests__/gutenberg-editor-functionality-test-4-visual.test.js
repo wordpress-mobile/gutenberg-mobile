@@ -22,7 +22,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await toggleOrientation( editorPage.driver );
 
 			// Wait for the device to finish rotating
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 
 			// Visual test check for selected state
 			let screenshot = await takeScreenshot();
@@ -42,7 +42,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await toggleOrientation( editorPage.driver );
 
 			// Wait for the device to finish rotating
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 		} );
 
 		it( 'should render dark mode colors', async () => {
@@ -56,7 +56,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Open and wait for block settings
 			await editorPage.openBlockSettings();
-			await editorPage.driver.sleep( 500 );
+			await editorPage.driver.pause( 500 );
 
 			// Visual test check
 			const screenshot = await takeScreenshot();
@@ -129,7 +129,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			);
 
 			// Wait for text context menu animation
-			await editorPage.driver.sleep( 500 );
+			await editorPage.driver.pause( 500 );
 
 			// Visual test check
 			const screenshot = await takeScreenshotByElement( buttonBlock );
@@ -193,7 +193,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			await titleElement.click();
 
 			await editorPage.dismissKeyboard();
-			await editorPage.driver.sleep( 500 );
+			await editorPage.driver.pause( 500 );
 
 			// Visual test check for unselected state
 			const screenshot = await takeScreenshot();
@@ -217,7 +217,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Open and wait for block settings
 			await editorPage.openBlockSettings();
-			await editorPage.driver.sleep( 500 );
+			await editorPage.driver.pause( 500 );
 
 			// Visual test check
 			let screenshot;
@@ -264,7 +264,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			);
 			await mostBottomSpacer.click();
 
-			await editorPage.driver.sleep( 500 );
+			await editorPage.driver.pause( 500 );
 
 			// Visual test check
 			let screenshot = await takeScreenshot();
@@ -274,7 +274,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			for ( let i = 1; i <= GROUP_NESTED_STRUCTURE_LEVELS; i++ ) {
 				await editorPage.moveBlockSelectionUp();
 
-				await editorPage.driver.sleep( 250 );
+				await editorPage.driver.pause( 250 );
 
 				// Visual test check
 				screenshot = await takeScreenshot();
@@ -298,7 +298,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 				);
 				await block.click();
 
-				await editorPage.driver.sleep( 500 );
+				await editorPage.driver.pause( 500 );
 
 				// Visual test check
 				const screenshot = await takeScreenshot();
