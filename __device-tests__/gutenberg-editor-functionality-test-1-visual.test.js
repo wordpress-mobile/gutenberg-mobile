@@ -23,11 +23,11 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			await editorPage.initializeEditor();
 			await editorPage.addNewBlock( blockNames.columns );
 			// Wait for the modal to open
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 			// Dismiss columns layout picker
 			await editorPage.dismissBottomSheet();
 			// Wait for the modal to close
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 			// Select title to unfocus the block
 			const titleElement = await editorPage.getTitleElement();
 			await titleElement.click();
@@ -39,7 +39,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 
 			await toggleOrientation( editorPage.driver );
 			// Wait for the device to finish rotating
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 
 			// Visual test check for landscape orientation
 			screenshot = await takeScreenshot();
@@ -47,18 +47,18 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 
 			await toggleOrientation( editorPage.driver );
 			// Wait for the device to finish rotating
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 		} );
 
 		it( 'displays correctly in portrait and landscape orientations', async () => {
 			await editorPage.initializeEditor();
 			await editorPage.addNewBlock( blockNames.columns );
 			// Wait for the modal to open
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 			// Dismiss columns layout picker
 			await editorPage.dismissBottomSheet();
 			// Wait for the modal to close
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 
 			// Click the block appender within the first column
 			if ( isAndroid() ) {
@@ -82,14 +82,14 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			} );
 
 			// Wait for the modal to open
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 			// Dismiss columns layout picker
 			await editorPage.dismissBottomSheet();
 			// Wait for the modal to close
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 			// Navigate upwards in block hierarchy
 			await editorPage.moveBlockSelectionUp( { toRoot: true } );
-			await editorPage.driver.sleep( 1000 );
+			await editorPage.driver.pause( 1000 );
 
 			// Visual test check for portrait orientation
 			let screenshot = await takeScreenshot();
@@ -97,7 +97,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 
 			await toggleOrientation( editorPage.driver );
 			// Wait for the device to finish rotating
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 
 			// Visual test check for landscape orientation
 			screenshot = await takeScreenshot();
@@ -105,18 +105,18 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 
 			await toggleOrientation( editorPage.driver );
 			// Wait for the device to finish rotating
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 		} );
 
 		it( 'mover buttons display in the correct positions', async () => {
 			await editorPage.initializeEditor();
 			await editorPage.addNewBlock( blockNames.columns );
 			// Wait for the modal to open
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 			// Dismiss columns layout picker
 			await editorPage.dismissBottomSheet();
 			// Wait for the modal to close
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 
 			// Click the block appender within the first column
 			if ( isAndroid() ) {
@@ -140,12 +140,12 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			} );
 
 			// Wait for the modal to open
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 			// Dismiss columns layout picker
 			await editorPage.dismissBottomSheet();
 			await toggleOrientation( editorPage.driver );
 			// Wait for the device to finish rotating
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 
 			// Visual test check for landscape orientation
 			let screenshot = await takeScreenshot();
@@ -153,7 +153,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 
 			// Navigate upwards in block hierarchy
 			await editorPage.moveBlockSelectionUp();
-			await editorPage.driver.sleep( 1000 );
+			await editorPage.driver.pause( 1000 );
 
 			// Visual test check for landscape orientation
 			screenshot = await takeScreenshot();
@@ -161,7 +161,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 
 			await toggleOrientation( editorPage.driver );
 			// Wait for the device to finish rotating
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 		} );
 
 		it( 'displays with correct colors with dark mode enabled', async () => {
@@ -170,11 +170,11 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 
 			await editorPage.addNewBlock( blockNames.columns );
 			// Wait for the modal to open
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 			// Dismiss columns layout picker
 			await editorPage.dismissBottomSheet();
 			// Wait for the modal to close
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 
 			// Visual test check for placeholders
 			let screenshot = await takeScreenshot();
@@ -214,13 +214,13 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			// TODO: determine a way to type a text block nested within a Columns block
 
 			// Wait for the modal to close
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 			// Navigate upwards in block hierarchy
 			await editorPage.moveBlockSelectionUp( { toRoot: true } );
 			await editorPage.waitForKeyboardToBeHidden();
 			// Android fails to display the keyboard at times, which can cause the
 			// above `waitForKeyboardToBeHidden` to finish prematurely.
-			await editorPage.driver.sleep( 1000 );
+			await editorPage.driver.pause( 1000 );
 
 			// Visual test check for nested content
 			screenshot = await takeScreenshot();
@@ -233,11 +233,11 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			await editorPage.initializeEditor();
 			await editorPage.addNewBlock( blockNames.columns );
 			// Wait for the modal to open
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 			await editorPage.dismissBottomSheet();
 			await editorPage.openBlockSettings();
 			// Wait for the modal to open
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 
 			const cellId = 'Column 1. Width is 50 Percent (%).';
 			const cell =
@@ -288,7 +288,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			} );
 
 			// Wait for the block to be rendered
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 
 			// Visual test check
 			const screenshot = await takeScreenshot();
@@ -320,7 +320,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			);
 			await editorPage.dismissBottomSheet();
 			// Wait for the modal to close
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 			const socialLinksBlockXpath = isAndroid()
 				? '//android.widget.Button[@content-desc="Social Icons Block. Row 1"]'
 				: '(//XCUIElementTypeOther[@name="Social Icons Block. Row 1"])[1]';
@@ -369,7 +369,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			);
 			await editorPage.dismissBottomSheet();
 			// Wait for the modal to close
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 
 			const socialLinksBlockXpath = isAndroid()
 				? '//android.widget.Button[@content-desc="Social Icons Block. Row 1"]'
