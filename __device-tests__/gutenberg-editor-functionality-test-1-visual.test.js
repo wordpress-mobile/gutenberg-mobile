@@ -201,11 +201,13 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			if ( isAndroid() ) {
 				await blockButton.click();
 			} else {
-				await editorPage.driver.execute( 'mobile: tap', {
-					element: blockButton,
-					x: 10,
-					y: 10,
-				} );
+				await editorPage.driver.executeScript( 'mobile: tap', [
+					{
+						element: blockButton,
+						x: 10,
+						y: 10,
+					},
+				] );
 			}
 
 			// TODO: determine a way to type a text block nested within a Columns block
