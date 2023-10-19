@@ -37,8 +37,6 @@ steps:
     key: lint
     plugins:
       - *gb-mobile-docker-container
-      - *ci_toolkit_plugin
-      - *nvm_plugin
       - *git-cache-plugin
     command: |
       echo "--- :docker: Additional Docker image setup"
@@ -57,8 +55,6 @@ steps:
     plugins:
       - *gb-mobile-docker-container
       - *ci_toolkit_plugin
-      - *nvm_plugin
-      - *git-cache-plugin
     command: |
       echo "--- :docker: Additional Docker image setup"
       source /root/.bashrc
@@ -81,8 +77,6 @@ steps:
     plugins:
       - *gb-mobile-docker-container
       - *ci_toolkit_plugin
-      - *nvm_plugin
-      - *git-cache-plugin
     command: |
       echo "--- :docker: Additional Docker image setup"
       source /root/.bashrc
