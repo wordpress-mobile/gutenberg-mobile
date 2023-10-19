@@ -8,7 +8,7 @@ describe( 'Gutenberg Editor Visual test for Gallery Block', () => {
 	it( 'should be able to render the placeholder correctly', async () => {
 		await editorPage.initializeEditor();
 		await editorPage.addNewBlock( blockNames.gallery );
-		await editorPage.closePicker();
+		await editorPage.closeMediaPicker();
 
 		// Visual test check
 		const screenshot = await takeScreenshot();
