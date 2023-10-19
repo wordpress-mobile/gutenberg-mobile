@@ -81,7 +81,7 @@ steps:
       - *git-cache-plugin
       - *nvm_plugin
     agents:
-      queue: android
+      queue: android-staging
 
   - label: iOS Unit Tests
     key: ios-unit-tests
