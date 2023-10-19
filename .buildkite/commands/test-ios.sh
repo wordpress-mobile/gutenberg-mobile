@@ -62,7 +62,7 @@ else
     echo "npm run $TESTS_CMD failed."
     echo "For more details about the failed tests, check the Buildkite annotation, the logs under the '$SECTION' section and the tests results in the artifacts tab."
 
-    if [[ $BUILDKITE_BRANCH == trunk ]]; then
+    if [[ $BUILDKITE_BRANCH == trunk ]] || [[ $BUILDKITE_BRANCH == send-slack-notification-only-trunk-failures ]]; then
         annotate_test_failures "$JEST_JUNIT_OUTPUT_FILE" --slack "build-and-ship"
     else
         annotate_test_failures "$JEST_JUNIT_OUTPUT_FILE"
