@@ -1,7 +1,9 @@
 Unreleased
 ---
+* [*] Social Icons: Fix visibility of inactive icons when used with block based themes in dark mode [https://github.com/WordPress/gutenberg/pull/55398]
 
 1.106.0
+---
 * [*] Exit Preformatted and Verse blocks by triple pressing the Return key [https://github.com/WordPress/gutenberg/pull/53354]
 * [*] Fix quote block border visibility when used with block based themes in dark mode [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6268]
 
