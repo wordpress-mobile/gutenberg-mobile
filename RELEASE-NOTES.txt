@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [*] Classic block: Add option to convert to blocks [https://github.com/WordPress/gutenberg/pull/55461]
 
 1.106.0
 * [*] Exit Preformatted and Verse blocks by triple pressing the Return key [https://github.com/WordPress/gutenberg/pull/53354]
