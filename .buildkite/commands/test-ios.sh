@@ -49,7 +49,8 @@ fi
 
 set +e
 echo "$SECTION"
-npm run "$TESTS_CMD"
+# npm run "$TESTS_CMD"
+npm run test:e2e:ios:local
 TESTS_EXIT_CODE=$?
 set -e
 
