@@ -34,6 +34,7 @@
     <string name="gutenberg_native_add_video" tools:ignore="UnusedResources">Add video</string>
     <string name="gutenberg_native_address_settings" tools:ignore="UnusedResources">Address Settings</string>
     <string name="gutenberg_native_alt_text" tools:ignore="UnusedResources">Alt Text</string>
+    <string name="gutenberg_native_alternatively_you_can_convert_the_content_to_blocks" tools:ignore="UnusedResources">Alternatively, you can convert the content to blocks.</string>
     <string name="gutenberg_native_alternatively_you_can_detach_and_edit_these_blocks_separately_by" tools:ignore="UnusedResources">Alternatively, you can detach and edit these blocks separately by tapping “Detach patterns”.</string>
     <string name="gutenberg_native_alternatively_you_can_detach_and_edit_this_block_separately_by_ta" tools:ignore="UnusedResources">Alternatively, you can detach and edit this block separately by tapping “Detach pattern”.</string>
     <string name="gutenberg_native_an_unknown_error_occurred_please_try_again" tools:ignore="UnusedResources">An unknown error occurred. Please try again.</string>
@@ -179,7 +180,6 @@
     <string name="gutenberg_native_failed_to_save_files_please_tap_for_options" tools:ignore="UnusedResources">Failed to save files.\nPlease tap for options.</string>
     <string name="gutenberg_native_failed_to_upload_files_please_tap_for_options" tools:ignore="UnusedResources">Failed to upload files.\nPlease tap for options.</string>
     <string name="gutenberg_native_featured" tools:ignore="UnusedResources">Featured</string>
-    <string name="gutenberg_native_featured_image" tools:ignore="UnusedResources">Featured Image</string>
     <string name="gutenberg_native_file_block_settings" tools:ignore="UnusedResources">File block settings</string>
     <string name="gutenberg_native_file_name" tools:ignore="UnusedResources">File name</string>
     <string name="gutenberg_native_font_size" tools:ignore="UnusedResources">Font Size</string>
@@ -309,6 +309,8 @@ translators: %s: Select control button label e.g. "Button width" -->
     <!-- translators: %s: Block name e.g. "Image block"
 translators: Block name. %s: The localized block name -->
     <string name="gutenberg_native_s_block" tools:ignore="UnusedResources">%s block</string>
+    <!-- translators: displayed right after the classic block is converted to blocks. %s: The localized classic block name -->
+    <string name="gutenberg_native_s_block_converted_to_blocks" tools:ignore="UnusedResources">\'%s\' block converted to blocks</string>
     <!-- translators: accessibility text for the media block empty state. %s: media type -->
     <string name="gutenberg_native_s_block_empty" tools:ignore="UnusedResources">%s block. Empty</string>
     <!-- translators: Newly available block name. %s: The localized block name -->

@@ -1,6 +1,7 @@
 import Foundation
 
 private func dummy() {
+    _ = NSLocalizedString("'%s' block converted to blocks", comment: "translators: displayed right after the classic block is converted to blocks. %s: The localized classic block name")
     _ = NSLocalizedString("'%s' is not fully-supported", comment: "translators: Missing block alert title. %s: The localized block name")
     _ = NSLocalizedString("%1$s transformed to %2$s", comment: "translators: 1: From block title, e.g. Paragraph. 2: To block title, e.g. Header.")
     _ = NSLocalizedString("%1$s. %2$s is %3$s %4$s.", comment: "translators: accessibility text. Inform about current value. %1$s: Control label %2$s: setting label (example: width), %3$s: Current value. %4$s: value measurement unit (example: pixels)")
@@ -44,6 +45,7 @@ private func dummy() {
     _ = NSLocalizedString("Add video", comment: "")
     _ = NSLocalizedString("Address Settings", comment: "")
     _ = NSLocalizedString("Alt Text", comment: "")
+    _ = NSLocalizedString("Alternatively, you can convert the content to blocks.", comment: "")
     _ = NSLocalizedString("Alternatively, you can detach and edit these blocks separately by tapping “Detach patterns”.", comment: "")
     _ = NSLocalizedString("Alternatively, you can detach and edit this block separately by tapping “Detach pattern”.", comment: "")
     _ = NSLocalizedString("An unknown error occurred. Please try again.", comment: "")
@@ -165,7 +167,6 @@ private func dummy() {
     _ = NSLocalizedString("Failed to save files.\nPlease tap for options.", comment: "")
     _ = NSLocalizedString("Failed to upload files.\nPlease tap for options.", comment: "")
     _ = NSLocalizedString("Featured", comment: "")
-    _ = NSLocalizedString("Featured Image", comment: "")
     _ = NSLocalizedString("File block settings", comment: "")
     _ = NSLocalizedString("File name", comment: "")
     _ = NSLocalizedString("Font Size", comment: "")
