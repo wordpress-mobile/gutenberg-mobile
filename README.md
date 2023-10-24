@@ -124,11 +124,11 @@ This project is set up to use [jest](https://facebook.github.io/jest/) for tests
 
 ## End-to-End Tests
 
-This repository extends the end-to-end (E2E) tests found in the Gutenberg for Mobile Apps (GMA) [project repository](https://github.com/WordPress/gutenberg). The majority of E2E tests should reside in the GMA repository. However, experimental tests or non-core-related tests should be placed in the `gutenberg-mobile` repository.
+This repository extends the end-to-end (E2E) tests found in the Mobile Gutenberg (MG) [project repository](https://github.com/WordPress/gutenberg). The majority of E2E tests should reside in the MG repository. However, experimental tests or non-core-related tests should be placed in the `gutenberg-mobile` repository.
 
-Reviewing the GMA E2E test [documentation](https://github.com/WordPress/gutenberg/tree/trunk/packages/react-native-editor/__device-tests__#readme) is the best approach for understanding the test environment and how to set up your computer to run tests. Much of the information and approaches outlined there also apply to the tests found in this repository. The only difference being that this repository includes its own matching npm scripts to run the test, e.g. `npm run test:e2e:ios:local`.
+Reviewing the MG E2E test [documentation](https://github.com/WordPress/gutenberg/tree/trunk/packages/react-native-editor/__device-tests__#readme) is the best approach for understanding the test environment and how to set up your computer to run tests. Much of the information and approaches outlined there also apply to the tests found in this repository. The only difference being that this repository includes its own matching npm scripts to run the test, e.g. `npm run test:e2e:ios:local`.
 
-After reviewing the GMA E2E test documentation, the following examples showcase running the E2E tests found in this repository using the repositories scripts.
+After reviewing the MG E2E test documentation, the following examples showcase running the E2E tests found in this repository using the repositories scripts.
 
 ```shell
 # Setup the E2E environment
