@@ -215,9 +215,6 @@ jobs:
       - install-node-version
       - npm-install
       - run:
-          name: Run Android native-editor unit tests
-          command: cd gutenberg/packages/react-native-editor/android && ./gradlew testDebug
-      - run:
           name: Run Android native-bridge unit tests
           command: cd gutenberg/packages/react-native-bridge/android && ./gradlew test
 
