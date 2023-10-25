@@ -96,6 +96,17 @@ steps:
       - github_commit_status:
           context: iOS Unit Tests
 
+  - label: React Native Editor Android Tests
+    command: |
+      npm ci --prefer-offline --no-audit --no-progress
+      cd gutenberg/packages/react-native-editor/android
+      ./gradlew testDebug
+    plugins:
+      - *git-cache-plugin
+      - *nvm_plugin
+    agents:
+      queue: android-staging
+
   - label: "Build JS Bundles"
     depends_on:
       - lint
