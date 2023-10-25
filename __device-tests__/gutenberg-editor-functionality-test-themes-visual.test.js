@@ -87,7 +87,7 @@ describe( 'Gutenberg Editor Visual test for Block Themes', () => {
 			await editorPage.dismissKeyboard();
 
 			// Wait for scrollbars to hide
-			await editorPage.driver.sleep( 3000 );
+			await editorPage.driver.pause( 3000 );
 
 			// Visual test check
 			const screenshot = await takeScreenshot();

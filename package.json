@@ -17,7 +17,7 @@
 		"@typescript-eslint/eslint-plugin": "^6.4.1",
 		"@wordpress/babel-preset-default": "file:gutenberg/packages/babel-preset-default",
 		"@wordpress/eslint-plugin": "file:gutenberg/packages/eslint-plugin",
-		"appium": "^1.22.3",
+		"appium": "2.0.0",
 		"babel-core": "^7.0.0-bridge.0",
 		"babel-eslint": "^8.2.2",
 		"babel-jest": "29.5.0",
@@ -56,7 +56,7 @@
 		"rungen": "^0.3.2",
 		"sprintf-js": "^1.1.1",
 		"typescript": "4.1.3",
-		"wd": "^1.11.1"
+		"webdriverio": "8.16.20"
 	},
 	"scripts": {
 		"postinstall": "patch-package && npm run clean:gutenberg:distclean && npm ci --prefix gutenberg && npm run i18n:check-cache && ./bin/run-jetpack-command.sh \"install --ignore-scripts\"",
@@ -87,7 +87,7 @@
 		"device-tests": "cross-env NODE_ENV=test jest --maxWorkers=2 --testPathIgnorePatterns='canary|gutenberg-editor-rendering|ipad' --config jest_ui.config.js",
 		"device-tests-canary": "cross-env NODE_ENV=test jest --maxWorkers=2 --testPathPattern=@canary --config jest_ui.config.js",
 		"device-tests-ipad": "cross-env NODE_ENV=test IPAD=true jest --maxWorkers=2 --testPathPattern=@ipad --config jest_ui.config.js",
-		"device-tests:local": "IOS_APP_PATH='./gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app' WDA_PATH='./gutenberg/packages/react-native-editor/ios/build/WDA' ANDROID_APP_PATH='./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk' NODE_ENV=test jest --maxWorkers=2 --detectOpenHandles --config jest_ui.config.js",
+		"device-tests:local": "APPIUM_HOME=~/.appium IOS_APP_PATH='./gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app' WDA_PATH='./gutenberg/packages/react-native-editor/ios/build/WDA' ANDROID_APP_PATH='./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk' NODE_ENV=test jest --maxWorkers=2 --detectOpenHandles --config jest_ui.config.js",
 		"device-tests:debug": "IOS_APP_PATH='./gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app' WDA_PATH='./gutenberg/packages/react-native-editor/ios/build/WDA' ANDROID_APP_PATH='./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk' cross-env NODE_ENV=test node $NODE_DEBUG_OPTION --inspect-brk node_modules/jest/bin/jest --runInBand --detectOpenHandles --verbose --config jest_ui.config.js",
 		"test:e2e:bundle:android": "npm run test:e2e:bundle:android:text && npm run test:e2e:bundle:android:bytecode",
 		"test:e2e:bundle:android:text": "mkdir -p gutenberg/packages/react-native-editor/android/app/src/main/assets && npm run rn-bundle -- --reset-cache --platform android --dev false --minify false --entry-file index.js --bundle-output gutenberg/packages/react-native-editor/android/app/src/main/assets/index.android.text.bundle --assets-dest gutenberg/packages/react-native-editor/android/app/src/main/res",

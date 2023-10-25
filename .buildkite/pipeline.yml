@@ -33,21 +33,36 @@ x-common-params:
     build.branch != 'trunk' && build.branch !~ /^release.*/ && build.branch !~ /^dependabot\/submodules.*/
 
 steps:
-  - label: Lint and Unit Tests
-    key: unit-tests
+  - label: Lint
+    key: lint
     plugins:
       - *gb-mobile-docker-container
+      - *git-cache-plugin
     command: |
+      echo "--- :docker: Additional Docker image setup"
       source /root/.bashrc
 
-      echo "--- :node: Setup Node environment"
+      echo "--- :docker::node: Setup Node environment"
       nvm install && nvm use
 
-      echo "--- :npm: Install Node dependencies"
-      npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+      .buildkite/commands/lint.sh
+    notify:
+      - github_commit_status:
+          context: Lint
 
-      echo "--- :node: Lint and Unit Tests"
-      ./bin/ci-checks-js.sh
+  - label: Android Unit Tests
+    key: android-unit-tests
+    plugins:
+      - *gb-mobile-docker-container
+      - *ci_toolkit_plugin
+    command: |
+      echo "--- :docker: Additional Docker image setup"
+      source /root/.bashrc
+
+      echo "--- :docker::node: Setup Node environment"
+      nvm install && nvm use
+
+      .buildkite/commands/unit-tests-android.sh
     env:
       JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
     artifact_paths:
@@ -55,10 +70,33 @@ steps:
       - ./reports/test-results/*.xml
     notify:
       - github_commit_status:
-          context: Lint and Unit Tests
+          context: Android Unit Tests
+
+  - label: iOS Unit Tests
+    key: ios-unit-tests
+    plugins:
+      - *gb-mobile-docker-container
+      - *ci_toolkit_plugin
+    command: |
+      echo "--- :docker: Additional Docker image setup"
+      source /root/.bashrc
+
+      echo "--- :docker::node: Setup Node environment"
+      nvm install && nvm use
+
+      .buildkite/commands/unit-tests-ios.sh
+    artifact_paths:
+      - ./logs/*.log
+      - ./reports/test-results/*.xml
+    notify:
+      - github_commit_status:
+          context: iOS Unit Tests
 
   - label: "Build JS Bundles"
-    depends_on: "unit-tests"
+    depends_on:
+      - lint
+      - android-unit-tests
+      - ios-unit-tests
     key: "js-bundles"
     plugins:
       - *gb-mobile-docker-container
@@ -106,7 +144,9 @@ steps:
         fi
 
   - label: "Build Android RN Aztec & Publish to S3"
-    depends_on: unit-tests
+    depends_on:
+      - lint
+      - android-unit-tests
     key: "publish-react-native-aztec-android"
     plugins:
       - *git-cache-plugin
@@ -137,6 +177,9 @@ steps:
 
   - label: iOS Build and Sauce Labs
     key: ios-build-and-saucelabs
+    depends_on:
+      - lint
+      - ios-unit-tests
     command: .buildkite/commands/build-ios.sh
     plugins:
       - *ci_toolkit_plugin
