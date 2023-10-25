@@ -107,6 +107,17 @@ steps:
     agents:
       queue: android-staging
 
+  - label: React Native Bridge Android Tests
+    command: |
+      npm ci --prefer-offline --no-audit --no-progress
+      cd gutenberg/packages/react-native-bridge/android
+      ./gradlew test
+    plugins:
+      - *git-cache-plugin
+      - *nvm_plugin
+    agents:
+      queue: android-staging
+
   - label: "Build JS Bundles"
     depends_on:
       - lint

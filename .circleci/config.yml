@@ -201,22 +201,6 @@ jobs:
             JEST_JUNIT_OUTPUT_FILE: "/home/circleci/test-results/android-test-results.xml"
       - store_test_results:
           path: /home/circleci/test-results
-  android-native-unit-tests:
-    parameters:
-      post-to-slack:
-        description: Post to Slack when tests fail. SLACK_WEBHOOK ENV variable must be set.
-        type: boolean
-        default: false
-    docker:
-    - image: << pipeline.parameters.android-docker-image >>
-    steps:
-      - checkout-shallow
-      - checkout-submodules
-      - install-node-version
-      - npm-install
-      - run:
-          name: Run Android native-bridge unit tests
-          command: cd gutenberg/packages/react-native-bridge/android && ./gradlew test
 
 workflows:
   gutenberg-mobile:
@@ -227,8 +211,6 @@ workflows:
           name: Test Android on Device - Canaries
           is-canary: "-canary"
           requires: [ "Android Native Unit Tests", "Android Build" ]
-      - android-native-unit-tests:
-          name: Android Native Unit Tests
       # For regular branches the full test suite is optional.
       - Optional UI Tests:
           type: approval
