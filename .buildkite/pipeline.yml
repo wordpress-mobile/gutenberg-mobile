@@ -37,7 +37,14 @@ x-common-params:
 steps:
   - label: Android Build for Sauce Labs
     key: android-build-and-saucelabs
-    command: .buildkite/commands/build-android.sh
+    command: |
+      echo "--- :docker: Additional Docker image setup"
+      source /root/.bashrc
+
+      echo "--- :docker::node: Setup Node environment"
+      nvm install && nvm use
+
+      .buildkite/commands/build-android.sh
     plugins:
       - *gb-mobile-docker-container
       - *git-cache-plugin
@@ -46,7 +53,14 @@ steps:
 
   - label: Test Android on Device – Canary Pages
     depends_on: android-build-and-saucelabs
-    command: .buildkite/commands/test-android.sh --canary
+    command: |
+      echo "--- :docker: Additional Docker image setup"
+      source /root/.bashrc
+
+      echo "--- :docker::node: Setup Node environment"
+      nvm install && nvm use
+
+      .buildkite/commands/test-android.sh --canary
     plugins:
       - *gb-mobile-docker-container
       - *git-cache-plugin
