@@ -61,7 +61,7 @@ steps:
     agents:
       queue: android-staging
 
-  - label: Test Android on Device – Canary Pages
+  - label: Test Android on Device – Canary Pages (Docker)
     depends_on: android-build-and-saucelabs
     command: |
       echo "--- :docker: Additional Docker image setup"
@@ -78,6 +78,39 @@ steps:
       - reports/test-results/android-test-results.xml
     env:
       JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
-    notify:
-      - github_commit_status:
-          context: Test Android on Device - Canaries
+    # notify:
+    #   - github_commit_status:
+    #       context: Test Android on Device - Canaries
+
+  - label: Test Android on Device – Canary Pages (Linux)
+    depends_on: android-build-and-saucelabs
+    command: .buildkite/commands/test-android.sh --canary
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+      - *git-cache-plugin
+    artifact_paths:
+      - reports/test-results/android-test-results.xml
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
+    # notify:
+    #   - github_commit_status:
+    #       context: Test Android on Device - Canaries
+
+  - label: Test Android on Device – Canary Pages (macOS)
+    depends_on: android-build-and-saucelabs
+    command: .buildkite/commands/test-android.sh --canary
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+      - *git-cache-plugin
+    artifact_paths:
+      - reports/test-results/android-test-results.xml
+    agents:
+      queue: mac
+    env:
+      <<: *xcode_agent_env
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
+    # notify:
+    #   - github_commit_status:
+    #       context: Test Android on Device - Canaries
