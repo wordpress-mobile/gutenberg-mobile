@@ -33,7 +33,7 @@ x-common-params:
     build.branch != 'trunk' && build.branch !~ /^release.*/ && build.branch !~ /^dependabot\/submodules.*/
 
 steps:
-  - label: Android E2E Tests
+  - label: Android E2E Tests – Android Queue
     command: |
       npm ci --prefer-offline --no-audit --no-progress
       npm run core test:e2e:setup
@@ -47,4 +47,21 @@ steps:
       queue: android-staging
     notify:
       - github_commit_status:
-          context: Android E2E Tests
+          context: Android E2E Tests – Android Queue
+
+  - label: Android E2E Tests – macOS Queue
+    command: |
+      npm ci --prefer-offline --no-audit --no-progress
+      npm run core test:e2e:setup
+      emulator -avd Pixel_3_XL_API_30 -noaudio
+      npm run test:e2e:android:local
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+      - *git-cache-plugin
+    agents:
+      queue: mac
+    env: *xcode_agent_env
+    notify:
+      - github_commit_status:
+          context: Android E2E Tests – macOS Queue
