@@ -207,6 +207,19 @@ steps:
       - github_commit_status:
           context: Test iOS on Device - Canaries
 
+  - label: Android E2E Tests
+    command: |
+      echo "Hello, World!"
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+      - *git-cache-plugin
+    agents:
+      queue: android-staging
+    notify:
+      - github_commit_status:
+          context: Android E2E Tests
+
   - block: "Full UI Tests"
     # Show only in branches that run the quick UI tests suite, to optionally run the full suite
     if: *is_branch_for_quick_ui_tests
