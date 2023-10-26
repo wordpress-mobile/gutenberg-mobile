@@ -209,6 +209,32 @@ steps:
       - github_commit_status:
           context: Test iOS on Device - Canaries
 
+  - label: Android Build for Sauce Labs
+    key: android-build-and-saucelabs
+    depends_on:
+      - lint
+      - android-unit-tests
+    command: .buildkite/commands/build-android.sh
+    plugins:
+      - *gb-mobile-docker-container
+      - *git-cache-plugin
+    artifact_paths:
+      - ./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk
+
+  - label: Test Android on Device – Canary Pages
+    depends_on: android-build-and-saucelabs
+    command: .buildkite/commands/test-android.sh --canary
+    plugins:
+      - *gb-mobile-docker-container
+      - *git-cache-plugin
+    artifact_paths:
+      - reports/test-results/android-test-results.xml
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
+    notify:
+      - github_commit_status:
+          context: Test Android on Device - Canaries
+
   - block: "Full UI Tests"
     # Show only in branches that run the quick UI tests suite, to optionally run the full suite
     if: *is_branch_for_quick_ui_tests
