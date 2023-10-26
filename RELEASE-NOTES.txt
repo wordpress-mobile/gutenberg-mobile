@@ -1,5 +1,8 @@
 Unreleased
 ---
+
+1.107.0
+---
 * [*] Social Icons: Fix visibility of inactive icons when used with block based themes in dark mode [https://github.com/WordPress/gutenberg/pull/55398]
 * [*] Classic block: Add option to convert to blocks [https://github.com/WordPress/gutenberg/pull/55461]
 * [*] Synced Patterns: Fix visibility of heading section when used with block based themes in dark mode [https://github.com/WordPress/gutenberg/pull/55399]
