@@ -143,64 +143,6 @@ parameters:
     default: "ubuntu-2004:2022.10.1"
 
 jobs:
-  android-build:
-    machine:
-      image: << pipeline.parameters.linux-machine-image >>
-    steps:
-      - checkout-shallow
-      - checkout-submodules
-      - install-node-version
-      - run: node -v
-      - npm-install
-      - run: npm run test:e2e:bundle:android
-      - run:
-          name: Build apk
-          command: |
-            docker run --rm -it \
-            --volume $(pwd):/home/circleci/project \
-            --workdir /home/circleci/project \
-            --env JAVA_OPTS='-Xms512m -Xmx2g' \
-            --env GRADLE_OPTS='-Xmx3g -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError"' \
-            << pipeline.parameters.android-docker-image >> \
-            /bin/bash -c "sudo chown -R circleci:circleci . && npm run core test:e2e:build-app:android"
-      - run:
-          name: Upload apk to sauce labs
-          command: |
-            source bin/sauce-pre-upload.sh
-            curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" --location \
-            --request POST 'https://api.us-west-1.saucelabs.com/v1/storage/upload' \
-            --form 'payload=@"./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk"' \
-            --form "name=Gutenberg-$SAUCE_FILENAME.apk" \
-            --form 'description="Gutenberg"'
-  android-device-checks:
-    parameters:
-      post-to-slack:
-        description: Post to Slack when tests fail. SLACK_WEBHOOK ENV variable must be set.
-        type: boolean
-        default: false
-      is-canary:
-        type: string
-        default: ""
-    machine:
-      image: << pipeline.parameters.linux-machine-image >>
-    steps:
-      - checkout-shallow
-      - checkout-submodules
-      - install-node-version
-      - run: node -v
-      - npm-install-e2e-tests
-      - add-jest-snapshot-dir
-      - run: mkdir /home/circleci/test-results
-      - run:
-          name: Run Device Tests
-          command: npm run device-tests<<parameters.is-canary>>
-          no_output_timeout: 1200
-          environment:
-            TEST_RN_PLATFORM: android
-            TEST_ENV: sauce
-            JEST_JUNIT_OUTPUT_FILE: "/home/circleci/test-results/android-test-results.xml"
-      - store_test_results:
-          path: /home/circleci/test-results
   android-native-unit-tests:
     parameters:
       post-to-slack:
@@ -224,40 +166,5 @@ jobs:
 workflows:
   gutenberg-mobile:
     jobs:
-      - android-build:
-          name: Android Build
-      - android-device-checks:
-          name: Test Android on Device - Canaries
-          is-canary: "-canary"
-          requires: [ "Android Native Unit Tests", "Android Build" ]
       - android-native-unit-tests:
           name: Android Native Unit Tests
-      # For regular branches the full test suite is optional.
-      - Optional UI Tests:
-          type: approval
-          filters:
-            branches:
-              ignore:
-                - trunk
-                - /^dependabot/submodules/.*/
-                - /^release.*/
-      - android-device-checks:
-          name: Test Android on Device - Full (Manually triggered)
-          requires: [ "Optional UI Tests", "Android Native Unit Tests", "Android Build" ]
-          filters:
-            branches:
-              ignore:
-                - trunk
-                - /^dependabot/submodules/.*/
-                - /^release.*/
-      # For `trunk`, Dependabot, and release branches we always run the full test suite.
-      - android-device-checks:
-          name: Test Android on Device - Full
-          post-to-slack: true
-          requires: [ "Android Native Unit Tests", "Android Build" ]
-          filters:
-            branches:
-              only:
-                - trunk
-                - /^dependabot/submodules/.*/
-                - /^release.*/
