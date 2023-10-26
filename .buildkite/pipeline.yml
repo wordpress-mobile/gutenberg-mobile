@@ -38,18 +38,28 @@ steps:
   - label: Android Build for Sauce Labs
     key: android-build-and-saucelabs
     command: |
-      echo "--- :docker: Additional Docker image setup"
-      source /root/.bashrc
+      # Tried the Docker route, but this container lacks the Java setup,
+      # and the other Node...
+      #
+      # For example, see this build:
+      # https://buildkite.com/automattic/gutenberg-mobile/builds/7702#018b6b82-f52e-426d-9944-f60f4a2b14dd
+      # echo "--- :docker: Additional Docker image setup"
+      # source /root/.bashrc
 
-      echo "--- :docker::node: Setup Node environment"
-      nvm install && nvm use
+      # echo "--- :docker::node: Setup Node environment"
+      # nvm install && nvm use
 
       .buildkite/commands/build-android.sh
     plugins:
-      - *gb-mobile-docker-container
+      # See comment about Docker above
+      # - *gb-mobile-docker-container
+      - *ci_toolkit_plugin
+      - *nvm_plugin
       - *git-cache-plugin
     artifact_paths:
       - ./gutenberg/packages/react-native-editor/android/app/build/outputs/apk/debug/app-debug.apk
+    agents:
+      queue: android-staging
 
   - label: Test Android on Device – Canary Pages
     depends_on: android-build-and-saucelabs
