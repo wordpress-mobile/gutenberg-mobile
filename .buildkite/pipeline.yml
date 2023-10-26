@@ -35,7 +35,9 @@ x-common-params:
 steps:
   - label: Android E2E Tests
     command: |
-      echo "Hello, World!"
+      npm ci --prefer-offline --no-audit --no-progress
+      emulator -avd Pixel_3_XL_API_30 -noaudio
+      npm run test:e2e:android:local
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
