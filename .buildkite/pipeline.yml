@@ -36,6 +36,7 @@ steps:
   - label: Android E2E Tests
     command: |
       npm ci --prefer-offline --no-audit --no-progress
+      npm run core test:e2e:setup
       emulator -avd Pixel_3_XL_API_30 -noaudio
       npm run test:e2e:android:local
     plugins:
