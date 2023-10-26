@@ -51,6 +51,12 @@ if [[ $TESTS_EXIT_CODE -eq 0 ]]; then
 else
     echo "+++ $REPORT_SECTION_NAME"
     echo "npm run $TESTS_CMD failed."
+
+    if ! command -v ruby ; then
+      echo 'Skipping test reporting because Ruby is not available on this machine.'
+      exit $TESTS_EXIT_CODE
+    fi
+
     echo "For more details about the failed tests, check the Buildkite annotation, the logs under the '$SECTION' section and the tests results in the artifacts tab."
 
     if [[ $BUILDKITE_BRANCH == trunk ]]; then
