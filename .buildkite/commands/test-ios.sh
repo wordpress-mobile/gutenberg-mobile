@@ -28,9 +28,6 @@ set -x
 export TEST_RN_PLATFORM=ios
 export TEST_ENV=sauce
 export JEST_JUNIT_OUTPUT_FILE="reports/test-results/ios-test-results.xml"
-# Set a destination different from the hardcoded one which only works in the
-# older Xcode-setup used by CircleCI
-export RN_EDITOR_E2E_IOS_DESTINATION='platform=iOS Simulator,name=iPhone 13,OS=16.4'
 # This is a relic of the CircleCI setup.
 # It should be removed once the migration to Buildkite is completed.
 export CIRCLE_BRANCH=${BUILDKITE_BRANCH}
