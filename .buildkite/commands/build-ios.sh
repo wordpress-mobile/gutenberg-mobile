@@ -8,7 +8,8 @@ set -x
 export TEST_RN_PLATFORM=ios
 export TEST_ENV=sauce
 CONFIG_FILE="$(pwd)/gutenberg/packages/react-native-editor/__device-tests__/helpers/device-config.json"
-IOS_DEVICE_NAME=$(jq -r '.ios.server.deviceName' "$CONFIG_FILE")
+# Uses the local deviceName since SauceLabs uses a different one.
+IOS_DEVICE_NAME=$(jq -r '.ios.local.deviceName' "$CONFIG_FILE")
 IOS_PLATFORM_VERSION=$(jq -r '.ios.server.platformVersion' "$CONFIG_FILE")
 # Set a destination different from the hardcoded one which only works in the
 # older Xcode-setup used by CircleCI
