@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [*] Contact Info: Fix visibility of typed text when used with block based themes in dark mode [https://github.com/Automattic/jetpack/pull/33873]
 
 1.107.0
 ---
