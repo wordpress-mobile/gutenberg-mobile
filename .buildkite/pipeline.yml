@@ -177,9 +177,9 @@ steps:
 
   - label: iOS Build
     key: ios-build
-    depends_on:
-      - lint
-      - ios-unit-tests
+    # depends_on:
+    #   - lint
+    #   - ios-unit-tests
     command: .buildkite/commands/build-ios.sh
     plugins:
       - *ci_toolkit_plugin
