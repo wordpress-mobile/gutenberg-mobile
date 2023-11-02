@@ -39,8 +39,8 @@ echo "--- :apple_logo: Start booting up simulator"
 xcrun simctl boot "$DEVICE_NAME" &
 
 echo "--- 📦 Downloading Build Artifacts"
-export APP_PATH=./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
-download_artifact "GutenbergDemo.app.zip" "$APP_PATH"
+export IOS_APP_PATH=./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
+download_artifact "GutenbergDemo.app.zip" "$IOS_APP_PATH"
 
 export WDA_PATH=./gutenberg/packages/react-native-editor/ios/build/WDA
 download_artifact "WDA.zip" "$WDA_PATH/WDA.zip"
