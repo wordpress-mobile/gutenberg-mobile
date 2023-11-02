@@ -20,5 +20,5 @@ if [ "$1" == "--debug" ]; then
     shift # Remove first argument
     node $NODE_DEBUG_OPTION --inspect-brk node_modules/jest/bin/jest --runInBand --detectOpenHandles --verbose --config jest_ui.config.js "$@"
 else
-    cross-env jest --config ./jest_ui.config.js --maxWorkers 1 "$@"
+    cross-env jest --config ./jest_ui.config.js --maxWorkers 1 --forceExit "$@"
 fi
