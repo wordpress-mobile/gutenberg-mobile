@@ -24,14 +24,14 @@ while [ "$INPUT" != "" ]; do
 done
 
 if [ "$MODE" == 'canary' ]; then
-    SECTION='--- :gutenberg-mobile: Test iOS Canary Pages'
+    SECTION='--- :react: Test iOS Canary Pages'
     TESTS_CMD='device-tests-canary'
 elif [ "$MODE" == "ipad" ]; then
-    SECTION='--- :gutenberg-mobile: Test iOS iPad'
+    SECTION='--- :react: Test iOS iPad'
     DEVICE_NAME=$DEVICE_TABLET_NAME
     TESTS_CMD='device-tests-ipad'
 else
-    SECTION='--- :gutenberg-mobile: Test iOS iPhone'
+    SECTION='--- :react: Test iOS iPhone'
     TESTS_CMD='device-tests'
 fi
 
@@ -57,7 +57,7 @@ export TEST_ENV=buildkite
 export JEST_JUNIT_OUTPUT_FILE="reports/test-results/ios-test-results.xml"
 set +x
 
-echo "--- :gutenberg-mobile: Prepare tests setup"
+echo "--- :react: Prepare tests setup"
 npm run core test:e2e:setup
 
 set +e
