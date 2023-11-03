@@ -1,6 +1,6 @@
 Unreleased
 ---
-* [*] Audio block: Fix visibility of uploaded audio [https://github.com/WordPress/gutenberg/pull/55627]
+* [*] Audio block: Improve legibility of audio file details on various background colors [https://github.com/WordPress/gutenberg/pull/55627]
 
 1.107.0
 ---
