@@ -177,11 +177,11 @@ steps:
       queue: mac
     env: *xcode_agent_env
 
-  - label: iOS Build and Sauce Labs
-    key: ios-build-and-saucelabs
-    depends_on:
-      - lint
-      - ios-unit-tests
+  - label: iOS Build
+    key: ios-build
+    # depends_on:
+    #   - lint
+    #   - ios-unit-tests
     command: .buildkite/commands/build-ios.sh
     plugins:
       - *ci_toolkit_plugin
@@ -194,7 +194,7 @@ steps:
     env: *xcode_agent_env
 
   - label: Test iOS on Device – Canary Pages
-    depends_on: ios-build-and-saucelabs
+    depends_on: ios-build
     command: .buildkite/commands/test-ios.sh --canary
     plugins:
       - *ci_toolkit_plugin
@@ -202,6 +202,7 @@ steps:
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
+      - ios-screen-recordings/*
     agents:
       queue: mac
     env: *xcode_agent_env
@@ -214,13 +215,13 @@ steps:
     if: *is_branch_for_quick_ui_tests
     key: run-full-ui-test
     prompt: "Run full UI tests suites?"
-    depends_on: ios-build-and-saucelabs
+    depends_on: ios-build
 
   - label: Test iOS on Device – Full iPhone
     # The quick UI tests suite version depends on the block step being unblocked
     if: *is_branch_for_quick_ui_tests
     depends_on:
-      - ios-build-and-saucelabs
+      - ios-build
       - run-full-ui-test
     command: .buildkite/commands/test-ios.sh
     plugins:
@@ -229,6 +230,7 @@ steps:
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
+      - ios-screen-recordings/*
     agents:
       queue: mac
     env: *xcode_agent_env
@@ -238,7 +240,7 @@ steps:
     # The full UI tests suite version depends only on the ios-build step, meaning it has no manual step that triggers it
     if: *is_branch_for_full_ui_tests
     depends_on:
-      - ios-build-and-saucelabs
+      - ios-build
     command: .buildkite/commands/test-ios.sh
     plugins:
       - *ci_toolkit_plugin
@@ -254,7 +256,7 @@ steps:
     # The quick UI tests suite version depends on the block step being unblocked
     if: *is_branch_for_quick_ui_tests
     depends_on:
-      - ios-build-and-saucelabs
+      - ios-build
       - run-full-ui-test
     command: .buildkite/commands/test-ios.sh --ipad
     plugins:
@@ -263,6 +265,7 @@ steps:
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
+      - ios-screen-recordings/*
     agents:
       queue: mac
     env: *xcode_agent_env
@@ -271,7 +274,7 @@ steps:
     # The full UI tests suite version depends only on the ios-build step, meaning it has no manual step that triggers it
     if: *is_branch_for_full_ui_tests
     depends_on:
-      - ios-build-and-saucelabs
+      - ios-build
     command: .buildkite/commands/test-ios.sh --ipad
     plugins:
       - *ci_toolkit_plugin
@@ -279,6 +282,7 @@ steps:
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
+      - ios-screen-recordings/*
     agents:
       queue: mac
     env: *xcode_agent_env
