@@ -8,8 +8,8 @@ on:
       platform:
         description: 'Platform target for integration'
         required: true
-      cli:
-        description: 'ClI version'
+      gbm-cli:
+        description: 'gbm-cli version'
         default: 'latest'
 
 jobs:
@@ -27,7 +27,7 @@ jobs:
           go-version: 1.21
 
       - name: Install CLI
-        run: go install github.com/wordpress-mobile/release-toolkit-gutenberg-mobile/gbm-cli@${{ github.event.inputs.cli }}
+        run: go install github.com/wordpress-mobile/release-toolkit-gutenberg-mobile/gbm-cli@${{ github.event.inputs.gbm-cli }}
 
 
       - name: Create PR
