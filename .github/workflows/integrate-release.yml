@@ -1,0 +1,34 @@
+name: Integrate Release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release'
+        required: true
+      platform:
+        description: 'Platform target for integration'
+        required: true
+      cli:
+        description: 'ClI version'
+        default: 'latest'
+
+jobs:
+  integrate_release:
+    runs-on: macos-latest
+    name: Integrate Gutenberg Release
+    env:
+      # Use the repo secret so we can access the main app repos
+      GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+
+    steps:
+      - name: Setup Go
+        uses: actions/setup-go@v4.1.0
+        with:
+          go-version: 1.21
+
+      - name: Install CLI
+        run: go install github.com/jhnstn/release-toolkit-gutenberg-mobile/gbm-cli@${{ github.event.inputs.cli }}
+
+
+      - name: Create PR
+        run: gbm-cli release integrate ${{ github.event.inputs.version }} --${{ github.event.inputs.platform}}
