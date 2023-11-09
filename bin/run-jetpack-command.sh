@@ -1,9 +1,11 @@
 #!/bin/bash
 set -Eeuo pipefail
 
-if [ -e ./bin/run-jetpack-command.sh.local ]
+local_run_script="${GBM_LOCAL_JP_RUN_SCRIPT:-./bin/run-jetpack-command.sh.local}"
+
+if [ -e "$local_run_script"]
 then
-  source ./bin/run-jetpack-command.sh.local
+  source "$local_run_script"
   exit 0
 fi
 
