@@ -3,7 +3,7 @@ set -Eeuo pipefail
 
 local_run_script="${GBM_LOCAL_JP_RUN_SCRIPT:-./bin/run-jetpack-command.sh.local}"
 
-if [ -e "$local_run_script"]
+if [ -e "$local_run_script" ]
 then
   source "$local_run_script"
   exit 0
