@@ -1,6 +1,11 @@
 Unreleased
 ---
 
+1.108.0
+---
+-   [*] Fix error when pasting deeply nested structure content [https://github.com/WordPress/gutenberg/pull/55613]
+-   [*] Fix crash related to accessing undefined value in `TextColorEdit` [https://github.com/WordPress/gutenberg/pull/55664]
+
 1.107.0
 ---
 * [*] Social Icons: Fix visibility of inactive icons when used with block based themes in dark mode [https://github.com/WordPress/gutenberg/pull/55398]
