@@ -22,7 +22,9 @@ x-common-params:
         - 'AWS_ACCESS_KEY'
         - 'AWS_SECRET_KEY'
   - &nvm_plugin
-    automattic/nvm#0.2.1
+    automattic/nvm#0.3.0:
+      # This is an attempt to fix curl error (92) during installing nodejs.
+      curlrc: --http1.1
   - &ci_toolkit_plugin
     automattic/a8c-ci-toolkit#2.18.2
   - &xcode_agent_env
