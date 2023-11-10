@@ -1,5 +1,6 @@
 Unreleased
 ---
+-   [**] Fix broken appearance of video blocks that were first created on the web []
 
 1.108.0
 ---
