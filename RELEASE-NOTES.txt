@@ -1,6 +1,6 @@
 Unreleased
 ---
-* [*] Contact Info: Fix visibility of typed text when used with block based themes in dark mode [https://github.com/Automattic/jetpack/pull/33873]
+-   [*] Contact Info: Fix visibility of typed text when used with block based themes in dark mode [https://github.com/Automattic/jetpack/pull/33873]
 -   [**] Fix broken appearance of video blocks that were first created on the web [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6371]
 
 1.108.0
