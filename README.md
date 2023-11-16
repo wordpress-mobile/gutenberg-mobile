@@ -39,11 +39,10 @@ git submodule update
 
 ## Set up
 
-Before running the demo app, you need to download and install the project dependencies. This is done via the following command:
+Before running the demo app, download and install the project dependencies:
 
 ```
-nvm install
-npm install
+nvm install && npm install
 ```
 
 ## Run
