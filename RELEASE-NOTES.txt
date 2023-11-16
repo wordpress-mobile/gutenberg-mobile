@@ -1,6 +1,12 @@
 Unreleased
 ---
 * [*] Contact Info: Fix visibility of typed text when used with block based themes in dark mode [https://github.com/Automattic/jetpack/pull/33873]
+-   [**] Fix broken appearance of video blocks that were first created on the web [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6371]
+
+1.108.0
+---
+-   [*] Fix error when pasting deeply nested structure content [https://github.com/WordPress/gutenberg/pull/55613]
+-   [*] Fix crash related to accessing undefined value in `TextColorEdit` [https://github.com/WordPress/gutenberg/pull/55664]
 
 1.107.0
 ---
