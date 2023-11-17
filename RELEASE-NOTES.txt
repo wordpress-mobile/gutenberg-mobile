@@ -1,5 +1,6 @@
 Unreleased
 ---
+-   [*] Contact Info block: Improve legibility of typed text on various background colors [https://github.com/Automattic/jetpack/pull/33873]
 -   [*] Audio block: Improve legibility of audio file details on various background colors [https://github.com/WordPress/gutenberg/pull/55627]
 -   [**] Fix broken appearance of video blocks that were first created on the web [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6371]
 
