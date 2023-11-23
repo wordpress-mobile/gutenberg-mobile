@@ -424,7 +424,7 @@ PODS:
     - React-RCTImage
   - RNSVG (13.9.0):
     - React-Core
-  - RNTAztecView (1.108.0):
+  - RNTAztecView (1.109.0):
     - React-Core
     - WordPress-Aztec-iOS (= 1.19.9)
   - SDWebImage (5.11.1):
@@ -659,7 +659,7 @@ SPEC CHECKSUMS:
   RNReanimated: 21e1e71d7f1ac9f2fa11df37c06a8ec52ed06232
   RNScreens: e3ffdd78ff5afe8ec82c2566ee2410857ed5ce75
   RNSVG: 29dd0ac32d83774d4b0953ae92a5cd8205a782d7
-  RNTAztecView: dfa8817995fc92b8a0ba755763aab77445650c91
+  RNTAztecView: 8415d8e322e98d087b3f8fbba0669e84d6b235cb
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   WordPress-Aztec-iOS: fbebd569c61baa252b3f5058c0a2a9a6ada686bb
