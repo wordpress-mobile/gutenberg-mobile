@@ -35,8 +35,9 @@
     <string name="gutenberg_native_address_settings" tools:ignore="UnusedResources">Address Settings</string>
     <string name="gutenberg_native_alt_text" tools:ignore="UnusedResources">Alt Text</string>
     <string name="gutenberg_native_alternatively_you_can_convert_the_content_to_blocks" tools:ignore="UnusedResources">Alternatively, you can convert the content to blocks.</string>
-    <string name="gutenberg_native_alternatively_you_can_detach_and_edit_these_blocks_separately_by" tools:ignore="UnusedResources">Alternatively, you can detach and edit these blocks separately by tapping “Detach patterns”.</string>
-    <string name="gutenberg_native_alternatively_you_can_detach_and_edit_this_block_separately_by_ta" tools:ignore="UnusedResources">Alternatively, you can detach and edit this block separately by tapping “Detach pattern”.</string>
+    <string name="gutenberg_native_alternatively_you_can_detach_and_edit_this_block_separately_by_ta" tools:ignore="UnusedResources">Alternatively, you can detach and edit this block separately by tapping “Detach”.</string>
+    <!-- translators: Alternative option included in a warning related to having blocks deeply nested. -->
+    <string name="gutenberg_native_alternatively_you_can_flatten_the_content_by_ungrouping_the_block" tools:ignore="UnusedResources">Alternatively, you can flatten the content by ungrouping the block.</string>
     <string name="gutenberg_native_an_unknown_error_occurred_please_try_again" tools:ignore="UnusedResources">An unknown error occurred. Please try again.</string>
     <string name="gutenberg_native_applies_the_setting" tools:ignore="UnusedResources">Applies the setting</string>
     <string name="gutenberg_native_arrange_your_content_into_columns_add_call_to_action_buttons_and" tools:ignore="UnusedResources">Arrange your content into columns, add Call to Action buttons, and overlay images with text.</string>
@@ -68,9 +69,7 @@
     <string name="gutenberg_native_blocks_are_pieces_of_content_that_you_can_insert_rearrange_and_st" tools:ignore="UnusedResources">Blocks are pieces of content that you can insert, rearrange, and style without needing to know how to code. Blocks are an easy and modern way for you to create beautiful layouts.</string>
     <string name="gutenberg_native_blocks_menu" tools:ignore="UnusedResources">Blocks menu</string>
     <!-- translators: Warning related to having blocks deeply nested. %d: The deepest nesting level. -->
-    <string name="gutenberg_native_blocks_nested_deeper_than_d_levels_may_not_render_properly_in_the" tools:ignore="UnusedResources">Blocks nested deeper than %d levels may not render properly in the mobile editor. For this reason, we recommend flattening the content by ungrouping the block or editing the block using your web browser.</string>
-    <!-- translators: Warning related to having blocks deeply nested. %d: The deepest nesting level. -->
-    <string name="gutenberg_native_blocks_nested_deeper_than_d_levels_may_not_render_properly_in_the_09df8c78" tools:ignore="UnusedResources">Blocks nested deeper than %d levels may not render properly in the mobile editor. For this reason, we recommend flattening the content by ungrouping the block or editing the block using the web editor.</string>
+    <string name="gutenberg_native_blocks_nested_deeper_than_d_levels_may_not_render_properly_in_the" tools:ignore="UnusedResources">Blocks nested deeper than %d levels may not render properly in the mobile editor.</string>
     <string name="gutenberg_native_border_radius" tools:ignore="UnusedResources">Border Radius</string>
     <string name="gutenberg_native_border_settings" tools:ignore="UnusedResources">Border Settings</string>
     <string name="gutenberg_native_briefly_describe_the_link_to_help_screen_reader_user" tools:ignore="UnusedResources">Briefly describe the link to help screen reader user</string>
@@ -183,6 +182,10 @@
     <string name="gutenberg_native_file_block_settings" tools:ignore="UnusedResources">File block settings</string>
     <string name="gutenberg_native_file_name" tools:ignore="UnusedResources">File name</string>
     <string name="gutenberg_native_font_size" tools:ignore="UnusedResources">Font Size</string>
+    <!-- translators: Recommendation included in a warning related to having blocks deeply nested. -->
+    <string name="gutenberg_native_for_this_reason_we_recommend_editing_the_block_using_the_web_edit" tools:ignore="UnusedResources">For this reason, we recommend editing the block using the web editor.</string>
+    <!-- translators: Recommendation included in a warning related to having blocks deeply nested. -->
+    <string name="gutenberg_native_for_this_reason_we_recommend_editing_the_block_using_your_web_bro" tools:ignore="UnusedResources">For this reason, we recommend editing the block using your web browser.</string>
     <string name="gutenberg_native_four" tools:ignore="UnusedResources">Four</string>
     <string name="gutenberg_native_from_clipboard" tools:ignore="UnusedResources">From clipboard</string>
     <!-- translators: accessibility text. %s: gallery caption. -->
