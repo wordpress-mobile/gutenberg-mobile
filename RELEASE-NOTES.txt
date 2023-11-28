@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [***] Fix issue when backspacing in an empty Paragraph block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6402]
 
 1.109.0
 ---
