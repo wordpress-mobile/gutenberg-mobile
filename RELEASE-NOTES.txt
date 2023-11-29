@@ -1,6 +1,10 @@
 Unreleased
 ---
 
+1.109.1
+---
+* [***] Fix issue when backspacing in an empty Paragraph block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6402]
+
 1.109.0
 ---
 -   [*] Contact Info block: Improve legibility of typed text on various background colors [https://github.com/Automattic/jetpack/pull/33873]
