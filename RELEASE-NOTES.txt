@@ -4,14 +4,14 @@ Unreleased
 
 1.109.0
 ---
--   [*] Contact Info block: Improve legibility of typed text on various background colors [https://github.com/Automattic/jetpack/pull/33873]
--   [*] Audio block: Improve legibility of audio file details on various background colors [https://github.com/WordPress/gutenberg/pull/55627]
--   [*] Fix ungroup functionality in `WarningMaxDepthExceeded` component [https://github.com/WordPress/gutenberg/pull/56445]
+* [*] Contact Info block: Improve legibility of typed text on various background colors [https://github.com/Automattic/jetpack/pull/33873]
+* [*] Audio block: Improve legibility of audio file details on various background colors [https://github.com/WordPress/gutenberg/pull/55627]
+* [*] Fix ungroup functionality in `WarningMaxDepthExceeded` component [https://github.com/WordPress/gutenberg/pull/56445]
 
 1.108.0
 ---
--   [*] Fix error when pasting deeply nested structure content [https://github.com/WordPress/gutenberg/pull/55613]
--   [*] Fix crash related to accessing undefined value in `TextColorEdit` [https://github.com/WordPress/gutenberg/pull/55664]
+* [*] Fix error when pasting deeply nested structure content [https://github.com/WordPress/gutenberg/pull/55613]
+* [*] Fix crash related to accessing undefined value in `TextColorEdit` [https://github.com/WordPress/gutenberg/pull/55664]
 
 1.107.0
 ---
