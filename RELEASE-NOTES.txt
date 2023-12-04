@@ -5,6 +5,7 @@ Unreleased
 1.109.1
 ---
 * [***] Fix issue when backspacing in an empty Paragraph block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6402]
+* [**] Address rare cases where a null value is passed to a heading block, causing a crash [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6435]
 
 1.109.0
 ---
