@@ -1,16 +1,29 @@
 Unreleased
 ---
 
+1.109.2
+---
+* [**] Fix issue related to text color format and receiving in rare cases an undefined ref from `RichText` component [https://github.com/WordPress/gutenberg/pull/56686]
+* [**] Fixes a crash on pasting MS Word list markup [https://github.com/WordPress/gutenberg/pull/56653]
+* [**] Address rare cases where a null value is passed to a heading block, causing a crash [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6435]
+* [**] Fixes a crash related to HTML to blocks conversion when no transformations are available [https://github.com/WordPress/gutenberg/pull/56723]
+* [**] Fixes a crash related to undefined attributes in `getFormatColors` function of `RichText` component [https://github.com/WordPress/gutenberg/pull/56684]
+* [**] Fixes an issue with custom color variables not being parsed when using global styles [https://github.com/WordPress/gutenberg/pull/56752]
+
+1.109.1
+---
+* [***] Fix issue when backspacing in an empty Paragraph block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6402]
+
 1.109.0
 ---
--   [*] Contact Info block: Improve legibility of typed text on various background colors [https://github.com/Automattic/jetpack/pull/33873]
--   [*] Audio block: Improve legibility of audio file details on various background colors [https://github.com/WordPress/gutenberg/pull/55627]
--   [*] Fix ungroup functionality in `WarningMaxDepthExceeded` component [https://github.com/WordPress/gutenberg/pull/56445]
+* [*] Contact Info block: Improve legibility of typed text on various background colors [https://github.com/Automattic/jetpack/pull/33873]
+* [*] Audio block: Improve legibility of audio file details on various background colors [https://github.com/WordPress/gutenberg/pull/55627]
+* [*] Fix ungroup functionality in `WarningMaxDepthExceeded` component [https://github.com/WordPress/gutenberg/pull/56445]
 
 1.108.0
 ---
--   [*] Fix error when pasting deeply nested structure content [https://github.com/WordPress/gutenberg/pull/55613]
--   [*] Fix crash related to accessing undefined value in `TextColorEdit` [https://github.com/WordPress/gutenberg/pull/55664]
+* [*] Fix error when pasting deeply nested structure content [https://github.com/WordPress/gutenberg/pull/55613]
+* [*] Fix crash related to accessing undefined value in `TextColorEdit` [https://github.com/WordPress/gutenberg/pull/55664]
 
 1.107.0
 ---
