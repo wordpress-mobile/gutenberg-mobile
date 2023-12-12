@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [**] Fixes a crash when blockType wrapperProps are not defined [https://github.com/WordPress/gutenberg/pull/56846]
 
 1.109.2
 ---
