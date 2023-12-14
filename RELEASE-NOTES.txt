@@ -3,6 +3,7 @@ Unreleased
 
 1.109.3
 ---
+* [**] Fix duplicate/unresponsive options in font size settings. [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6466]
 
 1.109.2
 ---
