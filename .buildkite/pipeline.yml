@@ -95,6 +95,7 @@ steps:
           context: iOS Unit Tests
 
   - label: React Native Editor Android Tests
+    key: android-unit-tests-editor
     command: |
       npm ci --prefer-offline --no-audit --no-progress
       cd gutenberg/packages/react-native-editor/android
@@ -106,6 +107,7 @@ steps:
       queue: android-staging
 
   - label: React Native Bridge Android Tests
+    key: android-unit-tests-bridge
     command: |
       npm ci --prefer-offline --no-audit --no-progress
       cd gutenberg/packages/react-native-bridge/android
