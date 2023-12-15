@@ -16,11 +16,11 @@ export TEST_ENV=sauce
 export RN_EDITOR_E2E_IOS_DESTINATION="platform=iOS Simulator,name=iPhone 15,OS=17.2"
 set +x
 
-echo '--- :react: Build iOS app for E2E testing'
-npm run core test:e2e:build-app:ios
-
 echo '--- :react: Build iOS bundle for E2E testing'
 npm run test:e2e:bundle:ios
+
+echo '--- :react: Build iOS app for E2E testing'
+npm run core test:e2e:build-app:ios
 
 echo '--- :compression: Prepare artifact for SauceLabs upload'
 WORK_DIR=$(pwd) \

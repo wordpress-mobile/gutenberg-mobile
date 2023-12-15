@@ -9,6 +9,9 @@ export TEST_RN_PLATFORM=android
 export TEST_ENV=sauce
 set +x
 
+echo '--- :react: Build Android bundle for E2E testing'
+npm run test:e2e:bundle:android
+
 echo '--- :react: Build Android app for E2E testing'
 npm run core test:e2e:build-app:android
 
