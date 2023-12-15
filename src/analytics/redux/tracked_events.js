@@ -47,7 +47,8 @@ const getBlockInserterUsed = ( originalBlockIds = [], metaData ) => {
 			'core/paragraph' &&
 		select( 'core/block-editor' )
 			.getBlockAttributes( clientIds[ 0 ] )
-			.content.startsWith( '/' )
+			.content.toString()
+			.startsWith( '/' )
 	) {
 		return INSERTERS.SLASH_INSERTER;
 	}
