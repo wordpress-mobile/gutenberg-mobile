@@ -235,6 +235,35 @@ steps:
       - github_commit_status:
           context: Test iOS on Device - Canaries
 
+  - label: Android Build and Sauce Labs
+    key: android-build-and-saucelabs
+    depends_on:
+      - lint
+      - android-unit-tests
+      - android-unit-tests-editor
+      - android-unit-tests-bridge
+    command: .buildkite/commands/build-android.sh
+    plugins:
+      - *ci_toolkit_plugin
+      - *git-cache-plugin
+      - *nvm_plugin
+    agents:
+      queue: android-staging
+
+  - label: Test Android on Device – Canary Pages
+    depends_on: android-build-and-saucelabs
+    command: .buildkite/commands/test-android.sh --canary
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+      - *git-cache-plugin
+    agents:
+      queue: android-staging
+    artifact_paths:
+      - reports/test-results/android-test-results.xml
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
+
   - block: "Full UI Tests"
     # Show only in branches that run the quick UI tests suite, to optionally run the full suite
     if: *is_branch_for_quick_ui_tests
@@ -308,3 +337,38 @@ steps:
     agents:
       queue: mac
     env: *xcode_agent_env
+
+  - label: Test Android on Device – Full
+    # The quick UI tests suite version depends on the block step being unblocked
+    if: *is_branch_for_quick_ui_tests
+    depends_on:
+      - android-build-and-saucelabs
+      - run-full-ui-test
+    command: .buildkite/commands/test-android.sh
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+      - *git-cache-plugin
+    agents:
+      queue: android-staging
+    artifact_paths:
+      - reports/test-results/android-test-results.xml
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
+
+  - label: Test Android on Device – Full
+    # The full UI tests suite version depends only on the android-build-and-suacelabs step, meaning it has no manual step that triggers it
+    if: *is_branch_for_full_ui_tests
+    depends_on:
+      - android-build-and-saucelabs
+    command: .buildkite/commands/test-android.sh
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+      - *git-cache-plugin
+    agents:
+      queue: android-staging
+    artifact_paths:
+      - reports/test-results/android-test-results.xml
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
