@@ -68,6 +68,10 @@ use_react_native! path: REACT_NATIVE_PATH, hermes_enabled: HERMES_ENABLED
 
 target 'Gutenberg' do
   pod 'RNTAztecView', path: File.join(GUTENBERG_PATH, 'packages', 'react-native-aztec')
+  # When using a tagged version, leave the WordPress-Aztec-iOS line commented out below.
+  # When using a commit number (to create an installable build) add the hash to the commit parameter.
+  # After changing, remember to run `bundle exec pod install` in this directory to update the Podfile.lock.
+  # pod 'WordPress-Aztec-iOS', :git => 'https://github.com/wordpress-mobile/WordPress-Aztec-iOS.git', :commit => ''
   gutenberg_dependencies
 end
 
