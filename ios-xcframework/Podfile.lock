@@ -424,7 +424,7 @@ PODS:
     - React-RCTImage
   - RNSVG (13.9.0):
     - React-Core
-  - RNTAztecView (1.109.2):
+  - RNTAztecView (1.109.3):
     - React-Core
     - WordPress-Aztec-iOS (= 1.19.9)
   - SDWebImage (5.11.1):
@@ -488,7 +488,7 @@ DEPENDENCIES:
   - RNScreens (from `../third-party-podspecs/RNScreens.podspec.json`)
   - RNSVG (from `../third-party-podspecs/RNSVG.podspec.json`)
   - RNTAztecView (from `../gutenberg/packages/react-native-aztec`)
-  - WordPress-Aztec-iOS (from `https://github.com/wordpress-mobile/WordPress-Aztec-iOS.git`, commit `16a7a70f6731fb04ef9fbf7ba39f534588eb9e16`)
+  - WordPress-Aztec-iOS (from `https://github.com/wordpress-mobile/WordPress-Aztec-iOS.git`, commit `8565ee0082532a2d6d931d434e372909179f5e4e`)
   - Yoga (from `../gutenberg/node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -600,7 +600,7 @@ EXTERNAL SOURCES:
   RNTAztecView:
     :path: "../gutenberg/packages/react-native-aztec"
   WordPress-Aztec-iOS:
-    :commit: 16a7a70f6731fb04ef9fbf7ba39f534588eb9e16
+    :commit: 8565ee0082532a2d6d931d434e372909179f5e4e
     :git: https://github.com/wordpress-mobile/WordPress-Aztec-iOS.git
   Yoga:
     :path: "../gutenberg/node_modules/react-native/ReactCommon/yoga"
@@ -610,7 +610,7 @@ CHECKOUT OPTIONS:
     :commit: 310ff71ea469f7cf8458d1dd7c3b1988a3d2e802
     :git: https://github.com/wordpress-mobile/react-native-reanimated
   WordPress-Aztec-iOS:
-    :commit: 16a7a70f6731fb04ef9fbf7ba39f534588eb9e16
+    :commit: 8565ee0082532a2d6d931d434e372909179f5e4e
     :git: https://github.com/wordpress-mobile/WordPress-Aztec-iOS.git
 
 SPEC CHECKSUMS:
@@ -665,12 +665,12 @@ SPEC CHECKSUMS:
   RNReanimated: 21e1e71d7f1ac9f2fa11df37c06a8ec52ed06232
   RNScreens: e3ffdd78ff5afe8ec82c2566ee2410857ed5ce75
   RNSVG: 29dd0ac32d83774d4b0953ae92a5cd8205a782d7
-  RNTAztecView: dc2635b4d33818f4c113717ff67071c1e367ed8c
+  RNTAztecView: fd32ea370f13d9edd7f43b65b6270ae499757d69
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   WordPress-Aztec-iOS: fbebd569c61baa252b3f5058c0a2a9a6ada686bb
   Yoga: f7decafdc5e8c125e6fa0da38a687e35238420fa
 
-PODFILE CHECKSUM: 1b035f7daf75d8a7aa9c5d74a0779a8682ad0ad1
+PODFILE CHECKSUM: e922ada640b15c52dd36789ae881369f4c3d8dbd
 
 COCOAPODS: 1.13.0
