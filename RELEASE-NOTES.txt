@@ -3,6 +3,7 @@ Unreleased
 * [**] Fix crash when sharing unsupported media types on Android [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6444]
 * [**] Fixes a crash when blockType wrapperProps are not defined [https://github.com/WordPress/gutenberg/pull/56846]
 * [**] Fix regressions with wrapper props and font size customization [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6459]
+* [***] Avoid keyboard dismiss when interacting with text blocks [https://github.com/WordPress/gutenberg/pull/57070]
 
 1.109.2
 ---
