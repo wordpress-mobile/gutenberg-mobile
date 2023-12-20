@@ -1,1 +1,5 @@
-
+blank_issues_enabled: true
+contact_links:
+  - name: Report issues with core functionality to Gutenberg
+    url: https://github.com/WordPress/gutenberg/issues/new?assignees=&labels=Mobile+App+-+i.e.+Android+or+iOS&projects=&template=Bug_report_mobile.md/
+    about: The gutenberg-mobile issue tracker is intended for non-core issues, such as those related to Automattic-owned products, like Jetpack. If you have a bug or enhancement request related to the editor's core functionality, please report it to the Gutenberg repository.
