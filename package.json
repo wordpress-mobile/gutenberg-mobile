@@ -34,7 +34,7 @@
 		"eslint-plugin-eslint-comments": "3.1.2",
 		"eslint-plugin-import": "2.25.2",
 		"eslint-plugin-jest": "27.2.1",
-		"eslint-plugin-jsdoc": "^39.6.9",
+		"eslint-plugin-jsdoc": "^46.4.6",
 		"eslint-plugin-react-native": "^3.6.0",
 		"gettext-parser": "^4.0.3",
 		"husky": "^3.0.2",
