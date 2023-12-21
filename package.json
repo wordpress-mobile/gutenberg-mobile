@@ -7,8 +7,8 @@
 		"scssfiles": "src/*.scss src/**/*.scss"
 	},
 	"engines": {
-		"node": ">=16.0.0",
-		"npm": ">=8 <9"
+		"node": ">=20.10.0",
+		"npm": ">=10.2.3"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.20.0",
