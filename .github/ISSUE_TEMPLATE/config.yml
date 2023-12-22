@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Bug report (core Gutenberg)
+    url: https://github.com/WordPress/gutenberg/issues/new/choose
+    about: The gutenberg-mobile issue tracker is intended for non-core issues, such as those related to Automattic-owned products, like Jetpack. For bugs or enhancement requests related to the editor's core functionality, please report it to the Gutenberg repository.
