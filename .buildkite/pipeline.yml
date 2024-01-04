@@ -48,7 +48,7 @@ steps:
       echo "--- :docker::node: Setup Node environment"
       nvm install && nvm use
 
-      .buildkite/commands/lint.sh
+      NODE_OPTIONS="--max-old-space-size=4000" .buildkite/commands/lint.sh
     notify:
       - github_commit_status:
           context: Lint
