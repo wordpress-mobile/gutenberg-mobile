@@ -7,6 +7,8 @@ x-common-params:
         # Allow WP-CLI to be run as root, otherwise it throws an exception.
         # Reference: https://git.io/J9q2S
         - 'WP_CLI_ALLOW_ROOT=true'
+        # Increase max available memory for node
+        - 'NODE_OPTIONS="--max-old-space-size=4096"'
   - &git-cache-plugin
     automattic/git-s3-cache#1.1.4:
       # Ensure these settings match what's defined in cache-builder.yml
