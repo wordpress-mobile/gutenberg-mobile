@@ -2,11 +2,11 @@
 
 node -e 'console.log("Heap size limit:",v8.getHeapStatistics().heap_size_limit/(1024*1024))'
 
-total_memory=$(free -m | awk '/^Mem:/{print $2}')
-available_memory=$(free -m | awk '/^Mem:/{print $7}')
+total_memory=$(cat /proc/meminfo | awk '/^MemTotal:/{print $2}')
+free_memory=$(cat /proc/meminfo | awk '/^MemFree:/{print $2}')
 
-echo "Total Memory: ${total_memory}MB"
-echo "Available Memory: ${available_memory}MB"
+echo "Total Memory: $(expr $total_memory / 1024)MB"  # Convert from KB to MB
+echo "Free Memory: $(expr $free_memory / 1024)MB"    # Convert from KB to MB
 
 echo "--- :npm: Install Node dependencies"
 npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
