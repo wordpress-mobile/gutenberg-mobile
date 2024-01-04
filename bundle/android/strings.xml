@@ -181,7 +181,10 @@
     <string name="gutenberg_native_featured" tools:ignore="UnusedResources">Featured</string>
     <string name="gutenberg_native_file_block_settings" tools:ignore="UnusedResources">File block settings</string>
     <string name="gutenberg_native_file_name" tools:ignore="UnusedResources">File name</string>
+    <string name="gutenberg_native_file_type_not_supported_as_a_media_file" tools:ignore="UnusedResources">File type not supported as a media file.</string>
     <string name="gutenberg_native_font_size" tools:ignore="UnusedResources">Font Size</string>
+    <!-- translators: %1$s: Font size name e.g. Small -->
+    <string name="gutenberg_native_font_size_1_s" tools:ignore="UnusedResources">Font Size, %1$s</string>
     <!-- translators: Recommendation included in a warning related to having blocks deeply nested. -->
     <string name="gutenberg_native_for_this_reason_we_recommend_editing_the_block_using_the_web_edit" tools:ignore="UnusedResources">For this reason, we recommend editing the block using the web editor.</string>
     <!-- translators: Recommendation included in a warning related to having blocks deeply nested. -->
@@ -194,7 +197,6 @@
     <string name="gutenberg_native_get_support" tools:ignore="UnusedResources">Get support</string>
     <string name="gutenberg_native_gif" tools:ignore="UnusedResources">GIF</string>
     <string name="gutenberg_native_give_it_a_try_by_adding_a_few_blocks_to_your_post_or_page" tools:ignore="UnusedResources">Give it a try by adding a few blocks to your post or page!</string>
-    <string name="gutenberg_native_go_back" tools:ignore="UnusedResources">Go back</string>
     <string name="gutenberg_native_gradient_type" tools:ignore="UnusedResources">Gradient Type</string>
     <string name="gutenberg_native_help_button" tools:ignore="UnusedResources">Help button</string>
     <string name="gutenberg_native_help_icon" tools:ignore="UnusedResources">Help icon</string>
@@ -256,6 +258,8 @@
 translators: %s: Select control button label e.g. "Button width" -->
     <string name="gutenberg_native_navigates_to_select_s" tools:ignore="UnusedResources">Navigates to select %s</string>
     <string name="gutenberg_native_navigates_to_the_previous_content_sheet" tools:ignore="UnusedResources">Navigates to the previous content sheet</string>
+    <string name="gutenberg_native_network_connection_lost_working_offline" tools:ignore="UnusedResources">Network connection lost, working offline</string>
+    <string name="gutenberg_native_network_connection_re_established" tools:ignore="UnusedResources">Network connection re-established</string>
     <string name="gutenberg_native_new" tools:ignore="UnusedResources">NEW</string>
     <string name="gutenberg_native_no_application_can_handle_this_request" tools:ignore="UnusedResources">No application can handle this request.</string>
     <string name="gutenberg_native_no_application_can_handle_this_request_please_install_a_web_brows" tools:ignore="UnusedResources">No application can handle this request. Please install a Web browser.</string>
@@ -309,9 +313,6 @@ translators: %s: Select control button label e.g. "Button width" -->
     <string name="gutenberg_native_replace_video" tools:ignore="UnusedResources">Replace video</string>
     <string name="gutenberg_native_retry" tools:ignore="UnusedResources">Retry</string>
     <string name="gutenberg_native_rich_text_editing" tools:ignore="UnusedResources">Rich text editing</string>
-    <!-- translators: %s: Block name e.g. "Image block"
-translators: Block name. %s: The localized block name -->
-    <string name="gutenberg_native_s_block" tools:ignore="UnusedResources">%s block</string>
     <!-- translators: displayed right after the classic block is converted to blocks. %s: The localized classic block name -->
     <string name="gutenberg_native_s_block_converted_to_blocks" tools:ignore="UnusedResources">\'%s\' block converted to blocks</string>
     <!-- translators: accessibility text for the media block empty state. %s: media type -->
@@ -404,6 +405,7 @@ translators: %s: Select control option value e.g: "Auto, 25%". -->
     <string name="gutenberg_native_what_is_alt_text" tools:ignore="UnusedResources">What is alt text?</string>
     <string name="gutenberg_native_width_settings" tools:ignore="UnusedResources">Width Settings</string>
     <string name="gutenberg_native_wordpress_media_library" tools:ignore="UnusedResources">WordPress Media Library</string>
+    <string name="gutenberg_native_working_offline" tools:ignore="UnusedResources">Working Offline</string>
     <string name="gutenberg_native_x_axis_position" tools:ignore="UnusedResources">X-Axis Position</string>
     <string name="gutenberg_native_y_axis_position" tools:ignore="UnusedResources">Y-Axis Position</string>
     <string name="gutenberg_native_you_can_also_rearrange_blocks_by_tapping_a_block_and_then_tapping" tools:ignore="UnusedResources">You can also rearrange blocks by tapping a block and then tapping the up and down arrows that appear on the bottom left side of the block to move it up or down.</string>
