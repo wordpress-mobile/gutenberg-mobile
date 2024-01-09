@@ -246,7 +246,7 @@ steps:
       - *git-cache-plugin
       - *nvm_plugin
     agents:
-      queue: android-staging
+      queue: android
 
   - label: Test Android on Device – Canary Pages
     depends_on: android-build-and-saucelabs
@@ -256,7 +256,7 @@ steps:
       - *nvm_plugin
       - *git-cache-plugin
     agents:
-      queue: android-staging
+      queue: android
     artifact_paths:
       - reports/test-results/android-test-results.xml
     env:
@@ -348,7 +348,7 @@ steps:
       - *nvm_plugin
       - *git-cache-plugin
     agents:
-      queue: android-staging
+      queue: android
     artifact_paths:
       - reports/test-results/android-test-results.xml
     env:
@@ -365,7 +365,7 @@ steps:
       - *nvm_plugin
       - *git-cache-plugin
     agents:
-      queue: android-staging
+      queue: android
     artifact_paths:
       - reports/test-results/android-test-results.xml
     env:
