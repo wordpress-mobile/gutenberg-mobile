@@ -30,7 +30,7 @@ x-common-params:
   - &ci_toolkit_plugin
     automattic/a8c-ci-toolkit#2.18.2
   - &xcode_agent_env
-    IMAGE_ID: xcode-14.3.1
+    IMAGE_ID: xcode-15.1
   - &is_branch_for_full_ui_tests
     build.branch == 'trunk' || build.branch =~ /^release.*/ || build.branch =~ /^dependabot\/submodules.*/
   - &is_branch_for_quick_ui_tests
