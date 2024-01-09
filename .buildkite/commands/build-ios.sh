@@ -13,7 +13,7 @@ IOS_DEVICE_NAME=$(jq -r '.ios.local.deviceName' "$CONFIG_FILE")
 IOS_PLATFORM_VERSION=$(jq -r '.ios.buildkite.platformVersion' "$CONFIG_FILE")
 # Set a destination different from the hardcoded one which only works in the
 # older Xcode-setup used by CircleCI
-export RN_EDITOR_E2E_IOS_DESTINATION="platform=iOS Simulator,name=$IOS_DEVICE_NAME,OS=$IOS_PLATFORM_VERSION"
+export RN_EDITOR_E2E_IOS_DESTINATION="platform=iOS Simulator,name=iPhone 15,OS=17.2"
 set +x
 
 echo '--- :react: Build iOS app for E2E testing'
