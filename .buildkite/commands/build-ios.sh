@@ -3,7 +3,7 @@
 echo '--- :desktop_computer: Clear up some disk space'
 rm -rfv ~/.Trash/15.1.xip
 
-echo '--- :node: Setup Node depenendencies'
+echo '--- :node: Set up Node depenendencies'
 npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
 echo '--- :ios: Set env var for iOS E2E testing'
