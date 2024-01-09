@@ -98,7 +98,7 @@ steps:
 
   - label: React Native Editor Android Tests
     command: |
-      npm ci --prefer-offline --no-audit --no-progress
+      npm ci --prefix gutenberg --prefer-offline --no-audit --no-progress --ignore-scripts
       cd gutenberg/packages/react-native-editor/android
       ./gradlew testDebug
     plugins:
@@ -109,7 +109,7 @@ steps:
 
   - label: React Native Bridge Android Tests
     command: |
-      npm ci --prefer-offline --no-audit --no-progress
+      npm ci --prefix gutenberg --prefer-offline --no-audit --no-progress --ignore-scripts
       cd gutenberg/packages/react-native-bridge/android
       ./gradlew test
     plugins:
