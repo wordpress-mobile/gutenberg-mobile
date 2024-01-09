@@ -44,7 +44,7 @@ steps:
       echo "--- :docker: Additional Docker image setup"
       source /root/.bashrc
 
-      echo "--- :docker::node: Setup Node environment"
+      echo "--- :docker::node: Set up Node environment"
       nvm install && nvm use
 
       .buildkite/commands/lint.sh
@@ -61,7 +61,7 @@ steps:
       echo "--- :docker: Additional Docker image setup"
       source /root/.bashrc
 
-      echo "--- :docker::node: Setup Node environment"
+      echo "--- :docker::node: Set up Node environment"
       nvm install && nvm use
 
       .buildkite/commands/unit-tests-android.sh
@@ -83,7 +83,7 @@ steps:
       echo "--- :docker: Additional Docker image setup"
       source /root/.bashrc
 
-      echo "--- :docker::node: Setup Node environment"
+      echo "--- :docker::node: Set up Node environment"
       nvm install && nvm use
 
       .buildkite/commands/unit-tests-ios.sh
@@ -130,7 +130,7 @@ steps:
     command: |
         source /root/.bashrc
 
-        echo "--- :node: Setup Node environment"
+        echo "--- :node: Set up Node environment"
         nvm install && nvm use
 
         echo "--- :npm: Install Node dependencies"

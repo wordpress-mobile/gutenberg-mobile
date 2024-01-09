@@ -1,6 +1,6 @@
 #!/bin/bash -eu
 
-echo '--- :node: Setup Node depenendencies'
+echo '--- :node: Set up Node depenendencies'
 npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
 echo '--- :ios: Set env var for iOS E2E testing'

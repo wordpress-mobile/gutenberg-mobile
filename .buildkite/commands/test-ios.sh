@@ -19,7 +19,7 @@ while [ "$INPUT" != "" ]; do
     INPUT="${1-}"
 done
 
-echo '--- :node: Setup Node depenendencies'
+echo '--- :node: Set up Node depenendencies'
 npm ci --prefer-offline --no-audit --ignore-scripts
 npm ci --prefix gutenberg --prefer-offline --no-audit
 
