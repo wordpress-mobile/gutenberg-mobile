@@ -105,7 +105,7 @@ steps:
       - *git-cache-plugin
       - *nvm_plugin
     agents:
-      queue: android-staging
+      queue: android
 
   - label: React Native Bridge Android Tests
     command: |
@@ -116,7 +116,7 @@ steps:
       - *git-cache-plugin
       - *nvm_plugin
     agents:
-      queue: android-staging
+      queue: android
 
   - label: "Build JS Bundles"
     depends_on:
