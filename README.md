@@ -125,7 +125,7 @@ This project is set up to use [jest](https://facebook.github.io/jest/) for tests
 
 ## End-to-End Tests
 
-This repository extends the end-to-end (E2E) tests found in the [`gutenberg` project repository](https://github.com/WordPress/gutenberg). The majority of E2E tests should reside in the `gutenberg` repository. However, experimental tests or non-core-related tests should be placed in the `gutenberg-mobile` repository.
+This repository extends the end-to-end (E2E) tests found in the [`gutenberg` project repository](https://github.com/WordPress/gutenberg). The majority of E2E tests reside in the `gutenberg-mobile` repository due to technical challenges, such as long runtime durations and instability. Additionally, experimental tests or non-core-related tests should be placed in the `gutenberg-mobile` repository.
 
 Reviewing the [`gutenberg` E2E test documentation](https://github.com/WordPress/gutenberg/tree/trunk/packages/react-native-editor/__device-tests__#readme) is the best approach for understanding the test environment and how to set up your computer to run tests. Much of the information and approaches outlined there also apply to the tests found in this repository. The only difference being that this repository includes its own matching npm scripts to run the test, e.g. `npm run test:e2e:ios:local`.
 
