@@ -13,7 +13,7 @@ export TEST_ENV=sauce
 # We must use a simulator that's available on the selected Xcode version
 # otherwsie Xcode fallbacks to "generic destination" which requires provision
 # profiles to built the Demo app.
-export RN_EDITOR_E2E_IOS_DESTINATION="platform=iOS Simulator,name=iPhone 15,OS=17.2"
+export RN_EDITOR_E2E_IOS_DESTINATION="platform=iOS Simulator,name=iPhone 15"
 set +x
 
 echo '--- :react: Build iOS bundle for E2E testing'
