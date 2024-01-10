@@ -1,5 +1,8 @@
 #!/bin/bash -eu
 
+echo '--- :desktop_computer: Clear up some disk space'
+rm -rfv ~/.Trash/15.1.xip
+
 echo '--- :node: Setup Node depenendencies'
 npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
