@@ -6,7 +6,7 @@ buildkite-agent artifact download ios-assets.tar.gz .
 mkdir -p ios-xcframework/Gutenberg/Resources
 tar -xzvf ios-assets.tar.gz -C ios-xcframework/Gutenberg/Resources/
 
-echo '--- :node: Setup node_modules for RNReanimated'
+echo '--- :node: Set up node_modules for RNReanimated'
 npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
 echo "--- :rubygems: Setting up Gems"
