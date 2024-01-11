@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [**] Display a notice when a network connection unavailable [https://github.com/WordPress/gutenberg/pull/56934]
 
 1.110.0
 ---
