@@ -18,7 +18,7 @@ For a developer experience closer to the one the project maintainers currently h
 -   CocoaPods (`sudo gem install cocoapods`) needed to fetch React and third-party dependencies.
 -   [Carthage](https://github.com/Carthage/Carthage#installing-carthage) for Appium to be able run iOS UI tests
 
-Depending on your setup, there may be a few configurations needed in Android Studio and Xcode. Please refer to [React Native's documentation](https://reactnative.dev/docs/environment-setup) for the latest requirements for each development environment.
+Depending on your setup, there may be a few configurations needed in Android Studio and Xcode. Please refer to [React Native's documentation](https://reactnative.dev/docs/environment-setup?guide=native) for the latest requirements for each development environment.
 
 Note that the OS platform used by the maintainers is macOS but the tools and setup should be usable in other platforms too.
 
