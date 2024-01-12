@@ -79,7 +79,7 @@ describe( 'VideoPress block', () => {
 		const videoPressBlock = await getBlock( screen, 'VideoPress' );
 		expect( videoPressBlock ).toBeVisible();
 
-		const expectedHtml = `<!-- wp:videopress/video /-->`;
+    const expectedHtml = `<!-- wp:videopress/video/hack/for/ci/failure /-->`;
 		expect( getEditorHtml() ).toBe( expectedHtml );
 	} );
 

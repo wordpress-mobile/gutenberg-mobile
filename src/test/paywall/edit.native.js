@@ -29,7 +29,7 @@ describe( 'Paywall block', () => {
 		} );
 
 		expect(
-			screen.getByText( 'Subscriber-only content below' )
+			screen.getByText( 'Subscriber-only content below HACKED TO EXPERIENCE FAILURE IN CI' )
 		).toBeVisible();
 	} );
 } );
