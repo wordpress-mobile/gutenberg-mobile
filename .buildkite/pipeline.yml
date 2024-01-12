@@ -89,6 +89,8 @@ steps:
       nvm install && nvm use
 
       .buildkite/commands/unit-tests-ios.sh
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/ios-test-results.xml
     artifact_paths:
       - ./logs/*.log
       - ./reports/test-results/*.xml
