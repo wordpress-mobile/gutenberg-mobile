@@ -263,6 +263,9 @@ steps:
       - reports/test-results/android-test-results.xml
     env:
       JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
+    notify:
+      - github_commit_status:
+          context: Test Android on Device - Canaries
 
   - block: "Full UI Tests"
     # Show only in branches that run the quick UI tests suite, to optionally run the full suite
