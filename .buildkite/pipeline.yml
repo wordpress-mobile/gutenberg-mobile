@@ -41,13 +41,13 @@ steps:
     plugins:
       - *gb-mobile-docker-container
       - *git-cache-plugin
-    command: which ruby
+    command: echo '--- Check Ruby' && which ruby
 
   - label: Check Ruby on Android queue
     plugins:
       - *git-cache-plugin
       - *nvm_plugin
-    command: which ruby
+    command: echo '--- Check Ruby' && which ruby
     agents:
       queue: android
 
@@ -55,10 +55,10 @@ steps:
     plugins:
       - *git-cache-plugin
       - *publish-android-artifacts-docker-container
-    command: which ruby
+    command: echo '--- Check Ruby' && which ruby
 
   - label: Check Ruby on macOS (expected to pass)
-    command: which ruby
+    command: echo '--- Check Ruby' && which ruby
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
