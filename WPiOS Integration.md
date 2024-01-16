@@ -1,5 +1,11 @@
 # WordPress iOS Integration Guide
 
+## Table of Contents
+
+1. [How to work with local gutenberg-mobile checkout](#how-to-work-with-local-gutenberg-mobile-checkout)
+2. [How to test a gutenberg-mobile PR in WPiOS](#how-to-test-a-gutenberg-mobile-pr-in-wpios)
+3. [How to work with Aztec in WPiOS](#how-to-work-with-aztec-in-wpios)
+
 ## How to work with local gutenberg-mobile checkout
 
 The `LOCAL_GUTENBERG` environment variable is useful when you want to iterate on the native iOS code (Swift, Objective-C) in `gutenberg-mobile` while testing it inside the [WPiOS](https://github.com/wordpress-mobile/WordPress-iOS) app. This also includes the case when you update a dependency in `gutenberg-mobile` that includes native code.
