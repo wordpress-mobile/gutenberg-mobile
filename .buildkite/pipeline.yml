@@ -66,3 +66,11 @@ steps:
     agents:
       queue: mac
     env: *xcode_agent_env
+
+  - label: Check npm on Android queue
+    plugins:
+      - *git-cache-plugin
+      - *nvm_plugin
+    command: echo '--- Check npm' && which npm
+    agents:
+      queue: android
