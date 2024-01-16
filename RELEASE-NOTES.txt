@@ -1,8 +1,16 @@
 Unreleased
 ---
+* [**] Display a notice when a network connection unavailable [https://github.com/WordPress/gutenberg/pull/56934]
+
+1.110.0
+---
 * [**] Fix crash when sharing unsupported media types on Android [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6444]
 * [**] Fixes a crash when blockType wrapperProps are not defined [https://github.com/WordPress/gutenberg/pull/56846]
 * [**] Fix regressions with wrapper props and font size customization [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6459]
+* [***] Avoid keyboard dismiss when interacting with text blocks [https://github.com/WordPress/gutenberg/pull/57070]
+* [**] Auto-scroll upon block insertion [https://github.com/WordPress/gutenberg/pull/57273]
+* [*] Unselect blocks using the hardware back button (Android) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6483]
+* [**] Image block media uploads display a custom error message when there is no internet connection [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6491]
 
 1.109.3
 ---
