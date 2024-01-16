@@ -71,7 +71,7 @@ target 'Gutenberg' do
   # When using a tagged version, leave the WordPress-Aztec-iOS line commented out below.
   # When using a commit number (to create an installable build) add the hash to the commit parameter.
   # After changing, remember to run `bundle exec pod install` in this directory to update the Podfile.lock.
-  # pod 'WordPress-Aztec-iOS', :git => 'https://github.com/wordpress-mobile/WordPress-Aztec-iOS.git', :commit => ''
+  # pod 'WordPress-Aztec-iOS', git: 'https://github.com/wordpress-mobile/WordPress-Aztec-iOS.git', commit: ''
   gutenberg_dependencies
 end
 
