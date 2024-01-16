@@ -1,14 +1,11 @@
 #!/bin/bash -eu
 
-MODE="iphone"
+MODE="full"
 INPUT="${1-}"
 while [ "$INPUT" != "" ]; do
     case $INPUT in
         --canary )
             MODE="canary"
-            ;;
-        --ipad )
-            MODE="ipad"
             ;;
         * )
             echo "Unknown option: $1"
@@ -23,24 +20,21 @@ echo '--- :node: Set up Node depenendencies'
 npm ci --prefer-offline --no-audit --ignore-scripts
 npm ci --prefix gutenberg --prefer-offline --no-audit
 
-echo '--- :ios: Set env var for iOS E2E testing'
+echo '--- :ios: Set env var for Android E2E testing'
 set -x
-export TEST_RN_PLATFORM=ios
+export TEST_RN_PLATFORM=android
 export TEST_ENV=sauce
-export JEST_JUNIT_OUTPUT_FILE="reports/test-results/ios-test-results.xml"
+export JEST_JUNIT_OUTPUT_FILE="reports/test-results/android-test-results.xml"
 # This is a relic of the CircleCI setup.
 # It should be removed once the migration to Buildkite is completed.
 export CIRCLE_BRANCH=${BUILDKITE_BRANCH}
 set +x
 
 if [ "$MODE" == 'canary' ]; then
-    SECTION='--- :saucelabs: Test iOS Canary Pages'
+    SECTION='--- :saucelabs: Test Android Canary Pages'
     TESTS_CMD='device-tests-canary'
-elif [ "$MODE" == "ipad" ]; then
-    SECTION='--- :saucelabs: Test iOS iPad'
-    TESTS_CMD='device-tests-ipad'
 else
-    SECTION='--- :saucelabs: Test iOS iPhone'
+    SECTION='--- :saucelabs: Test Android'
     TESTS_CMD='device-tests'
 fi
 

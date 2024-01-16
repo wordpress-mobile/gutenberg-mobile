@@ -7,6 +7,7 @@ import {
 	unregisterBlockType,
 	unregisterBlockVariation,
 } from '@wordpress/blocks';
+import { store as preferencesStore } from '@wordpress/preferences';
 import { select } from '@wordpress/data';
 import { registerCoreBlocks } from '@wordpress/block-library';
 import { applyFilters, removeAllFilters } from '@wordpress/hooks';
@@ -150,8 +151,8 @@ describe( 'Jetpack blocks', () => {
 			'Block videopress/video registered.'
 		);
 
-		const hiddenBlockTypes = select( 'core/preferences' ).get(
-			'core/edit-post',
+		const hiddenBlockTypes = select( preferencesStore ).get(
+			'core',
 			'hiddenBlockTypes'
 		);
 		expect( hiddenBlockTypes ).toEqual( [
