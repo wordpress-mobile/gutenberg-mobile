@@ -15,7 +15,7 @@ const {
 import { NESTED_COLUMNS_3_LEVELS } from './test-editor-data';
 
 const ANDROID_COLUMN_APPENDER_BUTTON_XPATH =
-	'//android.widget.Button[@content-desc="Column Block. Row 1"]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.Button';
+	'//android.widget.Button[@content-desc="Column Block. Row 1"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.Button';
 
 describe( 'Gutenberg Editor - Test Suite 1', () => {
 	describe( 'Columns block', () => {
@@ -298,7 +298,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			await clickIfClickable( editorPage.driver, twitterIconXpath );
 			await editorPage.toggleFormatting( 'Add link to Twitter' );
 			const uRLFieldXpath = isAndroid()
-				? '//android.widget.Button[@content-desc="URL. Empty"]/android.view.ViewGroup[1]/android.widget.EditText'
+				? '//android.widget.Button[@content-desc="URL. Empty"]/android.widget.EditText'
 				: '//XCUIElementTypeOther[@name="Add URL"]/XCUIElementTypeTextField';
 			const uRLField = await waitForVisible(
 				editorPage.driver,
@@ -347,7 +347,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			await clickIfClickable( editorPage.driver, amazonBlockXPath );
 
 			const uRLFieldXpath = isAndroid()
-				? '//android.widget.Button[@content-desc="URL. Empty"]/android.view.ViewGroup[1]/android.widget.EditText'
+				? '//android.widget.Button[@content-desc="URL. Empty"]/android.widget.EditText'
 				: '//XCUIElementTypeOther[@name="Add URL"]/XCUIElementTypeTextField';
 			const uRLField = await waitForVisible(
 				editorPage.driver,
