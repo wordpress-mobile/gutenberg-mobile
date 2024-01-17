@@ -608,7 +608,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/wordpress-mobile/react-native-reanimated
 
 SPEC CHECKSUMS:
-  boost: 57d2868c099736d80fcd648bf211b4431e51a558
+  boost: 7dcd2de282d72e344012f7d6564d024930a6a440
   BVLinearGradient: 1f859bad5f9ead6a57ac43dc42bfc4c587192618
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   FBLazyVector: c511d4cd0210f416cb5c289bd5ae6b36d909b048
@@ -665,6 +665,6 @@ SPEC CHECKSUMS:
   WordPress-Aztec-iOS: fbebd569c61baa252b3f5058c0a2a9a6ada686bb
   Yoga: f7decafdc5e8c125e6fa0da38a687e35238420fa
 
-PODFILE CHECKSUM: e9562063718a2c990efeba80fc1f8ab6b8e008ac
+PODFILE CHECKSUM: 46541d306e8c2e994a63a1c7fefe3ec8d1cc3bdb
 
 COCOAPODS: 1.13.0
