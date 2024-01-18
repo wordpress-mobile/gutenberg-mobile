@@ -1,5 +1,8 @@
 #!/bin/bash -eu
 
+echo "--- Check Ruby test"
+which ruby
+
 echo "--- :npm: Install Node dependencies"
 npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
