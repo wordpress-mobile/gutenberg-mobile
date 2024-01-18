@@ -43,7 +43,7 @@ steps:
       - *nvm_plugin
       - *git-cache-plugin
     agents:
-      queue: android
+      queue: default
     command: .buildkite/commands/lint.sh
     notify:
       - github_commit_status:
@@ -55,7 +55,7 @@ steps:
       - *nvm_plugin
       - *ci_toolkit_plugin
     agents:
-      queue: android
+      queue: default
     command: .buildkite/commands/unit-tests-android.sh
     env:
       JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
@@ -72,7 +72,7 @@ steps:
       - *nvm_plugin
       - *ci_toolkit_plugin
     agents:
-      queue: android
+      queue: default
     command: .buildkite/commands/unit-tests-ios.sh
     env:
       JEST_JUNIT_OUTPUT_FILE: reports/test-results/ios-test-results.xml
