@@ -1,5 +1,10 @@
 Unreleased
 ---
+
+1.111.0
+---
+* [**] Image block media uploads display a custom error message when there is no internet connection [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6491]
+* [*] Fix missing custom color indicator for custom gradients [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6512]
 * [**] Display a notice when a network connection unavailable [https://github.com/WordPress/gutenberg/pull/56934]
 
 1.110.0
