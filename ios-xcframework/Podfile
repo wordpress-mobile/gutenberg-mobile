@@ -7,6 +7,8 @@ GUTENBERG_PATH = '../gutenberg'
 REACT_NATIVE_PATH = File.join(GUTENBERG_PATH, 'node_modules', 'react-native')
 require_relative File.join(REACT_NATIVE_PATH, 'scripts', 'react_native_pods')
 
+pod 'WordPress-Aztec-iOS', :git => 'https://github.com/wordpress-mobile/WordPress-Aztec-iOS.git', :commit => '42485a778fe1966c9e0950b5e0e2e8b796f4eed0'
+
 HERMES_ENABLED = ENV.fetch('HERMES_ENABLED', true)
 
 puts "[Gutenberg] Installing pods with Hermes #{HERMES_ENABLED ? 'enabled' : 'disabled'}"
