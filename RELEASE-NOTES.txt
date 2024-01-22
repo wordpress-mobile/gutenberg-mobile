@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [**] Fix crash when RichText values are not defined [https://github.com/WordPress/gutenberg/pull/58088]
 
 1.111.0
 ---
