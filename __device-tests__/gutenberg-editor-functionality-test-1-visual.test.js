@@ -422,7 +422,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 				return ! ( await editorPage.driver.isKeyboardShown() );
 			} );
 
-			let paragraphBlockElement = await editorPage.getTextBlockAtPosition(
+			let paragraphBlockElement = await editorPage.getBlockAtPosition(
 				blockNames.paragraph
 			);
 			screenshot = await takeScreenshotByElement( paragraphBlockElement );
@@ -430,7 +430,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 
 			// Add a new Paragraph block
 			await editorPage.addParagraphBlockByTappingEmptyAreaBelowLastBlock();
-			paragraphBlockElement = await editorPage.getTextBlockAtPosition(
+			paragraphBlockElement = await editorPage.getBlockAtPosition(
 				blockNames.paragraph,
 				2
 			);
