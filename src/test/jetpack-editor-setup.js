@@ -28,7 +28,6 @@ import setupJetpackEditorHooks, {
 const defaultJetpackData = { blogId: 1, isJetpackActive: true };
 const defaultProps = {
 	capabilities: {
-		mediaFilesCollectionBlock: true,
 		contactInfoBlock: true,
 		facebookEmbed: true,
 		instagramEmbed: true,
@@ -39,7 +38,6 @@ const defaultProps = {
 const jetpackBlocks = [
 	'jetpack/contact-info',
 	'jetpack/paywall',
-	'jetpack/story',
 	'jetpack/tiled-gallery',
 	'videopress/video',
 ];
@@ -77,7 +75,6 @@ describe( 'Jetpack blocks', () => {
 			available_blocks: {
 				'contact-info': { available: true },
 				paywall: { available: true },
-				story: { available: true },
 				'tiled-gallery': { available: true },
 				'videopress/video': { available: true },
 			},
@@ -100,7 +97,6 @@ describe( 'Jetpack blocks', () => {
 		expect( console ).toHaveLoggedWith(
 			'Block jetpack/paywall registered.'
 		);
-		expect( console ).toHaveLoggedWith( 'Block jetpack/story registered.' );
 		expect( console ).toHaveLoggedWith(
 			'Block jetpack/tiled-gallery registered.'
 		);
@@ -130,7 +126,6 @@ describe( 'Jetpack blocks', () => {
 		setupJetpackEditor( defaultJetpackData );
 		registerJetpackBlocksIsolated( {
 			capabilities: {
-				mediaFilesCollectionBlock: true,
 				contactInfoBlock: false,
 				paywallBlock: true,
 				tiledGalleryBlock: true,
@@ -143,7 +138,6 @@ describe( 'Jetpack blocks', () => {
 		expect( console ).toHaveLoggedWith(
 			'Block jetpack/paywall registered.'
 		);
-		expect( console ).toHaveLoggedWith( 'Block jetpack/story registered.' );
 		expect( console ).toHaveLoggedWith(
 			'Block jetpack/tiled-gallery registered.'
 		);

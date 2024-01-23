@@ -63,7 +63,6 @@ describe( 'Gutenberg Mobile initialization', () => {
 		jest.unmock( '@wordpress/react-native-editor/src/setup' );
 
 		const capabilities = {
-			mediaFilesCollectionBlock: true,
 			contactInfoBlock: true,
 			facebookEmbed: true,
 			instagramEmbed: true,
