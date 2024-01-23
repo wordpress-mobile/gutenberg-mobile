@@ -488,7 +488,7 @@ DEPENDENCIES:
   - RNScreens (from `../third-party-podspecs/RNScreens.podspec.json`)
   - RNSVG (from `../third-party-podspecs/RNSVG.podspec.json`)
   - RNTAztecView (from `../gutenberg/packages/react-native-aztec`)
-  - WordPress-Aztec-iOS (from `https://github.com/wordpress-mobile/WordPress-Aztec-iOS.git`, commit `87123879b35a681eca6e32187e06eefae36a9ec9`)
+  - WordPress-Aztec-iOS (from `https://github.com/wordpress-mobile/WordPress-Aztec-iOS.git`, commit `a41d881f6a831fecef9e6400e69a64aafe80d9ac`)
   - Yoga (from `../gutenberg/node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -600,7 +600,7 @@ EXTERNAL SOURCES:
   RNTAztecView:
     :path: "../gutenberg/packages/react-native-aztec"
   WordPress-Aztec-iOS:
-    :commit: 87123879b35a681eca6e32187e06eefae36a9ec9
+    :commit: a41d881f6a831fecef9e6400e69a64aafe80d9ac
     :git: https://github.com/wordpress-mobile/WordPress-Aztec-iOS.git
   Yoga:
     :path: "../gutenberg/node_modules/react-native/ReactCommon/yoga"
@@ -610,7 +610,7 @@ CHECKOUT OPTIONS:
     :commit: 310ff71ea469f7cf8458d1dd7c3b1988a3d2e802
     :git: https://github.com/wordpress-mobile/react-native-reanimated
   WordPress-Aztec-iOS:
-    :commit: 87123879b35a681eca6e32187e06eefae36a9ec9
+    :commit: a41d881f6a831fecef9e6400e69a64aafe80d9ac
     :git: https://github.com/wordpress-mobile/WordPress-Aztec-iOS.git
 
 SPEC CHECKSUMS:
@@ -671,6 +671,6 @@ SPEC CHECKSUMS:
   WordPress-Aztec-iOS: fbebd569c61baa252b3f5058c0a2a9a6ada686bb
   Yoga: f7decafdc5e8c125e6fa0da38a687e35238420fa
 
-PODFILE CHECKSUM: a941d93d83a99578163e1abe50c47ede1c7780b5
+PODFILE CHECKSUM: da94b0de8337f91fe2293f073b6cb2528b9f1398
 
 COCOAPODS: 1.13.0
