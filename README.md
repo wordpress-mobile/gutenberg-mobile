@@ -1,8 +1,8 @@
 # Mobile Gutenberg
 
-This repository represents the mobile version of the WordPress [Gutenberg](https://github.com/WordPress/gutenberg) project, targeting Android and iOS platforms using React Native.
+This repository represents the mobile version of the WordPress [`gutenberg`](https://github.com/WordPress/gutenberg) project, targeting Android and iOS platforms using React Native.
 
-![Screenshot of the Mobile Gutenberg Editor, editing a post in WordPress](https://github.com/wordpress-mobile/gutenberg-mobile/assets/643285/db32a1b1-e149-4aab-aa81-01392f974aef)
+![Screenshot of the mobile Gutenberg editor, editing a post in WordPress](https://github.com/wordpress-mobile/gutenberg-mobile/assets/643285/db32a1b1-e149-4aab-aa81-01392f974aef)
 
 ## Getting Started
 
@@ -18,7 +18,7 @@ For a developer experience closer to the one the project maintainers currently h
 -   CocoaPods (`sudo gem install cocoapods`) needed to fetch React and third-party dependencies.
 -   [Carthage](https://github.com/Carthage/Carthage#installing-carthage) for Appium to be able run iOS UI tests
 
-Depending on your setup, there may be a few configurations needed in Android Studio and Xcode. Please refer to [React Native's documentation](https://reactnative.dev/docs/environment-setup) for the latest requirements for each development environment.
+Depending on your setup, there may be a few configurations needed in Android Studio and Xcode. Please refer to [React Native's documentation](https://reactnative.dev/docs/environment-setup?guide=native) for the latest requirements for each development environment.
 
 Note that the OS platform used by the maintainers is macOS but the tools and setup should be usable in other platforms too.
 
@@ -93,7 +93,7 @@ Some times, and especially when tweaking anything in the `package.json`, Babel c
 
 ## Developing with Visual Studio Code
 
-Although you're not required to use Visual Studio Code for developing gutenberg-mobile, it is the recommended IDE and we have some configuration for it.
+Although you're not required to use Visual Studio Code for developing `gutenberg-mobile`, it is the recommended IDE and we have some configuration for it.
 
 When you first open the project in Visual Studio, you will be prompted to install some recommended extensions. This will help with some things like type checking and debugging.
 
@@ -125,11 +125,11 @@ This project is set up to use [jest](https://facebook.github.io/jest/) for tests
 
 ## End-to-End Tests
 
-This repository extends the end-to-end (E2E) tests found in the Mobile Gutenberg (MG) [project repository](https://github.com/WordPress/gutenberg). The majority of E2E tests should reside in the MG repository. However, experimental tests or non-core-related tests should be placed in the `gutenberg-mobile` repository.
+This repository extends the end-to-end (E2E) tests found in the [`gutenberg` project repository](https://github.com/WordPress/gutenberg). The majority of E2E tests reside in the `gutenberg-mobile` repository due to technical challenges, such as long runtime durations and instability. Additionally, experimental tests or non-core-related tests should be placed in the `gutenberg-mobile` repository.
 
-Reviewing the MG E2E test [documentation](https://github.com/WordPress/gutenberg/tree/trunk/packages/react-native-editor/__device-tests__#readme) is the best approach for understanding the test environment and how to set up your computer to run tests. Much of the information and approaches outlined there also apply to the tests found in this repository. The only difference being that this repository includes its own matching npm scripts to run the test, e.g. `npm run test:e2e:ios:local`.
+Reviewing the [`gutenberg` E2E test documentation](https://github.com/WordPress/gutenberg/tree/trunk/packages/react-native-editor/__device-tests__#readme) is the best approach for understanding the test environment and how to set up your computer to run tests. Much of the information and approaches outlined there also apply to the tests found in this repository. The only difference being that this repository includes its own matching npm scripts to run the test, e.g. `npm run test:e2e:ios:local`.
 
-After reviewing the MG E2E test documentation, the following examples showcase running the E2E tests found in this repository using the repositories scripts.
+After reviewing the `gutenberg` E2E test documentation, the following examples showcase running the E2E tests found in this repository using the repositories scripts.
 
 ```shell
 # Setup the E2E environment
@@ -144,7 +144,7 @@ npm run test:e2e:android:local -- --watch
 
 ## Static analysis and code style
 
-The project includes a linter (`eslint`) to perform codestyle and static analysis of the code. The configuration used is the same as [the one in the Gutenberg project](https://github.com/WordPress/gutenberg/blob/HEAD/packages/eslint-plugin/README.md). To perform the check, run:
+The project includes a linter (`eslint`) to perform codestyle and static analysis of the code. The configuration used is the same as [the one in the `gutenberg` project](https://github.com/WordPress/gutenberg/blob/HEAD/packages/eslint-plugin/README.md). To perform the check, run:
 
 ```
 npm run lint
@@ -156,7 +156,7 @@ You might want to use Visual Studio Code as an editor. The project includes the 
 
 ## Internationalization (i18n)
 
-The support for i18n in the project is provided by three main areas for the different plugins included in Gutenberg Mobile:
+The support for i18n in the project is provided by three main areas for the different plugins included in `gutenberg-mobile`:
 
 1. Translations files download
 2. Locale setup
@@ -261,4 +261,4 @@ This can be produced by several causes, check the following steps in order to id
 
 ## License
 
-Gutenberg Mobile is an Open Source project covered by the [GNU General Public License version 2](LICENSE).
+`gutenberg-mobile` is an Open Source project covered by the [GNU General Public License version 2](LICENSE).

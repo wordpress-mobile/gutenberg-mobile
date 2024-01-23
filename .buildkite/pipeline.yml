@@ -7,6 +7,8 @@ x-common-params:
         # Allow WP-CLI to be run as root, otherwise it throws an exception.
         # Reference: https://git.io/J9q2S
         - 'WP_CLI_ALLOW_ROOT=true'
+        # Increase max available memory for node
+        - 'NODE_OPTIONS="--max-old-space-size=4096"'
   - &git-cache-plugin
     automattic/git-s3-cache#1.1.4:
       # Ensure these settings match what's defined in cache-builder.yml
@@ -28,7 +30,7 @@ x-common-params:
   - &ci_toolkit_plugin
     automattic/a8c-ci-toolkit#2.18.2
   - &xcode_agent_env
-    IMAGE_ID: xcode-15.1
+    IMAGE_ID: xcode-15.0.1
   - &is_branch_for_full_ui_tests
     build.branch == 'trunk' || build.branch =~ /^release.*/ || build.branch =~ /^dependabot\/submodules.*/
   - &is_branch_for_quick_ui_tests
@@ -38,16 +40,11 @@ steps:
   - label: Lint
     key: lint
     plugins:
-      - *gb-mobile-docker-container
+      - *nvm_plugin
       - *git-cache-plugin
-    command: |
-      echo "--- :docker: Additional Docker image setup"
-      source /root/.bashrc
-
-      echo "--- :docker::node: Setup Node environment"
-      nvm install && nvm use
-
-      .buildkite/commands/lint.sh
+    agents:
+      queue: android
+    command: .buildkite/commands/lint.sh
     notify:
       - github_commit_status:
           context: Lint
@@ -55,16 +52,11 @@ steps:
   - label: Android Unit Tests
     key: android-unit-tests
     plugins:
-      - *gb-mobile-docker-container
+      - *nvm_plugin
       - *ci_toolkit_plugin
-    command: |
-      echo "--- :docker: Additional Docker image setup"
-      source /root/.bashrc
-
-      echo "--- :docker::node: Setup Node environment"
-      nvm install && nvm use
-
-      .buildkite/commands/unit-tests-android.sh
+    agents:
+      queue: android
+    command: .buildkite/commands/unit-tests-android.sh
     env:
       JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
     artifact_paths:
@@ -77,16 +69,13 @@ steps:
   - label: iOS Unit Tests
     key: ios-unit-tests
     plugins:
-      - *gb-mobile-docker-container
+      - *nvm_plugin
       - *ci_toolkit_plugin
-    command: |
-      echo "--- :docker: Additional Docker image setup"
-      source /root/.bashrc
-
-      echo "--- :docker::node: Setup Node environment"
-      nvm install && nvm use
-
-      .buildkite/commands/unit-tests-ios.sh
+    agents:
+      queue: android
+    command: .buildkite/commands/unit-tests-ios.sh
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/ios-test-results.xml
     artifact_paths:
       - ./logs/*.log
       - ./reports/test-results/*.xml
@@ -94,21 +83,41 @@ steps:
       - github_commit_status:
           context: iOS Unit Tests
 
-  - label: "Build JS Bundles"
+  - label: React Native Editor Android Tests
+    key: android-unit-tests-editor
+    command: |
+      npm ci --prefix gutenberg --prefer-offline --no-audit --no-progress --ignore-scripts
+      cd gutenberg/packages/react-native-editor/android
+      ./gradlew testDebug
+    plugins:
+      - *git-cache-plugin
+      - *nvm_plugin
+    agents:
+      queue: android
+
+  - label: React Native Bridge Android Tests
+    key: android-unit-tests-bridge
+    command: |
+      npm ci --prefix gutenberg --prefer-offline --no-audit --no-progress --ignore-scripts
+      cd gutenberg/packages/react-native-bridge/android
+      ./gradlew test
+    plugins:
+      - *git-cache-plugin
+      - *nvm_plugin
+    agents:
+      queue: android
+
+  - label: Build JS Bundles
     depends_on:
       - lint
       - android-unit-tests
       - ios-unit-tests
-    key: "js-bundles"
+    key: js-bundles
     plugins:
-      - *gb-mobile-docker-container
+      - *ci_toolkit_plugin # unused?
+      - *nvm_plugin
       - *git-cache-plugin
     command: |
-        source /root/.bashrc
-
-        echo "--- :node: Setup Node environment"
-        nvm install && nvm use
-
         echo "--- :npm: Install Node dependencies"
         npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
@@ -209,6 +218,38 @@ steps:
       - github_commit_status:
           context: Test iOS on Device - Canaries
 
+  - label: Android Build and Sauce Labs
+    key: android-build-and-saucelabs
+    depends_on:
+      - lint
+      - android-unit-tests
+      - android-unit-tests-editor
+      - android-unit-tests-bridge
+    command: .buildkite/commands/build-android.sh
+    plugins:
+      - *ci_toolkit_plugin
+      - *git-cache-plugin
+      - *nvm_plugin
+    agents:
+      queue: android
+
+  - label: Test Android on Device – Canary Pages
+    depends_on: android-build-and-saucelabs
+    command: .buildkite/commands/test-android.sh --canary
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+      - *git-cache-plugin
+    agents:
+      queue: android
+    artifact_paths:
+      - reports/test-results/android-test-results.xml
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
+    notify:
+      - github_commit_status:
+          context: Test Android on Device - Canaries
+
   - block: "Full UI Tests"
     # Show only in branches that run the quick UI tests suite, to optionally run the full suite
     if: *is_branch_for_quick_ui_tests
@@ -282,3 +323,38 @@ steps:
     agents:
       queue: mac
     env: *xcode_agent_env
+
+  - label: Test Android on Device – Full
+    # The quick UI tests suite version depends on the block step being unblocked
+    if: *is_branch_for_quick_ui_tests
+    depends_on:
+      - android-build-and-saucelabs
+      - run-full-ui-test
+    command: .buildkite/commands/test-android.sh
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+      - *git-cache-plugin
+    agents:
+      queue: android
+    artifact_paths:
+      - reports/test-results/android-test-results.xml
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
+
+  - label: Test Android on Device – Full
+    # The full UI tests suite version depends only on the android-build-and-suacelabs step, meaning it has no manual step that triggers it
+    if: *is_branch_for_full_ui_tests
+    depends_on:
+      - android-build-and-saucelabs
+    command: .buildkite/commands/test-android.sh
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+      - *git-cache-plugin
+    agents:
+      queue: android
+    artifact_paths:
+      - reports/test-results/android-test-results.xml
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
