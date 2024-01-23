@@ -392,7 +392,8 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			await editorPage.typeKeyString( 'Hey ' );
 
 			screenshot = await takeScreenshotByElement(
-				await toolbar.$( '~Text color' )
+				await toolbar.$( '~Text color' ),
+				{ padding: -5 }
 			);
 			expect( screenshot ).toMatchImageSnapshot();
 
@@ -401,7 +402,8 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			await editorPage.typeKeyString( 'there ' );
 
 			screenshot = await takeScreenshotByElement(
-				await toolbar.$( '~Text color' )
+				await toolbar.$( '~Text color' ),
+				{ padding: -5 }
 			);
 			expect( screenshot ).toMatchImageSnapshot();
 
@@ -410,9 +412,15 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			await editorPage.typeKeyString( 'how are you?' );
 
 			screenshot = await takeScreenshotByElement(
-				await toolbar.$( '~Text color' )
+				await toolbar.$( '~Text color' ),
+				{ padding: -5 }
 			);
 			expect( screenshot ).toMatchImageSnapshot();
+
+			await editorPage.dismissKeyboard();
+			await editorPage.driver.waitUntil( async function () {
+				return ! ( await editorPage.driver.isKeyboardShown() );
+			} );
 
 			let paragraphBlockElement = await editorPage.getTextBlockAtPosition(
 				blockNames.paragraph
@@ -442,6 +450,11 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			await editorPage.toggleHighlightColor();
 
 			await editorPage.typeKeyString( ' No colored text.' );
+
+			await editorPage.dismissKeyboard();
+			await editorPage.driver.waitUntil( async function () {
+				return ! ( await editorPage.driver.isKeyboardShown() );
+			} );
 
 			screenshot = await takeScreenshotByElement( paragraphBlockElement );
 			expect( screenshot ).toMatchImageSnapshot();
