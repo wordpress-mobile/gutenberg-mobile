@@ -117,6 +117,8 @@ steps:
       - *ci_toolkit_plugin # unused?
       - *nvm_plugin
       - *git-cache-plugin
+    env:
+      NODE_OPTIONS: "--max-old-space-size=4096"
     command: |
         echo "--- :npm: Install Node dependencies"
         npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
