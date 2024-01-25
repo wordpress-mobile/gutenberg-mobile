@@ -27,9 +27,6 @@ const supportedJetpackBlocks = {
 	paywall: {
 		available: true,
 	},
-	story: {
-		available: true,
-	},
 	'tiled-gallery': {
 		available: __DEV__,
 	},
@@ -79,10 +76,6 @@ export function registerJetpackBlocks( { capabilities } ) {
 		return;
 	}
 
-	hideBlockByCapability(
-		capabilities.mediaFilesCollectionBlock,
-		'jetpack/story'
-	);
 	hideBlockByCapability(
 		capabilities.contactInfoBlock,
 		'jetpack/contact-info'
