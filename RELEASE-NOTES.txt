@@ -4,7 +4,7 @@ Unreleased
 1.111.2
 ---
 * [*] [internal] Remove `mediaFilesCollectionBlock` initial prop [https://github.com/WordPress/gutenberg/pull/58140]
-* [**] Disable Story block [https://github.com/Automattic/jetpack/pull/35202]
+* [**] Remove Story block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6568]
 
 1.111.1
 ---
