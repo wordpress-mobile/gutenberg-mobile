@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [**] Remove Story block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6568]
 
 1.111.1
 ---
