@@ -1,6 +1,10 @@
 Unreleased
 ---
 
+1.111.2
+---
+*   [*] [internal] Remove `mediaFilesCollectionBlock` initial prop [https://github.com/WordPress/gutenberg/pull/58140]
+
 1.111.1
 ---
 * [**] Fix crash when RichText values are not defined [https://github.com/WordPress/gutenberg/pull/58088]
