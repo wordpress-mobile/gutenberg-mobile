@@ -21,7 +21,7 @@ done
 
 echo '--- :node: Set up Node dependencies'
 npm ci --prefer-offline --no-audit --ignore-scripts
-npm ci --prefix gutenberg --prefer-offline --no-audit
+npm ci --prefix gutenberg --prefer-offline --no-audit --ignore-scripts
 
 echo '--- :ios: Set env var for iOS E2E testing'
 set -x
