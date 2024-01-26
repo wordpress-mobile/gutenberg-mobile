@@ -126,6 +126,8 @@ steps:
         echo "--- :node: Set up Node environment"
         nvm install && nvm use
 
+        node -e 'console.log("Heap size limit:",v8.getHeapStatistics().heap_size_limit/(1024*1024))'
+
         echo "--- :npm: Install Node dependencies"
         npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
