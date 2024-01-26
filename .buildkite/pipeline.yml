@@ -1,4 +1,14 @@
 x-common-params:
+  - &gb-mobile-docker-container
+    docker#v3.8.0:
+      image: 'public.ecr.aws/automattic/gb-mobile-image:latest'
+      environment:
+        - 'CI=true'
+        # Allow WP-CLI to be run as root, otherwise it throws an exception.
+        # Reference: https://git.io/J9q2S
+        - 'WP_CLI_ALLOW_ROOT=true'
+        # Increase max available memory for node
+        - 'NODE_OPTIONS="--max-old-space-size=4096"'
   - &git-cache-plugin
     automattic/git-s3-cache#1.1.4:
       # Ensure these settings match what's defined in cache-builder.yml
@@ -100,12 +110,18 @@ steps:
   - label: Build JS Bundles
     key: js-bundles
     plugins:
-      - *ci_toolkit_plugin # unused?
-      - *nvm_plugin
+      # The following plugins are disabled temporarily until PHP is available.
+      # In the meantime, we'll keep using the GB-mobile docker container.
+      - *gb-mobile-docker-container
+      # - *ci_toolkit_plugin # unused?
+      # - *nvm_plugin
       - *git-cache-plugin
-    env:
-      NODE_OPTIONS: "--max-old-space-size=4096"
     command: |
+        source /root/.bashrc
+        
+        echo "--- :node: Set up Node environment"
+        nvm install && nvm use
+
         echo "--- :npm: Install Node dependencies"
         npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
