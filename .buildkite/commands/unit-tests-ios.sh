@@ -1,8 +1,7 @@
 #!/bin/bash -eu
 
 echo "--- :npm: Install Node dependencies"
-npm ci --prefer-offline --no-audit --ignore-scripts
-npm ci --prefix gutenberg --prefer-offline --no-audit
+npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
 SECTION='--- :node: iOS Unit Tests'
 set +e
