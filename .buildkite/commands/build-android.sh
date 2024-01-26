@@ -13,6 +13,12 @@ set +x
 echo '--- :arrow_down: Download Android bundle'
 buildkite-agent artifact download bundle/android/App.js .
 
+# Copy the JavaScript bundle and all local static assets referenced within the
+# bundle to the appropriate locations for inclusion in the bridge bundle
+mkdir -p gutenberg/packages/react-native-bridge/android/react-native-bridge/build/assets
+cp ./bundle/android/App.js ./gutenberg/packages/react-native-bridge/android/react-native-bridge/build/assets/index.android.bundle
+cp -r ./bundle/android/drawable-* ./gutenberg/packages/react-native-bridge/android/react-native-bridge/src/main/res/
+
 echo '--- :react: Build Android app for E2E testing'
 npm run core test:e2e:build-app:android
 
