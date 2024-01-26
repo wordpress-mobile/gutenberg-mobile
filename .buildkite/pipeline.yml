@@ -110,8 +110,6 @@ steps:
     env:
       NODE_OPTIONS: "--max-old-space-size=4096"
     command: |
-        node -e 'console.log("Heap size limit:",v8.getHeapStatistics().heap_size_limit/(1024*1024))'
-
         echo "--- :npm: Install Node dependencies"
         npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
