@@ -120,8 +120,8 @@ steps:
           npm run prebundle:js
         fi
 
-        echo "--- :android: Build Android bundle"
-        npm run bundle:android
+        echo "--- :react: Generate bundles"
+        npm run bundle:all
 
         echo "--- :arrow_up: Upload Android bundle artifact"
         buildkite-agent artifact upload bundle/android/App.js
@@ -131,9 +131,6 @@ steps:
           node gutenberg/node_modules/react-native/scripts/compose-source-maps.js bundle/android/App.text.js.map bundle/android/App.js.map -o bundle/android/App.composed.js.map
           buildkite-agent artifact upload bundle/android/App.composed.js.map
         fi
-
-        echo "--- :ios: Build iOS bundle"
-        npm run bundle:ios
 
         echo "--- :arrow_up: Upload iOS bundle artifact"
         buildkite-agent artifact upload bundle/ios/App.js
