@@ -3,8 +3,9 @@
 echo '--- :desktop_computer: Clear up some disk space'
 rm -rfv ~/.Trash/15.1.xip
 
-echo '--- :node: Set up Node depenendencies'
-npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+echo '--- :node: Set up Node dependencies'
+npm ci --prefer-offline --no-audit --ignore-scripts
+npm ci --prefix gutenberg --prefer-offline --no-audit
 
 echo '--- :ios: Set env var for iOS E2E testing'
 set -x
@@ -16,8 +17,15 @@ export TEST_ENV=sauce
 export RN_EDITOR_E2E_IOS_DESTINATION="platform=iOS Simulator,name=iPhone 15"
 set +x
 
-echo '--- :react: Build iOS bundle for E2E testing'
-npm run test:e2e:bundle:ios
+echo '--- :arrow_down: Download iOS bundle'
+buildkite-agent artifact download bundle/ios/App.js .
+buildkite-agent artifact download ios-assets.tar.gz .
+
+APP_PATH="gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator/GutenbergDemo.app"
+
+mkdir -p "$APP_PATH"
+cp bundle/ios/App.js "$APP_PATH/main.jsbundle"
+tar -xzvf ios-assets.tar.gz -C "$APP_PATH/"
 
 echo '--- :react: Build iOS app for E2E testing'
 npm run core test:e2e:build-app:ios

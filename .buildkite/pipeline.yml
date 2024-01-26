@@ -176,6 +176,7 @@ steps:
     depends_on:
       - lint
       - ios-unit-tests
+      - js-bundles
     command: .buildkite/commands/build-ios.sh
     plugins:
       - *ci_toolkit_plugin
