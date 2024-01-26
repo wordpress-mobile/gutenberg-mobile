@@ -26,11 +26,7 @@ npm ci --prefix gutenberg --prefer-offline --no-audit --ignore-scripts
 echo '--- :ios: Set env var for iOS E2E testing'
 set -x
 export TEST_RN_PLATFORM=ios
-export TEST_ENV=sauce
 export JEST_JUNIT_OUTPUT_FILE="reports/test-results/ios-test-results.xml"
-# This is a relic of the CircleCI setup.
-# It should be removed once the migration to Buildkite is completed.
-export CIRCLE_BRANCH=${BUILDKITE_BRANCH}
 set +x
 
 if [ "$MODE" == 'canary' ]; then
@@ -43,6 +39,17 @@ else
     SECTION='--- :saucelabs: Test iOS iPhone'
     TESTS_CMD='device-tests'
 fi
+
+echo "--- :react: Prepare tests setup"
+npm run core test:e2e:setup
+
+echo "--- 📦 Downloading Build Artifacts"
+export IOS_APP_PATH=./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
+download_artifact "GutenbergDemo.app.zip" "$IOS_APP_PATH"
+
+export WDA_PATH=./gutenberg/packages/react-native-editor/ios/build/WDA
+download_artifact "WDA.zip" "$WDA_PATH/WDA.zip"
+unzip "$WDA_PATH/WDA.zip" -d "$WDA_PATH"
 
 set +e
 echo "$SECTION"
