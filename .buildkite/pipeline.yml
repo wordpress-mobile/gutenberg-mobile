@@ -108,10 +108,10 @@ steps:
       queue: android
 
   - label: Build JS Bundles
-    depends_on:
-      - lint
-      - android-unit-tests
-      - ios-unit-tests
+    # depends_on:
+    #   - lint
+    #   - android-unit-tests
+    #   - ios-unit-tests
     key: js-bundles
     plugins:
       # The following plugins are disabled temporarily until PHP is available.
