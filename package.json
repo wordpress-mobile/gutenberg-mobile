@@ -24,7 +24,6 @@
 		"babel-plugin-react-native-classname-to-style": "^1.2.1",
 		"babel-plugin-react-native-platform-specific-extensions": "^1.1.1",
 		"babel-plugin-transform-remove-console": "6.9.4",
-		"concurrently": "8.2.2",
 		"cross-env": "^5.1.4",
 		"empty": "^0.10.1",
 		"enzyme": "^3.9.0",
@@ -60,7 +59,7 @@
 		"webdriverio": "8.16.20"
 	},
 	"scripts": {
-		"postinstall": "npm run clean:gutenberg:distclean && npm ci --prefix gutenberg && concurrently 'npm run i18n:check-cache' './bin/run-jetpack-command.sh \"install --ignore-scripts\"'",
+		"postinstall": "patch-package && npm run clean:gutenberg:distclean && npm ci --prefix gutenberg && npm run i18n:check-cache && ./bin/run-jetpack-command.sh \"install --ignore-scripts\"",
 		"start": "echo \"\\x1b[33mThe start command is not available in this project. It is strongly recommended to use \\x1b[1:33mstart:reset\\x1b[0m\\x1b[33m to perform some cleanup when starting the metro bundler.\nOr you may use \\x1b[1:33mstart:quick\\x1b[0m\\x1b[33m for a quicker startup, but this may lead to unexpected javascript errors when running the app.\\x1b[0m\"",
 		"start:reset": "npm run core clean:runtime && npm run start:quick -- --reset-cache",
 		"start:quick": "react-native start --config ./metro.config.js",
@@ -78,7 +77,7 @@
 		"bundle:ios": "npm run bundle:ios:text && npm run bundle:ios:bytecode",
 		"bundle:ios:text": "mkdir -p bundle/ios && npm run rn-bundle -- --platform ios --dev false --entry-file ./index.js --assets-dest ./ios-xcframework/Gutenberg/Resources --bundle-output ./bundle/ios/App.text.js --sourcemap-output ./bundle/ios/App.text.js.map",
 		"bundle:ios:bytecode": "./gutenberg/node_modules/react-native/sdks/hermesc/`node -e \"const platform=require('os').platform();console.log(platform === 'darwin' ? 'osx-bin' : (platform === 'linux' ? 'linux64-bin' : (platform === 'win32' ? 'win64-bin' : 'unsupported-os')));\"`/hermesc -emit-binary -O -out bundle/ios/App.js bundle/ios/App.text.js -output-source-map",
-		"bundle:all": "concurrently 'npm run bundle:android' 'npm run bundle:ios'",
+		"bundle:all": "npm run bundle:android & npm run bundle:ios",
 		"prewpandroid": "rm -Rf $TMPDIR/gbmobile-wpandroidfakernroot && mkdir $TMPDIR/gbmobile-wpandroidfakernroot && ln -s $(cd \"$(dirname \"../../../\")\"; pwd) $TMPDIR/gbmobile-wpandroidfakernroot/android",
 		"wpandroid": "cd gutenberg && react-native run-android --root $TMPDIR/gbmobile-wpandroidfakernroot --variant wasabiDebug --appIdSuffix beta --appFolder WordPress --main-activity=ui.WPLaunchActivity",
 		"test": "cross-env NODE_ENV=test jest --config ./jest.config.js",
