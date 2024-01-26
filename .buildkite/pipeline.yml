@@ -108,10 +108,10 @@ steps:
       queue: android
 
   - label: Build JS Bundles
-    # depends_on:
-    #   - lint
-    #   - android-unit-tests
-    #   - ios-unit-tests
+    depends_on:
+      - lint
+      - android-unit-tests
+      - ios-unit-tests
     key: js-bundles
     plugins:
       # The following plugins are disabled temporarily until PHP is available.
@@ -126,13 +126,15 @@ steps:
         echo "--- :node: Set up Node environment"
         nvm install && nvm use
 
-        node -e 'console.log("Heap size limit:",v8.getHeapStatistics().heap_size_limit/(1024*1024))'
-
         echo "--- :npm: Install Node dependencies"
         npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
-        echo "--- :package: Run bundle prep work"
-        npm run prebundle:js
+        if [[ -z "$BUILDKITE_TAG" ]]; then
+          echo "--- :package: Skip bundle prep work"
+        else
+          echo "--- :package: Run bundle prep work"
+          npm run prebundle:js
+        fi
 
         echo "--- :android: Build Android bundle"
         npm run bundle:android
