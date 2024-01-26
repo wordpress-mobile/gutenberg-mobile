@@ -1,6 +1,6 @@
 Unreleased
 ---
-* [**] Fix crash occuring on large post on Android [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6575]
+* [**] Fix crash occurring on large post on Android [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6575]
 
 1.111.1
 ---
