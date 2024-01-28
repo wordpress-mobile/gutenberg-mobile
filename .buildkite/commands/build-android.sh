@@ -1,7 +1,8 @@
 #!/bin/bash -eu
 
 echo "--- :npm: Set up Node dependencies"
-npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+npm ci --prefer-offline --no-audit --ignore-scripts
+npm ci --prefix gutenberg --prefer-offline --no-audit --ignore-scripts
 
 echo '--- :android: Set env var for Android E2E testing'
 set -x
@@ -9,8 +10,14 @@ export TEST_RN_PLATFORM=android
 export TEST_ENV=sauce
 set +x
 
-echo '--- :react: Build Android bundle for E2E testing'
-npm run test:e2e:bundle:android
+echo '--- :arrow_down: Download Android bundle'
+buildkite-agent artifact download bundle/android/App.js .
+
+# Copy the JavaScript bundle and all local static assets referenced within the
+# bundle to the appropriate locations for inclusion in the bridge bundle
+mkdir -p gutenberg/packages/react-native-bridge/android/react-native-bridge/build/assets
+cp ./bundle/android/App.js ./gutenberg/packages/react-native-bridge/android/react-native-bridge/build/assets/index.android.bundle
+cp -r ./bundle/android/drawable-* ./gutenberg/packages/react-native-bridge/android/react-native-bridge/src/main/res/
 
 echo '--- :react: Build Android app for E2E testing'
 npm run core test:e2e:build-app:android
