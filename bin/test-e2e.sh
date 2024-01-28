@@ -15,7 +15,7 @@ export ANDROID_APP_PATH
 export APPIUM_HOME=~/.appium
 export NODE_ENV=test
 
-if [ -z "$TEST_RN_PLATFORM" ] || [ "$TEST_RN_PLATFORM" == "android" ]; then
+if [ "$TEST_RN_PLATFORM" == "android" ]; then
     MAX_WORKERS=2
 else
     MAX_WORKERS=1
@@ -26,5 +26,5 @@ if [ "$1" == "--debug" ]; then
     shift # Remove first argument
     node $NODE_DEBUG_OPTION --inspect-brk node_modules/jest/bin/jest --runInBand --detectOpenHandles --verbose --config jest_ui.config.js "$@"
 else
-    cross-env jest --config ./jest_ui.config.js --maxWorkers 1 --forceExit "$@"
+    jest --config ./jest_ui.config.js --maxWorkers $MAX_WORKERS --forceExit "$@"
 fi
