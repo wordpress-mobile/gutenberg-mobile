@@ -57,7 +57,6 @@ export JEST_JUNIT_OUTPUT_FILE="reports/test-results/ios-test-results.xml"
 set +x
 
 echo "--- :react: Prepare tests setup"
-npm run core appium:start &
 npm run core test:e2e:setup
 
 set +e
