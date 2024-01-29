@@ -124,9 +124,6 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 				buttonBlockTextInput
 			);
 
-			// Wait for text context menu animation
-			await editorPage.driver.pause( 500 );
-
 			// Visual test check
 			const screenshot = await takeScreenshotByElement(
 				buttonBlockTextInput,

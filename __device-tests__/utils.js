@@ -113,7 +113,7 @@ export async function takeScreenshot( { withoutKeyboard, crop } = {} ) {
 
 	const orientation = await editorPage.driver.getOrientation();
 	const isPortrait = orientation === 'PORTRAIT';
-	const statusBarHeightIPhone = isPortrait ? 94 : 0;
+	const statusBarHeightIPhone = isPortrait ? 118 : 0;
 	const statusBarHeightIOS = iPadDevice ? 48 : statusBarHeightIPhone;
 	const statusBarHeight = isAndroid() ? 100 : statusBarHeightIOS;
 	const screenshot = await editorPage.driver.takeScreenshot();
