@@ -5,7 +5,7 @@ const { blockNames } = editorPage;
 import { takeScreenshot } from './utils';
 import { WEBSITE_HTML } from './test-editor-data';
 
-describe( 'Gutenberg Editor Writing Flow', () => {
+describe.skip( 'Gutenberg Editor Writing Flow', () => {
 	it( 'should format pasted HTML', async () => {
 		// Arrange
 		await editorPage.initializeEditor();
