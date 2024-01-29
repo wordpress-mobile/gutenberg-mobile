@@ -33,6 +33,10 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			await titleElement.click();
 			await editorPage.dismissKeyboard();
 
+			await editorPage.driver.waitUntil( async function () {
+				return ! ( await editorPage.driver.isKeyboardShown() );
+			} );
+
 			// Visual test check for portrait orientation
 			let screenshot = await takeScreenshot();
 			expect( screenshot ).toMatchImageSnapshot();
