@@ -213,6 +213,7 @@ steps:
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
+      - ios-screen-recordings/*
     agents:
       queue: mac
     env: *xcode_agent_env
@@ -290,6 +291,7 @@ steps:
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
+      - ios-screen-recordings/*
     agents:
       queue: mac
     env: *xcode_agent_env
@@ -307,6 +309,7 @@ steps:
       - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
+      - ios-screen-recordings/*
     agents:
       queue: mac
     env: *xcode_agent_env
