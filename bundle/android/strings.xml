@@ -33,7 +33,6 @@
     <string name="gutenberg_native_add_url" tools:ignore="UnusedResources">Add URL</string>
     <string name="gutenberg_native_add_video" tools:ignore="UnusedResources">Add video</string>
     <string name="gutenberg_native_address_settings" tools:ignore="UnusedResources">Address Settings</string>
-    <string name="gutenberg_native_alt_text" tools:ignore="UnusedResources">Alt Text</string>
     <string name="gutenberg_native_alternatively_you_can_convert_the_content_to_blocks" tools:ignore="UnusedResources">Alternatively, you can convert the content to blocks.</string>
     <string name="gutenberg_native_alternatively_you_can_detach_and_edit_this_block_separately_by_ta" tools:ignore="UnusedResources">Alternatively, you can detach and edit this block separately by tapping “Detach”.</string>
     <!-- translators: Alternative option included in a warning related to having blocks deeply nested. -->
@@ -394,6 +393,7 @@ translators: %s: Select control option value e.g: "Auto, 25%". -->
     <string name="gutenberg_native_video_caption_empty" tools:ignore="UnusedResources">Video caption. Empty</string>
     <!-- translators: accessibility text. %s: video caption. -->
     <string name="gutenberg_native_video_caption_s" tools:ignore="UnusedResources">Video caption. %s</string>
+    <string name="gutenberg_native_waiting_for_connection" tools:ignore="UnusedResources">Waiting for connection</string>
     <string name="gutenberg_native_warning_message" tools:ignore="UnusedResources">Warning message</string>
     <string name="gutenberg_native_we_are_working_hard_to_add_more_blocks_with_each_release" tools:ignore="UnusedResources">We are working hard to add more blocks with each release.</string>
     <!-- translators: %s: embed block variant's label e.g: "Twitter". -->

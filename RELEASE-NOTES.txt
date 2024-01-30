@@ -1,6 +1,25 @@
 Unreleased
 ---
+
+1.111.2
+---
+* [*] [internal] Remove `mediaFilesCollectionBlock` initial prop [https://github.com/WordPress/gutenberg/pull/58140]
+* [**] Remove Story block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6568]
+
+1.111.1
+---
+* [**] Fix crash when RichText values are not defined [https://github.com/WordPress/gutenberg/pull/58088]
+* [**] Video block: Fix logic for displaying empty state based on source presence [https://github.com/WordPress/gutenberg/pull/58015]
+
+1.111.0
+---
+* [**] Image block media uploads display a custom error message when there is no internet connection [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6491]
+* [*] Fix missing custom color indicator for custom gradients [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6512]
 * [**] Display a notice when a network connection unavailable [https://github.com/WordPress/gutenberg/pull/56934]
+
+1.110.1
+---
+* [**] Fix crash when RichText values are not defined [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6563]
 
 1.110.0
 ---
@@ -10,7 +29,6 @@ Unreleased
 * [***] Avoid keyboard dismiss when interacting with text blocks [https://github.com/WordPress/gutenberg/pull/57070]
 * [**] Auto-scroll upon block insertion [https://github.com/WordPress/gutenberg/pull/57273]
 * [*] Unselect blocks using the hardware back button (Android) [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6483]
-* [**] Image block media uploads display a custom error message when there is no internet connection [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6491]
 
 1.109.3
 ---
