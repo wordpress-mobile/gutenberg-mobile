@@ -1,5 +1,6 @@
 Unreleased
 ---
+* [*] [internal] Upgrade React Native to version 0.71.15 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6522]
 
 1.111.2
 ---

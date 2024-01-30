@@ -1,6 +1,6 @@
 {
   "name": "React-jsc",
-  "version": "0.71.11",
+  "version": "0.71.15",
   "summary": "JavaScriptCore engine for React Native",
   "homepage": "https://reactnative.dev/",
   "license": "MIT",
@@ -10,14 +10,14 @@
   },
   "source": {
     "git": "https://github.com/facebook/react-native.git",
-    "tag": "v0.71.11"
+    "tag": "v0.71.15"
   },
   "source_files": "JSCRuntime.{cpp,h}",
   "exclude_files": "**/test/*",
   "frameworks": "JavaScriptCore",
   "dependencies": {
     "React-jsi": [
-      "0.71.11"
+      "0.71.15"
     ]
   },
   "subspecs": [
