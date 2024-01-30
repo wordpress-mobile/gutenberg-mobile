@@ -1,6 +1,12 @@
 Unreleased
 ---
 * [**] Fix crash occurring on large post on Android [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6575]
+* [*] [internal] Upgrade React Native to version 0.71.15 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6522]
+
+1.111.2
+---
+* [*] [internal] Remove `mediaFilesCollectionBlock` initial prop [https://github.com/WordPress/gutenberg/pull/58140]
+* [**] Remove Story block [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6568]
 
 1.111.1
 ---
