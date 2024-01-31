@@ -68,11 +68,21 @@ use_react_native! path: REACT_NATIVE_PATH, hermes_enabled: HERMES_ENABLED
 
 target 'Gutenberg' do
   pod 'RNTAztecView', path: File.join(GUTENBERG_PATH, 'packages', 'react-native-aztec')
+  # When using a tagged version, leave the WordPress-Aztec-iOS line commented out below.
+  # When using a commit number (to create an installable build) add the hash to the commit parameter.
+  # After changing, remember to run `bundle exec pod install` in this directory to update the Podfile.lock.
+  # pod 'WordPress-Aztec-iOS', git: 'https://github.com/wordpress-mobile/WordPress-Aztec-iOS.git', commit: ''
   gutenberg_dependencies
 end
 
 post_install do |installer|
   react_native_post_install(installer, REACT_NATIVE_PATH)
+
+  # The following workaround is needed to avoid the error `typedef redefinition with different types ('uint8_t' (aka 'unsigned char') vs 'enum clockid_t')`.
+  # This solution is referenced in https://github.com/facebook/react-native/issues/39568#issuecomment-1762890606.
+  # It will be needed until RCT-Folly version is bumped in React Native to version v2022.08.29.00 or above.
+  # Referece: https://github.com/facebook/folly/commit/4a2410fae65afb85e1fec6d922005054b05de59f
+  __apply_Xcode_12_5_M1_post_install_workaround(installer)
 
   installer.pods_project.targets.each do |target|
     # Work around issue with embedding the Hermes XCFramework

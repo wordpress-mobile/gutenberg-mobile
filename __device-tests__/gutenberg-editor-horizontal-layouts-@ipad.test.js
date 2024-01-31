@@ -32,7 +32,9 @@ describe( 'Gutenberg Editor iPad Visual test for Horizontal layouts', () => {
 		// Wait for the device to finish rotating
 		await editorPage.driver.pause( 3000 );
 
-		// Scroll to an arbitary position partially through the content
+		// Scroll to the bottom of the content
+		await swipeUp( editorPage.driver );
+		await swipeUp( editorPage.driver );
 		await swipeUp( editorPage.driver );
 
 		// Wait for the scrollbar to hide
@@ -71,7 +73,8 @@ describe( 'Gutenberg Editor iPad Visual test for Horizontal layouts', () => {
 		// Wait for the device to finish rotating
 		await editorPage.driver.pause( 3000 );
 
-		// Scroll to an arbitary position partially through the content
+		// Scroll to the bottom of the content
+		await swipeUp( editorPage.driver );
 		await swipeUp( editorPage.driver );
 
 		// Wait for the scrollbar to hide
