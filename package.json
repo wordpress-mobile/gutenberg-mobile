@@ -13,6 +13,7 @@
 	"devDependencies": {
 		"@babel/core": "^7.20.0",
 		"@babel/runtime": "^7.20.0",
+		"@react-native/babel-preset": "0.73.10",
 		"@react-native-community/cli": "^12.1.1",
 		"@typescript-eslint/eslint-plugin": "^6.4.1",
 		"@wordpress/babel-preset-default": "file:gutenberg/packages/babel-preset-default",
@@ -45,7 +46,6 @@
 		"jest-junit": "^13.0.0",
 		"jest-watch-typeahead": "2.2.2",
 		"jimp": "^0.22.1",
-		"metro-react-native-babel-preset": "^0.73.10",
 		"metro-resolver": "^0.80.0",
 		"node-fetch": "^2.3.0",
 		"patch-package": "^6.2.2",
