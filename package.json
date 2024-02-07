@@ -13,8 +13,8 @@
 	"devDependencies": {
 		"@babel/core": "^7.20.0",
 		"@babel/runtime": "^7.20.0",
-		"@react-native/babel-preset": "0.73.10",
 		"@react-native-community/cli": "^12.1.1",
+		"@react-native/babel-preset": "0.73.10",
 		"@typescript-eslint/eslint-plugin": "^6.4.1",
 		"@wordpress/babel-preset-default": "file:gutenberg/packages/babel-preset-default",
 		"@wordpress/eslint-plugin": "file:gutenberg/packages/eslint-plugin",
@@ -50,6 +50,7 @@
 		"node-fetch": "^2.3.0",
 		"patch-package": "^6.2.2",
 		"prettier": "npm:wp-prettier@3.0.3-beta-3",
+		"react-native": "0.73.3",
 		"react-native-sass-transformer": "^1.1.1",
 		"regenerator-runtime": "^0.12.1",
 		"remote-redux-devtools": "^0.5.12",
@@ -105,6 +106,5 @@
 		"lint:fix": "npm run lint -- --fix",
 		"xcframework:setup": "./bin/xcframework-setup",
 		"xcframework:build": "npm run xcframework:setup && pushd ./ios-xcframework && ./build.sh && popd"
-	},
-	"dependencies": {}
+	}
 }
