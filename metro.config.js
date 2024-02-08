@@ -6,6 +6,10 @@ const gutenbergMetroConfig = require( './gutenberg/packages/react-native-editor/
 const extraNodeModules = {};
 const gutenbergMetroConfigCopy = {
 	...gutenbergMetroConfig,
+	watchFolders: [
+		...gutenbergMetroConfig.watchFolders,
+		path.resolve( __dirname, '.' ),
+	],
 	resolver: {
 		...gutenbergMetroConfig.resolver,
 		sourceExts: [ 'js', 'cjs', 'jsx', 'json', 'scss', 'sass', 'ts', 'tsx' ],
@@ -14,8 +18,8 @@ const gutenbergMetroConfigCopy = {
 };
 
 const nodeModulePaths = [
-	'gutenberg/node_modules',
-	'jetpack/projects/plugins/jetpack/node_modules',
+	'../gutenberg/node_modules',
+	'../jetpack/projects/plugins/jetpack/node_modules',
 ];
 
 const possibleModulePaths = ( name ) =>
@@ -30,6 +34,9 @@ gutenbergMetroConfigCopy.resolver.resolveRequest = (
 	platform
 ) => {
 	// Add the module to the extra node modules object if the module is not on a local path.
+	if ( /social-links/.test( moduleName ) ) {
+		console.log( '>>>', moduleName );
+	}
 	if ( ! ( moduleName.startsWith( '.' ) || moduleName.startsWith( '/' ) ) ) {
 		const [ namespace, module = '' ] = moduleName.split( '/' );
 		const name = path.join( namespace, module );
