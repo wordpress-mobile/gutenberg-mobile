@@ -62,7 +62,7 @@
 		"postinstall": "patch-package && npm run clean:gutenberg:distclean && npm ci --prefix gutenberg && npm run i18n:check-cache && ./bin/run-jetpack-command.sh \"install --ignore-scripts\"",
 		"start": "echo \"\\x1b[33mThe start command is not available in this project. It is strongly recommended to use \\x1b[1:33mstart:reset\\x1b[0m\\x1b[33m to perform some cleanup when starting the metro bundler.\nOr you may use \\x1b[1:33mstart:quick\\x1b[0m\\x1b[33m for a quicker startup, but this may lead to unexpected javascript errors when running the app.\\x1b[0m\"",
 		"start:reset": "npm run core clean:runtime && npm run start:quick -- --reset-cache",
-		"start:quick": "react-native start --config ./metro.config.js",
+		"start:quick": "npm run core start:quick -- -- -- --config ../../../metro.config.js",
 		"core": "cd gutenberg && npm run native",
 		"prern-bundle": "patch-package --patch-dir gutenberg/packages/react-native-editor/metro-patch",
 		"rn-bundle": "react-native bundle",
