@@ -1,42 +1,54 @@
 const path = require( 'path' );
 const fs = require( 'fs' );
-const metroResolver = require( 'metro-resolver' );
+const {
+	getDefaultConfig,
+	mergeConfig,
+} = require( '@react-native/metro-config' );
+const gutenbergConfig = require( './gutenberg/packages/react-native-editor/metro.config.js' );
 
-const nodeModulePaths = [
-	'../../node_modules',
-	'../../../jetpack/projects/plugins/jetpack/node_modules',
-];
+const defaultConfig = getDefaultConfig( __dirname );
 
-const gutenbergMetroConfig = require( './gutenberg/packages/react-native-editor/metro.config.js' );
-const extraNodeModules = {};
-const gutenbergMetroConfigCopy = {
-	...gutenbergMetroConfig,
+/**
+ * Metro configuration
+ * https://facebook.github.io/metro/docs/configuration
+ *
+ * @type {import('metro-config').MetroConfig}
+ */
+const config = {
 	projectRoot: path.resolve( __dirname ),
 	resolver: {
-		...gutenbergMetroConfig.resolver,
-		unstable_enableSymlinks: false,
-		sourceExts: [ 'js', 'cjs', 'jsx', 'json', 'scss', 'sass', 'ts', 'tsx' ],
-		extraNodeModules,
 		// Exclude `ios-xcframework` folder to avoid conflicts with packages contained in Pods.
-		blockList: [ /ios-xcframework\/.*/ ],
+		blocklist: [ /ios-xcframework\/.*/ ],
+		sourceExts: [
+			...defaultConfig.resolver.sourceExts,
+			'cjs',
+			'scss',
+			'sass',
+		],
+		resolveRequest,
 	},
 };
 
-const possibleModulePaths = ( name ) =>
-	nodeModulePaths.map( ( dir ) => path.join( process.cwd(), dir, name ) );
+function resolveRequest( context, moduleName, platform ) {
+	const { extraNodeModules } = context;
 
-gutenbergMetroConfigCopy.resolver.resolveRequest = (
-	context,
-	moduleName,
-	platform
-) => {
-	// This handles part of the Jetpack Config setup typically handled by Webpack's externals.
+	// Manage Jetpack Config setup typically handled by Webpack's externals.
 	if ( moduleName.startsWith( '@automattic/jetpack-config' ) ) {
 		return {
 			filePath: path.resolve( __dirname + '/src/jetpack-config.js' ),
 			type: 'sourceFile',
 		};
 	}
+
+	if ( /^@wordpress\/[\w\d-]+/.test( moduleName ) ) {
+		const [ namespace, module = '' ] = moduleName.split( '/' );
+		const packageName = path.join( namespace, module );
+		extraNodeModules[ packageName ] = path.resolve(
+			__dirname,
+			`./gutenberg/packages/${ module }`
+		);
+	}
+
 	// Add the module to the extra node modules object if the module is not on a local path.
 	if ( ! ( moduleName.startsWith( '.' ) || moduleName.startsWith( '/' ) ) ) {
 		const [ namespace, module = '' ] = moduleName.split( '/' );
@@ -44,13 +56,10 @@ gutenbergMetroConfigCopy.resolver.resolveRequest = (
 
 		if ( ! extraNodeModules[ name ] ) {
 			let extraNodeModulePath;
-
 			const modulePath = possibleModulePaths( name ).find(
 				fs.existsSync
 			);
-
 			extraNodeModulePath = modulePath && fs.realpathSync( modulePath );
-
 			// If we haven't resolved the module yet, check if the module is managed by pnpm.
 			if (
 				! extraNodeModulePath &&
@@ -59,10 +68,8 @@ gutenbergMetroConfigCopy.resolver.resolveRequest = (
 				const filePath = require.resolve( name, {
 					paths: [ path.dirname( context.originModulePath ) ],
 				} );
-
 				const innerNodeModules =
 					filePath.match( /.*node_modules/ )?.[ 0 ];
-
 				extraNodeModulePath =
 					innerNodeModules && path.join( innerNodeModules, name );
 			}
@@ -73,15 +80,16 @@ gutenbergMetroConfigCopy.resolver.resolveRequest = (
 		}
 	}
 
-	// Restore the original resolver
-	return metroResolver.resolve(
-		{
-			...context,
-			resolveRequest: null,
-		},
-		moduleName,
-		platform
-	);
-};
+	// Fallback to the standard Metro resolver
+	return context.resolveRequest( context, moduleName, platform );
+}
 
-module.exports = gutenbergMetroConfigCopy;
+const possibleModulePaths = ( name ) =>
+	nodeModulePaths.map( ( dir ) => path.join( process.cwd(), dir, name ) );
+
+const nodeModulePaths = [
+	'../../node_modules', // Gutenberg core
+	'../../../jetpack/projects/plugins/jetpack/node_modules', // Jetpack plugin
+];
+
+module.exports = mergeConfig( gutenbergConfig, config );
