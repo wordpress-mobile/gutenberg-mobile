@@ -25,6 +25,7 @@ const config = {
 			'scss',
 			'sass',
 		],
+		unstable_enableSymlinks: false,
 		resolveRequest,
 	},
 };
