@@ -1104,7 +1104,7 @@ PODS:
     - React-RCTImage
   - RNSVG (14.0.0):
     - React-Core
-  - RNTAztecView (1.111.2):
+  - RNTAztecView (1.112.0):
     - React-Core
     - WordPress-Aztec-iOS (= 1.19.9)
   - SDWebImage (5.11.1):
