@@ -27,7 +27,6 @@
 		3F12365029F6B23300AF54A4 /* supported-blocks.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F12364F29F6B23300AF54A4 /* supported-blocks.json */; };
 		3F8D0D482A8CB297008A5891 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 3F8D0D472A8CB297008A5891 /* assets */; };
 		3FA0C5812A1C8C9700600A9A /* App.js in Resources */ = {isa = PBXBuildFile; fileRef = 3FA0C5802A1C8C9700600A9A /* App.js */; };
-		3FC7862B2A53047D00A0DDAF /* hermes.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC7862A2A53047D00A0DDAF /* hermes.xcframework */; };
 		3FE06AC329F3F61300F752AD /* Gutenberg.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE06AC229F3F61300F752AD /* Gutenberg.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3FE06ACE29F3F6DA00F752AD /* Gutenberg-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06AC829F3F6DA00F752AD /* Gutenberg-Debug.xcconfig */; };
 		3FE06ACF29F3F6DA00F752AD /* Gutenberg-Shared.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3FE06AC929F3F6DA00F752AD /* Gutenberg-Shared.xcconfig */; };
@@ -59,7 +58,6 @@
 		3F12364F29F6B23300AF54A4 /* supported-blocks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "supported-blocks.json"; path = "../../../src/block-support/supported-blocks.json"; sourceTree = "<group>"; };
 		3F8D0D472A8CB297008A5891 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = Gutenberg/Resources/assets; sourceTree = "<group>"; };
 		3FA0C5802A1C8C9700600A9A /* App.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = App.js; path = ../../../bundle/ios/App.js; sourceTree = "<group>"; };
-		3FC7862A2A53047D00A0DDAF /* hermes.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = hermes.xcframework; path = "Pods/hermes-engine/destroot/Library/Frameworks/universal/hermes.xcframework"; sourceTree = "<group>"; };
 		3FE06ABF29F3F61300F752AD /* Gutenberg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Gutenberg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE06AC229F3F61300F752AD /* Gutenberg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Gutenberg.h; sourceTree = "<group>"; };
 		3FE06AC829F3F6DA00F752AD /* Gutenberg-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Gutenberg-Debug.xcconfig"; sourceTree = "<group>"; };
@@ -79,7 +77,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				612F325D13E652BF476ED672 /* Pods_Gutenberg.framework in Frameworks */,
-				3FC7862B2A53047D00A0DDAF /* hermes.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,7 +154,6 @@
 		4FCF797BAE1CB2036BB60C7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3FC7862A2A53047D00A0DDAF /* hermes.xcframework */,
 				432C8665181F3EC336B71D6C /* Pods_Gutenberg.framework */,
 			);
 			name = Frameworks;
