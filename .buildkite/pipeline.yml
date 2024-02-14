@@ -113,6 +113,8 @@ steps:
       - android-unit-tests
       - ios-unit-tests
     key: js-bundles
+    agents:
+      queue: android
     plugins:
       # The following plugins are disabled temporarily until PHP is available.
       # In the meantime, we'll keep using the GB-mobile docker container.
