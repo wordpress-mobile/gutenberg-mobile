@@ -6,6 +6,7 @@ private func dummy() {
     _ = NSLocalizedString("%1$s transformed to %2$s", comment: "translators: 1: From block title, e.g. Paragraph. 2: To block title, e.g. Header.")
     _ = NSLocalizedString("%1$s. %2$s is %3$s %4$s.", comment: "translators: accessibility text. Inform about current value. %1$s: Control label %2$s: setting label (example: width), %3$s: Current value. %4$s: value measurement unit (example: pixels)")
     _ = NSLocalizedString("%1$s. Currently selected: %2$s", comment: "translators:  %1$s: Select control button label e.g. \"Button width\". %2$s: Select control option value e.g: \"Auto, 25%\".")
+    _ = NSLocalizedString("%s block", comment: "translators: Block name. %s: The localized block name\ntranslators: %s: Block name e.g. \"Image block\"")
     _ = NSLocalizedString("%s block options", comment: "translators: %s: block title e.g: \"Paragraph\".")
     _ = NSLocalizedString("%s block, newly available", comment: "translators: Newly available block name. %s: The localized block name")
     _ = NSLocalizedString("%s block. Empty", comment: "translators: accessibility text for the media block empty state. %s: media type")

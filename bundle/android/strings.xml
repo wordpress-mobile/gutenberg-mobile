@@ -312,6 +312,9 @@ translators: %s: Select control button label e.g. "Button width" -->
     <string name="gutenberg_native_replace_video" tools:ignore="UnusedResources">Replace video</string>
     <string name="gutenberg_native_retry" tools:ignore="UnusedResources">Retry</string>
     <string name="gutenberg_native_rich_text_editing" tools:ignore="UnusedResources">Rich text editing</string>
+    <!-- translators: Block name. %s: The localized block name
+translators: %s: Block name e.g. "Image block" -->
+    <string name="gutenberg_native_s_block" tools:ignore="UnusedResources">%s block</string>
     <!-- translators: displayed right after the classic block is converted to blocks. %s: The localized classic block name -->
     <string name="gutenberg_native_s_block_converted_to_blocks" tools:ignore="UnusedResources">\'%s\' block converted to blocks</string>
     <!-- translators: accessibility text for the media block empty state. %s: media type -->
