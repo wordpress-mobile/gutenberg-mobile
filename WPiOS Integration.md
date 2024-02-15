@@ -31,7 +31,7 @@ Assuming that there is no open WPiOS PR:
 1. Open `Gutenberg/config.yml` from the root of WPiOS directory
 2. Find the line where gutenberg reference is set: `tag: v1.110.0`
 3. Find latest commit hash of the `gutenberg-mobile` PR
-4. Comment out the line referencing the tag (e.g., `tag: v1.110.0`) and uncomment the line referencing the commit: `commit: 123456789`
+4. Remove the line referencing the tag (e.g., `tag: v1.110.0`) and add a line referencing the commit: `commit: 123456789`
 5. Run `bundle exec pod install` inside WPiOS
 6. Switch to the relevant branch in `gutenberg-mobile`and start the metro server with `npm run start:reset`
 7. Launch the WPiOS workspace (`.xcworkspace`) in Xcode and run the app
