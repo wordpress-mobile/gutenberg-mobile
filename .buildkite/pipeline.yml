@@ -54,7 +54,6 @@ steps:
     plugins:
       - *nvm_plugin
       - *ci_toolkit_plugin
-      - *git-cache-plugin
     agents:
       queue: android
     command: .buildkite/commands/unit-tests-android.sh
@@ -72,7 +71,6 @@ steps:
     plugins:
       - *nvm_plugin
       - *ci_toolkit_plugin
-      - *git-cache-plugin
     agents:
       queue: android
     command: .buildkite/commands/unit-tests-ios.sh
