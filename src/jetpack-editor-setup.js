@@ -129,7 +129,7 @@ export function registerJetpackEmbedVariations( { capabilities } ) {
 }
 
 export function enableVideoPressV5Support( { capabilities } ) {
-	if ( ! isActive() || ! capabilities.videoPressBlock ) {
+	if ( ! isActive() || ! capabilities.videoPressV5Support ) {
 		return;
 	}
 
