@@ -1,5 +1,6 @@
 Unreleased
 ---
+[*] Prevent crash when autoscrolling to blocks [https://github.com/WordPress/gutenberg/pull/59110]
 
 1.112.0
 ---
