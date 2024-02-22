@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D9EA4BE2B87A2570086B30F /* App.composed.js.map in Resources */ = {isa = PBXBuildFile; fileRef = 1D9EA4BD2B87A2470086B30F /* App.composed.js.map */; };
 		3F1235FE29F680F900AF54A4 /* GutenbergBridgeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1235FB29F680F900AF54A4 /* GutenbergBridgeDelegate.swift */; };
 		3F1235FF29F680F900AF54A4 /* GutenbergBridgeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1235FC29F680F900AF54A4 /* GutenbergBridgeDataSource.swift */; };
 		3F12360029F680F900AF54A4 /* Gutenberg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1235FD29F680F900AF54A4 /* Gutenberg.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D9EA4BD2B87A2470086B30F /* App.composed.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = App.composed.js.map; path = ../../../bundle/ios/App.composed.js.map; sourceTree = "<group>"; };
 		3F1235FB29F680F900AF54A4 /* GutenbergBridgeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GutenbergBridgeDelegate.swift; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergBridgeDelegate.swift"; sourceTree = "<group>"; };
 		3F1235FC29F680F900AF54A4 /* GutenbergBridgeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GutenbergBridgeDataSource.swift; path = "../../gutenberg/packages/react-native-bridge/ios/GutenbergBridgeDataSource.swift"; sourceTree = "<group>"; };
 		3F1235FD29F680F900AF54A4 /* Gutenberg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gutenberg.swift; path = "../../gutenberg/packages/react-native-bridge/ios/Gutenberg.swift"; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				3FA0C5802A1C8C9700600A9A /* App.js */,
+				1D9EA4BD2B87A2470086B30F /* App.composed.js.map */,
 				3F12363F29F6B21300AF54A4 /* content-functions.js */,
 				3F12364429F6B21300AF54A4 /* editor-behavior-overrides.js */,
 				3F12363D29F6B21300AF54A4 /* editor-style-overrides.css */,
@@ -262,6 +265,7 @@
 				3F12364C29F6B21300AF54A4 /* wp-bar-override.css in Resources */,
 				3F12365029F6B23300AF54A4 /* supported-blocks.json in Resources */,
 				3FA0C5812A1C8C9700600A9A /* App.js in Resources */,
+				1D9EA4BE2B87A2570086B30F /* App.composed.js.map in Resources */,
 				3F12364729F6B21300AF54A4 /* insert-block.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
