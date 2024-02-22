@@ -5,6 +5,7 @@ set -euo pipefail
 # Retrieve data from previous steps
 PUBLISHED_AZTEC_VERSION=`buildkite-agent meta-data get "PUBLISHED_REACT_NATIVE_AZTEC_ANDROID_VERSION"`
 buildkite-agent artifact download bundle/android/App.js .
+buildkite-agent artifact download bundle/android/App.composed.js.map .
 
 # Copy the JavaScript bundle and all local static assets referenced within the
 # bundle to the appropriate locations for inclusion in the bridge bundle
