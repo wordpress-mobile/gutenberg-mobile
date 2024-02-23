@@ -39,7 +39,9 @@ describe( 'Gutenberg Editor Visual test for Gallery Block', () => {
 			initialData: [ e2eTestData.galleryBlockTwoImages ].join( '\n\n' ),
 		} );
 
-		const block = await editorPage.selectBlockByType( blockNames.gallery );
+		const block = await editorPage.selectBlock(
+			await editorPage.getBlockAtPosition( blockNames.gallery )
+		);
 		await editorPage.driver.pause( 5000 ); // Wait for images to load
 
 		const screenshot = await takeScreenshotByElement( block, {

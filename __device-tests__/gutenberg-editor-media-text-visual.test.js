@@ -24,14 +24,12 @@ describe( 'Gutenberg Editor Visual test for Media & Text Block', () => {
 				y: ( height ) => Math.floor( height * -0.5 + 20 ),
 			},
 		};
-		await editorPage.selectBlockByType(
-			blockNames.mediaText,
+
+		const block = await editorPage.selectBlock(
+			await editorPage.getBlockAtPosition( blockNames.mediaText ),
 			tapOutsideMediaButton
 		);
 
-		const block = await editorPage.getBlockAtPosition(
-			blockNames.mediaText
-		);
 		const screenshot = await takeScreenshotByElement( block, {
 			padding: 7,
 		} );
