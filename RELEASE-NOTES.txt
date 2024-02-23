@@ -1,6 +1,7 @@
 Unreleased
 ---
-[*] Prevent crash when autoscrolling to blocks [https://github.com/WordPress/gutenberg/pull/59110]
+* [*] Prevent crash when autoscrolling to blocks [https://github.com/WordPress/gutenberg/pull/59110]
+* [*] Remove opacity change when images are being uploaded [https://github.com/WordPress/gutenberg/pull/59264]
 
 1.112.0
 ---
