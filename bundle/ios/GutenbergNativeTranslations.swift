@@ -54,6 +54,7 @@ private func dummy() {
     _ = NSLocalizedString("Audio caption. Empty", comment: "translators: accessibility text. Empty Audio caption.")
     _ = NSLocalizedString("audio file", comment: "translators: displays audio file extension. e.g. MP3 audio file")
     _ = NSLocalizedString("Audio Player", comment: "")
+    _ = NSLocalizedString("Autoplay may cause usability issues for some users", comment: "")
     _ = NSLocalizedString("Block cannot be rendered because it is deeply nested. Tap here for more details.", comment: "")
     _ = NSLocalizedString("Block copied", comment: "translators: displayed right after the block is copied.")
     _ = NSLocalizedString("Block cut", comment: "translators: displayed right after the block is cut.")
