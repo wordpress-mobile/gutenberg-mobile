@@ -48,7 +48,6 @@
     <!-- translators: displays audio file extension. e.g. MP3 audio file -->
     <string name="gutenberg_native_audio_file" tools:ignore="UnusedResources">audio file</string>
     <string name="gutenberg_native_audio_player" tools:ignore="UnusedResources">Audio Player</string>
-    <string name="gutenberg_native_auto" tools:ignore="UnusedResources">Auto</string>
     <string name="gutenberg_native_autoplay_may_cause_usability_issues_for_some_users" tools:ignore="UnusedResources">Autoplay may cause usability issues for some users</string>
     <string name="gutenberg_native_block_cannot_be_rendered_because_it_is_deeply_nested_tap_here_for" tools:ignore="UnusedResources">Block cannot be rendered because it is deeply nested. Tap here for more details.</string>
     <!-- translators: displayed right after the block is copied. -->
@@ -293,9 +292,7 @@ translators: %s: Select control button label e.g. "Button width" -->
     <string name="gutenberg_native_page_title_s" tools:ignore="UnusedResources">Page title. %s</string>
     <string name="gutenberg_native_paste_block_after" tools:ignore="UnusedResources">Paste block after</string>
     <string name="gutenberg_native_paste_url" tools:ignore="UnusedResources">Paste URL</string>
-    <string name="gutenberg_native_play_inline" tools:ignore="UnusedResources">Play inline</string>
     <string name="gutenberg_native_playback_bar_color" tools:ignore="UnusedResources">Playback Bar Color</string>
-    <string name="gutenberg_native_playback_controls" tools:ignore="UnusedResources">Playback controls</string>
     <string name="gutenberg_native_playback_settings" tools:ignore="UnusedResources">Playback Settings</string>
     <!-- translators: accessibility text. empty post title. -->
     <string name="gutenberg_native_post_title_empty" tools:ignore="UnusedResources">Post title. Empty</string>
