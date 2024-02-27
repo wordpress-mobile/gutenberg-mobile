@@ -26,12 +26,13 @@ export default () => {
 			handlingFatal = true;
 		}
 
-		// TODO: Set severity and exception mechanism.
-		// https://github.com/getsentry/sentry-react-native/blob/adfb66f16438dfd98f280307844778c7291b584b/src/js/integrations/reactnativeerrorhandlers.ts#L235-L239
-
-		logException( error, {}, () => {
-			// Wait for the exception to be sent to host app.
-			defaultHandler( error, isFatal );
-		} );
+		logException(
+			error,
+			{ isHandled: false, handledBy: 'Global Error Handler' },
+			() => {
+				// Wait for the exception to be sent to host app
+				defaultHandler( error, isFatal );
+			}
+		);
 	} );
 };
