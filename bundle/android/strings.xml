@@ -48,6 +48,7 @@
     <!-- translators: displays audio file extension. e.g. MP3 audio file -->
     <string name="gutenberg_native_audio_file" tools:ignore="UnusedResources">audio file</string>
     <string name="gutenberg_native_audio_player" tools:ignore="UnusedResources">Audio Player</string>
+    <string name="gutenberg_native_autoplay_may_cause_usability_issues_for_some_users" tools:ignore="UnusedResources">Autoplay may cause usability issues for some users</string>
     <string name="gutenberg_native_block_cannot_be_rendered_because_it_is_deeply_nested_tap_here_for" tools:ignore="UnusedResources">Block cannot be rendered because it is deeply nested. Tap here for more details.</string>
     <!-- translators: displayed right after the block is copied. -->
     <string name="gutenberg_native_block_copied" tools:ignore="UnusedResources">Block copied</string>
@@ -160,6 +161,7 @@
     <string name="gutenberg_native_edit_media" tools:ignore="UnusedResources">Edit media</string>
     <string name="gutenberg_native_edit_using_web_editor" tools:ignore="UnusedResources">Edit using web editor</string>
     <string name="gutenberg_native_edit_video" tools:ignore="UnusedResources">Edit video</string>
+    <string name="gutenberg_native_edit_video_024aee6d" tools:ignore="UnusedResources">Edit video</string>
     <!-- translators: %s: name of the host app (e.g. WordPress) -->
     <string name="gutenberg_native_editing_synced_patterns_is_not_yet_supported_on_s_for_android" tools:ignore="UnusedResources">Editing synced patterns is not yet supported on %s for Android</string>
     <!-- translators: %s: name of the host app (e.g. WordPress) -->
@@ -389,10 +391,13 @@ translators: %s: Select control option value e.g: "Auto, 25%". -->
     <string name="gutenberg_native_upgrade_your_plan_to_use_video_covers" tools:ignore="UnusedResources">Upgrade your plan to use video covers</string>
     <string name="gutenberg_native_uploading" tools:ignore="UnusedResources">Uploading…</string>
     <string name="gutenberg_native_use_icon_button" tools:ignore="UnusedResources">Use icon button</string>
-    <!-- translators: accessibility text. Empty video caption. -->
     <string name="gutenberg_native_video_caption_empty" tools:ignore="UnusedResources">Video caption. Empty</string>
+    <!-- translators: accessibility text. Empty video caption. -->
+    <string name="gutenberg_native_video_caption_empty_663aab49" tools:ignore="UnusedResources">Video caption. Empty</string>
     <!-- translators: accessibility text. %s: video caption. -->
     <string name="gutenberg_native_video_caption_s" tools:ignore="UnusedResources">Video caption. %s</string>
+    <!-- translators: accessibility text. %s: video caption. -->
+    <string name="gutenberg_native_video_caption_s_0141bd20" tools:ignore="UnusedResources">Video caption. %s</string>
     <string name="gutenberg_native_waiting_for_connection" tools:ignore="UnusedResources">Waiting for connection</string>
     <string name="gutenberg_native_warning_message" tools:ignore="UnusedResources">Warning message</string>
     <string name="gutenberg_native_we_are_working_hard_to_add_more_blocks_with_each_release" tools:ignore="UnusedResources">We are working hard to add more blocks with each release.</string>
