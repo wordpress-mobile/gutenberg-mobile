@@ -11,6 +11,7 @@ buildkite-agent artifact download bundle/android/App.composed.js.map .
 # bundle to the appropriate locations for inclusion in the bridge bundle
 mkdir -p gutenberg/packages/react-native-bridge/android/react-native-bridge/build/assets
 cp ./bundle/android/App.js ./gutenberg/packages/react-native-bridge/android/react-native-bridge/build/assets/index.android.bundle
+cp ./bundle/android/App.composed.js.map ./gutenberg/packages/react-native-bridge/android/react-native-bridge/build/assets/index.android.bundle.map
 cp -r ./bundle/android/drawable-* ./gutenberg/packages/react-native-bridge/android/react-native-bridge/src/main/res/
 
 # Publish react-native-bridge
