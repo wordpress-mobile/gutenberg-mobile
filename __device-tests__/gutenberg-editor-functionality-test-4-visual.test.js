@@ -60,10 +60,11 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Visual test check
 			const screenshot = await takeScreenshot();
-			expect( screenshot ).toMatchImageSnapshot();
 
 			// Clean up test
 			await toggleDarkMode( editorPage.driver, false );
+
+			expect( screenshot ).toMatchImageSnapshot();
 		} );
 	} );
 
@@ -233,10 +234,11 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			} else {
 				screenshot = await takeScreenshot();
 			}
-			expect( screenshot ).toMatchImageSnapshot();
 
 			// Clean up test
 			await toggleDarkMode( editorPage.driver, false );
+
+			expect( screenshot ).toMatchImageSnapshot();
 		} );
 	} );
 
@@ -342,10 +344,11 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Visual test check
 			const screenshot = await takeScreenshot();
-			expect( screenshot ).toMatchImageSnapshot();
 
 			// Clean up test
 			await toggleDarkMode( editorPage.driver, false );
+
+			expect( screenshot ).toMatchImageSnapshot();
 		} );
 	} );
 } );
