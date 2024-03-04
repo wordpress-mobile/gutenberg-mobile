@@ -60,10 +60,11 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Visual test check
 			const screenshot = await takeScreenshot();
-			expect( screenshot ).toMatchImageSnapshot();
 
 			// Clean up test
 			await toggleDarkMode( editorPage.driver, false );
+
+			expect( screenshot ).toMatchImageSnapshot();
 		} );
 	} );
 
@@ -233,10 +234,11 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			} else {
 				screenshot = await takeScreenshot();
 			}
-			expect( screenshot ).toMatchImageSnapshot();
 
 			// Clean up test
 			await toggleDarkMode( editorPage.driver, false );
+
+			expect( screenshot ).toMatchImageSnapshot();
 		} );
 	} );
 
@@ -273,7 +275,7 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 			for ( let i = 1; i <= GROUP_NESTED_STRUCTURE_LEVELS; i++ ) {
 				await editorPage.moveBlockSelectionUp();
 
-				await editorPage.driver.pause( 250 );
+				await editorPage.driver.pause( 500 );
 
 				// Visual test check
 				screenshot = await takeScreenshot();
@@ -342,10 +344,11 @@ describe( 'Gutenberg Editor - Test Suite 4', () => {
 
 			// Visual test check
 			const screenshot = await takeScreenshot();
-			expect( screenshot ).toMatchImageSnapshot();
 
 			// Clean up test
 			await toggleDarkMode( editorPage.driver, false );
+
+			expect( screenshot ).toMatchImageSnapshot();
 		} );
 	} );
 } );

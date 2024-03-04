@@ -7,6 +7,7 @@ import {
 	unregisterBlockType,
 	unregisterBlockVariation,
 } from '@wordpress/blocks';
+import { store as preferencesStore } from '@wordpress/preferences';
 import { select } from '@wordpress/data';
 import { registerCoreBlocks } from '@wordpress/block-library';
 import { applyFilters, removeAllFilters } from '@wordpress/hooks';
@@ -27,7 +28,6 @@ import setupJetpackEditorHooks, {
 const defaultJetpackData = { blogId: 1, isJetpackActive: true };
 const defaultProps = {
 	capabilities: {
-		mediaFilesCollectionBlock: true,
 		contactInfoBlock: true,
 		facebookEmbed: true,
 		instagramEmbed: true,
@@ -38,7 +38,6 @@ const defaultProps = {
 const jetpackBlocks = [
 	'jetpack/contact-info',
 	'jetpack/paywall',
-	'jetpack/story',
 	'jetpack/tiled-gallery',
 	'videopress/video',
 ];
@@ -76,7 +75,6 @@ describe( 'Jetpack blocks', () => {
 			available_blocks: {
 				'contact-info': { available: true },
 				paywall: { available: true },
-				story: { available: true },
 				'tiled-gallery': { available: true },
 				'videopress/video': { available: true },
 			},
@@ -99,7 +97,6 @@ describe( 'Jetpack blocks', () => {
 		expect( console ).toHaveLoggedWith(
 			'Block jetpack/paywall registered.'
 		);
-		expect( console ).toHaveLoggedWith( 'Block jetpack/story registered.' );
 		expect( console ).toHaveLoggedWith(
 			'Block jetpack/tiled-gallery registered.'
 		);
@@ -129,7 +126,6 @@ describe( 'Jetpack blocks', () => {
 		setupJetpackEditor( defaultJetpackData );
 		registerJetpackBlocksIsolated( {
 			capabilities: {
-				mediaFilesCollectionBlock: true,
 				contactInfoBlock: false,
 				paywallBlock: true,
 				tiledGalleryBlock: true,
@@ -142,7 +138,6 @@ describe( 'Jetpack blocks', () => {
 		expect( console ).toHaveLoggedWith(
 			'Block jetpack/paywall registered.'
 		);
-		expect( console ).toHaveLoggedWith( 'Block jetpack/story registered.' );
 		expect( console ).toHaveLoggedWith(
 			'Block jetpack/tiled-gallery registered.'
 		);
@@ -150,8 +145,8 @@ describe( 'Jetpack blocks', () => {
 			'Block videopress/video registered.'
 		);
 
-		const hiddenBlockTypes = select( 'core/preferences' ).get(
-			'core/edit-post',
+		const hiddenBlockTypes = select( preferencesStore ).get(
+			'core',
 			'hiddenBlockTypes'
 		);
 		expect( hiddenBlockTypes ).toEqual( [
