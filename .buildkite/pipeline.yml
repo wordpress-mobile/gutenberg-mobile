@@ -126,7 +126,7 @@ steps:
       - *git-cache-plugin
     command: |
         source /root/.bashrc
-        
+
         echo "--- :node: Set up Node environment"
         nvm install && nvm use
 
