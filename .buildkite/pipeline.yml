@@ -110,10 +110,6 @@ steps:
       queue: android
 
   - label: Build JS Bundles
-    depends_on:
-      - lint
-      - android-unit-tests
-      - ios-unit-tests
     key: js-bundles
     agents:
       queue: android
@@ -157,9 +153,6 @@ steps:
         buildkite-agent artifact upload ios-assets.tar.gz
 
   - label: "Build Android RN Aztec & Publish to S3"
-    depends_on:
-      - lint
-      - android-unit-tests
     key: "publish-react-native-aztec-android"
     plugins:
       - *git-cache-plugin
@@ -190,9 +183,6 @@ steps:
 
   - label: iOS Build and Sauce Labs
     key: ios-build-and-saucelabs
-    depends_on:
-      - lint
-      - ios-unit-tests
     command: .buildkite/commands/build-ios.sh
     plugins:
       - *ci_toolkit_plugin
@@ -222,11 +212,6 @@ steps:
 
   - label: Android Build and Sauce Labs
     key: android-build-and-saucelabs
-    depends_on:
-      - lint
-      - android-unit-tests
-      - android-unit-tests-editor
-      - android-unit-tests-bridge
     command: .buildkite/commands/build-android.sh
     plugins:
       - *ci_toolkit_plugin
