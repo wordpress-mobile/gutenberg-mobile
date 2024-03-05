@@ -73,7 +73,7 @@ describe( 'VideoPress block', () => {
 		// When the block is inserted, it automatically opens the media picker.
 		// On iOS, this picker is displayed using a timer, so we need to run it
 		// to allow any DOM update.
-		await withFakeTimers( () => jest.runOnlyPendingTimers() );
+		await act( () => withFakeTimers( () => jest.runOnlyPendingTimers() ) );
 
 		// Get block
 		const videoPressBlock = await getBlock( screen, 'VideoPress' );
