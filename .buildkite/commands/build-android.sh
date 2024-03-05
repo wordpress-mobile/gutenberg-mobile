@@ -1,7 +1,7 @@
 #!/bin/bash -eu
 
 echo "--- :npm: Set up Node dependencies"
-npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+npm ci --unsafe-perm --no-audit --no-progress
 
 echo '--- :android: Set env var for Android E2E testing'
 set -x

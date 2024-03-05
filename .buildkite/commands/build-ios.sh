@@ -4,7 +4,7 @@ echo '--- :desktop_computer: Clear up some disk space'
 rm -rfv ~/.Trash/15.1.xip
 
 echo '--- :node: Set up Node depenendencies'
-npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+npm ci --unsafe-perm --no-audit --no-progress
 
 echo '--- :ios: Set env var for iOS E2E testing'
 set -x

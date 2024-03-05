@@ -17,8 +17,8 @@ while [ "$INPUT" != "" ]; do
 done
 
 echo '--- :node: Set up Node depenendencies'
-npm ci --prefer-offline --no-audit --ignore-scripts
-npm ci --prefix gutenberg --prefer-offline --no-audit
+npm ci --no-audit --ignore-scripts
+npm ci --prefix gutenberg --no-audit
 
 echo '--- :ios: Set env var for Android E2E testing'
 set -x
