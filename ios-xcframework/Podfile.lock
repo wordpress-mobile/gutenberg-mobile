@@ -906,8 +906,12 @@ PODS:
     - React-Core
   - react-native-safe-area (0.5.1):
     - React-Core
-  - react-native-safe-area-context (4.8.2):
+  - react-native-safe-area-context (4.6.3):
+    - RCT-Folly
+    - RCTRequired
+    - RCTTypeSafety
     - React-Core
+    - ReactCommon/turbomodule/core
   - react-native-slider (3.0.2-wp-4):
     - React-Core
   - react-native-video (5.2.0-wp-6):
@@ -915,7 +919,7 @@ PODS:
     - react-native-video/Video (= 5.2.0-wp-6)
   - react-native-video/Video (5.2.0-wp-6):
     - React-Core
-  - react-native-webview (13.6.1):
+  - react-native-webview (11.26.1):
     - React-Core
   - React-nativeconfig (0.73.3)
   - React-NativeModulesApple (0.73.3):
@@ -1086,13 +1090,13 @@ PODS:
     - React-perflogger (= 0.73.3)
   - RNCClipboard (1.11.2):
     - React-Core
-  - RNCMaskedView (0.3.0):
+  - RNCMaskedView (0.2.9):
     - React-Core
   - RNFastImage (8.5.11):
     - React-Core
     - SDWebImage (~> 5.11.1)
     - SDWebImageWebPCoder (~> 0.8.4)
-  - RNGestureHandler (2.14.0):
+  - RNGestureHandler (2.10.2):
     - React-Core
   - RNReanimated (3.6.2):
     - glog
@@ -1102,9 +1106,9 @@ PODS:
   - RNScreens (3.22.0):
     - React-Core
     - React-RCTImage
-  - RNSVG (14.0.0):
+  - RNSVG (13.9.0):
     - React-Core
-  - RNTAztecView (1.112.0):
+  - RNTAztecView (1.114.0):
     - React-Core
     - WordPress-Aztec-iOS (= 1.19.9)
   - SDWebImage (5.11.1):
@@ -1336,11 +1340,11 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   boost: d3f49c53809116a5d38da093a8aa78bf551aed09
   BVLinearGradient: 1f859bad5f9ead6a57ac43dc42bfc4c587192618
-  DoubleConversion: fea03f2699887d960129cc54bba7e52542b6f953
+  DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   FBLazyVector: 70590b4f9e8ae9b0ce076efacea3abd7bc585ace
   FBReactNativeSpec: 844b7a79cd56dd9c461f2b246305d3607c25bb0d
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  glog: c5d68082e772fa1c511173d6b30a9de2c05a69a2
+  glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   hermes-engine: 5420539d016f368cd27e008f65f777abd6098c56
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
@@ -1368,10 +1372,10 @@ SPEC CHECKSUMS:
   react-native-blur: 14c75aa19da8734c1656d5b6ca5adb859b2c26aa
   react-native-get-random-values: 2869478c635a6e33080b917ce33f2803cb69262c
   react-native-safe-area: e3de9e959c7baaae8db9bcb015d99ed1da25c9d5
-  react-native-safe-area-context: 74cdde2772fed2eb95465b2227c20f18322b2b80
+  react-native-safe-area-context: 7b65bd7ec67d637f53ae874eedb72111d6e0aecb
   react-native-slider: fe24b59d1cdf9ce3adc7dc53f87cfdde8da9498a
   react-native-video: acfe36130a7476cf82eb543c7ee2b9e96794ff9e
-  react-native-webview: a25d3dfb812447696508da67094e1eba3fe7bc35
+  react-native-webview: 07834cb4097a1c1785ac8ac13126fa03b24ae81c
   React-nativeconfig: 4662ac75a0a77789c9ed896ed77baa1a25cdf006
   React-NativeModulesApple: 92bc296f2ae166d10cb4d6a05498c80bf4ef9fa2
   React-perflogger: 27ccacf853ba725524ef2b4e444f14e34d0837b0
@@ -1393,13 +1397,13 @@ SPEC CHECKSUMS:
   React-utils: 2d25ca0a6e635c095bc5e67ac1202c7939ec4af3
   ReactCommon: 8564d71cf76b1715740cb8bdc5b382d1ddd12dd1
   RNCClipboard: 6069fd5957cf3750fa03145f8a5d095ec96052fd
-  RNCMaskedView: 10a896caef9e17c874b8487de0b6e62d671e96d7
+  RNCMaskedView: 94f0f1558fae47042743b31916d5fff39266644b
   RNFastImage: 9407b5abc43452149a2f628107c64a7d11aa2948
-  RNGestureHandler: 380ef673a15d6772b63f3b59b1f4ec58acf9c07c
+  RNGestureHandler: 40fd57eb7f1affcfbc6bd2039bb6946412de360b
   RNReanimated: f705119af7f77c961122a09adbfdf3dd38ce6a60
   RNScreens: e3ffdd78ff5afe8ec82c2566ee2410857ed5ce75
-  RNSVG: eb0b170443191e4a1af53b9bd17d1f2fbd1ba152
-  RNTAztecView: 74c676c87e4a9db79104fcdad9624c1e5c02fe15
+  RNSVG: 29dd0ac32d83774d4b0953ae92a5cd8205a782d7
+  RNTAztecView: 68c970e04c9f7ae81ba64810667a07a66e6ba0b7
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17

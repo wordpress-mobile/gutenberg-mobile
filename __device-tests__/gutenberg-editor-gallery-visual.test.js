@@ -2,7 +2,8 @@
  * Internal dependencies
  */
 const { blockNames } = editorPage;
-import { takeScreenshot } from './utils';
+const { toggleDarkMode } = e2eUtils;
+import { takeScreenshot, takeScreenshotByElement } from './utils';
 
 describe( 'Gutenberg Editor Visual test for Gallery Block', () => {
 	it( 'should be able to render the placeholder correctly', async () => {
@@ -29,6 +30,24 @@ describe( 'Gutenberg Editor Visual test for Gallery Block', () => {
 
 		// Visual test check
 		const screenshot = await takeScreenshot();
+		expect( screenshot ).toMatchImageSnapshot();
+	} );
+
+	it( 'should display correct colors for dark mode', async () => {
+		await toggleDarkMode( editorPage.driver, true );
+		await editorPage.initializeEditor( {
+			initialData: [ e2eTestData.galleryBlockTwoImages ].join( '\n\n' ),
+		} );
+
+		const block = await editorPage.selectBlock(
+			await editorPage.getBlockAtPosition( blockNames.gallery )
+		);
+		await editorPage.driver.pause( 5000 ); // Wait for images to load
+
+		const screenshot = await takeScreenshotByElement( block, {
+			padding: 7,
+		} );
+		await toggleDarkMode( editorPage.driver, false );
 		expect( screenshot ).toMatchImageSnapshot();
 	} );
 } );
