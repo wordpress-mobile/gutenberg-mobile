@@ -33,6 +33,7 @@
     <string name="gutenberg_native_add_url" tools:ignore="UnusedResources">Add URL</string>
     <string name="gutenberg_native_add_video" tools:ignore="UnusedResources">Add video</string>
     <string name="gutenberg_native_address_settings" tools:ignore="UnusedResources">Address Settings</string>
+    <string name="gutenberg_native_alt_text" tools:ignore="UnusedResources">Alt Text</string>
     <string name="gutenberg_native_alternatively_you_can_convert_the_content_to_blocks" tools:ignore="UnusedResources">Alternatively, you can convert the content to blocks.</string>
     <string name="gutenberg_native_alternatively_you_can_detach_and_edit_this_block_separately_by_ta" tools:ignore="UnusedResources">Alternatively, you can detach and edit this block separately by tapping “Detach”.</string>
     <!-- translators: Alternative option included in a warning related to having blocks deeply nested. -->
@@ -48,7 +49,7 @@
     <!-- translators: displays audio file extension. e.g. MP3 audio file -->
     <string name="gutenberg_native_audio_file" tools:ignore="UnusedResources">audio file</string>
     <string name="gutenberg_native_audio_player" tools:ignore="UnusedResources">Audio Player</string>
-    <string name="gutenberg_native_autoplay_may_cause_usability_issues_for_some_users" tools:ignore="UnusedResources">Autoplay may cause usability issues for some users</string>
+    <string name="gutenberg_native_autoplay_may_cause_usability_issues_for_some_users" tools:ignore="UnusedResources">Autoplay may cause usability issues for some users.</string>
     <string name="gutenberg_native_block_cannot_be_rendered_because_it_is_deeply_nested_tap_here_for" tools:ignore="UnusedResources">Block cannot be rendered because it is deeply nested. Tap here for more details.</string>
     <!-- translators: displayed right after the block is copied. -->
     <string name="gutenberg_native_block_copied" tools:ignore="UnusedResources">Block copied</string>
@@ -314,6 +315,9 @@ translators: %s: Select control button label e.g. "Button width" -->
     <string name="gutenberg_native_replace_video" tools:ignore="UnusedResources">Replace video</string>
     <string name="gutenberg_native_retry" tools:ignore="UnusedResources">Retry</string>
     <string name="gutenberg_native_rich_text_editing" tools:ignore="UnusedResources">Rich text editing</string>
+    <!-- translators: Block name. %s: The localized block name
+translators: %s: Block name e.g. "Image block" -->
+    <string name="gutenberg_native_s_block" tools:ignore="UnusedResources">%s block</string>
     <!-- translators: displayed right after the classic block is converted to blocks. %s: The localized classic block name -->
     <string name="gutenberg_native_s_block_converted_to_blocks" tools:ignore="UnusedResources">\'%s\' block converted to blocks</string>
     <!-- translators: accessibility text for the media block empty state. %s: media type -->
