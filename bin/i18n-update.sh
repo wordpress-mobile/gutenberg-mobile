@@ -138,7 +138,7 @@ for (( index=0; index<${#PLUGINS[@]}; index+=3 )); do
   PLUGINS_WITH_ADAPTED_PATHS+=( "$PLUGIN_NAME" "$PROJECT_SLUG" "$ADJUSTED_PLUGIN_FOLDER" )
 done
 pushd gutenberg/packages/react-native-editor > /dev/null
-METRO_CONFIG="../../../metro.config.js" node bin/extract-used-strings "$USED_STRINGS_PATH" "${PLUGINS_WITH_ADAPTED_PATHS[@]}"
+METRO_CONFIG="../../../metro.config.js" node bin/extract-used-strings "../../../$USED_STRINGS_PATH" "${PLUGINS_WITH_ADAPTED_PATHS[@]}"
 popd > /dev/null
 
 # Download translations of plugins (i.e. Jetpack)
