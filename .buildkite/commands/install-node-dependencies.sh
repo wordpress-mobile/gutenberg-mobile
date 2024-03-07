@@ -11,7 +11,7 @@ echo "--- :npm: Restore cache if present"
 restore_cache "$CACHEKEY"
 
 echo "--- :npm: Install Node dependencies"
-npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+npm ci --unsafe-perm --prefer-offline --no-audit --no-progress "$@"
 
 echo "--- :npm: Save cache if necessary"
 # Notice that we don't cache the local node_modules.

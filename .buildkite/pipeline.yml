@@ -89,10 +89,11 @@ steps:
   - label: React Native Editor Android Tests
     key: android-unit-tests-editor
     command: |
-      npm ci --prefix gutenberg --prefer-offline --no-audit --no-progress --ignore-scripts
+      .buildkite/commands/install-node-dependencies.sh --prefix gutenberg
       cd gutenberg/packages/react-native-editor/android
       ./gradlew testDebug
     plugins:
+      - *ci_toolkit_plugin
       - *git-cache-plugin
       - *nvm_plugin
     agents:
@@ -101,10 +102,11 @@ steps:
   - label: React Native Bridge Android Tests
     key: android-unit-tests-bridge
     command: |
-      npm ci --prefix gutenberg --prefer-offline --no-audit --no-progress --ignore-scripts
+      .buildkite/commands/install-node-dependencies.sh --prefix gutenberg
       cd gutenberg/packages/react-native-bridge/android
       ./gradlew test
     plugins:
+      - *ci_toolkit_plugin
       - *git-cache-plugin
       - *nvm_plugin
     agents:
