@@ -43,6 +43,8 @@ steps:
       - *ci_toolkit_plugin
       - automattic/git-partial-clone#trunk
       - *nvm_plugin
+    env:
+      BUILDKITE_PLUGINS_ALWAYS_CLONE_FRESH: true
     agents:
       queue: android
     command: .buildkite/commands/lint.sh
