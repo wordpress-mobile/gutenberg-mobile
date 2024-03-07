@@ -41,8 +41,8 @@ steps:
     key: lint
     plugins:
       - *ci_toolkit_plugin
+      - automattic/git-partial-clone#trunk
       - *nvm_plugin
-      - *git-cache-plugin
     agents:
       queue: android
     command: .buildkite/commands/lint.sh
