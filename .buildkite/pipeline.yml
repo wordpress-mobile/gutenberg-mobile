@@ -40,16 +40,11 @@ steps:
   - label: Lint
     key: lint
     plugins:
-      - *gb-mobile-docker-container
+      - *nvm_plugin
       - *git-cache-plugin
-    command: |
-      echo "--- :docker: Additional Docker image setup"
-      source /root/.bashrc
-
-      echo "--- :docker::node: Set up Node environment"
-      nvm install && nvm use
-
-      .buildkite/commands/lint.sh
+    agents:
+      queue: android
+    command: .buildkite/commands/lint.sh
     notify:
       - github_commit_status:
           context: Lint
@@ -57,16 +52,12 @@ steps:
   - label: Android Unit Tests
     key: android-unit-tests
     plugins:
-      - *gb-mobile-docker-container
+      - *nvm_plugin
       - *ci_toolkit_plugin
-    command: |
-      echo "--- :docker: Additional Docker image setup"
-      source /root/.bashrc
-
-      echo "--- :docker::node: Set up Node environment"
-      nvm install && nvm use
-
-      .buildkite/commands/unit-tests-android.sh
+      - *git-cache-plugin
+    agents:
+      queue: android
+    command: .buildkite/commands/unit-tests-android.sh
     env:
       JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
     artifact_paths:
@@ -79,16 +70,14 @@ steps:
   - label: iOS Unit Tests
     key: ios-unit-tests
     plugins:
-      - *gb-mobile-docker-container
+      - *nvm_plugin
       - *ci_toolkit_plugin
-    command: |
-      echo "--- :docker: Additional Docker image setup"
-      source /root/.bashrc
-
-      echo "--- :docker::node: Set up Node environment"
-      nvm install && nvm use
-
-      .buildkite/commands/unit-tests-ios.sh
+      - *git-cache-plugin
+    agents:
+      queue: android
+    command: .buildkite/commands/unit-tests-ios.sh
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/ios-test-results.xml
     artifact_paths:
       - ./logs/*.log
       - ./reports/test-results/*.xml
@@ -120,18 +109,24 @@ steps:
     agents:
       queue: android
 
-  - label: "Build JS Bundles"
+  - label: Build JS Bundles
     depends_on:
       - lint
       - android-unit-tests
       - ios-unit-tests
-    key: "js-bundles"
+    key: js-bundles
+    agents:
+      queue: android
     plugins:
+      # The following plugins are disabled temporarily until PHP is available.
+      # In the meantime, we'll keep using the GB-mobile docker container.
       - *gb-mobile-docker-container
+      # - *ci_toolkit_plugin # unused?
+      # - *nvm_plugin
       - *git-cache-plugin
     command: |
         source /root/.bashrc
-
+        
         echo "--- :node: Set up Node environment"
         nvm install && nvm use
 

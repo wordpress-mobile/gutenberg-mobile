@@ -17,7 +17,6 @@ import {
 	registerLoomVariation,
 	registerSmartframeVariation,
 } from '../jetpack/projects/plugins/jetpack/extensions/extended-blocks/core-embed';
-import '../jetpack/projects/plugins/jetpack/extensions/blocks/videopress/editor';
 
 // When adding new blocks to this list please also consider updating `./block-support/supported-blocks.json`
 const supportedJetpackBlocks = {
@@ -25,9 +24,6 @@ const supportedJetpackBlocks = {
 		available: true,
 	},
 	paywall: {
-		available: true,
-	},
-	story: {
 		available: true,
 	},
 	'tiled-gallery': {
@@ -79,10 +75,6 @@ export function registerJetpackBlocks( { capabilities } ) {
 		return;
 	}
 
-	hideBlockByCapability(
-		capabilities.mediaFilesCollectionBlock,
-		'jetpack/story'
-	);
 	hideBlockByCapability(
 		capabilities.contactInfoBlock,
 		'jetpack/contact-info'
@@ -136,6 +128,14 @@ export function registerJetpackEmbedVariations( { capabilities } ) {
 	} );
 }
 
+export function enableVideoPressV5Support( { capabilities } ) {
+	if ( ! isActive() || ! capabilities.videoPressV5Support ) {
+		return;
+	}
+
+	require( '../jetpack/projects/plugins/jetpack/extensions/blocks/videopress/editor' );
+}
+
 const setupHooks = () => {
 	// Hook triggered before the editor is rendered
 	addAction( 'native.pre-render', 'gutenberg-mobile-jetpack', ( props ) => {
@@ -149,6 +149,11 @@ const setupHooks = () => {
 		// block type registration, so it’s required to add them before
 		// the core blocks are registered.
 		registerJetpackEmbedVariations( props );
+
+		// VideoPress v5 conversion also uses WP hooks that are attached to
+		// block type registration, so it’s required to add them before
+		// the core blocks are registered.
+		enableVideoPressV5Support( props );
 	} );
 
 	// Hook triggered after the editor is rendered
