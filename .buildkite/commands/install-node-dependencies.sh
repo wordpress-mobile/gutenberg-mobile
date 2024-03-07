@@ -25,7 +25,7 @@ save_cache "$HOME/.npm" "$CACHEKEY"
 if [ "$PLATFORM" = "Darwin" ]; then
   PNPM_PATH="$HOME/Library/pnpm/store/v3"
 elif [ "$PLATFORM" = "Linux" ]; then
-  PNPM_PATH="$HOME/.local/share/pnpm/store/v3"
+  PNPM_PATH="/root/.local/share/pnpm/store/v3"
 else
   echo "Unsupported platform: $PLATFORM."
   exit 1
