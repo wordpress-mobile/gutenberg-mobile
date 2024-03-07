@@ -1,6 +1,7 @@
 Unreleased
 ---
 * [**] [internal] Upgrade React Native to version 0.73.3 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6590]
+* [**] Highlight color formatting style improvements [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6517]
 
 1.114.0
 ---
