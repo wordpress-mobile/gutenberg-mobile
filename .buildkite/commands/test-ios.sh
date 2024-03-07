@@ -19,9 +19,7 @@ while [ "$INPUT" != "" ]; do
     INPUT="${1-}"
 done
 
-echo '--- :node: Set up Node depenendencies'
-npm ci --prefer-offline --no-audit --ignore-scripts
-npm ci --prefix gutenberg --prefer-offline --no-audit
+.buildkite/commands/install-node-dependencies.sh
 
 echo '--- :ios: Set env var for iOS E2E testing'
 set -x
