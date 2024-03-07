@@ -7,10 +7,11 @@ PACKAGE_HASH=$(hash_file package-lock.json)
 GUTENBERG_PACKAGE_HASH=$(hash_file gutenberg/package-lock.json)
 JETPACK_PACKAGE_HASH=$(hash_file jetpack/pnpm-lock.yaml)
 CACHEKEY="$BUILDKITE_PIPELINE_SLUG-$PLATFORM-$ARCHITECTURE-node$NODE_VERSION-$PACKAGE_HASH-$GUTENBERG_PACKAGE_HASH"
+PNPM_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-$PLATFORM-$ARCHITECTURE-node$NODE_VERSION-$JETPACK_PACKAGE_HASH"
 
 echo "--- :npm: Restore cache if present"
 restore_cache "$CACHEKEY"
-restore_cache "$JETPACK_PACKAGE_HASH"
+restore_cache "$PNPM_CACHEKEY"
 
 echo "--- :npm: Install Node dependencies"
 npm ci --unsafe-perm --prefer-offline --no-audit --no-progress "$@"
@@ -21,12 +22,13 @@ echo "--- :npm: Save cache if necessary"
 # What we are caching is the root npm folder, which stores pacakge downloads so they are available if the package.json resolution demands them.
 save_cache "$HOME/.npm" "$CACHEKEY"
 
-OS=$(uname -s)
-if [ "$OS" = "Darwin" ]; then
-  save_cache "$HOME/Library/pnpm/store/v3" "$JETPACK_PACKAGE_HASH"
-elif [ "$OS" = "Linux" ]; then
-  save_cache "$HOME/.local/share/pnpm/store/v3" "$JETPACK_PACKAGE_HASH"
+if [ "$PLATFORM" = "Darwin" ]; then
+  PNPM_PATH="$HOME/Library/pnpm/store/v3"
+elif [ "$PLATFORM" = "Linux" ]; then
+  PNPM_PATH="$HOME/.local/share/pnpm/store/v3"
 else
-  echo "Unsupported OS: $OS."
+  echo "Unsupported platform: $PLATFORM."
   exit 1
 fi
+
+save_cache "$PNPM_PATH" "$PNPM_CACHEKEY"
