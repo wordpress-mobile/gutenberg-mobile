@@ -40,8 +40,8 @@ steps:
   - label: Lint
     key: lint
     plugins:
+      - automattic/git-partial-clone#trunk
       - *nvm_plugin
-      - *git-cache-plugin
     agents:
       queue: android
     command: .buildkite/commands/lint.sh
