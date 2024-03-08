@@ -1,5 +1,5 @@
 #!/bin/bash
-# 
+#
 # Handles the process of updating the i18n localizations of plugins, including Gutenberg.
 # The main goals of this command are:
 #
@@ -127,8 +127,19 @@ npm run build:gutenberg
 # - VideoPress package
 ./bin/run-jetpack-command.sh "-C projects/packages/videopress build"
 
-# Extract used strings for plugins
-METRO_CONFIG="metro.config.js" node gutenberg/packages/react-native-editor/bin/extract-used-strings "$USED_STRINGS_PATH" "${PLUGINS[@]}"
+# Extract used strings for plugins, adapt relative paths for changing directories
+PLUGINS_WITH_ADAPTED_PATHS=()
+for (( index=0; index<${#PLUGINS[@]}; index+=3 )); do
+  PLUGIN_NAME=${PLUGINS[index]}
+  PROJECT_SLUG=${PLUGINS[index+1]}
+  PLUGIN_FOLDER=${PLUGINS[index+2]}
+
+  ADJUSTED_PLUGIN_FOLDER="../../../$PLUGIN_FOLDER"
+  PLUGINS_WITH_ADAPTED_PATHS+=( "$PLUGIN_NAME" "$PROJECT_SLUG" "$ADJUSTED_PLUGIN_FOLDER" )
+done
+pushd gutenberg/packages/react-native-editor > /dev/null
+METRO_CONFIG="../../../metro.config.js" node bin/extract-used-strings "../../../$USED_STRINGS_PATH" "${PLUGINS_WITH_ADAPTED_PATHS[@]}"
+popd > /dev/null
 
 # Download translations of plugins (i.e. Jetpack)
 for (( index=0; index<${#PLUGINS[@]}; index+=3 )); do
