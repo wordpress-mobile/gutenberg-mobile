@@ -3,6 +3,10 @@ Unreleased
 * [**] [internal] Upgrade React Native to version 0.73.3 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6590]
 * [**] Add error boundary components and exception logging [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6655]
 
+1.114.1
+---
+* [**] Fix a crash produced when the content of a synced pattern is updated [https://github.com/WordPress/gutenberg/pull/59632]
+
 1.114.0
 ---
 * [**] Introduce VideoPress v5 support, to fix issues using video block with dotcom and Jetpack sites [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6634]
