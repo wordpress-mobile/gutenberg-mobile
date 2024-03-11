@@ -2,6 +2,7 @@
 
 echo "--- :arrow_down: Download iOS JS bundle"
 buildkite-agent artifact download bundle/ios/App.js .
+buildkite-agent artifact download bundle/ios/App.composed.js.map .
 buildkite-agent artifact download ios-assets.tar.gz .
 mkdir -p ios-xcframework/Gutenberg/Resources
 tar -xzvf ios-assets.tar.gz -C ios-xcframework/Gutenberg/Resources/
