@@ -133,12 +133,12 @@ steps:
         echo "--- :npm: Install Node dependencies"
         npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
 
-        if [[ -z "$BUILDKITE_TAG" ]]; then
-          echo "--- :package: Skip bundle prep work"
-        else
+        # if [[ -z "$BUILDKITE_TAG" ]]; then
+          # echo "--- :package: Skip bundle prep work"
+        # else
           echo "--- :package: Run bundle prep work"
           npm run prebundle:js
-        fi
+        # fi
 
         echo "--- :android: Build Android bundle"
         npm run bundle:android
