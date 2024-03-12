@@ -41,7 +41,7 @@ steps:
     key: lint
     plugins:
       - *ci_toolkit_plugin
-      - automattic/git-partial-clone#trunk
+      - automattic/git-partial-clone#mokagio/experiments
       - *nvm_plugin
     env:
       BUILDKITE_PLUGINS_ALWAYS_CLONE_FRESH: true
