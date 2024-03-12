@@ -89,7 +89,7 @@ steps:
   - label: React Native Editor Android Tests
     key: android-unit-tests-editor
     command: |
-      .buildkite/commands/install-node-dependencies.sh --prefix gutenberg
+      .buildkite/commands/install-node-dependencies.sh --prefix gutenberg --ignore-scripts
       echo "--- :android: Run tests"
       cd gutenberg/packages/react-native-editor/android
       ./gradlew testDebug
@@ -103,7 +103,7 @@ steps:
   - label: React Native Bridge Android Tests
     key: android-unit-tests-bridge
     command: |
-      .buildkite/commands/install-node-dependencies.sh --prefix gutenberg
+      .buildkite/commands/install-node-dependencies.sh --prefix gutenberg --ignore-scripts
       echo "--- :android: Run tests"
       cd gutenberg/packages/react-native-bridge/android
       ./gradlew test
