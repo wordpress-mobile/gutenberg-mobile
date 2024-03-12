@@ -77,6 +77,8 @@
     <string name="gutenberg_native_build_layouts" tools:ignore="UnusedResources">Build layouts</string>
     <string name="gutenberg_native_button_link_url" tools:ignore="UnusedResources">Button Link URL</string>
     <string name="gutenberg_native_button_position" tools:ignore="UnusedResources">Button position</string>
+    <string name="gutenberg_native_button_to_copy_error" tools:ignore="UnusedResources">Button to copy error</string>
+    <string name="gutenberg_native_button_to_copy_post_text" tools:ignore="UnusedResources">Button to copy post text</string>
     <string name="gutenberg_native_cancel_search" tools:ignore="UnusedResources">Cancel search</string>
     <string name="gutenberg_native_change_block_position" tools:ignore="UnusedResources">Change block position</string>
     <string name="gutenberg_native_changes_to_featured_image_will_not_be_affected_by_the_undo_redo_b" tools:ignore="UnusedResources">Changes to featured image will not be affected by the undo/redo buttons.</string>
@@ -368,6 +370,8 @@ translators: %s: Select control option value e.g: "Auto, 25%". -->
     <string name="gutenberg_native_synced_patterns" tools:ignore="UnusedResources">Synced patterns</string>
     <string name="gutenberg_native_take_a_photo" tools:ignore="UnusedResources">Take a Photo</string>
     <string name="gutenberg_native_take_a_video" tools:ignore="UnusedResources">Take a Video</string>
+    <string name="gutenberg_native_tap_here_to_copy_error" tools:ignore="UnusedResources">Tap here to copy error</string>
+    <string name="gutenberg_native_tap_here_to_copy_post_text" tools:ignore="UnusedResources">Tap here to copy post text</string>
     <string name="gutenberg_native_tap_here_to_show_help" tools:ignore="UnusedResources">Tap here to show help</string>
     <string name="gutenberg_native_tap_here_to_show_more_details" tools:ignore="UnusedResources">Tap here to show more details.</string>
     <string name="gutenberg_native_tap_to_hide_the_keyboard" tools:ignore="UnusedResources">Tap to hide the keyboard</string>
