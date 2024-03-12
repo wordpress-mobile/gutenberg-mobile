@@ -22,11 +22,11 @@ echo "--- :npm: Save cache if necessary"
 # What we are caching is the root npm folder, which stores pacakge downloads so they are available if the package.json resolution demands them.
 save_cache "$HOME/.npm" "$CACHEKEY"
 
-# If we attempted to save the pnpm cache when npm run with '--prefix gutenber', the command might fail.
+# If we attempted to save the pnpm cache when npm run with '--prefix gutenberg', the command might fail.
 # That's because the Jetpack submodule alone uses pnpm.
 # Therefore, if no pnpm cache was available at the start, running with '--prefix gutenberg' would not have generated one and 'save_cache' would fail to find it.
-if echo "$@" | grep -q -- "--prefix gutenber"; then
-  echo "Skipping pnpm cache save due to --prefix gutenber parameter while PNPM is used in Jetpack."
+if echo "$@" | grep -q -- '--prefix gutenberg'; then
+  echo 'Skipping pnpm cach save due to --prefix gutenber parameter while PNPM is used in Jetpack.'
   exit 0
 fi
 
