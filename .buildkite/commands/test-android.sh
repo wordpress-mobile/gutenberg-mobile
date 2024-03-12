@@ -16,7 +16,12 @@ while [ "$INPUT" != "" ]; do
     INPUT="${1-}"
 done
 
-.buildkite/commands/install-node-dependencies.sh
+# First, set up the gutenberg-mobile dependencies without building the i18n cache (--ignore-scripts)
+# It takes time and we don't need at this point as we are running the tests on top of something already built.
+.buildkite/commands/install-node-dependencies.sh --ignore-scripts
+# Then, set up the gutenberg submodule dependencies, bypassed by the step above.
+# We need them because some E2E logic lives in gutenber.
+.buildkite/commands/install-node-dependencies.sh --prefix gutenberg
 
 echo '--- :ios: Set env var for Android E2E testing'
 set -x
