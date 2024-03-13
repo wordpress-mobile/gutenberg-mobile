@@ -1,5 +1,14 @@
 #!/bin/bash -eu
 
+RESTORE_ONLY='false'
+while [[ "$#" -gt 0 ]]; do
+	case $1 in
+		--restore-only) RESTORE_ONLY='true' ;;
+		*) break ;;
+	esac
+	shift
+done
+
 PLATFORM=$(uname -s)
 ARCHITECTURE=$(uname -m)
 NODE_VERSION=$(node --version)
@@ -12,6 +21,11 @@ PNPM_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-pnpm-$PLATFORM-$ARCHITECTURE-node$NODE_V
 echo "--- :npm: Restore cache if present"
 restore_cache "$CACHEKEY"
 restore_cache "$PNPM_CACHEKEY"
+
+if [[ "${RESTORE_ONLY}" ==  'true' ]]; then
+  echo 'Exiting after restoring caches as per --restore-only call parameter.'
+  exit 0
+fi
 
 echo "--- :npm: Install Node dependencies"
 npm ci --unsafe-perm --prefer-offline --no-audit --no-progress "$@"
