@@ -55,9 +55,9 @@ steps:
   - label: Android Unit Tests
     key: android-unit-tests
     plugins:
+      - automattic/git-partial-clone#mokagio/experiments
       - *nvm_plugin
       - *ci_toolkit_plugin
-      - *git-cache-plugin
     agents:
       queue: android
     command: .buildkite/commands/unit-tests-android.sh
@@ -75,7 +75,7 @@ steps:
     plugins:
       - *nvm_plugin
       - *ci_toolkit_plugin
-      - *git-cache-plugin
+      - automattic/git-partial-clone#mokagio/experiments
     agents:
       queue: android
     command: .buildkite/commands/unit-tests-ios.sh
@@ -97,7 +97,7 @@ steps:
       ./gradlew testDebug
     plugins:
       - *ci_toolkit_plugin
-      - *git-cache-plugin
+      - automattic/git-partial-clone#mokagio/experiments
       - *nvm_plugin
     agents:
       queue: android
@@ -111,7 +111,7 @@ steps:
       ./gradlew test
     plugins:
       - *ci_toolkit_plugin
-      - *git-cache-plugin
+      - automattic/git-partial-clone#mokagio/experiments
       - *nvm_plugin
     agents:
       queue: android
@@ -126,7 +126,7 @@ steps:
       - *gb-mobile-docker-container
       # - *ci_toolkit_plugin # unused?
       # - *nvm_plugin
-      - *git-cache-plugin
+      - automattic/git-partial-clone#mokagio/experiments
     command: |
         source /root/.bashrc
 
@@ -162,7 +162,7 @@ steps:
   - label: "Build Android RN Aztec & Publish to S3"
     key: "publish-react-native-aztec-android"
     plugins:
-      - *git-cache-plugin
+      - automattic/git-partial-clone#mokagio/experiments
       - *publish-android-artifacts-docker-container
     command: .buildkite/commands/publish-react-native-aztec-android-artifacts.sh
 
@@ -171,7 +171,7 @@ steps:
       - "js-bundles"
       - "publish-react-native-aztec-android"
     plugins:
-      - *git-cache-plugin
+      - automattic/git-partial-clone#mokagio/experiments
       - *publish-android-artifacts-docker-container
     command: .buildkite/commands/publish-react-native-bridge-android-artifacts.sh
 
@@ -222,7 +222,7 @@ steps:
     command: .buildkite/commands/build-android.sh
     plugins:
       - *ci_toolkit_plugin
-      - *git-cache-plugin
+      - automattic/git-partial-clone#mokagio/experiments
       - *nvm_plugin
     agents:
       queue: android
@@ -233,7 +233,7 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
+      - automattic/git-partial-clone#mokagio/experiments
     agents:
       queue: android
     artifact_paths:
@@ -328,7 +328,7 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
+      - automattic/git-partial-clone#mokagio/experiments
     agents:
       queue: android
     artifact_paths:
@@ -345,7 +345,7 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
+      - automattic/git-partial-clone#mokagio/experiments
     agents:
       queue: android
     artifact_paths:
