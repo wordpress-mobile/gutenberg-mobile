@@ -16,11 +16,17 @@ while [ "$INPUT" != "" ]; do
     INPUT="${1-}"
 done
 
-echo '--- :node: Set up Node depenendencies'
-npm ci --prefer-offline --no-audit --ignore-scripts
-npm ci --prefix gutenberg --prefer-offline --no-audit
+# First, restore the caches, if any
+.buildkite/commands/install-node-dependencies.sh --restore-only
+# Second, set up the gutenberg-mobile dependencies without building the i18n cache (--ignore-scripts)
+# It takes time and we don't need at this point as we are running the tests on top of something already built.
+echo "--- :npm: Install Node dependencies"
+npm ci --prefer-offline --no-progress --no-audit --ignore-scripts
+# Finally, set up the gutenberg submodule dependencies, bypassed by the step above.
+# We need them because some E2E logic lives in gutenber.
+npm ci --prefer-offline --no-progress --no-audit --prefix gutenberg
 
-echo '--- :ios: Set env var for Android E2E testing'
+echo '--- :android: Set env var for Android E2E testing'
 set -x
 export TEST_RN_PLATFORM=android
 export TEST_ENV=sauce
