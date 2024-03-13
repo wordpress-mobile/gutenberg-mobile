@@ -14,6 +14,8 @@ x-common-params:
       # Ensure these settings match what's defined in cache-builder.yml
       bucket: a8c-repo-mirrors
       repo: automattic/gutenberg-mobile/
+  - &git-partial-clone-plugin
+    automattic/git-partial-clone#trunk
   - &publish-android-artifacts-docker-container
     docker#v3.8.0:
       image: 'public.ecr.aws/automattic/android-build-image:v1.3.0'
@@ -40,7 +42,7 @@ steps:
   - label: Lint
     key: lint
     plugins:
-      - automattic/git-partial-clone#mokagio/experiments
+      - *git-partial-clone-plugin
       - *nvm_plugin
     env:
       BUILDKITE_PLUGINS_ALWAYS_CLONE_FRESH: true
@@ -54,7 +56,7 @@ steps:
   - label: Android Unit Tests
     key: android-unit-tests
     plugins:
-      - automattic/git-partial-clone#mokagio/experiments
+      - *git-partial-clone-plugin
       - *nvm_plugin
       - *ci_toolkit_plugin
     agents:
@@ -74,7 +76,7 @@ steps:
     plugins:
       - *nvm_plugin
       - *ci_toolkit_plugin
-      - automattic/git-partial-clone#mokagio/experiments
+      - *git-partial-clone-plugin
     agents:
       queue: android
     command: .buildkite/commands/unit-tests-ios.sh
@@ -94,7 +96,7 @@ steps:
       cd gutenberg/packages/react-native-editor/android
       ./gradlew testDebug
     plugins:
-      - automattic/git-partial-clone#mokagio/experiments
+      - *git-partial-clone-plugin
       - *nvm_plugin
     agents:
       queue: android
@@ -106,7 +108,7 @@ steps:
       cd gutenberg/packages/react-native-bridge/android
       ./gradlew test
     plugins:
-      - automattic/git-partial-clone#mokagio/experiments
+      - *git-partial-clone-plugin
       - *nvm_plugin
     agents:
       queue: android
@@ -121,7 +123,7 @@ steps:
       - *gb-mobile-docker-container
       # - *ci_toolkit_plugin # unused?
       # - *nvm_plugin
-      - automattic/git-partial-clone#mokagio/experiments
+      - *git-partial-clone-plugin
     command: |
         source /root/.bashrc
 
@@ -157,7 +159,7 @@ steps:
   - label: "Build Android RN Aztec & Publish to S3"
     key: "publish-react-native-aztec-android"
     plugins:
-      - automattic/git-partial-clone#mokagio/experiments
+      - *git-partial-clone-plugin
       - *publish-android-artifacts-docker-container
     command: .buildkite/commands/publish-react-native-aztec-android-artifacts.sh
 
@@ -166,7 +168,7 @@ steps:
       - "js-bundles"
       - "publish-react-native-aztec-android"
     plugins:
-      - automattic/git-partial-clone#mokagio/experiments
+      - *git-partial-clone-plugin
       - *publish-android-artifacts-docker-container
     command: .buildkite/commands/publish-react-native-bridge-android-artifacts.sh
 
@@ -217,7 +219,7 @@ steps:
     command: .buildkite/commands/build-android.sh
     plugins:
       - *ci_toolkit_plugin
-      - automattic/git-partial-clone#mokagio/experiments
+      - *git-partial-clone-plugin
       - *nvm_plugin
     agents:
       queue: android
@@ -228,7 +230,7 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - automattic/git-partial-clone#mokagio/experiments
+      - *git-partial-clone-plugin
     agents:
       queue: android
     artifact_paths:
@@ -323,7 +325,7 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - automattic/git-partial-clone#mokagio/experiments
+      - *git-partial-clone-plugin
     agents:
       queue: android
     artifact_paths:
@@ -340,7 +342,7 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - automattic/git-partial-clone#mokagio/experiments
+      - *git-partial-clone-plugin
     agents:
       queue: android
     artifact_paths:
