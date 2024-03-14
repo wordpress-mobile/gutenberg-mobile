@@ -46,7 +46,7 @@ save_cache "$HOME/.npm" "$CACHEKEY"
 # That's because the Jetpack submodule alone uses pnpm.
 # Therefore, if no pnpm cache was available at the start, running with '--prefix gutenberg' would not have generated one and 'save_cache' would fail to find it.
 if echo "$@" | grep -q -- '--prefix gutenberg'; then
-  echo 'Skipping pnpm cach save due to --prefix gutenber parameter while PNPM is used in Jetpack.'
+  echo 'Skipping pnpm cach save due to --prefix gutenberg parameter while PNPM is used in Jetpack.'
   exit 0
 fi
 

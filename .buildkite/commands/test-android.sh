@@ -23,7 +23,7 @@ done
 echo "--- :npm: Install Node dependencies"
 npm ci --prefer-offline --no-progress --no-audit --ignore-scripts
 # Finally, set up the gutenberg submodule dependencies, bypassed by the step above.
-# We need them because some E2E logic lives in gutenber.
+# We need them because some E2E logic lives in gutenberg.
 npm ci --prefer-offline --no-progress --no-audit --prefix gutenberg
 
 echo '--- :android: Set env var for Android E2E testing'
