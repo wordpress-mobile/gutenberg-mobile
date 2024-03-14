@@ -9,11 +9,8 @@ x-common-params:
         - 'WP_CLI_ALLOW_ROOT=true'
         # Increase max available memory for node
         - 'NODE_OPTIONS="--max-old-space-size=4096"'
-  - &git-cache-plugin
-    automattic/git-s3-cache#1.1.4:
-      # Ensure these settings match what's defined in cache-builder.yml
-      bucket: a8c-repo-mirrors
-      repo: automattic/gutenberg-mobile/
+  - &git-partial-clone-plugin
+    automattic/git-partial-clone#0.1.0
   - &publish-android-artifacts-docker-container
     docker#v3.8.0:
       image: 'public.ecr.aws/automattic/android-build-image:v1.3.0'
@@ -41,8 +38,8 @@ steps:
     key: lint
     plugins:
       - *ci_toolkit_plugin
+      - *git-partial-clone-plugin
       - *nvm_plugin
-      - *git-cache-plugin
     agents:
       queue: android
     command: .buildkite/commands/lint.sh
@@ -53,9 +50,9 @@ steps:
   - label: Android Unit Tests
     key: android-unit-tests
     plugins:
+      - *git-partial-clone-plugin
       - *nvm_plugin
       - *ci_toolkit_plugin
-      - *git-cache-plugin
     agents:
       queue: android
     command: .buildkite/commands/unit-tests-android.sh
@@ -73,7 +70,7 @@ steps:
     plugins:
       - *nvm_plugin
       - *ci_toolkit_plugin
-      - *git-cache-plugin
+      - *git-partial-clone-plugin
     agents:
       queue: android
     command: .buildkite/commands/unit-tests-ios.sh
@@ -95,7 +92,7 @@ steps:
       ./gradlew testDebug
     plugins:
       - *ci_toolkit_plugin
-      - *git-cache-plugin
+      - *git-partial-clone-plugin
       - *nvm_plugin
     agents:
       queue: android
@@ -109,7 +106,7 @@ steps:
       ./gradlew test
     plugins:
       - *ci_toolkit_plugin
-      - *git-cache-plugin
+      - *git-partial-clone-plugin
       - *nvm_plugin
     agents:
       queue: android
@@ -124,7 +121,7 @@ steps:
       - *gb-mobile-docker-container
       # - *ci_toolkit_plugin # unused?
       # - *nvm_plugin
-      - *git-cache-plugin
+      - *git-partial-clone-plugin
     command: |
         source /root/.bashrc
 
@@ -160,7 +157,7 @@ steps:
   - label: "Build Android RN Aztec & Publish to S3"
     key: "publish-react-native-aztec-android"
     plugins:
-      - *git-cache-plugin
+      - *git-partial-clone-plugin
       - *publish-android-artifacts-docker-container
     command: .buildkite/commands/publish-react-native-aztec-android-artifacts.sh
 
@@ -169,7 +166,7 @@ steps:
       - "js-bundles"
       - "publish-react-native-aztec-android"
     plugins:
-      - *git-cache-plugin
+      - *git-partial-clone-plugin
       - *publish-android-artifacts-docker-container
     command: .buildkite/commands/publish-react-native-bridge-android-artifacts.sh
 
@@ -181,7 +178,6 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
     agents:
       queue: mac
     env: *xcode_agent_env
@@ -192,7 +188,6 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
     artifact_paths:
       - ./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
     agents:
@@ -205,7 +200,6 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
     agents:
@@ -220,7 +214,7 @@ steps:
     command: .buildkite/commands/build-android.sh
     plugins:
       - *ci_toolkit_plugin
-      - *git-cache-plugin
+      - *git-partial-clone-plugin
       - *nvm_plugin
     agents:
       queue: android
@@ -231,7 +225,7 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
+      - *git-partial-clone-plugin
     agents:
       queue: android
     artifact_paths:
@@ -259,7 +253,6 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
     agents:
@@ -276,7 +269,6 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
     agents:
@@ -293,7 +285,6 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
     agents:
@@ -309,7 +300,6 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
     agents:
@@ -326,7 +316,7 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
+      - *git-partial-clone-plugin
     agents:
       queue: android
     artifact_paths:
@@ -343,7 +333,7 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
+      - *git-partial-clone-plugin
     agents:
       queue: android
     artifact_paths:
