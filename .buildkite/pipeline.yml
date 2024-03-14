@@ -45,8 +45,6 @@ steps:
       - *ci_toolkit_plugin
       - *git-partial-clone-plugin
       - *nvm_plugin
-    env:
-      BUILDKITE_PLUGINS_ALWAYS_CLONE_FRESH: true
     agents:
       queue: android
     command: .buildkite/commands/lint.sh
