@@ -15,7 +15,7 @@ x-common-params:
       bucket: a8c-repo-mirrors
       repo: automattic/gutenberg-mobile/
   - &git-partial-clone-plugin
-    automattic/git-partial-clone#trunk
+    automattic/git-partial-clone#0.1.0
   - &publish-android-artifacts-docker-container
     docker#v3.8.0:
       image: 'public.ecr.aws/automattic/android-build-image:v1.3.0'
