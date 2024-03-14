@@ -9,11 +9,6 @@ x-common-params:
         - 'WP_CLI_ALLOW_ROOT=true'
         # Increase max available memory for node
         - 'NODE_OPTIONS="--max-old-space-size=4096"'
-  - &git-cache-plugin
-    automattic/git-s3-cache#1.1.4:
-      # Ensure these settings match what's defined in cache-builder.yml
-      bucket: a8c-repo-mirrors
-      repo: automattic/gutenberg-mobile/
   - &git-partial-clone-plugin
     automattic/git-partial-clone#0.1.0
   - &publish-android-artifacts-docker-container
@@ -183,7 +178,6 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
     agents:
       queue: mac
     env: *xcode_agent_env
@@ -194,7 +188,6 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
     artifact_paths:
       - ./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
     agents:
@@ -207,7 +200,6 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
     agents:
@@ -261,7 +253,6 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
     agents:
@@ -278,7 +269,6 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
     agents:
@@ -295,7 +285,6 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
     agents:
@@ -311,7 +300,6 @@ steps:
     plugins:
       - *ci_toolkit_plugin
       - *nvm_plugin
-      - *git-cache-plugin
     artifact_paths:
       - reports/test-results/ios-test-results.xml
     agents:
