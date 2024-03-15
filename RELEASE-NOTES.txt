@@ -3,6 +3,7 @@ Unreleased
 * [**] [internal] Upgrade React Native to version 0.73.3 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6590]
 * [**] Add error boundary components and exception logging [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6655]
 * [**] Fix crash occurring when the URL associated with a Video block is changed too quickly [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6729]
+* [**] Improve the File block UI [https://github.com/wordpress/gutenberg/pull/59863]
 
 1.114.1
 ---
