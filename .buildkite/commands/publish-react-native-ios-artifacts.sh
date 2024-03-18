@@ -2,12 +2,13 @@
 
 echo "--- :arrow_down: Download iOS JS bundle"
 buildkite-agent artifact download bundle/ios/App.js .
+buildkite-agent artifact download bundle/ios/App.composed.js.map .
 buildkite-agent artifact download ios-assets.tar.gz .
 mkdir -p ios-xcframework/Gutenberg/Resources
 tar -xzvf ios-assets.tar.gz -C ios-xcframework/Gutenberg/Resources/
 
 echo '--- :node: Set up node_modules for RNReanimated'
-npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+.buildkite/commands/install-node-dependencies.sh
 
 echo "--- :rubygems: Setting up Gems"
 cd ./ios-xcframework

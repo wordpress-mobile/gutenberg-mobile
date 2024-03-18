@@ -82,7 +82,13 @@ function fetch_translations() {
 
 # Set target path
 if [[ -n "${LOCAL_PATH:-}" ]]; then
-  TARGET_PATH=$LOCAL_PATH
+  # Ensure the target path is an absolute path
+  # Use greadlink on macOS, readlink on Linux
+  if [[ "$(uname)" == "Darwin" ]]; then
+      TARGET_PATH=$(greadlink -f "$LOCAL_PATH")
+  else
+      TARGET_PATH=$(readlink -f "$LOCAL_PATH")
+  fi
 else
   TARGET_PATH=$(mktemp -d)
   trap '{ rm -rf -- "$TARGET_PATH"; }' EXIT

@@ -1,7 +1,6 @@
 #!/bin/bash -eu
 
-echo "--- :npm: Set up Node dependencies"
-npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+.buildkite/commands/install-node-dependencies.sh
 
 echo '--- :android: Set env var for Android E2E testing'
 set -x

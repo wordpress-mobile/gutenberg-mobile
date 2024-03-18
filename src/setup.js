@@ -9,6 +9,7 @@ import { initialHtmlGutenberg } from '@wordpress/react-native-editor';
  */
 import initialHtml from './initial-html';
 import initAnalytics from './analytics';
+import initErrorLogging from './errorLogging';
 
 const setupHooks = () => {
 	// Hook triggered before the editor is rendered
@@ -75,4 +76,5 @@ const setupHooks = () => {
 export default () => {
 	initAnalytics();
 	setupHooks();
+	initErrorLogging();
 };

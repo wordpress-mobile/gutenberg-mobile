@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D9EA4BE2B87A2570086B30F /* App.composed.js.map in Resources */ = {isa = PBXBuildFile; fileRef = 1D9EA4BD2B87A2470086B30F /* App.composed.js.map */; };
 		2F4F38292B86842C006EF573 /* external-style-overrides.css in Resources */ = {isa = PBXBuildFile; fileRef = 2F4F38282B86842C006EF573 /* external-style-overrides.css */; };
 		2F4F382B2B86844A006EF573 /* extra-localstorage-entries.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F4F382A2B86844A006EF573 /* extra-localstorage-entries.js */; };
 		2F4F382D2B868457006EF573 /* remove-nux.js in Resources */ = {isa = PBXBuildFile; fileRef = 2F4F382C2B868457006EF573 /* remove-nux.js */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D9EA4BD2B87A2470086B30F /* App.composed.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = App.composed.js.map; path = ../../../bundle/ios/App.composed.js.map; sourceTree = "<group>"; };
 		2F4F38282B86842C006EF573 /* external-style-overrides.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = "external-style-overrides.css"; path = "../../../resources/unsupported-block-editor/external-style-overrides.css"; sourceTree = "<group>"; };
 		2F4F382A2B86844A006EF573 /* extra-localstorage-entries.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "extra-localstorage-entries.js"; path = "../../../resources/unsupported-block-editor/extra-localstorage-entries.js"; sourceTree = "<group>"; };
 		2F4F382C2B868457006EF573 /* remove-nux.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "remove-nux.js"; path = "../../../resources/unsupported-block-editor/remove-nux.js"; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				2F4F382A2B86844A006EF573 /* extra-localstorage-entries.js */,
 				2F4F38282B86842C006EF573 /* external-style-overrides.css */,
 				3FA0C5802A1C8C9700600A9A /* App.js */,
+				1D9EA4BD2B87A2470086B30F /* App.composed.js.map */,
 				3F12363F29F6B21300AF54A4 /* content-functions.js */,
 				3F12364429F6B21300AF54A4 /* editor-behavior-overrides.js */,
 				3F12363D29F6B21300AF54A4 /* editor-style-overrides.css */,
@@ -269,6 +272,7 @@
 				3F12364C29F6B21300AF54A4 /* wp-bar-override.css in Resources */,
 				3F12365029F6B23300AF54A4 /* supported-blocks.json in Resources */,
 				3FA0C5812A1C8C9700600A9A /* App.js in Resources */,
+				1D9EA4BE2B87A2570086B30F /* App.composed.js.map in Resources */,
 				2F4F38292B86842C006EF573 /* external-style-overrides.css in Resources */,
 				3F12364729F6B21300AF54A4 /* insert-block.js in Resources */,
 			);

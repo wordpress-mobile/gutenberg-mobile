@@ -77,6 +77,8 @@
     <string name="gutenberg_native_build_layouts" tools:ignore="UnusedResources">Build layouts</string>
     <string name="gutenberg_native_button_link_url" tools:ignore="UnusedResources">Button Link URL</string>
     <string name="gutenberg_native_button_position" tools:ignore="UnusedResources">Button position</string>
+    <string name="gutenberg_native_button_to_copy_error_details" tools:ignore="UnusedResources">Button to copy error details</string>
+    <string name="gutenberg_native_button_to_copy_post_text" tools:ignore="UnusedResources">Button to copy post text</string>
     <string name="gutenberg_native_cancel_search" tools:ignore="UnusedResources">Cancel search</string>
     <string name="gutenberg_native_change_block_position" tools:ignore="UnusedResources">Change block position</string>
     <string name="gutenberg_native_changes_to_featured_image_will_not_be_affected_by_the_undo_redo_b" tools:ignore="UnusedResources">Changes to featured image will not be affected by the undo/redo buttons.</string>
@@ -96,7 +98,9 @@
     <string name="gutenberg_native_contact_support" tools:ignore="UnusedResources">Contact support</string>
     <string name="gutenberg_native_convert_to_link" tools:ignore="UnusedResources">Convert to link</string>
     <string name="gutenberg_native_copied_block" tools:ignore="UnusedResources">Copied block</string>
+    <string name="gutenberg_native_copy_error_details" tools:ignore="UnusedResources">Copy error details</string>
     <string name="gutenberg_native_copy_file_url" tools:ignore="UnusedResources">Copy file URL</string>
+    <string name="gutenberg_native_copy_post_text" tools:ignore="UnusedResources">Copy post text</string>
     <!-- translators: Copy URL from the clipboard, https://sample.url -->
     <string name="gutenberg_native_copy_url_from_the_clipboard_s" tools:ignore="UnusedResources">Copy URL from the clipboard, %s</string>
     <string name="gutenberg_native_create_embed" tools:ignore="UnusedResources">Create embed</string>
@@ -368,12 +372,15 @@ translators: %s: Select control option value e.g: "Auto, 25%". -->
     <string name="gutenberg_native_synced_patterns" tools:ignore="UnusedResources">Synced patterns</string>
     <string name="gutenberg_native_take_a_photo" tools:ignore="UnusedResources">Take a Photo</string>
     <string name="gutenberg_native_take_a_video" tools:ignore="UnusedResources">Take a Video</string>
+    <string name="gutenberg_native_tap_here_to_copy_error_details" tools:ignore="UnusedResources">Tap here to copy error details</string>
+    <string name="gutenberg_native_tap_here_to_copy_post_text" tools:ignore="UnusedResources">Tap here to copy post text</string>
     <string name="gutenberg_native_tap_here_to_show_help" tools:ignore="UnusedResources">Tap here to show help</string>
     <string name="gutenberg_native_tap_here_to_show_more_details" tools:ignore="UnusedResources">Tap here to show more details.</string>
     <string name="gutenberg_native_tap_to_hide_the_keyboard" tools:ignore="UnusedResources">Tap to hide the keyboard</string>
     <string name="gutenberg_native_text_color" tools:ignore="UnusedResources">Text color</string>
     <string name="gutenberg_native_text_formatting_controls_are_located_within_the_toolbar_positione" tools:ignore="UnusedResources">Text formatting controls are located within the toolbar positioned above the keyboard while editing a text block</string>
     <string name="gutenberg_native_the_basics" tools:ignore="UnusedResources">The basics</string>
+    <string name="gutenberg_native_the_editor_has_encountered_an_unexpected_error" tools:ignore="UnusedResources">The editor has encountered an unexpected error</string>
     <string name="gutenberg_native_this_color_combination_may_be_hard_for_people_to_read_try_using_a" tools:ignore="UnusedResources">This color combination may be hard for people to read. Try using a darker background color and/or a brighter text color.</string>
     <string name="gutenberg_native_this_color_combination_may_be_hard_for_people_to_read_try_using_a_a31656b3" tools:ignore="UnusedResources">This color combination may be hard for people to read. Try using a brighter background color and/or a darker text color.</string>
     <string name="gutenberg_native_three" tools:ignore="UnusedResources">Three</string>
@@ -418,5 +425,6 @@ translators: %s: Select control option value e.g: "Auto, 25%". -->
     <string name="gutenberg_native_x_axis_position" tools:ignore="UnusedResources">X-Axis Position</string>
     <string name="gutenberg_native_y_axis_position" tools:ignore="UnusedResources">Y-Axis Position</string>
     <string name="gutenberg_native_you_can_also_rearrange_blocks_by_tapping_a_block_and_then_tapping" tools:ignore="UnusedResources">You can also rearrange blocks by tapping a block and then tapping the up and down arrows that appear on the bottom left side of the block to move it up or down.</string>
+    <string name="gutenberg_native_you_can_copy_your_post_text_in_case_your_content_is_impacted_copy" tools:ignore="UnusedResources">You can copy your post text in case your content is impacted. Copy error details to debug and share with support.</string>
     <string name="gutenberg_native_you_can_edit_this_block_using_the_web_version_of_the_editor" tools:ignore="UnusedResources">You can edit this block using the web version of the editor.</string>
 </resources>

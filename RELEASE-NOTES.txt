@@ -1,7 +1,16 @@
 Unreleased
 ---
-* [**] [internal] Upgrade React Native to version 0.73.3 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6590]
 * [**] Highlight color formatting style improvements [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6517]
+
+1.115.0
+---
+* [**] [internal] Upgrade React Native to version 0.73.3 [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6590]
+* [**] Add error boundary components and exception logging [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6655]
+* [**] Fix crash occurring when the URL associated with a Video block is changed too quickly [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6729]
+
+1.114.1
+---
+* [**] Fix a crash produced when the content of a synced pattern is updated [https://github.com/WordPress/gutenberg/pull/59632]
 
 1.114.0
 ---

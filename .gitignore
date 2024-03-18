@@ -40,10 +40,7 @@ gen/
 build/
 build.log
 bundle/android/raw/*
-bundle/android/App.js
-bundle/android/App.js.map
-bundle/android/App.text.js
-bundle/android/App.text.js.map
+bundle/android/App.*
 bundle/ios/App.*
 bundle/ios/assets/gutenberg/packages/block-library/src/*
 
