@@ -16,10 +16,8 @@ updates:
     schedule:
       interval: "daily"
       time: "19:00" # UTC time
-    groups:
-      submodules:
-        patterns:
-        - "gutenberg"
+    allow:
+      - dependency-name: "gutenberg"
     target-branch: trunk
 
   - package-ecosystem: "gitsubmodule"
@@ -27,8 +25,6 @@ updates:
     schedule:
       interval: "daily"
       time: "21:00"
-    groups:
-      submodules:
-        patterns:
-        - "jetpack"
-        - "block-experiments"
+    allow:
+      - dependency-name: "jetpack"
+      - dependency-name: "block-experiments"
