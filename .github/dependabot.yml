@@ -3,23 +3,32 @@
 # Please see the documentation for all configuration options:
 # https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/
 
-# We are using a configuration for each submodule so they run at a different time
+# We are using two configurations so they run at a different time
 # to avoid multiple PRs running CI and SauceLabs.
+# Currently, there's a limitation with GitHub and multiple combinations of
+# package-ecosystem, as a workaround one of them has a target-branch.
+# https://github.com/dependabot/dependabot-core/issues/1778
 
 version: 2
 updates:
   - package-ecosystem: "gitsubmodule" # See documentation for possible values
-    directory: "/gutenberg" # Location of package manifests
+    directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
-      time: "12:00" # UTC time
+      time: "19:00" # UTC time
+    groups:
+      submodules:
+        patterns:
+        - "gutenberg"
+    target-branch: trunk
+
   - package-ecosystem: "gitsubmodule"
-    directory: "/jetpack"
+    directory: "/"
     schedule:
       interval: "daily"
-      time: "14:00"
-  - package-ecosystem: "gitsubmodule"
-    directory: "/block-experiments"
-    schedule:
-      interval: "daily"
-      time: "16:00"
+      time: "21:00"
+    groups:
+      submodules:
+        patterns:
+        - "jetpack"
+        - "block-experiments"
