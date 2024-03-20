@@ -169,10 +169,17 @@ cp -r "$XCFRAMEWORKS_DIR/yoga.xcframework" "$ARCHIVE_FRAMEWORKS_PATH"
 # We don't want the Catalyst slice because 1) it's huge and 2) we don't need it at the moment
 rsync -a "$HERMES_XCFRAMEWORK" "$ARCHIVE_FRAMEWORKS_PATH" --exclude '*-maccatalyst'
 
+# Copy React Native bundle and source map for other uses in the host app
+RN_BUNDLE_SOURCE_MAP_DIR_NAME="react-native-bundle-source-map"
+mkdir -p "$XCFRAMEWORKS_DIR/$RN_BUNDLE_SOURCE_MAP_DIR_NAME"
+cp ../bundle/ios/App.js.map "$XCFRAMEWORKS_DIR/$RN_BUNDLE_SOURCE_MAP_DIR_NAME/main.jsbundle"
+cp ../bundle/ios/App.composed.js.map "$XCFRAMEWORKS_DIR/$RN_BUNDLE_SOURCE_MAP_DIR_NAME/main.jsbundle.map"
+
 ARCHIVE_PATH="$XCFRAMEWORKS_DIR/$MAIN_FRAMEWORK_NAME.tar.gz"
 
 tar -czf "$ARCHIVE_PATH" -C "$XCFRAMEWORKS_DIR" \
   "$ARCHIVE_FRAMEWORKS_DIR_NAME" \
-  "$DUMMY_FILE_NAME"
+  "$DUMMY_FILE_NAME" \
+  "$RN_BUNDLE_SOURCE_MAP_DIR_NAME"
 
 echo "Gutenberg XCFrameworks archive generated at $ARCHIVE_PATH"
