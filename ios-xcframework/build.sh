@@ -172,7 +172,7 @@ rsync -a "$HERMES_XCFRAMEWORK" "$ARCHIVE_FRAMEWORKS_PATH" --exclude '*-maccataly
 # Copy React Native bundle and source map for other uses in the host app
 RN_BUNDLE_SOURCE_MAP_DIR_NAME="react-native-bundle-source-map"
 mkdir -p "$XCFRAMEWORKS_DIR/$RN_BUNDLE_SOURCE_MAP_DIR_NAME"
-cp ../bundle/ios/App.js.map "$XCFRAMEWORKS_DIR/$RN_BUNDLE_SOURCE_MAP_DIR_NAME/main.jsbundle"
+cp ../bundle/ios/App.js "$XCFRAMEWORKS_DIR/$RN_BUNDLE_SOURCE_MAP_DIR_NAME/main.jsbundle"
 cp ../bundle/ios/App.composed.js.map "$XCFRAMEWORKS_DIR/$RN_BUNDLE_SOURCE_MAP_DIR_NAME/main.jsbundle.map"
 
 ARCHIVE_PATH="$XCFRAMEWORKS_DIR/$MAIN_FRAMEWORK_NAME.tar.gz"
