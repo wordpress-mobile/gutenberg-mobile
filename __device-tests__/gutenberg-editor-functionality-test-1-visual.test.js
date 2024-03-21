@@ -376,4 +376,88 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			expect( screenshot ).toMatchImageSnapshot();
 		} );
 	} );
+
+	describe( 'Highlight color', () => {
+		let screenshot;
+		it( 'should set a custom highlight color', async () => {
+			await editorPage.initializeEditor();
+
+			const defaultBlockAppenderElement =
+				await editorPage.getDefaultBlockAppenderElement();
+			await defaultBlockAppenderElement.click();
+			const toolbar = await editorPage.getToolbar();
+
+			await editorPage.toggleHighlightColor( 'Pale pink' );
+
+			await editorPage.typeKeyString( 'Hey ' );
+
+			screenshot = await takeScreenshotByElement(
+				await toolbar.$( '~Text color' ),
+				{ padding: -5 }
+			);
+			expect( screenshot ).toMatchImageSnapshot();
+
+			await editorPage.toggleHighlightColor( 'Vivid red' );
+
+			await editorPage.typeKeyString( 'there ' );
+
+			screenshot = await takeScreenshotByElement(
+				await toolbar.$( '~Text color' ),
+				{ padding: -5 }
+			);
+			expect( screenshot ).toMatchImageSnapshot();
+
+			await editorPage.toggleHighlightColor( 'Luminous vivid orange' );
+
+			await editorPage.typeKeyString( 'how are you?' );
+
+			screenshot = await takeScreenshotByElement(
+				await toolbar.$( '~Text color' ),
+				{ padding: -5 }
+			);
+			expect( screenshot ).toMatchImageSnapshot();
+
+			await editorPage.dismissKeyboard();
+			await editorPage.driver.waitUntil( async function () {
+				return ! ( await editorPage.driver.isKeyboardShown() );
+			} );
+
+			let paragraphBlockElement = await editorPage.getBlockAtPosition(
+				blockNames.paragraph
+			);
+			screenshot = await takeScreenshotByElement( paragraphBlockElement );
+			expect( screenshot ).toMatchImageSnapshot();
+
+			// Add a new Paragraph block
+			await editorPage.addParagraphBlockByTappingEmptyAreaBelowLastBlock();
+			paragraphBlockElement = await editorPage.getBlockAtPosition(
+				blockNames.paragraph,
+				2
+			);
+			expect( paragraphBlockElement ).toBeTruthy();
+
+			await editorPage.typeKeyString( 'Hey there' );
+
+			await editorPage.toggleHighlightColor( 'Luminous vivid orange' );
+
+			await editorPage.typeKeyString( ' how are you?' );
+
+			await editorPage.toggleHighlightColor( 'Pale pink' );
+
+			await editorPage.typeKeyString( ' all good!.' );
+
+			// Reset color
+			await editorPage.toggleHighlightColor();
+
+			await editorPage.typeKeyString( ' No colored text.' );
+
+			await editorPage.dismissKeyboard();
+			await editorPage.driver.waitUntil( async function () {
+				return ! ( await editorPage.driver.isKeyboardShown() );
+			} );
+
+			screenshot = await takeScreenshotByElement( paragraphBlockElement );
+			expect( screenshot ).toMatchImageSnapshot();
+		} );
+	} );
 } );
