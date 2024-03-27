@@ -1,5 +1,8 @@
 Unreleased
 ---
+
+1.116.0
+---
 * [**] Highlight color formatting style improvements [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6517]
 * [*] Fix an Aztec editor crash occurring on some occasions when the keyboard suggestions are used [https://github.com/wordpress-mobile/gutenberg-mobile/pull/6765]
 

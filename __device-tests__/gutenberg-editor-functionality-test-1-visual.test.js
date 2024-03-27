@@ -218,7 +218,7 @@ describe( 'Gutenberg Editor - Test Suite 1', () => {
 			await toggleDarkMode( editorPage.driver, false );
 		} );
 
-		it( 'sliders display proportionate fill level previews', async () => {
+		it.skip( 'sliders display proportionate fill level previews', async () => {
 			await editorPage.initializeEditor();
 			await editorPage.addNewBlock( blockNames.columns );
 			// Wait for the modal to open

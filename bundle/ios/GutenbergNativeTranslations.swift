@@ -90,6 +90,7 @@ private func dummy() {
     _ = NSLocalizedString("Choose images", comment: "")
     _ = NSLocalizedString("Choose video", comment: "")
     _ = NSLocalizedString("Clear search", comment: "")
+    _ = NSLocalizedString("Clear selected color", comment: "")
     _ = NSLocalizedString("Column %d", comment: "translators: %d: column index.")
     _ = NSLocalizedString("Column Settings", comment: "")
     _ = NSLocalizedString("Columns Settings", comment: "")
