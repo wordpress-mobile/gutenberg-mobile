@@ -91,6 +91,7 @@
     <string name="gutenberg_native_choose_images" tools:ignore="UnusedResources">Choose images</string>
     <string name="gutenberg_native_choose_video" tools:ignore="UnusedResources">Choose video</string>
     <string name="gutenberg_native_clear_search" tools:ignore="UnusedResources">Clear search</string>
+    <string name="gutenberg_native_clear_selected_color" tools:ignore="UnusedResources">Clear selected color</string>
     <!-- translators: %d: column index. -->
     <string name="gutenberg_native_column_d" tools:ignore="UnusedResources">Column %d</string>
     <string name="gutenberg_native_column_settings" tools:ignore="UnusedResources">Column Settings</string>
