@@ -22,6 +22,14 @@ echo "--- :npm: Restore cache if present"
 restore_cache "$CACHEKEY"
 restore_cache "$PNPM_CACHEKEY"
 
+# Check if /files/ folder exists after restoring cache
+if [ -d "./files" ]; then
+  echo "The folder /files/ exists."
+else
+  echo "The folder /files/ does not exist."
+fi
+
+
 if [[ "${RESTORE_ONLY}" ==  'true' ]]; then
   echo 'Exiting after restoring caches as per --restore-only call parameter.'
   exit 0
