@@ -28,6 +28,7 @@ fi
 echo "--- :npm: Restore cache if present"
 restore_cache "$CACHEKEY"
 
+mkdir -p "$PNPM_PATH"
 pushd "$PNPM_PATH"
 restore_cache "$PNPM_CACHEKEY"
 popd
