@@ -36,8 +36,6 @@ pushd "$PNPM_PATH"
 restore_cache "$PNPM_CACHEKEY"
 popd
 
-if [ -d "$PNPM_PATH" ]; then echo "PNPM cache path exists: $PNPM_PATH"; else echo "PNPM cache path does not exist: $PNPM_PATH"; fi
-
 if [[ "${RESTORE_ONLY}" ==  'true' ]]; then
   echo 'Exiting after restoring caches as per --restore-only call parameter.'
   exit 0
