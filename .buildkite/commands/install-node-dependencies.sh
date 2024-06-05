@@ -17,10 +17,20 @@ GUTENBERG_PACKAGE_HASH=$(hash_file gutenberg/package-lock.json)
 JETPACK_PACKAGE_HASH=$(hash_file jetpack/pnpm-lock.yaml)
 CACHEKEY="$BUILDKITE_PIPELINE_SLUG-npm-$PLATFORM-$ARCHITECTURE-node$NODE_VERSION-$PACKAGE_HASH-$GUTENBERG_PACKAGE_HASH"
 PNPM_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-pnpm-$PLATFORM-$ARCHITECTURE-node$NODE_VERSION-$JETPACK_PACKAGE_HASH"
+PNPM_CACHE_FOLDER="store"
+
+if [ "$PLATFORM" = "Darwin" ]; then
+  PNPM_PATH="$HOME/Library/pnpm"
+elif [ "$PLATFORM" = "Linux" ]; then
+  PNPM_PATH="$HOME/.local/share/pnpm"
+fi
 
 echo "--- :npm: Restore cache if present"
 restore_cache "$CACHEKEY"
+
+pushd "$PNPM_PATH"
 restore_cache "$PNPM_CACHEKEY"
+popd
 
 if [ "$(uname -s)" = "Darwin" ]; then PNPM_PATH="$HOME/Library/pnpm/store/v3"; elif [ "$(uname -s)" = "Linux" ]; then PNPM_PATH="$HOME/.local/share/pnpm/store/v3"; else echo "Unsupported platform: $(uname -s)"; exit 1; fi; if [ -d "$PNPM_PATH" ]; then echo "PNPM cache path exists: $PNPM_PATH"; else echo "PNPM cache path does not exist: $PNPM_PATH"; fi
 
@@ -53,13 +63,7 @@ if echo "$@" | grep -q -- '--prefix gutenberg'; then
   exit 0
 fi
 
-if [ "$PLATFORM" = "Darwin" ]; then
-  PNPM_PATH="$HOME/Library/pnpm/store/v3"
-elif [ "$PLATFORM" = "Linux" ]; then
-  PNPM_PATH="$HOME/.local/share/pnpm/store/v3"
-else
-  echo "Unsupported platform: $PLATFORM."
-  exit 1
-fi
-
-save_cache "$PNPM_PATH" "$PNPM_CACHEKEY"
+mkdir -p "$PNPM_PATH"
+pushd "$PNPM_PATH"
+save_cache "$PNPM_CACHE_FOLDER" "$PNPM_CACHEKEY"
+popd
