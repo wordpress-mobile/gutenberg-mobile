@@ -67,7 +67,12 @@ rm -rf "$HOME/.npm/_cacache/tmp"
 pushd "$HOME"
 save_cache "$NPM_CACHE_FOLDER" "$NPM_CACHEKEY"
 popd
-save_cache "$I18N_CACHE_FOLDER" "$I18N_CACHEKEY"
+
+if [ -d "$I18N_CACHE_FOLDER" ]; then
+  save_cache "$I18N_CACHE_FOLDER" "$I18N_CACHEKEY"
+else
+  echo "Directory $I18N_CACHE_FOLDER does not exist. Skipping..."
+fi
 
 # If we attempted to save the pnpm cache when npm run with '--prefix gutenberg', the command might fail.
 # That's because the Jetpack submodule alone uses pnpm.
