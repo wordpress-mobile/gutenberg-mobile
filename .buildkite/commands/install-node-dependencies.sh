@@ -12,13 +12,20 @@ done
 PLATFORM=$(uname -s)
 ARCHITECTURE=$(uname -m)
 NODE_VERSION=$(node --version)
+PACKAGE_VERSION=$(jq -r .version package.json)
+
 PACKAGE_HASH=$(hash_file package-lock.json)
 GUTENBERG_PACKAGE_HASH=$(hash_file gutenberg/package-lock.json)
 JETPACK_PACKAGE_HASH=$(hash_file jetpack/pnpm-lock.yaml)
-CACHEKEY="$BUILDKITE_PIPELINE_SLUG-npm-$PLATFORM-$ARCHITECTURE-node-$NODE_VERSION-$PACKAGE_HASH-$GUTENBERG_PACKAGE_HASH"
+
+NPM_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-npm-$PLATFORM-$ARCHITECTURE-node-$NODE_VERSION-$PACKAGE_HASH-$GUTENBERG_PACKAGE_HASH"
+NPM_CACHE_FOLDER=".npm"
+
 PNPM_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-pnpm-$PLATFORM-$ARCHITECTURE-node-$NODE_VERSION-$JETPACK_PACKAGE_HASH"
 PNPM_CACHE_FOLDER="store"
-NPM_CACHE_FOLDER=".npm"
+
+I18N_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-i18n-$PLATFORM-$ARCHITECTURE-node-$NODE_VERSION-$PACKAGE_VERSION"
+I18N_CACHE_FOLDER="src/i18n-cache"
 
 if [ "$PLATFORM" = "Darwin" ]; then
   PNPM_PATH="$HOME/Library/pnpm"
@@ -28,13 +35,15 @@ fi
 
 echo "--- :npm: Restore cache if present"
 pushd "$HOME"
-restore_cache "$CACHEKEY"
+restore_cache "$NPM_CACHEKEY"
 popd
 
 mkdir -p "$PNPM_PATH"
 pushd "$PNPM_PATH"
 restore_cache "$PNPM_CACHEKEY"
 popd
+
+restore_cache "$I18N_CACHEKEY"
 
 if [[ "${RESTORE_ONLY}" ==  'true' ]]; then
   echo 'Exiting after restoring caches as per --restore-only call parameter.'
@@ -56,8 +65,9 @@ echo "--- :npm: Save cache if necessary"
 # Example: https://buildkite.com/automattic/gutenberg-mobile/builds/8857#018e37eb-7afc-4280-b736-cba76f02f1a3/524
 rm -rf "$HOME/.npm/_cacache/tmp"
 pushd "$HOME"
-save_cache "$NPM_CACHE_FOLDER" "$CACHEKEY"
+save_cache "$NPM_CACHE_FOLDER" "$NPM_CACHEKEY"
 popd
+save_cache "$I18N_CACHE_FOLDER" "$I18N_CACHEKEY"
 
 # If we attempted to save the pnpm cache when npm run with '--prefix gutenberg', the command might fail.
 # That's because the Jetpack submodule alone uses pnpm.
