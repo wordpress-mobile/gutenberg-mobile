@@ -33,7 +33,7 @@ pushd "$PNPM_PATH"
 restore_cache "$PNPM_CACHEKEY"
 popd
 
-if [ "$(uname -s)" = "Darwin" ]; then PNPM_PATH="$HOME/Library/pnpm/store/v3"; elif [ "$(uname -s)" = "Linux" ]; then PNPM_PATH="$HOME/.local/share/pnpm/store/v3"; else echo "Unsupported platform: $(uname -s)"; exit 1; fi; if [ -d "$PNPM_PATH" ]; then echo "PNPM cache path exists: $PNPM_PATH"; else echo "PNPM cache path does not exist: $PNPM_PATH"; fi
+if [ -d "$PNPM_PATH" ]; then echo "PNPM cache path exists: $PNPM_PATH"; else echo "PNPM cache path does not exist: $PNPM_PATH"; fi
 
 if [[ "${RESTORE_ONLY}" ==  'true' ]]; then
   echo 'Exiting after restoring caches as per --restore-only call parameter.'
