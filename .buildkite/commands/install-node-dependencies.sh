@@ -15,9 +15,10 @@ NODE_VERSION=$(node --version)
 PACKAGE_HASH=$(hash_file package-lock.json)
 GUTENBERG_PACKAGE_HASH=$(hash_file gutenberg/package-lock.json)
 JETPACK_PACKAGE_HASH=$(hash_file jetpack/pnpm-lock.yaml)
-CACHEKEY="$BUILDKITE_PIPELINE_SLUG-npm-$PLATFORM-$ARCHITECTURE-node$NODE_VERSION-$PACKAGE_HASH-$GUTENBERG_PACKAGE_HASH"
+CACHEKEY="$BUILDKITE_PIPELINE_SLUG-npm-$PLATFORM-$ARCHITECTURE-node-$NODE_VERSION-$PACKAGE_HASH-$GUTENBERG_PACKAGE_HASH"
 PNPM_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-pnpm-$PLATFORM-$ARCHITECTURE-node-$NODE_VERSION-$JETPACK_PACKAGE_HASH"
 PNPM_CACHE_FOLDER="store"
+NPM_CACHE_FOLDER=".npm"
 
 if [ "$PLATFORM" = "Darwin" ]; then
   PNPM_PATH="$HOME/Library/pnpm"
@@ -26,7 +27,9 @@ elif [ "$PLATFORM" = "Linux" ]; then
 fi
 
 echo "--- :npm: Restore cache if present"
+pushd "$HOME"
 restore_cache "$CACHEKEY"
+popd
 
 mkdir -p "$PNPM_PATH"
 pushd "$PNPM_PATH"
@@ -54,7 +57,9 @@ echo "--- :npm: Save cache if necessary"
 #
 # Example: https://buildkite.com/automattic/gutenberg-mobile/builds/8857#018e37eb-7afc-4280-b736-cba76f02f1a3/524
 rm -rf "$HOME/.npm/_cacache/tmp"
-save_cache "$HOME/.npm" "$CACHEKEY"
+pushd "$HOME"
+save_cache "$NPM_CACHE_FOLDER" "$CACHEKEY"
+popd
 
 # If we attempted to save the pnpm cache when npm run with '--prefix gutenberg', the command might fail.
 # That's because the Jetpack submodule alone uses pnpm.
@@ -64,7 +69,6 @@ if echo "$@" | grep -q -- '--prefix gutenberg'; then
   exit 0
 fi
 
-mkdir -p "$PNPM_PATH"
 pushd "$PNPM_PATH"
 save_cache "$PNPM_CACHE_FOLDER" "$PNPM_CACHEKEY"
 popd
