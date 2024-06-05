@@ -29,17 +29,7 @@ fi
 
 echo "--- :npm: Install Node dependencies"
 
-MAX_SOCKETS=15 # Default value from npm
-
-# To avoid constant ECONNRESET errors a limit is set for Linux,
-# as this is not happening with the Mac jobs.
-# This issue is being tracked here:
-# https://github.com/npm/cli/issues/4652
-if [ "$PLATFORM" = "Linux" ]; then
-  MAX_SOCKETS=1
-fi
-
-npm ci --unsafe-perm --prefer-offline --no-audit --no-progress --maxsockets "$MAX_SOCKETS" "$@"
+npm ci --unsafe-perm --prefer-offline --no-audit --no-progress "$@"
 
 echo "--- :npm: Save cache if necessary"
 # Notice that we don't cache the local node_modules.
