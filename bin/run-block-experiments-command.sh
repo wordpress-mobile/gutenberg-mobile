@@ -35,4 +35,4 @@ else
 fi
 
 # Install only regular dependencies (excluding devDependencies)
-npx --silent yarn install --production
+npx --silent yarn install --production --prefer-offline
