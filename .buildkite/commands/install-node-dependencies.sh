@@ -65,7 +65,6 @@ popd
 
 # i18n
 restore_cache "$I18N_CACHEKEY"
-
 if [[ "${RESTORE_ONLY}" ==  'true' ]]; then
   echo 'Exiting after restoring caches as per --restore-only call parameter.'
   exit 0
