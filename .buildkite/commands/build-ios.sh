@@ -1,5 +1,7 @@
 #!/bin/bash -eu
 
+PLATFORM=$(uname -s)
+ARCHITECTURE=$(uname -m)
 PODFILE_HASH=$(hash_file gutenberg/packages/react-native-editor/ios/Podfile.lock)
 PODFILE_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-pods-$PLATFORM-$ARCHITECTURE-$PODFILE_HASH"
 PODS_PATH="gutenberg/packages/react-native-editor/ios"
