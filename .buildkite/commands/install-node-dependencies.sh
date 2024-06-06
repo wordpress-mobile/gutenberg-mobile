@@ -37,7 +37,8 @@ elif [ "$PLATFORM" = "Linux" ]; then
   PNPM_PATH="$HOME/.local/share/pnpm"
 fi
 
-npx yarn cache dir
+YARN_CACHE_DIR=$(npx yarn cache dir)
+echo "Yarn cache directory: $YARN_CACHE_DIR"
 
 echo "--- :npm: Restore cache if present"
 pushd "$HOME"
