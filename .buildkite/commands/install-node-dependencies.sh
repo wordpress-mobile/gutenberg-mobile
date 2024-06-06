@@ -12,16 +12,59 @@ done
 PLATFORM=$(uname -s)
 ARCHITECTURE=$(uname -m)
 NODE_VERSION=$(node --version)
+GUTENBERG_PACKAGE_VERSION=$(jq -r .version package.json)
+
+# npm
 PACKAGE_HASH=$(hash_file package-lock.json)
 GUTENBERG_PACKAGE_HASH=$(hash_file gutenberg/package-lock.json)
+NPM_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-npm-$PLATFORM-$ARCHITECTURE-node-$NODE_VERSION-$PACKAGE_HASH-$GUTENBERG_PACKAGE_HASH"
+NPM_CACHE_FOLDER=".npm"
+
+# pnpm
 JETPACK_PACKAGE_HASH=$(hash_file jetpack/pnpm-lock.yaml)
-CACHEKEY="$BUILDKITE_PIPELINE_SLUG-npm-$PLATFORM-$ARCHITECTURE-node$NODE_VERSION-$PACKAGE_HASH-$GUTENBERG_PACKAGE_HASH"
-PNPM_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-pnpm-$PLATFORM-$ARCHITECTURE-node$NODE_VERSION-$JETPACK_PACKAGE_HASH"
+PNPM_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-pnpm-$PLATFORM-$ARCHITECTURE-node-$NODE_VERSION-$JETPACK_PACKAGE_HASH"
+PNPM_CACHE_FOLDER="store"
+
+# yarn
+BLOCK_EXPERIMENTS_YARN_HASH=$(hash_file block-experiments/yarn.lock)
+BLOCK_EXPERIMENTS_PACKAGE_HASH=$(hash_file block-experiments/package.json)
+YARN_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-yarn-$PLATFORM-$ARCHITECTURE-node-$NODE_VERSION-$BLOCK_EXPERIMENTS_YARN_HASH-$BLOCK_EXPERIMENTS_PACKAGE_HASH"
+
+# i18n
+I18N_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-i18n-$PLATFORM-$ARCHITECTURE-node-$NODE_VERSION-$GUTENBERG_PACKAGE_VERSION"
+I18N_CACHE_FOLDER="src/i18n-cache"
+
+# Cache folder directories
+if [ "$PLATFORM" = "Darwin" ]; then
+  PNPM_PATH="$HOME/Library/pnpm"
+  YARN_PATH="$HOME/Library/Caches"
+  YARN_CACHE_FOLDER="Yarn"
+elif [ "$PLATFORM" = "Linux" ]; then
+  PNPM_PATH="$HOME/.local/share/pnpm"
+  YARN_PATH="$HOME/.cache"
+  YARN_CACHE_FOLDER="yarn"
+fi
 
 echo "--- :npm: Restore cache if present"
-restore_cache "$CACHEKEY"
-restore_cache "$PNPM_CACHEKEY"
+# npm
+pushd "$HOME"
+restore_cache "$NPM_CACHEKEY"
+popd
 
+# pnpm
+mkdir -p "$PNPM_PATH"
+pushd "$PNPM_PATH"
+restore_cache "$PNPM_CACHEKEY"
+popd
+
+# yarn
+mkdir -p "$YARN_PATH"
+pushd "$YARN_PATH"
+restore_cache "$YARN_CACHEKEY"
+popd
+
+# i18n
+restore_cache "$I18N_CACHEKEY"
 if [[ "${RESTORE_ONLY}" ==  'true' ]]; then
   echo 'Exiting after restoring caches as per --restore-only call parameter.'
   exit 0
@@ -41,7 +84,18 @@ echo "--- :npm: Save cache if necessary"
 #
 # Example: https://buildkite.com/automattic/gutenberg-mobile/builds/8857#018e37eb-7afc-4280-b736-cba76f02f1a3/524
 rm -rf "$HOME/.npm/_cacache/tmp"
-save_cache "$HOME/.npm" "$CACHEKEY"
+
+# npm
+pushd "$HOME"
+save_cache "$NPM_CACHE_FOLDER" "$NPM_CACHEKEY"
+popd
+
+# i18n
+if [ -d "$I18N_CACHE_FOLDER" ]; then
+  save_cache "$I18N_CACHE_FOLDER" "$I18N_CACHEKEY"
+else
+  echo "Directory $I18N_CACHE_FOLDER does not exist. Skipping..."
+fi
 
 # If we attempted to save the pnpm cache when npm run with '--prefix gutenberg', the command might fail.
 # That's because the Jetpack submodule alone uses pnpm.
@@ -51,13 +105,12 @@ if echo "$@" | grep -q -- '--prefix gutenberg'; then
   exit 0
 fi
 
-if [ "$PLATFORM" = "Darwin" ]; then
-  PNPM_PATH="$HOME/Library/pnpm/store/v3"
-elif [ "$PLATFORM" = "Linux" ]; then
-  PNPM_PATH="$HOME/.local/share/pnpm/store/v3"
-else
-  echo "Unsupported platform: $PLATFORM."
-  exit 1
-fi
+# pnpm
+pushd "$PNPM_PATH"
+save_cache "$PNPM_CACHE_FOLDER" "$PNPM_CACHEKEY"
+popd
 
-save_cache "$PNPM_PATH" "$PNPM_CACHEKEY"
+# yarn
+pushd "$YARN_PATH"
+save_cache "$YARN_CACHE_FOLDER" "$YARN_CACHEKEY"
+popd
