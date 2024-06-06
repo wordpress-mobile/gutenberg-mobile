@@ -48,7 +48,7 @@ curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" \
   --form "name=Gutenberg-$SAUCE_FILENAME.app.zip" \
   --form 'description="Gutenberg"'
 
-echo "--- :cocoapods: Save pods cache if necessary"
+echo "--- :cocoapods: Save Pods cache if necessary"
 pushd "$PODS_PATH"
 save_cache "$PODS_FOLDER" "$PODFILE_CACHEKEY"
 popd
