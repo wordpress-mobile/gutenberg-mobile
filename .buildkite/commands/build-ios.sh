@@ -1,9 +1,19 @@
 #!/bin/bash -eu
 
+PODFILE_HASH=$(hash_file gutenberg/packages/react-native-editor/ios/Podfile.lock)
+PODFILE_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-pods-$PLATFORM-$ARCHITECTURE-$PODFILE_HASH"
+PODS_PATH="gutenberg/packages/react-native-editor/ios"
+PODS_FOLDER="Pods"
+
 echo '--- :desktop_computer: Clear up some disk space'
 rm -rfv ~/.Trash/15.1.xip
 
 .buildkite/commands/install-node-dependencies.sh
+
+echo "--- :cocoapods: Restore Pods if present"
+pushd "$PODS_PATH"
+restore_cache "$PODFILE_CACHEKEY"
+popd
 
 echo '--- :ios: Set env var for iOS E2E testing'
 set -x
@@ -35,3 +45,8 @@ curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" \
   --form 'payload=@"./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip"' \
   --form "name=Gutenberg-$SAUCE_FILENAME.app.zip" \
   --form 'description="Gutenberg"'
+
+echo "--- :cocoapods: Save pods cache if necessary"
+pushd "$PODS_PATH"
+save_cache "$PODS_FOLDER" "$PODFILE_CACHEKEY"
+popd
