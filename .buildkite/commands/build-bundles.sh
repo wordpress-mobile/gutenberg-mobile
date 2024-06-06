@@ -2,7 +2,7 @@
 
 .buildkite/commands/install-node-dependencies.sh
 
-if [[ -z "$BUILDKITE_TAG" ]]; then
+if [ -z "${BUILDKITE_TAG:-}" ]; then
   echo "--- :package: Skip bundle prep work"
 else
   echo "--- :package: Run bundle prep work"
