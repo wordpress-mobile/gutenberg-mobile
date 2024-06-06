@@ -26,30 +26,38 @@ PNPM_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-pnpm-$PLATFORM-$ARCHITECTURE-node-$NODE_
 PNPM_CACHE_FOLDER="store"
 
 YARN_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-yarn-$PLATFORM-$ARCHITECTURE-node-$NODE_VERSION-$BLOCK_EXPERIMENTS_PACKAGE_HASH"
-YARN_CACHE_FOLDER="Yarn"
 
 I18N_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-i18n-$PLATFORM-$ARCHITECTURE-node-$NODE_VERSION-$PACKAGE_VERSION"
 I18N_CACHE_FOLDER="src/i18n-cache"
 
 if [ "$PLATFORM" = "Darwin" ]; then
   PNPM_PATH="$HOME/Library/pnpm"
+  YARN_PATH="$HOME/Library/Caches"
+  YARN_CACHE_FOLDER="Yarn"
 elif [ "$PLATFORM" = "Linux" ]; then
   PNPM_PATH="$HOME/.local/share/pnpm"
+  YARN_PATH="$HOME/.cache"
+  YARN_CACHE_FOLDER="yarn"
 fi
 
-YARN_CACHE_DIR=$(npx yarn cache dir)
-echo "Yarn cache directory: $YARN_CACHE_DIR"
-
 echo "--- :npm: Restore cache if present"
+# npm
 pushd "$HOME"
 restore_cache "$NPM_CACHEKEY"
 popd
 
+# pnpm
 mkdir -p "$PNPM_PATH"
 pushd "$PNPM_PATH"
 restore_cache "$PNPM_CACHEKEY"
 popd
 
+# yarn
+pushd "$YARN_PATH"
+restore_cache "$YARN_CACHEKEY"
+popd
+
+# i18n
 restore_cache "$I18N_CACHEKEY"
 
 if [[ "${RESTORE_ONLY}" ==  'true' ]]; then
@@ -71,10 +79,13 @@ echo "--- :npm: Save cache if necessary"
 #
 # Example: https://buildkite.com/automattic/gutenberg-mobile/builds/8857#018e37eb-7afc-4280-b736-cba76f02f1a3/524
 rm -rf "$HOME/.npm/_cacache/tmp"
+
+# npm
 pushd "$HOME"
 save_cache "$NPM_CACHE_FOLDER" "$NPM_CACHEKEY"
 popd
 
+# i18n
 if [ -d "$I18N_CACHE_FOLDER" ]; then
   save_cache "$I18N_CACHE_FOLDER" "$I18N_CACHEKEY"
 else
@@ -89,6 +100,12 @@ if echo "$@" | grep -q -- '--prefix gutenberg'; then
   exit 0
 fi
 
+# pnpm
 pushd "$PNPM_PATH"
 save_cache "$PNPM_CACHE_FOLDER" "$PNPM_CACHEKEY"
+popd
+
+# yarn
+pushd "$YARN_PATH"
+save_cache "$YARN_CACHE_FOLDER" "$YARN_CACHEKEY"
 popd
