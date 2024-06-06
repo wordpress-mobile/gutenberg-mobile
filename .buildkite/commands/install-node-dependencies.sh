@@ -17,12 +17,16 @@ PACKAGE_VERSION=$(jq -r .version package.json)
 PACKAGE_HASH=$(hash_file package-lock.json)
 GUTENBERG_PACKAGE_HASH=$(hash_file gutenberg/package-lock.json)
 JETPACK_PACKAGE_HASH=$(hash_file jetpack/pnpm-lock.yaml)
+BLOCK_EXPERIMENTS_PACKAGE_HASH=$(hash_file block-experiments/yarn.lock)
 
 NPM_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-npm-$PLATFORM-$ARCHITECTURE-node-$NODE_VERSION-$PACKAGE_HASH-$GUTENBERG_PACKAGE_HASH"
 NPM_CACHE_FOLDER=".npm"
 
 PNPM_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-pnpm-$PLATFORM-$ARCHITECTURE-node-$NODE_VERSION-$JETPACK_PACKAGE_HASH"
 PNPM_CACHE_FOLDER="store"
+
+YARN_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-yarn-$PLATFORM-$ARCHITECTURE-node-$NODE_VERSION-$BLOCK_EXPERIMENTS_PACKAGE_HASH"
+YARN_CACHE_FOLDER="Yarn"
 
 I18N_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-i18n-$PLATFORM-$ARCHITECTURE-node-$NODE_VERSION-$PACKAGE_VERSION"
 I18N_CACHE_FOLDER="src/i18n-cache"
@@ -32,6 +36,8 @@ if [ "$PLATFORM" = "Darwin" ]; then
 elif [ "$PLATFORM" = "Linux" ]; then
   PNPM_PATH="$HOME/.local/share/pnpm"
 fi
+
+npx yarn cache dir
 
 echo "--- :npm: Restore cache if present"
 pushd "$HOME"
