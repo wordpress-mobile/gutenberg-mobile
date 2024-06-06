@@ -16,11 +16,11 @@ echo "--- :arrow_up: Upload Android bundle and source map artifacts"
 buildkite-agent artifact upload bundle/android/App.js
 buildkite-agent artifact upload bundle/android/App.composed.js.map
 
-echo "--- :iOS: Build iOS bundle"
+echo "--- :ios: Build iOS bundle"
 npm run bundle:ios
 
 echo "--- :arrow_up: Upload iOS bundle and source map artifacts"
-buildkite-agent artifact upload bundle/iOS/App.js
-buildkite-agent artifact upload bundle/iOS/App.composed.js.map
+buildkite-agent artifact upload bundle/ios/App.js
+buildkite-agent artifact upload bundle/ios/App.composed.js.map
 tar -czvf ios-assets.tar.gz -C ios-xcframework/Gutenberg/Resources assets/
 buildkite-agent artifact upload ios-assets.tar.gz
