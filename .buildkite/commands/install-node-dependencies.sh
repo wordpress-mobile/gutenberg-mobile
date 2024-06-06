@@ -53,6 +53,7 @@ restore_cache "$PNPM_CACHEKEY"
 popd
 
 # yarn
+mkdir -p "$YARN_PATH"
 pushd "$YARN_PATH"
 restore_cache "$YARN_CACHEKEY"
 popd
