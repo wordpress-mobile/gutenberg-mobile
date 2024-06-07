@@ -40,10 +40,18 @@ echo '--- :react: Build WDA for E2E testing'
 npm run core test:e2e:build-wda
 
 echo '--- :compression: Prepare artifacts'
-WORK_DIR=$(pwd) \
-  && pushd ./gutenberg/packages/react-native-editor/ios/build/WDA \
-  && zip -r "$WORK_DIR/gutenberg/packages/react-native-editor/ios/WDA.zip" ./* \
-  && popd
+# Set the working directory
+WORK_DIR=$(pwd)
+
+# Compress the GutenbergDemo.app
+pushd ./gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator
+zip -r "$WORK_DIR/gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip" GutenbergDemo.app
+popd
+
+# Compress the WDA directory
+pushd ./gutenberg/packages/react-native-editor/ios/build/WDA
+zip -r "$WORK_DIR/gutenberg/packages/react-native-editor/ios/WDA.zip" ./*
+popd
 
 echo "--- :arrow_up: Upload Build"
 upload_artifact "./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip"
