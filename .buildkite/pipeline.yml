@@ -151,20 +151,21 @@ steps:
       queue: mac
     env: *xcode_agent_env
 
-  # - label: Test iOS on Device – Canary Pages
-  #   depends_on: ios-build-and-saucelabs
-  #   command: .buildkite/commands/test-ios.sh --canary
-  #   plugins:
-  #     - *ci_toolkit_plugin
-  #     - *nvm_plugin
-  #   artifact_paths:
-  #     - reports/test-results/ios-test-results.xml
-  #   agents:
-  #     queue: mac
-  #   env: *xcode_agent_env
-  #   notify:
-  #     - github_commit_status:
-  #         context: Test iOS on Device - Canaries
+  - label: Test iOS on Device – Canary Pages
+    depends_on: ios-build
+    command: .buildkite/commands/test-ios.sh --canary
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+    artifact_paths:
+      - reports/test-results/ios-test-results.xml
+      - ios-screen-recordings/*
+    agents:
+      queue: mac
+    env: *xcode_agent_env
+    notify:
+      - github_commit_status:
+          context: Test iOS on Device - Canaries
 
   # - label: Android Build and Sauce Labs
   #   key: android-build-and-saucelabs
