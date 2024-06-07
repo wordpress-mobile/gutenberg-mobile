@@ -92,7 +92,6 @@ save_cache "$PODS_FOLDER" "$PODFILE_CACHEKEY"
 popd
 
 echo "--- :ios: Save App build cache if necessary"
-# Save app build
 rm "$APP_PATH/main.jsbundle"
 rm -rf "$APP_PATH/assets"
 pushd "$PRODUCTS_PATH"
