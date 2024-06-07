@@ -20,12 +20,15 @@ popd
 echo '--- :ios: Set env var for iOS E2E testing'
 set -x
 export TEST_RN_PLATFORM=ios
-export TEST_ENV=sauce
+export TEST_ENV=local
 # We must use a simulator that's available on the selected Xcode version
 # otherwsie Xcode fallbacks to "generic destination" which requires provision
 # profiles to built the Demo app.
 export RN_EDITOR_E2E_IOS_DESTINATION="platform=iOS Simulator,name=iPhone 15"
 set +x
+
+echo "--- :react: Prepare tests setup"
+npm run core test:e2e:setup
 
 echo '--- :react: Build iOS bundle for E2E testing'
 npm run test:e2e:bundle:ios
@@ -33,20 +36,18 @@ npm run test:e2e:bundle:ios
 echo '--- :react: Build iOS app for E2E testing'
 npm run core test:e2e:build-app:ios
 
-echo '--- :compression: Prepare artifact for SauceLabs upload'
+echo '--- :react: Build WDA for E2E testing'
+npm run core test:e2e:build-wda
+
+echo '--- :compression: Prepare artifacts'
 WORK_DIR=$(pwd) \
-  && pushd ./gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator \
-  && zip -r "$WORK_DIR/gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip" GutenbergDemo.app \
+  && pushd ./gutenberg/packages/react-native-editor/ios/build/WDA \
+  && zip -r "$WORK_DIR/gutenberg/packages/react-native-editor/ios/WDA.zip" ./* \
   && popd
 
-echo '--- :saucelabs: Upload app artifact to SauceLabs'
-SAUCE_FILENAME=${BUILDKITE_BRANCH//[\/]/-}
-curl -u "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY" \
-  --location \
-  --request POST 'https://api.us-west-1.saucelabs.com/v1/storage/upload' \
-  --form 'payload=@"./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip"' \
-  --form "name=Gutenberg-$SAUCE_FILENAME.app.zip" \
-  --form 'description="Gutenberg"'
+echo "--- :arrow_up: Upload Build"
+upload_artifact "./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip"
+upload_artifact "./gutenberg/packages/react-native-editor/ios/WDA.zip"
 
 echo "--- :cocoapods: Save Pods cache if necessary"
 pushd "$PODS_PATH"
