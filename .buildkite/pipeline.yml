@@ -205,7 +205,7 @@ steps:
     # The quick UI tests suite version depends on the block step being unblocked
     if: *is_branch_for_quick_ui_tests
     depends_on:
-      - ios
+      - ios-build
       - run-full-ui-test
     command: .buildkite/commands/test-ios.sh
     plugins:
@@ -222,7 +222,7 @@ steps:
     # The full UI tests suite version depends only on the ios-build step, meaning it has no manual step that triggers it
     if: *is_branch_for_full_ui_tests
     depends_on:
-      - ios
+      - ios-build
     command: .buildkite/commands/test-ios.sh
     plugins:
       - *ci_toolkit_plugin
@@ -237,7 +237,7 @@ steps:
     # The quick UI tests suite version depends on the block step being unblocked
     if: *is_branch_for_quick_ui_tests
     depends_on:
-      - ios
+      - ios-build
       - run-full-ui-test
     command: .buildkite/commands/test-ios.sh --ipad
     plugins:
@@ -253,7 +253,7 @@ steps:
     # The full UI tests suite version depends only on the ios-build step, meaning it has no manual step that triggers it
     if: *is_branch_for_full_ui_tests
     depends_on:
-      - ios
+      - ios-build
     command: .buildkite/commands/test-ios.sh --ipad
     plugins:
       - *ci_toolkit_plugin
