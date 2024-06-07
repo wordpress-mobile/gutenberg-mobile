@@ -24,120 +24,120 @@ x-common-params:
     build.branch != 'trunk' && build.branch !~ /^release.*/ && build.branch !~ /^dependabot\/submodules.*/
 
 steps:
-  # - label: Lint
-  #   key: lint
-  #   plugins:
-  #     - *ci_toolkit_plugin
-  #     - *git-partial-clone-plugin
-  #     - *nvm_plugin
-  #   agents:
-  #     queue: android
-  #   command: .buildkite/commands/lint.sh
-  #   notify:
-  #     - github_commit_status:
-  #         context: Lint
+  - label: Lint
+    key: lint
+    plugins:
+      - *ci_toolkit_plugin
+      - *git-partial-clone-plugin
+      - *nvm_plugin
+    agents:
+      queue: android
+    command: .buildkite/commands/lint.sh
+    notify:
+      - github_commit_status:
+          context: Lint
 
-  # - label: Android Unit Tests
-  #   key: android-unit-tests
-  #   plugins:
-  #     - *git-partial-clone-plugin
-  #     - *nvm_plugin
-  #     - *ci_toolkit_plugin
-  #   agents:
-  #     queue: android
-  #   command: .buildkite/commands/unit-tests-android.sh
-  #   env:
-  #     JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
-  #   artifact_paths:
-  #     - ./logs/*.log
-  #     - ./reports/test-results/*.xml
-  #   notify:
-  #     - github_commit_status:
-  #         context: Android Unit Tests
+  - label: Android Unit Tests
+    key: android-unit-tests
+    plugins:
+      - *git-partial-clone-plugin
+      - *nvm_plugin
+      - *ci_toolkit_plugin
+    agents:
+      queue: android
+    command: .buildkite/commands/unit-tests-android.sh
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
+    artifact_paths:
+      - ./logs/*.log
+      - ./reports/test-results/*.xml
+    notify:
+      - github_commit_status:
+          context: Android Unit Tests
 
-  # - label: iOS Unit Tests
-  #   key: ios-unit-tests
-  #   plugins:
-  #     - *nvm_plugin
-  #     - *ci_toolkit_plugin
-  #     - *git-partial-clone-plugin
-  #   agents:
-  #     queue: android
-  #   command: .buildkite/commands/unit-tests-ios.sh
-  #   env:
-  #     JEST_JUNIT_OUTPUT_FILE: reports/test-results/ios-test-results.xml
-  #   artifact_paths:
-  #     - ./logs/*.log
-  #     - ./reports/test-results/*.xml
-  #   notify:
-  #     - github_commit_status:
-  #         context: iOS Unit Tests
+  - label: iOS Unit Tests
+    key: ios-unit-tests
+    plugins:
+      - *nvm_plugin
+      - *ci_toolkit_plugin
+      - *git-partial-clone-plugin
+    agents:
+      queue: android
+    command: .buildkite/commands/unit-tests-ios.sh
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/ios-test-results.xml
+    artifact_paths:
+      - ./logs/*.log
+      - ./reports/test-results/*.xml
+    notify:
+      - github_commit_status:
+          context: iOS Unit Tests
 
-  # - label: React Native Editor Android Tests
-  #   key: android-unit-tests-editor
-  #   command: |
-  #     .buildkite/commands/install-node-dependencies.sh --prefix gutenberg --ignore-scripts
-  #     echo "--- :android: Run tests"
-  #     cd gutenberg/packages/react-native-editor/android
-  #     ./gradlew testDebug
-  #   plugins:
-  #     - *ci_toolkit_plugin
-  #     - *git-partial-clone-plugin
-  #     - *nvm_plugin
-  #   agents:
-  #     queue: android
+  - label: React Native Editor Android Tests
+    key: android-unit-tests-editor
+    command: |
+      .buildkite/commands/install-node-dependencies.sh --prefix gutenberg --ignore-scripts
+      echo "--- :android: Run tests"
+      cd gutenberg/packages/react-native-editor/android
+      ./gradlew testDebug
+    plugins:
+      - *ci_toolkit_plugin
+      - *git-partial-clone-plugin
+      - *nvm_plugin
+    agents:
+      queue: android
 
-  # - label: React Native Bridge Android Tests
-  #   key: android-unit-tests-bridge
-  #   command: |
-  #     .buildkite/commands/install-node-dependencies.sh --prefix gutenberg --ignore-scripts
-  #     echo "--- :android: Run tests"
-  #     cd gutenberg/packages/react-native-bridge/android
-  #     ./gradlew test
-  #   plugins:
-  #     - *ci_toolkit_plugin
-  #     - *git-partial-clone-plugin
-  #     - *nvm_plugin
-  #   agents:
-  #     queue: android
+  - label: React Native Bridge Android Tests
+    key: android-unit-tests-bridge
+    command: |
+      .buildkite/commands/install-node-dependencies.sh --prefix gutenberg --ignore-scripts
+      echo "--- :android: Run tests"
+      cd gutenberg/packages/react-native-bridge/android
+      ./gradlew test
+    plugins:
+      - *ci_toolkit_plugin
+      - *git-partial-clone-plugin
+      - *nvm_plugin
+    agents:
+      queue: android
 
-  # - label: Build JS Bundles
-  #   key: js-bundles
-  #   plugins:
-  #     - *ci_toolkit_plugin
-  #     - *nvm_plugin
-  #   command: .buildkite/commands/build-bundles.sh
-  #   agents:
-  #     queue: mac
-  #   env: *xcode_agent_env
+  - label: Build JS Bundles
+    key: js-bundles
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+    command: .buildkite/commands/build-bundles.sh
+    agents:
+      queue: mac
+    env: *xcode_agent_env
 
-  # - label: "Build Android RN Aztec & Publish to S3"
-  #   key: "publish-react-native-aztec-android"
-  #   plugins:
-  #     - *git-partial-clone-plugin
-  #     - *publish-android-artifacts-docker-container
-  #   command: .buildkite/commands/publish-react-native-aztec-android-artifacts.sh
+  - label: "Build Android RN Aztec & Publish to S3"
+    key: "publish-react-native-aztec-android"
+    plugins:
+      - *git-partial-clone-plugin
+      - *publish-android-artifacts-docker-container
+    command: .buildkite/commands/publish-react-native-aztec-android-artifacts.sh
 
-  # - label: "Build Android RN Bridge & Publish to S3"
-  #   depends_on:
-  #     - "js-bundles"
-  #     - "publish-react-native-aztec-android"
-  #   plugins:
-  #     - *git-partial-clone-plugin
-  #     - *publish-android-artifacts-docker-container
-  #   command: .buildkite/commands/publish-react-native-bridge-android-artifacts.sh
+  - label: "Build Android RN Bridge & Publish to S3"
+    depends_on:
+      - "js-bundles"
+      - "publish-react-native-aztec-android"
+    plugins:
+      - *git-partial-clone-plugin
+      - *publish-android-artifacts-docker-container
+    command: .buildkite/commands/publish-react-native-bridge-android-artifacts.sh
 
-  # - label: Build iOS RN XCFramework & Publish to S3
-  #   depends_on: js-bundles
-  #   command: .buildkite/commands/publish-react-native-ios-artifacts.sh
-  #   artifact_paths:
-  #     - ios-xcframework/build/xcframeworks/*.tar.gz
-  #   plugins:
-  #     - *ci_toolkit_plugin
-  #     - *nvm_plugin
-  #   agents:
-  #     queue: mac
-  #   env: *xcode_agent_env
+  - label: Build iOS RN XCFramework & Publish to S3
+    depends_on: js-bundles
+    command: .buildkite/commands/publish-react-native-ios-artifacts.sh
+    artifact_paths:
+      - ios-xcframework/build/xcframeworks/*.tar.gz
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+    agents:
+      queue: mac
+    env: *xcode_agent_env
 
   - label: iOS Build
     key: ios-build
@@ -167,134 +167,134 @@ steps:
       - github_commit_status:
           context: Test iOS on Device - Canaries
 
-  # - label: Android Build and Sauce Labs
-  #   key: android-build-and-saucelabs
-  #   command: .buildkite/commands/build-android.sh
-  #   plugins:
-  #     - *ci_toolkit_plugin
-  #     - *git-partial-clone-plugin
-  #     - *nvm_plugin
-  #   agents:
-  #     queue: android
+  - label: Android Build and Sauce Labs
+    key: android-build-and-saucelabs
+    command: .buildkite/commands/build-android.sh
+    plugins:
+      - *ci_toolkit_plugin
+      - *git-partial-clone-plugin
+      - *nvm_plugin
+    agents:
+      queue: android
 
-  # - label: Test Android on Device – Canary Pages
-  #   depends_on: android-build-and-saucelabs
-  #   command: .buildkite/commands/test-android.sh --canary
-  #   plugins:
-  #     - *ci_toolkit_plugin
-  #     - *nvm_plugin
-  #     - *git-partial-clone-plugin
-  #   agents:
-  #     queue: android
-  #   artifact_paths:
-  #     - reports/test-results/android-test-results.xml
-  #   env:
-  #     JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
-  #   notify:
-  #     - github_commit_status:
-  #         context: Test Android on Device - Canaries
+  - label: Test Android on Device – Canary Pages
+    depends_on: android-build-and-saucelabs
+    command: .buildkite/commands/test-android.sh --canary
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+      - *git-partial-clone-plugin
+    agents:
+      queue: android
+    artifact_paths:
+      - reports/test-results/android-test-results.xml
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
+    notify:
+      - github_commit_status:
+          context: Test Android on Device - Canaries
 
-  # - block: "Full UI Tests"
-  #   # Show only in branches that run the quick UI tests suite, to optionally run the full suite
-  #   if: *is_branch_for_quick_ui_tests
-  #   key: run-full-ui-test
-  #   prompt: "Run full UI tests suites?"
-  #   depends_on: ios-build-and-saucelabs
+  - block: "Full UI Tests"
+    # Show only in branches that run the quick UI tests suite, to optionally run the full suite
+    if: *is_branch_for_quick_ui_tests
+    key: run-full-ui-test
+    prompt: "Run full UI tests suites?"
+    depends_on: ios
 
-  # - label: Test iOS on Device – Full iPhone
-  #   # The quick UI tests suite version depends on the block step being unblocked
-  #   if: *is_branch_for_quick_ui_tests
-  #   depends_on:
-  #     - ios-build-and-saucelabs
-  #     - run-full-ui-test
-  #   command: .buildkite/commands/test-ios.sh
-  #   plugins:
-  #     - *ci_toolkit_plugin
-  #     - *nvm_plugin
-  #   artifact_paths:
-  #     - reports/test-results/ios-test-results.xml
-  #   agents:
-  #     queue: mac
-  #   env: *xcode_agent_env
+  - label: Test iOS on Device – Full iPhone
+    # The quick UI tests suite version depends on the block step being unblocked
+    if: *is_branch_for_quick_ui_tests
+    depends_on:
+      - ios
+      - run-full-ui-test
+    command: .buildkite/commands/test-ios.sh
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+    artifact_paths:
+      - reports/test-results/ios-test-results.xml
+    agents:
+      queue: mac
+    env: *xcode_agent_env
 
-  # # Same step as above, but will always run in trunk, release/, and dependabot/submodules branches
-  # - label: Test iOS on Device – Full iPhone
-  #   # The full UI tests suite version depends only on the ios-build step, meaning it has no manual step that triggers it
-  #   if: *is_branch_for_full_ui_tests
-  #   depends_on:
-  #     - ios-build-and-saucelabs
-  #   command: .buildkite/commands/test-ios.sh
-  #   plugins:
-  #     - *ci_toolkit_plugin
-  #     - *nvm_plugin
-  #   artifact_paths:
-  #     - reports/test-results/ios-test-results.xml
-  #   agents:
-  #     queue: mac
-  #   env: *xcode_agent_env
+  # Same step as above, but will always run in trunk, release/, and dependabot/submodules branches
+  - label: Test iOS on Device – Full iPhone
+    # The full UI tests suite version depends only on the ios-build step, meaning it has no manual step that triggers it
+    if: *is_branch_for_full_ui_tests
+    depends_on:
+      - ios
+    command: .buildkite/commands/test-ios.sh
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+    artifact_paths:
+      - reports/test-results/ios-test-results.xml
+    agents:
+      queue: mac
+    env: *xcode_agent_env
 
-  # - label: Test iOS on Device – Full iPad
-  #   # The quick UI tests suite version depends on the block step being unblocked
-  #   if: *is_branch_for_quick_ui_tests
-  #   depends_on:
-  #     - ios-build-and-saucelabs
-  #     - run-full-ui-test
-  #   command: .buildkite/commands/test-ios.sh --ipad
-  #   plugins:
-  #     - *ci_toolkit_plugin
-  #     - *nvm_plugin
-  #   artifact_paths:
-  #     - reports/test-results/ios-test-results.xml
-  #   agents:
-  #     queue: mac
-  #   env: *xcode_agent_env
+  - label: Test iOS on Device – Full iPad
+    # The quick UI tests suite version depends on the block step being unblocked
+    if: *is_branch_for_quick_ui_tests
+    depends_on:
+      - ios
+      - run-full-ui-test
+    command: .buildkite/commands/test-ios.sh --ipad
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+    artifact_paths:
+      - reports/test-results/ios-test-results.xml
+    agents:
+      queue: mac
+    env: *xcode_agent_env
 
-  # - label: Test iOS on Device – Full iPad
-  #   # The full UI tests suite version depends only on the ios-build step, meaning it has no manual step that triggers it
-  #   if: *is_branch_for_full_ui_tests
-  #   depends_on:
-  #     - ios-build-and-saucelabs
-  #   command: .buildkite/commands/test-ios.sh --ipad
-  #   plugins:
-  #     - *ci_toolkit_plugin
-  #     - *nvm_plugin
-  #   artifact_paths:
-  #     - reports/test-results/ios-test-results.xml
-  #   agents:
-  #     queue: mac
-  #   env: *xcode_agent_env
+  - label: Test iOS on Device – Full iPad
+    # The full UI tests suite version depends only on the ios-build step, meaning it has no manual step that triggers it
+    if: *is_branch_for_full_ui_tests
+    depends_on:
+      - ios
+    command: .buildkite/commands/test-ios.sh --ipad
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+    artifact_paths:
+      - reports/test-results/ios-test-results.xml
+    agents:
+      queue: mac
+    env: *xcode_agent_env
 
-  # - label: Test Android on Device – Full
-  #   # The quick UI tests suite version depends on the block step being unblocked
-  #   if: *is_branch_for_quick_ui_tests
-  #   depends_on:
-  #     - android-build-and-saucelabs
-  #     - run-full-ui-test
-  #   command: .buildkite/commands/test-android.sh
-  #   plugins:
-  #     - *ci_toolkit_plugin
-  #     - *nvm_plugin
-  #     - *git-partial-clone-plugin
-  #   agents:
-  #     queue: android
-  #   artifact_paths:
-  #     - reports/test-results/android-test-results.xml
-  #   env:
-  #     JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
+  - label: Test Android on Device – Full
+    # The quick UI tests suite version depends on the block step being unblocked
+    if: *is_branch_for_quick_ui_tests
+    depends_on:
+      - android-build-and-saucelabs
+      - run-full-ui-test
+    command: .buildkite/commands/test-android.sh
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+      - *git-partial-clone-plugin
+    agents:
+      queue: android
+    artifact_paths:
+      - reports/test-results/android-test-results.xml
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
 
-  # - label: Test Android on Device – Full
-  #   # The full UI tests suite version depends only on the android-build-and-suacelabs step, meaning it has no manual step that triggers it
-  #   if: *is_branch_for_full_ui_tests
-  #   depends_on:
-  #     - android-build-and-saucelabs
-  #   command: .buildkite/commands/test-android.sh
-  #   plugins:
-  #     - *ci_toolkit_plugin
-  #     - *nvm_plugin
-  #     - *git-partial-clone-plugin
-  #   agents:
-  #     queue: android
-  #   artifact_paths:
-  #     - reports/test-results/android-test-results.xml
-  #   env:
-  #     JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
+  - label: Test Android on Device – Full
+    # The full UI tests suite version depends only on the android-build-and-suacelabs step, meaning it has no manual step that triggers it
+    if: *is_branch_for_full_ui_tests
+    depends_on:
+      - android-build-and-saucelabs
+    command: .buildkite/commands/test-android.sh
+    plugins:
+      - *ci_toolkit_plugin
+      - *nvm_plugin
+      - *git-partial-clone-plugin
+    agents:
+      queue: android
+    artifact_paths:
+      - reports/test-results/android-test-results.xml
+    env:
+      JEST_JUNIT_OUTPUT_FILE: reports/test-results/android-test-results.xml
