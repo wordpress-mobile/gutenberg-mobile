@@ -28,11 +28,17 @@ find package-lock.json \
     -type f -print0 | sort -z | xargs -0 shasum | tee ios-checksums.txt
 APP_BUILD_HASH=$(hash_file ios-checksums.txt)
 APP_BUILD_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-ios-app-$PLATFORM-$ARCHITECTURE-$APP_BUILD_HASH"
+WDA_BUILD_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-ios-wda-$PLATFORM-$ARCHITECTURE-$APP_BUILD_HASH"
 
 echo "--- :ios: Restore App build if present"
 mkdir -p "$PRODUCTS_PATH"
 pushd "$PRODUCTS_PATH"
 restore_cache "$APP_BUILD_CACHEKEY"
+popd
+
+echo "--- :ios: Restore WDA build if present"
+pushd "$BUILD_PATH"
+restore_cache "$WDA_BUILD_CACHEKEY"
 popd
 
 echo "--- :cocoapods: Restore Pods if present"
@@ -60,7 +66,7 @@ echo '--- :react: Build iOS app for E2E testing'
 test -e "$APP_PATH/GutenbergDemo" || npm run core test:e2e:build-app:ios
 
 echo '--- :react: Build WDA for E2E testing'
-npm run core test:e2e:build-wda
+test -d "$BUILD_PATH/WDA" || npm run core test:e2e:build-wda
 
 echo '--- :compression: Prepare artifacts'
 # Set the working directory
@@ -85,10 +91,15 @@ pushd "$PODS_PATH"
 save_cache "$PODS_FOLDER" "$PODFILE_CACHEKEY"
 popd
 
-echo "--- :cocoapods: Save App build cache if necessary"
+echo "--- :ios: Save App build cache if necessary"
 # Save app build
 rm "$APP_PATH/main.jsbundle"
 rm -rf "$APP_PATH/assets"
 pushd "$PRODUCTS_PATH"
 save_cache "GutenbergDemo.app" "$APP_BUILD_CACHEKEY"
+popd
+
+echo "--- :ios: Save WDA build cache if necessary"
+pushd "$BUILD_PATH"
+save_cache "WDA" "$WDA_BUILD_CACHEKEY"
 popd
