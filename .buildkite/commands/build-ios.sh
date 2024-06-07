@@ -2,15 +2,41 @@
 
 PLATFORM=$(uname -s)
 ARCHITECTURE=$(uname -m)
-PODFILE_HASH=$(hash_file gutenberg/packages/react-native-editor/ios/Podfile.lock)
+
+# Base Paths
+REACT_NATIVE_EDITOR_PATH="gutenberg/packages/react-native-editor/ios"
+BUILD_PATH="$REACT_NATIVE_EDITOR_PATH/build"
+PRODUCTS_PATH="$BUILD_PATH/GutenbergDemo/Build/Products/Release-iphonesimulator"
+APP_PATH="$PRODUCTS_PATH/GutenbergDemo.app"
+PODS_PATH="$REACT_NATIVE_EDITOR_PATH"
+
+# Pods
+PODFILE_HASH=$(hash_file "$REACT_NATIVE_EDITOR_PATH/Podfile.lock")
 PODFILE_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-pods-$PLATFORM-$ARCHITECTURE-$PODFILE_HASH"
-PODS_PATH="gutenberg/packages/react-native-editor/ios"
 PODS_FOLDER="Pods"
 
 echo '--- :desktop_computer: Clear up some disk space'
 rm -rfv ~/.Trash/15.1.xip
 
 .buildkite/commands/install-node-dependencies.sh
+
+# Generate build key
+find package-lock.json \
+    gutenberg/packages/react-native-editor/ios \
+    gutenberg/packages/react-native-aztec/ios \
+    gutenberg/packages/react-native-bridge/ios \
+    -type f -print0 | sort -z | xargs -0 shasum | tee ios-checksums.txt
+APP_BUILD_HASH=$(hash_file ios-checksums.txt)
+APP_BUILD_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-ios-app-$PLATFORM-$ARCHITECTURE-$APP_BUILD_HASH"
+
+echo "--- :ios: Restore App build if present"
+if [ -d "$PRODUCTS_PATH" ]; then
+    pushd "$PRODUCTS_PATH"
+    restore_cache "$APP_BUILD_CACHEKEY"
+    popd
+else
+    echo "Error: Directory $PRODUCTS_PATH does not exist."
+fi
 
 echo "--- :cocoapods: Restore Pods if present"
 pushd "$PODS_PATH"
@@ -34,7 +60,7 @@ echo '--- :react: Build iOS bundle for E2E testing'
 npm run test:e2e:bundle:ios
 
 echo '--- :react: Build iOS app for E2E testing'
-npm run core test:e2e:build-app:ios
+test -e "$APP_PATH/GutenbergDemo" || npm run core test:e2e:build-app:ios
 
 echo '--- :react: Build WDA for E2E testing'
 npm run core test:e2e:build-wda
@@ -44,20 +70,27 @@ echo '--- :compression: Prepare artifacts'
 WORK_DIR=$(pwd)
 
 # Compress the GutenbergDemo.app
-pushd ./gutenberg/packages/react-native-editor/ios/build/GutenbergDemo/Build/Products/Release-iphonesimulator
-zip -r "$WORK_DIR/gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip" GutenbergDemo.app
+pushd "$PRODUCTS_PATH"
+zip -r "$WORK_DIR/$REACT_NATIVE_EDITOR_PATH/GutenbergDemo.app.zip" GutenbergDemo.app
 popd
 
 # Compress the WDA directory
-pushd ./gutenberg/packages/react-native-editor/ios/build/WDA
-zip -r "$WORK_DIR/gutenberg/packages/react-native-editor/ios/WDA.zip" ./*
+pushd "$BUILD_PATH/WDA"
+zip -r "$WORK_DIR/$REACT_NATIVE_EDITOR_PATH/WDA.zip" ./*
 popd
 
 echo "--- :arrow_up: Upload Build"
-upload_artifact "./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip"
-upload_artifact "./gutenberg/packages/react-native-editor/ios/WDA.zip"
+upload_artifact "$REACT_NATIVE_EDITOR_PATH/GutenbergDemo.app.zip"
+upload_artifact "$REACT_NATIVE_EDITOR_PATH/WDA.zip"
 
 echo "--- :cocoapods: Save Pods cache if necessary"
 pushd "$PODS_PATH"
 save_cache "$PODS_FOLDER" "$PODFILE_CACHEKEY"
+popd
+
+# Save app build
+rm "$APP_PATH/main.jsbundle"
+rm -rf "$APP_PATH/assets"
+pushd "$PRODUCTS_PATH"
+save_cache "GutenbergDemo.app" "$APP_BUILD_CACHEKEY"
 popd
