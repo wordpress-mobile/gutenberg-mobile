@@ -30,13 +30,10 @@ APP_BUILD_HASH=$(hash_file ios-checksums.txt)
 APP_BUILD_CACHEKEY="$BUILDKITE_PIPELINE_SLUG-ios-app-$PLATFORM-$ARCHITECTURE-$APP_BUILD_HASH"
 
 echo "--- :ios: Restore App build if present"
-if [ -d "$PRODUCTS_PATH" ]; then
-    pushd "$PRODUCTS_PATH"
-    restore_cache "$APP_BUILD_CACHEKEY"
-    popd
-else
-    echo "Error: Directory $PRODUCTS_PATH does not exist."
-fi
+mkdir -p "$PRODUCTS_PATH"
+pushd "$PRODUCTS_PATH"
+restore_cache "$APP_BUILD_CACHEKEY"
+popd
 
 echo "--- :cocoapods: Restore Pods if present"
 pushd "$PODS_PATH"
@@ -88,6 +85,7 @@ pushd "$PODS_PATH"
 save_cache "$PODS_FOLDER" "$PODFILE_CACHEKEY"
 popd
 
+echo "--- :cocoapods: Save App build cache if necessary"
 # Save app build
 rm "$APP_PATH/main.jsbundle"
 rm -rf "$APP_PATH/assets"
