@@ -35,7 +35,7 @@ else
     TESTS_CMD='device-tests'
 fi
 
-echo "--- :apple_logo: Start booting up simulator"
+echo "--- :ios: Start booting up simulator"
 xcrun simctl boot "$DEVICE_NAME" &
 
 echo "--- 📦 Downloading Build Artifacts"
