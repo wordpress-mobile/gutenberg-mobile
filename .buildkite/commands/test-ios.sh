@@ -35,6 +35,9 @@ else
     TESTS_CMD='device-tests'
 fi
 
+echo "--- :ios: Start booting up simulator"
+xcrun simctl boot "$DEVICE_NAME" &
+
 echo "--- 📦 Downloading Build Artifacts"
 export IOS_APP_PATH=./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
 download_artifact "GutenbergDemo.app.zip" "$IOS_APP_PATH"
@@ -42,6 +45,13 @@ download_artifact "GutenbergDemo.app.zip" "$IOS_APP_PATH"
 export WDA_PATH=./gutenberg/packages/react-native-editor/ios/build/WDA
 download_artifact "WDA.zip" "$WDA_PATH/WDA.zip"
 unzip "$WDA_PATH/WDA.zip" -d "$WDA_PATH"
+
+echo "--- 📦 Install WDA"
+
+APP_PATH="$WDA_PATH/Build/Products/Debug-iphonesimulator/WebDriverAgentRunner-Runner.app"
+
+# Install the app to the booted simulator
+xcrun simctl install booted $APP_PATH
 
 # First, restore the caches, if any
 .buildkite/commands/install-node-dependencies.sh --restore-only
