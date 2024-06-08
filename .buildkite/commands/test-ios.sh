@@ -46,13 +46,6 @@ export WDA_PATH=./gutenberg/packages/react-native-editor/ios/build/WDA
 download_artifact "WDA.zip" "$WDA_PATH/WDA.zip"
 unzip "$WDA_PATH/WDA.zip" -d "$WDA_PATH"
 
-echo "--- 📦 Install WDA"
-
-APP_PATH="$WDA_PATH/Build/Products/Debug-iphonesimulator/WebDriverAgentRunner-Runner.app"
-
-# Install the app to the booted simulator
-xcrun simctl install booted $APP_PATH
-
 # First, restore the caches, if any
 .buildkite/commands/install-node-dependencies.sh --restore-only
 # Second, set up the gutenberg-mobile dependencies without building the i18n cache (--ignore-scripts)
@@ -72,6 +65,13 @@ export JEST_JUNIT_OUTPUT_FILE="reports/test-results/ios-test-results.xml"
 # It should be removed once the migration to Buildkite is completed.
 export CIRCLE_BRANCH=${BUILDKITE_BRANCH}
 set +x
+
+echo "--- 📦 Install WDA"
+
+APP_PATH="$WDA_PATH/Build/Products/Debug-iphonesimulator/WebDriverAgentRunner-Runner.app"
+
+# Install the app to the booted simulator
+xcrun simctl install booted $APP_PATH &
 
 echo "--- :react: Prepare tests setup"
 npm run core test:e2e:setup
