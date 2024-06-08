@@ -35,9 +35,6 @@ else
     TESTS_CMD='device-tests'
 fi
 
-echo "--- :ios: Start booting up simulator"
-xcrun simctl boot "$DEVICE_NAME" &
-
 echo "--- 📦 Downloading Build Artifacts"
 export IOS_APP_PATH=./gutenberg/packages/react-native-editor/ios/GutenbergDemo.app.zip
 download_artifact "GutenbergDemo.app.zip" "$IOS_APP_PATH"
