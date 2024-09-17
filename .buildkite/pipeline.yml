@@ -119,7 +119,7 @@ steps:
       # The following plugins are disabled temporarily until PHP is available.
       # In the meantime, we'll keep using the GB-mobile docker container.
       - *gb-mobile-docker-container
-      # - *ci_toolkit_plugin # unused?
+      - *ci_toolkit_plugin
       # - *nvm_plugin
       - *git-partial-clone-plugin
     command: |
@@ -128,8 +128,7 @@ steps:
         echo "--- :node: Set up Node environment"
         nvm install && nvm use
 
-        echo "--- :npm: Install Node dependencies"
-        npm ci --unsafe-perm --prefer-offline --no-audit --no-progress
+        .buildkite/commands/install-node-dependencies.sh
 
         if [[ -z "$BUILDKITE_TAG" ]]; then
           echo "--- :package: Skip bundle prep work"
